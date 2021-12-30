@@ -1,0 +1,30 @@
+﻿@charset "utf-8"; 
+/**
+폰트 정의
+**/
+@font-face {
+  font-family: 'noto';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../../fonts/BANILACOMSans-Regular.woff2') format('woff2'),
+       url('../../fonts/BANILACOMSans-Regular.woff') format('woff'),
+	   url('../../fonts/BANILACOMSans-Regular.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'noto';
+  font-style: normal;
+  font-weight: 500;
+  src: url('../../fonts/BANILACOMSans-Medium.woff2') format('woff2'),
+       url('../../fonts/BANILACOMSans-Medium.woff') format('woff'),
+	   url('../../fonts/BANILACOMSans-Medium.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'noto';
+  font-style: normal;
+  font-weight: 600;
+  src: url('../../fonts/BANILACOMSans-Bold.woff2') format('woff2'),
+       url('../../fonts/BANILACOMSans-Bold.woff') format('woff'),
+	   url('../../fonts/BANILACOMSans-Bold.otf') format('opentype');
+}
