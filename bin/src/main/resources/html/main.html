@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<title></title>
+<meta name="title" content="">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta property="og:title" content="">
+<meta property="og:description" content="">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no, address=no, email=no">
+
+<meta property="og:url" content="">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="">
+<meta property="og:image" content="">
+
+<link rel="shortcut icon" href="">
+<link rel="apple-touch-icon" sizes="180x180" href="">
+<link rel="icon" type="image/png" sizes="32x32" href="">
+<link rel="icon" type="image/png" sizes="16x16" href="">
+<link rel="manifest" href="">
+<link rel="mask-icon" href="" color="">
+<meta name="msapplication-TileColor" content="">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="stylesheet" type="text/css" href="./resources/web/css/fonts.css">
+<link rel="stylesheet" type="text/css" href="./resources/web/css/common.css">
+<link rel="stylesheet" type="text/css" href="./resources/web/css/contents.css">
+<link rel="stylesheet" type="text/css" href="./resources/web/css/main.css">
+<body>
+<div id="wrap" class="loadingNot main">
+	<div id="loading">
+		<span class="hide">로딩중</span>
+	</div>
+
+	<!-- HEADER + GNB -->
+	<header id="header">
+		<!-- HEADERTOP -->
+		<div class="headerTop">
+			<div class="contents">
+				<div class="utilMenu">
+					<ul>
+						<li><a href="#loginLayer" onclick="loginLayer();return false;">로그인</a></li>
+						<li><a href="#">회원가입</a></li>
+						<li><a href="#">주문 조회</a></li>
+						<li><a href="#">고객센터</a></li>
+					</ul>
+					
+					<!-- 로그인 레이어 -->
+					<div id="loginLayer">
+						<div class="loginTabH">
+							<div class="inp_wrap">
+								<div class="inp_text sizeS">
+									<input type="text" title="아이디" placeholder="아이디">
+								</div>
+								<p class="error">아이디를 입력해주세요.</p>
+							</div>
+							<div class="inp_wrap mgt10">
+								<div class="inp_text sizeS">
+									<input type="password" title="비밀번호" placeholder="비밀번호">
+								</div>
+								<p class="error">비밀번호를 입력해주세요.</p>
+							</div>
+							<span class="inp_check mgt15">
+								<input type="checkbox" id="id_auto_loing_H">
+								<label for="id_auto_loing_H">자동 로그인</label>
+							</span>
+							<a href="#" class="btn btnSizeM btnColorP btnTypeR w100 mgt17"><span>로그인</span></a>
+						</div>
+						<div class="btn_member">
+							<ul>
+								<li><a href="#">회원가입</a></li>
+								<li><a href="#">아이디 찾기</a></li>
+								<li><a href="#">비밀번호 찾기</a></li>
+							</ul>
+						</div>
+						<div class="btn_sns">
+							<ul>
+								<li class="sns_n"><a href="javascript:void(0);"><span>네이버 로그인</span></a></li>
+								<li class="sns_k"><a href="javascript:void(0);"><span>카카오 로그인</span></a></li>
+							</ul>
+						</div>
+						<div class="loginLayerClose">
+							<a href="javascript:void(0);" onclick="loginLayer();">닫기</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- // HEADERTOP -->
+
+		<!-- HEADER -->
+		<div class="daoHeader">
+			<h1><a href="#"><img class="logoClass" src="./resources/web/images/common/logo.png" alt="BANILA.COM"></a></h1>
+			<div class="searchH">
+				<div class="searchWrap">
+					<div class="inp_wrap">
+						<div class="inp_text">
+							<input type="text" id="headerSearch">
+							<button class="btn_clear"><span>clear</span></button>
+							<button class="btn_search" type="button"><span class="hide">검색</span></button>
+						</div>
+					</div>
+				</div>
+				<div class="jsSearchTxt">
+					<div class="rollCon">
+						<div class="txt">검색어 순위 1위 노출</div>
+						<div class="txt">검색어 순위 2위 노출</div>
+						<div class="txt">검색어 순위 3위 노출</div>
+						<div class="txt">검색어 순위 4위 노출</div>
+						<div class="txt">검색어 순위 5위 노출</div>
+					</div>
+				</div>
+			</div>
+			<div class="myMenuH">
+				<ul>
+					<li><a href="#">마이페이지</a></li>
+					<li><a href="#">장바구니 <span>99</span></a></li>
+				</ul>
+			</div>
+		</div>
+		<!-- //HEADER -->
+		<!-- GNB -->
+		<div class="gnbWrap">
+			<div class="gnb">
+				<div class="contents">
+					<ul class="gnbLink">
+						<li><a href="#">랭킹</a></li>
+						<li><a href="#">신상품</a></li>
+						<li><a href="#">식품</a></li>
+						<li><a href="#">음료</a></li>
+						<li><a href="#">운동·생활용품</a></li>
+						<li><a href="#">주변 PT 찾기</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- //GNB -->
+	</header>
+	<!-- //HEADER + GNB -->
+
+	<!-- container -->
+	<div id="container" class="pdt0 pdb0">
+		<div class="main">
+			<div class="mainVisual">
+				<div class="visualRoll">
+					<div class="jsVisualRoll">
+						<div>
+							<a href="#"><img src="./resources/web/images/temp/main01.jpg" alt=""></a>
+						</div>
+						<div>
+							<a href="#"><img src="./resources/web/images/temp/main02.jpg" alt=""></a>
+						</div>
+						<div>
+							<a href="#"><img src="./resources/web/images/temp/main03.jpg" alt=""></a>
+						</div>
+						<div>
+							<a href="#"><img src="./resources/web/images/temp/main04.jpg" alt=""></a>
+						</div>
+						<div>
+							<a href="#"><img src="./resources/web/images/temp/main05.jpg" alt=""></a>
+						</div>
+						<div>
+							<a href="#"><img src="./resources/web/images/temp/main01.jpg" alt=""></a>
+						</div>
+						<div>
+							<a href="#"><img src="./resources/web/images/temp/main02.jpg" alt=""></a>
+						</div>
+						<div>
+							<a href="#"><img src="./resources/web/images/temp/main05.jpg" alt=""></a>
+						</div>
+					</div>
+					<div class="indicator">
+						<span class="nowNum">01</span>
+						<div><em></em></div>
+						<span class="maxNum">03</span>
+						<button type="button"><em class="hide">PLAY / STOP</em></button>
+					</div>
+					<button class="btnPrev" onclick="$('.jsVisualRoll').slick('slickPrev')"><span class="hide">이전</span></button>
+					<button class="btnNext" onclick="$('.jsVisualRoll').slick('slickNext')"><span class="hide">다음</span></button>
+				</div>
+				<div class="visualBtn">
+					<div class="jsVisualBtn">
+						<div><p>롤링배너명-main01</p></div>
+						<div><p>롤링배너명-main02</p></div>
+						<div><p>롤링배너명-main03</p></div>
+						<div><p>롤링배너명-main04</p></div>
+						<div><p>롤링배너명-main05</p></div>
+						<div><p>롤링배너명-main06</p></div>
+						<div><p>롤링배너명-main07</p></div>
+						<div><p>롤링배너명-main08</p></div>
+					</div>
+				</div>
+			</div>
+
+			<!-- 트레이너 -->
+			<div class="mainReco mainPt">
+				<div class="contents">
+					<p class="mainTit">
+						<em>전문 트레이너</em><span>내 주변 실력있는 트레이너를 찾아보세요🔥</span>
+						<i class="btn_tit"><a href="#">+ 전체보기</a></i>
+					</p>
+					<div class="pdt_list1">
+						<div class="list_box">
+							<div class="pdtCon">
+								<div class="pdtImg">
+									<ul class="pdt_type">
+										<li class="bg_p">NEW</li>
+										<li class="bg_p">BEST</li>
+										<li class="bg_r">SALE</li>
+									</ul>
+									<a href="#" class="imgLink"><img src="./resources/web/images/temp/pt01.jpg" alt=""></a>
+								</div>
+								<div class="pdtTxt">
+									<p class="pdtHead" style="color:#4f8ffa;">한줄소개 나오는 곳</p>
+									<p class="pdtBrand">PT쌤 이름</p>
+									<p class="pdtName"><a href="#">선생님 소개 나오는 곳</a></p>
+									<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
+									<div class="pdtReview">
+										<div class="js_rating ratingS"><span>4.5</span></div>
+										4.5 <span class="count">(리뷰 18)</span>
+									</div>
+								</div>
+								<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM on"><span class="hide">찜하기</span></a><!-- 좋아요 선택시 class on 추가 -->
+								<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
+							</div>
+							<div class="pdtCon">
+								<div class="pdtImg">
+									<ul class="pdt_type">
+										<li class="bg_p">NEW</li>
+										<li class="bg_p">BEST</li>
+										<li class="bg_r">SALE</li>
+									</ul>
+									<a href="#" class="imgLink"><img src="./resources/web/images/temp/pt02.jpg" alt=""></a>
+								</div>
+								<div class="pdtTxt">
+									<p class="pdtHead" style="color:#4f8ffa;">한줄소개 나오는 곳</p>
+									<p class="pdtBrand">PT쌤 이름</p>
+									<p class="pdtName"><a href="#">선생님 소개 나오는 곳</a></p>
+									<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
+									<div class="pdtReview">
+										<div class="js_rating ratingS"><span>4.5</span></div>
+										4.5 <span class="count">(리뷰 18)</span>
+									</div>
+								</div>
+								<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM on"><span class="hide">찜하기</span></a><!-- 좋아요 선택시 class on 추가 -->
+								<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
+							</div>
+							<div class="pdtCon">
+								<div class="pdtImg">
+									<ul class="pdt_type">
+										<li class="bg_p">NEW</li>
+										<li class="bg_p">BEST</li>
+										<li class="bg_r">SALE</li>
+									</ul>
+									<a href="#" class="imgLink"><img src="./resources/web/images/temp/pt03.jpg" alt=""></a>
+								</div>
+								<div class="pdtTxt">
+									<p class="pdtHead" style="color:#4f8ffa;">한줄소개 나오는 곳</p>
+									<p class="pdtBrand">PT쌤 이름</p>
+									<p class="pdtName"><a href="#">선생님 소개 나오는 곳</a></p>
+									<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
+									<div class="pdtReview">
+										<div class="js_rating ratingS"><span>4.5</span></div>
+										4.5 <span class="count">(리뷰 18)</span>
+									</div>
+								</div>
+								<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM on"><span class="hide">찜하기</span></a><!-- 좋아요 선택시 class on 추가 -->
+								<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
+							</div>
+							<div class="pdtCon">
+								<div class="pdtImg">
+									<ul class="pdt_type">
+										<li class="bg_p">NEW</li>
+										<li class="bg_p">BEST</li>
+										<li class="bg_r">SALE</li>
+									</ul>
+									<a href="#" class="imgLink"><img src="./resources/web/images/temp/pt04.jpg" alt=""></a>
+								</div>
+								<div class="pdtTxt">
+									<p class="pdtHead" style="color:#4f8ffa;">한줄소개 나오는 곳</p>
+									<p class="pdtBrand">PT쌤 이름</p>
+									<p class="pdtName"><a href="#">선생님 소개 나오는 곳</a></p>
+									<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
+									<div class="pdtReview">
+										<div class="js_rating ratingS"><span>4.5</span></div>
+										4.5 <span class="count">(리뷰 18)</span>
+									</div>
+								</div>
+								<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM on"><span class="hide">찜하기</span></a><!-- 좋아요 선택시 class on 추가 -->
+								<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- 타임 세일 -->
+			<div class="mainHotDeal">
+				<div class="contents">
+					<div class="hotDealCon">
+						<div class="pdtImg">
+							<img src="./resources/web/images/temp/pdt02.png" alt="">
+							<a href="#"><span class="hide">디어 하이드레이션인텐스 에센스</span></a>
+						</div>
+						<div class="conBox conL">
+							<p class="tit">⏰ TIME SALE ⏰</p>
+							<p class="dDay">남은시간 <span>D-3</span></p>
+							<p class="time">09<span>:</span>51<span>:</span>47</p>
+						</div>
+						<div class="conBox conR">
+							<p class="pdtName">맛있닭 소스 닭가슴살 스테이크 혼합 150g</p>
+							<div class="pdtPrice">
+								<div class="sale">20%</div>
+								<div>
+									25,200<em>원</em>
+									<span class="cost">15,000원</span>
+								</div>
+							</div>
+							<div class="pdtReview">
+								<div class="js_rating ratingS"><span>4.5</span></div>
+								4.5 <span class="count">(리뷰 18)</span>
+							</div>
+							<div class="btn_wrap">
+								<a href="#" class="btn btnSizeM btnColorW btnArr btnTypeR"><span>장바구니</span></a>
+								<a href="#" class="btn btnSizeM btnColorB btnArr btnTypeR"><span>바로구매</span></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- 제품 추천 -->
+			<div class="mainReco">
+				<div class="contents">
+					<p class="mainTit">
+						<em>MD 추천 상품</em><span>✨✨ 헬스Dao에서 추천하는 EAT 템 ✨✨</span>
+						<i class="btn_tit"><a href="#">+ 전체보기</a></i>
+					</p>
+					<div class="pdt_list1">
+						<button class="set-arrow set-prev" type="button">Previous</button>
+						<div class="list_box">
+							<div class="pdtCon">
+								<div class="pdtImg">
+									<ul class="pdt_type">
+										<li class="bg_p">NEW</li>
+										<li class="bg_p">BEST</li>
+									</ul>
+									<a href="#" class="imgLink"><img src="./resources/web/images/temp/pdt01.png" alt=""></a>
+								</div>
+								<div class="pdtTxt">
+									<p class="pdtHead" style="color:#4f8ffa;">추가혜택 문구</p>
+									<p class="pdtBrand">상품명</p>
+									<p class="pdtName">상품제목</p>
+									<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
+									<div class="pdtReview">
+										<div class="js_rating ratingS"><span>4.5</span></div>
+										4.5 <span class="count">(리뷰 18)</span>
+									</div>
+								</div>
+								<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM on"><span class="hide">찜하기</span></a><!-- 좋아요 선택시 class on 추가 -->
+								<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
+							</div>
+							<div class="pdtCon">
+								<div class="pdtImg">
+									<ul class="pdt_type">
+										<li class="bg_p">NEW</li>
+										<li class="bg_p">BEST</li>
+									</ul>
+									<a href="#" class="imgLink"><img src="./resources/web/images/temp/pdt02.png" alt=""></a>
+								</div>
+								<div class="pdtTxt">
+									<p class="pdtHead" style="color:#4f8ffa;">추가혜택 문구</p>
+									<p class="pdtBrand">상품명</p>
+									<p class="pdtName">상품제목</p>
+									<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
+									<div class="pdtReview">
+										<div class="js_rating ratingS"><span>4.5</span></div>
+										4.5 <span class="count">(리뷰 18)</span>
+									</div>
+								</div>
+								<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM on"><span class="hide">찜하기</span></a><!-- 좋아요 선택시 class on 추가 -->
+								<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
+							</div>
+							<div class="pdtCon">
+								<div class="pdtImg">
+									<ul class="pdt_type">
+										<li class="bg_p">NEW</li>
+										<li class="bg_p">BEST</li>
+									</ul>
+									<a href="#" class="imgLink"><img src="./resources/web/images/temp/pdt03.png" alt=""></a>
+								</div>
+								<div class="pdtTxt">
+									<p class="pdtHead" style="color:#4f8ffa;">추가혜택 문구</p>
+									<p class="pdtBrand">상품명</p>
+									<p class="pdtName">상품제목</p>
+									<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
+									<div class="pdtReview">
+										<div class="js_rating ratingS"><span>4.5</span></div>
+										4.5 <span class="count">(리뷰 18)</span>
+									</div>
+								</div>
+								<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM on"><span class="hide">찜하기</span></a><!-- 좋아요 선택시 class on 추가 -->
+								<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
+							</div>
+							<div class="pdtCon">
+								<div class="pdtImg">
+									<ul class="pdt_type">
+										<li class="bg_p">NEW</li>
+										<li class="bg_p">BEST</li>
+									</ul>
+									<a href="#" class="imgLink"><img src="./resources/web/images/temp/pdt01.png" alt=""></a>
+								</div>
+								<div class="pdtTxt">
+									<p class="pdtHead" style="color:#4f8ffa;">추가혜택 문구</p>
+									<p class="pdtBrand">상품명</p>
+									<p class="pdtName">상품제목</p>
+									<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
+									<div class="pdtReview">
+										<div class="js_rating ratingS"><span>4.5</span></div>
+										4.5 <span class="count">(리뷰 18)</span>
+									</div>
+								</div>
+								<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM on"><span class="hide">찜하기</span></a><!-- 좋아요 선택시 class on 추가 -->
+								<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
+							</div>
+							<div class="pdtCon">
+								<div class="pdtImg">
+									<ul class="pdt_type">
+										<li class="bg_p">NEW</li>
+										<li class="bg_p">BEST</li>
+									</ul>
+									<a href="#" class="imgLink"><img src="./resources/web/images/temp/pdt02.png" alt=""></a>
+								</div>
+								<div class="pdtTxt">
+									<p class="pdtHead" style="color:#4f8ffa;">추가혜택 문구</p>
+									<p class="pdtBrand">상품명</p>
+									<p class="pdtName">상품제목</p>
+									<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
+									<div class="pdtReview">
+										<div class="js_rating ratingS"><span>4.5</span></div>
+										4.5 <span class="count">(리뷰 18)</span>
+									</div>
+								</div>
+								<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM on"><span class="hide">찜하기</span></a><!-- 좋아요 선택시 class on 추가 -->
+								<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
+							</div>
+							<div class="pdtCon">
+								<div class="pdtImg">
+									<ul class="pdt_type">
+										<li class="bg_p">NEW</li>
+										<li class="bg_p">BEST</li>
+									</ul>
+									<a href="#" class="imgLink"><img src="./resources/web/images/temp/pdt03.png" alt=""></a>
+								</div>
+								<div class="pdtTxt">
+									<p class="pdtHead" style="color:#4f8ffa;">추가혜택 문구</p>
+									<p class="pdtBrand">상품명</p>
+									<p class="pdtName">상품제목</p>
+									<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
+									<div class="pdtReview">
+										<div class="js_rating ratingS"><span>4.5</span></div>
+										4.5 <span class="count">(리뷰 18)</span>
+									</div>
+								</div>
+								<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM on"><span class="hide">찜하기</span></a><!-- 좋아요 선택시 class on 추가 -->
+								<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
+							</div>
+						</div>
+						<button class="set-arrow set-next" type="button">Next</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="mainTrust">
+			<div class="contents">
+				<ul>
+					<li>
+						<div>
+							<em>SECURITY<br> CODE</em>
+							<span>100% 정품</span><br>
+							믿고 구매할 수 있는 본사 운영 공식몰
+						</div>
+					</li>
+					<li>
+						<div>
+							<em>DELIVERY<br> SERVICE</em>
+							<span>우체국 택배</span><br>
+							신속! 안전! 만족도 높은 배송
+						</div>
+					</li>
+					<li>
+						<div>
+							<em>EXP<br> (Expiry date)</em>
+							<span>유통기한 걱정 NO</span><br>
+							철저한 관리, 최신제품만 판매
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		
+	</div>
+	<!-- //container -->
+
+	<!-- footer -->
+	<footer id="footer">
+		<div class="copyArea">
+			<div class="copyLink">
+				<ul>
+					<li><a href="#">회사 소개</a></li>
+					<li><a href="#">공지사항</a></li>
+					<li><a href="#">입점·제휴문의</a></li>
+					<li><a href="#">이용약관</a></li>
+					<li><a href="#">개인정보처리방침</a></li>
+				</ul>
+			</div>
+			<div class="copySns">
+				<a href="https://www.instagram.com/ryuu4512/" class="instar"target="_blank" >RYU</a>
+				<a href="https://www.instagram.com/gahee_0305/" class="instar"target="_blank" >YU</a>
+			</div>
+			<div class="copyRight">
+				<div class="copyInfo">
+					<em class="noLine">㈜아령하세요</em>
+					<em>서울시 강남구 아령빌딩 1F ~ 123F</em>
+					<em>대표: 이창섭</em>
+					<em>사업자등록번호 1991-0722</em>
+					<br>
+					<em class="noLine">고객센터 : 010-9535-0371</em>
+					<em>FAX : 9535-0371</em>
+					<em>관리자이메일 : <a href="mailto:roksellid02@gmail.com">roksellid02@gmail.com</a></em>
+				</div>
+				<p>Copyright HealthDao. Co. Ltd All Right Reserved</p>
+			</div>
+		</div>
+	</footer>
+	<!-- //footer -->
+	<!-- javascript -->
+	<script type="text/javascript" src="./resources/web/js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="./resources/web/js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="./resources/web/js/slick.min.js"></script>
+	<script type="text/javascript" src="./resources/web/js/jquery.mCustomScrollbar.js"></script>
+	<script type="text/javascript" src="./resources/web/js/circle-progress.min.js"></script>
+	<script type="text/javascript" src="./resources/web/js/ui.js"></script>
+	<script type="text/javascript" src="./resources/web/js/main.js"></script>
+	<!-- //javascript -->
+</div>
+
+<!-- 퀵메뉴 -->
+<div id="quick">
+	<div class="contents">
+		<div class="quickArea">
+			<p class="tit">QUICK MENU</p>
+			<div class="recentArea">
+				<div class="tit">최근 본 상품</div>
+				<div class="recoQuick">
+					<div class="list">
+						<a href="#">
+							<img src="./resources/web/images/temp/pdt02.png" alt="">
+						</a>
+					</div>
+					<div class="list">
+						<a href="#">
+							<img src="./resources/web/images/temp/pdt01.png" alt="">
+						</a>
+					</div>
+					<div class="list">
+						<a href="#">
+							<img src="./resources/web/images/temp/pdt03.png" alt="">
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="likeArea">
+				<a href="#">					
+					<span>찜한 상품</span>
+				</a>
+			</div>
+			<div class="cartArea">
+				<a href="#"><span>장바구니</span></a>
+			</div>
+			<div class="bottomArea">
+				<ul>
+					<li><a class="btnTop" href="javascript:void(0);">△</a></li>
+					<li><a href="#"><span class="hide">마이페이지</span></a></li>
+					<li><a class="btnBtm" href="javascript:void(0);">▽</a></li>
+				</ul>				
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 톡톡 -->
+<button type="button" class="btnTalk" onclick="showLayer('talk');"><span class="hide">TalkBtn</span></button>
+<div id="talk" class="lyPopArea bgnone">
+	<div class="lyPop">
+		<div class="lyWrap">
+			<button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
+			<div class="lyTit">토크토크~</div>
+			<div class="lyBody basic">
+				<p>궁금증을 해결해드립니다😁</p>
+				<div class="chatArea">
+					<div class="chatCon">
+						<div class="row">
+							<div class="imgArea">
+								<img src="./resources/web/images/common/talk_chun.gif" alt="">
+							</div>
+							<div class="textArea left">
+								<div>너의 궁금증을 해결해줄게!<br>나는 헬춘식이야<span class="time">11:50:19</span></div>								
+							</div>
+							<div class="textArea left">
+								<div>
+									<ul class="talkSelect">
+										<li><button>1.궁금한거 1번</button></li>
+										<li><button>2.궁금한거 2번</button></li>
+										<li><button>3.궁금한거 3번</button></li>
+										<li><button>4.궁금한거 4번</button></li>
+										<li><button>5.궁금한거 5번</button></li>
+									</ul>
+									<span class="time">11:50:19</span>
+								</div>								
+							</div>
+							<div class="textArea right">
+								<div class="right">고마워요 헬춘식<span class="time">11:50:19</span></div>								
+							</div>
+							<div class="textArea left">
+								<div>헬춘식 헬스 매니아<br>춘식이처럼 몸짱이 되고 싶다면<br>헬스Dao에서<br>시작하라구😎<span class="time">11:50:19</span></div>								
+							</div>
+							<div class="textArea right">
+								<div class="right">헬춘식 짱짱맨<br>멋진 헬춘식<span class="time">11:50:19</span></div>								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	mainStart();
+	mainVisual();
+	recoQuick();
+	$('#quick .quickArea').css({'position':'absolute', 'top':936});
+</script>
+<!--// 퀵메뉴 / 톡 -->
+</body>
+</html>

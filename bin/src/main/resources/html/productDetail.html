@@ -1,0 +1,1363 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<title></title>
+<meta name="title" content="">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta property="og:title" content="">
+<meta property="og:description" content="">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no, address=no, email=no">
+
+<meta property="og:url" content="">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="">
+<meta property="og:image" content="">
+
+<link rel="shortcut icon" href="">
+<link rel="apple-touch-icon" sizes="180x180" href="">
+<link rel="icon" type="image/png" sizes="32x32" href="">
+<link rel="icon" type="image/png" sizes="16x16" href="">
+<link rel="manifest" href="">
+<link rel="mask-icon" href="" color="">
+<meta name="msapplication-TileColor" content="">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="stylesheet" type="text/css" href="./resources/web/css/fonts.css">
+<link rel="stylesheet" type="text/css" href="./resources/web/css/common.css">
+<link rel="stylesheet" type="text/css" href="./resources/web/css/contents.css">
+<link rel="stylesheet" type="text/css" href="./resources/web/css/changSeop.css">
+<body>
+<div id="wrap" class="loadingNot">
+	<div id="loading">
+		<span class="hide">로딩중</span>
+	</div>
+
+	<!-- HEADER + GNB -->
+	<header id="header">
+		<!-- HEADERTOP -->
+		<div class="headerTop">
+			<div class="contents">
+				<div class="utilMenu">
+					<ul>
+						<li><a href="#loginLayer" onclick="loginLayer();return false;">로그인</a></li>
+						<li><a href="#">회원가입</a></li>
+						<li><a href="#">주문 조회</a></li>
+						<li><a href="#">고객센터</a></li>
+					</ul>
+					
+					<!-- 로그인 레이어 -->
+					<div id="loginLayer">
+						<div class="loginTabH">
+							<div class="inp_wrap">
+								<div class="inp_text sizeS">
+									<input type="text" title="아이디" placeholder="아이디">
+								</div>
+								<p class="error">아이디를 입력해주세요.</p>
+							</div>
+							<div class="inp_wrap mgt10">
+								<div class="inp_text sizeS">
+									<input type="password" title="비밀번호" placeholder="비밀번호">
+								</div>
+								<p class="error">비밀번호를 입력해주세요.</p>
+							</div>
+							<span class="inp_check mgt15">
+								<input type="checkbox" id="id_auto_loing_H">
+								<label for="id_auto_loing_H">자동 로그인</label>
+							</span>
+							<a href="#" class="btn btnSizeM btnColorP btnTypeR w100 mgt17"><span>로그인</span></a>
+						</div>
+						<div class="btn_member">
+							<ul>
+								<li><a href="#">회원가입</a></li>
+								<li><a href="#">아이디 찾기</a></li>
+								<li><a href="#">비밀번호 찾기</a></li>
+							</ul>
+						</div>
+						<div class="btn_sns">
+							<ul>
+								<li class="sns_n"><a href="javascript:void(0);"><span>네이버 로그인</span></a></li>
+								<li class="sns_k"><a href="javascript:void(0);"><span>카카오 로그인</span></a></li>
+							</ul>
+						</div>
+						<div class="loginLayerClose">
+							<a href="javascript:void(0);" onclick="loginLayer();">닫기</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- // HEADERTOP -->
+
+		<!-- HEADER -->
+		<div class="daoHeader">
+			<h1><a href="#"><img class="logoClass" src="./resources/web/images/common/logo.png" alt="BANILA.COM"></a></h1>
+			<div class="searchH">
+				<div class="searchWrap">
+					<div class="inp_wrap">
+						<div class="inp_text">
+							<input type="text" id="headerSearch">
+							<button class="btn_clear"><span>clear</span></button>
+							<button class="btn_search" type="button"><span class="hide">검색</span></button>
+						</div>
+					</div>
+				</div>
+				<div class="jsSearchTxt">
+					<div class="rollCon">
+						<div class="txt">검색어 순위 1위 노출</div>
+						<div class="txt">검색어 순위 2위 노출</div>
+						<div class="txt">검색어 순위 3위 노출</div>
+						<div class="txt">검색어 순위 4위 노출</div>
+						<div class="txt">검색어 순위 5위 노출</div>
+					</div>
+				</div>
+			</div>
+			<div class="myMenuH">
+				<ul>
+					<li><a href="#">마이페이지</a></li>
+					<li><a href="#">장바구니 <span>99</span></a></li>
+				</ul>
+			</div>
+		</div>
+		<!-- //HEADER -->
+		<!-- GNB -->
+		<div class="gnbWrap">
+			<div class="gnb">
+				<div class="contents">
+					<ul class="gnbLink">
+						<li><a href="#">랭킹</a></li>
+						<li><a href="#">신상품</a></li>
+						<li><a href="#">식품</a></li>
+						<li><a href="#">음료</a></li>
+						<li><a href="#">운동·생활용품</a></li>
+						<li><a href="#">주변 PT 찾기</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- //GNB -->
+	</header>
+	<!-- //HEADER + GNB -->
+
+	<!-- container -->	
+	<div id="container">				
+		<div class="site_location">
+			<span><a href="/">HOME</a></span>
+			<span><a href="#">전체상품</a></span>
+			<em>제품상세</em>
+		</div>
+		<div class="product_detail">
+			<div class="pdtDetailHead">
+				<div class="contents">
+					<div class="pdtVisual">
+						<div class="pdtItem"><img src="./resources/web/images/temp/pdt01.png" alt=""></div>
+						
+					</div>
+					
+					<div class="pdtInfoBox">
+						<div class="hotdeal">
+							<div class="bg"><span></span></div>
+							<dl class="dDay">
+								<dt>남은시간</dt>
+								<dd><span class="day">D-3</span><span class="time">16:10:12</span></dd>
+							</dl>
+							<p class="hotdealPdt"><span class="notoM">타임 세일</span> 한정수량 211개 남음</p>
+						</div>
+						<div class="pdtInfo">							
+							<a href="javascript:void(0)" onclick="jsShopFloating('like_floating');" class="btn_like likeL_type2"><span class="hide">찜하기</span></a>
+							<div class="pdtBrand">아령하세요</div>
+							<div class="pdtName">러브잇 닭가슴살 100g</div>
+							<div class="pdtDesc">100ml</div>
+							<div class="pdtGrade">
+								<div class="gradeStar js_rating ratingM"><span>3.5</span></div>
+								<span class="gradeText">4.7</span>
+								<a href="javascript:void(0)" class="pdtReviewText">
+									<span class="txt">/ 331의 리뷰</span>
+								</a>
+							</div>
+							<div class="pdtPrice">
+								<div class="price">
+									판매가
+									<!-- none 클래스 추가시 취소선 처리  -->
+									<span class="num none">
+										<span class="txt">18,000</span>원
+									</span>
+								</div>
+								<div class="price">
+									할인가
+									<span class="num">
+										<span class="percent">10<span>%</span></span>
+										<span class="txt">16,200</span>원
+									</span>
+								</div>
+								<div class="price">
+									타임세일
+									<span class="num sale">
+										<span class="percent">10<span>%</span></span>
+										<span class="txt">18,000</span>원
+									</span>
+								</div>
+							</div>
+							
+							<div class="pdtPoint js_acoBox">
+								<div class="js_acoList noScrolling">
+									<a href="javascript:void(0)" class="pdtPointTtl js_acoLink">
+										<div class="tit">포인트 혜택 :  <span class="color">최대 500포인트</span></div>
+										<span class="arrow"><span class="hide">닫기</span></span>
+									</a>
+									<div class="pdtReview_wrap js_acoCon" style="display:none;">
+										<div class="pdtReviewTit">리뷰 적립</div>
+										<dl>
+											<dt>텍스트 리뷰 작성 시</dt>
+											<dd>
+												<span class="num">200</span>포인트
+											</dd>
+										</dl>
+										<dl>
+											<dt>포토 리뷰 작성 시</dt>
+											<dd>
+												<span class="num">500</span>포인트
+											</dd>
+										</dl>
+									</div>
+								</div>
+								<div class="pdtPoint_wrap">
+									<div class="pointTotal">
+										<div class="pointCmt">포인트 더 받는 법</div>
+										<span class="pointCon total">
+											<span class="txt">+ 최대 </span>
+											<span class="num">6,000</span>포인트
+										</span>
+									</div>
+									<div class="pointDetail">
+										<div class="tit">베스트 리뷰 선정 시</div>
+										<span class="pointCon">
+											<span class="num">5,000</span>포인트
+										</span>
+									</div>
+									<div class="pointDetail">
+										<div class="tit">피부 프로필 입력 시</div>
+										<span class="pointCon">
+											<span class="num">1,000</span>포인트
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="prmtInfo">
+								<div class="infoTit">1+1 상품안내</div>
+								<div class="InfoDetail">해당 상품은 동일한 상품만 1+1으로 구매 가능한 상품입니다.<br>수량을 2개로 선택해주세요.<br>2개 선택 시, 주문/결제 단에서 1개 가격으로 구매 가능합니다. </div>
+							</div>
+
+
+							<div class="pdtCmt">본품 1개 구매시 사은품 2개 증정!</div>
+							<div class="pdtOptionSelect">
+								<div class="inp_wrap">
+									<div class="inp_select pdtSelect">
+										<div class="selectBox">
+											<button class="title" type="button" title="">옵션을 선택해주세요</button>
+											<ul class="selList">
+												<li>
+													<input type="radio" value="" class="option" id="productDetail_radio1_1" name="productDetail_radio1">
+													<label for="productDetail_radio1_1">
+														<span class="selectColor colorShipM"><img src="./resources/web/images/temp/colorChip03.jpg"></span>벨벳 블러드 립-BE01 밀크티 필터01
+													</label>
+												</li>
+												<li class="soldOut"><!-- 일시 품절일 경우 soldOut 클래스 추가 -->
+													<input type="radio" value="" class="option" id="productDetail_radio1_2" name="productDetail_radio1" disabled><!-- 일시 품절일 경우 disabled 추가 -->
+													<label for="productDetail_radio1_2">
+														<span class="selectColor colorShipM"><img src="./resources/web/images/temp/colorChip04.jpg"></span>벨벳 블러드 립-BE01 밀크티 필터02
+													</label>
+													<span class="soldOutTxt">[일시품절]</span><!-- 일시 품절일 경우 항목 추가 -->
+													<button class="soldOutBtn btn_txt" onclick="showLayer('stockAlt');" type="button">입고알림신청</button><!-- 일시 품절일 경우 항목 추가 -->
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="pdtSelectedOption"> 
+								<div class="optionName">벨벳 블러드 립-BE01 밀크티 필터</div>
+								<div class="optionDetail">
+									<div class="js_pdtCount pdtUiSpinner">
+										<button class="js_pdtCountMinus spinnerDecrease" type="button" onclick="productCountMinus(this)" disabled>
+											<span class="hide">제품 수량 감소</span>
+										</button>
+										<!-- 구매수량이 정해져 있을 경우 data-max 를 넣어주세요 -->
+										<input class="spinnerInput" type="text" title="선택품목갯수" id="" value="1" readonly>
+										<button class="js_pdtCountPlus spinnerIncrease" type="button" onclick="productCountPlus(this)">
+											<span class="hide">제품 수량 증가</span>
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="pdtSelectedOption"> 
+								<div class="optionName">벨벳 블러드 립-BE01 밀크티 필터</div>
+								<div class="optionDetail">
+									<!-- 일시 품절일 경우 항목 추가 -->
+									<span class="soldOutTxt">[일시품절]</span>
+									<div class="js_pdtCount pdtUiSpinner">
+										<button class="js_pdtCountMinus spinnerDecrease" type="button" onclick="productCountMinus(this)" disabled>
+											<span class="hide">제품 수량 감소</span>
+										</button>
+										<!-- 구매수량이 정해져 있을 경우 data-max 를 넣어주세요 -->
+										<input class="spinnerInput" type="text" title="선택품목갯수" value="0" disabled>
+										<button class="js_pdtCountPlus spinnerIncrease" type="button" onclick="productCountPlus(this)" disabled>
+											<span class="hide">제품 수량 증가</span>
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="pdtSelectedOption type02"> 
+								<div class="optionName"><span class="selectColor colorShipM"><img src="./resources/web/images/temp/colorChip01.jpg"></span><span>벨벳 블러드 립-BE01 밀크티 필터</span></div>
+								<div class="optionDetail">
+									<div class="js_pdtCount pdtUiSpinner">
+										<button class="js_pdtCountMinus spinnerDecrease" type="button" onclick="productCountMinus(this)" disabled>
+											<span class="hide">제품 수량 감소</span>
+										</button>
+										<!-- 구매수량이 정해져 있을 경우 data-max 추가 -->
+										<input class="spinnerInput" type="text" title="선택품목갯수" value="1" data-max="10" readonly>
+										<button class="js_pdtCountPlus spinnerIncrease" type="button" onclick="productCountPlus(this)">
+											<span class="hide">제품 수량 증가</span>
+										</button>
+									</div>
+								</div>	
+								<div class="price"> 
+									<span class="dftPrice"><span>80,000</span>원</span>
+								</div>
+								<a href="javascript:void(0)" class="close"><span class="hide">닫기</span></a>
+							</div>
+							<div class="pdtSelectedOption type02"> 
+								<div class="optionName"><span class="selectColor colorShipM"><img src="./resources/web/images/temp/colorChip03.jpg"></span><span>벨벳 블러드 립-BE01 밀크티 필터</span></div>
+								<div class="optionDetail">
+									<div class="js_pdtCount pdtUiSpinner">
+										<button class="js_pdtCountMinus spinnerDecrease" type="button" onclick="productCountMinus(this)" disabled>
+											<span class="hide">제품 수량 감소</span>
+										</button>
+										<!-- 구매수량이 정해져 있을 경우 data-max 추가 -->
+										<input class="spinnerInput" type="text" title="선택품목갯수" value="1" data-max="10" readonly>
+										<button class="js_pdtCountPlus spinnerIncrease" type="button" onclick="productCountPlus(this)">
+											<span class="hide">제품 수량 증가</span>
+										</button>
+									</div>
+								</div>	
+								<div class="price"> 
+									<span class="dftPrice"><span>80,000</span>원</span>
+								</div>
+								<a href="javascript:void(0)" class="close"><span class="hide">닫기</span></a>
+							</div>
+							<div class="pdtSelectedOption type02"> 
+								<div class="optionName"><span class="selectColor colorShipM"><img src="./resources/web/images/temp/colorChip03.jpg"></span><span>벨벳 블러드 립-BE01 밀크티 필터</span></div>
+								<div class="optionDetail">
+									<div class="js_pdtCount pdtUiSpinner">
+										<button class="js_pdtCountMinus spinnerDecrease" type="button" onclick="productCountMinus(this)" disabled>
+											<span class="hide">제품 수량 감소</span>
+										</button>
+										<!-- 구매수량이 정해져 있을 경우 data-max 추가 -->
+										<input class="spinnerInput" type="text" title="선택품목갯수" value="1" data-max="10" readonly>
+										<button class="js_pdtCountPlus spinnerIncrease" type="button" onclick="productCountPlus(this)">
+											<span class="hide">제품 수량 증가</span>
+										</button>
+									</div>
+								</div>	
+								<div class="price"> 
+									<!-- 할인 들어갈 경우 기존 가격 태그에 'none' 클래스 추가 -->
+									<span class="dftPrice none"><span>80,000</span>원</span>
+									<span class="dftPrice"><span>64,000</span>원</span>
+								</div>
+								<a href="javascript:void(0)" class="close"><span class="hide">닫기</span></a>
+							</div>
+							<!-- 200424 삭제 
+							<div class="pdtStockOff">재고가 부족하여 추가 수량만큼 주문할 수 없습니다.</div>
+							<div class="pdtStockOff">일일 최대 구매수량을 초과하였습니다.</div> 
+							-->
+							
+							<!-- 200424 error text 위치 이동 -->
+							<div class="pdtStockOff">
+								<p>error text</p>
+							</div>
+							<!-- //200424 error text 위치 이동 -->
+							<div class="pdtMoney">
+								<span class="totalText">총 합계 금액</span>
+								총 1개 <span class="total_price" style="margin-left: 345px;"><span>64,000</span>원</span>
+							</div>
+							<div class="pdtbuyBtnArea">
+								<div class="btn_wrap">
+									<a href="javascript:void(0)" class="btn btnArr btnSizeL btnColorW btnTypeR"><span>장바구니</span></a>
+									<a href="javascript:void(0)" class="btn btnSizeL btnColorB btnTypeR"><span>바로구매</span></a>
+								</div>
+							</div>
+							
+							<div class="pdtGift js_acoBox">
+								<div class="js_acoList on">
+									<a href="javascript:void(0)" class="pdtGiftTtl js_acoLink">추가혜택(2)<span class="arrow"><span class="hide">닫기</span></span></a>
+									<ul class="js_acoCon">
+										<li>
+											<a href="javascript:void(0)">
+												<div><img src="./resources/web/images/temp/thumbImg01.jpg" alt=""></div>
+												<p>바닐라코 제로 스페츌러 세트</p>
+											</a>
+										</li>
+										<li>
+											<a href="javascript:void(0)">
+												<div><img src="./resources/web/images/temp/thumbImg01.jpg" alt=""></div>
+												<p>바닐라코 제로 스페츌러 세트</p>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="pdtGuide">
+								<p><span class="bullet"></span>타임 세일 상품 구매 하기 전 꼭 확인하세요.</p>
+								<ul class="dotInfo">
+									<li>타임 세일은 회원 전용 행사입니다.</li>
+									<li>타임 세일은 당사의 사정으로 인해 사전 공지 없이 변경 또는 종료될 수 있습니다.</li>
+									<li>타임 세일 상품이 한정수량일 경우 선착순 판매로 진행됩니다.</li>
+									<li>타임 세일 상품 조기 품절시 정상가로 구매할 수 있습니다.</li>
+									<li>타임 세일 상품은 장바구니에 담아두었더라도 지정된 행사 시간 외에 구매하실 경우 가격이 변동될 수 있습니다.</li>
+									<li>타임 세일 상품은 포인트 사용이 불가능합니다.</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="pdtDetailBody">
+				<div class="tabType tabType2 sizeL fixedScroll">
+					<ul>
+						<li><a href="#detailContentMede" class="current"><span>상세정보</span></a></li>
+						<li><a href="#detailReviewMede"><span>상품리뷰(0)</span></a></li>
+						<li><a href="#detailQnaMede"><span>상품문의(0)</span></a></li>
+						<li><a href="#detailOrder"><span>배송안내</span></a></li>
+					</ul>
+				</div>
+				<div id="medeArea">
+					<div id="detailContentMede">
+						<div class="IngreBox">
+							<img class="productInfo" src="./resources/web/images/product/product_info.jfif">
+							
+							<p class="IngreCmt">피부 상태 및 환경에 따라 사용상 주의가 필요한 성분 중, 이 상품에 함유되지 않은 성분입니다.</p>
+						</div>
+						
+						<div class="detailGoodsInfo">
+							<img src="http://img.fnf.co.kr/banilaco/kr/product/product_detail/prime_primer_classic_1_v6.jpg" alt="">
+						</div>
+					</div>
+					<div id="detailReviewMede">
+						<div class="bannerBox">
+							
+						</div>
+						<div class="reviewBtnArea">
+							<p class="reviewText">구매하신 상품은 마음에 드셨나요?<br>상품리뷰 작성하고 포인트 적립하세요</p>
+							<div class="btn_wrap">
+								<a href="javascript:void(0)" onclick="showLayer('reViewWritePop');" class="btn btnSizeL btnColorB btnTypeR" style="width:330px;"><span>리뷰작성</span></a>
+							</div>
+							<div class="reviewIco">
+								<div class="icoText">텍스트 리뷰 +200P</div>
+								<div class="icoPhoto">포토 리뷰 +500P</div>
+							</div>
+						</div>
+						<div class="reviewGrade">
+							<p><span class="fcPink fs22">세정력, 촉촉함, 피부자극</span><br>에 대하여 만족하는 고객이 많았어요!</p>
+							<div class="gradeArea">
+								<div class="gradeText">4.5</div>
+								<div class="gradeStar js_rating ratingL cPink"><span>4.5</span></div>
+								<p>총 827명의 리뷰어 중 587명이 <br>4.5점을 주었어요</p>
+							</div>
+							<div class="StatArea">
+								<div>
+									<dl>
+										<dt>세정력</dt>
+										<dd>아주 순해요<span class="statBar"><span></span></span><span class="statData">80<!-- 200423 span 추가 --><span>%</span></span></dd>
+										<dd>적당해요<span class="statBar"><span></span></span><span class="statData">0<!-- 200423 span 추가 --><span>%</span></span></dd>
+										<dd>조금 아쉬워요<span class="statBar"><span></span></span><span class="statData">40<!-- 200423 span 추가 --><span>%</span></span></dd>
+									</dl>
+									<dl>
+										<dt>촉촉함</dt>
+										<dd>아주 순해요<span class="statBar"><span></span></span><span class="statData">80<!-- 200423 span 추가 --><span>%</span></span></dd>
+										<dd>적당해요<span class="statBar"><span></span></span><span class="statData">10<!-- 200423 span 추가 --><span>%</span></span></dd>
+										<dd>조금 아쉬워요<span class="statBar"><span></span></span><span class="statData">60<!-- 200423 span 추가 --><span>%</span></span></dd>
+									</dl>
+									<dl>
+										<dt>피부자극</dt>
+										<dd>아주 순해요<span class="statBar"><span></span></span><span class="statData">80<!-- 200423 span 추가 --><span>%</span></span></dd>
+										<dd>적당해요<span class="statBar"><span></span></span><span class="statData">30<!-- 200423 span 추가 --><span>%</span></span></dd>
+										<dd>조금 아쉬워요<span class="statBar"><span></span></span><span class="statData">90<!-- 200423 span 추가 --><span>%</span></span></dd>
+									</dl>
+								</div>
+							</div>
+						</div>
+						<div class="photoReview">
+							<p class="photoReviewTtl">포토리뷰 모아보기 (215)</p>
+							<div class="photoReviewSlide">
+								<div class="imgCutting"><a href="javascript:void(0)" onclick="showLayer('reViewDetailPop');" class="imgBox"><img src="./resources/web/images/temp/480X480.png" alt=""></a></div>
+								<div class="imgCutting"><a href="javascript:void(0)" onclick="showLayer('reViewDetailPop');" class="imgBox"><img src="./resources/web/images/temp/480X480.png" alt=""></a></div>
+								<div class="imgCutting"><a href="javascript:void(0)" onclick="showLayer('reViewDetailPop');" class="imgBox"><img src="./resources/web/images/temp/480X480.png" alt=""></a></div>
+								<div class="imgCutting"><a href="javascript:void(0)" onclick="showLayer('reViewDetailPop');" class="imgBox"><img src="./resources/web/images/temp/280X480.png" alt=""></a></div>
+								<div class="imgCutting"><a href="javascript:void(0)" onclick="showLayer('reViewDetailPop');" class="imgBox"><img src="./resources/web/images/temp/280X480.png" alt=""></a></div>
+								<div class="imgCutting"><a href="javascript:void(0)" onclick="showLayer('reViewDetailPop');" class="imgBox"><img src="./resources/web/images/temp/280X480.png" alt=""></a></div>
+								<div class="imgCutting"><a href="javascript:void(0)" onclick="showLayer('reViewDetailPop');" class="imgBox"><img src="./resources/web/images/temp/480X280.png" alt=""></a></div>
+								<div class="imgCutting"><a href="javascript:void(0)" onclick="showLayer('reViewDetailPop');" class="imgBox"><img src="./resources/web/images/temp/480X280.png" alt=""></a></div>
+								<div class="imgCutting"><a href="javascript:void(0)" onclick="showLayer('reViewDetailPop');" class="imgBox"><img src="./resources/web/images/temp/480X280.png" alt=""></a></div>
+								<div class="imgCutting"><a href="javascript:void(0)" onclick="showLayer('reViewDetailPop');" class="imgBox"><img src="./resources/web/images/temp/480X280.png" alt=""></a></div>
+								<div class="imgCutting"><a href="javascript:void(0)" onclick="showLayer('reViewDetailPop');" class="imgBox"><img src="./resources/web/images/temp/480X280.png" alt=""></a></div>
+								<div class="imgCutting"><a href="javascript:void(0)" onclick="showLayer('reViewDetailPop');" class="imgBox"><img src="./resources/web/images/temp/480X280.png" alt=""></a></div>
+								<div class="imgCutting"><a href="javascript:void(0)" onclick="showLayer('reViewDetailPop');" class="imgBox"><img src="./resources/web/images/temp/480X280.png" alt=""></a></div>
+							</div>
+						</div>
+						<div class="ReviewList">
+							<p class="ReviewListTtl">전체리뷰 (827)</p>
+							<!-- 20200115 영역수정 s -->
+							<div class="tblBar">
+								<div class="sorting">
+									<ul>
+										<li><a href="javascript:void(0)" class="on">베스트순</a></li>
+										<li><a href="javascript:void(0)">등록순</a></li>
+										<li><a href="javascript:void(0)">높은평점순</a></li>
+										<li><a href="javascript:void(0)">낮은평점순</a></li>
+									</ul>
+								</div>
+								<a href="#layer_filter" class="btn_filter"><span>맞춤필터</span></a><!-- 필터가 적용된 상태일경우 active 클래스 추가 --><!-- 20200310 수정 -->
+								<!-- 20200310 수정 -->
+								<div class="layer_filter" id="layer_filter">
+									<dl class="sub">
+										<dt>내 피부타입</dt>
+										<dd>
+											<p>피부 밝기</p>											
+											<ul>
+												<li>
+													<span class="inp_check">
+														<input type="checkbox" name="pdt_filter1" id="pdt_filter1_1">
+														<label for="pdt_filter1_1">수분/보습케어</label>
+													</span>
+												</li>
+												<li>
+													<span class="inp_check">
+														<input type="checkbox" name="pdt_filter1" id="pdt_filter1_2">
+														<label for="pdt_filter1_2">탄력/안티에이징 케어</label>
+													</span>
+												</li>
+												<li>
+													<span class="inp_check">
+														<input type="checkbox" name="pdt_filter1" id="pdt_filter1_3">
+														<label for="pdt_filter1_3">진정 케어</label>
+													</span>
+												</li>
+												<li>
+													<span class="inp_check">
+														<input type="checkbox" name="pdt_filter1" id="pdt_filter1_4">
+														<label for="pdt_filter1_4">트러블 케어</label>
+													</span>
+												</li>
+												<li>
+													<span class="inp_check">
+														<input type="checkbox" name="pdt_filter1" id="pdt_filter1_5">
+														<label for="pdt_filter1_5">모공/피지 케어</label>
+													</span>
+												</li>
+											</ul>
+										</dd>
+										<dd>
+											<p>피부 밝기</p>											
+											<ul>
+												<li>
+													<span class="inp_check">
+														<input type="checkbox" name="pdt_filter2" id="pdt_filter2_1">
+														<label for="pdt_filter2_1">수분/보습케어</label>
+													</span>
+												</li>
+												<li>
+													<span class="inp_check">
+														<input type="checkbox" name="pdt_filter2" id="pdt_filter2_2">
+														<label for="pdt_filter2_2">탄력/안티에이징 케어</label>
+													</span>
+												</li>
+												<li>
+													<span class="inp_check">
+														<input type="checkbox" name="pdt_filter2" id="pdt_filter2_3">
+														<label for="pdt_filter2_3">진정 케어</label>
+													</span>
+												</li>
+												<li>
+													<span class="inp_check">
+														<input type="checkbox" name="pdt_filter2" id="pdt_filter2_4">
+														<label for="pdt_filter2_4">트러블 케어</label>
+													</span>
+												</li>
+												<li>
+													<span class="inp_check">
+														<input type="checkbox" name="pdt_filter2" id="pdt_filter2_5">
+														<label for="pdt_filter2_5">모공/피지 케어</label>
+													</span>
+												</li>
+											</ul>
+										</dd>
+									</dl>
+									<dl>
+										<dt>내 피부에 가까운 색</dt>
+										<dd>
+											<ul>
+												<li>
+													<span class="inp_check">
+														<input type="checkbox" name="pdt_filter3" id="pdt_filter3_1">
+														<label for="pdt_filter3_1">수분/보습케어</label>
+													</span>
+												</li>
+												<li>
+													<span class="inp_check">
+														<input type="checkbox" name="pdt_filter3" id="pdt_filter3_2">
+														<label for="pdt_filter3_2">탄력/안티에이징 케어</label>
+													</span>
+												</li>
+												<li>
+													<span class="inp_check">
+														<input type="checkbox" name="pdt_filter3" id="pdt_filter3_3">
+														<label for="pdt_filter3_3">진정 케어</label>
+													</span>
+												</li>
+												<li>
+													<span class="inp_check">
+														<input type="checkbox" name="pdt_filter3" id="pdt_filter3_4">
+														<label for="pdt_filter3_4">트러블 케어</label>
+													</span>
+												</li>
+												<li>
+													<span class="inp_check">
+														<input type="checkbox" name="pdt_filter3" id="pdt_filter3_5">
+														<label for="pdt_filter3_5">모공/피지 케어</label>
+													</span>
+												</li>
+											</ul>
+										</dd>
+									</dl>
+									<!-- 필터 선택시 적용 s -->
+									<div class="selec_filter">									
+										<ul>
+											<li>수분/보습케어<button type="button"><span class="hide">삭제</button></a></li>
+											<li>흡수력<button type="button"><span class="hide">삭제</button></a></li>
+										</ul>
+										<a href="#" class="btn_reset"><span>초기화</span></a>
+									</div>
+									<!-- 필터 선택시 적용 e -->
+									<div class="btn_wrap">
+										<a href="#" class="btn btnArr btnSizeM btnColorB btnTypeR"><span>필터적용</span></a>
+									</div>
+									<a href="javascript:void(0);" onclick="" class="filter_close"><span class="hide">닫기</span></a>
+								</div>
+								<!-- //20200310 수정 -->
+							</div>
+							<!-- 20200115 영역수정 e -->
+							<div class="reviewListBox">
+								<ul>
+									<li>
+										<div class="reviewInfo">
+											<div class="gradeStar js_rating ratingM"><span>4.5</span></div>
+											<div class="userInfo">
+												<p class="userAcnt"><!-- 200326 등급영역 수정 --><span class="userRank userLv1">PINK</span><!-- // 200326 등급영역 수정 --><!-- 기본등급 userLv1 ~ 최고등급 userLv4 --><span class="userName">ihkim****</span></p>
+												<p class="dftPoint"><span>30대</span><span>여성</span></p>
+												<p class="reviewDate">2019.05.05</p>
+											</div>
+											<div class="skinProfile">
+												<p>피부 프로필</p>
+												<div>
+													<span>복합성</span>
+													<span>어두운 노란톤</span>
+													<span>수분충전</span>
+													<span>영양공급</span>
+													<span>트러블 케어</span>
+													<span>복합성</span>
+													<span>어두운 노란톤</span>
+													<span>수분충전</span>
+													<span>영양공급</span>
+													<span>트러블 케어</span>
+												</div>
+											</div>
+										</div>
+										<div class="reviewBox">
+											<div class="reviewImg">
+												<ul>
+													<li class="imgCutting"><a href="javascript:void(0)" onclick="showLayer('reViewDetailPop');" class="imgBox"><img src="./resources/web/images/temp/photoReviewImg01.jpg" alt=""></a></li>
+													<li class="imgCutting"><a href="javascript:void(0)" onclick="showLayer('reViewDetailPop');" class="imgBox"><img src="./resources/web/images/temp/photoReviewImg02.jpg" alt=""></a></li>
+													<li class="imgCutting"><a href="javascript:void(0)" onclick="showLayer('reViewDetailPop');" class="imgBox"><img src="./resources/web/images/temp/photoReviewImg03.jpg" alt=""></a></li>
+													<li class="imgCutting"><a href="javascript:void(0)" onclick="showLayer('reViewDetailPop');" class="imgBox"><img src="./resources/web/images/temp/photoReviewImg04.jpg" alt=""></a></li>
+													<li class="imgCutting"><a href="javascript:void(0)" onclick="showLayer('reViewDetailPop');" class="imgBox"><img src="./resources/web/images/temp/photoReviewImg05.jpg" alt=""></a></li>
+												</ul>
+											</div>
+											<p class="reviewTtl"><span class="BestIco typeM">BEST</span>가을 피부관리에는 고민없이 늘 사용하던 클린 잇 제로!</p>
+											<p>벨벳 블러드 립-BE01 밀크티 필터</p>
+											<p class="reviewCtt">늘 사용하고 있는 클렌저입니다. 최근에 50% 세일해서 잔뜩 쟁여두었어요! 클렌징을 하면 늘 잔여물이 남거나 건조하다는 느낌이 있었는데 부드러운 샤벳 제형이라 촉촉하고 세정력도 늘 사용하고 있는 클렌저입니다. 최근에 50% 세일해서 잔뜩 쟁여두었어요! 클렌징을 하면 늘 잔여물이 남거나 건조하다는 느낌이 있었는데 부드러운 샤벳 제형이라 촉촉하고 세정력도 늘 사용하고 있는 클렌저입니다.늘 사용하고 있는 클렌저입니다. 최근에 50% 세일해서 잔뜩 쟁여두었어요! 클렌징을 하면 늘 잔여물이 남거나 건조하다는 느낌이 있었는데 부드러운 샤벳 제형이라 촉촉하고 세정력도 늘 사용하고 있는 클렌저입니다. 최근에 50% 세일해서 잔뜩 쟁여두었어요! 클렌징을 하면 늘 잔여물이 남거나 건조하다는 느낌이 있었는데 부드러운 샤벳 제형이라 촉촉하고 세정력도 늘 사용하고 있는 클렌저입니다.늘 사용하고 있는 클렌저입니다. 최근에 50% 세일해서 잔뜩 쟁여두었어요! 클렌징을 하면 늘 잔여물이 남거나 건조하다는 느낌이 있었는데 부드러운 샤벳 제형이라 촉촉하고 세정력도 늘 사용하고 있는 클렌저입니다. 최근에 50% 세일해서 잔뜩 쟁여두었어요! 클렌징을 하면 늘 잔여물이 남거나 건조하다는 느낌이 있었는데 부드러운 샤벳 제형이라 촉촉하고 세정력도 늘 사용하고 있는 클렌저입니다.</p>
+											<div class="userPoint">
+												<span>순해요</span><span>순해요</span><span>순해요</span><span>순해요</span>
+											</div>
+											<a href="javascript:void(0)" class="reviewMore">더보기</a>
+										</div>
+									</li>
+									<li>
+										<div class="reviewInfo">
+											<div class="gradeStar js_rating ratingM"><span>4.5</span></div>
+											<div class="userInfo">
+												<p class="userAcnt"><!-- 200326 등급영역 수정 --><span class="userRank userLv2">SILVER</span><!-- // 200326 등급영역 수정 --><!-- 기본등급 userLv1 ~ 최고등급 userLv4 --><span class="userName">ihkim****</span></p>
+												<p class="dftPoint"><span>30대</span><span>여성</span></p>
+												<p class="reviewDate">2019.05.05</p>
+											</div>
+											<div class="skinProfile">
+												<p>피부 프로필</p>
+												<div>
+													<span>복합성</span>
+													<span>어두운 노란톤</span>
+													<span>수분충전</span>
+													<span>영양공급</span>
+													<span>트러블 케어</span>
+													<span>복합성</span>
+													<span>어두운 노란톤</span>
+													<span>수분충전</span>
+													<span>영양공급</span>
+													<span>트러블 케어</span>
+												</div>
+											</div>
+										</div>
+										<div class="reviewBox">
+											<div class="reviewImg">
+												<ul>
+													<li class="imgCutting"><a href="javascript:void(0)" onclick="showLayer('reViewDetailPop');" class="imgBox"><img src="./resources/web/images/temp/photoReviewImg01.jpg" alt=""></a></li>
+													<li class="imgCutting"><a href="javascript:void(0)" onclick="showLayer('reViewDetailPop');" class="imgBox"><img src="./resources/web/images/temp/photoReviewImg02.jpg" alt=""></a></li>
+													<li class="imgCutting"><a href="javascript:void(0)" onclick="showLayer('reViewDetailPop');" class="imgBox"><img src="./resources/web/images/temp/photoReviewImg03.jpg" alt=""></a></li>
+													<li class="imgCutting"><a href="javascript:void(0)" onclick="showLayer('reViewDetailPop');" class="imgBox"><img src="./resources/web/images/temp/photoReviewImg04.jpg" alt=""></a></li>
+													<li class="imgCutting"><a href="javascript:void(0)" onclick="showLayer('reViewDetailPop');" class="imgBox"><img src="./resources/web/images/temp/photoReviewImg05.jpg" alt=""></a></li>
+												</ul>
+											</div>
+											<p class="reviewTtl"><span class="BestIco typeM">BEST</span>가을 피부관리에는 고민없이 늘 사용하던 클린 잇 제로!</p>
+											<p>벨벳 블러드 립-BE01 밀크티 필터</p>
+											<p class="reviewCtt">늘 사용하고 있는 클렌저입니다. 최근에 50% 세일해서 잔뜩 쟁여두었어요! 클렌징을 하면 늘 잔여물이 남거나 건조하다는 느낌이 있었는데 부드러운 샤벳 제형이라 촉촉하고 세정력도 늘 사용하고 있는 클렌저입니다. 최근에 50% 세일해서 잔뜩 쟁여두었어요! 클렌징을 하면 늘 잔여물이 남거나 건조하다는 느낌이 있었는데 부드러운 샤벳 제형이라 촉촉하고 세정력도 늘 사용하고 있는 클렌저입니다.늘 사용하고 있는 클렌저입니다. 최근에 50% 세일해서 잔뜩 쟁여두었어요! 클렌징을 하면 늘 잔여물이 남거나 건조하다는 느낌이 있었는데 부드러운 샤벳 제형이라 촉촉하고 세정력도 늘 사용하고 있는 클렌저입니다. 최근에 50% 세일해서 잔뜩 쟁여두었어요! 클렌징을 하면 늘 잔여물이 남거나 건조하다는 느낌이 있었는데 부드러운 샤벳 제형이라 촉촉하고 세정력도 늘 사용하고 있는 클렌저입니다.늘 사용하고 있는 클렌저입니다. 최근에 50% 세일해서 잔뜩 쟁여두었어요! 클렌징을 하면 늘 잔여물이 남거나 건조하다는 느낌이 있었는데 부드러운 샤벳 제형이라 촉촉하고 세정력도 늘 사용하고 있는 클렌저입니다. 최근에 50% 세일해서 잔뜩 쟁여두었어요! 클렌징을 하면 늘 잔여물이 남거나 건조하다는 느낌이 있었는데 부드러운 샤벳 제형이라 촉촉하고 세정력도 늘 사용하고 있는 클렌저입니다.</p>
+											<div class="userPoint">
+												<span>순해요</span><span>순해요</span><span>순해요</span><span>순해요</span>
+											</div>
+											<a href="javascript:void(0)" class="reviewMore">더보기</a>
+										</div>
+									</li>
+									<li>
+										<div class="reviewInfo">
+											<div class="gradeStar js_rating ratingM"><span>4.5</span></div>
+											<div class="userInfo">
+												<p class="userAcnt"><!-- 200326 등급영역 수정 --><span class="userRank userLv3">GOLD</span><!-- // 200326 등급영역 수정 --><!-- 기본등급 userLv1 ~ 최고등급 userLv4 --><span class="userName">ihkim****</span></p>
+												<p class="dftPoint"><span>30대</span><span>여성</span></p>
+												<p class="reviewDate">2019.05.05</p>
+											</div>
+											<div class="skinProfile">
+												<p>피부 프로필</p>
+												<div>
+													<span>복합성</span>
+													<span>어두운 노란톤</span>
+													<span>수분충전</span>
+													<span>영양공급</span>
+													<span>트러블 케어</span>
+													<span>복합성</span>
+													<span>어두운 노란톤</span>
+													<span>수분충전</span>
+													<span>영양공급</span>
+													<span>트러블 케어</span>
+												</div>
+											</div>
+										</div>
+										<div class="reviewBox">
+											<div class="reviewImg">
+												<ul>
+													<li class="imgCutting"><a href="javascript:void(0)" onclick="showLayer('reViewDetailPop');" class="imgBox"><img src="./resources/web/images/temp/photoReviewImg01.jpg" alt=""></a></li>
+													<li class="imgCutting"><a href="javascript:void(0)" onclick="showLayer('reViewDetailPop');" class="imgBox"><img src="./resources/web/images/temp/photoReviewImg02.jpg" alt=""></a></li>
+													<li class="imgCutting"><a href="javascript:void(0)" onclick="showLayer('reViewDetailPop');" class="imgBox"><img src="./resources/web/images/temp/photoReviewImg03.jpg" alt=""></a></li>
+													<li class="imgCutting"><a href="javascript:void(0)" onclick="showLayer('reViewDetailPop');" class="imgBox"><img src="./resources/web/images/temp/photoReviewImg04.jpg" alt=""></a></li>
+													<li class="imgCutting"><a href="javascript:void(0)" onclick="showLayer('reViewDetailPop');" class="imgBox"><img src="./resources/web/images/temp/photoReviewImg05.jpg" alt=""></a></li>
+												</ul>
+											</div>
+											<p class="reviewTtl"><span class="BestIco typeM">BEST</span>가을 피부관리에는 고민없이 늘 사용하던 클린 잇 제로!</p>
+											<p>벨벳 블러드 립-BE01 밀크티 필터</p>
+											<p class="reviewCtt">늘 사용하고 있는 클렌저입니다. 최근에 50% 세일해서 잔뜩 쟁여두었어요! 클렌징을 하면 늘 잔여물이 남거나 건조하다는 느낌이 있었는데 부드러운 샤벳 제형이라 촉촉하고 세정력도 늘 사용하고 있는 클렌저입니다. 최근에 50% 세일해서 잔뜩 쟁여두었어요! 클렌징을 하면 늘 잔여물이 남거나 건조하다는 느낌이 있었는데 부드러운 샤벳 제형이라 촉촉하고 세정력도 늘 사용하고 있는 클렌저입니다.늘 사용하고 있는 클렌저입니다. 최근에 50% 세일해서 잔뜩 쟁여두었어요! 클렌징을 하면 늘 잔여물이 남거나 건조하다는 느낌이 있었는데 부드러운 샤벳 제형이라 촉촉하고 세정력도 늘 사용하고 있는 클렌저입니다. 최근에 50% 세일해서 잔뜩 쟁여두었어요! 클렌징을 하면 늘 잔여물이 남거나 건조하다는 느낌이 있었는데 부드러운 샤벳 제형이라 촉촉하고 세정력도 늘 사용하고 있는 클렌저입니다.늘 사용하고 있는 클렌저입니다. 최근에 50% 세일해서 잔뜩 쟁여두었어요! 클렌징을 하면 늘 잔여물이 남거나 건조하다는 느낌이 있었는데 부드러운 샤벳 제형이라 촉촉하고 세정력도 늘 사용하고 있는 클렌저입니다. 최근에 50% 세일해서 잔뜩 쟁여두었어요! 클렌징을 하면 늘 잔여물이 남거나 건조하다는 느낌이 있었는데 부드러운 샤벳 제형이라 촉촉하고 세정력도 늘 사용하고 있는 클렌저입니다.</p>
+											<div class="userPoint">
+												<span>순해요</span><span>순해요</span><span>순해요</span><span>순해요</span>
+											</div>
+											<a href="javascript:void(0)" class="reviewMore">더보기</a>
+										</div>
+									</li>
+									<li>
+										<div class="reviewInfo">
+											<div class="gradeStar js_rating ratingM"><span>4.5</span></div>
+											<div class="userInfo">
+												<p class="userAcnt"><!-- 200326 등급영역 수정 --><span class="userRank userLv4">PLATINUM</span><!-- // 200326 등급영역 수정 --><!-- 기본등급 userLv1 ~ 최고등급 userLv4 --><span class="userName">ihkim****</span></p>
+												<p class="dftPoint"><span>30대</span><span>여성</span></p>
+												<p class="reviewDate">2019.05.05</p>
+											</div>
+											<div class="skinProfile">
+												<p>피부 프로필</p>
+												<div>
+													<span>복합성</span>
+													<span>어두운 노란톤</span>
+													<span>수분충전</span>
+													<span>영양공급</span>
+													<span>트러블 케어</span>
+													<span>복합성</span>
+													<span>어두운 노란톤</span>
+													<span>수분충전</span>
+													<span>영양공급</span>
+													<span>트러블 케어</span>
+												</div>
+											</div>
+										</div>
+										<div class="reviewBox">
+											<div class="reviewImg">
+												<ul>
+													<li class="imgCutting"><a href="javascript:void(0)" onclick="showLayer('reViewDetailPop');" class="imgBox"><img src="./resources/web/images/temp/photoReviewImg01.jpg" alt=""></a></li>
+													<li class="imgCutting"><a href="javascript:void(0)" onclick="showLayer('reViewDetailPop');" class="imgBox"><img src="./resources/web/images/temp/photoReviewImg02.jpg" alt=""></a></li>
+													<li class="imgCutting"><a href="javascript:void(0)" onclick="showLayer('reViewDetailPop');" class="imgBox"><img src="./resources/web/images/temp/photoReviewImg03.jpg" alt=""></a></li>
+													<li class="imgCutting"><a href="javascript:void(0)" onclick="showLayer('reViewDetailPop');" class="imgBox"><img src="./resources/web/images/temp/photoReviewImg04.jpg" alt=""></a></li>
+													<li class="imgCutting"><a href="javascript:void(0)" onclick="showLayer('reViewDetailPop');" class="imgBox"><img src="./resources/web/images/temp/photoReviewImg05.jpg" alt=""></a></li>
+												</ul>
+											</div>
+											<p class="reviewTtl"><span class="BestIco typeM">BEST</span>가을 피부관리에는 고민없이 늘 사용하던 클린 잇 제로!</p>
+											<p>벨벳 블러드 립-BE01 밀크티 필터</p>
+											<p class="reviewCtt">늘 사용하고 있는 클렌저입니다. 최근에 50% 세일해서 잔뜩 쟁여두었어요! 클렌징을 하면 늘 잔여물이 남거나 건조하다는 느낌이 있었는데 부드러운 샤벳 제형이라 촉촉하고 세정력도 늘 사용하고 있는 클렌저입니다. 최근에 50% 세일해서 잔뜩 쟁여두었어요! 클렌징을 하면 늘 잔여물이 남거나 건조하다는 느낌이 있었는데 부드러운 샤벳 제형이라 촉촉하고 세정력도 늘 사용하고 있는 클렌저입니다.늘 사용하고 있는 클렌저입니다. 최근에 50% 세일해서 잔뜩 쟁여두었어요! 클렌징을 하면 늘 잔여물이 남거나 건조하다는 느낌이 있었는데 부드러운 샤벳 제형이라 촉촉하고 세정력도 늘 사용하고 있는 클렌저입니다. 최근에 50% 세일해서 잔뜩 쟁여두었어요! 클렌징을 하면 늘 잔여물이 남거나 건조하다는 느낌이 있었는데 부드러운 샤벳 제형이라 촉촉하고 세정력도 늘 사용하고 있는 클렌저입니다.늘 사용하고 있는 클렌저입니다. 최근에 50% 세일해서 잔뜩 쟁여두었어요! 클렌징을 하면 늘 잔여물이 남거나 건조하다는 느낌이 있었는데 부드러운 샤벳 제형이라 촉촉하고 세정력도 늘 사용하고 있는 클렌저입니다. 최근에 50% 세일해서 잔뜩 쟁여두었어요! 클렌징을 하면 늘 잔여물이 남거나 건조하다는 느낌이 있었는데 부드러운 샤벳 제형이라 촉촉하고 세정력도 늘 사용하고 있는 클렌저입니다.</p>
+											<div class="userPoint">
+												<span>순해요</span><span>순해요</span><span>순해요</span><span>순해요</span>
+											</div>
+											<a href="javascript:void(0)" class="reviewMore">더보기</a>
+										</div>
+									</li>
+									<!-- 20200115 노데이타 추가 s -->
+									<li class="noData">
+										<span>등록된 리뷰가 없습니다.</span>
+									</li>
+									<!-- 20200115 노데이타 추가 e -->
+								</ul>
+							</div>
+							<div class="paging">
+								<a href="javascript:void(0)" class="first"><span class="hide">첫페이지</span></a>
+								<a href="javascript:void(0)" class="prev"><span class="hide">이전페이지</span></a>
+								<a href="javascript:void(0)" class="active">1</a>
+								<a href="javascript:void(0)">2</a>
+								<a href="javascript:void(0)">3</a>
+								<a href="javascript:void(0)">4</a>
+								<a href="javascript:void(0)">5</a>
+								<a href="javascript:void(0)">6</a>
+								<a href="javascript:void(0)">7</a>
+								<a href="javascript:void(0)">8</a>
+								<a href="javascript:void(0)">9</a>
+								<a href="javascript:void(0)">10</a>
+								<a href="javascript:void(0)" class="next"><span class="hide">다음페이지</span></a>
+								<a href="javascript:void(0)" class="last"><span class="hide">마지막페이지</span></a>
+							</div>
+						</div>
+					</div>
+					<div id="detailQnaMede">
+						<div class="qnaArea">
+							<div class="qnaComt">
+								<p class="qnaComt01">상품문의가 필요하신가요?</p>
+								<p class="qnaComt02">상품문의를 제외한 반품, 교환, 취소 등에 관한 문의는 <a href="javascript:void(0)" class="btn_txt">고객센터 1:1 문의 게시판</a>을 이용해주시기 바랍니다.</p>
+								<div class="btn_wrap">
+									<a href="javascript:void(0)" class="btn btnSizeM btnColorB btnTypeB qnaBtn" style="width: 268px;"><span>상품 문의하기</span></a>
+								</div>
+							</div>
+							<div class="tblBar mgt50">
+								<ul class="tblList">
+									<li><a href="javascript:void(0)" class="on">전체(15)</a></li><!-- 활성화 시 class on 추가 -->
+									<li><a href="javascript:void(0)">답변완료</a></li><!-- 활성화 시 class on 추가 -->
+									<li><a href="javascript:void(0)">비밀글제외</a></li><!-- 활성화 시 class on 추가 -->
+								</ul>
+								<span class="inp_check userQnaBtn">
+									<input type="checkbox" name="productDetail_qna" id="productDetail_qna">
+									<label for="productDetail_qna">내 문의 보기</label>
+								</span>
+							</div>
+							<div class="js_tblList">
+								<table class="tblType1" summary="상품문의 리스트">
+									<caption></caption>
+									<colgroup>
+										<!-- 200504 width 수정 -->
+										<col width="150px">								
+										<!-- //200504 width 수정 -->
+										<col>
+										<col width="130px">
+										<col width="120px">
+										<col width="120px">
+										<col width="70px">
+									</colgroup>
+									<thead>
+										<tr>
+											<th></th>
+											<th>제목</th>
+											<th>등록일</th>
+											<th>작성자</th>
+											<th>처리현황</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr class="userOn lock"><!-- 200626 uerOn, lock 클래스 이동 -->
+											<td class="fc88">컬러문의</td>
+											<td class="ttl ta_l">
+												<a href="javascript:void(0)" class="js_ListTtl" title="바닐라닷컴 모바일 앱 서비스 오픈">비밀글 입니다.</a>
+												<div class="editOn"><a href="javascript:void(0)">수정</a><a href="javascript:void(0)">삭제</a></div>
+											</td>
+											<td class="fc88">2019-09-01</td>
+											<td class="fc88">gigiiboc</td>
+											<td><span class="reply on">답변완료</span></td>
+											<td><a href="javascript:void(0)" class="js_ListTtl js_arrow arrow"></a></td>
+										</tr>
+										<tr class="js_ListCtt ListCtt">
+											<td></td>
+											<td>
+												<div class="ta_l js_replyCtt replyCtt">
+													<div>
+														<div class="questn">
+															<!-- 200626 타이틀 추가, 내용 태그 수정 -->
+															<div>[제목]</div>
+															<p>고객님 안녕하세요. 네 아침 저녁으로 사용해주셔도 됩니다. 저녁엔 두번 덧발라 수면팩으로도 사용해주시면 좋습니다. 감사합니다.</p>
+															<!-- //200626 타이틀 추가, 내용 태그 수정 -->
+															<ul class="fileUploadArea">
+																<li class="imgCutting">
+																	<a href="javascript:void(0);" onclick="imgViewPop()" class="imgBox">
+																		<img src="./resources/web/images/temp/480X480.png" alt="">
+																	</a>
+																</li>
+																<li class="imgCutting">
+																	<a href="javascript:void(0);" onclick="imgViewPop()" class="imgBox">
+																		<img src="./resources/web/images/temp/480X480.png" alt="">
+																	</a>
+																</li>
+																<li class="imgCutting">
+																	<a href="javascript:void(0);" onclick="imgViewPop()" class="imgBox">
+																		<img src="./resources/web/images/temp/280X480.png" alt="">
+																	</a>
+																</li>
+																<li class="imgCutting">
+																	<a href="javascript:void(0);" onclick="imgViewPop()" class="imgBox">
+																		<img src="./resources/web/images/temp/480X280.png" alt="">
+																	</a>
+																</li>
+																<li class="imgCutting">
+																	<a href="javascript:void(0);" onclick="imgViewPop()" class="imgBox">
+																		<img src="./resources/web/images/temp/photoReviewImg01.jpg" alt="">
+																	</a>
+																</li>
+															</ul>
+														</div>
+														<div class="aswr">바닐라코 공식몰을 이용해주시는 고객님들꼐 양해 말씀드립니다.바닐라코 공식몰을 이용해주시는 고객님들꼐 양해 말씀드립니다.바닐라코 공식몰을 이용해주시는 고객님들꼐 양해 말씀드립니다.바닐라코 공식몰을 이용해주시는 고객님들꼐 양해 말씀드립니다.바닐라코 공식몰을 이용해주시는 고객님들꼐 양해 말씀드립니다.<span>답변일: 2019-09-01</span></div>
+													</div>
+												</div>
+											</td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+										</tr>
+										<tr>
+											<td class="fc88">제형문의</td>
+											<td class="ttl ta_l">
+												<a href="javascript:void(0)" class="js_ListTtl" title="바닐라닷컴 모바일 앱 서비스 오픈">바닐라닷컴 모바일 앱 서비스 오픈</a>
+											</td>
+											<td class="fc88">2019-09-01</td>
+											<td class="fc88">gigiiboc</td>
+											<td><span class="reply">답변대기</span></td>
+											<td><a href="javascript:void(0)" class="js_ListTtl js_arrow arrow"></a></td>
+										</tr>
+										<tr class="js_ListCtt ListCtt">
+											<td></td>
+											<td>
+												<div class="ta_l js_replyCtt replyCtt">
+													<div>
+														<div class="questn">
+															<!-- 200626 타이틀 추가, 내용 태그 수정 -->
+															<div>[제목]</div>
+															<p>고객님 안녕하세요. 네 아침 저녁으로 사용해주셔도 됩니다. 저녁엔 두번 덧발라 수면팩으로도 사용해주시면 좋습니다. 감사합니다.</p>
+															<!-- //200626 타이틀 추가, 내용 태그 수정 -->
+														</div>
+													</div>
+												</div>
+											</td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+										</tr>
+										<tr>
+											<td colspan="6" class="noData">
+												<span>등록된 게시물이 없습니다.</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="paging">
+								<a href="javascript:void(0)" class="first"><span class="hide">첫페이지</span></a>
+								<a href="javascript:void(0)" class="prev"><span class="hide">이전페이지</span></a>
+								<a href="javascript:void(0)" class="active">1</a>
+								<a href="javascript:void(0)">2</a>
+								<a href="javascript:void(0)">3</a>
+								<a href="javascript:void(0)">4</a>
+								<a href="javascript:void(0)">5</a>
+								<a href="javascript:void(0)">6</a>
+								<a href="javascript:void(0)">7</a>
+								<a href="javascript:void(0)">8</a>
+								<a href="javascript:void(0)">9</a>
+								<a href="javascript:void(0)">10</a>
+								<a href="javascript:void(0)" class="next"><span class="hide">다음페이지</span></a>
+								<a href="javascript:void(0)" class="last"><span class="hide">마지막페이지</span></a>
+							</div>
+						</div>
+						<div class="qnaBanner">
+							<ul>
+								<li>
+									<p class="bannerTtl list02"><a href="">1:1 문의 작성</a></p> 
+									<p class="bannerCmt">자세한 상담이 필요하다면? 1:1 문의를 남겨주세요.<br><a href="javascript:void(0)" class="btn_txt">1:1 문의 바로가기</a></p>
+								</li>
+								<li>
+									<p class="bannerTtl list03"><a href="">전화문의</a></p>
+									<p class="bannerCmt">이용시간 평일 09:00 ~ 18:00 (주말/공휴일 휴무)<br>점심시간 12:00 ~ 13:00 / 080-225-6500</p>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div id="detailOrder">
+						<div class="myOrderStep orderType contents">
+							<p class="tit">주문/배송 진행단계 안내</p>
+							<div class="stepArea">
+								<ol class="stepList">
+									<li>
+										<dl>
+											<dt>입금대기</dt>
+											<dd>가상계좌 결제후<br> 입금확인이 아직<br> 이뤄지지 않은<br> 단계입니다.</dd>
+										</dl>
+									</li>
+									<li>
+										<dl>
+											<dt>결제완료</dt>
+											<dd>주문정보를 확인하기<br> 전 단계입니다.</dd>
+										</dl>
+									</li>
+									<li>
+										<dl>
+											<dt>상품준비중</dt>
+											<dd>주문정보를 확인하고<br> 배송을 준비중입니다.</dd>
+										</dl>
+									</li>
+									<li>
+										<dl>
+											<dt>배송중</dt>
+											<dd>주문상품이 발송되어<br> 고객님께 배송중입니다.</dd>
+										</dl>
+									</li>
+									<li>
+										<dl>
+											<dt>배송완료</dt>
+											<dd>상품수령후 구매확정을<br> 선택하시면<br> 거래가 종료됩니다.</dd>
+										</dl>
+									</li>
+									<li>
+										<dl>
+											<dt>구매확정</dt>
+											<dd>리뷰작성시 포인트를<br> 적립해 드립니다.</dd>
+										</dl>
+									</li>
+								</ol>
+								<ul class="stepInfo">
+									<li>배송지 변경 가능<br> 주문 취소 가능</li>
+									<li>주문취소 불가</li>
+									<li>교환신청 가능<br> 반품신청 가능</li>
+									<li>리뷰작성 가능 <span>(*구매확정 이후<br> 60일이내)</span></li>
+								</ul>
+							</div>
+							<ul class="dotInfo mgt15">
+								<li><span class="fc22">[입금대기]</span> 상태의 주먼건은 주문일 기준 <span class="fc22">3일간 보관되며 이후 자동 취소 처리</span> 됩니다.</li>
+								<li>제품을 수령하신 후 이상이 없을 경우 [구매확정] 처리를 진행해주세요.</li>
+								<li><span class="fc22">[배송완료] 7일 이후</span>에는 <span class="fc22">자동으로 [구매확정]</span> 처리가 됩니다.</li>
+								<li><span class="fc22">[구매확정] 이후에는 교환/반품 신청이 불가</span>능합니다.</li>
+								<li>교환/반품 진행 중인 상품이 포함된 주문의 경우, <span class="fc22">교환/반품이 완료된 후 [구매확정]이 가능</span>합니다.</li>
+								<li>멤버십 등급 산정 시에도 실 결제금액 기준으로 반영되며 포인트 결제금액, 배송비, 반품금액은 제외됩니다.</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="footSmryInfo">
+					<p class="titleType02"><span>배송관련 유의사항</span></p>
+					<div class="CttType02">
+						<table summary="배송관련 유의사항">
+							<caption></caption>
+							<colgroup>
+								<col width="207px"></col>
+								<col></col>
+							</colgroup>
+							<tbody>
+							<tr>
+								<th>배송업체</th>
+								<td class="fc88"><span class="fc22">우체국 택배</span></td>
+							</tr>
+							<tr>
+								<th>배송비</th>
+								<td class="fc88">
+									<span class="fc22">무료배송</span>
+									<div>
+										<ul class="lineInfo">
+											<li><span class="fc22">15,000원 이상</span> (쿠폰할인,포인트할인 등 적용된 최종결제금액 기준) <span class="fc22">배송비 무료</span></li>
+											<li>도서산간지역 배송비 추가 발생 (3,000원)</li>
+											<li>배송비는 한번에 결제한 동일 주문번호 기준으로 부과됩니다.</li>
+										</ul>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<th>배송기간</th>
+								<td class="fc88">
+									<div>
+										<ul class="lineInfo">
+											<li>평일 오후 1시 이전 입금 확인된 건에 한하여 당일 배송되며, 이후 주문건은 다음날 출고됩니다.</li>
+											<li>입금 확인 후 영업일 기준 2-3일 이내 배송 (토/일/공휴일 제외)</li>
+											<li>도서 산간 지역은 7일 이내 배송</li>
+											<li>주문 폭주와 택배사의 사정등으로 배송이 지연될 수 있습니다.</li>
+										</ul>
+									</div>
+								</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+					<p class="titleType02"><span>교환 및 반품관련 유의사항</span></p>
+					<div class="CttType02">
+						<table summary="교환 및 반품관련 유의사항">
+							<caption></caption>
+							<colgroup>
+								<col width="207px"></col>
+								<col></col>
+							</colgroup>
+							<tbody>
+							<tr>
+								<th>반품/교환 택배비</th>
+								<td class="fc88">
+									<span class="fc22">교환 배송비 : 5,000원 / 반품 배송비 : 5,000원</span>
+									<ul class="lineInfo">
+										<li>상품 불량 및 오배송 등의 이유로 반품하실 경우 반품배송비는 무상으로 진행됩니다.</li>
+										<li>단순변심 및 고객님의 사정으로 반품하실 경우, 반품배송비는 유상으로 진행됩니다.</li>
+									</ul>
+								</td>
+							</tr>
+							<tr>
+								<th>반품/교환 신청방법</th>
+								<td class="fc88">
+									<ul class="lineInfo">
+										<li>[마이페이지>내 주문관리] 에서 취소/반품/교환 신청하시거나, 바닐라코 고객센터 [080-225-6500]으로 전화해주세요.</li>
+										<li>반품 접수 후 영업일 기준 2-3일 이내에 우체국 택배 기사님이 직접 방문하여 상품을 수거합니다.</li>
+										<li>교환 및 반품 주소지 : (17895) 경기도 평택시 중앙로 63 (비전동, 평택우체국) 평택우체국 사서함 100호 바닐라코</li>
+									</ul>
+								</td>
+							</tr>
+							<tr>
+								<th>반품/교환 가능 사유</th>
+								<td class="fc88">
+									<ul class="lineInfo">
+										<li>구매자 단순변심 (단, 단상자와 스티커등 개봉상품 제외)으로 제품 수령일 기준 7일 이내</li>
+										<li>제품 수령 후 제품이 주문 내용과 다르거나 제품이 고객에게 인도될 당시 상품이 멸실 또는 훼손된 경우</li>
+										<li>전자상거래 등에서의 소비자 보호에 관한 법률에 규정되어 있는 소비자 청약철회 가능 범위에 해당하는 경우</li>
+										<li>제품 수령 후 제품이 표시/광고의 내용과 다르거나 계약 내용과 다르게 이행된 경우에는 제품을 공급받은 날부터 3개월 이내,<br> 그리고 그 사실을 알았거나 알 수 이었던 날부터 30일 이내에 교환/반품 가능</li>
+									</ul>
+								</td>
+							</tr>
+							<tr>
+								<th>반품/교환 불가 사유</th>
+								<td class="fc88">
+									<ul class="lineInfo">
+										<li>고객에게 책임이 있는 사유로 상품이 멸실되거나 훼손된 경우</li>
+										<li>고객의 사용 또는 일부 소비로 상품 가치가 현저히 감소한 경우</li>
+										<li>상품의 겉포장이 손상되거나 분실한 경우</li>
+										<li>제품 배송일로부터 7일이 경과한 경우</li>
+										<li>오프라인 매장에서 구매한 제품은 온라인에서 교환/반품 불가능</li>
+										<li>고객의 주문에 따라 개별적으로 생산되는 상품 또는 이외 유사한 상품에 대하여 청약철회등을 인정하는 경우<br> 통신판매업자에게 회복할 수 없는 중대한 피해가 예상되는 경우로서 사전에 해당 거래에 대하여 별도로<br> 그 사실을 고지하고 고객의 서면(전사문저 포함)에 의한 동의를 받은 경우</li>
+										<li>기타 : 전자상거래등에서의 소비자보호관한법률이 정하는 소비자 청약철회 제한에 해당되는 경우</li>
+									</ul>
+								</td>
+							</tr>
+							</tbody>
+						</table>
+						<p class="cmt fc88">* 기타 자세한 사항이나 더 궁금하신 점은 <a href="javascript:void(0)" class="btn_txt fc22">고객센터 > FAQ</a> 이용약관을 참조해주시고, 고객센터를 통해 문의해주세요.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //container -->
+	
+	<!-- footer -->
+	<footer id="footer">
+		<div class="copyArea">
+			<div class="copyLink">
+				<ul>
+					<li><a href="#">회사 소개</a></li>
+					<li><a href="#">공지사항</a></li>
+					<li><a href="#">입점·제휴문의</a></li>
+					<li><a href="#">이용약관</a></li>
+					<li><a href="#">개인정보처리방침</a></li>
+				</ul>
+			</div>
+			<div class="copySns">
+				<a href="https://www.instagram.com/ryuu4512/" class="instar"target="_blank" >RYU</a>
+				<a href="https://www.instagram.com/gahee_0305/" class="instar"target="_blank" >YU</a>
+			</div>
+			<div class="copyRight">
+				<div class="copyInfo">
+					<em class="noLine">㈜아령하세요</em>
+					<em>서울시 강남구 아령빌딩 1F ~ 123F</em>
+					<em>대표: 이창섭</em>
+					<em>사업자등록번호 1991-0722</em>
+					<br>
+					<em class="noLine">고객센터 : 010-9535-0371</em>
+					<em>FAX : 9535-0371</em>
+					<em>관리자이메일 : <a href="mailto:roksellid02@gmail.com">roksellid02@gmail.com</a></em>
+				</div>
+				<p>Copyright HealthDao. Co. Ltd All Right Reserved</p>
+			</div>
+		</div>
+	</footer>
+	<!-- //footer -->
+	<!-- javascript -->
+	<script type="text/javascript" src="./resources/web/js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="./resources/web/js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="./resources/web/js/slick.min.js"></script>
+	<script type="text/javascript" src="./resources/web/js/jquery.mCustomScrollbar.js"></script>
+	<script type="text/javascript" src="./resources/web/js/circle-progress.min.js"></script>
+	<script type="text/javascript" src="./resources/web/js/ui.js"></script>
+	<!-- //javascript -->
+</div>
+<!-- 퀵메뉴 -->
+<div id="quick">
+	<div class="contents">
+		<div class="quickArea">
+			<p class="tit">QUICK MENU</p>
+			<div class="recentArea">
+				<div class="tit">최근 본 상품</div>
+				<div class="recoQuick">
+					<div class="list">
+						<a href="#">
+							<img src="./resources/web/images/temp/pdt02.png" alt="">
+						</a>
+					</div>
+					<div class="list">
+						<a href="#">
+							<img src="./resources/web/images/temp/pdt01.png" alt="">
+						</a>
+					</div>
+					<div class="list">
+						<a href="#">
+							<img src="./resources/web/images/temp/pdt03.png" alt="">
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="likeArea">
+				<a href="#">					
+					<span>찜한 상품</span>
+				</a>
+			</div>
+			<div class="cartArea">
+				<a href="#"><span>장바구니</span></a>
+			</div>
+			<div class="bottomArea">
+				<ul>
+					<li><a class="btnTop" href="javascript:void(0);">△</a></li>
+					<li><a href="#"><span class="hide">마이페이지</span></a></li>
+					<li><a class="btnBtm" href="javascript:void(0);">▽</a></li>
+				</ul>				
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 톡톡 -->
+<button type="button" class="btnTalk" onclick="showLayer('talk');"><span class="hide">TalkBtn</span></button>
+<div id="talk" class="lyPopArea bgnone">
+	<div class="lyPop">
+		<div class="lyWrap">
+			<button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
+			<div class="lyTit">토크토크~</div>
+			<div class="lyBody basic">
+				<p>궁금증을 해결해드립니다😁</p>
+				<div class="chatArea">
+					<div class="chatCon">
+						<div class="row">
+							<div class="imgArea">
+								<img src="./resources/web/images/common/talk_chun.gif" alt="">
+							</div>
+							<div class="textArea left">
+								<div>너의 궁금증을 해결해줄게!<br>나는 헬춘식이야<span class="time">11:50:19</span></div>								
+							</div>
+							<div class="textArea left">
+								<div>
+									<ul class="talkSelect">
+										<li><button>1.궁금한거 1번</button></li>
+										<li><button>2.궁금한거 2번</button></li>
+										<li><button>3.궁금한거 3번</button></li>
+										<li><button>4.궁금한거 4번</button></li>
+										<li><button>5.궁금한거 5번</button></li>
+									</ul>
+									<span class="time">11:50:19</span>
+								</div>								
+							</div>
+							<div class="textArea right">
+								<div class="right">고마워요 헬춘식<span class="time">11:50:19</span></div>								
+							</div>
+							<div class="textArea left">
+								<div>헬춘식 헬스 매니아<br>춘식이처럼 몸짱이 되고 싶다면<br>헬스Dao에서<br>시작하라구😎<span class="time">11:50:19</span></div>								
+							</div>
+							<div class="textArea right">
+								<div class="right">헬춘식 짱짱맨<br>멋진 헬춘식<span class="time">11:50:19</span></div>								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	recoQuick();
+	$('#quick .quickArea').css({'position':'absolute', 'top':290});
+</script>
+
+<!-- 위시 리스트 삭제 -->
+<div id="myWishDel" class="lyPopArea">
+    <div class="lyPop">
+        <div class="lyWrap">
+            <button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
+            <div class="lyTit">위시 리스트 삭제</div>
+            <div class="lyBody basic">
+                <p>선택하신 상품을 정말 삭제하시겠습니까?</p>
+                <div class="btn_wrap length2">
+                    <a href="javascript:void(0);" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorW btnTypeR"><span>취소</span></a>
+                    <a href="javascript:void(0);" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+	$(window).on('load', function(){
+		/* 포토리뷰 슬라이드 */
+		if ($('.photoReview').length > 0){
+			$('.photoReview').find('.photoReviewSlide').not('.slick-initialized').slick({
+				slidesToShow: 9,
+				slidesToScroll: 9,
+				arrows: true,
+				dots: false,
+				infinite: false
+			});
+		}
+	});
+</script>
+<style>
+	.pdtDetailHead{z-index:0;}
+	#detailOrder{font-size: 14px;}
+	#detailOrder .myOrderStep .stepInfo li:nth-child(1),
+	#detailOrder .myOrderStep .stepInfo li:nth-child(2){width:380px;}
+	#detailOrder .myOrderStep .stepInfo li:nth-child(3),
+	#detailOrder .myOrderStep .stepInfo li:nth-child(4){width:190px;}
+</style>
+</body>
+</html>
