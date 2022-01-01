@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.trainer.model.dao.TrainerMapper">
+
+	<resultMap id="trainerResultMap" type="com.example.demo.trainer.model.vo.Trainer">
+		<id property="tNo" column="T_NO"/>
+		<result property="tGymName" column="T_GYM_NAME"/>
+		<result property="tGymAddress" column="T_GYM_ADDRESS"/>
+		<result property="tArea" column="T_AREA"/>
+		<result property="tMetro" column="T_METRO"/>
+		<result property="tAreaIntro" column="T_AREA_INTRO"/>
+		<result property="tOneIntro" column="T_ONE_INTRO"/>
+		<result property="tPrice" column="T_PRICE"/>
+		<result property="weekDaySc" column="WEEKDAY_SC"/>
+		<result property="weekAndSc" column="WEEKAND_SC"/>
+		<result property="tIntro" column="T_INTRO"/>
+		<result property="queIntro" column="QUE_INTRO"/>
+	</resultMap>
+
+	<select id="TrainerList" resultMap="trainerResultMap">
+		SELECT
+			   *
+		  FROM TRAINER
+	</select>
+
+	<select id="TrainerSelect" resultMap="trainerResultMap" parameterType="int">
+		SELECT
+			   *
+		  FROM TRAINER
+		 WHERE T_NO = #{tNo}
+	</select>
+	
+
+</mapper>
