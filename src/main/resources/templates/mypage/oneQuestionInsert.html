@@ -1,0 +1,70 @@
+<div th:replace="common/header.html"></div>
+<!-- container -->
+	
+	<div id="container" class="pdt0">
+		<div class="site_location">
+			<span><a href="/">HOME</a></span>
+			<span><em>마이페이지</em></span>
+            <span><em>1:1문의</em></span>
+            <em>1:1문의하기</em>
+		</div>
+		<div class="mypage">
+			<div class="myMain myCon">
+				<div class="contents">
+					<div th:replace="common/mypageGnb.html"></div>
+
+					<!-- myPageCon -->
+					<div class="myPageCon one_question_detail">
+						<p class="tit mgb40">
+							1:1문의하기
+						</p>
+						<form action="/mypage/qnaInsert" method="post">
+	                        <div class="inp_wrap">
+	                            <label class="inp_lab" for="ipt_label">문의유형</label>
+	                            <div class="inp_select">
+	                                <div class="selectBox">
+	                                    <button class="title" type="button">문의유형을 선택해주세요</button>
+	                                    <ul class="selList">
+	                                        <li>
+	                                            <input type="radio" value="" class="option" id="select1_1" name="select1">
+	                                            <label for="select1_1">일반문의(상품/주문/배송)</label>
+	                                        </li>         
+	                                        <li>
+	                                            <input type="radio" value="" class="option" id="select1_1" name="select1">
+	                                            <label for="select1_1">코치 가입 문의</label>
+	                                        </li>
+	                                        <li>
+	                                            <input type="radio" value="" class="option" id="select1_1" name="select1">
+	                                            <label for="select1_1">잘못된 정보 신고</label>
+	                                        </li>
+	                                        <li>
+	                                            <input type="radio" value="" class="option" id="select1_1" name="select1">
+	                                            <label for="select1_1">기타</label>
+	                                        </li>   
+	                                    </ul>
+	                                </div>
+	                            </div>
+	                            <label class="inp_lab" for="ipt_label">제목</label>
+	                            <div class="inp_text">
+	                                <input type="text" name="" id="ipt_label" placeholder="제목을 입력해주세요">
+	                            </div>
+	                            <label class="inp_lab" for="ipt_label">내용</label>
+	                            <div class="inp_textArea">
+	                                <textarea rows="10"></textarea>
+	                                <div class="textarea-clone"></div>
+	                            </div>
+	                        </div>    
+	                        <div class="btn_wrap mgt40">
+	                            <button class="btn btnSizeL btnColorW btnTypeR" style="width:150px;"><span>문의하기</span></button>
+	                        </div>
+                        </form>                          
+                    </div>
+					<!-- //myPageCon -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //container -->
+<div th:replace="common/footer.html"></div>
+</body>
+</html>
