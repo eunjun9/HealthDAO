@@ -36,4 +36,52 @@ public class mypageController {
 	public String qnaInsert() {
 		return "redirect:/mypage/qna";
 	}
+	
+	/* 쿠폰받기 이벤트 */
+	@GetMapping("/event/couponEvent")
+	public String couponEvent() {
+		return "mypage/couponEvent";
+	}
+	
+	/* 내 쿠폰 */
+	@GetMapping("/myCoupon")
+	public String myCoupon() {
+		return "mypage/couponList";
+	}
+	
+	/* 내가 쓴 리뷰 */
+	@GetMapping("/review")
+	public String review() {
+		return "mypage/reivewList";
+	}
+	
+	/* 고객센터 */
+	@GetMapping("/customCenter")
+	public String customCenter() {
+		return "mypage/customCenter";
+	}
+	
+	/* 자주묻는질문 */
+	@GetMapping("/jajuQna")
+	public String jajuQna() {
+		return "mypage/jajuQna";
+	}
+	
+	/* 공지사항 */
+	@GetMapping("/notice")
+	public String notice() {
+		return "mypage/noticeList";
+	}
+	
+	/* 공지사항 상세 */
+	@GetMapping("/noticeDetail")
+	public String noticeDetail() {
+		return "mypage/noticeDetail";
+	}
+	
+	/* 고객의 소리 */
+	@GetMapping("/memberSound")
+	public String memberSound() {
+		return "mypage/memberSoundInput";
+	}
 }
