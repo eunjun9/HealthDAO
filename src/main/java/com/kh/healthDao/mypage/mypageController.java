@@ -84,4 +84,17 @@ public class mypageController {
 	public String memberSound() {
 		return "mypage/memberSoundInput";
 	}
+	
+	/* 배송지 관리 */
+	@GetMapping("/deli")
+	public String deliModify() {
+		return "mypage/deliModify";
+	}
+	
+	/* 내 정보 수정 */
+	@GetMapping("/myInfo")
+	public String myInfoModify() {
+		return "mypage/deliModify";
+	}
+	
 }
