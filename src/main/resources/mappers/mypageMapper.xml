@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mypage.model.dao.MypageMapper">
+	<resultMap id="qnaResultMap" type="com.example.demo.mypage.model.vo.Qna">
+		<id property="qNo" column="Q_NO"/>
+		<result property="qDeptCode" column="Q_DEPT_CODE" />
+		<result property="userNo" column="USER_NO" />
+		<result property="qTitle" column="Q_TITLE" />
+		<result property="qContent" column="Q_CONTENT" />
+		<result property="qDate" column="Q_DATE" />
+		<result property="qStatus" column="Q_STATUS" />
+		<result property="reply" column="REPLY" />
+		<result property="replyDate" column="REPLY_DATE" />
+		<result property="replyModifyDate" column="REPLY_MODIFY_DATE" />
+	</resultMap>
+	
+	<insert id="qnaInsert" parameterType="com.example.demo.mypage.model.vo.Qna">
+		INSERT INTO QNA(
+		      Q_NO
+		    , Q_DEPT_CODE
+		    , USER_NO
+		    , Q_TITLE
+		    , Q_CONTENT
+		    , Q_DATE
+		    , Q_STATUS
+		    , REPLY
+		    , REPLY_DATE
+		    , REPLY_MODIFY_DATE
+		)VALUES(
+		     SEQ_Q_NO.NEXTVAL
+		   , #{qDeptCode}
+		   , #{userNo}
+		   , #{qTitle}
+		   , #{qContent}
+		   , SYSDATE
+		   , '문의'
+		   , NULL
+		   , NULL
+		   , NULL
+		)
+	</insert>
+</mapper>

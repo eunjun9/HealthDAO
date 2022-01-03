@@ -1214,8 +1214,6 @@ function quickMenu(){
 	}
 	h = con;
 
-	console.log("winS : " + winS);
-	console.log(h - gnb);
 	if(winS >= h - gnb -10) { //downscroll
 		$('#quick .quickArea').css({'position':'absolute', 'top':'60px'});
 	} else { //upscroll
