@@ -1,4 +1,15 @@
-<div th:replace="common/header.html"></div>
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title></title>
+<!-- 메타태그, 스타일 -->
+<th:block th:replace="common/head.html"></th:block>
+<!--// 메타태그, 스타일 -->
+<body>
+<div id="wrap" class="main">
+<!-- HEADER + GNB -->
+<th:block th:replace="common/header.html"></th:block>
+<!--// HEADER + GNB -->
 	<!-- container -->
 <div id="container" class="pdt0">
     <div class="guideTab" id="guideTab1">
@@ -44,7 +55,7 @@
                         </div>
                         <div style="text-align: center;">
                             <!-- 트레이너 이름 넣는 곳 -->
-                            <p class="trainerDetailName">이애림 선생님</p>
+                            <p class="trainerDetailName" th:text="${trainer.member?.userName}"/>
                             <!-- 헬스장 이름 넣는 곳 -->
                             <p class="trainerDetailPitName" th:text="${trainer.tGymName}"/>
 
@@ -218,11 +229,21 @@
 	</div>
 </div>
 
-	<!-- footer -->
-
-	<div th:replace="common/footer.html"></div>
 	
-	<script type="text/javascript">
+	<!-- 스크립트 -->
+		<th:block th:replace="common/script.html"></th:block>
+		<!--// 스크립트 -->
+		<!-- FOOTER -->
+		<th:block th:replace="common/footer.html"></th:block>
+		<!--// FOOTER -->
+	</div>
+	
+	<!-- 퀵메뉴 + 톡톡 -->
+	<th:block th:replace="common/quickNtalk.html"></th:block>
+	<!--// 퀵메뉴 + 톡톡 -->	
+	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+	<script type="text/javascript" th:inline="javascript">
+
 		$(document).ready(function(){
 			$(".trainerDetailQue").click(function(){
 				$("#modal2").show();
@@ -233,10 +254,13 @@
 			});
 			$("#callBtn").click(function(){
 				// 트레이너 번호 넣는 곳
-				$("#callBtn").text("010-1234-5678");
+				$("#callBtn").text('[[${trainer.member.userPhone}]]');
 			});
 		});
 	</script>
-	<style>#quick{display: none;}</style>
+	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+	<style>
+		#quick{display:none;}
+	</style>
 </body>
 </html>

@@ -15,19 +15,56 @@
 		<result property="weekAndSc" column="WEEKAND_SC"/>
 		<result property="tIntro" column="T_INTRO"/>
 		<result property="queIntro" column="QUE_INTRO"/>
+		
+		<association javaType="com.example.demo.member.model.vo.Member" property="member">
+			<id column="USER_NO" property="userNo"/>
+			<result column="USER_NAME" property="userName"/>
+			<result column="USER_PHONE" property="userPhone"/>
+		</association>
+		
 	</resultMap>
 
 	<select id="TrainerList" resultMap="trainerResultMap">
 		SELECT
-			   *
-		  FROM TRAINER
+		       T.T_NO
+		     , T.T_GYM_NAME
+		     , T.T_GYM_ADDRESS
+		     , T.T_AREA
+		     , T.T_METRO
+		     , T.T_AREA_INTRO
+		     , T.T_ONE_INTRO
+		     , T.T_PRICE
+		     , T.WEEKDAY_SC
+		     , T.WEEKAND_SC
+		     , T.T_INTRO
+		     , T.QUE_INTRO
+		     , M.USER_NO
+		     , M.USER_NAME
+		     , M.USER_PHONE
+		  FROM TRAINER T
+		  JOIN MEMBER M ON(T.T_NO = M.USER_NO)
 	</select>
 
-	<select id="TrainerSelect" resultMap="trainerResultMap" parameterType="int">
-		SELECT
-			   *
-		  FROM TRAINER
-		 WHERE T_NO = #{tNo}
+	<select id="TrainerSelect" resultMap="trainerResultMap" parameterType="_int">
+		 SELECT
+		       T.T_NO
+		     , T.T_GYM_NAME
+		     , T.T_GYM_ADDRESS
+		     , T.T_AREA
+		     , T.T_METRO
+		     , T.T_AREA_INTRO
+		     , T.T_ONE_INTRO
+		     , T.T_PRICE
+		     , T.WEEKDAY_SC
+		     , T.WEEKAND_SC
+		     , T.T_INTRO
+		     , T.QUE_INTRO
+		     , M.USER_NO
+		     , M.USER_NAME
+		     , M.USER_PHONE
+		  FROM TRAINER T
+		  JOIN MEMBER M ON(T.T_NO = M.USER_NO)
+		   AND T.T_NO = #{tNo}
 	</select>
 	
 

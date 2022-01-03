@@ -1,4 +1,15 @@
-<div th:replace="common/header.html"></div>
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title></title>
+<!-- 메타태그, 스타일 -->
+<th:block th:replace="common/head.html"></th:block>
+<!--// 메타태그, 스타일 -->
+<body>
+<div id="wrap" class="main">
+<!-- HEADER + GNB -->
+<th:block th:replace="common/header.html"></th:block>
+<!--// HEADER + GNB -->
 	<!-- container -->
 <div id="container" class="pdt0">
 	<div class="contents">
@@ -26,7 +37,7 @@
 									<div class="trainerDetail5">
 										<div class="trainerDetail6">
 											<!-- 트레이너 이름 넣는 곳 -->
-											<span class="trainerName">우기희 선생님</span>
+											<span class="trainerName" th:text="${trainer.member.userName}"/>
 											<div>
 												<span style="font-size: 12px; color:#FFBB33;">★</span>
 												<!-- 평균 별점 넣는 곳 -->
@@ -67,9 +78,22 @@
 	</div>
 </div>
 
-	<div th:replace="common/footer.html"></div>
+<!-- 스크립트 -->
+		<th:block th:replace="common/script.html"></th:block>
+		<!--// 스크립트 -->
+		<!-- FOOTER -->
+		<th:block th:replace="common/footer.html"></th:block>
+		<!--// FOOTER -->
+	</div>
 	
-	<style>#quick{display: none;}</style>
-	
+	<!-- 퀵메뉴 + 톡톡 -->
+	<th:block th:replace="common/quickNtalk.html"></th:block>
+	<!--// 퀵메뉴 + 톡톡 -->	
+	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+
+	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+	<style>
+		#quick{display:none;}
+	</style>
 </body>
 </html>
