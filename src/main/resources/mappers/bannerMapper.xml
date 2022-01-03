@@ -10,22 +10,10 @@
 		<result property="main_status" column="MAIN_STATUS"/>
 	</resultMap>
 
-	<select id="findBannerList" resultMap="bannerResultMap">
+	<select id="bannerAllList" resultMap="bannerResultMap">
 		SELECT
 			   *
 		  FROM BANNER
-	</select>
-	<select id="BannerList" resultMap="bannerResultMap">
-		SELECT
-			   *
-		  FROM BANNER
-	</select>
-
-	<select id="TrainerSelect" resultMap="bannerResultMap" parameterType="int">
-		SELECT
-			   *
-		  FROM BANNER
-		 WHERE MAIN_NO = #{main_no}
 	</select>
 	
 

@@ -8,9 +8,5 @@ import com.example.demo.main.model.vo.Banner;
 
 @Mapper
 public interface BannerMapper {
-	List<Banner> BannerList();
-
-	Banner BannerSelect(int main_no);
-
-	List<Banner> findAllBanner();
+	List<Banner> bannerAllList();
 }

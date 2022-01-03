@@ -2,6 +2,7 @@ package com.example.demo.main.model.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,13 +24,6 @@ public class MainController {
 		return "redirect:/";
 	}
 	
-	private BannerService bannerService;
-
-	@GetMapping("/banner")
-	public String banner() {
-		return "admin/banner";
-	}
-
 	@GetMapping("/reco")
 	public String reco() {
 		return "admin/reco";
@@ -39,11 +33,18 @@ public class MainController {
 		return "admin/time";
 	}
 
+
+	private BannerService bannerService;
 	
-	@GetMapping("/banner/list")
+	@Autowired
+	public MainController(BannerService bannerService) {
+		this.bannerService = bannerService;
+	}
+	
+	@GetMapping("/banner")
 	public ModelAndView findBannerList(ModelAndView mv){
 		
-		List<Banner> bannerList = bannerService.findAllBanner();
+		List<Banner> bannerList = bannerService.bannerAllList();
 		
 		mv.addObject("bannerList", bannerList);
 		mv.setViewName("admin/banner");

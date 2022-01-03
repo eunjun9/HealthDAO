@@ -17,21 +17,11 @@ public class BannerServiceImpl implements BannerService{
 	public BannerServiceImpl(BannerMapper bannerMapper) {
 		this.bannerMapper = bannerMapper;
 	}
+
+	@Override
+	public List<Banner> bannerAllList() {
+		return bannerMapper.bannerAllList();
+	}
 	
-	@Override
-	public List<Banner> BannerList() {
-		return bannerMapper.BannerList();
-	}
-
-	@Override
-	public Banner BannerSelect(int main_no) {
-		return bannerMapper.BannerSelect(main_no);
-	}
-
-	@Override
-	public List<Banner> findAllBanner() {
-		return bannerMapper.findAllBanner();
-	}
-
 
 }
