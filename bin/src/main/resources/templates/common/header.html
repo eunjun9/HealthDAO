@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title></title>
+<meta name="title" content="">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta property="og:title" content="">
+<meta property="og:description" content="">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no, address=no, email=no">
+
+<meta property="og:url" content="">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="">
+<meta property="og:image" content="">
+
+<link rel="shortcut icon" href="">
+<link rel="apple-touch-icon" sizes="180x180" href="">
+<link rel="icon" type="image/png" sizes="32x32" href="">
+<link rel="icon" type="image/png" sizes="16x16" href="">
+<link rel="manifest" href="">
+<link rel="mask-icon" href="" color="">
+<meta name="msapplication-TileColor" content="">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="stylesheet" type="text/css" href="../../css/fonts.css">
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<link rel="stylesheet" type="text/css" href="../../css/contents.css">
+<link rel="stylesheet" type="text/css" href="../../css/main.css">
+
+<!-- javascript -->
+
+<!-- //javascript -->
+<body>
+<div id="wrap" class="main">
+	<!-- HEADER + GNB -->
+	<header id="header">
+		<!-- HEADERTOP -->
+		<div class="headerTop">
+			<div class="contents">
+				<div class="utilMenu">
+					<ul>
+						<li><a href="#loginLayer" onclick="loginLayer();return false;">로그인</a></li>
+						<li><a href="#">회원가입</a></li>
+						<li><a href="#">주문 조회</a></li>
+						<li><a href="#">고객센터</a></li>
+					</ul>
+					
+					<!-- 로그인 레이어 -->
+					<div id="loginLayer">
+						<div class="loginTabH">
+							<div class="inp_wrap">
+								<div class="inp_text sizeS">
+									<input type="text" title="아이디" placeholder="아이디">
+								</div>
+								<p class="error">아이디를 입력해주세요.</p>
+							</div>
+							<div class="inp_wrap mgt10">
+								<div class="inp_text sizeS">
+									<input type="password" title="비밀번호" placeholder="비밀번호">
+								</div>
+								<p class="error">비밀번호를 입력해주세요.</p>
+							</div>
+							<span class="inp_check mgt15">
+								<input type="checkbox" id="id_auto_loing_H">
+								<label for="id_auto_loing_H">자동 로그인</label>
+							</span>
+							<a href="#" class="btn btnSizeM btnColorP btnTypeR w100 mgt17"><span>로그인</span></a>
+						</div>
+						<div class="btn_member">
+							<ul>
+								<li><a href="#">회원가입</a></li>
+								<li><a href="#">아이디 찾기</a></li>
+								<li><a href="#">비밀번호 찾기</a></li>
+							</ul>
+						</div>
+						<div class="btn_sns">
+							<ul>
+								<li class="sns_n"><a href="javascript:void(0);"><span>네이버 로그인</span></a></li>
+								<li class="sns_k"><a href="javascript:void(0);"><span>카카오 로그인</span></a></li>
+							</ul>
+						</div>
+						<div class="loginLayerClose">
+							<a href="javascript:void(0);" onclick="loginLayer();">닫기</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- // HEADERTOP -->
+
+		<!-- HEADER -->
+		<div class="daoHeader">
+			<h1><a href="#"><img class="logoClass" src="../../images/common/logo.png" alt="BANILA.COM"></a></h1>
+			<div class="searchH">
+				<div class="searchWrap">
+					<div class="inp_wrap">
+						<div class="inp_text">
+							<input type="text" id="headerSearch">
+							<button class="btn_clear"><span>clear</span></button>
+							<button class="btn_search" type="button"><span class="hide">검색</span></button>
+						</div>
+					</div>
+				</div>
+				<div class="jsSearchTxt">
+					<div class="rollCon">
+						<div class="txt">검색어 순위 1위 노출</div>
+						<div class="txt">검색어 순위 2위 노출</div>
+						<div class="txt">검색어 순위 3위 노출</div>
+						<div class="txt">검색어 순위 4위 노출</div>
+						<div class="txt">검색어 순위 5위 노출</div>
+					</div>
+				</div>
+			</div>
+			<div class="myMenuH">
+				<ul>
+					<li><a href="#">마이페이지</a></li>
+					<li><a href="#">장바구니 <span>99</span></a></li>
+				</ul>
+			</div>
+		</div>
+		<!-- //HEADER -->
+		<!-- GNB -->
+		<div class="gnbWrap">
+			<div class="gnb">
+				<div class="contents">
+					<ul class="gnbLink">
+						<li><a href="#">랭킹</a></li>
+						<li><a href="#">신상품</a></li>
+						<li><a href="#">식품</a></li>
+						<li><a href="#">음료</a></li>
+						<li><a href="#">운동·생활용품</a></li>
+						<li><a href="#">주변 PT 찾기</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- //GNB -->
+	</header>
+<script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../../js/slick.min.js"></script>
+<script type="text/javascript" src="../../js/jquery.mCustomScrollbar.js"></script>
+<script type="text/javascript" src="../../js/circle-progress.min.js"></script>
+<script type="text/javascript" src="../../js/ui.js"></script>
+<script type="text/javascript" src="../../js/main.js"></script>
+	<!-- //HEADER + GNB -->
