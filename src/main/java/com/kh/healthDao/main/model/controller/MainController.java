@@ -1,11 +1,13 @@
 package com.kh.healthDao.main.model.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.healthDao.main.model.service.BannerService;
@@ -42,14 +44,25 @@ public class MainController {
 		this.bannerService = bannerService;
 	}
 	
+//	@GetMapping("/banner")
+//	public ModelAndView findBannerList(ModelAndView mv, @RequestParam int page){
+//		page=1;
+//		Map<String, Object> map = bannerService.bannerAllList(page);
+//
+//		mv.addObject("pi", map.get("pi"));
+//		mv.addObject("bannerList", map.get("bannerList"));
+//		mv.setViewName("admin/banner");
+//		return mv;
+//	}
+	
 	@GetMapping("/banner")
-	public ModelAndView findBannerList(ModelAndView mv){
+	public ModelAndView findBannerList(ModelAndView mv) {
 		
 		List<Banner> bannerList = bannerService.bannerAllList();
 		
 		mv.addObject("bannerList", bannerList);
 		mv.setViewName("admin/banner");
+		
 		return mv;
 	}
-	
 }

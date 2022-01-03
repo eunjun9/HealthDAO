@@ -8,12 +8,30 @@
 		<result property="main_rank" column="MAIN_RANK"/>
 		<result property="main_url" column="MAIN_URL"/>
 		<result property="main_status" column="MAIN_STATUS"/>
+		<result property="file_path" column="FILE_PATH"/>
+		<result property="change_file" column="CHANGE_FILE"/>
 	</resultMap>
 
 	<select id="bannerAllList" resultMap="bannerResultMap">
-		SELECT
-			   *
+		SELECT					   
+			    MAIN_NO
+			  , MAIN_NAME
+			  , MAIN_RANK
+			  , MAIN_URL
+			  , MAIN_STATUS
+			  , FILE_PATH
+			  , CHANGE_FILE
 		  FROM BANNER
+		  JOIN BANNER_FILE USING(MAIN_NO)
+		  JOIN AT_FILE USING(F_NO)
+	</select>
+	
+	<select id="getListCount" resultMap="bannerResultMap">
+		SELECT					   
+			    COUNT(*)
+		  FROM BANNER
+		  JOIN BANNER_FILE USING(MAIN_NO)
+		  JOIN AT_FILE USING(F_NO)
 	</select>
 	
 
