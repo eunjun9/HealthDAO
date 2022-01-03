@@ -41,55 +41,57 @@
 							</div>
 						</div>
                         <!-- 사용가능 쿠폰 리스트 -->
-                        <div class="tab-pannel" id="useableCoupon">                            
-                            <div class="couponList tblBar mgt50">
-                                <p class="tblList">총 <span>1개</span></p>
-                            </div>
-                            <div class="js_tblList">
-                                <table class="tblType1" summary="">
-                                    <caption></caption>
-                                    <colgroup>
-                                        <col width="15%" />
-                                        <col width="15%" />
-                                        <col width="50%" />
-                                        <col width="20%" />
-                                    </colgroup>
-                                    <thead>
-                                        <tr>
-                                            <th>문의유형</th>
-                                            <th>진행상태</th>
-                                            <th>제목</th>
-                                            <th>등록일</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>상품관련</td>
-                                            <td><span class="gr">문의</span></td>
-                                            <td><a href="./oneQuestionDetail.html" class="js_ListTtl ListTtl">상품이 뭔가 이상해요</a></td>
-                                            <td>2021-12-01</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <div class="paging mgt50">
-                                    <a href="#" class="first"><span class="hide">첫페이지</span></a>
-                                    <a href="#" class="prev"><span class="hide">이전페이지</span></a>
-                                    <a href="#">1</a>
-                                    <a href="#" class="active">2</a>
-                                    <a href="#">3</a>
-                                    <a href="#">4</a>
-                                    <a href="#">5</a>
-                                    <a href="#">6</a>
-                                    <a href="#">7</a>
-                                    <a href="#">8</a>
-                                    <a href="#">9</a>
-                                    <a href="#">10</a>
-                                    <a href="#" class="next"><span class="hide">다음페이지</span></a>
-                                    <a href="#" class="last"><span class="hide">마지막페이지</span></a>
-                                </div>
+                        <div class="tab-pannel" id="useableCoupon">  
+                        	<div th:if="${qnaList != null}">                          
+	                            <div class="couponList tblBar mgt50">
+	                                <p class="tblList">총 <span>1개</span></p>
+	                            </div>
+	                            <div class="js_tblList">
+	                                <table class="tblType1" summary="">
+	                                    <caption></caption>
+	                                    <colgroup>
+	                                        <col width="15%" />
+	                                        <col width="15%" />
+	                                        <col width="50%" />
+	                                        <col width="20%" />
+	                                    </colgroup>
+	                                    <thead>
+	                                        <tr>
+	                                            <th>문의유형</th>
+	                                            <th>진행상태</th>
+	                                            <th>제목</th>
+	                                            <th>등록일</th>
+	                                        </tr>
+	                                    </thead>
+	                                    <tbody>
+	                                        <tr th:each="qna : ${qnaList}">
+	                                            <td th:text="${qna.qDeptCode}"></td>
+	                                            <td><span class="gr" th:text="${qna.qStatus}"></span></td>
+	                                            <td><a href="./oneQuestionDetail.html" class="js_ListTtl ListTtl"><span th:text="${qna.qTitle}"></span></a></td>
+	                                            <td th:text="${#dates.format(qna.qDate, 'yyyy-MM-dd')}"></td>
+	                                        </tr>
+	                                    </tbody>
+	                                </table>
+	                                <div class="paging mgt50">
+	                                    <a href="#" class="first"><span class="hide">첫페이지</span></a>
+	                                    <a href="#" class="prev"><span class="hide">이전페이지</span></a>
+	                                    <a href="#">1</a>
+	                                    <a href="#" class="active">2</a>
+	                                    <a href="#">3</a>
+	                                    <a href="#">4</a>
+	                                    <a href="#">5</a>
+	                                    <a href="#">6</a>
+	                                    <a href="#">7</a>
+	                                    <a href="#">8</a>
+	                                    <a href="#">9</a>
+	                                    <a href="#">10</a>
+	                                    <a href="#" class="next"><span class="hide">다음페이지</span></a>
+	                                    <a href="#" class="last"><span class="hide">마지막페이지</span></a>
+	                                </div>
+	                            </div>
                             </div>
                             <!-- 데이터 없을 때 -->
-                            <div class="noData">
+                            <div class="noData" th:unless="${qnaList != null}">
                                 <span>1:1문의하신 이력이 없습니다.<br>궁금하신 점이 있으시면 1:1문의를 이용해주세요</span>
                             </div>
 
