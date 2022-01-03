@@ -1,4 +1,4 @@
-package com.example.demo.member.model.dao;
+package com.kh.healthDao.member.model.dao;
 
 public interface MemberMapper {
 
