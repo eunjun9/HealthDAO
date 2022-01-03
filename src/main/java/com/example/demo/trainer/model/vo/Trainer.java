@@ -1,5 +1,7 @@
 package com.example.demo.trainer.model.vo;
 
+import com.example.demo.member.model.vo.Member;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,6 +24,7 @@ public class Trainer {
 	private String tIntro;			// 선생님소개
 	private String queIntro;		// 문의소개
 	
+	private Member member;
 	/* + 추가할 것
 	 * MEMBER 조인 -> 트레이너 이름, 트레이너 전화번호
 	 * REVIEW 조인 -> 별점, 리뷰 수
