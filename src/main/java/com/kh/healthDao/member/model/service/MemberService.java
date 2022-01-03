@@ -1,4 +1,4 @@
-package com.example.demo.member.model.service;
+package com.kh.healthDao.member.model.service;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 
