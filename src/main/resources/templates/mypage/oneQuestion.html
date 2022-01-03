@@ -11,6 +11,13 @@
 <th:block th:replace="common/header.html"></th:block>
 <!--// HEADER + GNB -->
 <!-- container -->
+	<script>
+		const msg = '[[${msg}]]';
+		
+		if(msg){
+			alert(msg);			
+		}
+	</script>
 	<div id="container" class="pdt0">
 		<div class="site_location">
 			<span><a href="/">HOME</a></span>

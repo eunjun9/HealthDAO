@@ -8,12 +8,12 @@ import com.kh.healthDao.mypage.model.vo.Qna;
 
 
 @Service("mypageService")
-public class mypageServiceImpl implements qnaService{
+public class MypageServiceImpl implements QnaService{
 	
 	private final MypageMapper mypageMapper; 
 	
 	@Autowired
-	public mypageServiceImpl(MypageMapper mypageMapper) {
+	public MypageServiceImpl(MypageMapper mypageMapper) {
 		this.mypageMapper = mypageMapper;
 	}
 	
