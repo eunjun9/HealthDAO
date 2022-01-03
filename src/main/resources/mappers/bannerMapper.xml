@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.main.model.dao.BannerMapper">
+
+	<resultMap id="bannerResultMap" type="com.example.demo.main.model.vo.Banner">
+		<id property="main_no" column="MAIN_NO"/>
+		<result property="main_name" column="MAIN_NAME"/>
+		<result property="main_rank" column="MAIN_RANK"/>
+		<result property="main_url" column="MAIN_URL"/>
+		<result property="main_status" column="MAIN_STATUS"/>
+	</resultMap>
+
+	<select id="findBannerList" resultMap="bannerResultMap">
+		SELECT
+			   *
+		  FROM BANNER
+	</select>
+	<select id="BannerList" resultMap="bannerResultMap">
+		SELECT
+			   *
+		  FROM BANNER
+	</select>
+
+	<select id="TrainerSelect" resultMap="bannerResultMap" parameterType="int">
+		SELECT
+			   *
+		  FROM BANNER
+		 WHERE MAIN_NO = #{main_no}
+	</select>
+	
+
+</mapper>

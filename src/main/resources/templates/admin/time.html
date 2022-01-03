@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title></title>
+<!-- 메타태그, 스타일 -->
+<th:block th:replace="common/head.html"></th:block>
+<!--// 메타태그, 스타일 -->
+<body>
+	<div id="wrap" class="main">
+		<!-- HEADER + GNB -->
+		<th:block th:replace="common/header.html"></th:block>
+		<!--// HEADER + GNB -->
+		
+			
+		<!-- container -->		
+		<div id="container" class="pdt0">
+			<div class="site_location">
+				<span><a href="/">HOME</a></span>
+				<span><a href="/">마이페이지</a></span>
+				<em>타임 세일 관리</em>
+			</div>
+			<div class="mypage">
+				<div class="myWish myCon">
+					<div class="contents">
+						<!-- mypage lnb -->
+						<div class="myPageLnb">
+							<div class="myRank">
+								<p class="rank userLv1" id="Lv">
+									<span class="btnMain">관리자</span>
+								</p><!-- 기본등급 userLv1 ~ 최고등급 userLv4 -->
+								<p class="txt">
+									<span>HELLO, VIP!</span><br>
+									<em id="name">류상훈님</em>
+								</p>
+							</div>
+							<div class="myPageMenu">
+								<ul class="dep1">
+									<li>
+										<p>주문관리</p>
+										<ul class="dep2">
+											<li><a href="/mypage/myorder">주문배송 조회</a></li>
+											<li><a href="/mypage/storebuy">매장구매내역</a></li>
+											<li><a href="/mypage/evidence">증빙서류 발급</a></li>
+										</ul>
+									</li>
+									<li>
+										<a href="/mypage/mycoupon">쿠폰</a>
+									</li>
+									<li>
+										<a href="/mypage/mypoint">포인트</a>
+									</li>
+									<li>
+										<p>내 활동</p>
+										<ul class="dep2">
+											<li><a href="/mypage/counsel">1:1 문의</a></li>
+											<li><a href="/mypage/mywish">위시리스트</a></li>
+											<li><a href="/mypage/mystock">입고 알림</a></li>
+										</ul>
+									</li>
+									<li>
+										<a href="/mypage/myreview">상품 리뷰</a>
+									</li>
+									<li>
+										<p>내 정보 관리</p>
+										<ul class="dep2">
+											<li><a href="/mypage/confirmpw">회원정보수정</a></li>
+											<li><a href="/mypage/myaddress">배송지 관리</a></li>
+											<li><a href="/mypage/skininfo">피부 프로필 관리</a></li>
+											<li><a href="javascript:;" onclick="goLeaveMemberInfo();return false;">회원탈퇴 하기</a></li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<!-- //mypage lnb -->
+	
+						<!-- myPageCon -->
+						<div class="myPageCon">
+							<p class="tit mgb40">
+								타임 세일
+							</p>
+							<div class="pdtWishBar">
+								<span class="inp_check">
+									<input type="checkbox" name="chkTimeAllChk" id="chkTimeAllChk">
+									<label for="chkTimeAllChk">전체선택</label>
+								</span>
+								<div class="btn_wrap">
+									<a href="javascript:void(0)" onclick="showLayer('pdtSearch');" class="basketBtn btn btnSizeS btnColorW btnTypeB"><span>제품찾기</span></a>
+									<a href="javascript:void(0)" onclick="showLayer('recoDel');" class="wishBtn btn btnSizeS btnColorW btnTypeB"><span>삭제하기</span></a>
+								</div>
+							</div>
+							<div class="pdt_list1 type02 mgt60">
+								<ul class="list_box">
+									<li>
+										<div class="pdtImg">
+											<a href="javascript:showLayer('optChange2');" class="imgLink"><img src="./images/temp/pdt_img3.png" alt=""></a>
+										</div>
+										<div class="pdtTxt">
+											<p class="pdtHead" style="color:#4f8ffa;">21.12.27 ~ 22.01.01</p>
+											<p class="pdtName"><a href="#">제품명제품명제품명제품명제품명</a></p>
+											<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
+											<div class="pdtReview">
+												<div class="js_rating ratingS"><span>4.5</span></div>
+												4.5 <span class="count">(리뷰 18)</span>
+											</div>
+										</div>
+										<span class="inp_check OtPdtCheckBox">
+											<input type="checkbox" name="chkTime" id="chkTime1" class="js_checkbox">
+											<label for="chkTime1"><span class="hide">제품명제품명제품명제품명제품명</span></label>
+										</span>
+									</li>
+									<li>
+										<div class="pdtImg">
+											<a href="javascript:showLayer('optChange2');" class="imgLink"><img src="./images/temp/pdt_img3.png" alt=""></a>
+										</div>
+										<div class="pdtTxt">
+											<p class="pdtHead" style="color:#4f8ffa;">21.12.27 ~ 22.01.01</p>
+											<p class="pdtName"><a href="#">제품명제품명제품명제품명제품명</a></p>
+											<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
+											<div class="pdtReview">
+												<div class="js_rating ratingS"><span>4.5</span></div>
+												4.5 <span class="count">(리뷰 18)</span>
+											</div>
+										</div>
+										<span class="inp_check OtPdtCheckBox">
+											<input type="checkbox" name="chkTime" id="chkTime2" class="js_checkbox">
+											<label for="chkTime2"><span class="hide">제품명제품명제품명제품명제품명</span></label>
+										</span>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<!-- //myPageCon -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- //container -->
+		
+		<!-- 스크립트 -->
+		<th:block th:replace="common/script.html"></th:block>
+		<!--// 스크립트 -->
+		<!-- FOOTER -->
+		<th:block th:replace="common/footer.html"></th:block>
+		<!--// FOOTER -->
+	</div>
+	
+	<!-- 퀵메뉴 + 톡톡 -->
+	<th:block th:replace="common/quickNtalk.html"></th:block>
+	<!--// 퀵메뉴 + 톡톡 -->	
+	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+	<script type="text/javascript">
+		$('#quick .quickArea').css({'position':'absolute', 'top':290});
+	</script>
+	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+
+<!-- 상품검색 -->
+<div id="pdtSearch" class="lyPopArea">
+    <div class="lyPop">
+        <div class="lyWrap">
+            <button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
+            <div class="lyTit">상품검색</div>
+            <div class="lyBody">
+                <div class="searchBox">
+                    <div class="selec">
+                        <div class="inp_wrap">
+                            <div class="inp_text sizeS searchType mgt10">
+                                <input type="text" name="" id="" placeholder="상품명을 입력해주세요.">
+                                <button type="button" class="btn_clear"><span>clear</span></button>
+                                <button type="button" class="btn_search"><span>search</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="listBox">
+                    <ul class="vScroll">
+                        <!-- 200610 브랜드명 추가 -->
+                        <li><a href="javascript:void(0)"><img src="./images/temp/pdtsearchImg01.jpg" alt=""></a><p><span>바닐라코</span>커버리셔스 파워 핏 쿠션 리필 14g</p></li>
+                        <li><a href="javascript:void(0)"><img src="./images/temp/pdtsearchImg01.jpg" alt=""></a><p><span>바닐라코</span>커버리셔스 파워 핏 쿠션 리필 14g</p></li>
+                        <li><a href="javascript:void(0)"><img src="./images/temp/pdtsearchImg01.jpg" alt=""></a><p><span>바닐라코</span>커버리셔스 파워 핏 쿠션 리필 14g</p></li>
+                        <li><a href="javascript:void(0)"><img src="./images/temp/pdtsearchImg01.jpg" alt=""></a><p><span>바닐라코</span>커버리셔스 파워 핏 쿠션 리필 14g</p></li>
+                        <li><a href="javascript:void(0)"><img src="./images/temp/pdtsearchImg01.jpg" alt=""></a><p><span>바닐라코</span>커버리셔스 파워 핏 쿠션 리필 14g</p></li>
+                        <li><a href="javascript:void(0)"><img src="./images/temp/pdtsearchImg01.jpg" alt=""></a><p><span>바닐라코</span>커버리셔스 파워 핏 쿠션 리필 14g</p></li>
+                        <!-- //200610 브랜드명 추가 -->
+                    </ul>
+                    <div class="noData">
+                        <span>검색된 결과가 없습니다.</span>
+                    </div>
+                    <span>총 <span class="fcPink">10</span>개</span>
+                </div>
+                <div class="paging mgt40">
+                    <a href="#" class="first"><span class="hide">첫페이지</span></a>
+                    <a href="#" class="prev"><span class="hide">이전페이지</span></a>
+                    <a href="#" class="active">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                    <a href="#" class="next"><span class="hide">다음페이지</span></a>
+                    <a href="#" class="last"><span class="hide">마지막페이지</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 타임세일 변경 -->
+<div id="optChange2" class="lyPopArea">
+    <div class="lyPop">
+        <div class="lyWrap">
+            <button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
+            <div class="lyTit">날짜/할인율 변경</div>
+            <div class="lyBody">
+                <div class="inp_wrap">
+					<div class="inp_text datepicker">
+						<input type="text" name="" id="datepicker_1" class="js_datepicker" placeholder="시작일을 검색해주세요." readonly>
+						<label for="datepicker_1">일자</label>
+					</div>
+					<div class="inp_text datepicker">
+						<input type="text" name="" id="datepicker_2" class="js_datepicker" placeholder="종료일을 검색해주세요." readonly>
+						<label for="datepicker_2">일자</label>
+					</div>
+				</div>
+                <div class="inp_wrap">
+					<div class="inp_select">
+						<div class="selectBox">
+							<button class="title" type="button">할인율을 선택해주세요</button>
+							<ul class="selList">
+								<li>
+									<input type="radio" value="" class="option" id="select1_1" name="select1">
+									<label for="select1_1">5%</label>
+								</li>
+								<li>
+									<input type="radio" value="" class="option" id="select1_2" name="select1">
+									<label for="select1_2">10%</label>
+								</li>
+								<li>
+									<input type="radio" value="" class="option" id="select1_3" name="select1">
+									<label for="select1_3">15%</label>
+								</li>
+								<li>
+									<input type="radio" value="" class="option" id="select1_4" name="select1">
+									<label for="select1_4">20%</label>
+								</li>
+								<li>
+									<input type="radio" value="" class="option" id="select1_5" name="select1">
+									<label for="select1_5">25%</label>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+                <div class="btn_wrap length2">
+                    <a href="javascript:void(0);" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorW btnTypeR"><span>취소</span></a>
+                    <a href="#" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 추천상품 삭제 -->
+<div id="recoDel" class="lyPopArea">
+    <div class="lyPop">
+        <div class="lyWrap">
+            <button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
+            <div class="lyTit">추천 상품 삭제</div>
+            <div class="lyBody basic">
+                <p>선택하신 상품을 정말 삭제하시겠습니까?</p>
+                <div class="btn_wrap length2">
+                    <a href="javascript:void(0);" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorW btnTypeR"><span>취소</span></a>
+                    <a href="javascript:void(0);" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
