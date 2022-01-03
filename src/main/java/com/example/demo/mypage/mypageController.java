@@ -34,6 +34,6 @@ public class mypageController {
 	
 	@PostMapping("/qnaInsert")
 	public String qnaInsert() {
-		return "redirect";
+		return "redirect:/mypage/qna";
 	}
 }

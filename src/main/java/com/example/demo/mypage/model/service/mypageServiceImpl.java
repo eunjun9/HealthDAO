@@ -18,7 +18,7 @@ public class mypageServiceImpl implements qnaService{
 	
 	@Override
 	public int qnaInsert(Qna newQna) {
-		return mypageMapper.qnaInsert();
+		return mypageMapper.qnaInsert(newQna);
 	}
 
 	@Override
