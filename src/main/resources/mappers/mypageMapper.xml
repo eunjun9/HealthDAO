@@ -14,7 +14,29 @@
 		<result property="replyModifyDate" column="REPLY_MODIFY_DATE" />
 	</resultMap>
 	
-	<insert id="qnaInsert">
-		
+	<insert id="qnaInsert" parameterType="com.example.demo.mypage.model.vo.Qna">
+		INSERT INTO QNA(
+		      Q_NO
+		    , Q_DEPT_CODE
+		    , USER_NO
+		    , Q_TITLE
+		    , Q_CONTENT
+		    , Q_DATE
+		    , Q_STATUS
+		    , REPLY
+		    , REPLY_DATE
+		    , REPLY_MODIFY_DATE
+		)VALUES(
+		     SEQ_Q_NO.NEXTVAL
+		   , #{qDeptCode}
+		   , #{userNo}
+		   , #{qTitle}
+		   , #{qContent}
+		   , SYSDATE
+		   , '문의'
+		   , NULL
+		   , NULL
+		   , NULL
+		)
 	</insert>
 </mapper>
