@@ -94,7 +94,7 @@ public class mypageController {
 	/* 내 정보 수정 */
 	@GetMapping("/myInfo")
 	public String myInfoModify() {
-		return "mypage/deliModify";
+		return "mypage/myInfoModify";
 	}
 	
 }
