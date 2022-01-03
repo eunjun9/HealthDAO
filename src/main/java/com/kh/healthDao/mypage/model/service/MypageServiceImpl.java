@@ -1,5 +1,7 @@
 package com.kh.healthDao.mypage.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,11 @@ public class MypageServiceImpl implements QnaService{
 	@Override
 	public int qnaModify(Qna modifyQna) {
 		return 0;
+	}
+
+	@Override
+	public List<Qna> findQnaList() {		
+		return mypageMapper.findQnaList();
 	}
 
 }
