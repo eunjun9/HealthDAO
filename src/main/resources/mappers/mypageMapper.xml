@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.demo.mypage.model.dao.MypageMapper">
-	<resultMap id="qnaResultMap" type="com.example.demo.mypage.model.vo.Qna">
+<mapper namespace="com.kh.healthDao.mypage.model.dao.MypageMapper">
+	<resultMap id="qnaResultMap" type="com.kh.healthDao.mypage.model.vo.Qna">
 		<id property="qNo" column="Q_NO"/>
 		<result property="qDeptCode" column="Q_DEPT_CODE" />
 		<result property="userNo" column="USER_NO" />
@@ -14,7 +14,7 @@
 		<result property="replyModifyDate" column="REPLY_MODIFY_DATE" />
 	</resultMap>
 	
-	<insert id="qnaInsert" parameterType="com.example.demo.mypage.model.vo.Qna">
+	<insert id="qnaInsert" parameterType="com.kh.healthDao.mypage.model.vo.Qna">
 		INSERT INTO QNA(
 		      Q_NO
 		    , Q_DEPT_CODE

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.demo.trainer.model.dao.TrainerMapper">
+<mapper namespace="com.kh.healthDao.trainer.model.dao.TrainerMapper">
 
-	<resultMap id="trainerResultMap" type="com.example.demo.trainer.model.vo.Trainer">
+	<resultMap id="trainerResultMap" type="com.kh.healthDao.trainer.model.vo.Trainer">
 		<id property="tNo" column="T_NO"/>
 		<result property="tGymName" column="T_GYM_NAME"/>
 		<result property="tGymAddress" column="T_GYM_ADDRESS"/>
@@ -16,7 +16,7 @@
 		<result property="tIntro" column="T_INTRO"/>
 		<result property="queIntro" column="QUE_INTRO"/>
 		
-		<association javaType="com.example.demo.member.model.vo.Member" property="member">
+		<association javaType="com.kh.healthDao.member.model.vo.Member" property="member">
 			<id column="USER_NO" property="userNo"/>
 			<result column="USER_NAME" property="userName"/>
 			<result column="USER_PHONE" property="userPhone"/>
