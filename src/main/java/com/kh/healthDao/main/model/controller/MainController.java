@@ -46,6 +46,7 @@ public class MainController {
 		this.bannerService = bannerService;
 	}
 	
+//	왜 안돼
 //	@GetMapping("/banner")
 //	public ModelAndView findBannerList(ModelAndView mv, @RequestParam int page){
 //		page=1;
