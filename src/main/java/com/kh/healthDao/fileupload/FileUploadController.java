@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,23 +16,12 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class FileUploadController {
 
-	@PostMapping("/single-file")
-	public String singleFileUpload(@RequestParam MultipartFile singleFile, HttpServletRequest request, Model model) {
-		
-		String singleFileDescrition = request.getParameter("singleFileDescription");
-		System.out.println("singleFile : " + singleFile);
-		System.out.println("singleFileDescrition : " + singleFileDescrition);
-		
+	@PostMapping("/uploadBanner")
+	public String singleFileUpload(@RequestParam MultipartFile singleFile, @Value("${custom.path.upload-images}") String uploadImagesPath) {
 		
 		/* 파일을 저장할 경로 */
-		String root = request.getSession().getServletContext().getRealPath("resources");
+		String root = uploadImagesPath;
 		System.out.println("root : " + root);
-		
-		String filePath = root + "\\uploadFiles";
-		
-		/* 해당 파일 경로 존재 여부 확인하여 없을 경우 make directory */
-		File mkdir = new File(filePath);
-		if(!mkdir.exists()) mkdir.mkdirs();
 		
 		/* 파일명 확인 */
 		String originFileName = singleFile.getOriginalFilename();
@@ -44,12 +34,11 @@ public class FileUploadController {
 		
 		/* 파일을 저장함 */
 		try {
-			singleFile.transferTo(new File(filePath + "\\" + savedName));
-			model.addAttribute("message", "파일 업로드 성공!");
+			singleFile.transferTo(new File(uploadImagesPath + "main/" + "\\" + savedName));		// 업로드 경로 지정
 		} catch (IllegalStateException | IOException e) {
 			e.printStackTrace();
 		}
 
-		return "redirect:/";
+		return "redirect:/banner";
 	}
 }

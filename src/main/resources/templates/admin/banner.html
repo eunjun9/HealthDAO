@@ -70,7 +70,7 @@
 												</span>
 											</td>
 											<td th:text="${banner.main_no}"></td>
-											<td class="tdName"><a href="javascript:void(0);" onclick="showLayer('mainRollDetail')"><span th:text="${banner.main_name}"></span></a></td>
+											<td class="tdName"><a href="javascript:void(0);" onclick="showLayer('enrollMain')"><span th:text="${banner.main_name}"></span></a></td>
 											<td class="tdImg"><img th:src="${banner.file_path}+${banner.change_file}" /></td>
 											<td th:text="${banner.main_url}"></td>
 											<td th:text="${banner.main_rank}"></td>
@@ -112,194 +112,313 @@
 	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 	<script type="text/javascript">
 		$('#quick .quickArea').css({'position':'absolute', 'top':290});
+
+	    function submit(){
+	    	let val = content.value.length;
+	    	if($('input[name="uploadName"]').val() == ''){
+	       		alert('이미지는 꼭 넣어야 됩니다😵');
+	       		return false;
+	    	}
+	       	if(val > 200){
+	       		alert('글자수 확인! 200자가 넘은 글자는 삭제됩니다😵');
+	       		let a = content.value.substr(0,200);
+	       		content.value = a;
+	       		area1.innerHTML = 200;
+	       		area1.style.color = '#222';
+	       		content.focus();
+	       		return false;
+	       	}else{
+	       		document.enroll.submit();
+	       	}
+	    }
 	</script>
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 
-<!-- 메인롤링 등록 -->
-<div id="enrollMain" class="lyPopArea">
-    <div class="lyPop">
-        <div class="lyWrap">
-            <button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
-            <div class="lyTit">메인 롤링 등록</div>
-            <div class="lyBody">			
-				<ul class="inputArea">
-					<li>
-						<dl>
-							<dt>배너명</dt>
-							<dd>
-								<div class="inp_wrap">
-									<div class="inp_text sizeS">
-										<input type="text" name="name" id="name" placeholder="배너명을 입력하세요.">
-										<button class="btn_clear"><span>clear</span></button>
-									</div>
-								</div>
-							</dd>
-						</dl>
-						<dl class="mgt20">
-							<dt>URL</dt>
-							<dd>
-								<div class="inp_wrap">
-									<div class="inp_text sizeS">
-										<input type="text" name="url" id="url" placeholder="/event?no=1">
-										<button class="btn_clear"><span>clear</span></button>
-									</div>
-								</div>
-							</dd>
-						</dl>
-						<dl class="mgt15">
-							<dt>사진 추가</dt>
-							<dd>
-								<ul class="fileUploadArea">
-									<li><label for="pdtQna_imgUpload"><span class="hide">업로드</span></label><input type="file" class="hide" name="pdtQna_imgUpload" id="pdtQna_imgUpload"></li>
-									<li class="imgCutting">
-										<div class="imgBox">
-											<img src="./resources/web/images/temp/main01.jpg" alt="">
+	<!-- 메인롤링 등록 -->
+	<div id="enrollMain" class="lyPopArea">
+	    <div class="lyPop">
+	        <div class="lyWrap">
+	            <button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
+	            <div class="lyTit">메인 롤링 등록</div>
+	            <form action="uploadBanner" name="enroll" method="post" enctype="multipart/form-data">
+		            <div class="lyBody">			
+						<ul class="inputArea">
+							<li>
+								<dl>
+									<dt>배너명</dt>
+									<dd>
+										<div class="inp_wrap">
+											<div class="inp_text sizeS">
+												<input type="text" name="name" id="name" placeholder="배너명을 입력하세요.">
+												<button class="btn_clear"><span>clear</span></button>
+											</div>
 										</div>
-										<a href="javascript:void(0)" class="closeLink"><span class="hide">close</span></a>
-									</li>
-								</ul>
-								<p class="mgt5 fs14">파일첨부 (1개) <span class="fc88">5MB미만 jpg,gif,png 파일 가능</span></p>
-							</dd>
-						</dl>
-					</li>
-					<li>
-						<dl class="mgt20">
-							<dt>순위</dt>
-							<dd>
-								<div class="inp_wrap">
-									<div class="inp_text sizeS">
-										<input type="text" name="rank" id="rank" placeholder="1">
-										<button class="btn_clear"><span>clear</span></button>
-									</div>
-								</div>
-							</dd>
-						</dl>
-						<dl class="mgt20">
-							<dt>노출상태</dt>
-							<dd class="mgt7">
-								<div class="inp_wrap error">
-									<span class="inp_check">
-										<input type="radio" name="pdtQna_radio3" id="pdtQna_radio3_1" checked>
-										<label for="pdtQna_radio3_1">노출</label>
-									</span>
-									<span class="inp_check mgl40">
-										<input type="radio" name="pdtQna_radio3" id="pdtQna_radio3_2">
-										<label for="pdtQna_radio3_2" class="fc88">비노출</label>
-									</span>
-								</div>
-								<p class="fs13 fc88 mgt10">* 노출로 등록시 메인화면에 등록됩니다.</p>
-							</dd>
-						</dl>
-					</li>
-				</ul>
-				<div class="btn_wrap mgt30">
-					<a href="#" class="btn btnSizeL btnArr btnColorW btnTypeR" style="width:200px;"><span>취소</span></a>
-					<a href="#" class="btn btnSizeL btnArr btnColorB btnTypeR" style="width:200px;"><span>등록</span></a>
-				</div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- 메인롤링 수정 -->
-<div id="mainRollDetail" class="lyPopArea">
-    <div class="lyPop">
-        <div class="lyWrap">
-            <button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
-            <div class="lyTit">메인 롤링 수정</div>
-            <div class="lyBody">			
-				<ul class="inputArea">
-					<li>
-						<dl>
-							<dt>배너명</dt>
-							<dd>
-								<div class="inp_wrap">
-									<div class="inp_text sizeS">
-										<input type="text" name="name" id="name" value="메인 롤링 배너 뇽뇽🎄🎄">
-										<button class="btn_clear"><span>clear</span></button>
-									</div>
-								</div>
-							</dd>
-						</dl>
-						<dl class="mgt20">
-							<dt>URL</dt>
-							<dd>
-								<div class="inp_wrap">
-									<div class="inp_text sizeS">
-										<input type="text" name="url" id="url" value="/event?no=1">
-										<button class="btn_clear"><span>clear</span></button>
-									</div>
-								</div>
-							</dd>
-						</dl>
-						<dl class="mgt15">
-							<dt>사진 추가</dt>
-							<dd>
-								<ul class="fileUploadArea">
-									<li><label for="pdtQna_imgUpload"><span class="hide">업로드</span></label><input type="file" class="hide" name="pdtQna_imgUpload" id="pdtQna_imgUpload"></li>
-									<li class="imgCutting">
-										<div class="imgBox">
-											<img src="./resources/web/images/temp/main01.jpg" alt="">
+									</dd>
+								</dl>
+								<dl class="mgt20">
+									<dt>URL</dt>
+									<dd>
+										<div class="inp_wrap">
+											<div class="inp_text sizeS">
+												<input type="text" name="url" id="url" placeholder="/event?no=1">
+												<button class="btn_clear"><span>clear</span></button>
+											</div>
 										</div>
-										<a href="javascript:void(0)" class="closeLink"><span class="hide">close</span></a>
-									</li>
-								</ul>
-								<p class="mgt5 fs14">파일첨부 (1개) <span class="fc88">5MB미만 jpg,gif,png 파일 가능</span></p>
-							</dd>
-						</dl>
-					</li>
-					<li>
-						<dl class="mgt20">
-							<dt>순위</dt>
-							<dd>
-								<div class="inp_wrap">
-									<div class="inp_text sizeS">
-										<input type="text" name="rank" id="rank" value="1">
-										<button class="btn_clear"><span>clear</span></button>
+									</dd>
+								</dl>
+								<dl class="mgt15">
+									<dt>사진 추가</dt>
+									<dd>
+										<ul class="fileUploadArea">
+											<li><label for="imgUpload"><span class="hide">업로드</span></label><input type="file" class="hide" name="imgUpload" id="imgUpload" multiple accept="image/*"></li>
+											<!-- <li class="imgCutting">
+												<div class="imgBox">
+													<img src="./resources/web/images/temp/main01.jpg" alt="">
+												</div>
+												<a href="javascript:void(0)" class="closeLink"><span class="hide">close</span></a>
+											</li> -->
+										</ul>
+										<p class="mgt5 fs14">파일첨부 (1개) <span class="fc88">5MB미만 jpg,gif,png 파일 가능</span></p>
+									</dd>
+								</dl>
+							</li>
+							<li>
+								<dl class="mgt20">
+									<dt>순위</dt>
+									<dd>
+										<div class="inp_wrap">
+											<div class="inp_text sizeS">
+												<input type="text" name="rank" id="rank" placeholder="1">
+												<button class="btn_clear"><span>clear</span></button>
+											</div>
+										</div>
+									</dd>
+								</dl>
+								<dl class="mgt20">
+									<dt>노출상태</dt>
+									<dd class="mgt7">
+										<div class="inp_wrap error">
+											<span class="inp_check">
+												<input type="radio" name="pdtQna_radio3" id="pdtQna_radio3_1" checked>
+												<label for="pdtQna_radio3_1">노출</label>
+											</span>
+											<span class="inp_check mgl40">
+												<input type="radio" name="pdtQna_radio3" id="pdtQna_radio3_2">
+												<label for="pdtQna_radio3_2" class="fc88">비노출</label>
+											</span>
+										</div>
+										<p class="fs13 fc88 mgt10">* 노출로 등록시 메인화면에 등록됩니다.</p>
+									</dd>
+								</dl>
+							</li>
+						</ul>
+						<div class="btn_wrap mgt30">
+							<a href="javascript:void(0);" class="btn btnSizeL btnArr btnColorW btnTypeR" style="width:200px;" onclick="layerPopClose();"><span>취소</span></a>
+							<a href="javascript:void(0);" class="btn btnSizeL btnArr btnColorB btnTypeR" style="width:200px;" onclick="return submit();"><span>등록</span></a>
+						</div>
+				     </div>
+				</form>
+	        </div>
+	    </div>
+	</div>
+	<!-- 메인롤링 수정 -->
+	<div id="enrollMain" class="lyPopArea">
+	    <div class="lyPop">
+	        <div class="lyWrap">
+	            <button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
+	            <div class="lyTit">메인 롤링 수정</div>
+	            <div class="lyBody">			
+					<ul class="inputArea">
+						<li>
+							<dl>
+								<dt>배너명</dt>
+								<dd>
+									<div class="inp_wrap">
+										<div class="inp_text sizeS">
+											<input type="text" name="name" id="name" value="메인 롤링 배너 뇽뇽🎄🎄">
+											<button class="btn_clear"><span>clear</span></button>
+										</div>
 									</div>
-								</div>
-							</dd>
-						</dl>
-						<dl class="mgt20">
-							<dt>노출상태</dt>
-							<dd class="mgt7">
-								<div class="inp_wrap error">
-									<span class="inp_check">
-										<input type="radio" name="pdtQna_radio3" id="pdtQna_radio3_1" checked>
-										<label for="pdtQna_radio3_1">노출</label>
-									</span>
-									<span class="inp_check mgl40">
-										<input type="radio" name="pdtQna_radio3" id="pdtQna_radio3_2">
-										<label for="pdtQna_radio3_2" class="fc88">비노출</label>
-									</span>
-								</div>
-								<p class="fs13 fc88 mgt10">* 노출로 등록시 메인화면에 등록됩니다.</p>
-							</dd>
-						</dl>
-					</li>
-				</ul>
-				<div class="btn_wrap mgt30">
-					<a href="#" class="btn btnSizeL btnArr btnColorW btnTypeR" style="width:200px;"><span>취소</span></a>
-					<a href="#" class="btn btnSizeL btnArr btnColorB btnTypeR" style="width:200px;"><span>수정</span></a>
-				</div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- 메인롤링 삭제 -->
-<div id="mainDel" class="lyPopArea">
-    <div class="lyPop">
-        <div class="lyWrap">
-            <button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
-            <div class="lyTit">메인 롤링 삭제</div>
-            <div class="lyBody basic">
-                <p>정말 삭제하시겠습니까?</p>
-                <div class="btn_wrap length2">
-                    <a href="javascript:void(0);" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorW btnTypeR"><span>취소</span></a>
-                    <a href="javascript:void(0);" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+								</dd>
+							</dl>
+							<dl class="mgt20">
+								<dt>URL</dt>
+								<dd>
+									<div class="inp_wrap">
+										<div class="inp_text sizeS">
+											<input type="text" name="url" id="url" value="/event?no=1">
+											<button class="btn_clear"><span>clear</span></button>
+										</div>
+									</div>
+								</dd>
+							</dl>
+							<dl class="mgt15">
+								<dt>사진 추가</dt>
+								<dd>
+									<ul class="fileUploadArea">
+										<li><label for="imgUpload"><span class="hide">업로드</span></label><input type="file" class="hide" name="imgUpload" id="imgUpload"></li>
+										<li class="imgCutting">
+											<div class="imgBox">
+												<img src="./resources/web/images/temp/main01.jpg" alt="">
+											</div>
+											<a href="javascript:void(0)" class="closeLink"><span class="hide">close</span></a>
+										</li>
+									</ul>
+									<p class="mgt5 fs14">파일첨부 (1개) <span class="fc88">5MB미만 jpg,gif,png 파일 가능</span></p>
+								</dd>
+							</dl>
+						</li>
+						<li>
+							<dl class="mgt20">
+								<dt>순위</dt>
+								<dd>
+									<div class="inp_wrap">
+										<div class="inp_text sizeS">
+											<input type="text" name="rank" id="rank" value="1">
+											<button class="btn_clear"><span>clear</span></button>
+										</div>
+									</div>
+								</dd>
+							</dl>
+							<dl class="mgt20">
+								<dt>노출상태</dt>
+								<dd class="mgt7">
+									<div class="inp_wrap error">
+										<span class="inp_check">
+											<input type="radio" name="pdtQna_radio3" id="pdtQna_radio3_1" checked>
+											<label for="pdtQna_radio3_1">노출</label>
+										</span>
+										<span class="inp_check mgl40">
+											<input type="radio" name="pdtQna_radio3" id="pdtQna_radio3_2">
+											<label for="pdtQna_radio3_2" class="fc88">비노출</label>
+										</span>
+									</div>
+									<p class="fs13 fc88 mgt10">* 노출로 등록시 메인화면에 등록됩니다.</p>
+								</dd>
+							</dl>
+						</li>
+					</ul>
+					<div class="btn_wrap mgt30">
+						<a href="#" class="btn btnSizeL btnArr btnColorW btnTypeR" style="width:200px;"><span>취소</span></a>
+						<a href="#" class="btn btnSizeL btnArr btnColorB btnTypeR" style="width:200px;"><span>수정</span></a>
+					</div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	<!-- 메인롤링 삭제 -->
+	<div id="mainDel" class="lyPopArea">
+	    <div class="lyPop">
+	        <div class="lyWrap">
+	            <button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
+	            <div class="lyTit">메인 롤링 삭제</div>
+	            <div class="lyBody basic">
+	                <p>정말 삭제하시겠습니까?</p>
+	                <div class="btn_wrap length2">
+	                    <a href="javascript:void(0);" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorW btnTypeR"><span>취소</span></a>
+	                    <a href="javascript:void(0);" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></a>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
 </body>
 </html>
+<script>
+	//파일 등록	
+	var fileBuffer = []; 	// 이미지 저장배열
+	var review_fileCnt = 0;	// 이미지 개수
+	
+	$(document).off('change','#enrollMain #imgUpload').on('change','#enrollMain #imgUpload',function(){		
+			const target = $(this);
+			var targetFilesCnt = target[0].files.length;
+			
+			//유효성 검사
+			if(fileBuffer.length >= 1){
+				alert("이미지는 최대 1개까지 첨부 가능합니다.");
+				return;
+			}else if(targetFilesCnt + fileBuffer.length > 1){
+				alert("이미지는 최대 1개까지 첨부 가능합니다.");
+				return;
+			}else if(review_fileCnt + targetFilesCnt > 1){ //기존이미지와 신규이미지 개수의 합
+				alert("이미지는 최대 1개까지 첨부 가능합니다.");
+				return;
+			}			
+			
+			var validateChk = true;		
+			//유효성 검사
+			$.each(target[0].files,function(index,file){
+				const fileName = file.name;
+				var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
+			    var fileNameExtension = fileName.toLowerCase().substring(fileNameExtensionIndex, fileName.length);
+			    if (!((fileNameExtension === 'jpg') || (fileNameExtension === 'gif') || (fileNameExtension === 'png') || (fileNameExtension === 'jpeg'))){
+			    	alert("상품 이미지는 이미지 파일(gif,jpg,jpeg,png)만 등록 가능합니다");
+			    	validateChk = false;
+			    	return;
+			    }
+			    
+			    if(file.size > 1024 * 1024 * 5){
+			    	alert("사진은 최대 5mb미만으로 첨부 가능합니다.");
+			    	validateChk = false;
+			    	return;
+			    }
+			});
+			
+			if(!validateChk)return false;
+			
+			//filebuffer 저장
+			Array.prototype.push.apply(fileBuffer, target[0].files);
+			
+			var html = '';
+			$.each(target[0].files,function(index,file){
+				
+				//미리보기
+				var reader = new FileReader();
+				var fileUrl;
+				reader.onload = function(e) {
+						const fileName = file.name;
+						html+= '<li class="imgCutting">';
+						html+= '<div class="imgBox">';
+						html+= '	<img src="'+e.target.result+'" alt="">';
+						html+= '</div>';
+						html+= '<a href="javascript:void(0)" class="closeLink"><span class="hide">close</span></a>';
+						html+= '</li>';
+						$('.fileUploadArea').append(html);
+						//이미지 맞추기
+						imgCrop();
+						html = "";
+				};
+				
+				reader.readAsDataURL(file);
+				
+				review_fileCnt++;
+			});
+			
+			
+			//input[file] 초기화
+			var agent = navigator.userAgent.toLowerCase();
+			if ( (navigator.appName == 'Netscape' && navigator.userAgent.search('Trident') != -1) || (agent.indexOf("msie") != -1) ){
+			    // ie 일때 input[type=file] init.
+			    $("#enrollMain #imgUpload").replaceWith( $("#enrollMain #imgUpload").clone(true) );
+			}else {
+			    //other browser 일때 input[type=file] init.
+			    $("#enrollMain #imgUpload").val("");
+			}
+	});
+	
+	//파일삭제
+	$(document).off("click","#enrollMain .imgCutting .closeLink").on('click','#enrollMain .imgCutting .closeLink',function(){
+		var imgno = $(this).parent("li").find("#reviewImgNo").val();
+		const fileIndex = $(this).parent("li").index();
+		
+		review_fileCnt--;//파일개수 감소
+		
+		if(imgno){//기존등록된 이미지면 delimgno에만 push
+			delimgno.push(imgno);
+		}else{//신규 등록된 이미지면 fileBuffer에서 제거
+			fileBuffer.splice(fileIndex-1,1);
+		}
+		
+		$('.fileUploadArea > li:eq('+fileIndex+')').remove();
+	});
+</script>
