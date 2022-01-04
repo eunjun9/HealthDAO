@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kh.healthDao.main.model.dao.MemberMapper">
+<mapper namespace="com.kh.healthDao.member.model.dao.MemberMapper">
 
-	<resultMap type="com.kh.session.member.model.vo.Member" id="loginMemberResultMap">
+	<resultMap type="com.kh.healthDao.member.model.vo.Member" id="loginMemberResultMap">
 		<id property="no" column="MEMBER_NO"/>
 		<result property="id" column="MEMBER_ID"/>
 		<result property="pwd" column="MEMBER_PWD"/>
@@ -21,13 +21,13 @@
 		<collection property="memberRoleList" resultMap="memberRoleResultMap"/>
 	</resultMap>
 	
-	<resultMap type="com.kh.session.member.model.vo.MemberRole" id="memberRoleResultMap">
+	<resultMap type="com.kh.healthDao.member.model.vo.MemberRole" id="memberRoleResultMap">
 		<id property="memberNo" column="REF_MEMBER_NO"/>
 		<id property="authorityCode" column="REF_AUTHORITY_CODE"/>
 		<association property="authority" resultMap="authorityResultMap"/>
 	</resultMap>
 	
-	<resultMap type="com.kh.session.member.model.vo.Authority" id="authorityResultMap">
+	<resultMap type="com.kh.healthDao.member.model.vo.Authority" id="authorityResultMap">
 		<id property="code" column="REF_AUTHORITY_CODE2"/>
 		<result property="name" column="AUTHORITY_NAME"/>
 		<result property="desc" column="AUTHORITY_DESC"/>
