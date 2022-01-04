@@ -1,4 +1,4 @@
-package com.kh.healthDao.shopping.model.vo;
+package com.kh.healthDao.admin.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Shopping {
+public class Product {
 	
 	private int productNo;			// 상품번호
 	private String productName;		// 상품명
@@ -18,6 +18,11 @@ public class Shopping {
 	private String productInfo;		// 상품 정보
 	private String productView;		// 조회수
 	private String productStock;	// 재고량
+	private String categoryId;		// 카테고리ID
+	private int pMembership;		// 적립혜택
+	private String productOption;			//임시 옵션번호
+	
+	
 	
 	/* + 추가할 것
 	 * MEMBER 조인 -> 트레이너 이름, 트레이너 전화번호
@@ -25,5 +30,7 @@ public class Shopping {
 	 * TRAINER_FILE 조인 -> AT_FILE 조인 -> 트레이너 사진 1장, 헬스장 사진 2장
 	 * 
 	 * */
+	
+
 	
 }

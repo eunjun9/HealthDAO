@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title></title>
+<!-- 메타태그, 스타일 -->
+<th:block th:replace="common/head.html"></th:block>
+<!--// 메타태그, 스타일 -->
+<body>
+	<div id="wrap" class="main">
+		<!-- HEADER + GNB -->
+		<th:block th:replace="common/header.html"></th:block>
+		<!--// HEADER + GNB -->
+
+	<!-- container -->
+	
+	<div id="container" class="pdt0">
+		<div class="site_location">
+			<span><a href="/">HOME</a></span>
+			<em>마이페이지</em>
+		</div>
+		<div class="mypage">
+			<div class="myMain myCon">
+				<div class="contents">
+					<!-- mypage lnb -->
+					<div class="myPageLnb">
+						<div class="myRank">
+							<p class="rank userLv1" id="Lv">
+								<span class="btnMain">관리자</span>
+							</p><!-- 기본등급 userLv1 ~ 최고등급 userLv4 -->
+							<p class="txt">
+								<span>HELLO, VIP!</span><br>
+								<em id="name">류상훈님</em>
+							</p>
+						</div>
+						<div class="myPageMenu">
+							<ul class="dep1">
+								<li>
+									<p>주문관리</p>
+									<ul class="dep2">
+										<li><a href="/mypage/myorder">주문배송 조회</a></li>
+										<li><a href="/mypage/storebuy">매장구매내역</a></li>
+										<li><a href="/mypage/evidence">증빙서류 발급</a></li>
+									</ul>
+								</li>
+								<li>
+									<a href="/mypage/productRegist">상품등록</a>
+								</li>
+								<li>
+									<a href="/mypage/mycoupon">쿠폰</a>
+								</li>
+								<li>
+									<a href="/mypage/mypoint">포인트</a>
+								</li>
+								<li>
+									<p>내 활동</p>
+									<ul class="dep2">
+										<li><a href="/mypage/counsel">1:1 문의</a></li>
+										<li><a href="/mypage/mywish">위시리스트</a></li>
+										<li><a href="/mypage/mystock">입고 알림</a></li>
+									</ul>
+								</li>
+								<li>
+									<a href="/mypage/myreview">상품 리뷰</a>
+								</li>
+								<li>
+									<p>내 정보 관리</p>
+									<ul class="dep2">
+										<li><a href="/mypage/confirmpw">회원정보수정</a></li>
+										<li><a href="/mypage/myaddress">배송지 관리</a></li>
+										<li><a href="/mypage/skininfo">피부 프로필 관리</a></li>
+										<li><a href="javascript:;" onclick="goLeaveMemberInfo();return false;">회원탈퇴 하기</a></li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<!-- //mypage lnb -->
+
+					<!-- myPageCon -->
+					<div class="myPageCon regiPdt">
+						<p class="tit mgb40">
+							상품등록
+						</p>
+						<!-- productRegist tab -->
+						<div class="productRegist">
+							<form name="registForm" action="/admin/productRegist" method="post">		
+								<dl>
+									<dt>썸네일</dt>
+									<dd>
+										<ul class="fileUploadArea">
+											<li><label for="imgUpload"><span class="hide">업로드</span></label><input type="file" class="hide" id="imgUpload"></li>
+											<li class="imgCutting">
+												<div class="imgBox">
+													<img src="/images/temp/480X480.png" alt="" class="wh" style="margin-top: 0px; margin-left: 0px;">
+												</div>
+												<a href="javascript:void(0)" class="closeLink"><span class="hide">close</span></a>
+											</li>
+											
+										</ul>
+									</dd>
+								</dl>	
+								<dl>
+									<dt>분류</dt>
+									<dd>
+										<div class="inp_wrap">
+											<div class="inp_select">
+												<div class="selectBox">
+													<button class="title" type="button">옵션을 선택해주세요</button>
+													<ul class="selList">
+														<li>
+															<input type="radio" value="식품" class="option" id="select1_1" name="categoryId">
+															<label for="select1_1">01. 식품</label>
+														</li>
+														<li>
+															<input type="radio" value="음료" class="option" id="select1_2" name="categoryId">
+															<label for="select1_2">02. 음료</label>
+														</li>
+														<li>
+															<input type="radio" value="운동기구" class="option" id="select1_3" name="categoryId">
+															<label for="select1_3">03. 운동기구</label>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</dd>
+								</dl>
+								<dl>
+									<dt>상품명</dt>
+									<dd>
+										<div class="inp_wrap">
+											<div class="inp_text">
+												<input type="text" name="productName" id="productName" placeholder="input text">
+												<button class="btn_clear"><span>clear</span></button>
+											</div>
+										</div>
+									</dd>
+								</dl>
+								<dl>
+									<dt>제목</dt>
+									<dd>
+										<div class="inp_wrap">
+											<div class="inp_text">
+												<input type="text" name="productTitle" id="productTitle" placeholder="input text">
+												<button class="btn_clear"><span>clear</span></button>
+											</div>
+										</div>
+									</dd>
+								</dl>
+								<dl>
+									<dt>상품가격</dt>
+									<dd>
+										<div class="inp_wrap">
+											<div class="inp_text">
+												<input type="text" name="productPrice" id="productPrice" placeholder="input text">
+												<button class="btn_clear"><span>clear</span></button>
+											</div>
+										</div>
+									</dd>
+								</dl>
+								<dl>
+									<dt>적립혜택</dt>
+									<dd>
+										<div class="inp_wrap">
+											<div class="inp_select">
+												<div class="selectBox">
+													<button class="title" type="button">옵션을 선택해주세요</button>
+													<ul class="selList">
+														<li>
+															<input type="radio" value="1" class="option" id="select1_1" name="pMembership">
+															<label for="select1_1">1% 적립</label>
+														</li>
+														<li>
+															<input type="radio" value="2" class="option" id="select1_2" name="pMembership">
+															<label for="select1_2">2% 적립</label>
+														</li>
+														<li>
+															<input type="radio" value="3" class="option" id="select1_3" name="pMembership">
+															<label for="select1_3">3% 적립</label>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</dd>
+								</dl>
+								<dl>
+									<dt>추가혜택</dt>
+									<dd>
+										<div class="inp_wrap">
+											<div class="inp_text">
+												<input type="text" name="productBenefit" id="productBenefit" placeholder="input text">
+												<button class="btn_clear"><span>clear</span></button>
+											</div>
+										</div>
+									</dd>
+								</dl>
+								<dl>
+									<dt>공지사항</dt>
+									<dd>
+										<div class="inp_wrap">
+											<div class="inp_text">
+												<input type="text" name="productNotice" id="productNotice" placeholder="input text">
+												<button class="btn_clear"><span>clear</span></button>
+											</div>
+										</div>
+									</dd>
+								</dl>
+								<dl>
+									<dt>옵션등록</dt>
+									<dd>
+										<div class="inp_wrap">
+											<div class="inp_text">
+												<input type="text" name="productOption" id="productOption" placeholder="input text">
+												<button class="btn_clear"><span>clear</span></button>
+											</div>
+										</div>
+									</dd>
+								</dl>
+								<dl>
+									<dt>상품정보</dt>
+									<dd>
+										<ul class="fileUploadArea">
+											<li><label for="imgUpload"><span class="hide">업로드</span></label><input type="file" class="hide" id="imgUpload"></li>
+											<li class="imgCutting">
+												<div class="imgBox">
+													<img src="/images/temp/480X480.png" alt="" class="wh" style="margin-top: 0px; margin-left: 0px;">
+												</div>
+												<a href="javascript:void(0)" class="closeLink"><span class="hide">close</span></a>
+											</li>
+										</ul>
+									</dd>
+								</dl>	
+								<div class="btn_wrap mgt40">
+									<a href="#" class="btn btnSizeL btnColorW btnTypeR" id="register_Btn" style="width:150px;"><span>취소하기</span></a>
+									<a href="#" onclick="document.registForm.submit();" class="btn btnSizeL btnColorB btnTypeR" id="register_Btn" style="width:150px;"><span>등록하기</span></a>
+								</div>
+								
+							</form>
+						
+							
+						</div>
+					</div>
+					<!-- //myPageCon -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //container -->
+	
+<!-- 스크립트 -->
+		<th:block th:replace="common/script.html"></th:block>
+		<!--// 스크립트 -->
+		<!-- FOOTER -->
+		<th:block th:replace="common/footer.html"></th:block>
+		<!--// FOOTER -->
+	</div>
+	
+	<!-- 퀵메뉴 + 톡톡 -->
+	<th:block th:replace="common/quickNtalk.html"></th:block>
+	<!--// 퀵메뉴 + 톡톡 -->	
+	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+	<link rel="stylesheet" type="text/css" href="../../css/main.css">
+	<script type="text/javascript" src="../../js/main.js"></script>
+	<script type="text/javascript">
+		$('#quick .quickArea').css({'position':'absolute', 'top':936});
+		mainStart();
+		mainVisual();
+	</script>
+	
+	<script type="text/javascript">
+	var message = '${msg}';
+	if(message.empty){
+		alert(message);
+	}
+	</script>
+	
+	<script>
+		$('#imgUpload').change(function(){
+			if(this.files && this.files[0]){
+				var reader = new FileReader;
+				reader.onload = function(data){
+					$(".select_img img").attr("src", data.target.result).width(250);
+				}
+				reader.readAsDataURL(this.files[0]);
+			}
+		});
+	</script>
+	
+	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+</body>
+</html>

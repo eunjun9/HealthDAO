@@ -47,6 +47,42 @@ public class ShoppingController {
 		return mv;
 	}
 	
+	// 쇼핑 식품
+	@GetMapping("/foodProduct")
+	public ModelAndView shoppingFoodProduct(ModelAndView mv) {
+		
+		//List<Shopping> shoppingList = shoppingService.ShoppingList();
+		
+		// mv.addObject("shoppingList", shoppingList);
+		mv.setViewName("shopping/shoppingFoodProduct");
+		
+		return mv;
+	}
+	
+	// 쇼핑 음료
+	@GetMapping("/beverageProduct")
+	public ModelAndView shoppingBeverageProduct(ModelAndView mv) {
+		
+		//List<Shopping> shoppingList = shoppingService.ShoppingList();
+		
+		// mv.addObject("shoppingList", shoppingList);
+		mv.setViewName("shopping/shoppingBeverageProduct");
+		
+		return mv;
+	}
+	
+	// 쇼핑 음료
+	@GetMapping("/goodsProduct")
+	public ModelAndView shoppingGoodsProduct(ModelAndView mv) {
+		
+		//List<Shopping> shoppingList = shoppingService.ShoppingList();
+		
+		// mv.addObject("shoppingList", shoppingList);
+		mv.setViewName("shopping/shoppingGoodsProduct");
+		
+		return mv;
+	}
+	
 //	@GetMapping("/detail")
 //	public ModelAndView shoppingDetail(ModelAndView mv, @RequestParam int tNo) {
 //		

@@ -10,7 +10,7 @@ import com.kh.healthDao.shopping.model.vo.Shopping;
 
 
 
-@Service("shoppingService")
+@Service("ShoppingService")
 public class ShoppingServiceImpl implements ShoppingService{
 	
 	private final ShoppingMapper shoppingMapper;
