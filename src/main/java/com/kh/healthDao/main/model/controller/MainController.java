@@ -35,6 +35,10 @@ public class MainController {
 	public String time() {
 		return "admin/time";
 	}
+	@GetMapping("/file")
+	public String file() {
+		return "admin/fileuploadTest";
+	}
 
 
 	private BannerService bannerService;
