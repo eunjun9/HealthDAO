@@ -122,4 +122,22 @@ public class MypageController {
 	public String myInfoModify() {
 		return "mypage/myInfoModify";
 	}
+	
+	/* 룰렛 */
+	@GetMapping("/roulette")
+	public String roulette() {
+		return "mypage/roulette";
+	}
+		
+	/* 보유 포인트 내역 */
+	@GetMapping("/point")
+	public String point() {
+		return "mypage/point";
+	}
+	
+	/* 출석 체크 */
+	@GetMapping("/attendanceCheck")
+	public String attendanceCheck() {
+		return "mypage/attendanceCheck";
+	}
 }
