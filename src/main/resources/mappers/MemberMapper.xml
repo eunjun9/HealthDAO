@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.healthDao.main.model.dao.MemberMapper">
+
+	<resultMap type="com.kh.session.member.model.vo.Member" id="loginMemberResultMap">
+		<id property="no" column="MEMBER_NO"/>
+		<result property="id" column="MEMBER_ID"/>
+		<result property="pwd" column="MEMBER_PWD"/>
+		<result property="tempPwdYn" column="TEMP_PWD_YN"/>
+		<result property="pwdChangedDatetime" column="PWD_CHANGED_DATETIME"/>
+		<result property="pwdExpDate" column="PWD_EXP_DATE"/>
+		<result property="name" column="MEMBER_NAME"/>
+		<result property="registDatetime" column="REGIST_DATETIME"/>
+		<result property="accumLoginCount" column="ACCUM_LOGIN_COUNT"/>
+		<result property="loginFailedCount" column="LOGIN_FAILED_COUNT"/>
+		<result property="accLockYn" column="ACC_LOCK_YN"/>
+		<result property="accInactiveYn" column="ACC_INACTIVE_YN"/>
+		<result property="accExpYn" column="ACC_EXP_YN"/>
+		<result property="accsecssionDatetime" column="ACC_SECESSION_DATETIME"/>
+		<result property="accSecssionYn" column="ACC_SECESSION_YN"/>
+		<collection property="memberRoleList" resultMap="memberRoleResultMap"/>
+	</resultMap>
+	
+	<resultMap type="com.kh.session.member.model.vo.MemberRole" id="memberRoleResultMap">
+		<id property="memberNo" column="REF_MEMBER_NO"/>
+		<id property="authorityCode" column="REF_AUTHORITY_CODE"/>
+		<association property="authority" resultMap="authorityResultMap"/>
+	</resultMap>
+	
+	<resultMap type="com.kh.session.member.model.vo.Authority" id="authorityResultMap">
+		<id property="code" column="REF_AUTHORITY_CODE2"/>
+		<result property="name" column="AUTHORITY_NAME"/>
+		<result property="desc" column="AUTHORITY_DESC"/>
+	</resultMap>
+
+</mapper>
