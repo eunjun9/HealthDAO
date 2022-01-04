@@ -1,6 +1,6 @@
 package com.kh.healthDao.mypage;
 
-import java.util.Locale;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.healthDao.mypage.model.service.QnaService;
@@ -33,8 +34,13 @@ public class MypageController {
 	
 	/* 1:1 문의 */
 	@GetMapping("/qna")
-	public String qna() {
-		return "mypage/oneQuestion";
+	public ModelAndView qna(ModelAndView mv) {
+		List<Qna> qnaList = qnaService.findQnaList();
+		
+		mv.addObject("qnaList", qnaList);
+		mv.setViewName("mypage/oneQuestion");
+		
+		return mv;
 	}
 	
 	/* 1:1 문의 상세 */
@@ -50,7 +56,7 @@ public class MypageController {
 	}
 	
 	@PostMapping("/qnaInsert")
-	public String qnaInsert(Qna newQna, RedirectAttributes rttr, Locale locale) {
+	public String qnaInsert(Qna newQna, RedirectAttributes rttr) {
 		String msg = qnaService.qnaInsert(newQna) > 0 ? "문의 등록 성공" : "문의 등록 실패";		
 		rttr.addFlashAttribute("msg", msg);
 		

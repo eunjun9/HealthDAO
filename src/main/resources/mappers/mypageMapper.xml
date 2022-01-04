@@ -14,6 +14,21 @@
 		<result property="replyModifyDate" column="REPLY_MODIFY_DATE" />
 	</resultMap>
 	
+	<select id="findQnaList" resultMap="qnaResultMap">
+		SELECT
+			Q_NO
+		    , Q_DEPT_CODE
+		    , USER_NO
+		    , Q_TITLE
+		    , Q_CONTENT
+		    , Q_DATE
+		    , Q_STATUS
+		    , REPLY
+		    , REPLY_DATE
+		    , REPLY_MODIFY_DATE
+		FROM QNA
+	</select>
+	
 	<insert id="qnaInsert" parameterType="com.kh.healthDao.mypage.model.vo.Qna">
 		INSERT INTO QNA(
 		      Q_NO
@@ -39,4 +54,5 @@
 		   , NULL
 		)
 	</insert>
+	
 </mapper>
