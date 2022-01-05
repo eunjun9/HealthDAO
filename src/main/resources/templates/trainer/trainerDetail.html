@@ -62,9 +62,9 @@
                             <a href="#" style="display: flex; justify-content: center;">
                                 <p style="font-size: 12px; color:#FFBB33;">★</p>
 							    <!-- 평균 별점 넣는 곳 -->
-								<p class="trainerDetailReview">5.0</p>
+								<p class="trainerDetailReview" th:text="${trainer.avgStar}"/>
 								<!-- 리뷰 수 넣는 곳 -->
-								<p class="traninerDetailReviewSum">(23)</p>
+								<p class="traninerDetailReviewSum" th:text="'('+${trainer.sumReview}+')'"/>
                             </a>
 
                             <!-- 한 줄 소개 넣는 곳 -->
@@ -96,13 +96,14 @@
 			<div class="lyTit">트레이너 수정</div>
 			<div class="lyBody">
 				<div class="form_area">
+				<form class="trainerModifyForm" name="trainerModifyForm" action="/trainer/modify" method="post">
 					<dl>
 						<dt><label for="deliRegId"><span class="fcRed"></span>센터 이름</label></dt>
 						<dd>
 							<!-- 200330 에러 메세지 추가 -->
 							<div class="inp_wrap error">
 								<div class="inp_text sizeS">
-									<input type="text" name="" id="deliRegId" value="별림 휘트니스">
+									<input type="text" name="tGymName" id="deliRegId" th:value="${trainer.tGymName}">
 								</div>
 								<p class="error">센터 이름을 입력해주세요.</p>
 							</div>
@@ -115,7 +116,7 @@
 							<!-- 200330 에러 메세지 추가 -->
 							<div class="inp_wrap error">
 								<div class="inp_text sizeS">
-									<input type="text" name="" id="deliRegName" value="강남역 도보 6분">
+									<input type="text" name="tAreaIntro" id="deliRegName" th:value="${trainer.tAreaIntro}">
 								</div>
 								<p class="error">위치를 입력하세요.</p>
 							</div>
@@ -128,7 +129,7 @@
 							<!-- 200330 에러 메세지 추가 -->
 							<div class="inp_wrap error">
 								<div class="inp_text sizeS">
-									<input type="text" name="" id="deliRegName" value="13년 경력/ 다이어트. 근력증가. 바디프로필 전문">
+									<input type="text" name="tOneIntro" id="deliRegName" th:value="${trainer.tOneIntro}">
 								</div>
 								<p class="error">소개를 입력하세요.</p>
 							</div>
@@ -141,7 +142,7 @@
 							<!-- 200330 에러 메세지 추가 -->
 							<div class="inp_wrap error">
 								<div class="inp_text sizeS yb">
-									<input type="text" name="" id="deliRegHphone" value="25000">원
+									<input type="text" name="tPrice" id="deliRegHphone" th:value="${trainer.tPrice}">원
 								</div>
 								<p class="error">가격을 입력해주세요.</p>
 							</div>
@@ -154,7 +155,7 @@
 							<!-- 200330 에러 메세지 추가 -->
 							<div class="inp_wrap error">
 								<div class="inp_text sizeS" style="width: 150px;">
-									<input type="text" name="" id="deliRegHphone" value="전북">
+									<input type="text" name="tArea" id="deliRegHphone" th:value="${trainer.tArea}">
 								</div>
 								<p class="error">지역을 입력해주세요.</p>
 							</div>
@@ -165,7 +166,7 @@
 						<dt><label for="deliRegName"><span class="fcRed">*</span>평일 스케줄</label></dt>
 						<dd>
 							<div class="inp_text sizeS">
-								<input type="text" name="" id="deliRegName" value="09:00~21:00">
+								<input type="text" name="weekDaySc" id="deliRegName" th:value="${trainer.weekDaySc}">
 							</div>
 						</dd>
 					</dl>
@@ -173,7 +174,7 @@
 						<dt><label for="deliRegName"><span class="fcRed">*</span>주말 스케줄</label></dt>
 						<dd>
 							<div class="inp_text sizeS">
-								<input type="text" name="" id="deliRegName" value="09:00~18:00">
+								<input type="text" name="weekAndSc" id="deliRegName" th:value="${trainer.weekAndSc}">
 							</div>
 						</dd>
 					</dl>
@@ -181,7 +182,7 @@
 						<dt style="margin-right: 20px;"><label for="deliRegName"><span class="fcRed"></span>선생님 소개</label></dt>
 							<div class="inp_wrap">
 								<div class="inp_textArea yn">
-									<textarea>예 예 안녕하세요 반갑습니다. 트레이닝 경력 12년차로 다양한 진상들을 겪어온 베테랑 트레이너 이애림 입니다. 무언가를 배울 때 '누구에게' 배우는 것은 매우 중요한 문제입니다. 전문가에게 제대로 배워서 시작하는 것이 가장 효과적이지요. 운동도 마찬가지입니다. 운동 시작 시 회원님의 몸 상태를 잘 파악하고 지도 해주는 선생님을 만나는 게 중요합니다! 다양한 운동지도 경력이 있는 저와 함께 운동을 시작해보세요!</textarea>
+									<textarea name="tIntro" th:value="${trainer.tIntro}" th:text="${trainer.tIntro}"></textarea>
 									<div class="textarea-clone"></div>
 								</div>
 							</div>
@@ -193,12 +194,15 @@
 								<input type="file" name="fitPhoto1" style="border: none;">
 								<input type="file" name="fitPhoto2" style="border: none;">
 							</div>
+							<input type="hidden" name="tNo" th:value="${trainer.tNo}">
 						</dd>
 					</dl>
+					
+					</form>
 				</div>
 				<div class="btn_wrap length2">
-					<a href="#" class="btn btnSizeL btnArr btnColorW btnTypeR"><span>취소</span></a>
-					<a href="#" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>수정</span></a>
+					<a href="#" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorW btnTypeR"><span>취소</span></a>
+					<a href="#" onclick="document.trainerModifyForm.submit();" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>수정</span></a>
 				</div>
 			</div>
 		</div>
@@ -262,5 +266,7 @@
 	<style>
 		#quick{display:none;}
 	</style>
+	
+
 </body>
 </html>
