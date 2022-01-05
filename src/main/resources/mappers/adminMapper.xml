@@ -3,7 +3,7 @@
 <mapper namespace="com.kh.healthDao.admin.model.dao.AdminMapper">
 	<resultMap id="productResultMap" type="com.kh.healthDao.admin.model.vo.Product">
 		<id property="productNo" column="PRODUCT_NO"/>
-		<result property="productName" column="PRODUCT_NAME" />
+		<result property="productBrand" column="PRODUCT_BRAND" />
 		<result property="productTitle" column="PRODUCT_TITLE" />
 		<result property="productPrice" column="PRODUCT_PRICE" />
 		<result property="productBenefit" column="PRODUCT_BENEFIT" />
@@ -22,7 +22,7 @@
 		INTO PRODUCT
 		(
 			PRODUCT_NO
-		  , PRODUCT_NAME
+		  , PRODUCT_BRAND
 		  , PRODUCT_TITLE
 		  , PRODUCT_PRICE
 		  , PRODUCT_BENEFIT
@@ -34,7 +34,7 @@
 		  , P_MEMBERSHIP
 		)VALUES(
 		    SEQ_PRODUCT_NO.NEXTVAL
-		  , #{productName}
+		  , #{productBrand}
 		  , #{productTitle}
 		  , #{productPrice}
 		  , #{productBenefit}

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.healthDao.trainer.model.dao.TrainerMapper;
+import com.kh.healthDao.trainer.model.vo.PtOrder;
 import com.kh.healthDao.trainer.model.vo.Trainer;
 
 
@@ -28,6 +29,20 @@ public class TrainerServiceImpl implements TrainerService{
 	public Trainer TrainerSelect(int tNo) {
 		return trainerMapper.TrainerSelect(tNo);
 	}
+
+	@Override
+	public int TrainerModify(Trainer trainer) {
+		return trainerMapper.TrainerModify(trainer);
+	}
+
+	@Override
+	public List<PtOrder> TrainerOrderList() {
+		return trainerMapper.TrainerOrderList();
+	}
+
+
+
+
 
 
 }
