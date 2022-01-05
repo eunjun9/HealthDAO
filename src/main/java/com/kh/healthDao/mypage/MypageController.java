@@ -72,7 +72,7 @@ public class MypageController {
 		String msg = qnaService.qnaInsert(newQna) > 0 ? "문의 등록 성공" : "문의 등록 실패";		
 		rttr.addFlashAttribute("msg", msg);
 		
-		return "redirect:/mypage/qna/1";
+		return "redirect:/mypage/qna?page=1";
 	}
 	
 	/* 1:1문의하기 수정(사용자) */
@@ -81,7 +81,7 @@ public class MypageController {
 		String msg = qnaService.qnaModify(modifyQna) > 0 ? "문의 수정 성공" : "문의 수정 실패";		
 		rttr.addFlashAttribute("msg", msg);
 		
-		return "redirect:/mypage/qna/1";
+		return "redirect:/mypage/qna?page=1";
 	}
 	
 	/* 쿠폰받기 이벤트 */
