@@ -16,13 +16,9 @@ public class AdminServiceImpl implements AdminService{
 		this.adminMapper = adminMapper;
 	}
 	
-	// 상품 등록
-	@Override
-	public void registNewProduct(Product newProduct) {
-		
-		
-	}
+	
 
+	// 상품 등록
 	@Override
 	public int RegistProduct(Product product) {
 		return adminMapper.RegistProduct(product);

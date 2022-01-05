@@ -2,12 +2,19 @@ package com.kh.healthDao.shopping.model.service;
 
 import java.util.List;
 
-import com.kh.healthDao.shopping.model.vo.Shopping;
+import com.kh.healthDao.admin.model.vo.Product;
+
 
 
 public interface ShoppingService {
-	List<Shopping> ShoppingList();
+	List<Product> ShoppingList();
 
-	Shopping ShoppingSelect(int tNo);
+	Product NewProductSelect(int productNo);
+
+	List<Product> foodShoppingList();
+
+	List<Product> beverageShoppingList();
+
+	List<Product> goodsShoppingList();
 
 }

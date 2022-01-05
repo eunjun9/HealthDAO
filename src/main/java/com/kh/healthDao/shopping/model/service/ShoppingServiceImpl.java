@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.healthDao.admin.model.vo.Product;
 import com.kh.healthDao.shopping.model.dao.ShoppingMapper;
 import com.kh.healthDao.shopping.model.vo.Shopping;
-
 
 
 @Service("ShoppingService")
@@ -21,14 +21,32 @@ public class ShoppingServiceImpl implements ShoppingService{
 	}
 	
 	@Override
-	public List<Shopping> ShoppingList() {
+	public List<Product> ShoppingList() {
 		return shoppingMapper.ShoppingList();
 	}
 
 	@Override
-	public Shopping ShoppingSelect(int tNo) {
-		return shoppingMapper.ShoppingSelect(tNo);
+	public Product NewProductSelect(int productNo) {
+		return shoppingMapper.NewProductSelect(productNo);
 	}
+
+	
+	@Override
+	public List<Product> foodShoppingList() {
+		return shoppingMapper.foodShoppingList();
+	}
+
+	@Override
+	public List<Product> beverageShoppingList() {
+		return shoppingMapper.beverageShoppingList();
+	}
+
+	@Override
+	public List<Product> goodsShoppingList() {
+		return shoppingMapper.goodsShoppingList();
+	}
+
+	
 
 
 }
