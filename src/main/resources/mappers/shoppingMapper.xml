@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.healthDao.shopping.model.dao.ShoppingMapper">
+	<resultMap id="productResultMap" type="com.kh.healthDao.admin.model.vo.Product">
+		<id property="productNo" column="PRODUCT_NO"/>
+		<result property="productBrand" column="PRODUCT_BRAND" />
+		<result property="productTitle" column="PRODUCT_TITLE" />
+		<result property="productPrice" column="PRODUCT_PRICE" />
+		<result property="productBenefit" column="PRODUCT_BENEFIT" />
+		<result property="productNotice" column="PRODUCT_NOTICE" />
+		<result property="productInfo" column="PRODUCT_INFO" />
+		<result property="productView" column="PRODUCT_VIEW" />
+		<result property="productStock" column="PRODUCT_STOCK" />
+		<result property="categoryId" column="CATEGORY_ID" />
+		<result property="pMembership" column="P_MEMBERSHIP"/>
+		
+	</resultMap>
+	
+	<select id="ShoppingList" resultMap="productResultMap">
+		SELECT
+				PRODUCT_NO
+			  , PRODUCT_BRAND
+			  , PRODUCT_TITLE
+			  , PRODUCT_PRICE
+			  , PRODUCT_BENEFIT
+			  , PRODUCT_NOTICE
+			  , PRODUCT_INFO
+			  , PRODUCT_VIEW
+			  , PRODUCT_STOCK
+			  , CATEGORY_ID
+			  , P_MEMBERSHIP
+		 FROM PRODUCT
+	</select>
+	
+	<select id="NewProductSelect" resultMap="productResultMap" parameterType="_int">
+		SELECT
+				PRODUCT_NO
+			  , PRODUCT_BRAND
+			  , PRODUCT_TITLE
+			  , PRODUCT_PRICE
+			  
+		 FROM PRODUCT
+	</select>
+	
+	<select id="foodShoppingList" resultMap="productResultMap">
+		SELECT
+				PRODUCT_NO
+			  , PRODUCT_BRAND
+			  , PRODUCT_TITLE
+			  , PRODUCT_PRICE
+			  , CATEGORY_ID 
+		 FROM PRODUCT
+		WHERE CATEGORY_ID='식품'
+	</select>
+	
+	<select id="beverageShoppingList" resultMap="productResultMap">
+		SELECT
+				PRODUCT_NO
+			  , PRODUCT_BRAND
+			  , PRODUCT_TITLE
+			  , PRODUCT_PRICE
+			  , CATEGORY_ID 
+		 FROM PRODUCT
+		WHERE CATEGORY_ID='음료'
+	</select>
+	
+	<select id="goodsShoppingList" resultMap="productResultMap">
+		SELECT
+				PRODUCT_NO
+			  , PRODUCT_BRAND
+			  , PRODUCT_TITLE
+			  , PRODUCT_PRICE
+			  , CATEGORY_ID 
+		 FROM PRODUCT
+		WHERE CATEGORY_ID='운동기구'
+	</select>
+	
+</mapper>
