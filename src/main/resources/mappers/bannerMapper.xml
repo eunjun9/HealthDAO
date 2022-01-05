@@ -34,5 +34,52 @@
 		  JOIN AT_FILE USING(F_NO)
 	</select>
 	
+	
+	<insert id="insertBanner" parameterType="hashmap">
+		INSERT 
+		INTO BANNER
+		(
+		    MAIN_NO
+		  , MAIN_NAME
+		  , MAIN_RANK
+		  , MAIN_URL
+		  , MAIN_STATUS
+		)VALUES(
+		    SEQ_MAIN_NO.NEXTVAL
+		  , #{banner.main_name}
+		  , #{banner.main_rank}
+		  , #{banner.main_url}
+		  , #{banner.main_status}
+		)
+	</insert>
+	<insert id="insertFile" parameterType="hashmap">
+		INSERT 
+		INTO AT_FILE
+		(
+		    F_NO
+		  , ORIGIN_FILE
+		  , CHANGE_FILE
+		  , FILE_PATH
+		  , STATUS
+		)VALUES(
+		    SEQ_F_NO.NEXTVAL
+		  , #{originFileName}
+		  , #{savedName}
+		  , #{path}
+		  , 'Y'
+		)
+	</insert>
+	<insert id="insertFileDB">
+		INSERT 
+		INTO BANNER_FILE
+		(
+		    F_NO
+		  , MAIN_NO
+		)VALUES(
+		    SEQ_F_NO.CURRVAL
+		  , SEQ_MAIN_NO.CURRVAL
+		)
+	</insert>
+	
 
 </mapper>
