@@ -3,8 +3,8 @@
 <mapper namespace="com.kh.healthDao.mypage.model.dao.MypageMapper">
 	<resultMap id="qnaResultMap" type="com.kh.healthDao.mypage.model.vo.Qna">
 		<id property="qNo" column="Q_NO"/>
-		<result property="qDeptCode" column="Q_DEPT_CODE" />
-		<result property="userNo" column="USER_NO" />
+		<result property="qDept" column="Q_DEPT" />
+		<result property="userId" column="USER_ID" />
 		<result property="qTitle" column="Q_TITLE" />
 		<result property="qContent" column="Q_CONTENT" />
 		<result property="qDate" column="Q_DATE" />
@@ -15,10 +15,57 @@
 	</resultMap>
 	
 	<select id="findQnaList" resultMap="qnaResultMap">
+		SELECT 
+            Q_NO
+            , Q_DEPT
+            , USER_ID
+            , Q_TITLE
+            , Q_CONTENT
+            , Q_DATE
+            , Q_STATUS
+            , REPLY
+            , REPLY_DATE
+            , REPLY_MODIFY_DATE
+        FROM QNA
+        JOIN QNA_DEPT USING(Q_DEPT_CODE)
+        JOIN MEMBER USING(USER_NO)
+        WHERE USER_NO = 6
+        ORDER BY Q_NO DESC
+	</select>
+	
+	<select id="pagingQnaList" resultMap="qnaResultMap" parameterType="hashmap">
+		SELECT *
+		FROM
+		    (SELECT ROWNUM RNUM, A.*
+		            FROM
+		            (SELECT 
+		            Q_NO
+		            , Q_DEPT
+		            , USER_ID
+		            , Q_TITLE
+		            , Q_CONTENT
+		            , Q_DATE
+		            , Q_STATUS
+		            , REPLY
+		            , REPLY_DATE
+		            , REPLY_MODIFY_DATE
+		        FROM QNA
+		        JOIN QNA_DEPT USING(Q_DEPT_CODE)
+		        JOIN MEMBER USING(USER_NO)
+		        WHERE USER_NO = 6
+		        ORDER BY Q_NO DESC) A
+		    )
+		WHERE ROWNUM BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="getQnaListCount" resultType="_int">
 		SELECT
-			Q_NO
-		    , Q_DEPT_CODE
-		    , USER_NO
+		    COUNT(*)
+		FROM
+		(SELECT 
+		    Q_NO
+		    , Q_DEPT
+		    , USER_ID
 		    , Q_TITLE
 		    , Q_CONTENT
 		    , Q_DATE
@@ -27,6 +74,28 @@
 		    , REPLY_DATE
 		    , REPLY_MODIFY_DATE
 		FROM QNA
+		JOIN QNA_DEPT USING(Q_DEPT_CODE)
+		JOIN MEMBER USING(USER_NO)
+		WHERE USER_NO = 6
+		ORDER BY Q_NO DESC)
+	</select>
+	
+	<select id="qnaDetail" resultMap="qnaResultMap" parameterType="_int">
+		SELECT 
+		    Q_NO
+		    , Q_DEPT
+		    , USER_ID
+		    , Q_TITLE
+		    , Q_CONTENT
+		    , Q_DATE
+		    , Q_STATUS
+		    , REPLY
+		    , REPLY_DATE
+		    , REPLY_MODIFY_DATE
+		FROM QNA
+		JOIN QNA_DEPT USING(Q_DEPT_CODE)
+		JOIN MEMBER USING(USER_NO)
+		WHERE Q_NO = #{qNo}
 	</select>
 	
 	<insert id="qnaInsert" parameterType="com.kh.healthDao.mypage.model.vo.Qna">
