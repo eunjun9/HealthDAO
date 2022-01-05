@@ -15,8 +15,8 @@
 		<result property="weekAndSc" column="WEEKAND_SC"/>
 		<result property="tIntro" column="T_INTRO"/>
 		<result property="queIntro" column="QUE_INTRO"/>
-		<result property="avgStar" column="AVG_STAR"/>
 		<result property="sumReview" column="SUM_REVIEW"/>
+		<result property="avgStar" column="AVG_STAR"/>
 		
 		<association javaType="com.kh.healthDao.member.model.vo.Member" property="member">
 			<id column="USER_NO" property="userNo"/>
@@ -58,11 +58,11 @@
 		     , T.WEEKAND_SC
 		     , T.T_INTRO
 		     , T.QUE_INTRO
+             , COUNT(R.REVIEW_NO) AS SUM_REVIEW
+             , ROUND((SUM(R.STAR)) / COUNT(R.REVIEW_NO), 1) AS AVG_STAR
 		     , M.USER_NO
 		     , M.USER_NAME
 		     , M.USER_PHONE
-             , COUNT(R.REVIEW_NO) AS SUM_REVIEW
-             , ROUND((SUM(R.STAR)) / COUNT(R.REVIEW_NO), 1) AS AVG_STAR
 		  FROM TRAINER T
 		  JOIN MEMBER M ON(T.T_NO = M.USER_NO)
           JOIN PT_ORDER O ON(T.T_NO = O.T_NO)
@@ -84,7 +84,10 @@
 		     , M.USER_PHONE
 	</select>
 
-	<select id="TrainerSelect" resultMap="trainerResultMap" parameterType="_int">
+<!-- <select id="TrainerSelect" resultMap="trainerResultMap" parameterType="_int">
+	select t_no from trainer where T_NO = #{tNo}
+</select> -->
+<select id="TrainerSelect" resultMap="trainerResultMap" parameterType="_int">
 		 SELECT
 		       T.T_NO
 		     , T.T_GYM_NAME
@@ -123,7 +126,7 @@
 		     , M.USER_NAME
 		     , M.USER_PHONE
 		HAVING T.T_NO = #{tNo}
-	</select>
+	</select> 
 	
 	<update id="TrainerModify" parameterType="com.kh.healthDao.trainer.model.vo.Trainer">
 		UPDATE TRAINER

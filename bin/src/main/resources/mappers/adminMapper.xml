@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.healthDao.admin.model.dao.AdminMapper">
+	<resultMap id="productResultMap" type="com.kh.healthDao.admin.model.vo.Product">
+		<id property="productNo" column="PRODUCT_NO"/>
+		<result property="productBrand" column="PRODUCT_BRAND" />
+		<result property="productTitle" column="PRODUCT_TITLE" />
+		<result property="productPrice" column="PRODUCT_PRICE" />
+		<result property="productBenefit" column="PRODUCT_BENEFIT" />
+		<result property="productNotice" column="PRODUCT_NOTICE" />
+		<result property="productInfo" column="PRODUCT_INFO" />
+		<result property="productView" column="PRODUCT_VIEW" />
+		<result property="productStock" column="PRODUCT_STOCK" />
+		<result property="CategoryId" column="CATEGORY_ID" />
+		<result property="pMembership" column="P_MEMBERSHIP"/>
+		
+	</resultMap>
+	
+	<!-- 상품 등록 -->
+	<insert id="RegistProduct" parameterType="com.kh.healthDao.admin.model.vo.Product">
+		INSERT 
+		INTO PRODUCT
+		(
+			PRODUCT_NO
+		  , PRODUCT_BRAND
+		  , PRODUCT_TITLE
+		  , PRODUCT_PRICE
+		  , PRODUCT_BENEFIT
+		  , PRODUCT_NOTICE
+		  , PRODUCT_INFO
+		  , PRODUCT_VIEW
+		  , PRODUCT_STOCK
+		  , CATEGORY_ID
+		  , P_MEMBERSHIP
+		)VALUES(
+		    SEQ_PRODUCT_NO.NEXTVAL
+		  , #{productBrand}
+		  , #{productTitle}
+		  , #{productPrice}
+		  , #{productBenefit}
+		  , #{productNotice}
+		  , '식품'
+		  , 0
+		  , 0
+		  , #{categoryId}
+		  , #{pMembership}
+		)
+	</insert>
+	
+</mapper>
