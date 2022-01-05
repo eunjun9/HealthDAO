@@ -82,5 +82,11 @@ public class MemberServiceImpl implements MemberService{
 		memberRole.setAuthorityCode(1);
 		memberMapper.insertMemberRole(memberRole);
 	}
+
+	@Override
+	public int idChk(Member member) {
+		int result = memberMapper.idChk(member);
+		return result;
+	}
 	
 }

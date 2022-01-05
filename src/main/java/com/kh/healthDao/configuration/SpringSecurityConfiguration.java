@@ -1,5 +1,6 @@
 package com.kh.healthDao.configuration;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -67,7 +68,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter{
             /* 로그인 설정 */
             .formLogin()
             /* 로그인 페이지 설정 */
-            .loginPage("/common/header")
+            .loginPage("/member/login")
             /* 로그인 성공 시 랜딩 페이지 설정 */
             .successForwardUrl("/")
          .and()

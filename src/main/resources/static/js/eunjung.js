@@ -41,6 +41,10 @@ $(document).ready(function() {
     });
 });
 
+function chk_signUp() {
+	document.getElementById('memberJoinForm').submit();
+}
+
 /* 아이디/비밀번호 찾기 */
 document.getElementById('ht-custom2').addEventListener('click', function(e) {
     if ( ht_init ) {
