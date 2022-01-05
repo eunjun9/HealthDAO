@@ -33,11 +33,11 @@ public class ManagerController {
 	}
 	
 	// 재고내역
-	@GetMapping("/inventoryList")
-	public String managerInventoryList() {
+//	@GetMapping("/inventoryList")
+//	public String managerInventoryList() {
 		
-		return "manager/inventoryList";
-	}
+//		return "manager/inventoryList";
+//	}
 	
 	// 회원문의
 	@GetMapping("/memberInquiry")

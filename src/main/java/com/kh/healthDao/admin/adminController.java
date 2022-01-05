@@ -1,5 +1,7 @@
 package com.kh.healthDao.admin;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.healthDao.admin.model.service.AdminService;
 import com.kh.healthDao.admin.model.vo.Product;
+
 
 
 
@@ -41,9 +44,18 @@ public class adminController {
 		}else {
 			mv.setViewName("redirect:/ProductRegist");
 			return mv;
-
 		}
+	}
+	
+	@GetMapping("inventoryList")
+	public ModelAndView managerInventoryList(ModelAndView mv) {
 		
+		List<Product> ProductList = adminService.listProductInventory();
+		
+		mv.addObject("ProductList", ProductList);
+		mv.setViewName("admin/inventoryList");
+		
+		return mv;
 	}
 	
 	

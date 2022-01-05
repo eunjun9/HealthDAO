@@ -38,7 +38,7 @@ display
 .v-cell.va-t{vertical-align:top;}
 .v-cell.va-b{vertical-align:bottom;}
 .uppercase{text-transform:uppercase;}
-.ta_l{text-align:left !important;}
+.ta_l{text-align:center !important;}
 .ta_c{text-align:center !important;}
 .ta_r{text-align:right !important;}
 .va_t{vertical-align:top !important;}

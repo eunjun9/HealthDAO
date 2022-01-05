@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.healthDao.admin.model.vo.Product;
 import com.kh.healthDao.manager.model.dao.ManagerMapper;
 import com.kh.healthDao.manager.model.vo.Qna;
 
@@ -36,6 +37,9 @@ public class ManagerServiceImpl implements ManagerService{
 	public int managerQAnswer(Qna qna) {
 		return managerMapper.managerQAnswer(qna);
 	}
+
+
+
 
 
 
