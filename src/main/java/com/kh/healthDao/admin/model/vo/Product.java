@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class Product {
 	
 	private int productNo;			// 상품번호
-	private String productName;		// 상품명
+	private String productBrand;	// 상품브랜드
 	private String productTitle;	// 상품 제목
 	private String productPrice;	// 상품 가격
 	private String productBenefit;	// 추가 혜택
