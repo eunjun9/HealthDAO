@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title></title>
+<!-- 메타태그, 스타일 -->
+<th:block th:replace="common/head.html"></th:block>
+<!--// 메타태그, 스타일 -->
+<body>
+<div id="wrap" class="main">
+<!-- HEADER + GNB -->
+<th:block th:replace="common/header.html"></th:block>
+<!--// HEADER + GNB -->
+
+	<!-- container -->
+	
+	<div id="container" class="pdt0">
+		<div class="site_location">
+			<span><a href="/">HOME</a></span>
+			<span><em>마이페이지</em></span>
+            <em>고객의소리</em>
+		</div>
+		<div class="mypage">
+			<div class="myMain myCon">
+				<div class="contents">
+					<!-- mypage lnb -->
+					<div th:replace="common/customCenterGnb.html"></div>
+					<!-- //mypage lnb -->
+
+					<!-- myPageCon -->
+					<div class="myPageCon member_sound_input">
+						<p class="tit mgb40">
+							고객의소리
+						</p>
+						<div class="question_input_link">
+							<p>
+								헬스Dao는 항상 고객을 먼저 생각합니다.<br>
+								이용하시면서 느낀 불편사항이나 바라는 점을 알려주세요.<br>
+								더 나은 헬스Dao가 되겠습니다.<br>
+								<br>
+								상품/주문/배송 문의는 1:1문의로 해주세요.
+							</p>
+							<div class="btn_wrap">
+								<a href="./oneQuestionInput.html" class="btn btnSizeL btnColorW btnTypeR" style="width:150px;"><span>1:1문의하기</span></a>
+							</div>
+						</div>
+                        <div class="hr"></div>
+						<div class="inp_wrap mgt30">
+							<div class="inp_lab"><label for="select1">의견 유형</label></div>
+							<div class="inp_select">
+								<div class="selectBox">
+									<button class="title" type="button">옵션을 선택해주세요</button>
+									<ul class="selList">
+										<li>
+											<input type="radio" value="" class="option" id="select1_1" name="select1">
+											<label for="select1_1">서비스 칭찬</label>
+										</li>
+										<li>
+											<input type="radio" value="" class="option" id="select1_1" name="select1">
+											<label for="select1_1">서비스 개선 의견</label>
+										</li>
+										<li>
+											<input type="radio" value="" class="option" id="select1_1" name="select1">
+											<label for="select1_1">상품제안</label>
+										</li>
+										<li>
+											<input type="radio" value="" class="option" id="select1_1" name="select1">
+											<label for="select1_1">사이트 오류 문의</label>
+										</li>
+										<li>
+											<input type="radio" value="" class="option" id="select1_1" name="select1">
+											<label for="select1_1">서비스 불편/제안</label>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<label class="inp_lab" for="ipt_label">내용</label>
+                            <div class="inp_textArea">
+                                <textarea rows="10"></textarea>
+                                <div class="textarea-clone"></div>
+                            </div>
+							<label class="inp_lab" for="ipt_label">이미지</label>
+							<ul class="fileUploadArea">
+								<li><label for="imgUpload"><span class="hide">업로드</span></label><input type="file" class="hide" id="imgUpload"></li>
+								<li class="imgCutting">
+									<div class="imgBox">
+										<img src="../resources/web/images/temp/480X480.png" alt="" class="wh" style="margin-top: 0px; margin-left: 0px;">
+									</div>
+									<a href="javascript:void(0)" class="closeLink"><span class="hide">close</span></a>
+								</li>
+							</ul>
+							<div class="btn_wrap mgt40">
+								<a href="#" class="btn btnSizeL btnColorW btnTypeR" style="width:150px;"><span>보내기</span></a>
+							</div>
+						</div>
+                    </div>
+					<!-- //myPageCon -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //container -->
+<!-- 스크립트 -->
+		<th:block th:replace="common/script.html"></th:block>
+		<!--// 스크립트 -->
+		<!-- FOOTER -->
+		<th:block th:replace="common/footer.html"></th:block>
+		<!--// FOOTER -->
+	</div>
+	
+	<!-- 퀵메뉴 + 톡톡 -->
+	<th:block th:replace="common/quickNtalk.html"></th:block>
+	<!--// 퀵메뉴 + 톡톡 -->	
+	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+	<script type="text/javascript">
+		$('#quick .quickArea').css({'position':'absolute', 'top':290});
+	</script>
+	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+</body>
+</html>

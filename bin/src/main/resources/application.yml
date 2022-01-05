@@ -13,3 +13,10 @@ spring:
 # mybatis config
 mybatis:
   mapper-locations: mappers/**/*.xml 
+  
+custom:
+  path:
+# 상훈 pc
+#   upload-images: 'D:/develop/boot_workspace/HealthDAO/src/main/resources/uploadFiles/'
+# 상훈 노트북
+    upload-images: 'D:/spring/final/HealthDAO/src/main/resources/uploadFiles/'

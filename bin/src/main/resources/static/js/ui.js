@@ -103,15 +103,6 @@ function recoQuick(){
 /**
 scrollTop
 **/
-function scrollSet(scrollPo){
-	/* [약관페이지] */
-	if ($(scrollPo).closest('.terms_page, .privacy_page')){
-		$('html, body').animate({'scrollTop' : $(scrollPo).offset().top - 50},200);
-	} else {
-		$('html, body').animate({'scrollTop' : $(scrollPo).offset().top + 4},200);
-	}	
-}
-
 $(document).on('click', '.btnTop', function(){
 	$('html, body').animate({'scrollTop' : 0},200);
 });
@@ -491,44 +482,6 @@ function jsShopFloating(showTarget, myTarget){
 	});
 }
 
-/**
-제품리스트 고민별 OVER효과
-**/
-$(document).on('mouseenter', '.pdt_list_cate .list_trouble a', function(){
-	$(this).find('img').attr('src', $(this).find('img').attr('src').replace('.png', '.gif'));
-});
-$(document).on('mouseleave', '.pdt_list_cate .list_trouble a', function(){
-	if (!$(this).hasClass('on'))
-	{
-		$(this).find('img').attr('src', $(this).find('img').attr('src').replace('.gif', '.png'));
-	}
-});
-
-
-/**
-FILTER BTN
-**/
-/* 필터열기 */
-$(document).on('click', '.tblBar .btn_filter', function(){
-	$(this).addClass('on');
-	$(this).closest('.tblBar').find('.layer_filter').fadeIn(400);
-	return false;
-});
-
-/* 필터닫기 */
-$(document).on('click', '.layer_filter .filter_close', function(){
-	$(this).closest('.tblBar').find('.btn_filter').removeClass('on');
-	$(this).closest('.layer_filter').fadeOut(400);
-	return false;
-});
-
-/* LEFT 필터 */
-$(document).on('click', '.left_filter button', function(){
-	$(this).toggleClass('hidden');
-	$(this).siblings().stop().slideToggle(500);
-	return false;
-});
-
 
 /**
 GRADE
@@ -833,54 +786,6 @@ $(window).on('load', function(){
 			}
 		})
 	}
-});
-
-
-/**
-영상 재생 
-**/
-$(window).on('load', function(){
-	if ($('.videoCtt').length > 0){
-		$('.videoCtt').on('pause', function() {
-			if ($(this).get(0).currentTime >= $(this).get(0).duration){
-				$(this).closest('.videoItem').removeClass('play');
-				$(this).closest('.videoItem').removeClass('pause');
-				$(this).closest('.videoItem').addClass('end');
-				//브랜드 쿠스 영상
-				if($('.videoCtt').hasClass('kusvod')){
-					$("html,body").stop().animate({ "scrollTop": 1500 }, 1000);
-				}
-			} else {
-				$(this).closest('.videoItem').removeClass('play');
-				$(this).closest('.videoItem').addClass('pause');
-				$(this).closest('.videoItem').removeClass('end');	
-			}
-		});		
-	}
-});
-function videoAllStop(){
-	$('.videoCtt').each(function(){
-		$(this).get(0).pause()
-		$(this).closest('.videoItem').removeClass('play');
-		$(this).closest('.videoItem').addClass('pause');
-		$(this).closest('.videoItem').removeClass('end');
-	})
-}
-function videoPlay(e){
-	videoAllStop()
-	$(e).siblings('.videoCtt').get(0).play()
-	$(e).closest('.videoItem').addClass('play');
-	$(e).closest('.videoItem').removeClass('pause');
-	$(e).closest('.videoItem').removeClass('end');
-}
-function videoPause(e){
-	$(e).siblings('.videoCtt').get(0).pause()
-	$(e).closest('.videoItem').removeClass('play');
-	$(e).closest('.videoItem').addClass('pause');
-	$(e).closest('.videoItem').removeClass('end');
-}
-$('.pdtSlide .pdtSlideImg').on('beforeChange', function(event, slick, currentSlide){
-	videoAllStop()
 });
 
 
@@ -1214,8 +1119,6 @@ function quickMenu(){
 	}
 	h = con;
 
-	console.log("winS : " + winS);
-	console.log(h - gnb);
 	if(winS >= h - gnb -10) { //downscroll
 		$('#quick .quickArea').css({'position':'absolute', 'top':'60px'});
 	} else { //upscroll
@@ -1236,3 +1139,46 @@ function quickMenu(){
 		}
 	}
 }
+
+$(document).on('click', '.inp_check label', function (){
+	if ($(this).parent().hasClass('readOnly')){return false;}
+	if ($(this).parent().hasClass('disabled')){return false;}
+	
+	var tar = $(this).parent().find('input');
+	var chk = tar.prop('checked');
+	var grpNm = tar.attr('name');
+
+
+	if ($(this).parent('.inp_check').hasClass('allChk')){
+		var chkStatus = tar.prop('checked');
+		$("input:checkbox[name=" + grpNm + "]").each(function() {
+			if (chkStatus) {
+				$(this).closest(".inp_check").removeClass("checked");
+				$(this).prop("checked",false);
+			} else {
+				$(this).closest(".inp_check").addClass("checked");
+				$(this).prop("checked",true);
+			}
+		});
+	} else {
+		if ($(this).parent().hasClass('checked')) {
+			$("input:checkbox[name=" + grpNm + "]").each(function() {
+				$(this).closest('.inp_check.allChk').removeClass('checked');;
+				$(this).closest('.inp_check.allChk input').prop("checked",false);
+			});
+			$(this).parent().removeClass('checked');				
+			if($(this).attr('for') == 'remember'){
+				deleteCookie("rememberId");
+			}
+			tar.prop("checked",false);
+		} else {
+			$(this).parent().addClass('checked');				
+			if($(this).attr('for') == 'remember'){
+				setCookie("rememberId", userId.value, 7);
+			}
+			tar.prop("checked",true);
+		}
+	}
+	console.log(tar.prop('checked'));
+	return false;
+});

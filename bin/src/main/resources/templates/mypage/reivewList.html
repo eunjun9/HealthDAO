@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title></title>
+<!-- 메타태그, 스타일 -->
+<th:block th:replace="common/head.html"></th:block>
+<!--// 메타태그, 스타일 -->
+<body>
+<div id="wrap" class="main">
+<!-- HEADER + GNB -->
+<th:block th:replace="common/header.html"></th:block>
+<!--// HEADER + GNB -->
+
+	<!-- container -->
+	
+	<div id="container" class="pdt0">
+		<div class="site_location">
+			<span><a href="/">HOME</a></span>
+			<span><em>마이페이지</em></span>
+            <em>쿠폰</em>
+		</div>
+		<div class="mypage">
+			<div class="myMain myCon">
+				<div class="contents">
+					<!-- mypage lnb -->
+					<div th:replace="common/mypageGnb.html"></div>
+					<!-- //mypage lnb -->
+
+					<!-- myPageCon -->
+					<div class="myPageCon coupon">
+						<p class="tit mgb40">
+							리뷰
+						</p>
+                        <!-- 사용가능 쿠폰 리스트 -->
+                        <div class="tab-pannel" id="useableCoupon">
+                            <div class="couponList tblBar mgt50">
+                                <p class="tblList">총 <span>1개</span></p>                               
+                            </div>
+                            <div class="js_tblList">
+                                <table class="tblType1" summary="">
+                                    <caption></caption>
+                                    <colgroup>
+                                        <col width="10%" />
+                                        <col width="25%" />
+                                        <col width="20%" />
+                                        <col width="25%" />
+                                        <col width="15%" />
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th>구분</th>
+                                            <th>상품명</th>
+                                            <th>별점</th>
+                                            <th>리뷰</th>
+                                            <th>작성일자</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="fc88">제품</td>
+                                            <td class="fc88">잇메이트 소고기볼 혼합 100g</td>
+                                            <td class="fc88"><div class="js_rating ratingS"><span>4.5</span></div></td>
+                                            <td class="fc88"><a href="#" class="js_ListTtl ListTtl" onclick="showLayer('reviewDetail');">완전 최고예요!! 까아아아아아아아ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</a></td>
+                                            <td class="fc88">2021-12-01</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- 데이터 없을 때 -->
+                            <div class="noData">
+                                <span>리뷰를 남기신 이력이 없습니다.</span>
+                            </div>
+                        </div>
+                    </div>
+					<!-- //myPageCon -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //container -->
+	<!-- 스크립트 -->
+		<th:block th:replace="common/script.html"></th:block>
+		<!--// 스크립트 -->
+		<!-- FOOTER -->
+		<th:block th:replace="common/footer.html"></th:block>
+		<!--// FOOTER -->
+	</div>
+	
+	<!-- 퀵메뉴 + 톡톡 -->
+	<th:block th:replace="common/quickNtalk.html"></th:block>
+	<!--// 퀵메뉴 + 톡톡 -->	
+	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+	<script type="text/javascript">
+		$('#quick .quickArea').css({'position':'absolute', 'top':290});
+	</script>
+	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+</body>
+</html>
