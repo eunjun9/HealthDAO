@@ -105,6 +105,7 @@
 												</div>
 											</div>
 										</div>
+
 										<div class="js_tblList">
 											<table class="tblType1" summary="">
 												<caption></caption>
@@ -114,7 +115,7 @@
 													<col width="100px"></col>
 													<col width="100px"></col>
 													<col width="80x"></col>
-													<col width="80px"></col>
+													<col width="80x"></col>
 													<col width="100px"></col>
 												</colgroup>
 												<thead>
@@ -122,22 +123,57 @@
 														<th>제품번호</th>
 														<th>제품명</th>
 														<th>회사명</th>
+														<th>분류</th>
 														<th>가격</th>
-														<th>입고수량</th>
 														<th>재고수량</th>
 														<th>관리</th>
 													</tr>
 												</thead>
 												<tbody>
-													<tr>
-														<td class="fc88">11</td>
-														<td class="ta_l"><a href="javascript:void(0)" class="js_ListTtl ListTtl" title="">맛있닭 닭가슴살 한끼 만두 혼합...</a></td>
-														<td class="fc88">맛있닭</td>
-														<td>5,000</td>
-														<td>500</td>
-														<td>300</td>
-														<td>									
-															<button type="button" onclick="showLayer('pdtQna');" class="btn btnSizeS btnColorW btnTypeB" style="width:100px;"><span>추가 입고</span></button>
+													<tr th:each="plist : ${ProductList}">
+														<td class="fc88" th:text=${plist.productNo}></td>
+														<td class="ta_l" th:text=${plist.productTitle}></td>
+														<td class="fc88" th:text=${plist.productName}>맛있닭</td>
+														<td th:text=${plist.productInfo}></td>
+														<td th:text=${plist.productPrice}></td>
+														<td th:text=${plist.productStock}></td>
+														<td>	
+															<div id="optChange" class="lyPopArea" style="display: none;">
+		<div class="lyPop">
+			<div class="lyWrap">
+				<button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
+				<div class="lyTit">옵션 변경</div>
+				<div class="lyBody">
+					<div class="inp_wrap">
+						<div class="inp_select pdtSelect">
+							<div class="selectBox">
+								<button class="title" type="button" title="">옵션을 선택해주세요</button>
+								<ul class="selList mCS_destroyed" style="display: none; position: relative; overflow: visible;">
+									<li>
+										<input type="radio" value="" class="option" id="optChange1" name="optChange">
+										<label for="optChange1">
+											<span class="selectColor colorShipM"><img src="/static/front/resources/web/images/temp/colorChip03.jpg" class=""></span>벨벳 블러드 립-BE01 밀크티 필터
+										</label>
+									</li>
+									<li class="soldOut">
+										<input type="radio" value="" class="option" id="optChange2" name="optChange">
+										<label for="optChange2">
+											<span class="selectColor colorShipM"><img src="/static/front/resources/web/images/temp/colorChip04.jpg" class=""></span>벨벳 블러드 립-BE01 밀크티 필터
+										</label>
+										<span class="soldOutTxt">[일시품절]</span>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="btn_wrap length2">
+						<a href="#" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>					
+															<button type="button" onclick="showLayer('ㄴ');" class="btn btnSizeS btnColorW btnTypeB" style="width:100px;"><span>입고</span></button>
 														</td>
 													</tr>
 													<tr class="js_ListCtt ListCtt">

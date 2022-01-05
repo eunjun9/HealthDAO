@@ -16,6 +16,8 @@ public interface ManagerService{
 	int managerQAnswer(Qna qna);
 	
 
+	
+
 
 
 	

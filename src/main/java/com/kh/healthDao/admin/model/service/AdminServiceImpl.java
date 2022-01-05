@@ -1,5 +1,7 @@
 package com.kh.healthDao.admin.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,12 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public int RegistProduct(Product product) {
 		return adminMapper.RegistProduct(product);
+	}
+
+	@Override
+	public List<Product> listProductInventory() {
+		
+		return adminMapper.listProductInventory();
 	}
 
 	
