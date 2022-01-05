@@ -37,19 +37,8 @@ public class MypageController {
 	
 	/* 1:1 문의 */
 	@GetMapping("/qna")
-	public ModelAndView qna(ModelAndView mv) {
-		List<Qna> qnaList = qnaService.findQnaList();
-		
-		mv.addObject("qnaList", qnaList);
-		mv.setViewName("mypage/oneQuestion");
-		
-		return mv;
-	}
-	
-	@GetMapping("/qna/{page}")
-	public ModelAndView qna(ModelAndView mv, @PathVariable int page) {
-		Map<String, Object> map = qnaService.pagingQnaList(page);
-			
+	public ModelAndView qna(ModelAndView mv, @RequestParam int page) {
+		Map<String, Object> map = qnaService.findQnaList(page);
 		
 		mv.addObject("qnaList", map.get("qnaList"));
 		mv.addObject("listCount", map.get("listCount"));
@@ -58,6 +47,7 @@ public class MypageController {
 		
 		return mv;
 	}
+	
 	
 	
 	/* 1:1 문의 상세 */
@@ -82,7 +72,16 @@ public class MypageController {
 		String msg = qnaService.qnaInsert(newQna) > 0 ? "문의 등록 성공" : "문의 등록 실패";		
 		rttr.addFlashAttribute("msg", msg);
 		
-		return "redirect:/mypage/qna";
+		return "redirect:/mypage/qna/1";
+	}
+	
+	/* 1:1문의하기 수정(사용자) */
+	@PostMapping("/qnaModify")
+	public String qnaModify(Qna modifyQna, RedirectAttributes rttr) {
+		String msg = qnaService.qnaModify(modifyQna) > 0 ? "문의 수정 성공" : "문의 수정 실패";		
+		rttr.addFlashAttribute("msg", msg);
+		
+		return "redirect:/mypage/qna/1";
 	}
 	
 	/* 쿠폰받기 이벤트 */
