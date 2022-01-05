@@ -1,13 +1,16 @@
 package com.kh.healthDao.mypage;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -43,10 +46,29 @@ public class MypageController {
 		return mv;
 	}
 	
+	@GetMapping("/qna/{page}")
+	public ModelAndView qna(ModelAndView mv, @PathVariable int page) {
+		Map<String, Object> map = qnaService.pagingQnaList(page);
+			
+		
+		mv.addObject("qnaList", map.get("qnaList"));
+		mv.addObject("listCount", map.get("listCount"));
+		mv.addObject("pi", map.get("pi"));
+		mv.setViewName("mypage/oneQuestion");
+		
+		return mv;
+	}
+	
+	
 	/* 1:1 문의 상세 */
-	@GetMapping("/qnaDetail")
-	public String qnaDetail() {
-		return "mypage/oneQuestionDetail";
+	@GetMapping("qnaDetail")
+	public ModelAndView qnaDetail(ModelAndView mv, @RequestParam int qNo) {
+		Qna qna = qnaService.qnaDetail(qNo);
+		
+		mv.addObject("qna", qna);
+		mv.setViewName("mypage/oneQuestionDetail");
+		
+		return mv;
 	}
 	
 	/* 1:1 문의하기 */

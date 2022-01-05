@@ -29,27 +29,34 @@
 						<p class="tit mgb40">
 							1:1문의 상세보기
 						</p>
-                        <p class="fc88 mgb30">문의번호 : 00001 | 작성일 : 2021-01-01 00:00:00 | 수정일 : 2021-01-01 00:00:00</p>                       
+                        <p class="fc88 mgb30">
+                        	문의번호 : <span th:text="${qna.qNo}"></span> | 
+                        	작성일 : <span th:text="${#dates.format(qna.qDate, 'yyyy-MM-dd')}"></span>
+                        </p>                       
                         <div class="inp_wrap">
                             <label class="inp_lab" for="ipt_label">문의유형</label>
                             <div class="inp_select">
                                 <div class="selectBox">
-                                    <button class="title" type="button">문의유형을 선택해주세요</button>
+                                    <button class="title" type="button" th:text="${qna.qDept}">문의유형을 선택해주세요</button>
                                     <ul class="selList">
                                         <li>
-                                            <input type="radio" value="" class="option" id="select1_1" name="select1">
+                                            <input type="radio" value="1" class="option" id="select1_1" name="qDeptCode" th:checked="${qna.qDeptCode eq '1'}">
                                             <label for="select1_1">일반문의(상품/주문/배송)</label>
                                         </li>         
                                         <li>
-                                            <input type="radio" value="" class="option" id="select1_1" name="select1">
+                                            <input type="radio" value="2" class="option" id="select1_1" name="qDeptCode" th:checked="${qna.qDeptCode == 2}">
                                             <label for="select1_1">코치 가입 문의</label>
                                         </li>
                                         <li>
-                                            <input type="radio" value="" class="option" id="select1_1" name="select1">
+                                            <input type="radio" value="3" class="option" id="select1_1" name="qDeptCode" th:checked="${qna.qDeptCode == 3}">
                                             <label for="select1_1">잘못된 정보 신고</label>
                                         </li>
                                         <li>
-                                            <input type="radio" value="" class="option" id="select1_1" name="select1">
+                                            <input type="radio" value="4" class="option" id="select1_1" name="qDeptCode" th:checked="${qna.qDeptCode == 5}"> 
+                                            <label for="select1_1">신고</label>
+                                        </li>
+                                        <li>
+                                            <input type="radio" value="5" class="option" id="select1_1" name="qDeptCode" th:checked="${qna.qDeptCode == 5}"> 
                                             <label for="select1_1">기타</label>
                                         </li>   
                                     </ul>
