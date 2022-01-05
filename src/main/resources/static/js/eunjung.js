@@ -1,3 +1,16 @@
+/* 로그인 */
+function chk_form() {
+	if(document.getElementById("ip_name").value==''){
+		alert("아이디를 입력해주세요.");
+		return false;
+	}
+	if(document.getElementById("ip_pwd").value==''){
+		alert("비밀번호를 입력해주세요.");
+		return false;
+	}
+	document.getElementById('loginForm').submit();
+}
+
 /* 회원가입 */
 function selectAll(selectAll)  {
     const checkboxes = document.querySelectorAll('.js_tblList input[type="checkbox"]');

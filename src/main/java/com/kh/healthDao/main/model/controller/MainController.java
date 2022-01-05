@@ -20,7 +20,7 @@ public class MainController {
 		return "main/main";
 	}
 	
-	@PostMapping(value="/")
+	@PostMapping(value= {"/", "/main"})
 	public String redirectMain() {
 		return "redirect:/";
 	}
