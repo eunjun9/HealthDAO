@@ -29,16 +29,11 @@ public class MypageServiceImpl implements QnaService{
 
 	@Override
 	public int qnaModify(Qna modifyQna) {
-		return 0;
+		return mypageMapper.qnaModify(modifyQna);
 	}
-
+	
 	@Override
-	public List<Qna> findQnaList() {		
-		return mypageMapper.findQnaList();
-	}
-
-	@Override
-	public Map<String, Object> pagingQnaList(int page) {
+	public Map<String, Object> findQnaList(int page) {
 		int listCount = mypageMapper.getQnaListCount();
 		Paging pi = new Paging(page, listCount, 5, 10);
 		
@@ -46,10 +41,11 @@ public class MypageServiceImpl implements QnaService{
 		int endRow = startRow + pi.getBoardLimit() - 1;
 		
 		Map<String, Object> pageRow = new HashMap<>();
+		pageRow.put("page", page);
 		pageRow.put("startRow", startRow);
 		pageRow.put("endRow", endRow);
 		
-		List<Qna> qnaList = mypageMapper.pagingQnaList(pageRow);
+		List<Qna> qnaList = mypageMapper.findQnaList(pageRow);
 		
 		Map<String, Object> qna = new HashMap<>();
 		
@@ -64,7 +60,5 @@ public class MypageServiceImpl implements QnaService{
 	public Qna qnaDetail(int qNo) {
 		return mypageMapper.qnaDetail(qNo);
 	}
-
-	
 
 }

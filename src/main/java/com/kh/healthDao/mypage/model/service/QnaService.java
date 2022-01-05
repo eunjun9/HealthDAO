@@ -11,9 +11,7 @@ public interface QnaService {
 	// (사용자) 문의 수정하기
 	int qnaModify(Qna modifyQna);	
 	// (사용자) 문의 리스트
-	List<Qna> findQnaList();
-	// 문의리스트 페이징
-	Map<String, Object> pagingQnaList(int page);
+	Map<String, Object> findQnaList(int page);
 	// 문의 디테일
 	Qna qnaDetail(int qNo);
 	

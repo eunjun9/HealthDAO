@@ -13,13 +13,13 @@ public interface MypageMapper {
 
 	int qnaInsert(Qna newQna);
 
-	List<Qna> findQnaList();
+	List<Qna> findQnaList(Map<String, Object> pageRow);
 
 	int getQnaListCount();
 
-	List<Qna> pagingQnaList(Map<String, Object> pageRow);
-
 	Qna qnaDetail(int qNo);
+
+	int qnaModify(Qna modifyQna);
 
 
 }
