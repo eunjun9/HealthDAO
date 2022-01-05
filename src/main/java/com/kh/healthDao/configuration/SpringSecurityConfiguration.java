@@ -1,7 +1,7 @@
 package com.kh.healthDao.configuration;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -21,7 +21,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter{
    
    @Autowired
    public SpringSecurityConfiguration(MemberService memberService) {
-      this.memberService = memberService;
+      this.memberService = memberService;	
    }
 
    /* 암호화에 사용될 객체 BCryptPasswordEncoder
