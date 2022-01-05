@@ -11,16 +11,18 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import com.kh.healthDao.member.model.service.MemberService;
+
 /* 스프링 시큐리티 설정 활성화 + bean 등록 가능 */
 @EnableWebSecurity
 public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter{
    
-//   private MemberService memberService;
-//   
-//   @Autowired
-//   public SpringSecurityConfiguration(MemberService memberService) {
-//      this.memberService = memberService;
-//   }
+   private MemberService memberService;
+   
+   @Autowired
+   public SpringSecurityConfiguration(MemberService memberService) {
+      this.memberService = memberService;
+   }
 
    /* 암호화에 사용될 객체 BCryptPasswordEncoder
     * - encode() : BCrypt 해싱 함수를 사용해서 비밀번호를 인코딩 해주는 메소드, salt를 지원하여 똑같은 비밀번호를 인코딩 하더라도 매번 다른 인코딩 된 문자열 반환
@@ -53,12 +55,10 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter{
          .authorizeRequests()
             /* 요청 보안 수준의 세부적인 설정
              * "/menu/**"요청은 인증이 되어야 함을 명시 */         
-            .antMatchers("/menu/**").authenticated()
-            /* 더 상세하게 "/menu/**"의 get 요청은 ROLE_MEMBER 권한을 가진 사람에게만 허용
-             * hasRole 안의 값 앞에는 자동으로 ROLE_ 가 붙음 */
-            .antMatchers(HttpMethod.GET, "/menu/**").hasRole("MEMBER")
-            /* "/menu/**"의 post 요청은 ROLE_ADMIN 권한을 가진 사람에게만 허용 */
-            .antMatchers(HttpMethod.POST, "/menu/**").hasRole("ADMIN")
+            .antMatchers("/mypage/**").authenticated()
+            /* hasRole 안의 값 앞에는 자동으로 ROLE_ 가 붙음 */
+            .antMatchers("/mypage/**").hasRole("MEMBER")
+            .antMatchers("/trainer/**").hasRole("TRAINER")
             /* "/admin/**"의 요청은 ROLE_ADMIN 권한을 가진 사람에게만 허용 */
             .antMatchers("/admin/**").hasRole("ADMIN")
             /* 그 외의 요청은 모두 허가함 - 게스트 사용자도 접근 가능 */
@@ -67,7 +67,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter{
             /* 로그인 설정 */
             .formLogin()
             /* 로그인 페이지 설정 */
-            .loginPage("/member/login")
+            .loginPage("/common/header")
             /* 로그인 성공 시 랜딩 페이지 설정 */
             .successForwardUrl("/")
          .and()
@@ -91,7 +91,8 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter{
    public void configure(AuthenticationManagerBuilder auth) throws Exception{
       /* 로그인, 로그아웃은 MemberController에 작성하지 않고 스프링 시큐리티 모듈을 통해 처리 */
       /* 유저 인증을 위해 사용할 MemberService 등록, 사용하는 패스워드 인코딩 방식 설정 */
-      //auth.userDetailsService(memberService).passwordEncoder(passwordEncoder());
+      auth.userDetailsService(memberService).passwordEncoder(passwordEncoder());
+	  // userDetailsService : 로그인, 로그아웃을 컨트롤러 없이 service로 보낸다
    }
    
    

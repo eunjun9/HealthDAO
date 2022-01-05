@@ -2,9 +2,11 @@ package com.kh.healthDao.member.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class MemberRole {
 	
 	private int memberNo;		// 유저번호
