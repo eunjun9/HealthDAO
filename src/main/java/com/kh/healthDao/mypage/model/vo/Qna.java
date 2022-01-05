@@ -11,7 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Qna {
 	private int qNo;						// 문의번호
-	private String qDeptCode;				// 문의유형
+	private String qDeptCode;				// 문의유형코드
+	private String qDept;					// 문의유형
 	private int userNo;						// 작성자 유저코드
 	private String userId;					// 작성자
 	private String qTitle;					// 제목

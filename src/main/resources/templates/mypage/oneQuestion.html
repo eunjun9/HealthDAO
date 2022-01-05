@@ -44,7 +44,7 @@
                         <div class="tab-pannel" id="useableCoupon">  
                         	<div th:if="${qnaList != null}">                          
 	                            <div class="couponList tblBar mgt50">
-	                                <p class="tblList">총 <span>1개</span></p>
+	                                <p class="tblList">총 <span th:text="${listCount}"></span>개</p>
 	                            </div>
 	                            <div class="js_tblList">
 	                                <table class="tblType1" summary="">
@@ -65,26 +65,17 @@
 	                                    </thead>
 	                                    <tbody>
 	                                        <tr th:each="qna : ${qnaList}">
-	                                            <td th:text="${qna.qDeptCode}"></td>
+	                                            <td th:text="${qna.qDept}"></td>
 	                                            <td><span class="gr" th:text="${qna.qStatus}"></span></td>
-	                                            <td><a href="./oneQuestionDetail.html" class="js_ListTtl ListTtl"><span th:text="${qna.qTitle}"></span></a></td>
+	                                            <td><a href="/mypage/qnaDetail?qNo=" th:attrappend="href=${qna.qNo}" class="js_ListTtl ListTtl"><span th:text="${qna.qTitle}"></span></a></td>
 	                                            <td th:text="${#dates.format(qna.qDate, 'yyyy-MM-dd')}"></td>
 	                                        </tr>
 	                                    </tbody>
 	                                </table>
 	                                <div class="paging mgt50">
-	                                    <a href="#" class="first"><span class="hide">첫페이지</span></a>
+	                                    <a th:href="@{/mypage/qna(page=1)}" class="first"><span class="hide">첫페이지</span></a>
 	                                    <a href="#" class="prev"><span class="hide">이전페이지</span></a>
-	                                    <a href="#">1</a>
-	                                    <a href="#" class="active">2</a>
-	                                    <a href="#">3</a>
-	                                    <a href="#">4</a>
-	                                    <a href="#">5</a>
-	                                    <a href="#">6</a>
-	                                    <a href="#">7</a>
-	                                    <a href="#">8</a>
-	                                    <a href="#">9</a>
-	                                    <a href="#">10</a>
+	                                    <a th:each="page : ${#numbers.sequence(pi.startPage, pi.endPage)}" class="active">1</a>	                                   
 	                                    <a href="#" class="next"><span class="hide">다음페이지</span></a>
 	                                    <a href="#" class="last"><span class="hide">마지막페이지</span></a>
 	                                </div>
