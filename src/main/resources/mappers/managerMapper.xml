@@ -64,6 +64,7 @@
 		UPDATE QNA
 		   SET REPLY = #{reply}
 		     , REPLY_DATE = SYSDATE
+		     , Q_STATUS = '답변완료'
 		 WHERE Q_NO = #{qNo}
 	</update>
 
