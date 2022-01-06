@@ -72,12 +72,13 @@
 	                                        </tr>
 	                                    </tbody>
 	                                </table>
-	                                <div class="paging mgt50">
+	                                <div class="paging mgt50"
+	                                	th:with="prev=${pi.page - 1}, next=${pi.page + 1}">
 	                                    <a th:href="@{/mypage/qna(page=1)}" class="first"><span class="hide">첫페이지</span></a>
-	                                    <a href="#" class="prev"><span class="hide">이전페이지</span></a>
-	                                    <a th:each="page : ${#numbers.sequence(pi.startPage, pi.endPage)}" class="active">1</a>	                                   
-	                                    <a href="#" class="next"><span class="hide">다음페이지</span></a>
-	                                    <a href="#" class="last"><span class="hide">마지막페이지</span></a>
+	                                    <a class="prev" href="/mypage/qna?page=" th:attrappend="href=${prev}"><span class="hide">이전페이지</span></a>
+	                                    <a th:each="page : ${#numbers.sequence(pi.startPage, pi.endPage)}" href="/mypage/qna?page=" th:attrappend="href=${page}" th:text="${page}" th:classappend="${page} == ${#httpServletRequest.getParameter('page')} ? active"></a>	                                   
+	                                    <a class="next" href="/mypage/qna?page=" th:attrappend="href=${next}"><span class="hide">다음페이지</span></a>
+	                                    <a href="/mypage/qna?page=" th:attrappend="href=${pi.maxPage}" class="last"><span class="hide">마지막페이지</span></a>
 	                                </div>
 	                            </div>
                             </div>

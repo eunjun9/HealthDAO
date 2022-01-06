@@ -1140,7 +1140,7 @@ function quickMenu(){
 	}
 }
 
-$(document).on('click', '.inp_check label', function (){
+/*$(document).on('click', '.inp_check label', function (){
 	if ($(this).parent().hasClass('readOnly')){return false;}
 	if ($(this).parent().hasClass('disabled')){return false;}
 	
@@ -1181,4 +1181,4 @@ $(document).on('click', '.inp_check label', function (){
 	}
 	console.log(tar.prop('checked'));
 	return false;
-});
+});*/

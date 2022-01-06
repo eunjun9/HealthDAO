@@ -9,4 +9,5 @@ public interface MemberService extends UserDetailsService{
 
 	void signUp(Member member);
 
+	int idChk(Member member);
 }

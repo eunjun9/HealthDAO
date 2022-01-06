@@ -20,7 +20,7 @@ public class Product {
 	private int productStock;	// 재고량
 	private String categoryId;		// 카테고리ID
 	private int pMembership;		// 적립혜택
-	private String productOption;			//임시 옵션번호
+	private String productOption;	//임시 옵션번호
 	
 	
 	

@@ -1,150 +1,15 @@
 <!doctype html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
 <title></title>
-<meta name="title" content="">
-<meta name="keywords" content="">
-<meta name="description" content="">
-<meta property="og:title" content="">
-<meta property="og:description" content="">
-
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="format-detection" content="telephone=no, address=no, email=no">
-
-<meta property="og:url" content="">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="">
-<meta property="og:image" content="">
-
-<link rel="shortcut icon" href="">
-<link rel="apple-touch-icon" sizes="180x180" href="">
-<link rel="icon" type="image/png" sizes="32x32" href="">
-<link rel="icon" type="image/png" sizes="16x16" href="">
-<link rel="manifest" href="">
-<link rel="mask-icon" href="" color="">
-<meta name="msapplication-TileColor" content="">
-<meta name="theme-color" content="#ffffff">
-
-<link rel="stylesheet" type="text/css" href="./resources/web/css/fonts.css">
-<link rel="stylesheet" type="text/css" href="./resources/web/css/common.css">
-<link rel="stylesheet" type="text/css" href="./resources/web/css/contents.css">
-<link rel="stylesheet" type="text/css" href="./resources/web/css/main.css">
-<link rel="stylesheet" type="text/css" href="./resources/web/css/yonghan.css">
-</head>
+<!-- 메타태그, 스타일 -->
+<th:block th:replace="common/head.html"></th:block>
+<!--// 메타태그, 스타일 -->
 <body>
-<div id="wrap" class="loadingNot">
-	<div id="loading">
-		<span class="hide">로딩중</span>
-	</div>
-
-	<!-- HEADER + GNB -->
-	<header id="header">
-		<!-- HEADERTOP -->
-		<div class="headerTop">
-			<div class="contents">
-				<div class="utilMenu">
-					<ul>
-						<li><a href="#loginLayer" onclick="loginLayer();return false;">로그인</a></li>
-						<li><a href="#">회원가입</a></li>
-						<li><a href="#">주문 조회</a></li>
-						<li><a href="#">고객센터</a></li>
-					</ul>
-					
-					<!-- 로그인 레이어 -->
-					<div id="loginLayer">
-						<div class="loginTabH">
-							<p class="info_txt">통합회원은 바닐라닷컴 전 브랜드를<br> 이용하실 수 있습니다.</p>
-							<div class="inp_wrap">
-								<div class="inp_text sizeS">
-									<input type="text" title="아이디" placeholder="아이디">
-								</div>
-								<p class="error">아이디를 입력해주세요.</p>
-							</div>
-							<div class="inp_wrap mgt10">
-								<div class="inp_text sizeS">
-									<input type="password" title="비밀번호" placeholder="비밀번호">
-								</div>
-								<p class="error">비밀번호를 입력해주세요.</p>
-							</div>
-							<span class="inp_check mgt15">
-								<input type="checkbox" id="id_auto_loing_H">
-								<label for="id_auto_loing_H">자동 로그인</label>
-							</span>
-							<a href="#" class="btn btnSizeM btnColorP btnTypeR w100 mgt17"><span>로그인</span></a>
-						</div>
-						<div class="btn_member">
-							<ul>
-								<li><a href="#">회원가입</a></li>
-								<li><a href="#">아이디 찾기</a></li>
-								<li><a href="#">비밀번호 찾기</a></li>
-							</ul>
-						</div>
-						<div class="btn_sns">
-							<ul>
-								<li class="sns_n"><a href="javascript:void(0);"><span>네이버 로그인</span></a></li>
-								<li class="sns_k"><a href="javascript:void(0);"><span>카카오 로그인</span></a></li>
-							</ul>
-						</div>
-						<div class="loginLayerClose">
-							<a href="javascript:void(0);" onclick="loginLayer();">닫기</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- // HEADERTOP -->
-
-		<!-- HEADER -->
-		<div class="daoHeader">
-			<h1><a href="#"><img class="logoClass" src="./resources/web/images/common/logo.png" alt="BANILA.COM"></a></h1>
-			<div class="searchH">
-				<div class="searchWrap">
-					<div class="inp_wrap">
-						<div class="inp_text">
-							<input type="text" id="headerSearch">
-							<button class="btn_clear"><span>clear</span></button>
-							<button class="btn_search" type="button"><span class="hide">검색</span></button>
-						</div>
-					</div>
-				</div>
-				<div class="jsSearchTxt">
-					<div class="rollCon">
-						<div class="txt">검색어 순위 1위 노출</div>
-						<div class="txt">검색어 순위 2위 노출</div>
-						<div class="txt">검색어 순위 3위 노출</div>
-						<div class="txt">검색어 순위 4위 노출</div>
-						<div class="txt">검색어 순위 5위 노출</div>
-					</div>
-				</div>
-			</div>
-			<div class="myMenuH">
-				<ul>
-					<li><a href="#">마이페이지</a></li>
-					<li><a href="#">장바구니 <span>99</span></a></li>
-				</ul>
-			</div>
-		</div>
-		<!-- //HEADER -->
-		<!-- GNB -->
-		<div class="gnbWrap">
-			<div class="gnb">
-				<div class="contents">
-					<ul class="gnbLink">
-						<li><a href="#">랭킹</a></li>
-						<li><a href="#">신상품</a></li>
-						<li><a href="#">식품</a></li>
-						<li><a href="#">음료</a></li>
-						<li><a href="#">운동·생활용품</a></li>
-						<li><a href="#">주변 PT 찾기</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<!-- //GNB -->
-	</header>
-	<!-- //HEADER + GNB -->
+<div id="wrap" class="main">
+<!-- HEADER + GNB -->
+<th:block th:replace="common/header.html"></th:block>
+<!--// HEADER + GNB -->
 
 	<!-- container -->
 <div id="container" class="pdt0">
@@ -153,124 +18,64 @@
         <p style="font-weight: 600; font-size: 28px;">1회 체험 신청 내역</p>
         <hr style="border: 1px solid #888888; margin-top: 10px; margin-bottom: 10px;">
         <div class="trainerOrderListView">
-
-            <li>
-                <div class="trainerOrderListView2">
-                    <div class="trainerOrderListView3">
-                        <div class="trainerOrderListView4">
-                            <!-- 트레이너 사진 넣는 곳 -->
-                            <img class="trainerOrderListView5" src="resources/web/images/yonghan/trainer.png">
-                        </div>
-                        <div class="trainerOrderListView5">
-                            <div class="trainerOrderListView6">
-                                <!-- 트레이너 이름 넣는 곳 -->
-                                <p style="font-weight: 600; font-size: 20px;">이애림</p>
-                                <!-- PT체험 신청일 넣는 곳 -->
-                                <p style="font-weight: 500; font-size: 16px; color: #666666; margin-left: 10px;">2021-11-26</p>
-                            </div>
-                            <div>
-                                <p style="font-weight: 500; font-size: 18px; color: #666666; margin-left: 10px; margin-top: 10px;">PT 1회 체험</p>
-                            </div>
-                            <div class="trainerOrderListView7">
-                                <div style="width: 30px; height: 100%;">
-                                    <img src="resources/web/images/yonghan/marker.png" style="width: 100%; height: 100%;">
-                                </div>
-                                <!-- 헬스장 이름 넣는 곳 -->
-                                <span class="trainerOrderListView8">별림 휘트니스 · 강남역 도보 6분</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="trainerOrderListMenu">
-                        <button style="margin-top: 10px;">프로필 보기</button><br>
-                        <button style="margin-top: 5px;">리뷰 남기기</button><br>
-                        <button style="margin-top: 5px;">신청 상세</button>
-                    </div>
-                </div>
-            </li>
-
-            <li>
-                <div class="trainerOrderListView2">
-                    <div class="trainerOrderListView3">
-                        <div class="trainerOrderListView4">
-                            <!-- 트레이너 사진 넣는 곳 -->
-                            <img class="trainerOrderListView5" src="resources/web/images/yonghan/trainer.png">
-                        </div>
-                        <div class="trainerOrderListView5">
-                            <div class="trainerOrderListView6">
-                                <!-- 트레이너 이름 넣는 곳 -->
-                                <p style="font-weight: 600; font-size: 20px;">류상흔</p>
-                                <!-- PT체험 신청일 넣는 곳 -->
-                                <p style="font-weight: 500; font-size: 16px; color: #666666; margin-left: 10px;">2021-11-20</p>
-                            </div>
-                            <div>
-                                <p style="font-weight: 500; font-size: 18px; color: #666666; margin-left: 10px; margin-top: 10px;">PT 1회 체험</p>
-                            </div>
-                            <div class="trainerOrderListView7">
-                                <div style="width: 30px; height: 100%;">
-                                    <img src="resources/web/images/yonghan/marker.png" style="width: 100%; height: 100%;">
-                                </div>
-                                <!-- 헬스장 이름 넣는 곳 -->
-                                <span class="trainerOrderListView8">자바 헬스클럽 · 청담역 도보 4분</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="trainerOrderListMenu">
-                        <button style="margin-top: 10px;">프로필 보기</button><br>
-                        <button style="margin-top: 5px;">리뷰 남기기</button><br>
-                        <button style="margin-top: 5px;">신청 상세</button>
-                    </div>
-                </div>
-            </li>
+        
+	        <ul>
+	            <li th:each="trainerOrderList:${trainerOrderList}">
+	                <div class="trainerOrderListView2">
+	                    <div class="trainerOrderListView3">
+	                        <div class="trainerOrderListView4">
+	                            <!-- 트레이너 사진 넣는 곳 -->
+	                            <img class="trainerOrderListView5" src="/images/yonghan/trainer.png">
+	                        </div>
+	                        <div class="trainerOrderListView5">
+	                            <div class="trainerOrderListView6">
+	                                <!-- 트레이너 이름 넣는 곳 -->
+	                                <p style="font-weight: 600; font-size: 20px;" th:text="${trainerOrderList.trainer.member.userName}"/>
+	                                <!-- PT체험 신청일 넣는 곳 -->
+	                                <p style="font-weight: 500; font-size: 16px; color: #666666; margin-left: 10px;" th:text="${#dates.format(trainerOrderList.ptDate, 'yyyy-MM-DD')}"/>
+	                            </div>
+	                            <div>
+	                                <p style="font-weight: 500; font-size: 18px; color: #666666; margin-left: 10px; margin-top: 10px;">PT 1회 체험</p>
+	                            </div>
+	                            <div class="trainerOrderListView7">
+	                                <div style="width: 30px; height: 100%;">
+	                                    <img src="/images/yonghan/marker.png" style="width: 100%; height: 100%;">
+	                                </div>
+	                                <!-- 헬스장 이름 넣는 곳 -->
+	                                <span class="trainerOrderListView8" th:text="${trainerOrderList.trainer.TAreaIntro}">별림 휘트니스 · 강남역 도보 6분</span>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="trainerOrderListMenu">
+	                        <button onclick="" style="margin-top: 10px;">프로필 보기</button><br>
+	                        <button style="margin-top: 5px;">리뷰 남기기</button><br>
+	                        <button style="margin-top: 5px;">신청 상세</button>
+	                    </div>
+	                </div>
+	            </li>
+            </ul>
             
         </div>
 	</div>
 </div>
 
 	<!-- footer -->
-	<footer id="footer">
-		<div class="copyArea">
-			<div class="copyLink">
-				<ul>
-					<li><a href="#">회사 소개</a></li>
-					<li><a href="#">공지사항</a></li>
-					<li><a href="#">입점·제휴문의</a></li>
-					<li><a href="#">이용약관</a></li>
-					<li><a href="#">개인정보처리방침</a></li>
-				</ul>
-			</div>
-			<div class="copySns">
-				<a href="https://www.instagram.com/ryuu4512/" class="instar"target="_blank" >RYU</a>
-				<a href="https://www.instagram.com/gahee_0305/" class="instar"target="_blank" >YU</a>
-			</div>
-			<div class="copyRight">
-				<div class="copyInfo">
-					<em class="noLine">㈜아령하세요</em>
-					<em>서울시 강남구 아령빌딩 1F ~ 123F</em>
-					<em>대표: 이창섭</em>
-					<em>사업자등록번호 1991-0722</em>
-					<br>
-					<em class="noLine">고객센터 : 010-9535-0371</em>
-					<em>FAX : 9535-0371</em>
-					<em>관리자이메일 : <a href="mailto:roksellid02@gmail.com">roksellid02@gmail.com</a></em>
-				</div>
-				<p>Copyright HealthDao. Co. Ltd All Right Reserved</p>
-			</div>
-		</div>
-	</footer>
-	<!-- //footer -->
-	<!-- javascript -->
-	<script type="text/javascript" src="./resources/web/js/jquery-3.3.1.min.js"></script>
-	<script type="text/javascript" src="./resources/web/js/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="./resources/web/js/slick.min.js"></script>
-	<script type="text/javascript" src="./resources/web/js/jquery.mCustomScrollbar.js"></script>
-	<script type="text/javascript" src="./resources/web/js/circle-progress.min.js"></script>
-	<script type="text/javascript" src="./resources/web/js/ui.js"></script>
-	<script type="text/javascript" src="./resources/web/js/main.js"></script>
-	<!-- //javascript -->
-	<script type="text/javascript">
-		mainStart();
-		mainVisual();
-	</script>
-</div>
+<!-- 스크립트 -->
+		<th:block th:replace="common/script.html"></th:block>
+		<!--// 스크립트 -->
+		<!-- FOOTER -->
+		<th:block th:replace="common/footer.html"></th:block>
+		<!--// FOOTER -->
+	</div>
+	
+	<!-- 퀵메뉴 + 톡톡 -->
+	<th:block th:replace="common/quickNtalk.html"></th:block>
+	<!--// 퀵메뉴 + 톡톡 -->	
+	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+
+	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+	<style>
+		#quick{display:none;}
+	</style>
 </body>
 </html>

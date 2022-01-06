@@ -1,11 +1,14 @@
 package com.kh.healthDao.shopping.model.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.healthDao.admin.model.vo.Product;
 import com.kh.healthDao.shopping.model.service.ShoppingService;
 
 
@@ -39,9 +42,9 @@ public class ShoppingController {
 	@GetMapping("/newProduct")
 	public ModelAndView shoppingNewProduct(ModelAndView mv) {
 		
-		//List<Shopping> shoppingList = shoppingService.ShoppingList();
+		List<Product> shoppingList = shoppingService.ShoppingList();
 		
-		// mv.addObject("shoppingList", shoppingList);
+		mv.addObject("shoppingList", shoppingList);
 		mv.setViewName("shopping/shoppingNewProduct");
 		
 		return mv;
@@ -51,9 +54,9 @@ public class ShoppingController {
 	@GetMapping("/foodProduct")
 	public ModelAndView shoppingFoodProduct(ModelAndView mv) {
 		
-		//List<Shopping> shoppingList = shoppingService.ShoppingList();
+		List<Product> shoppingList = shoppingService.foodShoppingList();
 		
-		// mv.addObject("shoppingList", shoppingList);
+		mv.addObject("shoppingList", shoppingList);
 		mv.setViewName("shopping/shoppingFoodProduct");
 		
 		return mv;
@@ -63,21 +66,21 @@ public class ShoppingController {
 	@GetMapping("/beverageProduct")
 	public ModelAndView shoppingBeverageProduct(ModelAndView mv) {
 		
-		//List<Shopping> shoppingList = shoppingService.ShoppingList();
+		List<Product> shoppingList = shoppingService.beverageShoppingList();
 		
-		// mv.addObject("shoppingList", shoppingList);
+		mv.addObject("shoppingList", shoppingList);
 		mv.setViewName("shopping/shoppingBeverageProduct");
 		
 		return mv;
 	}
 	
-	// 쇼핑 음료
+	// 쇼핑 운동용품
 	@GetMapping("/goodsProduct")
 	public ModelAndView shoppingGoodsProduct(ModelAndView mv) {
 		
-		//List<Shopping> shoppingList = shoppingService.ShoppingList();
+		List<Product> shoppingList = shoppingService.goodsShoppingList();
 		
-		// mv.addObject("shoppingList", shoppingList);
+		mv.addObject("shoppingList", shoppingList);
 		mv.setViewName("shopping/shoppingGoodsProduct");
 		
 		return mv;

@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<title></title>
+<meta name="title" content="">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta property="og:title" content="">
+<meta property="og:description" content="">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no, address=no, email=no">
+
+<meta property="og:url" content="">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="">
+<meta property="og:image" content="">
+
+<link rel="shortcut icon" href="">
+<link rel="apple-touch-icon" sizes="180x180" href="">
+<link rel="icon" type="image/png" sizes="32x32" href="">
+<link rel="icon" type="image/png" sizes="16x16" href="">
+<link rel="manifest" href="">
+<link rel="mask-icon" href="" color="">
+<meta name="msapplication-TileColor" content="">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="stylesheet" type="text/css" href="./resources/web/css/fonts.css">
+<link rel="stylesheet" type="text/css" href="./resources/web/css/common.css">
+<link rel="stylesheet" type="text/css" href="./resources/web/css/contents.css">
+<link rel="stylesheet" type="text/css" href="./resources/web/css/main.css">
+<link rel="stylesheet" type="text/css" href="./resources/web/css/yonghan.css">
+</head>
+<body>
+<div id="wrap" class="loadingNot">
+	<div id="loading">
+		<span class="hide">로딩중</span>
+	</div>
+
+	<!-- HEADER + GNB -->
+	<header id="header">
+		<!-- HEADERTOP -->
+		<div class="headerTop">
+			<div class="contents">
+				<div class="utilMenu">
+					<ul>
+						<li><a href="#loginLayer" onclick="loginLayer();return false;">로그인</a></li>
+						<li><a href="#">회원가입</a></li>
+						<li><a href="#">주문 조회</a></li>
+						<li><a href="#">고객센터</a></li>
+					</ul>
+					
+					<!-- 로그인 레이어 -->
+					<div id="loginLayer">
+						<div class="loginTabH">
+							<p class="info_txt">통합회원은 바닐라닷컴 전 브랜드를<br> 이용하실 수 있습니다.</p>
+							<div class="inp_wrap">
+								<div class="inp_text sizeS">
+									<input type="text" title="아이디" placeholder="아이디">
+								</div>
+								<p class="error">아이디를 입력해주세요.</p>
+							</div>
+							<div class="inp_wrap mgt10">
+								<div class="inp_text sizeS">
+									<input type="password" title="비밀번호" placeholder="비밀번호">
+								</div>
+								<p class="error">비밀번호를 입력해주세요.</p>
+							</div>
+							<span class="inp_check mgt15">
+								<input type="checkbox" id="id_auto_loing_H">
+								<label for="id_auto_loing_H">자동 로그인</label>
+							</span>
+							<a href="#" class="btn btnSizeM btnColorP btnTypeR w100 mgt17"><span>로그인</span></a>
+						</div>
+						<div class="btn_member">
+							<ul>
+								<li><a href="#">회원가입</a></li>
+								<li><a href="#">아이디 찾기</a></li>
+								<li><a href="#">비밀번호 찾기</a></li>
+							</ul>
+						</div>
+						<div class="btn_sns">
+							<ul>
+								<li class="sns_n"><a href="javascript:void(0);"><span>네이버 로그인</span></a></li>
+								<li class="sns_k"><a href="javascript:void(0);"><span>카카오 로그인</span></a></li>
+							</ul>
+						</div>
+						<div class="loginLayerClose">
+							<a href="javascript:void(0);" onclick="loginLayer();">닫기</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- // HEADERTOP -->
+
+		<!-- HEADER -->
+		<div class="daoHeader">
+			<h1><a href="#"><img class="logoClass" src="./resources/web/images/common/logo.png" alt="BANILA.COM"></a></h1>
+			<div class="searchH">
+				<div class="searchWrap">
+					<div class="inp_wrap">
+						<div class="inp_text">
+							<input type="text" id="headerSearch">
+							<button class="btn_clear"><span>clear</span></button>
+							<button class="btn_search" type="button"><span class="hide">검색</span></button>
+						</div>
+					</div>
+				</div>
+				<div class="jsSearchTxt">
+					<div class="rollCon">
+						<div class="txt">검색어 순위 1위 노출</div>
+						<div class="txt">검색어 순위 2위 노출</div>
+						<div class="txt">검색어 순위 3위 노출</div>
+						<div class="txt">검색어 순위 4위 노출</div>
+						<div class="txt">검색어 순위 5위 노출</div>
+					</div>
+				</div>
+			</div>
+			<div class="myMenuH">
+				<ul>
+					<li><a href="#">마이페이지</a></li>
+					<li><a href="#">장바구니 <span>99</span></a></li>
+				</ul>
+			</div>
+		</div>
+		<!-- //HEADER -->
+		<!-- GNB -->
+		<div class="gnbWrap">
+			<div class="gnb">
+				<div class="contents">
+					<ul class="gnbLink">
+						<li><a href="#">랭킹</a></li>
+						<li><a href="#">신상품</a></li>
+						<li><a href="#">식품</a></li>
+						<li><a href="#">음료</a></li>
+						<li><a href="#">운동·생활용품</a></li>
+						<li><a href="#">주변 PT 찾기</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- //GNB -->
+	</header>
+	<!-- //HEADER + GNB -->
+
+	<!-- container -->
+<div id="container" class="pdt0">
+    <div class="guideTab" id="guideTab1">
+        <div style="display: flex;">
+            <!-- 헬스장 사진 넣는 곳 -->
+            <img class="imgCutting" style="width:50%; height:350px;" src="./resources/web/images/yonghan/aa1.jpg">
+            <img class="imgCutting" style="width:50%; height:350px;" src="./resources/web/images/yonghan/aa2.jpg">
+        </div>
+    </div>
+	<div class="contents">
+		<div style="height: 100%; display: flex; margin-top: 30px;">
+            <div style="width: 50%; height: 100%;">
+                <h1>선생님 소개</h1>
+                <div class="trainerDetailP">
+                    <div class="inp_wrap" style="border: 1px solid #CCCCCC; border-radius: 10px;">
+						<div class="inp_textArea">
+							<!-- 선생님 소개 넣는 곳 -->
+							<textarea style="height: 400px;" readonly>
+예 예 안녕하세요 반갑습니다.
+
+트레이닝 경력 12년차로 다양한 진상들을 겪어온 베테랑 트레이너 이애림 입니다.
+								
+무언가를 배울 때 '누구에게' 배우는 것은 매우 중요한 문제입니다. 전문가에게 제대로 배워서 시작하는 것이 가장 효과적이지요. 운동도 마찬가지입니다. 운동 시작 시 회원님의 몸 상태를 잘 파악하고 지도 해주는 선생님을 만나는 게 중요합니다!
+다양한 운동지도 경력이 있는 저와 함께 운동을 시작해보세요!
+							</textarea>
+							<div class="textarea-clone"></div>
+						</div>
+					</div>
+                </div>
+				<h1>PT 스케줄</h1>
+				<div class="trainerDetailPtS">
+					<!-- PT 스케줄 넣는 곳 -->
+					<br>
+					<p>평일&nbsp; &nbsp; &nbsp; &nbsp;09:00~23:00</p>
+					<p>주말&nbsp; &nbsp; &nbsp; &nbsp;09:00~17:00</p>
+				</div>
+				<button class="trainerDetailReport">🚨잘못된 정보 신고하기</button>
+				<div class="btn_wrap" style="margin-top: 50px">
+					<a href="#" class="btn btnSizeL btnColorW btnTypeR" onclick="showLayer('deliRegister');" style="width:150px;"><span>트레이너 수정</span></a>
+				</div>
+            </div>
+            <div style="width: 50%; height: 100%; display: inline-block;">
+                <div style="width: 60%; height: auto; margin-top: 20px; border-radius: 10px; float: right; border: 1px solid #CCCCCC; padding-top: 30px;">
+                    <div style="height: 55%;">
+                        <div style="width: 100%; height: 100px; display: flex; justify-content: center; margin-top: 10px; padding-bottom: 30px;">
+                            <div style="width: 90px; height: 100px;">
+                                <!-- 트레이너 사진 넣는 곳 -->
+                                <img src="resources/web/images/yonghan/trainer.png" style="width: 100%; height: 100%;">
+                            </div>
+                        </div>
+                        <div style="text-align: center;">
+                            <!-- 트레이너 이름 넣는 곳 -->
+                            <p class="trainerDetailName">이애림 선생님</p>
+                            <!-- 헬스장 이름 넣는 곳 -->
+                            <p class="trainerDetailPitName">별림 휘트니스</p>
+
+                            <a href="#" style="display: flex; justify-content: center;">
+                                <p style="font-size: 12px; color:#FFBB33;">★</p>
+							    <!-- 평균 별점 넣는 곳 -->
+								<p class="trainerDetailReview">5.0</p>
+								<!-- 리뷰 수 넣는 곳 -->
+								<p class="traninerDetailReviewSum">(23)</p>
+                            </a>
+
+                            <!-- 한 줄 소개 넣는 곳 -->
+                            <p class="trainerDetailOneP">"13년 경력/다이어트. 근력증가. 바디프로필 전문"</p>
+                        </div>
+                    </div>
+                    <div style="height: 45%; background-color: #F8F8F8; border-radius: 10px;">
+                        <div class="trainerDetailPrice">
+							<br>
+							<!-- 가격 넣는 곳 -->
+							<h2>1회 이용권 25,000원</h2>
+							<br>
+							<h5>회원권을 등록하지 않아도 가능해요</h5>
+						</div>
+						<div class="trainerDetailOrderAndQue">
+							<button class="trainerDetailOrder">1회 체험 신청하기</button>
+							<button class="trainerDetailQue">문의</button>
+						</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>
+<div id="deliRegister" class="lyPopArea">
+	<div class="lyPop">
+		<div class="lyWrap">
+			<button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
+			<div class="lyTit">트레이너 수정</div>
+			<div class="lyBody">
+				<div class="form_area">
+					<dl>
+						<dt><label for="deliRegId"><span class="fcRed"></span>센터 이름</label></dt>
+						<dd>
+							<!-- 200330 에러 메세지 추가 -->
+							<div class="inp_wrap error">
+								<div class="inp_text sizeS">
+									<input type="text" name="" id="deliRegId" value="별림 휘트니스">
+								</div>
+								<p class="error">센터 이름을 입력해주세요.</p>
+							</div>
+							<!-- // 200330 에러 메세지 추가 -->
+						</dd>
+					</dl>
+					<dl>
+						<dt><label for="deliRegName"><span class="fcRed">*</span>센터 위치 소개</label></dt>
+						<dd>
+							<!-- 200330 에러 메세지 추가 -->
+							<div class="inp_wrap error">
+								<div class="inp_text sizeS">
+									<input type="text" name="" id="deliRegName" value="강남역 도보 6분">
+								</div>
+								<p class="error">위치를 입력하세요.</p>
+							</div>
+							<!-- // 200330 에러 메세지 추가 -->
+						</dd>
+					</dl>
+					<dl>
+						<dt><label for="deliRegName"><span class="fcRed">*</span>한 줄 소개</label></dt>
+						<dd>
+							<!-- 200330 에러 메세지 추가 -->
+							<div class="inp_wrap error">
+								<div class="inp_text sizeS">
+									<input type="text" name="" id="deliRegName" value="13년 경력/ 다이어트. 근력증가. 바디프로필 전문">
+								</div>
+								<p class="error">소개를 입력하세요.</p>
+							</div>
+							<!-- // 200330 에러 메세지 추가 -->
+						</dd>
+					</dl>
+					<dl>
+						<dt><label for="deliRegHphone"><span class="fcRed">*</span>가격</label></dt>
+						<dd>
+							<!-- 200330 에러 메세지 추가 -->
+							<div class="inp_wrap error">
+								<div class="inp_text sizeS yb">
+									<input type="text" name="" id="deliRegHphone" value="25000">원
+								</div>
+								<p class="error">가격을 입력해주세요.</p>
+							</div>
+							<!-- // 200330 에러 메세지 추가 -->
+						</dd>
+					</dl>
+					<dl>
+						<dt><label for="deliRegHphone"><span class="fcRed">*</span>지역</label></dt>
+						<dd>
+							<!-- 200330 에러 메세지 추가 -->
+							<div class="inp_wrap error">
+								<div class="inp_text sizeS" style="width: 150px;">
+									<input type="text" name="" id="deliRegHphone" value="전북">
+								</div>
+								<p class="error">지역을 입력해주세요.</p>
+							</div>
+							<!-- // 200330 에러 메세지 추가 -->
+						</dd>
+					</dl>
+					<dl>
+						<dt><label for="deliRegName"><span class="fcRed">*</span>평일 스케줄</label></dt>
+						<dd>
+							<div class="inp_text sizeS">
+								<input type="text" name="" id="deliRegName" value="09:00~21:00">
+							</div>
+						</dd>
+					</dl>
+					<dl>
+						<dt><label for="deliRegName"><span class="fcRed">*</span>주말 스케줄</label></dt>
+						<dd>
+							<div class="inp_text sizeS">
+								<input type="text" name="" id="deliRegName" value="09:00~18:00">
+							</div>
+						</dd>
+					</dl>
+					<dl>
+						<dt style="margin-right: 20px;"><label for="deliRegName"><span class="fcRed"></span>선생님 소개</label></dt>
+							<div class="inp_wrap">
+								<div class="inp_textArea yn">
+									<textarea>예 예 안녕하세요 반갑습니다. 트레이닝 경력 12년차로 다양한 진상들을 겪어온 베테랑 트레이너 이애림 입니다. 무언가를 배울 때 '누구에게' 배우는 것은 매우 중요한 문제입니다. 전문가에게 제대로 배워서 시작하는 것이 가장 효과적이지요. 운동도 마찬가지입니다. 운동 시작 시 회원님의 몸 상태를 잘 파악하고 지도 해주는 선생님을 만나는 게 중요합니다! 다양한 운동지도 경력이 있는 저와 함께 운동을 시작해보세요!</textarea>
+									<div class="textarea-clone"></div>
+								</div>
+							</div>
+					</dl>
+					<dl>
+						<dt><label for="deliRegName"><span class="fcRed">*</span>센터 사진(최대 2장)</label></dt>
+						<dd style="margin-left: 0px">
+							<div class="inp_text sizeS">
+								<input type="file" name="fitPhoto1" style="border: none;">
+								<input type="file" name="fitPhoto2" style="border: none;">
+							</div>
+						</dd>
+					</dl>
+				</div>
+				<div class="btn_wrap length2">
+					<a href="#" class="btn btnSizeL btnArr btnColorW btnTypeR"><span>취소</span></a>
+					<a href="#" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>수정</span></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="modal2">
+	<div class="popup2">
+		<button id="xBtn">X</button>
+		<div style="display: flex;">
+			<div class="tD1">
+				<!-- 트레이너 사진 넣는 곳 -->
+				<img src="resources/web/images/yonghan/trainer.png" style="width: 100%; height: 100%; border-radius: 5px;">
+			</div>
+			<div style="display: block;">
+				<!-- 트레이너 이름 넣는 곳 -->
+				<p class="tD2">이애림</p>
+				<!-- 헬스장 이름 넣는 곳 -->
+				<p class="tD3">별림 휘트니스</p>
+			</div>
+		</div>
+		<div class="tD4">
+			<p style="margin-left: 10px; text-align: center;">코치님에게 직접 상담받을 수 있어요</p>
+		</div>
+		<!-- 트레이너 문의 소개 넣는 곳 -->
+		<textarea class="tD5" readonly style="resize: none;">안녕하세요 이애림 트레이너입니다 수업 중이면 연락을 못 받을 수 있으니 나중에 다시 한번 더 연락 부탁드립니다 감사합니다</textarea>
+		<button id="callBtn">📞전화</button>
+	</div>
+</div>
+
+	<!-- footer -->
+	<footer id="footer">
+		<div class="copyArea">
+			<div class="copyLink">
+				<ul>
+					<li><a href="#">회사 소개</a></li>
+					<li><a href="#">공지사항</a></li>
+					<li><a href="#">입점·제휴문의</a></li>
+					<li><a href="#">이용약관</a></li>
+					<li><a href="#">개인정보처리방침</a></li>
+				</ul>
+			</div>
+			<div class="copySns">
+				<a href="https://www.instagram.com/ryuu4512/" class="instar"target="_blank" >RYU</a>
+				<a href="https://www.instagram.com/gahee_0305/" class="instar"target="_blank" >YU</a>
+			</div>
+			<div class="copyRight">
+				<div class="copyInfo">
+					<em class="noLine">㈜아령하세요</em>
+					<em>서울시 강남구 아령빌딩 1F ~ 123F</em>
+					<em>대표: 이창섭</em>
+					<em>사업자등록번호 1991-0722</em>
+					<br>
+					<em class="noLine">고객센터 : 010-9535-0371</em>
+					<em>FAX : 9535-0371</em>
+					<em>관리자이메일 : <a href="mailto:roksellid02@gmail.com">roksellid02@gmail.com</a></em>
+				</div>
+				<p>Copyright HealthDao. Co. Ltd All Right Reserved</p>
+			</div>
+		</div>
+	</footer>
+	<!-- //footer -->
+	<!-- javascript -->
+	<script type="text/javascript" src="./resources/web/js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="./resources/web/js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="./resources/web/js/slick.min.js"></script>
+	<script type="text/javascript" src="./resources/web/js/jquery.mCustomScrollbar.js"></script>
+	<script type="text/javascript" src="./resources/web/js/circle-progress.min.js"></script>
+	<script type="text/javascript" src="./resources/web/js/ui.js"></script>
+	<script type="text/javascript" src="./resources/web/js/main.js"></script>
+	<!-- //javascript -->
+	<script type="text/javascript">
+		mainStart();
+		mainVisual();
+	</script>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$(".trainerDetailQue").click(function(){
+				$("#modal2").show();
+			});
+			$("#xBtn").click(function(){
+				$("#modal2").hide();
+				$("#callBtn").text("📞전화");
+			});
+			$("#callBtn").click(function(){
+				// 트레이너 번호 넣는 곳
+				$("#callBtn").text("010-1234-5678");
+			});
+		});
+	</script>
+
+
+</div>
+</body>
+</html>

@@ -2,9 +2,13 @@ package com.kh.healthDao.review.model.vo;
 
 import java.util.Date;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Review {
 	
 	private int reviewNo;		// 리뷰번호

@@ -87,13 +87,14 @@ function mainVisual(){
 		$('.visualRoll .indicator div em').stop().css({'width' : '0'});
 		$('.visualRoll .indicator div em').stop().animate({'width' : '100%'},autoPlayTime);
 	});
+	
+	$('.jsVisualRoll').on('afterChange', function(event, slick, currentSlide){
+		if (String(currentSlide+1).length < 2) mainVisualNow = '0' + (currentSlide+1);
+		else mainVisualNow = (currentSlide+1);
+		$('.visualRoll .indicator .nowNum').text(mainVisualNow);
+	});
 }
 
-$('.jsVisualRoll').on('afterChange', function(event, slick, currentSlide){
-	if (String(currentSlide+1).length < 2) mainVisualNow = '0' + (currentSlide+1);
-	else mainVisualNow = (currentSlide+1);
-	$('.visualRoll .indicator .nowNum').text(mainVisualNow);
-});
 
 $('.jsVisualRoll .slick-arrow').hide();
 

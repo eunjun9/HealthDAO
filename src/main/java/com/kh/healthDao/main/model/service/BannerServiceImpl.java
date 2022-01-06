@@ -22,28 +22,33 @@ public class BannerServiceImpl implements BannerService{
 		this.bannerMapper = bannerMapper;
 	}
 
-
-//	@Override
-//	public Map<String, Object> bannerAllList(int page) {
-//		
-//		int listCount = bannerMapper.getListCount();
-//		
-//		PageInfo pi = new PageInfo(page, listCount, 10, 10);
-//		
-//		List<Banner> bannerList = bannerMapper.bannerAllList(pi);
-//		
-//		Map<String, Object> returnMap = new HashMap<>();
-//		
-//		returnMap.put("pi", pi);
-//		returnMap.put("bannerList", bannerList);
-//		
-//		return returnMap;
-//	}
-
-
 	@Override
 	public List<Banner> bannerAllList() {
 		return bannerMapper.bannerAllList();
+	}
+
+	@Override
+	public int insertBanner(Banner banner, String originFileName, String path, String savedName) {
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("banner", banner);
+		map.put("originFileName", originFileName);
+		// map.put("path", path);
+		map.put("path", "/images/upload/main/");
+		map.put("savedName", savedName);
+		System.out.println(banner + ", " + path + ", " + savedName);
+		
+		int result1 = bannerMapper.insertBanner(map);
+		int result2 = bannerMapper.insertFile(map);
+		int result3 = bannerMapper.insertFileDB();
+		
+		int result = 0;
+				
+		if(result1 > 0 && result2 > 0 && result3 > 0) {
+			result = 1;
+		}
+				
+		return result;
 	}
 	
 
