@@ -18,10 +18,29 @@ public class AdminServiceImpl implements AdminService{
 	
 	
 
+	@Override
+	public void registNewProduct(Product newProduct) {
+		
+	}
+	
+
 	// 상품 등록
 	@Override
 	public int RegistProduct(Product product) {
 		return adminMapper.RegistProduct(product);
+	}
+
+	@Override
+	public List<Product> listProductInventory() {
+		
+		return adminMapper.listProductInventory();
+	}
+
+
+	// 재고 수량 입력
+	@Override
+	public int insertproductStock(Product product) {
+		return adminMapper.insertproductStock(product);
 	}
 
 	

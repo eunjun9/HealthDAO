@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" type="text/css" href="../../css/fonts.css">
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<link rel="stylesheet" type="text/css" href="../../css/contents.css">
+<script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
+<meta charset="UTF-8">
+<title>재고수량</title>
+</head>
+<body>
+	
+	
+		<p class="poptext">해당 제품의<br><br>입고된 수량을 입력하세요</p>
+		<div class="inp_wrap">
+			<div class="inp_text yl">
+				<input type="text" name="inplpp" id="inplpp" placeholder="input text">
+				<input type="hidden" name="hplpp" id="hplpp" th:value="${#httpServletRequest.getParameter('productNo')}">
+			</div>
+		</div>
+		<div class="btn_wrap">
+			<button id="plpp" class="btn btnSizeM btnColorB btnTypeB" style="width:150px;"><span>입력하기</span></button>
+		</div>
+	
+	
+	 <script>
+   		$(function(){
+   			$("#plpp").click(function(){
+				alert("ok");
+   				
+   				let param = {};
+   				param.productNo = $("#hplpp").val();
+   				param.productStock = $("#inplp").val();
+   				
+   				$.ajax({
+   					url : "/admin/pLPopupSu",
+   					data : JSON.stringify(param),
+   					dataType : "json",
+   					contentType : "application/json; charset=utf-8",
+   					type : "post",
+   					success : function(data){
+   						console.log(data);
+   					},
+   					error : function(e){
+   						console.log(e)
+   					}
+   				});
+   			});
+   		});
+   </script>
+	
+
+	
+</body>
+</html>
+
+
+
+
+
+
