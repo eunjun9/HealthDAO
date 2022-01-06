@@ -67,7 +67,8 @@ public class MypageServiceImpl implements QnaService, MyCouponService{
 	@Override
 	public List<Coupon> couponEventList() {
 		return mypageMapper.couponEventList();
-
+	}
+	
 	// 포인트 내역
 	@Override
 	public List<Point> pointList() {
