@@ -21,4 +21,6 @@ public interface ShoppingMapper {
 	List<Product> beverageShoppingList();
 
 	List<Product> goodsShoppingList();
+
+	Product shoppingSelect(int productNo);
 }

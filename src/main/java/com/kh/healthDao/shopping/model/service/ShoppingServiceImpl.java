@@ -46,6 +46,11 @@ public class ShoppingServiceImpl implements ShoppingService{
 		return shoppingMapper.goodsShoppingList();
 	}
 
+	@Override
+	public Product shoppingSelect(int productNo) {
+		return shoppingMapper.shoppingSelect(productNo);
+	}
+
 	
 
 
