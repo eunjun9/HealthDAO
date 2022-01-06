@@ -11,4 +11,6 @@ public interface BannerService {
 	int insertBanner(Banner banner, String originFileName, String path, String savedName);
 
 	int deleteBanner(String[] arr);
+
+	List<Banner> bannerRankList();
 }

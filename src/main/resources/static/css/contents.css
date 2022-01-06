@@ -3214,9 +3214,9 @@ filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#555555', endC
 .pointOutline {border : 2px solid #CCCCCC; height: auto; margin-top: 30px; padding-bottom: 50px;}
 .pointOutline .pointInline {border : 1px solid #CCCCCC; height: 100px; width:350px; display:flex; float: left;margin-left: 78px; margin-top: 47px;
 	font-family:'noto','맑은고딕',sans-serif;color:#222;}
-.pointOutline .pointInline .pointTitle{font-weight:500; font-size: 20px; margin-left: 25px;margin-top: 25px;}
-.pointOutline .pointInline .pointPrice{font-weight:400; font-size: 15px; margin-left: -175px; margin-top: 60px;}
-.pointOutline .pointInline .pointDay{font-weight:400; font-size: 15px; margin-left: 180px; margin-top: 60px;}
+.pointOutline .pointInline .pointTitle{font-weight:500; font-size: 20px; margin-left: 25px;margin-top: 25px;width: 100px;}
+.pointOutline .pointInline .pointPrice{font-weight:400; font-size: 15px; margin-top: 60px;}
+.pointOutline .pointInline .pointDay{font-weight:400; font-size: 15px; margin-left: 130px; margin-top: 60px;}
 
 
 
@@ -3835,6 +3835,8 @@ filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#555555', endC
 
 .coupon_input .using_date { display:flex; align-items: center; justify-content: space-between; }
 .coupon_input .using_date span { margin: 0 10px; }
+.coupon_input .inp_text { width: 100%; }
+.coupon_input .inp_wrap { margin-top: 20px; }
 
 /* 쿠폰 이벤트? */
 .coupon_event .info_text_box { width: 100%; height: 70px; padding: 30px 0; text-align: center; background: url('../images/chunsik2.gif') no-repeat left 20px bottom -29px; }

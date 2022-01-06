@@ -16,6 +16,14 @@
 		
 	</resultMap>
 	
+	<resultMap id="couponResultMap" type="com.kh.healthDao.admin.model.vo.Coupon">
+		<id property="pNo" column="P_NO" />
+		<result property="pName" column="P_NAME" />
+		<result property="pSale" column="P_SALE" />
+		<result property="startDate" column="START_DATE" />
+		<result property="endDate" column="END_DATE" />
+	</resultMap>
+	
  	<!-- 상품 등록 -->
 	<insert id="RegistProduct" parameterType="com.kh.healthDao.admin.model.vo.Product">
 		INSERT 
@@ -63,4 +71,52 @@
 		SET PRODUCT_STOCK = #{productStock}
 	  WHERE PRODUCT_NO = #{productNo}
 	</update>
+	
+	<!-- 쿠폰 등록 -->
+	<insert id="couponInput" parameterType="com.kh.healthDao.admin.model.vo.Coupon">
+		INSERT INTO COUPON(
+		      P_NO
+		    , P_NAME
+		    , P_SALE
+		    , START_DATE
+		    , END_DATE
+		)VALUES(
+		    SEQ_P_NO.NEXTVAL
+		    , #{pName}
+		    , #{pSale}
+		    , #{startDate}
+		    , #{endDate}
+		)
+	</insert>
+	
+	<!-- 쿠폰 리스트 -->
+	<select id="allCouponListCount" resultType="_int">
+		SELECT
+		    COUNT(*)
+		FROM(
+		SELECT
+		    P_NO
+		    , P_NAME
+		    , P_SALE
+		    , START_DATE
+		    , END_DATE
+		FROM COUPON)
+	</select>
+	
+	<select id="allCouponList" parameterType="hashmap" resultMap="couponResultMap">
+		SELECT *
+		FROM
+		    (SELECT ROWNUM RNUM, A.*
+		            FROM
+		            (SELECT
+					    P_NO
+					    , P_NAME
+					    , P_SALE
+					    , START_DATE
+					    , END_DATE
+					FROM COUPON
+		        	ORDER BY P_NO DESC) A
+		    )
+		WHERE RNUM BETWEEN #{startRow} AND #{endRow}
+	</select>
 </mapper>

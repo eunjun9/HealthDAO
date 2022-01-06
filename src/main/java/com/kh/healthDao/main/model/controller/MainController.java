@@ -17,9 +17,20 @@ import com.kh.healthDao.main.model.vo.Banner;
 @Controller
 public class MainController {
 
+	/*
+	 * @GetMapping(value= {"/", "/main"}) public String main() { return "main/main";
+	 * }
+	 */
+
 	@GetMapping(value= {"/", "/main"})
-	public String main() {
-		return "main/main";
+	public ModelAndView findBannerRankList(ModelAndView mv) {
+		
+		List<Banner> bannerList = bannerService.bannerRankList();
+		
+		mv.addObject("bannerList", bannerList);
+		mv.setViewName("main/main");
+		
+		return mv;
 	}
 	
 	@PostMapping(value= {"/", "/main"})

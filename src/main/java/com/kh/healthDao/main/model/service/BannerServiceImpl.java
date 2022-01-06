@@ -64,4 +64,10 @@ public class BannerServiceImpl implements BannerService{
 		}
 		return result;
 	}
+
+	@Override
+	public List<Banner> bannerRankList() {
+		// 메인배너 랭킹 리스트		
+		return bannerMapper.bannerRankList();
+	}
 }

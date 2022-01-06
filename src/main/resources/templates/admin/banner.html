@@ -134,21 +134,28 @@
 	       	document.enroll.submit();
 	    }
 
-	    function aaa(){
-	    	
-	    }
-	    function previewFile() {
-	    	  const preview = document.getElementById('imgCutting');
-	    	  var file = document.querySelector('input[type=file]').files[0];
-	    	  var reader  = new FileReader();
-
-	    	  if (file) {
-	    	    reader.readAsDataURL(file);
-	    	  }
-	    	}
+	    var loadFile = function(event) {
+	        var reader = new FileReader();
+	        $(".imgCutting").remove();	// 클릭하면 일단 삭제
+	        $(".imgUpload").val('');	// 클릭하면 일단 삭제
+			var html = '';
+	        reader.onload = function(e){
+				html+= '<li class="imgCutting">';
+				html+= '<div class="imgBox">';
+				html+= '	<img src="'+e.target.result+'" alt="">';
+				html+= '</div>';
+				html+= '</li>';
+				$('.fileUploadArea').append(html);
+				//이미지 맞추기
+				imgCrop();
+				html = "";
+	        };
+	        
+	        reader.readAsDataURL(event.target.files[0]);
+	      };
 	</script>
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
-
+	<div><img src="#" id="imgCutting"></div>
 	<!-- 메인롤링 등록 -->
 	<div id="enrollMain" class="lyPopArea">
 	    <div class="lyPop">
@@ -185,8 +192,10 @@
 									<dt>사진 추가</dt>
 									<dd>
 										<ul class="fileUploadArea">
-											<li><label for="imgUpload"><span class="hide">업로드</span></label><input type="file" class="hide" name="imgUpload" id="imgUpload" multiple accept="image/*" onchange="previewFile()"></li>
-											<li><img class="imgCutting" id="imgCutting" src=""></li>
+											<li>
+												<label for="imgUpload"><span class="hide">업로드</span>
+												</label><input type="file" class="hide" name="imgUpload" id="imgUpload" multiple accept="image/*" onchange="loadFile(event)">												
+											</li>
 										</ul>
 										<p class="mgt5 fs14">파일첨부 (1개) <span class="fc88">5MB미만 jpg,gif,png 파일 가능</span></p>
 									</dd>

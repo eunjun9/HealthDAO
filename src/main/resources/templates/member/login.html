@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title></title>
+<!-- 메타태그, 스타일 -->
+<th:block th:replace="common/head.html"></th:block>
+<!--// 메타태그, 스타일 -->
+<body>
+	<div id="wrap" class="main">
+		<!-- HEADER + GNB -->
+		<th:block th:replace="common/header.html"></th:block>
+		<!--// HEADER + GNB -->
+
+	<!-- container -->
+	<div id="container" class="pdt0">
+		<div class="login">
+			<div class="findMain">
+				<div class="contents">
+					<div class="pageTitArea">
+						<h1>로그인</h1>
+					</div>
+						<div class="loginTabH">
+						<form th:action="@{/member/login}" id="loginForm" method="post">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+							<div class="inp_wrap">
+								<div class="inp_text sizeS">
+									<input type="text" id="ip_name" name="username" title="아이디" placeholder="아이디">
+								</div>
+								<p class="error">아이디를 입력해주세요.</p>
+							</div>
+							<div class="inp_wrap mgt10">
+								<div class="inp_text sizeS">
+									<input type="password" id="ip_pwd" name="password" title="비밀번호" placeholder="비밀번호">
+								</div>
+								<p class="error">비밀번호를 입력해주세요.</p>
+							</div>
+							<span class="inp_check mgt15">
+								<input type="checkbox" id="id_auto_loing_H">
+								<label for="id_auto_loing_H">아이디 저장</label>
+							</span>
+							<button type="submit" id="subbtn" class="btn btnSizeM btnColorP btnTypeR w100 mgt17"><span>로그인</span></button>
+							</form>
+						</div>
+						<div class="btn_member">
+							<ul>
+								<li><a href="/signUp">회원가입</a></li>
+								<li><a href="/findIdPwd">아이디 찾기</a></li>
+								<li><a href="/findIdPwd">비밀번호 찾기</a></li>
+							</ul>
+						</div>
+						<div class="btn_sns">
+							<ul>
+								<li class="sns_n"><a href="javascript:void(0);"><span>네이버 로그인</span></a></li>
+								<li class="sns_k"><a href="javascript:void(0);"><span>카카오 로그인</span></a></li>
+							</ul>
+						</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //container -->
+
+		<!-- 스크립트 -->
+		<th:block th:replace="common/script.html"></th:block>
+		<!--// 스크립트 -->
+		<!-- FOOTER -->
+		<th:block th:replace="common/footer.html"></th:block>
+		<!--// FOOTER -->
+	</div>
+	
+	<!-- 퀵메뉴 + 톡톡 -->
+	<!-- <th:block th:replace="common/quickNtalk.html"></th:block> -->
+	<!--// 퀵메뉴 + 톡톡 -->
+	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+	<link rel="stylesheet" type="text/css" href="../../css/main.css">
+	<script type="text/javascript" src="../../js/main.js"></script>
+	<script type="text/javascript" src="../../js/eunjung.js"></script>
+	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+</body>
+</html>

@@ -89,36 +89,14 @@
 							<div class="point2"><p>3,000p</p></div>
 						</div>	
 						<div class="pointOutline">
-							<div class="pointInline">
-								<p class="pointTitle">크리스마스 맞이 쿠폰</p>
-								<p class="pointPrice">1225원</p>
-								<p class="pointDay">~21/12/25</p>
+							<div class="pointInline" th:each="pList : ${pointList}">
+								<div class="pointTitle" >
+									<p th:text=${pList.pCategoryName}></p>
+									<span class="pointPrice" th:text="${pList.pointamount} + '원'"></span>
+								</div>
+								<p class="pointDay" th:text=${pList.pointEndDate}></p>
 							</div>
-							<div class="pointInline">
-								<p class="pointTitle">크리스마스 맞이 쿠폰</p>
-								<p class="pointPrice">1225원</p>
-								<p class="pointDay">~21/12/25</p>
-							</div>
-							<div class="pointInline">
-								<p class="pointTitle">크리스마스 맞이 쿠폰</p>
-								<p class="pointPrice">1225원</p>
-								<p class="pointDay">~21/12/25</p>
-							</div>
-							<div class="pointInline">
-								<p class="pointTitle">크리스마스 맞이 쿠폰</p>
-								<p class="pointPrice">1225원</p>
-								<p class="pointDay">~21/12/25</p>
-							</div>
-							<div class="pointInline">
-								<p class="pointTitle">크리스마스 맞이 쿠폰</p>
-								<p class="pointPrice">1225원</p>
-								<p class="pointDay">~21/12/25</p>
-							</div>
-							<div class="pointInline">
-								<p class="pointTitle">크리스마스 맞이 쿠폰</p>
-								<p class="pointPrice">1225원</p>
-								<p class="pointDay">~21/12/25</p>
-							</div>
+							
 							<div class="clear"></div>
 							<div class="paging mgt40">
 								<a href="#" class="first"><span class="hide">첫페이지</span></a>
@@ -136,7 +114,7 @@
 								<a href="#" class="next"><span class="hide">다음페이지</span></a>
 								<a href="#" class="last"><span class="hide">마지막페이지</span></a>
 							</div>
-						</div>
+						
 					</div>
 					<!-- //myPageCon -->
 				</div>
@@ -158,6 +136,7 @@
 	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 	<script type="text/javascript">
 		$('#quick .quickArea').css({'position':'absolute', 'top':290});
+
 	</script>
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 </body>

@@ -120,11 +120,11 @@
 										<button class="title" type="button">월</button>
 										<ul class="selList">
 											<li>
-												<input type="radio" value="1" class="option" id="select1_1" name="userBirth2">
+												<input type="radio" value="01" class="option" id="select1_1" name="userBirth2">
 												<label for="select1_1">1</label>
 											</li>
 											<li>
-												<input type="radio" value="2" class="option" id="select1_2" name="userBirth2">
+												<input type="radio" value="02" class="option" id="select1_2" name="userBirth2">
 												<label for="select1_2">2</label>
 											</li>
 										</ul>
@@ -135,11 +135,11 @@
 										<button class="title" type="button">일</button>
 										<ul class="selList">
 											<li>
-												<input type="radio" value="1" class="option" id="select1_1" name="userBirth3">
+												<input type="radio" value="01" class="option" id="select1_1" name="userBirth3">
 												<label for="select1_1">1</label>
 											</li>
 											<li>
-												<input type="radio" value="2" class="option" id="select1_2" name="userBirth3">
+												<input type="radio" value="02" class="option" id="select1_2" name="userBirth3">
 												<label for="select1_2">2</label>
 											</li>
 										</ul>
@@ -254,9 +254,13 @@
 	<script type="text/javascript" src="../../js/main.js"></script>
 	<script type="text/javascript" src="../../js/eunjung.js"></script>
 	<script>
-		/* $(document).ready(function(){
+		$(document).ready(function(){
 			
-			$("#submit").on("click", function(){
+			if($("input:checkbox[name=emailReceive]").is(":checked") == false) {
+				this.val('N');
+			}
+			
+			/* $("#submit").on("click", function(){
 				if($("#inp_id").val()==""){
 					alert("아이디를 입력해주세요.");
 					$("#inp_id").focus();
@@ -310,8 +314,8 @@
 						alert("사용가능한 아이디입니다.");
 					}
 				}
-			})
-		} */
+			}) */
+		}
 	</script>
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 </body>

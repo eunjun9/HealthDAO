@@ -10,6 +10,12 @@
 	<div id="wrap" class="main">
 		<!-- HEADER + GNB -->
 		<th:block th:replace="common/header.html"></th:block>
+		<div align="right">
+		<!-- isAuthenticated() : 인증 되어 있는지 확인 (로그인 여부) -->
+		<th:block sec:authorize="isAuthenticated()">
+			<h3><span sec:authentication="principal.userName"></span>님 환영합니다. (로그인 확인용-임시)</h3>
+		</th:block>
+		</div>
 		<!--// HEADER + GNB -->
 	
 		<!-- container -->
@@ -18,29 +24,8 @@
 				<div class="mainVisual">
 					<div class="visualRoll">
 						<div class="jsVisualRoll">
-							<div>
-								<a href="#"><img src="/images/temp/main01.jpg" alt=""></a>
-							</div>
-							<div>
-								<a href="#"><img src="/images/temp/main02.jpg" alt=""></a>
-							</div>
-							<div>
-								<a href="#"><img src="/images/temp/main03.jpg" alt=""></a>
-							</div>
-							<div>
-								<a href="#"><img src="/images/temp/main04.jpg" alt=""></a>
-							</div>
-							<div>
-								<a href="#"><img src="/images/temp/main05.jpg" alt=""></a>
-							</div>
-							<div>
-								<a href="#"><img src="/images/temp/main01.jpg" alt=""></a>
-							</div>
-							<div>
-								<a href="#"><img src="/images/temp/main02.jpg" alt=""></a>
-							</div>
-							<div>
-								<a href="#"><img src="/images/temp/main05.jpg" alt=""></a>
+							<div th:each="banner : ${bannerList}">
+								<a th:href="${banner.main_url}"><img th:src="${banner.file_path}+${banner.change_file}" /></a>
 							</div>
 						</div>
 						<div class="indicator">
@@ -53,15 +38,10 @@
 						<button class="btnNext" onclick="$('.jsVisualRoll').slick('slickNext')"><span class="hide">다음</span></button>
 					</div>
 					<div class="visualBtn">
-						<div class="jsVisualBtn">
-							<div><p>롤링배너명-main01</p></div>
-							<div><p>롤링배너명-main02</p></div>
-							<div><p>롤링배너명-main03</p></div>
-							<div><p>롤링배너명-main04</p></div>
-							<div><p>롤링배너명-main05</p></div>
-							<div><p>롤링배너명-main06</p></div>
-							<div><p>롤링배너명-main07</p></div>
-							<div><p>롤링배너명-main08</p></div>
+						<div class="jsVisualBtn">							
+							<div th:each="banner : ${bannerList}">
+								<p th:text="${banner.main_name}"></p>
+							</div>
 						</div>
 					</div>
 				</div>

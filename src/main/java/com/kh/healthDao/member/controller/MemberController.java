@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.healthDao.member.model.service.MemberService;
@@ -22,6 +23,7 @@ public class MemberController {
 	}
 	
 	@GetMapping("/login")
+//	@RequestMapping(value="/login", method = {RequestMethod.GET, RequestMethod.POST})
 	public void loginForm() {}
 	
 	@GetMapping("/signUp")

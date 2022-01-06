@@ -1,15 +1,19 @@
 /* 로그인 */
-function chk_form() {
-	if(document.getElementById("ip_name").value==''){
-		alert("아이디를 입력해주세요.");
-		return false;
-	}
-	if(document.getElementById("ip_pwd").value==''){
-		alert("비밀번호를 입력해주세요.");
-		return false;
-	}
-	document.getElementById('loginForm').submit();
-}
+/*$(document).ready(function() {
+	$('#subbtn').click(function() {
+		let name = $.trim($("#ip_name").val());
+		
+		if(!name) {
+			alert("아이디를 입력해주세요.");
+			return false;
+		}
+		
+		if($('#ip_name').val() == "") {
+			alert("아이디를 입력해주세요.");
+			return false;
+		}
+	})
+});*/
 
 /* 회원가입 */
 function selectAll(selectAll)  {
