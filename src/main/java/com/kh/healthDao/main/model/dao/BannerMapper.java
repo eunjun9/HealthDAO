@@ -6,7 +6,6 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.kh.healthDao.main.model.vo.Banner;
-import com.kh.healthDao.main.model.vo.PageInfo;
 
 
 @Mapper
@@ -19,4 +18,8 @@ public interface BannerMapper {
 	int insertFile(Map<String, Object> map);
 
 	int insertFileDB();
+
+	int deleteBanner(String[] arr);
+
+	int deleteBanner2(String[] arr);
 }

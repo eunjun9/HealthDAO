@@ -80,6 +80,14 @@
 		  , SEQ_MAIN_NO.CURRVAL
 		)
 	</insert>
-	
-
+	<delete id="deleteBanner">
+		DELETE
+				BANNER_FILE
+		 WHERE MAIN_NO = #{main_no}
+	</delete>
+	<delete id="deleteBanner2">
+		DELETE
+				BANNER
+		 WHERE MAIN_NO = #{main_no}
+	</delete>
 </mapper>

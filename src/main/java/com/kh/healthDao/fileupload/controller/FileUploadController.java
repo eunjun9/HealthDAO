@@ -30,11 +30,8 @@ public class FileUploadController {
 		
 		/* 파일을 저장할 경로 */
 		String root = uploadImagesPath;
-		System.out.println("root : " + root);
-		
 		/* 파일명 확인 */
 		String originFileName = imgUpload.getOriginalFilename();
-		System.out.println("originFileName : " + originFileName);
 		String ext = originFileName.substring(originFileName.lastIndexOf("."));
 		
 		/* 파일명 변경 처리 */

@@ -50,6 +50,18 @@ public class BannerServiceImpl implements BannerService{
 				
 		return result;
 	}
-	
 
+	@Override
+	public int deleteBanner(String[] arr) {
+
+		int result1 = bannerMapper.deleteBanner(arr);
+		int result2 = bannerMapper.deleteBanner2(arr);
+
+		int result = 0;
+		
+		if(result1 > 0 && result2 > 0) {
+			result = 1;
+		}
+		return result;
+	}
 }
