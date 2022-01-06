@@ -1,10 +1,7 @@
 package com.kh.healthDao.trainer.model.vo;
 
 
-import java.util.List;
-
 import com.kh.healthDao.member.model.vo.Member;
-import com.kh.healthDao.review.model.vo.Review;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,7 +26,6 @@ public class Trainer {
 	private String queIntro;		// 문의소개
 	
 	private Member member;			// Member 테이블
-	private List<Review> review;	// Review 테이블
 	private float avgStar;
 	private int sumReview;
 	/* + 추가할 것
