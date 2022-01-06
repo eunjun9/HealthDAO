@@ -12,18 +12,43 @@
 		<result property="change_file" column="CHANGE_FILE"/>
 	</resultMap>
 
-	<select id="bannerAllList" resultMap="bannerResultMap">
-		SELECT					   
-			    MAIN_NO
-			  , MAIN_NAME
-			  , MAIN_RANK
-			  , MAIN_URL
-			  , MAIN_STATUS
-			  , FILE_PATH
-			  , CHANGE_FILE
-		  FROM BANNER
-		  JOIN BANNER_FILE USING(MAIN_NO)
-		  JOIN AT_FILE USING(F_NO)
+	<select id="findBannreList" resultMap="bannerResultMap" parameterType="hashmap">
+		SELECT *
+		FROM
+		    (SELECT ROWNUM RNUM, A.*
+		            FROM
+		            (SELECT 
+			            MAIN_NO
+					  , MAIN_NAME
+					  , MAIN_RANK
+					  , MAIN_URL
+					  , MAIN_STATUS
+					  , FILE_PATH
+					  , CHANGE_FILE
+		        FROM BANNER
+		        JOIN BANNER_FILE USING(MAIN_NO)
+		        JOIN AT_FILE USING(F_NO)
+		       ORDER BY MAIN_NO DESC) A
+		    )
+			WHERE RNUM BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="getBannerListCount" resultType="_int">
+		SELECT
+		    COUNT(*)
+		FROM
+		(SELECT 
+            MAIN_NO
+		  , MAIN_NAME
+		  , MAIN_RANK
+		  , MAIN_URL
+		  , MAIN_STATUS
+		  , FILE_PATH
+		  , CHANGE_FILE
+      FROM BANNER
+      JOIN BANNER_FILE USING(MAIN_NO)
+      JOIN AT_FILE USING(F_NO)
+     ORDER BY MAIN_NO DESC)
 	</select>
 	
 	<select id="bannerRankList" resultMap="bannerResultMap">
@@ -105,4 +130,21 @@
 				BANNER
 		 WHERE MAIN_NO = #{main_no}
 	</delete>
+	
+	<select id="bannerSelect" resultMap="bannerResultMap" parameterType="_int">
+		SELECT
+			    MAIN_NO
+			  , MAIN_NAME
+			  , MAIN_RANK
+			  , MAIN_URL
+			  , MAIN_STATUS
+			  , FILE_PATH
+			  , CHANGE_FILE
+		  FROM BANNER
+		  JOIN BANNER_FILE USING(MAIN_NO)
+		  JOIN AT_FILE USING(F_NO)
+		 WHERE MAIN_NO=#{main_no}
+	</select>
+	
+	
 </mapper>

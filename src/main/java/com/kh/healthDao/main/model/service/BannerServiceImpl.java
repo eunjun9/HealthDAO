@@ -7,9 +7,11 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.healthDao.common.model.vo.Paging;
 import com.kh.healthDao.main.model.dao.BannerMapper;
 import com.kh.healthDao.main.model.vo.Banner;
 import com.kh.healthDao.main.model.vo.PageInfo;
+import com.kh.healthDao.mypage.model.vo.Qna;
 
 
 @Service("BannerService")
@@ -20,11 +22,6 @@ public class BannerServiceImpl implements BannerService{
 	@Autowired
 	public BannerServiceImpl(BannerMapper bannerMapper) {
 		this.bannerMapper = bannerMapper;
-	}
-
-	@Override
-	public List<Banner> bannerAllList() {
-		return bannerMapper.bannerAllList();
 	}
 
 	@Override
@@ -69,5 +66,34 @@ public class BannerServiceImpl implements BannerService{
 	public List<Banner> bannerRankList() {
 		// 메인배너 랭킹 리스트		
 		return bannerMapper.bannerRankList();
+	}
+
+	@Override
+	public Map<String, Object> findBannerList(int page) {
+		int listCount = bannerMapper.getBannerListCount();
+		Paging pi = new Paging(page, listCount, 5, 10);
+		
+		int startRow = (pi.getPage() - 1) * pi.getBoardLimit() + 1;
+		int endRow = startRow + pi.getBoardLimit() - 1;
+		
+		Map<String, Object> pageRow = new HashMap<>();
+		pageRow.put("page", page);
+		pageRow.put("startRow", startRow);
+		pageRow.put("endRow", endRow);
+		
+		List<Banner> bannerList = bannerMapper.findBannreList(pageRow);
+		
+		Map<String, Object> banner = new HashMap<>();
+		
+		banner.put("listCount", listCount);
+		banner.put("bannerList", bannerList);
+		banner.put("pi", pi);
+		
+		return banner;
+	}
+
+	@Override
+	public Banner bannerSelect(int main_no) {
+		return bannerMapper.bannerSelect(main_no);
 	}
 }
