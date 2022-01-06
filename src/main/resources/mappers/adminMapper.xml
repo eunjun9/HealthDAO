@@ -16,7 +16,7 @@
 		
 	</resultMap>
 	
-	<!-- 상품 등록 -->
+ 	<!-- 상품 등록 -->
 	<insert id="RegistProduct" parameterType="com.kh.healthDao.admin.model.vo.Product">
 		INSERT 
 		INTO PRODUCT
@@ -47,4 +47,20 @@
 		)
 	</insert>
 	
+	<select id="listProductInventory" resultMap="productResultMap" parameterType="com.kh.healthDao.admin.model.vo.Product">
+	SELECT
+	      PRODUCT_NO
+	    , PRODUCT_TITLE
+	    , PRODUCT_BRAND
+	    , PRODUCT_PRICE
+	    , PRODUCT_INFO
+	    , PRODUCT_STOCK
+	 FROM PRODUCT
+	 </select>
+	 
+	 <update id="insertproductStock" parameterType="com.kh.healthDao.admin.model.vo.Product">
+	 UPDATE PRODUCT
+		SET PRODUCT_STOCK = #{productStock}
+	  WHERE PRODUCT_NO = #{productNo}
+	</update>
 </mapper>

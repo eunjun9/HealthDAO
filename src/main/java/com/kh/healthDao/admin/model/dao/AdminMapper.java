@@ -20,5 +20,8 @@ public interface AdminMapper {
 	// 상품 재고
 	public List<Product> listProductInventory();
 
+	// 재고 수량 입력
+	public int insertproductStock(Product product);
+
 	
 }

@@ -15,4 +15,9 @@ public interface AdminService {
 	// 재고내역
 	List<Product> listProductInventory();
 
+	// 재고 수량 입력
+	public int insertproductStock(Product product);
+	
+	
+
 }
