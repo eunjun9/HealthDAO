@@ -67,35 +67,13 @@
 							</div>
 							<p class="error">잘못 입력했습니다</p>
 						</div>
-						<div class="inp_wrap inp_email">
-							<div class="inp_email_label">
-								<label class="inp_lab" for="join_email">이메일 <b>*</b></label>
-							</div>
+						<div class="inp_wrap inp_eml">
+							<label class="inp_lab" for="ipt_label">이메일 <b>*</b></label>
 							<div class="inp_text sizeS">
-								<input type="text" name="userEmail" id="join_email" placeholder="이메일">
+								<input type="text" name="" id="inp_eml" placeholder="input text">
+								<a href="#" class="btn btnSizeM btnColorM btnTypeB"><span>중복확인</span></a>
 							</div>
-							<span class="hyphen">@</span>
-							<div class="inp_select sizeS">
-								<div class="selectBox">
-									<button class="title" type="button" title=""></button>
-									<ul class="selList">
-										<li>
-											<input type="radio" value="naver.com" class="option" id="join_email1" name="userEmail2" checked>
-											<label for="join_email1">naver.com</label>
-										</li>
-										<li>
-											<input type="radio" value="gmail.com" class="option" id="join_email2" name="userEmail2">
-											<label for="join_email2">gmail.com</label>
-										</li>
-										<li>
-											<input type="radio" value="kakao.com" class="option" id="join_email3" name="userEmail2">
-											<label for="join_email3">kakao.com</label>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<a href="#" class="btn btnSizeM btnColorM btnTypeB"><span>중복확인</span></a>
-							<p class="error">이미 사용중인 이메일입니다.</p>
+							<p class="error">잘못 입력했습니다</p>
 						</div>
 						<div class="inp_wrap inp_birth">
 							<label class="inp_lab" for="ipt_label">생년월일 <b>*</b></label>
@@ -229,7 +207,7 @@
 							<p class="infoMsg">※ 상품 구매정보는 수신동의 여부 관계없이 받아 보실 수 있습니다.</p>
 						</div>
 						<div class="btn_wrap">
-							<a href="#" id="submit" onclick="return chk_signUp()" class="btn btnArr btnSizeL btnColorB btnTypeB" style="width:500px;"><span>회원가입</span></a>
+							<button type="submit" onclick="return chk_signUp()" class="btn btnArr btnSizeL btnColorB btnTypeB" style="width:500px;"><span>회원가입</span></button>
 						</div>
 					</form>
 				</div>
@@ -255,10 +233,6 @@
 	<script type="text/javascript" src="../../js/eunjung.js"></script>
 	<script>
 		$(document).ready(function(){
-			
-			if($("input:checkbox[name=emailReceive]").is(":checked") == false) {
-				this.val('N');
-			}
 			
 			/* $("#submit").on("click", function(){
 				if($("#inp_id").val()==""){

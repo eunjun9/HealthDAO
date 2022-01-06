@@ -23,7 +23,6 @@ public class MemberController {
 	}
 	
 	@GetMapping("/login")
-//	@RequestMapping(value="/login", method = {RequestMethod.GET, RequestMethod.POST})
 	public void loginForm() {}
 	
 	@GetMapping("/signUp")
@@ -45,7 +44,7 @@ public class MemberController {
 				memberService.signUp(member);
 			}
 			// 입력된 아이디가 존재한다면 -> 다시 회원가입 페이지로 돌아가기 
-			// 존재하지 않는다면 -> signUp
+			// 존재하지 않는다면 -> service
 		} catch (Exception e) {
 			throw new RuntimeException();
 		}*/
