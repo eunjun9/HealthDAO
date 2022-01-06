@@ -3,8 +3,6 @@ package com.kh.healthDao.member.model.vo;
 import java.util.Date;
 import java.util.List;
 
-import com.kh.healthDao.trainer.model.vo.Trainer;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
