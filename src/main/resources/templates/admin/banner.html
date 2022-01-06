@@ -70,7 +70,7 @@
 												</span>
 											</td>
 											<td th:text="${banner.main_no}"></td>
-											<td class="tdName"><a href="javascript:void(0);" onclick="showLayer('enrollMain')"><span th:text="${banner.main_name}"></span></a></td>
+											<td class="tdName" th:value="${banner.main_no}"><a href="javascript:void(0);" th:onclick="|showLayer('modifyMain');modfiyBanner('${banner.main_no}');|"><span th:text="${banner.main_name}"></span></a></td>
 											<td class="tdImg"><img th:src="${banner.file_path}+${banner.change_file}" /></td>
 											<td th:text="${banner.main_url}"></td>
 											<td th:text="${banner.main_rank}"></td>
@@ -79,16 +79,13 @@
 									</tbody>
 								</table>
 							</div>
-							<div class="paging mgt40">
-								<a href="#" class="first"><span class="hide">첫페이지</span></a>
-								<a href="#" class="prev"><span class="hide">이전페이지</span></a>
-								<a href="#">1</a>
-								<a href="#" class="active">2</a>
-								<a href="#">3</a>
-								<a href="#">4</a>
-								<a href="#">5</a>
-								<a href="#" class="next"><span class="hide">다음페이지</span></a>
-								<a href="#" class="last"><span class="hide">마지막페이지</span></a>
+							<div class="paging mgt50"
+								th:with="prev=${pi.page - 1}, next=${pi.page + 1}">
+							    <a th:href="@{/banner(page=1)}" class="first"><span class="hide">첫페이지</span></a>
+							    <a class="prev" href="/banner?page=" th:attrappend="href=${prev}"><span class="hide">이전페이지</span></a>
+							    <a th:each="page : ${#numbers.sequence(pi.startPage, pi.endPage)}" href="/banner?page=" th:attrappend="href=${page}" th:text="${page}" th:classappend="${page} == ${#httpServletRequest.getParameter('page')} ? active"></a>	                                   
+							    <a class="next" href="/banner?page=" th:attrappend="href=${next}"><span class="hide">다음페이지</span></a>
+							    <a href="/banner?page=" th:attrappend="href=${pi.maxPage}" class="last"><span class="hide">마지막페이지</span></a>
 							</div>
 						</div>
 						<!-- //myPageCon -->
@@ -142,7 +139,7 @@
 	        reader.onload = function(e){
 				html+= '<li class="imgCutting">';
 				html+= '<div class="imgBox">';
-				html+= '	<img src="'+e.target.result+'" alt="">';
+				html+= '	<img id="img" src="'+e.target.result+'" alt="">';
 				html+= '</div>';
 				html+= '</li>';
 				$('.fileUploadArea').append(html);
@@ -155,9 +152,8 @@
 	      };
 	</script>
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
-	<div><img src="#" id="imgCutting"></div>
 	<!-- 메인롤링 등록 -->
-	<div id="enrollMain" class="lyPopArea">
+	<div id="enrollMain" class="lyPopArea bannerPop">
 	    <div class="lyPop">
 	        <div class="lyWrap">
 	            <button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
@@ -216,14 +212,14 @@
 								<dl class="mgt20">
 									<dt>노출상태</dt>
 									<dd class="mgt7">
-										<div class="inp_wrap error">
-											<span class="inp_check">
-												<input type="radio" name="main_status" id="pdtQna_radio3_1" value="Y" checked>
-												<label for="pdtQna_radio3_1">노출</label>
+										<div class="inp_wrap">
+											<span class="inp_radio">
+												<input type="radio" name="main_status" id="bannerStatus1_1" value="Y" checked>
+												<label for="bannerStatus1_1">노출</label>
 											</span>
-											<span class="inp_check mgl40">
-												<input type="radio" name="main_status" id="pdtQna_radio3_2">
-												<label for="pdtQna_radio3_2" class="fc88">비노출</label>
+											<span class="inp_radio mgl40">
+												<input type="radio" name="main_status" id="bannerStatus1_2" value="N">
+												<label for="bannerStatus1_2">비노출</label>
 											</span>
 										</div>
 										<p class="fs13 fc88 mgt10">* 노출로 등록시 메인화면에 등록됩니다.</p>
@@ -241,7 +237,7 @@
 	    </div>
 	</div>
 	<!-- 메인롤링 수정 -->
-	<div id="enrollMain" class="lyPopArea">
+	<div id="modifyMain" class="lyPopArea bannerPop">
 	    <div class="lyPop">
 	        <div class="lyWrap">
 	            <button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
@@ -278,9 +274,8 @@
 										<li><label for="imgUpload"><span class="hide">업로드</span></label><input type="file" class="hide" name="imgUpload" id="imgUpload"></li>
 										<li class="imgCutting">
 											<div class="imgBox">
-												<img src="./resources/web/images/temp/main01.jpg" alt="">
+												<img id="img" src="./resources/web/images/temp/main01.jpg" alt="">
 											</div>
-											<a href="javascript:void(0)" class="closeLink"><span class="hide">close</span></a>
 										</li>
 									</ul>
 									<p class="mgt5 fs14">파일첨부 (1개) <span class="fc88">5MB미만 jpg,gif,png 파일 가능</span></p>
@@ -302,14 +297,14 @@
 							<dl class="mgt20">
 								<dt>노출상태</dt>
 								<dd class="mgt7">
-									<div class="inp_wrap error">
-										<span class="inp_check">
-											<input type="radio" name="pdtQna_radio3" id="pdtQna_radio3_1" checked>
-											<label for="pdtQna_radio3_1">노출</label>
+									<div id="modifyStatus" class="inp_wrap">
+										<span class="inp_radio">
+											<input type="radio" name="modify_status" id="bannerStatus1" value="Y" checked>
+											<label for="bannerStatus1">노출</label>
 										</span>
-										<span class="inp_check mgl40">
-											<input type="radio" name="pdtQna_radio3" id="pdtQna_radio3_2">
-											<label for="pdtQna_radio3_2" class="fc88">비노출</label>
+										<span class="inp_radio mgl40">
+											<input type="radio" name="modify_status" id="bannerStatus2" value="N">
+											<label for="bannerStatus2">비노출</label>
 										</span>
 									</div>
 									<p class="fs13 fc88 mgt10">* 노출로 등록시 메인화면에 등록됩니다.</p>
@@ -318,15 +313,15 @@
 						</li>
 					</ul>
 					<div class="btn_wrap mgt30">
-						<a href="#" class="btn btnSizeL btnArr btnColorW btnTypeR" style="width:200px;"><span>취소</span></a>
-						<a href="#" class="btn btnSizeL btnArr btnColorB btnTypeR" style="width:200px;"><span>수정</span></a>
+						<a href="javascript:void(0);" class="btn btnSizeL btnArr btnColorW btnTypeR" style="width:200px;" onclick="layerPopClose();"><span>취소</span></a>
+						<a href="javascript:void(0);" class="btn btnSizeL btnArr btnColorB btnTypeR" style="width:200px;" onclick="bannerUpdate();"><span>수정</span></a>
 					</div>
 	            </div>
 	        </div>
 	    </div>
 	</div>
 	<!-- 메인롤링 삭제 -->
-	<div id="mainDel" class="lyPopArea">
+	<div id="mainDel" class="lyPopArea bannerPop">
 	    <div class="lyPop">
 	        <div class="lyWrap">
 	            <button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
@@ -342,6 +337,67 @@
 	    </div>
 	</div>
 	<script>
+		function modfiyBanner(e){
+			console.log(e);
+			var result = e;
+			var sendData = {"main_no":result};
+			$.ajax({
+				url: "/banner/modify",
+				method: 'POST',
+				data: sendData,
+				success: function(data){
+					console.log(data);
+					$("#modifyMain #name").val(data.main_name);
+					$("#modifyMain #url").val(data.main_url);
+					$("#modifyMain #img").attr('src', data.file_path + data.change_file);
+					$("#modifyMain #rank").val(data.main_rank);				
+
+					//상태
+					let stateHtml = "";					
+					if(data.main_status == "Y"){
+						stateHtml = '<span class="inp_radio">'
+								  + '<input type="radio" name="modify_status" id="bannerStatus1" value="Y" checked><label for="bannerStatus1">노출</label></span>'
+								  + '<span class="inp_radio mgl40">'
+								  + '<input type="radio" name="modify_status" id="bannerStatus2" value="N"><label for="bannerStatus2">비노출</label></span>';
+					}else{
+						stateHtml = '<span class="inp_radio">'
+								  + '<input type="radio" name="modify_status" id="bannerStatus1" value="Y" ><label for="bannerStatus1">노출</label></span>'
+								  + '<span class="inp_radio mgl40">'
+								  + '<input type="radio" name="modify_status" id="bannerStatus2" value="N" checked><label for="bannerStatus2">비노출</label></span>';
+					}					
+					document.getElementById("modifyStatus").innerHTML = stateHtml;					
+				},
+				error: function(e){
+					console.log(e);
+				}
+			});
+		}
+		
+		function bannerUpdate(){
+			$.ajax({
+				url : "/banner/update",
+				data : {
+
+					main_name : $("#modifyMain #name").val(),
+					main_url : $("#modifyMain #url").val(),
+					change_file : $("#modifyMain #img").attr('src')
+				},
+				dataType : "json",
+				type : "post",
+				success : function(result){	
+					if(result == "success"){
+						alert("성공적으로 적용되었습니다.");
+						location.reload();
+					}else{
+						alert("업데이트가 되지 않았습니다ㅜㅜ");
+					}
+				},
+				error : function(e){
+					console.log(e);
+				}
+			});
+		}
+	
 		function deleteBanner(){
 			let chk = $('.checked:not(.allChk) input[name="inp_check1"]:checked');		
 			let chkLength = chk.length;	// 체크된 갯수
@@ -375,6 +431,49 @@
 				alert('선택된 값이 없습니다.');
 			}
 		}
+
+		$(document).on('click', '.inp_check label', function (){
+			if ($(this).parent().hasClass('readOnly')){return false;}
+			if ($(this).parent().hasClass('disabled')){return false;}
+			
+			var tar = $(this).parent().find('input');
+			var chk = tar.prop('checked');
+			var grpNm = tar.attr('name');
+
+
+			if ($(this).parent('.inp_check').hasClass('allChk')){
+				var chkStatus = tar.prop('checked');
+				$("input:checkbox[name=" + grpNm + "]").each(function() {
+					if (chkStatus) {
+						$(this).closest(".inp_check").removeClass("checked");
+						$(this).prop("checked",false);
+					} else {
+						$(this).closest(".inp_check").addClass("checked");
+						$(this).prop("checked",true);
+					}
+				});
+			} else {
+				if ($(this).parent().hasClass('checked')) {
+					$("input:checkbox[name=" + grpNm + "]").each(function() {
+						$(this).closest('.inp_check.allChk').removeClass('checked');;
+						$(this).closest('.inp_check.allChk input').prop("checked",false);
+					});
+					$(this).parent().removeClass('checked');				
+					if($(this).attr('for') == 'remember'){
+						deleteCookie("rememberId");
+					}
+					tar.prop("checked",false);
+				} else {
+					$(this).parent().addClass('checked');				
+					if($(this).attr('for') == 'remember'){
+						setCookie("rememberId", userId.value, 7);
+					}
+					tar.prop("checked",true);
+				}
+			}
+			console.log(tar.prop('checked'));
+			return false;
+		});
 	</script>
 </body>
 </html>

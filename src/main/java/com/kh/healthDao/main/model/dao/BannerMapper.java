@@ -24,4 +24,10 @@ public interface BannerMapper {
 	int deleteBanner2(String[] arr);
 
 	List<Banner> bannerRankList();
+
+	int getBannerListCount();
+
+	List<Banner> findBannreList(Map<String, Object> pageRow);
+
+	Banner bannerSelect(int main_no);
 }

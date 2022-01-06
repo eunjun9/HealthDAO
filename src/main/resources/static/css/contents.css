@@ -2818,8 +2818,8 @@ filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#555555', endC
 
 .tdName a{border-bottom:1px solid #222;box-sizing: border-box;}
 .tdImg img{width:100%;}
-#enrollMain .fileUploadArea li,
-#mainRollDetail .fileUploadArea li{width:188px;height:118px;}
+.bannerPop .fileUploadArea li,
+.bannerPop .fileUploadArea li{width:188px;height:118px;}
 
 /* 은정 part */
 /* 로그인 ---------------------------------- */

@@ -49,6 +49,6 @@ public class FileUploadController {
 		
 		String msg = bannerService.insertBanner(banner, originFileName, path, savedName) > 0 ? "등록 성공" : "등록 실패";
 
-		return "redirect:/banner";
+		return "redirect:/banner?page=1";
 	}
 }
