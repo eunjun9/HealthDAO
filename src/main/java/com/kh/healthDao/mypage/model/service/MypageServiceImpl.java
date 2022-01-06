@@ -7,13 +7,15 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.healthDao.admin.model.service.CouponService;
+import com.kh.healthDao.admin.model.vo.Coupon;
 import com.kh.healthDao.common.model.vo.Paging;
 import com.kh.healthDao.mypage.model.dao.MypageMapper;
 import com.kh.healthDao.mypage.model.vo.Qna;
 
 
 @Service("mypageService")
-public class MypageServiceImpl implements QnaService{
+public class MypageServiceImpl implements QnaService, MyCouponService{
 	
 	private final MypageMapper mypageMapper; 
 	
@@ -59,6 +61,11 @@ public class MypageServiceImpl implements QnaService{
 	@Override
 	public Qna qnaDetail(int qNo) {
 		return mypageMapper.qnaDetail(qNo);
+	}
+
+	@Override
+	public List<Coupon> couponEventList() {
+		return mypageMapper.couponEventList();
 	}
 
 }
