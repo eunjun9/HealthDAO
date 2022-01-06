@@ -4,12 +4,12 @@
 			<div class="contents">
 				<div class="utilMenu">
 					<ul>
-						<li><a href="/member/login">로그인</a></li>
-						<li><a href="/member/signUp">회원가입</a></li>
 						<th:block sec:authorize="isAnonymous()">
+							<li><a href="/member/login">로그인</a></li>
+							<li><a href="/member/signUp">회원가입</a></li>
 						</th:block>
 						<th:block sec:authorize="isAuthenticated()">
-						<li><a href="/member/logout">로그아웃</a></li>
+							<li><a href="/member/logout">로그아웃</a></li>
 						</th:block>
 						<li><a href="#">주문 조회</a></li>
 						<li><a href="#">고객센터</a></li>

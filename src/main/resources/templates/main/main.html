@@ -10,6 +10,12 @@
 	<div id="wrap" class="main">
 		<!-- HEADER + GNB -->
 		<th:block th:replace="common/header.html"></th:block>
+		<div align="right">
+		<!-- isAuthenticated() : 인증 되어 있는지 확인 (로그인 여부) -->
+		<th:block sec:authorize="isAuthenticated()">
+			<h3><span sec:authentication="principal.userName"></span>님 환영합니다. (로그인 확인용-임시)</h3>
+		</th:block>
+		</div>
 		<!--// HEADER + GNB -->
 	
 		<!-- container -->
