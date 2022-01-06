@@ -1,9 +1,11 @@
 package com.kh.healthDao.admin.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.kh.healthDao.admin.model.vo.Coupon;
 import com.kh.healthDao.admin.model.vo.Product;
 
 
@@ -24,6 +26,15 @@ public interface AdminMapper {
 	public int pLPopupSu(Product product);
 
 	public int insertproductStock(Product product);
+
+
+	public int couponInput(Coupon coupon);
+
+
+	public int allCouponListCount();
+
+
+	public List<Coupon> allCouponList(Map<String, Object> pageRow);
 
 	
 }

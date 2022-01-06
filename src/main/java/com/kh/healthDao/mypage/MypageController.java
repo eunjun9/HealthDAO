@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.healthDao.admin.model.vo.Coupon;
+import com.kh.healthDao.mypage.model.service.MyCouponService;
 import com.kh.healthDao.mypage.model.service.QnaService;
 import com.kh.healthDao.mypage.model.vo.Point;
 import com.kh.healthDao.mypage.model.vo.Qna;
@@ -22,11 +24,13 @@ import com.kh.healthDao.mypage.model.vo.Qna;
 public class MypageController {
 	
 	private QnaService qnaService;
+	private MyCouponService couponService;
 	private MessageSource messageSource;
 	
 	@Autowired
-	public MypageController(QnaService qnaService, MessageSource messageSource) {
+	public MypageController(QnaService qnaService, MyCouponService couponService, MessageSource messageSource) {
 		this.qnaService = qnaService;
+		this.couponService = couponService;
 		this.messageSource = messageSource;
 	}
 	
@@ -86,9 +90,14 @@ public class MypageController {
 	
 	/* 쿠폰받기 이벤트 */
 	@GetMapping("/event/couponEvent")
-	public String couponEvent() {
-		return "mypage/couponEvent";
+	public ModelAndView couponEvent(ModelAndView mv) {
+		List<Coupon> couponList = couponService.couponEventList();
+		mv.addObject("couponList", couponList);
+		mv.setViewName("mypage/couponEvent");
+		
+		return mv;
 	}
+	
 	
 	/* 내 쿠폰 */
 	@GetMapping("/myCoupon")

@@ -2,6 +2,7 @@ package com.kh.healthDao.admin.model.service;
 
 import java.util.List;
 
+import com.kh.healthDao.admin.model.vo.Coupon;
 import com.kh.healthDao.admin.model.vo.Product;
 
 public interface AdminService {
@@ -19,6 +20,10 @@ public interface AdminService {
 	public int pLPopupSu(Product product);
 
 	public int insertproductStock(Product product);
+
+	List<Product> listProductInventory();
+
+
 	
 	
 
