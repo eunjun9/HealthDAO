@@ -38,38 +38,7 @@
 		        WHERE USER_NO = 6
 		        ORDER BY Q_NO DESC) A
 		    )
-		<if test="page != null">
-			WHERE ROWNUM BETWEEN #{startRow} AND #{endRow}
-		</if>
-		<if test="page == null">
-			WHERE ROWNUM BETWEEN 1 AND 10
-		</if>
-	</select>
-	
-	<select id="pagingQnaList" resultMap="qnaResultMap" parameterType="hashmap">
-		SELECT *
-		FROM
-		    (SELECT ROWNUM RNUM, A.*
-		            FROM
-		            (SELECT 
-		            Q_NO
-		            , Q_DEPT
-		            , Q_DEPT_CODE
-		            , USER_ID
-		            , Q_TITLE
-		            , Q_CONTENT
-		            , Q_DATE
-		            , Q_STATUS
-		            , REPLY
-		            , REPLY_DATE
-		            , REPLY_MODIFY_DATE
-		        FROM QNA
-		        JOIN QNA_DEPT USING(Q_DEPT_CODE)
-		        JOIN MEMBER USING(USER_NO)
-		        WHERE USER_NO = 6
-		        ORDER BY Q_NO DESC) A
-		    )
-		WHERE ROWNUM BETWEEN #{startRow} AND #{endRow}
+			WHERE RNUM BETWEEN #{startRow} AND #{endRow}
 	</select>
 	
 	<select id="getQnaListCount" resultType="_int">

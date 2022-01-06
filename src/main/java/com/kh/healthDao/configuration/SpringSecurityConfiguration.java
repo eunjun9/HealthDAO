@@ -21,7 +21,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter{
    
    @Autowired
    public SpringSecurityConfiguration(MemberService memberService) {
-      this.memberService = memberService;
+      this.memberService = memberService;	
    }
 
    /* 암호화에 사용될 객체 BCryptPasswordEncoder
@@ -67,7 +67,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter{
             /* 로그인 설정 */
             .formLogin()
             /* 로그인 페이지 설정 */
-            .loginPage("/common/header")
+            .loginPage("/member/login")
             /* 로그인 성공 시 랜딩 페이지 설정 */
             .successForwardUrl("/")
          .and()

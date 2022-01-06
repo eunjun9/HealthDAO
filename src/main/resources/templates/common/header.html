@@ -4,8 +4,8 @@
 			<div class="contents">
 				<div class="utilMenu">
 					<ul>
-						<li><a href="#loginLayer" onclick="loginLayer();return false;">로그인</a></li>
-						<li><a href="/signUp">회원가입</a></li>
+						<li><a href="/member/login">로그인</a></li>
+						<li><a href="/member/signUp">회원가입</a></li>
 						<th:block sec:authorize="isAnonymous()">
 						</th:block>
 						<th:block sec:authorize="isAuthenticated()">

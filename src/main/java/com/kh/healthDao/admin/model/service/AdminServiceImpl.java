@@ -1,7 +1,5 @@
 package com.kh.healthDao.admin.model.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,13 +16,15 @@ public class AdminServiceImpl implements AdminService{
 		this.adminMapper = adminMapper;
 	}
 	
-	// 상품 등록
+	
+
 	@Override
 	public void registNewProduct(Product newProduct) {
 		
-		
 	}
+	
 
+	// 상품 등록
 	@Override
 	public int RegistProduct(Product product) {
 		return adminMapper.RegistProduct(product);
@@ -34,6 +34,13 @@ public class AdminServiceImpl implements AdminService{
 	public List<Product> listProductInventory() {
 		
 		return adminMapper.listProductInventory();
+	}
+
+
+	// 재고 수량 입력
+	@Override
+	public int insertproductStock(Product product) {
+		return adminMapper.insertproductStock(product);
 	}
 
 	

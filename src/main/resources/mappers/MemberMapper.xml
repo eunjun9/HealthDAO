@@ -95,8 +95,8 @@
 		  , SYSDATE
 		  , DEFAULT
 		  , NULL
-		  , 'Y'
-		  , 'Y'
+		  , #{ emailReceive }
+		  , #{ smsReceive }
 		  , 0
 		)
 	</insert>
@@ -114,5 +114,11 @@
 		  , #{ authorityCode }
 		)
 	</insert>
+	
+	<!-- id 중복체크 -->
+	<select id="idChk" resultType="int">
+		SELECT COUNT(*) FROM MEMBER
+		WHERE USER_ID = #{ userId }
+	</select>
 
 </mapper>
