@@ -37,6 +37,7 @@
 									<div class="trainerDetail5">
 										<div class="trainerDetail6">
 											<!-- 트레이너 이름 넣는 곳 -->
+											<input type="hidden" class="starSumAjax" th:value="${trainer.tNo}"/>
 											<span class="trainerName" th:text="${trainer.member.userName}"/>
 											<div>
 												<span style="font-size: 12px; color:#FFBB33;">★</span>
@@ -95,6 +96,29 @@
 	<style>
 		#quick{display:none;}
 	</style>
+
+	<!-- <script>
+	
+	
+		$(document).ready(function starAjax() {
+			var param = {"tNo" : $(".starSumAjax").val()}
+		    $.ajax({
+		        url: encodeURI("/trainer/starSumAjax"),
+		        data: JSON.stringify(param),
+		        type:"POST",
+		        contentType: "application/json; charset=utf-8;",
+		        dataType: "json",
+		        success: function(result){
+		        	
+		        },
+		        error: function(e){
+		        	console.log(e);
+		        }
+		    });
+		    
+		});
+		
+	</script> -->
 	
 	
 </body>
