@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kh.healthDao.review.model.vo.Review;
 import com.kh.healthDao.trainer.model.dao.TrainerMapper;
 import com.kh.healthDao.trainer.model.vo.PtOrder;
 import com.kh.healthDao.trainer.model.vo.Trainer;
@@ -22,49 +21,26 @@ public class TrainerServiceImpl implements TrainerService{
 	}
 	
 	@Override
-	public List<Trainer> trainerList() {
-		return trainerMapper.trainerList();
+	public List<Trainer> TrainerList() {
+		return trainerMapper.TrainerList();
 	}
 
 	@Override
-	public Trainer trainerSelect(int tNo) {
-		return trainerMapper.trainerSelect(tNo);
+	public Trainer TrainerSelect(int tNo) {
+		return trainerMapper.TrainerSelect(tNo);
 	}
 
 	@Override
-	public int trainerModify(Trainer trainer) {
-		return trainerMapper.trainerModify(trainer);
+	public int TrainerModify(Trainer trainer) {
+		return trainerMapper.TrainerModify(trainer);
 	}
 
 	@Override
-	public List<PtOrder> trainerOrderList() {
-		return trainerMapper.trainerOrderList();
+	public List<PtOrder> TrainerOrderList() {
+		return trainerMapper.TrainerOrderList();
 	}
 
-	@Override
-	public List<Review> trainerReviewList(int tNo) {
-		return trainerMapper.trainerReviewList(tNo);
-	}
 
-	@Override
-	public int trainerInsert(Trainer trainer) {
-		return trainerMapper.trainerInsert(trainer);
-	}
-
-	@Override
-	public int sumPtOrder() {
-		return trainerMapper.sumPtOrder();
-	}
-
-	@Override
-	public int sumTrainer() {
-		return trainerMapper.sumTrainer();
-	}
-
-	@Override
-	public int sumReview() {
-		return trainerMapper.sumReview();
-	}
 
 
 

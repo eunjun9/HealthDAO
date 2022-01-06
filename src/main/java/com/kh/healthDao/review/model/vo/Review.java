@@ -2,8 +2,6 @@ package com.kh.healthDao.review.model.vo;
 
 import java.util.Date;
 
-import com.kh.healthDao.member.model.vo.Member;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,7 +19,5 @@ public class Review {
 	private Date modifyDate;	// 수정일자
 	private int payNo;			// 주문번호
 	private int userNo;			// 유저번호
-	
-	private Member member;		// 멤버테이블
 	
 }

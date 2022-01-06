@@ -44,22 +44,7 @@
 		</association>
 	</resultMap>
 
-	<resultMap id="trainerReviewListMap" type="com.kh.healthDao.review.model.vo.Review">
-		<id property="reviewNo" column="REVIEW_NO"/>
-		<result property="category" column="CATEGORY"/>
-		<result property="star" column="STAR"/>
-		<result property="rContent" column="R_CONTENT"/>
-		<result property="rDate" column="R_DATE"/>
-		<result property="modifyDate" column="MODIFY_DATE"/>
-		<result property="payNo" column="PAY_NO"/>
-		<result property="userNo" column="USER_NO"/>
-			<association javaType="com.kh.healthDao.member.model.vo.Member" property="member">
-				<id property="userNo" column="USER_NO"/>
-				<result property="userName" column="USER_NAME"/>
-			</association>
-	</resultMap>
-	
-	<select id="trainerList" resultMap="trainerResultMap">
+	<select id="TrainerList" resultMap="trainerResultMap">
 		SELECT
 		       T.T_NO
 		     , T.T_GYM_NAME
@@ -81,8 +66,8 @@
 		  FROM TRAINER T
 		  JOIN MEMBER M ON(T.T_NO = M.USER_NO)
           JOIN PT_ORDER O ON(T.T_NO = O.T_NO)
-          LEFT OUTER JOIN REVIEW R ON(O.PAY_NO = R.PAY_NO)
-         GROUP BY T.T_NO
+          JOIN REVIEW R ON(O.PAY_NO = R.PAY_NO)
+         GROUP BY 		       T.T_NO
 		     , T.T_GYM_NAME
 		     , T.T_GYM_ADDRESS
 		     , T.T_AREA
@@ -102,7 +87,7 @@
 <!-- <select id="TrainerSelect" resultMap="trainerResultMap" parameterType="_int">
 	select t_no from trainer where T_NO = #{tNo}
 </select> -->
-<select id="trainerSelect" resultMap="trainerResultMap" parameterType="_int">
+<select id="TrainerSelect" resultMap="trainerResultMap" parameterType="_int">
 		 SELECT
 		       T.T_NO
 		     , T.T_GYM_NAME
@@ -124,8 +109,8 @@
 		  FROM TRAINER T
 		  JOIN MEMBER M ON(T.T_NO = M.USER_NO)
           JOIN PT_ORDER O ON(T.T_NO = O.T_NO)
-          LEFT OUTER JOIN REVIEW R ON(O.PAY_NO = R.PAY_NO)
-         GROUP BY T.T_NO
+          JOIN REVIEW R ON(O.PAY_NO = R.PAY_NO)
+         GROUP BY 		       T.T_NO
 		     , T.T_GYM_NAME
 		     , T.T_GYM_ADDRESS
 		     , T.T_AREA
@@ -143,20 +128,19 @@
 		HAVING T.T_NO = #{tNo}
 	</select> 
 	
-	<update id="trainerModify" parameterType="com.kh.healthDao.trainer.model.vo.Trainer">
+	<update id="TrainerModify" parameterType="com.kh.healthDao.trainer.model.vo.Trainer">
 		UPDATE TRAINER
 		   SET T_AREA_INTRO = #{tAreaIntro}
 		     , T_ONE_INTRO = #{tOneIntro}
 		     , T_PRICE = #{tPrice}
 		     , T_AREA = #{tArea}
-		     , T_METRO = #{tMetro}
 		     , WEEKDAY_SC = #{weekDaySc}
 		     , WEEKAND_SC = #{weekAndSc}
 		     , T_INTRO = #{tIntro}
 		 where T_NO = #{tNo}
 	</update>
 	
-	<select id="trainerOrderList" resultMap="trainerOrderMap">
+	<select id="TrainerOrderList" resultMap="trainerOrderMap">
 		SELECT
 		       P.PT_NO
 		     , P.PT_DATE
@@ -169,79 +153,10 @@
 		  FROM PT_ORDER P
 		  JOIN TRAINER T ON(P.T_NO = T.T_NO)
 		  JOIN MEMBER M ON(T.T_NO = M.USER_NO)
-		 <!-- WHERE P.USER_ID=1 -->
+		 WHERE P.USER_ID=1
 	</select>
+
+
 	
-	<select id="trainerReviewList" resultMap="trainerReviewListMap" parameterType="_int">
-		SELECT
-		       R.REVIEW_NO
-		     , R.STAR
-		     , R.R_CONTENT
-		     , R.R_DATE
-		     , R.MODIFY_DATE
-		     , M.USER_NO
-		     , M.USER_NAME
-		  FROM REVIEW R
-		  JOIN PT_ORDER O ON(R.PAY_NO = O.PAY_NO)
-		  JOIN TRAINER T ON(O.T_NO = T.T_NO)
-		  JOIN MEMBER M ON(R.USER_NO = M.USER_NO)
-		 WHERE T.T_NO = #{tNo}
-	</select>
-	
-	<insert id="trainerInsert" parameterType="com.kh.healthDao.trainer.model.vo.Trainer">
-		INSERT
-		  INTO TRAINER
-		  (
-		    T_NO
-		  , T_GYM_NAME
-		  , T_GYM_ADDRESS
-		  , T_AREA
-		  , T_METRO
-		  , T_AREA_INTRO
-		  , T_ONE_INTRO
-		  , T_PRICE
-		  , WEEKDAY_SC
-		  , WEEKAND_SC
-		  , T_INTRO
-		  , QUE_INTRO
-		  )
-		  VALUES
-		  (
-		    3
-		  , #{tGymName}
-		  , '없음'
-		  , #{tArea}
-		  , #{tMetro}
-		  , #{tAreaIntro}
-		  , #{tOneIntro}
-		  , #{tPrice}
-		  , #{weekDaySc}
-		  , #{weekAndSc}
-		  , #{tIntro}
-		  , #{queIntro}
-		  )
-	</insert>
-	
-	<select id="sumPtOrder" resultType="_int">
-		SELECT
-		       COUNT(*)
-		  FROM PT_ORDER
-	</select>
-	
-	<select id="sumTrainer" resultType="_int">
-		SELECT
-		       COUNT(*)
-		  FROM TRAINER
-	</select>
-	
-	<select id="sumReview" resultType="_int">
-		SELECT
-		       COUNT(*)
-		  FROM REVIEW
-		 WHERE CATEGORY='PT'
-	</select>
-	
-	
-	
-	
+
 </mapper>
