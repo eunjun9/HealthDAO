@@ -39,6 +39,13 @@ public class AdminServiceImpl implements AdminService{
 
 	// 재고 수량 입력
 	@Override
+	public int pLPopupSu(Product product) {
+
+		return adminMapper.pLPopupSu(product);
+	}
+
+
+	@Override
 	public int insertproductStock(Product product) {
 		return adminMapper.insertproductStock(product);
 	}
