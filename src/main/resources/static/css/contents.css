@@ -2830,7 +2830,7 @@ filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#555555', endC
 .login .btn_sns li {
 	width: 240px;
 }
-/* 회원가입 ---------------------------------------------------------------------------------------------------- */
+/* 회원가입 --------------------------------- */
 .memberJoin .joinMain { 
     padding-top: 80px; 
 }
@@ -2859,12 +2859,14 @@ filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#555555', endC
 }
 .memberJoin #inp_id,
 .memberJoin #inp_nic,
-.memberJoin #inp_phn {
+.memberJoin #inp_phn,
+.memberJoin #inp_eml {
     width: 390px;
 }
 .memberJoin .inp_id .btn,
 .memberJoin .inp_nic .btn,
-.memberJoin .inp_phn .btn {
+.memberJoin .inp_phn .btn,
+.memberJoin .inp_eml .btn {
     width: 148px;
     margin-left: 8px;
 }
@@ -3065,12 +3067,14 @@ filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#555555', endC
 .myPageMIMf .inp_gender {
     margin-top: 4px !important;
 }
-.myPageMIMf #inp_nic {
-    width: 388px; /*340*/
+.myPageMIMf #inp_nic,
+.myPageMIMf #inp_eml {
+    width: 388px;
 }
 .myPageMIMf .inp_id .btn,
 .myPageMIMf .inp_nic .btn,
-.myPageMIMf .inp_phn .btn {
+.myPageMIMf .inp_phn .btn,
+.myPageMIMf .inp_eml .btn {
     width: 148px;
     margin-left: 8px;
 }
@@ -3115,11 +3119,14 @@ filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#555555', endC
 	-webkit-transition:Transform 0.5s ease;-o-transition:Transform 0.5s ease;transition:Transform 0.5s ease;}
 .myPageMIMf .btnColorR:hover:before{-webkit-transform:scale(0,1);-ms-transform:scale(0,1);transform:scale(0,1);
 	-webkit-transform-origin:right center;transform-origin:right center;}
-.myPageMIMf .btnColorR:after{color:#fff; background:#FF5B5D;}
-.myPageMIMf .btnColorR:hover{color:#fff; border-color:#FF5B5D;}
+.myPageMIMf .btnColorR:after{color:#fff;}
+.myPageMIMf .btnColorR:hover{color:#FF5B5D; border-color:#FF5B5D;}
 .myPageMIMf .btnColorR:hover:after{
 	-webkit-transform-origin:left center;transform-origin:left center;
 	-webkit-transform:scale(1);-ms-transform:scale(1);transform:scale(1);}
+.myPageMIMf .inp_gender .active {
+    color:#FF5B5D; border-color:#FF5B5D;
+}
 .myPageMIMf .tblType1 {
     border-top: 0px;
 }
