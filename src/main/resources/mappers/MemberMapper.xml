@@ -95,8 +95,22 @@
 		  , SYSDATE
 		  , DEFAULT
 		  , NULL
+		  <choose>
+		  <when test="emailReceive != null">
 		  , #{ emailReceive }
+		  </when>
+		  <otherwise>
+		  , 'N'
+		  </otherwise>
+		  </choose>
+		  <choose>
+		  <when test="smsReceive != null">
 		  , #{ smsReceive }
+		  </when>
+		  <otherwise>
+		  , 'N'
+		  </otherwise>
+		  </choose>
 		  , 0
 		)
 	</insert>
