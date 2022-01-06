@@ -7,7 +7,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kh.healthDao.admin.model.service.CouponService;
 import com.kh.healthDao.admin.model.vo.Coupon;
 import com.kh.healthDao.common.model.vo.Paging;
 import com.kh.healthDao.mypage.model.dao.MypageMapper;
@@ -67,7 +66,8 @@ public class MypageServiceImpl implements QnaService, MyCouponService{
 	@Override
 	public List<Coupon> couponEventList() {
 		return mypageMapper.couponEventList();
-
+	}
+	
 	// 포인트 내역
 	@Override
 	public List<Point> pointList() {
