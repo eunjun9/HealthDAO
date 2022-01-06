@@ -11,6 +11,7 @@ import com.kh.healthDao.admin.model.service.CouponService;
 import com.kh.healthDao.admin.model.vo.Coupon;
 import com.kh.healthDao.common.model.vo.Paging;
 import com.kh.healthDao.mypage.model.dao.MypageMapper;
+import com.kh.healthDao.mypage.model.vo.Point;
 import com.kh.healthDao.mypage.model.vo.Qna;
 
 
@@ -66,6 +67,13 @@ public class MypageServiceImpl implements QnaService, MyCouponService{
 	@Override
 	public List<Coupon> couponEventList() {
 		return mypageMapper.couponEventList();
+
+	// 포인트 내역
+	@Override
+	public List<Point> pointList() {
+		
+		return mypageMapper.pointList();
+
 	}
 
 }

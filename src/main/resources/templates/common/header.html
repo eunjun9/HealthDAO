@@ -4,12 +4,12 @@
 			<div class="contents">
 				<div class="utilMenu">
 					<ul>
-						<li><a href="/member/login">로그인</a></li>
-						<li><a href="/member/signUp">회원가입</a></li>
 						<th:block sec:authorize="isAnonymous()">
+							<li><a href="/member/login">로그인</a></li>
+							<li><a href="/member/signUp">회원가입</a></li>
 						</th:block>
 						<th:block sec:authorize="isAuthenticated()">
-						<li><a href="/member/logout">로그아웃</a></li>
+							<li><a href="/member/logout">로그아웃</a></li>
 						</th:block>
 						<li><a href="#">주문 조회</a></li>
 						<li><a href="#">고객센터</a></li>
@@ -98,7 +98,7 @@
 					<ul class="gnbLink">
 						<li><a href="/shopping/ranking/">랭킹</a></li>
 						<li><a href="/shopping/newProduct/">신상품</a></li>
-						<li><a href="/shopping/foodProduct">식품</a></li>
+						<li><a href="/shopping/foodProduct/">식품</a></li>
 						<li><a href="/shopping/beverageProduct/">음료</a></li>
 						<li><a href="/shopping/goodsProduct/">운동·생활용품</a></li>
 						<li><a href="/trainer/">주변 PT 찾기</a></li>

@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.healthDao.admin.model.vo.Coupon;
 import com.kh.healthDao.mypage.model.service.MyCouponService;
 import com.kh.healthDao.mypage.model.service.QnaService;
+import com.kh.healthDao.mypage.model.vo.Point;
 import com.kh.healthDao.mypage.model.vo.Qna;
 
 @Controller
@@ -160,8 +161,14 @@ public class MypageController {
 		
 	/* 보유 포인트 내역 */
 	@GetMapping("/point")
-	public String point() {
-		return "mypage/point";
+	public ModelAndView point(ModelAndView mv) {
+		
+		List<Point> PointList = qnaService.pointList();
+		
+		mv.addObject("pointList", PointList);
+		mv.setViewName("mypage/point");
+		
+		return mv;
 	}
 	
 	/* 출석 체크 */

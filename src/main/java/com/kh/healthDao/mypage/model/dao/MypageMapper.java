@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.kh.healthDao.admin.model.vo.Coupon;
+import com.kh.healthDao.mypage.model.vo.Point;
 import com.kh.healthDao.mypage.model.vo.Qna;
 
 
@@ -23,5 +24,8 @@ public interface MypageMapper {
 	int qnaModify(Qna modifyQna);
 
 	List<Coupon> couponEventList();
+
+	List<Point> pointList();
+
 
 }

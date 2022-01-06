@@ -13,15 +13,18 @@ import com.kh.healthDao.admin.model.vo.Product;
 @Mapper
 public interface AdminMapper {
 
+	
+	public void register(Product product);
 
 	// 상품 등록
 	public int RegistProduct(Product product);
-
 
 	// 상품 재고
 	public List<Product> listProductInventory();
 
 	// 재고 수량 입력
+	public int pLPopupSu(Product product);
+
 	public int insertproductStock(Product product);
 
 

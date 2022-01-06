@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +23,6 @@ public class AdminServiceImpl implements AdminService, CouponService{
 		this.adminMapper = adminMapper;
 	}
 	
-
-
 	// 상품 등록
 	@Override
 	public int RegistProduct(Product product) {
@@ -38,6 +37,13 @@ public class AdminServiceImpl implements AdminService, CouponService{
 
 
 	// 재고 수량 입력
+	@Override
+	public int pLPopupSu(Product product) {
+
+		return adminMapper.pLPopupSu(product);
+	}
+
+
 	@Override
 	public int insertproductStock(Product product) {
 		return adminMapper.insertproductStock(product);
