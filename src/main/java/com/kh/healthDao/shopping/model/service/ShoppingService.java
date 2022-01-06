@@ -17,4 +17,6 @@ public interface ShoppingService {
 
 	List<Product> goodsShoppingList();
 
+	Product shoppingSelect(int productNo);
+
 }

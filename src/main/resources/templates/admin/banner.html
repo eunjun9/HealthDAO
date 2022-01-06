@@ -114,11 +114,48 @@
 		$('#quick .quickArea').css({'position':'absolute', 'top':290});
 
 	    function submit(){
+	    	if($('input[name="main_name"]').val() == ''){
+	       		alert('배너명을 넣어주세요');
+	       		console.log($('input[name="imgUpload"]').val());
+	       		return false;	    		
+	    	}
+	    	if($('input[name="main_url"]').val() == ''){
+	       		alert('url을 넣어주세요');
+	       		return false;	    		
+	    	}
+	    	if($('input[name="imgUpload"]').val() == ''){
+	       		alert('이미지는 꼭 넣어야 됩니다😵');
+	       		return false;
+	    	}
+	    	if($('input[name="main_rank"]').val() == ''){
+	       		alert('순위를 넣어야 됩니다');
+	       		return false;
+	    	}
 	       	document.enroll.submit();
 	    }
+
+	    var loadFile = function(event) {
+	        var reader = new FileReader();
+	        $(".imgCutting").remove();	// 클릭하면 일단 삭제
+	        $(".imgUpload").val('');	// 클릭하면 일단 삭제
+			var html = '';
+	        reader.onload = function(e){
+				html+= '<li class="imgCutting">';
+				html+= '<div class="imgBox">';
+				html+= '	<img src="'+e.target.result+'" alt="">';
+				html+= '</div>';
+				html+= '</li>';
+				$('.fileUploadArea').append(html);
+				//이미지 맞추기
+				imgCrop();
+				html = "";
+	        };
+	        
+	        reader.readAsDataURL(event.target.files[0]);
+	      };
 	</script>
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
-
+	<div><img src="#" id="imgCutting"></div>
 	<!-- 메인롤링 등록 -->
 	<div id="enrollMain" class="lyPopArea">
 	    <div class="lyPop">
@@ -135,7 +172,7 @@
 										<div class="inp_wrap">
 											<div class="inp_text sizeS">
 												<input type="text" name="main_name" id="name" placeholder="메인 롤링 배너 뇽뇽🎄🎄">
-												<button class="btn_clear"><span>clear</span></button>
+												<button class="btn_clear" type="button"><span>clear</span></button>
 											</div>
 										</div>
 									</dd>
@@ -146,7 +183,7 @@
 										<div class="inp_wrap">
 											<div class="inp_text sizeS">
 												<input type="text" name="main_url" id="url" placeholder="/event?no=1">
-												<button class="btn_clear"><span>clear</span></button>
+												<button class="btn_clear" type="button"><span>clear</span></button>
 											</div>
 										</div>
 									</dd>
@@ -155,7 +192,10 @@
 									<dt>사진 추가</dt>
 									<dd>
 										<ul class="fileUploadArea">
-											<li><label for="imgUpload"><span class="hide">업로드</span></label><input type="file" class="hide" name="imgUpload" id="imgUpload" multiple accept="image/*"></li>
+											<li>
+												<label for="imgUpload"><span class="hide">업로드</span>
+												</label><input type="file" class="hide" name="imgUpload" id="imgUpload" multiple accept="image/*" onchange="loadFile(event)">												
+											</li>
 										</ul>
 										<p class="mgt5 fs14">파일첨부 (1개) <span class="fc88">5MB미만 jpg,gif,png 파일 가능</span></p>
 									</dd>
@@ -168,7 +208,7 @@
 										<div class="inp_wrap">
 											<div class="inp_text sizeS">
 												<input type="text" name="main_rank" id="rank" placeholder="1">
-												<button class="btn_clear"><span>clear</span></button>
+												<button class="btn_clear" type="button"><span>clear</span></button>
 											</div>
 										</div>
 									</dd>
@@ -215,7 +255,7 @@
 									<div class="inp_wrap">
 										<div class="inp_text sizeS">
 											<input type="text" name="name" id="name" value="메인 롤링 배너 뇽뇽🎄🎄">
-											<button class="btn_clear"><span>clear</span></button>
+											<button class="btn_clear" type="button"><span>clear</span></button>
 										</div>
 									</div>
 								</dd>
@@ -226,7 +266,7 @@
 									<div class="inp_wrap">
 										<div class="inp_text sizeS">
 											<input type="text" name="url" id="url" value="/event?no=1">
-											<button class="btn_clear"><span>clear</span></button>
+											<button class="btn_clear" type="button"><span>clear</span></button>
 										</div>
 									</div>
 								</dd>
@@ -254,7 +294,7 @@
 									<div class="inp_wrap">
 										<div class="inp_text sizeS">
 											<input type="text" name="rank" id="rank" value="1">
-											<button class="btn_clear"><span>clear</span></button>
+											<button class="btn_clear" type="button"><span>clear</span></button>
 										</div>
 									</div>
 								</dd>
@@ -295,98 +335,46 @@
 	                <p>정말 삭제하시겠습니까?</p>
 	                <div class="btn_wrap length2">
 	                    <a href="javascript:void(0);" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorW btnTypeR"><span>취소</span></a>
-	                    <a href="javascript:void(0);" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></a>
+	                    <a href="javascript:void(0);" onclick="deleteBanner();" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></a>
 	                </div>
 	            </div>
 	        </div>
 	    </div>
 	</div>
+	<script>
+		function deleteBanner(){
+			let chk = $('.checked:not(.allChk) input[name="inp_check1"]:checked');		
+			let chkLength = chk.length;	// 체크된 갯수
+			let arr = {
+				"arrVal" : []
+			};	
+			if(chkLength >= 1){
+				for(var i = 0; i < chkLength; i++){
+					arr.arrVal.push(chk[i].value);	// 체크된 값 배열에 담기
+				}
+				console.log(arr.arrVal);			// 배열에 담긴 값
+				$.ajax({
+					url : "/banner/delete",
+					data : JSON.stringify(arr),
+					contentType: 'application/json',
+					type : "post",
+					success : function(arr){
+						console.log(arr);
+						if(arr){
+							alert('삭제되었습니다');
+							location.reload();
+						}else{
+							alert('실패');
+						}
+					},
+					error : function(e){
+						console.log(e);
+					}
+				});
+			}else{
+				alert('선택된 값이 없습니다.');
+			}
+		}
+	</script>
 </body>
 </html>
-<script>
-	//파일 등록	
-	var fileBuffer = []; 	// 이미지 저장배열
-	var fileCnt = 0;	// 이미지 개수
-	
-	$(document).off('change','#enrollMain #imgUpload').on('change','#enrollMain #imgUpload',function(){		
-		const target = $(this);
-		var targetFilesCnt = target[0].files.length;
-		
-		//유효성 검사
-		if(fileBuffer.length >= 1){
-			alert("이미지는 최대 1개까지 첨부 가능합니다.");
-			return;
-		}else if(targetFilesCnt + fileBuffer.length > 1){
-			alert("이미지는 최대 1개까지 첨부 가능합니다.");
-			return;
-		}else if(fileCnt + targetFilesCnt > 1){ //기존이미지와 신규이미지 개수의 합
-			alert("이미지는 최대 1개까지 첨부 가능합니다.");
-			return;
-		}			
-		
-		var validateChk = true;		
-		//유효성 검사
-		$.each(target[0].files,function(index,file){
-			const fileName = file.name;
-			var fileNameExtensionIndex = fileName.lastIndexOf('.') + 1;
-		    var fileNameExtension = fileName.toLowerCase().substring(fileNameExtensionIndex, fileName.length);
-		    if (!((fileNameExtension === 'jpg') || (fileNameExtension === 'gif') || (fileNameExtension === 'png') || (fileNameExtension === 'jpeg'))){
-		    	alert("상품 이미지는 이미지 파일(gif,jpg,jpeg,png)만 등록 가능합니다");
-		    	validateChk = false;
-		    	return;
-		    }
-		    
-		    if(file.size > 1024 * 1024 * 5){
-		    	alert("사진은 최대 5mb미만으로 첨부 가능합니다.");
-		    	validateChk = false;
-		    	return;
-		    }
-		});
-		
-		if(!validateChk)return false;
-		
-		//filebuffer 저장
-		Array.prototype.push.apply(fileBuffer, target[0].files);
-		
-		var html = '';
-		$.each(target[0].files,function(index,file){
-			
-			//미리보기
-			var reader = new FileReader();
-			var fileUrl;
-			reader.onload = function(e) {
-					const fileName = file.name;
-					html+= '<li class="imgCutting">';
-					html+= '<div class="imgBox">';
-					html+= '	<img src="'+e.target.result+'" alt="">';
-					html+= '</div>';
-					html+= '<a href="javascript:void(0)" class="closeLink"><span class="hide">close</span></a>';
-					html+= '</li>';
-					$('.fileUploadArea').append(html);
-					//이미지 맞추기
-					imgCrop();
-					html = "";
-			};
-			
-			reader.readAsDataURL(file);
-			
-			fileCnt++;
-		});
-	});
-	
-	//파일삭제
-	$(document).off("click","#enrollMain .imgCutting .closeLink").on('click','#enrollMain .imgCutting .closeLink',function(){
-		var imgno = $(this).parent("li").find("#reviewImgNo").val();
-		const fileIndex = $(this).parent("li").index();
-		
-		fileCnt--;//파일개수 감소
-		
-		if(imgno){//기존등록된 이미지면 delimgno에만 push
-			delimgno.push(imgno);
-		}else{//신규 등록된 이미지면 fileBuffer에서 제거
-			fileBuffer.splice(fileIndex-1,1);
-		}
-		
-		$('.fileUploadArea > li:eq('+fileIndex+')').remove();
-	});
-</script>

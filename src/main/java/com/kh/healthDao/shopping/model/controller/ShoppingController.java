@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.healthDao.admin.model.vo.Product;
@@ -86,15 +87,15 @@ public class ShoppingController {
 		return mv;
 	}
 	
-//	@GetMapping("/detail")
-//	public ModelAndView shoppingDetail(ModelAndView mv, @RequestParam int tNo) {
-//		
-//		Shopping trainer = ShoppingService.shoppingSelect(tNo);
-//		
-//		mv.addObject("trainer", trainer);
-//		mv.setViewName("trainer/trainerDetail");
-//		
-//		return mv;
-//	}
+	@GetMapping("/detail")
+	public ModelAndView shoppingDetail(ModelAndView mv, @RequestParam int productNo) {
+		
+		//Product shoppingDetail = shoppingService.shoppingSelect(productNo);
+		
+		//mv.addObject("shopping", shoppingDetail);
+		mv.setViewName("shopping/shoppingProductDetail");
+		
+		return mv;
+	}
 
 }

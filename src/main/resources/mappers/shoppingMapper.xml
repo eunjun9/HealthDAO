@@ -30,6 +30,7 @@
 			  , CATEGORY_ID
 			  , P_MEMBERSHIP
 		 FROM PRODUCT
+		 ORDER BY PRODUCT_NO DESC
 	</select>
 	
 	<select id="NewProductSelect" resultMap="productResultMap" parameterType="_int">
@@ -40,6 +41,7 @@
 			  , PRODUCT_PRICE
 			  
 		 FROM PRODUCT
+		 ORDER BY PRODUCT_NO DESC
 	</select>
 	
 	<select id="foodShoppingList" resultMap="productResultMap">
@@ -51,6 +53,7 @@
 			  , CATEGORY_ID 
 		 FROM PRODUCT
 		WHERE CATEGORY_ID='식품'
+		ORDER BY PRODUCT_NO DESC
 	</select>
 	
 	<select id="beverageShoppingList" resultMap="productResultMap">
@@ -62,6 +65,7 @@
 			  , CATEGORY_ID 
 		 FROM PRODUCT
 		WHERE CATEGORY_ID='음료'
+		ORDER BY PRODUCT_NO DESC
 	</select>
 	
 	<select id="goodsShoppingList" resultMap="productResultMap">
@@ -73,6 +77,27 @@
 			  , CATEGORY_ID 
 		 FROM PRODUCT
 		WHERE CATEGORY_ID='운동기구'
+		ORDER BY PRODUCT_NO DESC
 	</select>
+	
+	<select id="shoppingSelect" resultMap="productResultMap" parameterType="_int">
+		SELECT
+				PRODUCT_NO
+			  , PRODUCT_BRAND
+			  , PRODUCT_TITLE
+			  
+		 FROM PRODUCT
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 </mapper>

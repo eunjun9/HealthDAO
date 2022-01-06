@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.healthDao.main.model.service.BannerService;
@@ -15,9 +17,20 @@ import com.kh.healthDao.main.model.vo.Banner;
 @Controller
 public class MainController {
 
+	/*
+	 * @GetMapping(value= {"/", "/main"}) public String main() { return "main/main";
+	 * }
+	 */
+
 	@GetMapping(value= {"/", "/main"})
-	public String main() {
-		return "main/main";
+	public ModelAndView findBannerRankList(ModelAndView mv) {
+		
+		List<Banner> bannerList = bannerService.bannerRankList();
+		
+		mv.addObject("bannerList", bannerList);
+		mv.setViewName("main/main");
+		
+		return mv;
 	}
 	
 	@PostMapping(value= {"/", "/main"})
@@ -65,6 +78,19 @@ public class MainController {
 		
 		mv.addObject("bannerList", bannerList);
 		mv.setViewName("admin/banner");
+		
+		return mv;
+	}
+	
+	@ResponseBody
+	@PostMapping("/banner/delete")
+	public ModelAndView deleteBanner(ModelAndView mv, @RequestBody String[] arr) {
+		
+		System.out.println(arr);
+		int result = bannerService.deleteBanner(arr);
+		
+		mv.addObject("result", result);
+		mv.setViewName("banner/bannerDetail");
 		
 		return mv;
 	}

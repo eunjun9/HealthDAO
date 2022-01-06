@@ -1,6 +1,12 @@
 package com.kh.healthDao.admin;
 
+
 import java.util.List;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,8 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.healthDao.admin.model.service.AdminService;
 import com.kh.healthDao.admin.model.vo.Product;
 import com.kh.healthDao.manager.model.vo.Qna;
-
-
 
 
 @Controller
@@ -52,10 +56,12 @@ public class adminController {
 	public ModelAndView managerInventoryList(ModelAndView mv) {
 		
 		List<Product> ProductList = adminService.listProductInventory();
+
 		
 		mv.addObject("ProductList", ProductList);
 		mv.setViewName("admin/inventoryList");
 		
+
 		return mv;
 	}
 	

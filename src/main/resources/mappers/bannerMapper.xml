@@ -26,6 +26,21 @@
 		  JOIN AT_FILE USING(F_NO)
 	</select>
 	
+	<select id="bannerRankList" resultMap="bannerResultMap">
+		SELECT					   
+			    MAIN_NO
+			  , MAIN_NAME
+			  , MAIN_RANK
+			  , MAIN_URL
+			  , MAIN_STATUS
+			  , FILE_PATH
+			  , CHANGE_FILE
+		  FROM BANNER
+		  JOIN BANNER_FILE USING(MAIN_NO)
+		  JOIN AT_FILE USING(F_NO)
+         ORDER BY MAIN_RANK ASC
+	</select>
+	
 	<select id="getListCount" resultMap="bannerResultMap">
 		SELECT					   
 			    COUNT(*)
@@ -80,6 +95,14 @@
 		  , SEQ_MAIN_NO.CURRVAL
 		)
 	</insert>
-	
-
+	<delete id="deleteBanner">
+		DELETE
+				BANNER_FILE
+		 WHERE MAIN_NO = #{main_no}
+	</delete>
+	<delete id="deleteBanner2">
+		DELETE
+				BANNER
+		 WHERE MAIN_NO = #{main_no}
+	</delete>
 </mapper>
