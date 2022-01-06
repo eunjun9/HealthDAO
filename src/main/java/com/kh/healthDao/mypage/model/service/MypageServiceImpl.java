@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.healthDao.common.model.vo.Paging;
 import com.kh.healthDao.mypage.model.dao.MypageMapper;
+import com.kh.healthDao.mypage.model.vo.Point;
 import com.kh.healthDao.mypage.model.vo.Qna;
 
 
@@ -59,6 +60,13 @@ public class MypageServiceImpl implements QnaService{
 	@Override
 	public Qna qnaDetail(int qNo) {
 		return mypageMapper.qnaDetail(qNo);
+	}
+
+	// 포인트 내역
+	@Override
+	public List<Point> pointList() {
+		
+		return mypageMapper.pointList();
 	}
 
 }

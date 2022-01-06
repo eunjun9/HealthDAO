@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.kh.healthDao.mypage.model.vo.Point;
 import com.kh.healthDao.mypage.model.vo.Qna;
 
 
@@ -20,6 +21,8 @@ public interface MypageMapper {
 	Qna qnaDetail(int qNo);
 
 	int qnaModify(Qna modifyQna);
+
+	List<Point> pointList();
 
 
 }

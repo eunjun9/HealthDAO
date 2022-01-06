@@ -3,6 +3,7 @@ package com.kh.healthDao.mypage.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.healthDao.mypage.model.vo.Point;
 import com.kh.healthDao.mypage.model.vo.Qna;
 
 public interface QnaService {
@@ -14,5 +15,8 @@ public interface QnaService {
 	Map<String, Object> findQnaList(int page);
 	// 문의 디테일
 	Qna qnaDetail(int qNo);
+	
+	// 포인트 내역
+	List<Point> pointList();
 	
 }
