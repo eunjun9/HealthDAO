@@ -1,6 +1,7 @@
 package com.kh.healthDao.shopping.model.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,11 +42,14 @@ public class ShoppingController {
 	
 	// 쇼핑 신상품
 	@GetMapping("/newProduct")
-	public ModelAndView shoppingNewProduct(ModelAndView mv) {
+	public ModelAndView shoppingNewProduct(ModelAndView mv, @RequestParam int page) {
 		
-		List<Product> shoppingList = shoppingService.ShoppingList();
+		Map<String, Object> map = shoppingService.shoppingList(page);
 		
-		mv.addObject("shoppingList", shoppingList);
+		mv.addObject("shoppingList", map.get("shoppingList"));
+		mv.addObject("listCount", map.get("listCount"));
+		mv.addObject("pi", map.get("pi"));
+		
 		mv.setViewName("shopping/shoppingNewProduct");
 		
 		return mv;
@@ -53,11 +57,14 @@ public class ShoppingController {
 	
 	// 쇼핑 식품
 	@GetMapping("/foodProduct")
-	public ModelAndView shoppingFoodProduct(ModelAndView mv) {
+	public ModelAndView shoppingFoodProduct(ModelAndView mv, @RequestParam int page) {
 		
-		List<Product> shoppingList = shoppingService.foodShoppingList();
+		Map<String, Object> map = shoppingService.foodShoppingList(page);
 		
-		mv.addObject("shoppingList", shoppingList);
+		mv.addObject("shoppingList", map.get("shoppingList"));
+		mv.addObject("listCount", map.get("listCount"));
+		mv.addObject("pi", map.get("pi"));
+		
 		mv.setViewName("shopping/shoppingFoodProduct");
 		
 		return mv;
@@ -90,9 +97,9 @@ public class ShoppingController {
 	@GetMapping("/detail")
 	public ModelAndView shoppingDetail(ModelAndView mv, @RequestParam int productNo) {
 		
-		//Product shoppingDetail = shoppingService.shoppingSelect(productNo);
+		Product shoppingDetail = shoppingService.shoppingDetail(productNo);
 		
-		//mv.addObject("shopping", shoppingDetail);
+		mv.addObject("shoppingDetail", shoppingDetail);
 		mv.setViewName("shopping/shoppingProductDetail");
 		
 		return mv;

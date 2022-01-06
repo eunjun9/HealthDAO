@@ -16,6 +16,29 @@
 		
 	</resultMap>
 	
+	<select id="shoppingList" resultMap="productResultMap" parameterType="hashmap">
+		SELECT *
+		FROM
+		    (SELECT ROWNUM RNUM, A.*
+		            FROM
+		            (SELECT
+				PRODUCT_NO
+			  , PRODUCT_BRAND
+			  , PRODUCT_TITLE
+			  , PRODUCT_PRICE
+			  , PRODUCT_BENEFIT
+			  , PRODUCT_NOTICE
+			  , PRODUCT_INFO
+			  , PRODUCT_VIEW
+			  , PRODUCT_STOCK
+			  , CATEGORY_ID
+			  , P_MEMBERSHIP
+		 FROM PRODUCT
+		 ORDER BY PRODUCT_NO DESC) A
+		    )
+			WHERE RNUM BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
 	<select id="ShoppingList" resultMap="productResultMap">
 		SELECT
 				PRODUCT_NO
@@ -32,6 +55,20 @@
 		 FROM PRODUCT
 		 ORDER BY PRODUCT_NO DESC
 	</select>
+	
+	<select id="shoppingListCount" resultType="_int">
+      SELECT
+          COUNT(*)
+	      FROM
+	      (SELECT
+	            PRODUCT_NO
+	           , PRODUCT_BRAND
+	           , PRODUCT_TITLE
+	           , PRODUCT_PRICE
+	           
+	       FROM PRODUCT
+	       ORDER BY PRODUCT_NO DESC)
+   </select>
 	
 	<select id="NewProductSelect" resultMap="productResultMap" parameterType="_int">
 		SELECT
@@ -80,15 +117,12 @@
 		ORDER BY PRODUCT_NO DESC
 	</select>
 	
-	<select id="shoppingSelect" resultMap="productResultMap" parameterType="_int">
+	<select id="shoppingDetail" resultMap="productResultMap" parameterType="_int">
 		SELECT
 				PRODUCT_NO
-			  , PRODUCT_BRAND
 			  , PRODUCT_TITLE
-			  
 		 FROM PRODUCT
 	</select>
-	
 	
 	
 	
