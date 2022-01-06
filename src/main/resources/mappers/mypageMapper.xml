@@ -15,6 +15,16 @@
 		<result property="replyModifyDate" column="REPLY_MODIFY_DATE" />
 	</resultMap>
 	
+	<resultMap id="pointMap" type="com.kh.healthDao.mypage.model.vo.Point">
+		<id property="pointNo" column="POINT_NO"/>
+		<result property="pointamount" column="POINT_AMOUNT" />
+		<result property="pointIssueDate" column="POINT_ISSUEDATE" />
+		<result property="pointEndDate" column="POINT_ENDDATE" />
+		<result property="userNo" column="USER_NO" />
+		<result property="pCategoryNo" column="P_CATEGORY_NO" />
+		<result property="pCategoryName" column="P_CATEGORY_NAME" />
+	</resultMap>
+	
 	<select id="findQnaList" resultMap="qnaResultMap" parameterType="hashmap">
 		SELECT *
 		FROM
@@ -115,4 +125,22 @@
 			, Q_CONTENT = #{qContent}
 		WHERE Q_NO = #{qNo}
 	</update>
+	
+	<select id="pointList" resultMap="pointMap" parameterType="com.kh.healthDao.mypage.model.vo.Point">
+		SELECT 
+		      POINT_NO
+		    , POINT_AMOUNT
+		    , POINT_ISSUEDATE
+		    , POINT_ENDDATE
+		    , USER_NO
+		    , P_CATEGORY_NO
+		    , P_CATEGORY_NAME
+		  FROM POINT
+		  JOIN POINT_CATEGORY USING(P_CATEGORY_NO)
+	</select>
+
+	
+	
+	
+	
 </mapper>
