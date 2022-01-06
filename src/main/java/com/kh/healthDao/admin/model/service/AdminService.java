@@ -21,7 +21,6 @@ public interface AdminService {
 
 	public int insertproductStock(Product product);
 
-	List<Product> listProductInventory();
 
 
 	
