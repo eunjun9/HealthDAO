@@ -81,6 +81,12 @@ public class AdminServiceImpl implements AdminService, CouponService{
 		
 		return coupon;
 	}
+
+	@Override
+	public void registNewProduct(Product newProduct) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	

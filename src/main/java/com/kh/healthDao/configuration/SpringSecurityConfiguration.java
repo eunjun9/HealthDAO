@@ -35,7 +35,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter{
    /* 정적 리소스는 권한 없이도 접근 가능하게끔 무시할 경로 작성 */
    @Override
    public void configure(WebSecurity web) {
-      web.ignoring().antMatchers("/css/**", "/js/**", "/images/**");
+      web.ignoring().antMatchers("/css/**", "/js/**", "/images/**", "/trainer/**");
    }
    
    /* HTTP 요청에 대한 설정 */
