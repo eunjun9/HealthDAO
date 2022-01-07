@@ -30,7 +30,8 @@
 							1:1문의하기
 						</p>
 						<form action="/mypage/qnaInsert" method="post">
-							<input type="hidden" name="userNo" id="userNo" value="<sec:authentication property='principal.userName'>" />
+							<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /> <!-- 시큐리티 405에러 방지 -->
+							<input type="hidden" th:value="${#authentication.principal.userNo}" name="userNo" />
 	                        <div class="inp_wrap">
 	                            <label class="inp_lab" for="ipt_label">문의유형</label>
 	                            <div class="inp_select">

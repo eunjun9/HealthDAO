@@ -27,5 +27,9 @@ public interface MypageMapper {
 
 	List<Point> pointList();
 
+	int myCouponInsert(Map<String, Object> map);
+
+	List<Coupon> myCouponList(int userNo);
+
 
 }

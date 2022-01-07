@@ -5,15 +5,19 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.healthDao.admin.model.vo.Coupon;
+import com.kh.healthDao.member.model.vo.UserImpl;
 import com.kh.healthDao.mypage.model.service.MyCouponService;
 import com.kh.healthDao.mypage.model.service.QnaService;
 import com.kh.healthDao.mypage.model.vo.Point;
@@ -41,8 +45,10 @@ public class MypageController {
 	
 	/* 1:1 문의 */
 	@GetMapping("/qna")
-	public ModelAndView qna(ModelAndView mv, @RequestParam int page) {
-		Map<String, Object> map = qnaService.findQnaList(page);
+	public ModelAndView qna(ModelAndView mv, @RequestParam int page, @AuthenticationPrincipal UserImpl userImpl) {
+		
+		int userNo = userImpl.getUserNo();
+		Map<String, Object> map = qnaService.findQnaList(page, userNo);
 		
 		mv.addObject("qnaList", map.get("qnaList"));
 		mv.addObject("listCount", map.get("listCount"));
@@ -98,11 +104,27 @@ public class MypageController {
 		return mv;
 	}
 	
+	@PostMapping("/event/couponEvent")
+	@ResponseBody
+	public String myCouponInsert(int pNo, @AuthenticationPrincipal UserImpl userImpl, RedirectAttributes rttr) {
+		int userNo = userImpl.getUserNo();
+		
+		String msg = couponService.myCouponInsert(pNo, userNo) > 0 ? "success" : "fail";
+		
+		return msg;
+	}
+	
 	
 	/* 내 쿠폰 */
 	@GetMapping("/myCoupon")
-	public String myCoupon() {
-		return "mypage/couponList";
+	public ModelAndView myCoupon(ModelAndView mv, @AuthenticationPrincipal UserImpl userImpl) {
+		int userNo = userImpl.getUserNo();
+		
+		List<Coupon> myCouponList = couponService.myCouponList(userNo);
+		mv.addObject("couponList", myCouponList);
+		mv.setViewName("mypage/couponList");
+		
+		return mv;
 	}
 	
 	/* 내가 쓴 리뷰 */
