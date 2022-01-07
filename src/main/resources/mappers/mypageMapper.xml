@@ -54,7 +54,7 @@
 		        FROM QNA
 		        JOIN QNA_DEPT USING(Q_DEPT_CODE)
 		        JOIN MEMBER USING(USER_NO)
-		        WHERE USER_NO = 6
+		        WHERE USER_NO = #{userNo}
 		        ORDER BY Q_NO DESC) A
 		    )
 			WHERE RNUM BETWEEN #{startRow} AND #{endRow}
@@ -145,10 +145,22 @@
 		    , END_DATE
 		FROM COUPON
 		<![CDATA[
-		WHERE START_DATE < SYSDATE 
-		AND END_DATE > SYSDATE
+		WHERE START_DATE > SYSDATE 
+		OR END_DATE > SYSDATE
 		]]>
 	</select>
+	
+	<insert id="myCouponInsert" parameterType="hashmap">
+		INSERT INTO MEMBER_COUPON(
+			  P_NO
+			, USER_NO
+			, P_STATUS
+		)VALUES(
+		      #{pNo}
+		    , #{userNo}
+		    , DEFAULT
+		)
+	</insert>
 
 	
 	<select id="pointList" resultMap="pointMap" parameterType="com.kh.healthDao.mypage.model.vo.Point">
@@ -163,7 +175,25 @@
 		  FROM POINT
 		  JOIN POINT_CATEGORY USING(P_CATEGORY_NO)
 	</select>
-
+	
+	<select id="myCouponList" resultMap="couponResultMap">
+		SELECT
+		      P_NO
+		    , P_NAME
+		    , P_SALE
+		    , START_DATE
+		    , END_DATE
+		FROM MEMBER_COUPON
+		JOIN COUPON USING(P_NO)
+		WHERE USER_NO = 21
+		AND P_STATUS = 'N'
+		<![CDATA[
+		AND (
+		START_DATE > SYSDATE 
+		OR END_DATE > SYSDATE
+		)
+		]]>
+	</select>
 	
 
 </mapper>
