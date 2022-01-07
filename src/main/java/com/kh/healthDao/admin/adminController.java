@@ -93,6 +93,11 @@ public class adminController {
 	}
 	
 	// 쿠폰등록
+	@GetMapping("/couponInput")
+	public String couponInput() {
+		return "admin/couponInput";
+	}
+	
 	@PostMapping("/couponInput")
 	public String couponInput(Coupon coupon, RedirectAttributes rttr) {
 		String msg = couponService.couponInput(coupon) > 0 ? "쿠폰 등록 성공" : "쿠폰 등록 실패";
