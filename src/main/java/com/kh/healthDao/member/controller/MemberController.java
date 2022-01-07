@@ -1,5 +1,7 @@
 package com.kh.healthDao.member.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +34,13 @@ public class MemberController {
 	public void findIdPwd() {}
 	
 	@PostMapping("/signUp")
-	public String signUp(Member member) {
+	public String signUp(HttpServletRequest hsr, Member member) {
+		
+		String b1 = hsr.getParameter("userBirth");
+		String b2 = hsr.getParameter("userBirth2");
+		String b3 = hsr.getParameter("userBirth3");
+		String birth = b1+b2+b3;
+		member.setUserBirth(birth);
 		
 		memberService.signUp(member);
 		/*
