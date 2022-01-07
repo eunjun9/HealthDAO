@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kh.healthDao.member.model.dao.MemberMapper;
 import com.kh.healthDao.member.model.vo.Authority;
 import com.kh.healthDao.member.model.vo.Member;
+import com.kh.healthDao.member.model.vo.MemberGrade;
 import com.kh.healthDao.member.model.vo.MemberRole;
 import com.kh.healthDao.member.model.vo.UserImpl;
 
@@ -81,6 +82,11 @@ public class MemberServiceImpl implements MemberService{
 		MemberRole memberRole = new MemberRole();
 		memberRole.setAuthorityCode(1);
 		memberMapper.insertMemberRole(memberRole);
+		
+		/* MEMBER_GRADE INSERT */
+		MemberGrade memberGrade = new MemberGrade();
+		memberGrade.setUserGrade("일반회원");
+		memberMapper.insertMemberGrade(memberGrade);
 	}
 
 	@Override

@@ -49,7 +49,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter{
           * CSRF 공격 방어를 위해 referrer 검증 => 요청 도메인이 일치하는지 검증함
           * Spring Security CSRF Token 사용 => 임의의 토큰 방급 후 자원에 대한 "변경" 요청일 경우 token 값 확인
           *  */
-         //.csrf().disable()
+         .csrf().disable()
          /* 요청에 대한 권한 체크 */
          .authorizeRequests()
             /* 요청 보안 수준의 세부적인 설정

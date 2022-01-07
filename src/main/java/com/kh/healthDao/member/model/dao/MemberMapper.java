@@ -3,6 +3,7 @@ package com.kh.healthDao.member.model.dao;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.kh.healthDao.member.model.vo.Member;
+import com.kh.healthDao.member.model.vo.MemberGrade;
 import com.kh.healthDao.member.model.vo.MemberRole;
 
 @Mapper
@@ -16,6 +17,8 @@ public interface MemberMapper {
 	void insertMember(Member member);
 
 	void insertMemberRole(MemberRole memberRole);
+	
+	void insertMemberGrade(MemberGrade memberGrade);
 	
 	// 아이디 중복 체크
 	int idChk(Member member);
