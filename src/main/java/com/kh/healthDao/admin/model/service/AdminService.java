@@ -2,7 +2,6 @@ package com.kh.healthDao.admin.model.service;
 
 import java.util.List;
 
-import com.kh.healthDao.admin.model.vo.Coupon;
 import com.kh.healthDao.admin.model.vo.Product;
 
 public interface AdminService {

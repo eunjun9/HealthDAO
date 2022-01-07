@@ -80,7 +80,7 @@
 		     , M.USER_PHONE
 		  FROM TRAINER T
 		  JOIN MEMBER M ON(T.T_NO = M.USER_NO)
-          JOIN PT_ORDER O ON(T.T_NO = O.T_NO)
+          LEFT OUTER JOIN PT_ORDER O ON(T.T_NO = O.T_NO)
           LEFT OUTER JOIN REVIEW R ON(O.PAY_NO = R.PAY_NO)
          GROUP BY T.T_NO
 		     , T.T_GYM_NAME
@@ -99,10 +99,7 @@
 		     , M.USER_PHONE
 	</select>
 
-<!-- <select id="TrainerSelect" resultMap="trainerResultMap" parameterType="_int">
-	select t_no from trainer where T_NO = #{tNo}
-</select> -->
-<select id="trainerSelect" resultMap="trainerResultMap" parameterType="_int">
+	<select id="trainerSelect" resultMap="trainerResultMap" parameterType="_int">
 		 SELECT
 		       T.T_NO
 		     , T.T_GYM_NAME
@@ -123,7 +120,7 @@
              , ROUND((SUM(R.STAR)) / COUNT(R.REVIEW_NO), 1) AS AVG_STAR
 		  FROM TRAINER T
 		  JOIN MEMBER M ON(T.T_NO = M.USER_NO)
-          JOIN PT_ORDER O ON(T.T_NO = O.T_NO)
+          LEFT OUTER JOIN PT_ORDER O ON(T.T_NO = O.T_NO)
           LEFT OUTER JOIN REVIEW R ON(O.PAY_NO = R.PAY_NO)
          GROUP BY T.T_NO
 		     , T.T_GYM_NAME
@@ -207,7 +204,7 @@
 		  )
 		  VALUES
 		  (
-		    3
+		    4
 		  , #{tGymName}
 		  , '없음'
 		  , #{tArea}

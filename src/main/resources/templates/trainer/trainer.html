@@ -35,18 +35,18 @@
 		<div class="trainerMain">
 			<div class="trainerMain2">
 				<h2><span>이용 고객</span></h2><br>
-				<h1><span style="color: orange;">453</span></h1><br>
-				<h2><span>453명의 고객이<br>PT를 신청했어요!</span></h2>
+				<h1><span style="color: orange;" th:text="${sumPtOrder}"/></h1><br>
+				<h2><span th:text="${sumPtOrder}+'명의 고객이'"/><br>PT를 신청했어요!</h2>
 			</div>
 			<div class="trainerMain2">
 				<h2><span>활동중인 트레이너</span></h2><br>
-				<h1><span style="color: orange;">782</span></h1><br>
-				<h2><span>전문 트레이너 782 명이<br>활동중이에요!</span></h2>
+				<h1><span style="color: orange;" th:text="${sumTrainer}"/></h1><br>
+				<h2><span th:text="'전문 트레이너 '+${sumTrainer}+'명이'"/><br>활동중이에요!</h2>
 			</div>
 			<div class="trainerMain2">
 				<h2><span>등록된 후기</span></h2><br>
-				<h1><span style="color: orange;">1820</span></h1><br>
-				<h2><span>누적 1820개 PT 후기를<br>확인해보세요</span></h2>
+				<h1><span style="color: orange;" th:text="${sumReview}"/></h1><br>
+				<h2><span th:text="'누적 '+${sumReview}+'개 PT 후기를'"/><br>확인해보세요</h2>
 			</div>
 		</div>
 		<div class="btn_wrap" style="margin-top: 50px">
@@ -63,13 +63,14 @@
 			<div class="lyTit">트레이너 등록</div>
 			<div class="lyBody">
 				<div class="form_area">
+				<form class="trainerInsertForm" name="trainerInsertForm" action="/trainer/insert" method="post">
 					<dl>
 						<dt><label for="deliRegId"><span class="fcRed">*</span>센터 이름</label></dt>
 						<dd>
 							<!-- 200330 에러 메세지 추가 -->
 							<div class="inp_wrap error">
 								<div class="inp_text sizeS">
-									<input type="text" name="" id="deliRegId" placeholder="ex) 별림 휘트니스">
+									<input type="text" name="tGymName" id="deliRegId" placeholder="ex) 별림 휘트니스">
 								</div>
 								<p class="error">센터 이름을 입력해주세요.</p>
 							</div>
@@ -82,7 +83,7 @@
 							<!-- 200330 에러 메세지 추가 -->
 							<div class="inp_wrap error">
 								<div class="inp_text sizeS">
-									<input type="text" name="" id="deliRegName" placeholder="ex) 강남역 도보 6분">
+									<input type="text" name="tAreaIntro" id="deliRegName" placeholder="ex) 강남역 도보 6분">
 								</div>
 								<p class="error">위치를 입력하세요.</p>
 							</div>
@@ -95,7 +96,7 @@
 							<!-- 200330 에러 메세지 추가 -->
 							<div class="inp_wrap error">
 								<div class="inp_text sizeS">
-									<input type="text" name="" id="deliRegName" placeholder="ex) 13년 경력/ 다이어트. 근력증가. 바디프로필 전문">
+									<input type="text" name="tOneIntro" id="deliRegName" placeholder="ex) 13년 경력/ 다이어트. 근력증가. 바디프로필 전문">
 								</div>
 								<p class="error">소개를 입력하세요.</p>
 							</div>
@@ -108,7 +109,7 @@
 							<!-- 200330 에러 메세지 추가 -->
 							<div class="inp_wrap error">
 								<div class="inp_text sizeS yb">
-									<input type="text" name="" id="deliRegHphone">원
+									<input type="text" name="tPrice" id="deliRegHphone">원
 								</div>
 								<p class="error">가격을 입력해주세요.</p>
 							</div>
@@ -121,7 +122,7 @@
 							<!-- 200330 에러 메세지 추가 -->
 							<div class="inp_wrap error">
 								<div class="inp_text sizeS" style="width: 150px;">
-									<input type="text" name="" id="deliRegHphone" placeholder="ex) 전북">
+									<input type="text" name="tArea" id="deliRegHphone" placeholder="ex) 전북">
 								</div>
 								<p class="error">지역을 입력해주세요.</p>
 							</div>
@@ -134,7 +135,7 @@
 							<!-- 200330 에러 메세지 추가 -->
 							<div class="inp_wrap error">
 								<div class="inp_text sizeS" style="width: 150px;">
-									<input type="text" name="" id="deliRegHphone" placeholder="ex) 가양역">
+									<input type="text" name="tMetro" id="deliRegHphone" placeholder="ex) 가양역">
 								</div>
 								<p class="error">지하철역을 입력해주세요.</p>
 							</div>
@@ -145,7 +146,7 @@
 						<dt><label for="deliRegName"><span class="fcRed">*</span>평일 스케줄</label></dt>
 						<dd>
 							<div class="inp_text sizeS">
-								<input type="text" name="" id="deliRegName" placeholder="ex) 09:00~21:00">
+								<input type="text" name=weekDaySc id="deliRegName" placeholder="ex) 09:00~21:00">
 							</div>
 						</dd>
 					</dl>
@@ -153,7 +154,7 @@
 						<dt><label for="deliRegName"><span class="fcRed">*</span>주말 스케줄</label></dt>
 						<dd>
 							<div class="inp_text sizeS">
-								<input type="text" name="" id="deliRegName" placeholder="ex) 09:00~18:00">
+								<input type="text" name="weekAndSc" id="deliRegName" placeholder="ex) 09:00~18:00">
 							</div>
 						</dd>
 					</dl>
@@ -161,7 +162,16 @@
 						<dt style="margin-right: 20px;"><label for="deliRegName"><span class="fcRed"></span>선생님 소개</label></dt>
 							<div class="inp_wrap">
 								<div class="inp_textArea yn">
-									<textarea>Start typing...</textarea>
+									<textarea name="tIntro" placeholder="선생님 소개를 입력해주세요."></textarea>
+									<div class="textarea-clone"></div>
+								</div>
+							</div>
+					</dl>
+					<dl>
+						<dt style="margin-right: 30px;"><label for="deliRegName"><span class="fcRed"></span>문의 소개</label></dt>
+							<div class="inp_wrap">
+								<div class="inp_textArea yn">
+									<textarea name="queIntro" placeholder="ex)수업 중에는 연락을 못 받을 수 있습니다."></textarea>
 									<div class="textarea-clone"></div>
 								</div>
 							</div>
@@ -175,10 +185,11 @@
 							</div>
 						</dd>
 					</dl>
+					</form>
 				</div>
 				<div class="btn_wrap length2">
-					<a href="/trainer/" class="btn btnSizeL btnArr btnColorW btnTypeR"><span>취소</span></a>
-					<a href="#" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></a>
+					<a href="#" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorW btnTypeR"><span>취소</span></a>
+					<a href="#" onclick="document.trainerInsertForm.submit();" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></a>
 				</div>
 			</div>
 		</div>
