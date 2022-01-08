@@ -46,20 +46,6 @@ public class BannerServiceImpl implements BannerService{
 		return result;
 	}
 
-	@Override
-	public int deleteBanner(String[] arr) {
-
-		int result1 = bannerMapper.deleteBanner(arr);
-		int result2 = bannerMapper.deleteBanner2(arr);
-		int result3 = bannerMapper.deleteBanner3(arr);
-
-		int result = 0;
-		
-		if(result1 > 0 && result2 > 0 && result3 > 0) {
-			result = 1;
-		}
-		return result;
-	}
 
 	@Override
 	public List<Banner> bannerRankList() {
@@ -99,13 +85,30 @@ public class BannerServiceImpl implements BannerService{
 	@Override
 	public int bannerUpdate(Map<String, Object> map) {
 		int result1 = bannerMapper.bannerUpdate(map);
-		int result2 = bannerMapper.bannerImgUpdate(map);
+		//int result2 = bannerMapper.bannerImgUpdate(map);
 				
 		int result = 0;
 		
-		if(result1 > 0 && result2 > 0) {
+		if(result1 > 0) {
 			result = 1;
 		}
+		return result;
+	}
+
+	@Override
+	public int deleteBanner(int value) {
+		int result1 = bannerMapper.deleteBanner(value);
+		int result2 = bannerMapper.deleteBanner2(value);
+		int result3 = bannerMapper.deleteBanner3(value);
+
+		int result = 0;
+		System.out.println("r1" + result1);
+		System.out.println("r2" + result2);
+		System.out.println("r3" + result3);
+		if(result1 > 0 && result2 > 0 && result3 > 0) {
+			result = 1;
+		}
+		System.out.println("r" + result);
 		return result;
 	}
 }

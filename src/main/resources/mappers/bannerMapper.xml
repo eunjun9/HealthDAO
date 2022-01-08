@@ -67,6 +67,7 @@
 		  FROM BANNER
 		  JOIN BANNER_FILE USING(MAIN_NO)
 		  JOIN AT_FILE USING(F_NO)
+		 WHERE MAIN_STATUS = 'Y'
          ORDER BY MAIN_RANK ASC
 	</select>
 	
@@ -126,18 +127,18 @@
 	</insert>
 	<delete id="deleteBanner">
 		DELETE
-				BANNER_FILE
-		 WHERE MAIN_NO = #{main_no}
+				AT_FILE
+		 WHERE F_NO = (SELECT F_NO FROM BANNER_FILE WHERE MAIN_NO = #{main_no})
 	</delete>
 	<delete id="deleteBanner2">
 		DELETE
-				BANNER
+				BANNER_FILE
 		 WHERE MAIN_NO = #{main_no}
 	</delete>
 	<delete id="deleteBanner3">
 		DELETE
-				AT_FILE
-		 WHERE F_NO = (SELECT F_NO FROM BANNER_FILE WHERE MAIN_NO = #{main_no})
+				BANNER
+		 WHERE MAIN_NO = #{main_no}
 	</delete>
 	
 	<select id="bannerSelect" resultMap="bannerResultMap" parameterType="_int">
