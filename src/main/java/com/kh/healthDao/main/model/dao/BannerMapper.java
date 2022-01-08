@@ -19,11 +19,11 @@ public interface BannerMapper {
 
 	int insertFileDB();
 
-	int deleteBanner(String[] arr);
+	int deleteBanner(int value);
 
-	int deleteBanner2(String[] arr);
+	int deleteBanner2(int value);
 
-	int deleteBanner3(String[] arr);
+	int deleteBanner3(int value);
 
 	List<Banner> bannerRankList();
 

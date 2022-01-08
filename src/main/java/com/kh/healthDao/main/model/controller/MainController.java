@@ -63,17 +63,6 @@ public class MainController {
 		this.bannerService = bannerService;
 	}
 	
-//	왜 안돼
-//	@GetMapping("/banner")
-//	public ModelAndView findBannerList(ModelAndView mv, @RequestParam int page){
-//		page=1;
-//		Map<String, Object> map = bannerService.bannerAllList(page);
-//
-//		mv.addObject("pi", map.get("pi"));
-//		mv.addObject("bannerList", map.get("bannerList"));
-//		mv.setViewName("admin/banner");
-//		return mv;
-//	}
 	
 	@GetMapping("/banner")
 	public ModelAndView findBannerList(ModelAndView mv, @RequestParam int page) {
@@ -90,15 +79,14 @@ public class MainController {
 	
 	@ResponseBody
 	@PostMapping("/banner/delete")
-	public ModelAndView deleteBanner(ModelAndView mv, @RequestBody String[] arr) {
+	public int deleteBanner(@RequestBody int[] addList) {
+		int result = 0;
+		for(int i = 0; i < addList.length; i++) {
+			result += bannerService.deleteBanner(addList[i]);			
+		}
+		System.out.println(result);
 		
-		System.out.println(arr);
-		int result = bannerService.deleteBanner(arr);
-		
-		mv.addObject("result", result);
-		mv.setViewName("banner/bannerDetail");
-		
-		return mv;
+		return result;
 	}
 
 	@PostMapping("/banner/select")
@@ -110,7 +98,7 @@ public class MainController {
 
 	@PostMapping("/banner/update")
 	@ResponseBody
-	public int updateBanner(int main_no, String main_name, String main_url, @RequestParam MultipartFile imgUpload, String main_status, int main_rank) {
+	public int updateBanner(int main_no, String main_name, String main_url, String imgUpload, String main_status, int main_rank) {
 		System.out.println(imgUpload);
 		
 		Map<String, Object> map = new HashMap<>();
