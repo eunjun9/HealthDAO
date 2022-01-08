@@ -16,4 +16,6 @@ public interface BannerService {
 	Map<String, Object> findBannerList(int page);
 
 	Banner bannerSelect(int main_no);
+
+	int bannerUpdate(Map<String, Object> map);
 }

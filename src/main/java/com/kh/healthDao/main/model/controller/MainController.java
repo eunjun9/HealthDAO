@@ -1,5 +1,6 @@
 package com.kh.healthDao.main.model.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.healthDao.main.model.service.BannerService;
@@ -98,13 +100,29 @@ public class MainController {
 		
 		return mv;
 	}
-	
-	@PostMapping("/banner/modify")
+
+	@PostMapping("/banner/select")
 	@ResponseBody
 	public Banner modifyBanner(int main_no) {
 		Banner banner = bannerService.bannerSelect(main_no);
 		return banner;
 	}
-	
+
+	@PostMapping("/banner/update")
+	@ResponseBody
+	public int updateBanner(int main_no, String main_name, String main_url, @RequestParam MultipartFile imgUpload, String main_status, int main_rank) {
+		System.out.println(imgUpload);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("main_no", main_no);
+		map.put("main_name", main_name);
+		map.put("main_url", main_url);
+		map.put("imgUpload", imgUpload);
+		map.put("main_status", main_status);
+		map.put("main_rank", main_rank);
+		
+		int result = bannerService.bannerUpdate(map);
+		return result;
+	}
 	
 }

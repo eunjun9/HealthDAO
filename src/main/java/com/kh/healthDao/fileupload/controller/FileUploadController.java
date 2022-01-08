@@ -25,7 +25,7 @@ public class FileUploadController {
 		this.bannerService = bannerService;
 	}
 
-	@PostMapping("/uploadBanner")
+	@PostMapping("/banner/upload")
 	public String singleFileUpload(Banner banner, @RequestParam MultipartFile imgUpload, @Value("${custom.path.upload-images}") String uploadImagesPath) {
 		
 		/* 파일을 저장할 경로 */
