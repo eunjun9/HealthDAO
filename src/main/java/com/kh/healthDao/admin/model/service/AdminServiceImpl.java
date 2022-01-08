@@ -127,6 +127,11 @@ public class AdminServiceImpl implements AdminService, CouponService, NoticeServ
 	public int noticeModify(Notice notice) {
 		return adminMapper.noticeModify(notice);
 	}
+
+	@Override
+	public int viewUpdate(int nNo) {		
+		return adminMapper.viewUpdate(nNo);
+	}
 	
 	
 	

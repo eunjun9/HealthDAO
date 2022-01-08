@@ -13,5 +13,7 @@ public interface NoticeService {
 	Notice noticeDetail(int nNo);
 
 	int noticeModify(Notice notice);
+
+	int viewUpdate(int nNo);
 	
 }

@@ -48,8 +48,10 @@ public interface AdminMapper {
 	
 	// 공지사항 디테일
 	public Notice noticeDetail(int nNo);
-
+	// 공지사항 수정
 	public int noticeModify(Notice notice);
+	// 공지사항 조회수
+	public int viewUpdate(int nNo);
 
 	
 }
