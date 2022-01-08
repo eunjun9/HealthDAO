@@ -26,5 +26,6 @@ public class Banner {
 	private String main_status;		// 상태
 	private String file_path;		// 파일경로
 	private String change_file;		// 파일명
+	private int f_no;				// 파일번호
 	
 }
