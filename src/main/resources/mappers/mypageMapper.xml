@@ -60,7 +60,7 @@
 			WHERE RNUM BETWEEN #{startRow} AND #{endRow}
 	</select>
 	
-	<select id="getQnaListCount" resultType="_int">
+	<select id="getQnaListCount" parameterType="com.kh.healthDao.mypage.model.vo.Qna" resultType="_int">
 		SELECT
 		    COUNT(*)
 		FROM
@@ -79,7 +79,7 @@
 		FROM QNA
 		JOIN QNA_DEPT USING(Q_DEPT_CODE)
 		JOIN MEMBER USING(USER_NO)
-		WHERE USER_NO = 6
+		WHERE USER_NO = #{userNo}
 		ORDER BY Q_NO DESC)
 	</select>
 	

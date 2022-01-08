@@ -55,7 +55,7 @@ public class MypageServiceImpl implements QnaService, MyCouponService{
 
 	@Override
 	public Map<String, Object> findQnaList(int page, int userNo) {
-		int listCount = mypageMapper.getQnaListCount();
+		int listCount = mypageMapper.getQnaListCount(userNo);
 		Paging pi = new Paging(page, listCount, 5, 10);
 		
 		int startRow = (pi.getPage() - 1) * pi.getBoardLimit() + 1;
