@@ -23,6 +23,8 @@ public interface BannerMapper {
 
 	int deleteBanner2(String[] arr);
 
+	int deleteBanner3(String[] arr);
+
 	List<Banner> bannerRankList();
 
 	int getBannerListCount();

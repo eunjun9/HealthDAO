@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.kh.healthDao.common.model.vo.Paging;
 import com.kh.healthDao.main.model.dao.BannerMapper;
 import com.kh.healthDao.main.model.vo.Banner;
-import com.kh.healthDao.main.model.vo.PageInfo;
 import com.kh.healthDao.mypage.model.vo.Qna;
 
 
@@ -27,13 +26,12 @@ public class BannerServiceImpl implements BannerService{
 	@Override
 	public int insertBanner(Banner banner, String originFileName, String path, String savedName) {
 		Map<String, Object> map = new HashMap<>();
+		banner.setFile_path("/images/upload/main/");
+		banner.setChange_file(savedName);
 		
 		map.put("banner", banner);
 		map.put("originFileName", originFileName);
-		// map.put("path", path);
-		map.put("path", "/images/upload/main/");
-		map.put("savedName", savedName);
-		System.out.println(banner + ", " + path + ", " + savedName);
+		System.out.println(banner);
 		
 		int result1 = bannerMapper.insertBanner(map);
 		int result2 = bannerMapper.insertFile(map);
@@ -53,10 +51,11 @@ public class BannerServiceImpl implements BannerService{
 
 		int result1 = bannerMapper.deleteBanner(arr);
 		int result2 = bannerMapper.deleteBanner2(arr);
+		int result3 = bannerMapper.deleteBanner3(arr);
 
 		int result = 0;
 		
-		if(result1 > 0 && result2 > 0) {
+		if(result1 > 0 && result2 > 0 && result3 > 0) {
 			result = 1;
 		}
 		return result;

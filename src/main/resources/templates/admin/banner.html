@@ -61,7 +61,14 @@
 											<th>노출상태</th>
 										</tr>
 									</thead>
-									<tbody>
+									<tbody th:if="${listCount == 0 }">
+										<tr>
+											<td colspan="7" class="noData">
+												<span>등록된 내용이 없습니다.<br>지금 바로 등록 해보세요.</span>
+											</td>
+										</tr>
+									</tbody>
+									<tbody th:unless="${listCount == 0 }">
 										<tr th:each="banner : ${bannerList}">
 											<td>
 												<span class="inp_check">
@@ -79,8 +86,7 @@
 									</tbody>
 								</table>
 							</div>
-							<div class="paging mgt50"
-								th:with="prev=${pi.page - 1}, next=${pi.page + 1}">
+							<div class="paging mgt50" th:unless="${listCount == 0 }" th:with="prev=${pi.page - 1}, next=${pi.page + 1}">
 							    <a th:href="@{/banner(page=1)}" class="first"><span class="hide">첫페이지</span></a>
 							    <a class="prev" href="/banner?page=" th:attrappend="href=${prev}"><span class="hide">이전페이지</span></a>
 							    <a th:each="page : ${#numbers.sequence(pi.startPage, pi.endPage)}" href="/banner?page=" th:attrappend="href=${page}" th:text="${page}" th:classappend="${page} == ${#httpServletRequest.getParameter('page')} ? active"></a>	                                   
