@@ -73,7 +73,7 @@ public class MypageController {
 	
 	/* 1:1 문의하기 */
 	@GetMapping("/qnaInsert")
-	public String qnaInsertView() {
+	public String qnaInsert() {
 		return "mypage/oneQuestionInsert";
 	}
 	

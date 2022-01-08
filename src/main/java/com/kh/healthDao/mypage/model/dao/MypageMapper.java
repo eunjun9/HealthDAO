@@ -17,7 +17,7 @@ public interface MypageMapper {
 
 	List<Qna> findQnaList(Map<String, Object> pageRow);
 
-	int getQnaListCount();
+	int getQnaListCount(int userNo);
 
 	Qna qnaDetail(int qNo);
 

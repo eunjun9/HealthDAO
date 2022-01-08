@@ -10,11 +10,12 @@ import org.springframework.stereotype.Service;
 
 import com.kh.healthDao.admin.model.dao.AdminMapper;
 import com.kh.healthDao.admin.model.vo.Coupon;
+import com.kh.healthDao.admin.model.vo.Notice;
 import com.kh.healthDao.admin.model.vo.Product;
 import com.kh.healthDao.common.model.vo.Paging;
 
 @Service("adminService")
-public class AdminServiceImpl implements AdminService, CouponService{
+public class AdminServiceImpl implements AdminService, CouponService, NoticeService{
 
 	private final AdminMapper adminMapper; 
 	
@@ -86,6 +87,45 @@ public class AdminServiceImpl implements AdminService, CouponService{
 	public void registNewProduct(Product newProduct) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public int noticeInsert(Notice notice) {		
+		return adminMapper.noticeInsert(notice);
+	}
+
+	@Override
+	public Map<String, Object> allNoticeList(int page) {
+		int listCount = adminMapper.allNoticeListCount();
+		Paging pi = new Paging(page, listCount, 5, 10);
+		
+		int startRow = (pi.getPage() - 1) * pi.getBoardLimit() + 1;
+		int endRow = startRow + pi.getBoardLimit() - 1;
+		
+		Map<String, Object> pageRow = new HashMap<>();
+		pageRow.put("page", page);
+		pageRow.put("startRow", startRow);
+		pageRow.put("endRow", endRow);
+		
+		List<Coupon> noticeList = adminMapper.allNoticeList(pageRow);
+		
+		Map<String, Object> notice = new HashMap<>();
+		
+		notice.put("listCount", listCount);
+		notice.put("noticeList", noticeList);
+		notice.put("pi", pi);
+		
+		return notice;
+	}
+
+	@Override
+	public Notice noticeDetail(int nNo) {	
+		return adminMapper.noticeDetail(nNo);
+	}
+
+	@Override
+	public int noticeModify(Notice notice) {
+		return adminMapper.noticeModify(notice);
 	}
 	
 	
