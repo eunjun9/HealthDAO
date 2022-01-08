@@ -30,4 +30,8 @@ public interface BannerMapper {
 	List<Banner> findBannreList(Map<String, Object> pageRow);
 
 	Banner bannerSelect(int main_no);
+
+	int bannerUpdate(Map<String, Object> map);
+
+	int bannerImgUpdate(Map<String, Object> map);
 }
