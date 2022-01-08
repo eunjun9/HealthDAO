@@ -199,4 +199,10 @@
 		  , N_CONTENT = #{nContent}
 		WHERE N_NO = #{nNo}
 	</update>
+	
+	<update id="viewUpdate" parameterType="_int">
+		UPDATE NOTICE 
+		SET N_VIEW = N_VIEW + 1
+		WHERE N_NO = #{nNo}
+	</update>
 </mapper>

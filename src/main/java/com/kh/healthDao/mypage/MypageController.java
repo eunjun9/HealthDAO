@@ -9,14 +9,15 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.healthDao.admin.model.service.NoticeService;
 import com.kh.healthDao.admin.model.vo.Coupon;
+import com.kh.healthDao.admin.model.vo.Notice;
 import com.kh.healthDao.member.model.vo.UserImpl;
 import com.kh.healthDao.mypage.model.service.MyCouponService;
 import com.kh.healthDao.mypage.model.service.QnaService;
@@ -30,12 +31,14 @@ public class MypageController {
 	private QnaService qnaService;
 	private MyCouponService couponService;
 	private MessageSource messageSource;
+	private NoticeService noticeService;
 	
 	@Autowired
-	public MypageController(QnaService qnaService, MyCouponService couponService, MessageSource messageSource) {
+	public MypageController(QnaService qnaService, MyCouponService couponService, MessageSource messageSource, NoticeService noticeService) {
 		this.qnaService = qnaService;
 		this.couponService = couponService;
 		this.messageSource = messageSource;
+		this.noticeService = noticeService;
 	}
 	
 	@GetMapping(value= {"/", "/myOrder"})
@@ -147,14 +150,28 @@ public class MypageController {
 	
 	/* 공지사항 */
 	@GetMapping("/notice")
-	public String notice() {
-		return "mypage/noticeList";
+	public ModelAndView notice(ModelAndView mv, @RequestParam int page) {
+		Map<String, Object> map = noticeService.allNoticeList(page);
+		
+		mv.addObject("noticeList", map.get("noticeList"));
+		mv.addObject("listCount", map.get("listCount"));
+		mv.addObject("pi", map.get("pi"));
+		mv.setViewName("mypage/noticeList");
+		
+		return mv;
 	}
 	
 	/* 공지사항 상세 */
 	@GetMapping("/noticeDetail")
-	public String noticeDetail() {
-		return "mypage/noticeDetail";
+	public ModelAndView noticeDetail(ModelAndView mv, @RequestParam int nNo) {
+		
+		int viewUpdate = noticeService.viewUpdate(nNo);
+		Notice notice = noticeService.noticeDetail(nNo);
+		
+		mv.addObject("notice", notice);
+		mv.setViewName("mypage/noticeDetail");
+		
+		return mv;
 	}
 	
 	/* 고객의 소리 */
