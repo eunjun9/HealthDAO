@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.healthDao.main.model.service.BannerService;
 import com.kh.healthDao.main.model.vo.Banner;
+import com.kh.healthDao.shopping.model.service.ShoppingService;
 
 
 @Controller
@@ -50,11 +51,6 @@ public class MainController {
 	public String time() {
 		return "admin/time";
 	}
-	@GetMapping("/file")
-	public String file() {
-		return "admin/fileuploadTest";
-	}
-
 
 	private BannerService bannerService;
 	
@@ -113,4 +109,31 @@ public class MainController {
 		return result;
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+//	private ShoppingService shoppingService;
+//	
+//	@Autowired
+//	public MainController(ShoppingService shoppingService) {
+//		this.shoppingService = shoppingService;
+//	}
+//	// 추천상품 검색
+//	@GetMapping("/reco")
+//	public ModelAndView pdtList(ModelAndView mv) {
+//		Map<String, Object> map = shoppingService.pdtList();
+//		mv.addObject("pdtList", map.get("pdtList"));
+//		mv.setViewName("admin/reco");
+//		return mv;
+//	}
 }

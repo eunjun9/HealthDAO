@@ -25,10 +25,6 @@ public interface ShoppingService {
 
 	Product shoppingDetail(int productNo);
 
-
-
-
-
-	
+	Map<String, Object> pdtList();
 
 }
