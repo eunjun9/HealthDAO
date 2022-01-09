@@ -104,5 +104,106 @@
 	<script type="text/javascript" src="../../js/main.js"></script>
 	<script type="text/javascript" src="../../js/eunjung.js"></script>
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+	
+	<!-- 아이디 찾기 결과 : 성공 -->
+	<div id="findIdSuccess" class="lyPopArea">
+		<div class="lyPop">
+			<div class="lyWrap">
+				<button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
+				<div class="lyTit">아이디 찾기 결과</div>
+				<div class="lyBody basic">
+					<p>입력하신 정보와 일치하는 아이디는 아래와 같습니다.</p>
+					<div class="find_id_pop">
+						<div>
+							<dl>
+								<dt>아이디</dt>
+								<dd>koreamase</dd>
+							</dl>
+							<dl>
+								<dt>가입일자</dt>
+								<dd>2019.03.14</dd>
+							</dl>
+						</div>
+					</div>
+					<div class="btn_wrap">
+						<a href="javascript:void(0);" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>로그인</span></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 아이디 찾기 결과 : 실패 -->
+	<div id="findIdFail" class="lyPopArea">
+		<div class="lyPop">
+			<div class="lyWrap">
+				<button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
+				<div class="lyTit">아이디 찾기 결과</div>
+				<div class="lyBody basic">
+					<p>입력하신 회원정보가 정확하지 않습니다.<br> 확인하신 후 다시 이용해주세요.</p>
+					<div class="btn_wrap">
+						<a href="javascript:void(0);" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 비밀번호 찾기 결과 : 성공 -->
+	<div id="findPwSuccess" class="lyPopArea">
+		<div class="lyPop">
+			<div class="lyWrap">
+				<button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
+				<div class="lyTit">비밀번호 찾기 결과</div>
+				<div class="lyBody basic">
+					<p>이메일이 발송되었습니다.<br> 새로운 비밀번호를 설정해주세요.</p>
+					<div class="inp_wrap mgt35">
+						<label class="inp_lab" for="find_new_pw_chk">인증번호</label>
+						<div class="inp_text">
+							<input type="password" id="find_new_pw_chk" placeholder="인증번호를 입력해주세요.">
+							<button type="button" class="btn_clear"><span>clear</span></button>
+						</div>
+						<p class="error">비밀번호가 일치하지 않습니다.</p>
+					</div>
+					<div class="inp_wrap mgt20">
+						<label class="inp_lab" for="find_new_pw">새 비밀번호</label>
+						<div class="inp_text">
+							<input type="password" id="find_new_pw" placeholder="새 비밀번호를 입력해주세요. (영문/숫자조합 6~12자 이내)">
+							<button type="button" class="btn_clear"><span>clear</span></button>
+						</div>
+						<p class="error">비밀번호는 최소 8자 이상 입력해야 합니다.</p>
+						<p class="error">영문/숫자/특수문자 조합으로 12자 이내로 입력해야 합니다.</p>
+					</div>
+					<div class="inp_wrap mgt20">
+						<label class="inp_lab" for="find_new_pw_chk">새 비밀번호 확인</label>
+						<div class="inp_text">
+							<input type="password" id="find_new_pw_chk" placeholder="새 비밀번호를 확인해주세요.">
+							<button type="button" class="btn_clear"><span>clear</span></button>
+						</div>
+						<p class="error">비밀번호가 일치하지 않습니다.</p>
+					</div>
+					<div class="btn_wrap">
+						<a href="javascript:void(0);" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 비밀번호 찾기 결과 : 실패 -->
+	<div id="findPwFail" class="lyPopArea">
+		<div class="lyPop">
+			<div class="lyWrap">
+				<button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
+				<div class="lyTit">비밀번호 찾기 결과</div>
+				<div class="lyBody basic">
+					<p>입력하신 회원정보가 정확하지 않습니다.<br> 확인하신 후 다시 이용해주세요.</p>
+					<div class="btn_wrap">
+						<a href="javascript:void(0);" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
