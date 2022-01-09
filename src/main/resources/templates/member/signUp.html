@@ -82,13 +82,9 @@
 									<div class="selectBox">
 										<button class="title" type="button">년도</button>
 										<ul class="selList">
-											<li>
-												<input type="radio" value="2021" class="option" id="select1_1" name="userBirth">
-												<label for="select1_1">2021</label>
-											</li>
-											<li>
-												<input type="radio" value="2020" class="option" id="select1_2" name="userBirth">
-												<label for="select1_2">2020</label>
+											<li th:each="m : ${#numbers.sequence(#calendars.format(#calendars.createNow(), 'yyyy'),1910)}">
+												<input type="radio" value="${m}" class="option" id="select1_1" name="userBirth">
+												<label for="select1_1" th:text="${m}"></label>
 											</li>
 										</ul>
 									</div>
@@ -97,13 +93,9 @@
 									<div class="selectBox">
 										<button class="title" type="button">월</button>
 										<ul class="selList">
-											<li>
-												<input type="radio" value="01" class="option" id="select1_1" name="userBirth2">
-												<label for="select1_1">1</label>
-											</li>
-											<li>
-												<input type="radio" value="02" class="option" id="select1_2" name="userBirth2">
-												<label for="select1_2">2</label>
+											<li th:each="m : ${#numbers.sequence(1,12)}">
+												<input type="radio" value="${m}<=9 ? 0+${m} : ${m}" class="option" id="select1_1" name="userBirth2">
+												<label for="select1_1" th:text="${m}"></label>
 											</li>
 										</ul>
 									</div>
@@ -112,13 +104,9 @@
 									<div class="selectBox">
 										<button class="title" type="button">일</button>
 										<ul class="selList">
-											<li>
-												<input type="radio" value="01" class="option" id="select1_1" name="userBirth3">
-												<label for="select1_1">1</label>
-											</li>
-											<li>
-												<input type="radio" value="02" class="option" id="select1_2" name="userBirth3">
-												<label for="select1_2">2</label>
+											<li th:each="m : ${#numbers.sequence(1,31)}">
+												<input type="radio" value="${m}<=9 ? 0+${m} : ${m}" class="option" id="select1_1" name="userBirth3">
+												<label for="select1_1" th:text="${m}"></label>
 											</li>
 										</ul>
 									</div>
@@ -231,7 +219,7 @@
 	<link rel="stylesheet" type="text/css" href="../../css/main.css">
 	<script type="text/javascript" src="../../js/main.js"></script>
 	<script type="text/javascript" src="../../js/eunjung.js"></script>
-	<script>
+	<script th:inline="javascript">
 		$(document).ready(function(){
 			
 			/* $("#submit").on("click", function(){
