@@ -26,10 +26,11 @@
 						</ul>
 					</div>
 					<div class="guideTab findIdTab" id="guideTab1" style>
+						<form id="findIdForm">
 						<div class="inp_wrap">
 							<label class="inp_lab" for="ipt_label">이름</label>
 							<div class="inp_text">
-								<input type="text" name="" id="ipt_label" placeholder="input text">
+								<input type="text" name="userName" id="ipt_label" placeholder="input text">
 								<button class="btn_clear"><span>clear</span></button>
 							</div>
 							<p class="error">잘못 입력했습니다</p>
@@ -37,20 +38,21 @@
 						<div class="inp_wrap">
 							<label class="inp_lab" for="ipt_label">이메일</label>
 							<div class="inp_text">
-								<input type="text" name="" id="ipt_label" placeholder="input text">
+								<input type="text" name="userEmail" id="ipt_label" placeholder="input text">
 								<button class="btn_clear"><span>clear</span></button>
 							</div>
 							<p class="error">잘못 입력했습니다</p>
 						</div>
 						<div class="btn_wrap">
-							<a href="#" class="btn btnArr btnSizeL btnColorG btnTypeB" style="width:180px;"><span><b>확인</b></span></a>
+							<a href="#" onclick="showLayer('findIdSuccess');" class="btn btnArr btnSizeL btnColorG btnTypeB findIdBtn" style="width:180px;"><span><b>확인</b></span></a>
 						</div>
+						</form>
 					</div>
 					<div class="guideTab findPwdTab" id="guideTab2" style="display: none;">
 						<div class="inp_wrap">
 							<label class="inp_lab" for="ipt_label">아이디</label>
 							<div class="inp_text">
-								<input type="text" name="" id="ipt_label" placeholder="input text">
+								<input type="text" name="userId" id="ipt_label" placeholder="input text">
 								<button class="btn_clear"><span>clear</span></button>
 							</div>
 							<p class="error">잘못 입력했습니다</p>
@@ -58,7 +60,7 @@
 						<div class="inp_wrap">
 							<label class="inp_lab" for="ipt_label">이름</label>
 							<div class="inp_text">
-								<input type="text" name="" id="ipt_label" placeholder="input text">
+								<input type="text" name="userName" id="ipt_label" placeholder="input text">
 								<button class="btn_clear"><span>clear</span></button>
 							</div>
 							<p class="error">잘못 입력했습니다</p>
@@ -66,13 +68,13 @@
 						<div class="inp_wrap">
 							<label class="inp_lab" for="ipt_label">이메일</label>
 							<div class="inp_text">
-								<input type="text" name="" id="ipt_label" placeholder="input text">
+								<input type="text" name="userEmail" id="ipt_label" placeholder="input text">
 								<button class="btn_clear"><span>clear</span></button>
 							</div>
 							<p class="error">잘못 입력했습니다</p>
 						</div>
 						<div class="btn_wrap">
-							<a href="#" class="btn btnArr btnSizeL btnColorG btnTypeB" style="width:180px;"><span><b>확인</b></span></a>
+							<a href="#" onclick="showLayer('findPwSuccess');" class="btn btnArr btnSizeL btnColorG btnTypeB findPwdBtn" style="width:180px;"><span><b>확인</b></span></a>
 						</div>
 					</div>
 					<div class="find_cc">
@@ -103,7 +105,32 @@
 	<link rel="stylesheet" type="text/css" href="../../css/main.css">
 	<script type="text/javascript" src="../../js/main.js"></script>
 	<script type="text/javascript" src="../../js/eunjung.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+	<script>
+		$(function(){
+			$("#findIdForm .findIdBtn").on('click', function(){
+				
+				let userName = $("#findIdForm [name=userName]").val();
+				let userEmail = $("#findIdForm [name=userEmail]").val();
+				
+				$.ajax({
+					url : "/member/findIdPwd/" + userName + "/" + userEmail,
+					type : "get",
+					dataType : "json",
+					success : function(data) {
+						let resultDate = moment(data.joinDate).format("YYYY.MM.DD");
+						
+						$('#resultId').html(data.userId);
+						$('#resultDate').html(resultDate);
+					},
+					error : function(e) {
+						console.log(e);
+					}
+				});
+			});
+		});
+	</script>
 	
 	<!-- 아이디 찾기 결과 : 성공 -->
 	<div id="findIdSuccess" class="lyPopArea">
@@ -117,11 +144,11 @@
 						<div>
 							<dl>
 								<dt>아이디</dt>
-								<dd>koreamase</dd>
+								<dd id="resultId"></dd>
 							</dl>
 							<dl>
 								<dt>가입일자</dt>
-								<dd>2019.03.14</dd>
+								<dd id="resultDate"></dd>
 							</dl>
 						</div>
 					</div>
