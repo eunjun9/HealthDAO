@@ -127,13 +127,13 @@
 	</insert>
 	<delete id="deleteBanner">
 		DELETE
-				AT_FILE
-		 WHERE F_NO = (SELECT F_NO FROM BANNER_FILE WHERE MAIN_NO = #{main_no})
+				BANNER_FILE
+		 WHERE MAIN_NO = #{main_no}
 	</delete>
 	<delete id="deleteBanner2">
 		DELETE
-				BANNER_FILE
-		 WHERE MAIN_NO = #{main_no}
+				AT_FILE
+		 WHERE F_NO = #{f_no}
 	</delete>
 	<delete id="deleteBanner3">
 		DELETE

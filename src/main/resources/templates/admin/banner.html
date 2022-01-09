@@ -74,6 +74,7 @@
 												<span class="inp_check">
 													<input type="checkbox" name="inp_check1" th:id="@{inp_check1_}+${banner.main_no}" th:value="${banner.main_no}">
 													<label th:for="@{inp_check1_}+${banner.main_no}"></label>
+													<input type="hidden" name="f_no" th:id="@{inp_check1_}+${banner.main_no}" th:value="${banner.f_no}">
 												</span>
 											</td>
 											<td th:text="${banner.main_no}"></td>
@@ -427,7 +428,6 @@
 					success : function(data){
 						console.log(data);
 						if(chkLength == data){
-							alert('삭제되었습니다');
 							location.reload();
 						}else{
 							alert('실패');
