@@ -34,29 +34,6 @@ public class MypageServiceImpl implements QnaService, MyCouponService{
 		return mypageMapper.qnaModify(modifyQna);
 	}
 	
-	@Override
-	public Map<String, Object> findQnaList(int page) {
-		int listCount = mypageMapper.getQnaListCount();
-		Paging pi = new Paging(page, listCount, 5, 10);
-		
-		int startRow = (pi.getPage() - 1) * pi.getBoardLimit() + 1;
-		int endRow = startRow + pi.getBoardLimit() - 1;
-		
-		Map<String, Object> pageRow = new HashMap<>();
-		pageRow.put("page", page);
-		pageRow.put("startRow", startRow);
-		pageRow.put("endRow", endRow);
-		
-		List<Qna> qnaList = mypageMapper.findQnaList(pageRow);
-		
-		Map<String, Object> qna = new HashMap<>();
-		
-		qna.put("listCount", listCount);
-		qna.put("qnaList", qnaList);
-		qna.put("pi", pi);
-		
-		return qna;
-	}
 
 	@Override
 	public Qna qnaDetail(int qNo) {
@@ -74,6 +51,45 @@ public class MypageServiceImpl implements QnaService, MyCouponService{
 		
 		return mypageMapper.pointList();
 
+	}
+
+	@Override
+	public Map<String, Object> findQnaList(int page, int userNo) {
+		int listCount = mypageMapper.getQnaListCount(userNo);
+		Paging pi = new Paging(page, listCount, 5, 10);
+		
+		int startRow = (pi.getPage() - 1) * pi.getBoardLimit() + 1;
+		int endRow = startRow + pi.getBoardLimit() - 1;
+		
+		Map<String, Object> pageRow = new HashMap<>();
+		pageRow.put("page", page);
+		pageRow.put("startRow", startRow);
+		pageRow.put("endRow", endRow);
+		pageRow.put("userNo", userNo);
+		
+		List<Qna> qnaList = mypageMapper.findQnaList(pageRow);
+		
+		Map<String, Object> qna = new HashMap<>();
+		
+		qna.put("listCount", listCount);
+		qna.put("qnaList", qnaList);
+		qna.put("pi", pi);
+		
+		return qna;
+	}
+
+	@Override
+	public int myCouponInsert(int pNo, int userNo) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("pNo", pNo);
+		map.put("userNo", userNo);
+				
+		return mypageMapper.myCouponInsert(map);
+	}
+
+	@Override
+	public List<Coupon> myCouponList(int userNo) {
+		return mypageMapper.myCouponList(userNo);
 	}
 
 }

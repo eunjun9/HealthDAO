@@ -24,6 +24,15 @@
 		<result property="endDate" column="END_DATE" />
 	</resultMap>
 	
+	<resultMap id="noticeResultMap" type="com.kh.healthDao.admin.model.vo.Notice">
+		<id property="nNo" column="N_NO" />
+		<result property="nTitle" column="N_TITLE" />
+		<result property="nContent" column="N_CONTENT" />
+		<result property="nDate" column="N_DATE" />
+		<result property="modifyDate" column="MODIFY_DATE" />
+		<result property="nView" column="N_VIEW" />
+	</resultMap>
+	
  	<!-- 상품 등록 -->
 	<insert id="RegistProduct" parameterType="com.kh.healthDao.admin.model.vo.Product">
 		INSERT 
@@ -119,4 +128,81 @@
 		    )
 		WHERE RNUM BETWEEN #{startRow} AND #{endRow}
 	</select>
+	
+	<insert id="noticeInsert" parameterType="com.kh.healthDao.admin.model.vo.Notice">
+		INSERT INTO NOTICE
+		(    N_NO
+		    , N_TITLE
+		    , N_CONTENT
+		    , N_DATE
+		    , N_STATUS
+		    , N_VIEW
+		    , USER_NO
+		)VALUES(
+		    SEQ_N_NO.NEXTVAL
+		    , #{nTitle}
+		    , #{nContent}
+		    , SYSDATE
+		    , 'Y'
+		    , 0
+		    , #{userNo}
+		)
+	</insert>
+	
+	<select id="allNoticeListCount" resultType="_int">
+		SELECT
+		    COUNT(*)
+		FROM(
+		SELECT
+		    N_NO
+		    , N_TITLE
+		    , N_CONTENT
+		    , N_DATE
+		    , MODIFY_DATE
+		    , N_VIEW
+		FROM NOTICE)
+	</select>
+	
+	<select id="allNoticeList" parameterType="hashmap" resultMap="noticeResultMap">
+		SELECT *
+		FROM
+		    (SELECT ROWNUM RNUM, A.*
+		            FROM
+		            (SELECT
+					    N_NO
+					    , N_TITLE
+					    , N_CONTENT
+					    , N_DATE
+					    , MODIFY_DATE
+					    , N_VIEW
+					FROM NOTICE
+		        	ORDER BY N_NO DESC) A
+		    )
+		WHERE RNUM BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="noticeDetail" parameterType="_int" resultMap="noticeResultMap">
+		SELECT
+		    N_NO
+		    , N_TITLE
+		    , N_CONTENT
+		    , N_DATE
+		    , MODIFY_DATE
+		    , N_VIEW
+		FROM NOTICE
+		WHERE N_NO = #{nNo}
+	</select>
+	
+	<update id="noticeModify" parameterType="com.kh.healthDao.admin.model.vo.Notice">
+		UPDATE NOTICE 
+		SET N_TITLE = #{nTitle}
+		  , N_CONTENT = #{nContent}
+		WHERE N_NO = #{nNo}
+	</update>
+	
+	<update id="viewUpdate" parameterType="_int">
+		UPDATE NOTICE 
+		SET N_VIEW = N_VIEW + 1
+		WHERE N_NO = #{nNo}
+	</update>
 </mapper>

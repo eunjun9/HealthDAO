@@ -1,4 +1,34 @@
 <!doctype html>
+<html lang="ko">
+<head>
+<title></title>
+<meta name="title" content="">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta property="og:title" content="">
+<meta property="og:description" content="">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no, address=no, email=no">
+
+<meta property="og:url" content="">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="">
+<meta property="og:image" content="">
+
+<link rel="shortcut icon" href="">
+<link rel="apple-touch-icon" sizes="180x180" href="">
+<link rel="icon" type="image/png" sizes="32x32" href="">
+<link rel="icon" type="image/png" sizes="16x16" href="">
+<link rel="manifest" href="">
+<link rel="mask-icon" href="" color="">
+<meta name="msapplication-TileColor" content="">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="stylesheet" type="text/css" href="./resources/web/css/fonts.css">
+<!doctype html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
 <title></title>
@@ -10,8 +40,16 @@
 <!-- HEADER + GNB -->
 <th:block th:replace="common/header.html"></th:block>
 <!--// HEADER + GNB -->
+
+
 	<!-- container -->
-	
+	<script>
+		const msg = '[[${msg}]]';
+		
+		if(msg){
+			alert(msg);			
+		}
+	</script>
 	<div id="container" class="pdt0">
 		<div class="site_location">
 			<span><a href="/">HOME</a></span>
@@ -22,9 +60,9 @@
 		<div class="mypage">
 			<div class="myMain myCon">
 				<div class="contents">
-					<!-- mypage lnb -->
-					<div th:replace="common/customCenterGnb.html"></div>
-					<!-- //mypage lnb -->
+					<!-- admin lnb -->
+					<div th:replace="common/adminGnb.html"></div>
+					<!-- //admin lnb -->
 
 					<!-- myPageCon -->
 					<div class="myPageCon one_question">
@@ -55,7 +93,7 @@
                                     </thead>
                                     <tbody>
                                         <tr th:each="notice : ${noticeList}">
-                                            <td><a href="/mypage/noticeDetail?nNo=" th:attrappend="href=${notice.nNo}" class="js_ListTtl ListTtl" th:text="${notice.nTitle}"></a></td>
+                                            <td><a href="/admin/noticeDetail?nNo=" th:attrappend="href=${notice.nNo}" class="js_ListTtl ListTtl" th:text="${notice.nTitle}"></a></td>
                                             <td>관리자</td>
                                             <td th:text="${#dates.format(notice.nDate, 'yyyy-MM-dd')}">2021-12-01</td>
 											<td th:text="${notice.nView}">20</td>
@@ -64,11 +102,11 @@
                                 </table>
                                 <div class="paging mgt50"
                                 	th:with="prev=${pi.page - 1}, next=${pi.page + 1}">
-                                    <a th:href="@{/mypage/noticeList(page=1)}" class="first"><span class="hide">첫페이지</span></a>
-                                    <a class="prev" href="/mypage/noticeList?page=" th:attrappend="href=${prev}"><span class="hide">이전페이지</span></a>
-                                    <a th:each="page : ${#numbers.sequence(pi.startPage, pi.endPage)}" href="/mypage/noticeList?page=" th:attrappend="href=${page}" th:text="${page}" th:classappend="${page} == ${#httpServletRequest.getParameter('page')} ? active"></a>	                                   
-                                    <a class="next" href="/mypage/noticeList?page=" th:attrappend="href=${next}"><span class="hide">다음페이지</span></a>
-                                    <a href="/mypage/noticeList?page=" th:attrappend="href=${pi.maxPage}" class="last"><span class="hide">마지막페이지</span></a>
+                                    <a th:href="@{/admin/noticeList(page=1)}" class="first"><span class="hide">첫페이지</span></a>
+                                    <a class="prev" href="/admin/noticeList?page=" th:attrappend="href=${prev}"><span class="hide">이전페이지</span></a>
+                                    <a th:each="page : ${#numbers.sequence(pi.startPage, pi.endPage)}" href="/admin/noticeList?page=" th:attrappend="href=${page}" th:text="${page}" th:classappend="${page} == ${#httpServletRequest.getParameter('page')} ? active"></a>	                                   
+                                    <a class="next" href="/admin/noticeList?page=" th:attrappend="href=${next}"><span class="hide">다음페이지</span></a>
+                                    <a href="/admin/noticeList?page=" th:attrappend="href=${pi.maxPage}" class="last"><span class="hide">마지막페이지</span></a>
                                 </div>
                             </div>
                             <!-- 데이터 없을 때 -->
@@ -91,14 +129,5 @@
 		<th:block th:replace="common/footer.html"></th:block>
 		<!--// FOOTER -->
 	</div>
-	
-	<!-- 퀵메뉴 + 톡톡 -->
-	<th:block th:replace="common/quickNtalk.html"></th:block>
-	<!--// 퀵메뉴 + 톡톡 -->	
-	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
-	<script type="text/javascript">
-		$('#quick .quickArea').css({'position':'absolute', 'top':290});
-	</script>
-	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 </body>
 </html>

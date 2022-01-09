@@ -62,100 +62,90 @@
 </div>
 <!--// 퀵메뉴 / 톡 -->
 <script>	
-	function talkStart(){
+	function timeStamp(){	// 시간 설정
 		let today = new Date();   
 		let hours = ('0' + today.getHours()).slice(-2); 
 		let minutes = ('0' + today.getMinutes()).slice(-2);
 		let seconds = ('0' + today.getSeconds()).slice(-2); 
 		let msgTime = hours + ':' + minutes  + ':' + seconds;
-		
+		return msgTime;
+	}
+	function btnVal(){
+		$(".talkSelect button").click(function(){
+			let a = $(this).val();
+			qnaData(a);
+		})	
+	}
+	function talkStart(){
+		let msgTime = timeStamp();
 		let html = '';
 		if(!$("#chatData").children().hasClass("imgArea")){
-
 			html = '<div class="imgArea"><img src="/images/common/talk_chun.gif" alt=""></div>'
 				 + '<div class="textArea left"><div>너의 궁금증을 해결해줄게!<br>나는 헬춘식이야<span class="time">'
 				 + msgTime
 				 + '</span></div></div>'
 				 + '<div class="textArea left"><div><ul class="talkSelect">'
-				 + '<li><button>궁금한거 1번</button></li>'
-				 + '<li><button>궁금한거 2번</button></li>'
-				 + '<li><button>궁금한거 3번</button></li>'
-				 + '<li><button>궁금한거 4번</button></li>'
-				 + '<li><button>궁금한거 5번</button></li>'
+				 + '<li><button value="1">궁금한거 1번</button></li>'
+				 + '<li><button value="2">궁금한거 2번</button></li>'
+				 + '<li><button value="3">궁금한거 3번</button></li>'
+				 + '<li><button value="4">궁금한거 4번</button></li>'
+				 + '<li><button value="5">궁금한거 5번</button></li>'
 				 + '</ul><span class="time">'
 				 + msgTime
 				 + '</span></div></div>'
 			$("#chatData").append(html);
 			html = '';
-			document.querySelectorAll('.talkSelect button').forEach(item => item.addEventListener('click', qnaData));
 		}
-		function qnaData(){
-			let index = Array.from(document.querySelectorAll(".talkSelect button")).indexOf(this);
-            switch (index){
-            	case 0 :
-        			today = new Date();   
-        			hours = ('0' + today.getHours()).slice(-2); 
-        			minutes = ('0' + today.getMinutes()).slice(-2);
-        			seconds = ('0' + today.getSeconds()).slice(-2); 
-        			msgTime = hours + ':' + minutes  + ':' + seconds;
-        			// 시간 재설정
-        			html = '<div class="textArea right"><div class="right">1번이 궁금해<span class="time">'+msgTime+'</span></div></div>'
-        				 + '<div class="textArea left"><div>헬춘식 헬스 매니아<br>춘식이처럼 몸짱이 되고 싶다면<br>헬스Dao에서<br>시작하라구😎<span class="time">'+msgTime+'</span></div></div>';
-        			$("#chatData").append(html);
-        			html = '';
-        			break;
-            	case 1 :
-        			today = new Date();   
-        			hours = ('0' + today.getHours()).slice(-2); 
-        			minutes = ('0' + today.getMinutes()).slice(-2);
-        			seconds = ('0' + today.getSeconds()).slice(-2); 
-        			msgTime = hours + ':' + minutes  + ':' + seconds;
-        			// 시간 재설정
-        			html = '<div class="textArea right"><div class="right">2번이 궁금해<span class="time">'+msgTime+'</span></div></div>'
-		   				 + '<div class="textArea left"><div>2번이 궁금하구나<br>설명해줄게!<span class="time">'+msgTime+'</span></div></div>';
-		   			$("#chatData").append(html);
-		   			html = '';
-        			break;
-            	case 2 :
-        			today = new Date();   
-        			hours = ('0' + today.getHours()).slice(-2); 
-        			minutes = ('0' + today.getMinutes()).slice(-2);
-        			seconds = ('0' + today.getSeconds()).slice(-2); 
-        			msgTime = hours + ':' + minutes  + ':' + seconds;
-        			// 시간 재설정
-        			html = '<div class="textArea right"><div class="right">3번이 궁금해<span class="time">'+msgTime+'</span></div></div>'
-		   				 + '<div class="textArea left"><div>3번이 궁금하구나<br>설명해줄게!<span class="time">'+msgTime+'</span></div></div>';
-		   			$("#chatData").append(html);
-		   			html = '';
-        			break;
-            	case 3 :
-        			today = new Date();   
-        			hours = ('0' + today.getHours()).slice(-2); 
-        			minutes = ('0' + today.getMinutes()).slice(-2);
-        			seconds = ('0' + today.getSeconds()).slice(-2); 
-        			msgTime = hours + ':' + minutes  + ':' + seconds;
-        			// 시간 재설정
-        			html = '<div class="textArea right"><div class="right">4번이 궁금해<span class="time">'+msgTime+'</span></div></div>'
-		   				 + '<div class="textArea left"><div>4번이 궁금하구나<br>설명해줄게!<span class="time">'+msgTime+'</span></div></div>';
-		   			$("#chatData").append(html);
-		   			html = '';
-        			break;
-            	case 4 :
-        			today = new Date();   
-        			hours = ('0' + today.getHours()).slice(-2); 
-        			minutes = ('0' + today.getMinutes()).slice(-2);
-        			seconds = ('0' + today.getSeconds()).slice(-2); 
-        			msgTime = hours + ':' + minutes  + ':' + seconds;
-        			// 시간 재설정
-        			html = '<div class="textArea right"><div class="right">5번이 궁금해<span class="time">'+msgTime+'</span></div></div>'
-		   				 + '<div class="textArea left"><div>5번이 궁금하구나<br>설명해줄게!<span class="time">'+msgTime+'</span></div></div>';
-		   			$("#chatData").append(html);
-		   			html = '';
-        			break;
-        		default : break;
-            }
-		}
+		btnVal();
 	}
-	
+	function qnaData(val){
+		var index = val;
+		let msgTime = timeStamp();	// 시간 재설정
+        switch (index){
+        	case '1' :
+    			html = '<div class="textArea right"><div class="right">1번이 궁금해<span class="time">'+msgTime+'</span></div></div>'
+    				 + '<div class="textArea left"><div>헬춘식 헬스 매니아<br>춘식이처럼 몸짱이 되고 싶다면<br>헬스Dao에서<br>시작하라구😎<span class="time">'+msgTime+'</span></div></div>';
+    			$("#chatData").append(html);
+    			html = '';
+    			break;
+        	case '2' :
+    			html = '<div class="textArea right"><div class="right">2번이 궁금해<span class="time">'+msgTime+'</span></div></div>'
+ 				 + '<div class="textArea left"><div>2번이 궁금하구나<br>설명해줄게!<span class="time">'+msgTime+'</span></div></div>';
+ 			$("#chatData").append(html);
+ 			html = '';
+    			break;
+        	case '3' :
+    			html = '<div class="textArea right"><div class="right">3번이 궁금해<span class="time">'+msgTime+'</span></div></div>'
+ 				 + '<div class="textArea left"><div>3번이 궁금하구나<br>설명해줄게!<span class="time">'+msgTime+'</span></div></div>';
+ 			$("#chatData").append(html);
+ 			html = '';
+    			break;
+        	case '4' :
+    			html = '<div class="textArea right"><div class="right">4번이 궁금해<span class="time">'+msgTime+'</span></div></div>'
+ 				 + '<div class="textArea left"><div>4번이 궁금하구나<br>설명해줄게!<span class="time">'+msgTime+'</span></div></div>';
+ 			$("#chatData").append(html);
+ 			html = '';
+    			break;
+        	case '5' :
+    			html = '<div class="textArea right"><div class="right">5번이 궁금해<span class="time">'+msgTime+'</span></div></div>'
+ 				 + '<div class="textArea left"><div>5번이 궁금하구나<br>설명해줄게!<span class="time">'+msgTime+'</span></div></div>';
+ 			$("#chatData").append(html);
+ 			html = '';
+    			break;
+    		default : break;
+        }
+		html = '<div class="textArea left"><div><span>더 궁금한게 있어?</span><ul class="talkSelect">'
+			 + '<li><button value="1">궁금한거 1번</button></li>'
+			 + '<li><button value="2">궁금한거 2번</button></li>'
+			 + '<li><button value="3">궁금한거 3번</button></li>'
+			 + '<li><button value="4">궁금한거 4번</button></li>'
+			 + '<li><button value="5">궁금한거 5번</button></li>'
+			 + '</ul><span class="time">'
+			 + msgTime
+			 + '</span></div></div>'
+		$("#chatData").append(html);
+		html = '';
+		btnVal();
+	}
 	recoQuick();
 </script>

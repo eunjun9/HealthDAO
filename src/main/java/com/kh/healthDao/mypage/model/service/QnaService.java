@@ -12,7 +12,7 @@ public interface QnaService {
 	// (사용자) 문의 수정하기
 	int qnaModify(Qna modifyQna);	
 	// (사용자) 문의 리스트
-	Map<String, Object> findQnaList(int page);
+	Map<String, Object> findQnaList(int page, int userNo);
 	// 문의 디테일
 	Qna qnaDetail(int qNo);
 	

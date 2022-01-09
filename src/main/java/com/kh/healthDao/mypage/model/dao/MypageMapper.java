@@ -17,7 +17,7 @@ public interface MypageMapper {
 
 	List<Qna> findQnaList(Map<String, Object> pageRow);
 
-	int getQnaListCount();
+	int getQnaListCount(int userNo);
 
 	Qna qnaDetail(int qNo);
 
@@ -26,6 +26,10 @@ public interface MypageMapper {
 	List<Coupon> couponEventList();
 
 	List<Point> pointList();
+
+	int myCouponInsert(Map<String, Object> map);
+
+	List<Coupon> myCouponList(int userNo);
 
 
 }

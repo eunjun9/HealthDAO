@@ -9,11 +9,13 @@ public interface BannerService {
 
 	int insertBanner(Banner banner, String originFileName, String path, String savedName);
 
-	int deleteBanner(String[] arr);
-
 	List<Banner> bannerRankList();
 
 	Map<String, Object> findBannerList(int page);
 
 	Banner bannerSelect(int main_no);
+
+	int bannerUpdate(Map<String, Object> map);
+
+	int deleteBanner(int value);
 }

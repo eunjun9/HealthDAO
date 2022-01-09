@@ -60,22 +60,26 @@
 					<!-- myPageCon -->
 					<div class="myPageCon one_question_detail">
 						<p class="tit mgb40">
-							공지사항 등록
+							공지사항 상세보기
 						</p>
-						<form action="/admin/noticeInsert" method="post">
-	                        <div class="inp_wrap">
+						<p>작성일 : <span th:text="${notice.nDate}"></span></p>
+						<p th:if="${notice.modifyDate != null}">수정일 : <span th:text="${notice.modifyDate}"></span></p>
+						<form action="/admin/noticeModify" method="post">
+							<input type="hidden" name="nNo" th:value="${notice.nNo}" />
+	                        <div class="inp_wrap mgt30">
 	                            <label class="inp_lab" for="ipt_label">제목</label>
 	                            <div class="inp_text">
-	                                <input type="text" name="nTitle" id="ipt_label" placeholder="제목을 입력해주세요">
+	                                <input type="text" name="nTitle" id="ipt_label" th:value="${notice.nTitle}">
 	                            </div>
 	                            <label class="inp_lab" for="ipt_label">내용</label>
 	                            <div class="inp_textArea">
-	                                <textarea rows="20" name="nContent"></textarea>
+	                                <textarea rows="20" name="nContent" th:text="${notice.nContent}"></textarea>
 	                                <div class="textarea-clone"></div>
 	                            </div>
 	                        </div>    
 	                        <div class="btn_wrap mgt40">
-	                            <button type="submit" class="btn btnSizeL btnColorW btnTypeR" style="width:150px;"><span>등록하기</span></button>
+	                            <button type="submit" class="btn btnSizeL btnColorW btnTypeR" style="width:150px;"><span>수정하기</span></button>
+	                            <a href="/admin/noticeList?page=1" class="btn btnSizeL btnColorW btnTypeR" style="width:150px;"><span>목록보기</span></a>
 	                        </div>  
                         </form>                        
                     </div>

@@ -8,4 +8,9 @@ public interface MyCouponService {
 
 	List<Coupon> couponEventList();
 
+	int myCouponInsert(int pNo, int userNo);
+
+	List<Coupon> myCouponList(int userNo);
+
+
 }
