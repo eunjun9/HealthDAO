@@ -3,6 +3,7 @@ package com.kh.healthDao.mypage.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.healthDao.mypage.model.vo.AttCheck;
 import com.kh.healthDao.mypage.model.vo.Point;
 import com.kh.healthDao.mypage.model.vo.Qna;
 
@@ -18,5 +19,8 @@ public interface QnaService {
 	
 	// 포인트 내역
 	List<Point> pointList();
+	
+	// 출석체크
+	int attendanceCheck(AttCheck att);
 	
 }

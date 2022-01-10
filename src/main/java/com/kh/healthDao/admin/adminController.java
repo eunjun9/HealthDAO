@@ -1,24 +1,20 @@
 package com.kh.healthDao.admin;
 
 
-import java.util.List;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.healthDao.admin.model.service.AdminService;
 import com.kh.healthDao.admin.model.vo.Product;
-import com.kh.healthDao.manager.model.vo.Qna;
 
 
 @Controller
@@ -52,39 +48,30 @@ public class adminController {
 		}
 	}
 	
+	// 페이징 된 리스트
 	@GetMapping("inventoryList")
-	public ModelAndView managerInventoryList(ModelAndView mv) {
+	public ModelAndView managerInventoryList(ModelAndView mv, @RequestParam int page) {
 		
-		List<Product> ProductList = adminService.listProductInventory();
-
+		Map<String, Object> map = adminService.inventoryPaging(page);
 		
-		mv.addObject("ProductList", ProductList);
+		mv.addObject("ProductList", map.get("ProductList"));
+		mv.addObject("listCount", map.get("listCount"));
+		mv.addObject("pi", map.get("pi"));
 		mv.setViewName("admin/inventoryList");
-		
 
 		return mv;
-	}
-	
-	// 팝업
-	@GetMapping("/pLPopup")
-	public String managerpLPopup() {
-		
-		return "admin/pLPopup";
 	}
 	
 	// 팝업 수량 입력
 	@PostMapping("/pLPopupSu")
 	@ResponseBody
-	public ModelAndView pLPopupSu(ModelAndView mv, Product product) {
+	public ModelAndView pLPopupSu(Product product, ModelAndView mv) {
+		System.out.println(product.getProductStock());
+		System.out.println(product.getProductNo());
 		
-		int result = adminService.pLPopupSu(product);
+		int result = adminService.stockPlus(product);
 		
-		if(result > 0) {
-			System.out.println("성공");
-		} else {
-			System.out.println("실패");
-		}
-
+		mv.setViewName("redirect:/");
 		return mv;
 	}
 	

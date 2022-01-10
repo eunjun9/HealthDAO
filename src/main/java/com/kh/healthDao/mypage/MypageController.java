@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.healthDao.mypage.model.service.QnaService;
+import com.kh.healthDao.mypage.model.vo.AttCheck;
 import com.kh.healthDao.mypage.model.vo.Point;
 import com.kh.healthDao.mypage.model.vo.Qna;
 
@@ -162,9 +164,26 @@ public class MypageController {
 		return mv;
 	}
 	
-	/* 출석 체크 */
+	/* 출석체크 화면이동 */
 	@GetMapping("/attendanceCheck")
 	public String attendanceCheck() {
 		return "mypage/attendanceCheck";
+	}
+	
+	/* 출석 체크 */
+	@PostMapping("/attendance")
+	@ResponseBody
+	public ModelAndView attendanceCheck(ModelAndView mv, AttCheck att) {
+		
+		int result = qnaService.attendanceCheck(att);
+
+		if(result > 0) {
+			mv.setViewName("redirect:/mypage/attendanceCheck");
+			return mv;
+		}else {
+			mv.setViewName("redirect:/mypage/attendanceCheck");
+			return mv;
+		}
+		
 	}
 }
