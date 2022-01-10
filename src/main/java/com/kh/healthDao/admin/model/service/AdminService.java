@@ -19,13 +19,7 @@ public interface AdminService {
 
 	public int stockPlus(Product product);
 
-
-
-
-
-
-	
-
+	public int insertproductStock(Product product);
 
 
 	

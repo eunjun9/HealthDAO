@@ -19,9 +19,21 @@ public interface BannerMapper {
 
 	int insertFileDB();
 
-	int deleteBanner(String[] arr);
+	int deleteBanner(int value);
 
-	int deleteBanner2(String[] arr);
+	int deleteBanner2(int value);
+
+	int deleteBanner3(int value);
 
 	List<Banner> bannerRankList();
+
+	int getBannerListCount();
+
+	List<Banner> findBannreList(Map<String, Object> pageRow);
+
+	Banner bannerSelect(int main_no);
+
+	int bannerUpdate(Map<String, Object> map);
+
+	int bannerImgUpdate(Map<String, Object> map);
 }

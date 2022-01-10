@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.kh.healthDao.review.model.vo.Review;
 import com.kh.healthDao.trainer.model.vo.PtOrder;
 import com.kh.healthDao.trainer.model.vo.Trainer;
 
@@ -11,14 +12,22 @@ import com.kh.healthDao.trainer.model.vo.Trainer;
 @Mapper
 public interface TrainerMapper {
 
-	List<Trainer> TrainerList();
+	List<Trainer> trainerList();
 
-	Trainer TrainerSelect(int tNo);
+	Trainer trainerSelect(int tNo);
 
-	int TrainerModify(Trainer trainer);
+	int trainerModify(Trainer trainer);
 
-	List<PtOrder> TrainerOrderList();
+	List<PtOrder> trainerOrderList();
 
+	List<Review> trainerReviewList(int tNo);
 
+	int trainerInsert(Trainer trainer);
+
+	int sumPtOrder();
+
+	int sumTrainer();
+
+	int sumReview();
 	
 }

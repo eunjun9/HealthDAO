@@ -16,22 +16,93 @@
 		
 	</resultMap>
 	
-	<select id="ShoppingList" resultMap="productResultMap">
+	<select id="shoppingList" resultMap="productResultMap" parameterType="hashmap">
+		SELECT *
+				FROM
+				    (SELECT ROWNUM RNUM, A.*
+				            FROM
+				            (SELECT
+						PRODUCT_NO
+					  , PRODUCT_BRAND
+					  , PRODUCT_TITLE
+					  , PRODUCT_PRICE
+					  , PRODUCT_BENEFIT
+					  , PRODUCT_NOTICE
+					  , PRODUCT_INFO
+					  , PRODUCT_VIEW
+					  , PRODUCT_STOCK
+					  , CATEGORY_ID
+					  , P_MEMBERSHIP
+				 FROM PRODUCT
+				 ORDER BY PRODUCT_NO DESC) A
+		    )
+			WHERE RNUM BETWEEN #{startRow} AND #{endRow}
+		
+	</select>
+	
+	<!-- 신상품 -->
+	<select id="shoppingListCount" resultType="_int">
 		SELECT
+		    COUNT(*)
+		FROM
+		(SELECT
 				PRODUCT_NO
 			  , PRODUCT_BRAND
 			  , PRODUCT_TITLE
 			  , PRODUCT_PRICE
-			  , PRODUCT_BENEFIT
-			  , PRODUCT_NOTICE
-			  , PRODUCT_INFO
-			  , PRODUCT_VIEW
-			  , PRODUCT_STOCK
-			  , CATEGORY_ID
-			  , P_MEMBERSHIP
+			  
 		 FROM PRODUCT
-		 ORDER BY PRODUCT_NO DESC
+		 ORDER BY PRODUCT_NO DESC)
 	</select>
+	
+	<!-- 식품 -->
+	<select id="foodShoppingListCount" resultType="_int">
+		SELECT
+		    COUNT(*)
+		FROM
+		(SELECT
+				PRODUCT_NO
+			  , PRODUCT_BRAND
+			  , PRODUCT_TITLE
+			  , PRODUCT_PRICE
+			  , CATEGORY_ID 
+		 FROM PRODUCT
+		WHERE CATEGORY_ID='식품'
+		ORDER BY PRODUCT_NO DESC)
+	</select>
+	
+	<!-- 음료 -->
+	<select id="beverageShoppingListCount" resultType="_int">
+		SELECT
+		    COUNT(*)
+		FROM
+		(SELECT
+				PRODUCT_NO
+			  , PRODUCT_BRAND
+			  , PRODUCT_TITLE
+			  , PRODUCT_PRICE
+			  , CATEGORY_ID 
+		 FROM PRODUCT
+		WHERE CATEGORY_ID='음료'
+		ORDER BY PRODUCT_NO DESC)
+	</select>
+	
+	<!-- 음료 -->
+	<select id="goodsShoppingListCount" resultType="_int">
+		SELECT
+		    COUNT(*)
+		FROM
+		(SELECT
+				PRODUCT_NO
+			  , PRODUCT_BRAND
+			  , PRODUCT_TITLE
+			  , PRODUCT_PRICE
+			  , CATEGORY_ID 
+		 FROM PRODUCT
+		WHERE CATEGORY_ID='운동기구'
+		ORDER BY PRODUCT_NO DESC)
+	</select>
+	
 	
 	<select id="NewProductSelect" resultMap="productResultMap" parameterType="_int">
 		SELECT
@@ -80,13 +151,14 @@
 		ORDER BY PRODUCT_NO DESC
 	</select>
 	
-	<select id="shoppingSelect" resultMap="productResultMap" parameterType="_int">
+	<select id="shoppingDetail" resultMap="productResultMap" parameterType="_int">
 		SELECT
 				PRODUCT_NO
 			  , PRODUCT_BRAND
 			  , PRODUCT_TITLE
 			  
-		 FROM PRODUCT
+		   FROM PRODUCT
+		  WHERE PRODUCT_NO = #{productNo}
 	</select>
 	
 	

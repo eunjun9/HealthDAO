@@ -8,24 +8,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.healthDao.admin.model.dao.AdminMapper;
+import com.kh.healthDao.admin.model.vo.Coupon;
+import com.kh.healthDao.admin.model.vo.Notice;
 import com.kh.healthDao.admin.model.vo.Product;
 import com.kh.healthDao.common.model.vo.Paging;
 import com.kh.healthDao.mypage.model.vo.Qna;
 
+
 @Service("adminService")
-public class AdminServiceImpl implements AdminService{
+public class AdminServiceImpl implements AdminService, CouponService, NoticeService{
 
 	private final AdminMapper adminMapper; 
 	
 	@Autowired
 	public AdminServiceImpl(AdminMapper adminMapper) {
 		this.adminMapper = adminMapper;
-	}
-	
-	
-	@Override
-	public void registNewProduct(Product newProduct) {
-		
 	}
 	
 	// 상품 등록
@@ -75,14 +72,87 @@ public class AdminServiceImpl implements AdminService{
 
 
 
+	@Override
+	public int couponInput(Coupon coupon) {
+		return adminMapper.couponInput(coupon);
+	}
 
 
 
+	@Override
+	public Map<String, Object> allCouponList(int page) {
+		int listCount = adminMapper.allCouponListCount();
+		Paging pi = new Paging(page, listCount, 5, 10);
+		
+		int startRow = (pi.getPage() - 1) * pi.getBoardLimit() + 1;
+		int endRow = startRow + pi.getBoardLimit() - 1;
+		
+		Map<String, Object> pageRow = new HashMap<>();
+		pageRow.put("page", page);
+		pageRow.put("startRow", startRow);
+		pageRow.put("endRow", endRow);
+		
+		List<Coupon> couponList = adminMapper.allCouponList(pageRow);
+		
+		Map<String, Object> coupon = new HashMap<>();
+		
+		coupon.put("listCount", listCount);
+		coupon.put("couponList", couponList);
+		coupon.put("pi", pi);
+		
+		return coupon;
+	}
 
+	@Override
+	public void registNewProduct(Product newProduct) {
+		// TODO Auto-generated method stub
+		
+	}
 
+	@Override
+	public int noticeInsert(Notice notice) {		
+		return adminMapper.noticeInsert(notice);
+	}
 
+	@Override
+	public Map<String, Object> allNoticeList(int page) {
+		int listCount = adminMapper.allNoticeListCount();
+		Paging pi = new Paging(page, listCount, 5, 10);
+		
+		int startRow = (pi.getPage() - 1) * pi.getBoardLimit() + 1;
+		int endRow = startRow + pi.getBoardLimit() - 1;
+		
+		Map<String, Object> pageRow = new HashMap<>();
+		pageRow.put("page", page);
+		pageRow.put("startRow", startRow);
+		pageRow.put("endRow", endRow);
+		
+		List<Coupon> noticeList = adminMapper.allNoticeList(pageRow);
+		
+		Map<String, Object> notice = new HashMap<>();
+		
+		notice.put("listCount", listCount);
+		notice.put("noticeList", noticeList);
+		notice.put("pi", pi);
+		
+		return notice;
+	}
 
-	
+	@Override
+	public Notice noticeDetail(int nNo) {	
+		return adminMapper.noticeDetail(nNo);
+	}
+
+	@Override
+	public int noticeModify(Notice notice) {
+		return adminMapper.noticeModify(notice);
+	}
+
+	@Override
+	public int viewUpdate(int nNo) {		
+		return adminMapper.viewUpdate(nNo);
+	}
+
 	
 	
 	

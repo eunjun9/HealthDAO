@@ -30,6 +30,7 @@
 							1:1문의하기
 						</p>
 						<form action="/mypage/qnaInsert" method="post">
+							<input type="hidden" th:value="${#authentication.principal.userNo}" name="userNo" />
 	                        <div class="inp_wrap">
 	                            <label class="inp_lab" for="ipt_label">문의유형</label>
 	                            <div class="inp_select">

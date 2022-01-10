@@ -15,6 +15,15 @@
 		<result property="replyModifyDate" column="REPLY_MODIFY_DATE" />
 	</resultMap>
 	
+
+	<resultMap id="couponResultMap" type="com.kh.healthDao.admin.model.vo.Coupon">
+		<id property="pNo" column="P_NO" />
+		<result property="pName" column="P_NAME" />
+		<result property="pSale" column="P_SALE" />
+		<result property="startDate" column="START_DATE" />
+		<result property="endDate" column="END_DATE" />
+  </resultMap>
+  
 	<resultMap id="pointMap" type="com.kh.healthDao.mypage.model.vo.Point">
 		<id property="pointNo" column="POINT_NO"/>
 		<result property="pointamount" column="POINT_AMOUNT" />
@@ -51,13 +60,13 @@
 		        FROM QNA
 		        JOIN QNA_DEPT USING(Q_DEPT_CODE)
 		        JOIN MEMBER USING(USER_NO)
-		        WHERE USER_NO = 6
+		        WHERE USER_NO = #{userNo}
 		        ORDER BY Q_NO DESC) A
 		    )
 			WHERE RNUM BETWEEN #{startRow} AND #{endRow}
 	</select>
 	
-	<select id="getQnaListCount" resultType="_int">
+	<select id="getQnaListCount" parameterType="com.kh.healthDao.mypage.model.vo.Qna" resultType="_int">
 		SELECT
 		    COUNT(*)
 		FROM
@@ -76,7 +85,7 @@
 		FROM QNA
 		JOIN QNA_DEPT USING(Q_DEPT_CODE)
 		JOIN MEMBER USING(USER_NO)
-		WHERE USER_NO = 6
+		WHERE USER_NO = #{userNo}
 		ORDER BY Q_NO DESC)
 	</select>
 	
@@ -131,6 +140,34 @@
 			, Q_CONTENT = #{qContent}
 		WHERE Q_NO = #{qNo}
 	</update>
+
+	<!-- 쿠폰 이벤트 리스트  -->
+	<select id="couponEventList" resultMap="couponResultMap">
+		SELECT
+		    P_NO
+		    , P_NAME
+		    , P_SALE
+		    , START_DATE
+		    , END_DATE
+		FROM COUPON
+		<![CDATA[
+		WHERE START_DATE > SYSDATE 
+		OR END_DATE > SYSDATE
+		]]>
+	</select>
+	
+	<insert id="myCouponInsert" parameterType="hashmap">
+		INSERT INTO MEMBER_COUPON(
+			  P_NO
+			, USER_NO
+			, P_STATUS
+		)VALUES(
+		      #{pNo}
+		    , #{userNo}
+		    , DEFAULT
+		)
+	</insert>
+
 	
 	<select id="pointList" resultMap="pointMap" parameterType="com.kh.healthDao.mypage.model.vo.Point">
 		SELECT 
@@ -144,7 +181,7 @@
 		  FROM POINT
 		  JOIN POINT_CATEGORY USING(P_CATEGORY_NO)
 	</select>
-	
+
 	<insert id="attendanceCheck" parameterType="com.kh.healthDao.mypage.model.vo.AttCheck">
 		INSERT INTO ATT_CHECK(
 	        ATTENDANCE_ID
@@ -158,7 +195,24 @@
 	</insert>
 
 	
+	<select id="myCouponList" resultMap="couponResultMap">
+		SELECT
+		      P_NO
+		    , P_NAME
+		    , P_SALE
+		    , START_DATE
+		    , END_DATE
+		FROM MEMBER_COUPON
+		JOIN COUPON USING(P_NO)
+		WHERE USER_NO = 21
+		AND P_STATUS = 'N'
+		<![CDATA[
+		AND (
+		START_DATE > SYSDATE 
+		OR END_DATE > SYSDATE
+		)
+		]]>
+	</select>
 	
-	
-	
+
 </mapper>

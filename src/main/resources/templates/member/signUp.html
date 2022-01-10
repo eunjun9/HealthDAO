@@ -67,35 +67,13 @@
 							</div>
 							<p class="error">잘못 입력했습니다</p>
 						</div>
-						<div class="inp_wrap inp_email">
-							<div class="inp_email_label">
-								<label class="inp_lab" for="join_email">이메일 <b>*</b></label>
-							</div>
+						<div class="inp_wrap inp_eml">
+							<label class="inp_lab" for="ipt_label">이메일 <b>*</b></label>
 							<div class="inp_text sizeS">
-								<input type="text" name="userEmail" id="join_email" placeholder="이메일">
+								<input type="text" name="userEmail" id="inp_eml" placeholder="input text">
+								<a href="#" class="btn btnSizeM btnColorM btnTypeB"><span>중복확인</span></a>
 							</div>
-							<span class="hyphen">@</span>
-							<div class="inp_select sizeS">
-								<div class="selectBox">
-									<button class="title" type="button" title=""></button>
-									<ul class="selList">
-										<li>
-											<input type="radio" value="naver.com" class="option" id="join_email1" name="userEmail2" checked>
-											<label for="join_email1">naver.com</label>
-										</li>
-										<li>
-											<input type="radio" value="gmail.com" class="option" id="join_email2" name="userEmail2">
-											<label for="join_email2">gmail.com</label>
-										</li>
-										<li>
-											<input type="radio" value="kakao.com" class="option" id="join_email3" name="userEmail2">
-											<label for="join_email3">kakao.com</label>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<a href="#" class="btn btnSizeM btnColorM btnTypeB"><span>중복확인</span></a>
-							<p class="error">이미 사용중인 이메일입니다.</p>
+							<p class="error">잘못 입력했습니다</p>
 						</div>
 						<div class="inp_wrap inp_birth">
 							<label class="inp_lab" for="ipt_label">생년월일 <b>*</b></label>
@@ -104,13 +82,9 @@
 									<div class="selectBox">
 										<button class="title" type="button">년도</button>
 										<ul class="selList">
-											<li>
-												<input type="radio" value="2021" class="option" id="select1_1" name="userBirth">
-												<label for="select1_1">2021</label>
-											</li>
-											<li>
-												<input type="radio" value="2020" class="option" id="select1_2" name="userBirth">
-												<label for="select1_2">2020</label>
+											<li th:each="m : ${#numbers.sequence(#calendars.format(#calendars.createNow(), 'yyyy'),1910)}">
+												<input type="radio" value="${m}" class="option" id="select1_1" name="userBirth">
+												<label for="select1_1" th:text="${m}"></label>
 											</li>
 										</ul>
 									</div>
@@ -119,13 +93,9 @@
 									<div class="selectBox">
 										<button class="title" type="button">월</button>
 										<ul class="selList">
-											<li>
-												<input type="radio" value="1" class="option" id="select1_1" name="userBirth2">
-												<label for="select1_1">1</label>
-											</li>
-											<li>
-												<input type="radio" value="2" class="option" id="select1_2" name="userBirth2">
-												<label for="select1_2">2</label>
+											<li th:each="m : ${#numbers.sequence(1,12)}">
+												<input type="radio" value="${m}<=9 ? 0+${m} : ${m}" class="option" id="select1_1" name="userBirth2">
+												<label for="select1_1" th:text="${m}"></label>
 											</li>
 										</ul>
 									</div>
@@ -134,13 +104,9 @@
 									<div class="selectBox">
 										<button class="title" type="button">일</button>
 										<ul class="selList">
-											<li>
-												<input type="radio" value="1" class="option" id="select1_1" name="userBirth3">
-												<label for="select1_1">1</label>
-											</li>
-											<li>
-												<input type="radio" value="2" class="option" id="select1_2" name="userBirth3">
-												<label for="select1_2">2</label>
+											<li th:each="m : ${#numbers.sequence(1,31)}">
+												<input type="radio" value="${m}<=9 ? 0+${m} : ${m}" class="option" id="select1_1" name="userBirth3">
+												<label for="select1_1" th:text="${m}"></label>
 											</li>
 										</ul>
 									</div>
@@ -229,7 +195,7 @@
 							<p class="infoMsg">※ 상품 구매정보는 수신동의 여부 관계없이 받아 보실 수 있습니다.</p>
 						</div>
 						<div class="btn_wrap">
-							<a href="#" id="submit" onclick="return chk_signUp()" class="btn btnArr btnSizeL btnColorB btnTypeB" style="width:500px;"><span>회원가입</span></a>
+							<button type="submit" onclick="return chk_signUp()" class="btn btnArr btnSizeL btnColorB btnTypeB" style="width:500px;"><span>회원가입</span></button>
 						</div>
 					</form>
 				</div>
@@ -253,10 +219,10 @@
 	<link rel="stylesheet" type="text/css" href="../../css/main.css">
 	<script type="text/javascript" src="../../js/main.js"></script>
 	<script type="text/javascript" src="../../js/eunjung.js"></script>
-	<script>
-		/* $(document).ready(function(){
+	<script th:inline="javascript">
+		$(document).ready(function(){
 			
-			$("#submit").on("click", function(){
+			/* $("#submit").on("click", function(){
 				if($("#inp_id").val()==""){
 					alert("아이디를 입력해주세요.");
 					$("#inp_id").focus();
@@ -310,8 +276,8 @@
 						alert("사용가능한 아이디입니다.");
 					}
 				}
-			})
-		} */
+			}) */
+		}
 	</script>
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 </body>

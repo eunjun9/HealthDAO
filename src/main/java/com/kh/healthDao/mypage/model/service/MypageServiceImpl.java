@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.healthDao.admin.model.vo.Coupon;
 import com.kh.healthDao.common.model.vo.Paging;
 import com.kh.healthDao.mypage.model.dao.MypageMapper;
 import com.kh.healthDao.mypage.model.vo.AttCheck;
@@ -15,7 +16,7 @@ import com.kh.healthDao.mypage.model.vo.Qna;
 
 
 @Service("mypageService")
-public class MypageServiceImpl implements QnaService{
+public class MypageServiceImpl implements QnaService, MyCouponService{
 	
 	private final MypageMapper mypageMapper; 
 	
@@ -34,9 +35,28 @@ public class MypageServiceImpl implements QnaService{
 		return mypageMapper.qnaModify(modifyQna);
 	}
 	
+
 	@Override
-	public Map<String, Object> findQnaList(int page) {
-		int listCount = mypageMapper.getQnaListCount();
+	public Qna qnaDetail(int qNo) {
+		return mypageMapper.qnaDetail(qNo);
+	}
+
+	@Override
+	public List<Coupon> couponEventList() {
+		return mypageMapper.couponEventList();
+	}
+	
+	// 포인트 내역
+	@Override
+	public List<Point> pointList() {
+		
+		return mypageMapper.pointList();
+
+	}
+
+	@Override
+	public Map<String, Object> findQnaList(int page, int userNo) {
+		int listCount = mypageMapper.getQnaListCount(userNo);
 		Paging pi = new Paging(page, listCount, 5, 10);
 		
 		int startRow = (pi.getPage() - 1) * pi.getBoardLimit() + 1;
@@ -46,6 +66,7 @@ public class MypageServiceImpl implements QnaService{
 		pageRow.put("page", page);
 		pageRow.put("startRow", startRow);
 		pageRow.put("endRow", endRow);
+		pageRow.put("userNo", userNo);
 		
 		List<Qna> qnaList = mypageMapper.findQnaList(pageRow);
 		
@@ -59,15 +80,17 @@ public class MypageServiceImpl implements QnaService{
 	}
 
 	@Override
-	public Qna qnaDetail(int qNo) {
-		return mypageMapper.qnaDetail(qNo);
+	public int myCouponInsert(int pNo, int userNo) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("pNo", pNo);
+		map.put("userNo", userNo);
+				
+		return mypageMapper.myCouponInsert(map);
 	}
 
-	// 포인트 내역
 	@Override
-	public List<Point> pointList() {
-		
-		return mypageMapper.pointList();
+	public List<Coupon> myCouponList(int userNo) {
+		return mypageMapper.myCouponList(userNo);
 	}
 
 	// 출석체크

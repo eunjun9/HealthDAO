@@ -18,11 +18,12 @@
 		<result property="emailReceive" column="EMAIL_RECEIVE"/>
 		<result property="smsReceive" column="SMS_RECEIVE"/>
 		<result property="point" column="POINT"/>
+		<association property="memberGrade" resultMap="memberGradeResultMap"/>
 		<collection property="memberRoleList" resultMap="memberRoleResultMap"/>
 	</resultMap>
 	
 	<resultMap type="com.kh.healthDao.member.model.vo.MemberRole" id="memberRoleResultMap">
-		<id property="memberNo" column="REF_USER_NO"/>
+		<id property="userNo" column="REF_USER_NO"/>
 		<id property="authorityCode" column="REF_AUTHORITY_CODE"/>
 		<association property="authority" resultMap="authorityResultMap"/>
 	</resultMap>
@@ -31,6 +32,11 @@
 		<id property="code" column="REF_AUTHORITY_CODE2"/>
 		<result property="name" column="AUTHORITY_NAME"/>
 		<result property="desc" column="AUTHORITY_DESC"/>
+	</resultMap>
+	
+	<resultMap type="com.kh.healthDao.member.model.vo.MemberGrade" id="memberGradeResultMap">
+		<id property="userNo" column="REF_USER_NO2"/>
+		<result property="userGrade" column="USER_GRADE"/>
 	</resultMap>
 	
 	<select id="findMemberById" resultMap="loginMemberResultMap">
@@ -55,9 +61,12 @@
 		      , C.AUTHORITY_CODE REF_AUTHORITY_CODE2
 		      , C.AUTHORITY_NAME
 		      , C.AUTHORITY_DESC
+		      , D.USER_NO REF_USER_NO2
+              , D.USER_GRADE
 		   FROM MEMBER A
 		   LEFT JOIN MEMBER_ROLE B ON(A.USER_NO = B.USER_NO)
 		   LEFT JOIN AUTHORITY C ON(B.AUTHORITY_CODE = C.AUTHORITY_CODE)
+		   LEFT JOIN MEMBER_GRADE D ON(A.USER_NO = D.USER_NO)
 		  WHERE A.USER_ID = #{ userId }
 	</select>
 	
@@ -95,8 +104,22 @@
 		  , SYSDATE
 		  , DEFAULT
 		  , NULL
+		  <choose>
+		  <when test="emailReceive != null">
 		  , #{ emailReceive }
+		  </when>
+		  <otherwise>
+		  , 'N'
+		  </otherwise>
+		  </choose>
+		  <choose>
+		  <when test="smsReceive != null">
 		  , #{ smsReceive }
+		  </when>
+		  <otherwise>
+		  , 'N'
+		  </otherwise>
+		  </choose>
 		  , 0
 		)
 	</insert>
@@ -115,10 +138,34 @@
 		)
 	</insert>
 	
+	<insert id="insertMemberGrade" parameterType="com.kh.healthDao.member.model.vo.MemberGrade">
+		INSERT
+		  INTO MEMBER_GRADE
+		(
+			USER_NO
+		  , USER_GRADE
+		)
+		VALUES
+		(
+			SEQ_USER_NO.CURRVAL
+		  , #{ userGrade }
+		)
+	</insert>
+	
 	<!-- id 중복체크 -->
 	<select id="idChk" resultType="int">
 		SELECT COUNT(*) FROM MEMBER
 		WHERE USER_ID = #{ userId }
+	</select>
+	
+	<!-- 아이디 찾기 -->
+	<select id="selectId" resultMap="loginMemberResultMap">
+		SELECT
+			   USER_ID
+			 , JOIN_DATE
+		  FROM MEMBER
+		 WHERE USER_NAME = #{ userName }
+		   AND USER_EMAIL = #{ userEmail }
 	</select>
 
 </mapper>
