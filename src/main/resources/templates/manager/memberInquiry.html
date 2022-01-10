@@ -166,22 +166,16 @@
 													</tr>
 												</tbody>
 											</table>
-											<div class="paging mgt40">
-												<a href="#" class="first"><span class="hide">첫페이지</span></a>
-												<a href="#" class="prev"><span class="hide">이전페이지</span></a>
-												<a href="#">1</a>
-												<a href="#" class="active">2</a>
-												<a href="#">3</a>
-												<a href="#">4</a>
-												<a href="#">5</a>
-												<a href="#">6</a>
-												<a href="#">7</a>
-												<a href="#">8</a>
-												<a href="#">9</a>
-												<a href="#">10</a>
-												<a href="#" class="next"><span class="hide">다음페이지</span></a>
-												<a href="#" class="last"><span class="hide">마지막페이지</span></a>
-											</div>
+											
+											<div class="paging mgt50"
+				                                	th:with="prev=${pi.page - 1}, next=${pi.page + 1}">
+				                                    <a th:href="@{/manager/memberInquiry(page=1)}" class="first"><span class="hide">첫페이지</span></a>
+				                                    <a class="prev" href="/manager/memberInquiry?page=" th:attrappend="href=${prev}"><span class="hide">이전페이지</span></a>
+				                                    <a th:each="page : ${#numbers.sequence(pi.startPage, pi.endPage)}" href="/manager/memberInquiry?page=" th:attrappend="href=${page}" th:text="${page}" th:classappend="${page} == ${#httpServletRequest.getParameter('page')} ? active"></a>	                                   
+				                                    <a class="next" href="/manager/memberInquiry?page=" th:attrappend="href=${next}"><span class="hide">다음페이지</span></a>
+				                                    <a href="/manager/memberInquiry?page=" th:attrappend="href=${pi.maxPage}" class="last"><span class="hide">마지막페이지</span></a>
+				                                </div>
+
 										</div>
 
 									</div>

@@ -54,7 +54,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter{
          .authorizeRequests()
             /* 요청 보안 수준의 세부적인 설정
              * "/mypage/**"요청은 인증이 되어야 함을 명시 */         
-            .antMatchers("/mypage/**").authenticated()
+            //.antMatchers("/mypage/**").authenticated()
             /* hasRole 안의 값 앞에는 자동으로 ROLE_ 가 붙음 */
             .antMatchers("/mypage/**").hasRole("MEMBER")
             /* "/trainer/**"의 요청은 ROLE_TRAINER 권한을 가진 사람에게만 허용 */

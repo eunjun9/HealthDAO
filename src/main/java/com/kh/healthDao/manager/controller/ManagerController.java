@@ -1,6 +1,7 @@
 package com.kh.healthDao.manager.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,13 +40,15 @@ public class ManagerController {
 //		return "manager/inventoryList";
 //	}
 	
-	// 회원문의
+	// 회원문의 페이징 된
 	@GetMapping("/memberInquiry")
-	public ModelAndView managerMemberInquiry(ModelAndView mv) {
+	public ModelAndView managerMemberInquiry(ModelAndView mv,  @RequestParam int page) {
 		
-		List<Qna> QnaList = managerService.listAllQna();
+		Map<String, Object> map = managerService.InquiryPaging(page);
 		
-		mv.addObject("QnaList", QnaList);
+		mv.addObject("QnaList", map.get("QnaList"));
+		mv.addObject("listCount", map.get("listCount"));
+		mv.addObject("pi", map.get("pi"));
 		mv.setViewName("manager/memberInquiry");
 		
 		return mv;
@@ -70,10 +73,10 @@ public class ManagerController {
 		int result = managerService.managerQAnswer(qna);
 
 		if(result > 0) {
-			mv.setViewName("redirect:/manager/memberInquiry");
+			mv.setViewName("redirect:/manager/memberInquiry?page=1");
 			return mv;
 		}else {
-			mv.setViewName("redirect:/manager/memberInquiry");
+			mv.setViewName("redirect:/manager/memberInquiry?page=1");
 			return mv;
 		}
 	}

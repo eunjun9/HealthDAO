@@ -5,16 +5,21 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.healthDao.member.model.service.MemberService;
 import com.kh.healthDao.member.model.vo.Member;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
 @RequestMapping("/member")
+@Slf4j
 public class MemberController {
 	
 	private MemberService memberService;
@@ -43,6 +48,7 @@ public class MemberController {
 		member.setUserBirth(birth);
 		
 		memberService.signUp(member);
+
 		/*
 		int result = memberService.idChk(member);
 		try {
@@ -66,5 +72,15 @@ public class MemberController {
 		int result = memberService.idChk(member);
 		return result;
 	}
-
+	
+	@ResponseBody
+	@GetMapping("/findIdPwd/{userName}/{userEmail}")
+	public Member findId(ModelAndView mv, @PathVariable String userName, @PathVariable String userEmail) {
+		
+		log.info("조회 요청 이름 : {}", userName);
+		log.info("조회 요청 이메일 : {}", userEmail);
+		
+		return memberService.findId(userName, userEmail);
+	}
+	
 }

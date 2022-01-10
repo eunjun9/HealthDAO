@@ -13,7 +13,15 @@
 		<result property="productStock" column="PRODUCT_STOCK" />
 		<result property="CategoryId" column="CATEGORY_ID" />
 		<result property="pMembership" column="P_MEMBERSHIP"/>
-		
+	</resultMap>
+	
+	<resultMap id="productResultMap2" type="com.kh.healthDao.admin.model.vo.Product">
+		<id property="productNo" column="PRODUCT_NO"/>
+		<result property="productBrand" column="PRODUCT_BRAND" />
+		<result property="productTitle" column="PRODUCT_TITLE" />
+		<result property="productPrice" column="PRODUCT_PRICE" />
+		<result property="productInfo" column="PRODUCT_INFO" />
+		<result property="productStock" column="PRODUCT_STOCK" />
 	</resultMap>
 	
 	<resultMap id="couponResultMap" type="com.kh.healthDao.admin.model.vo.Coupon">
@@ -64,23 +72,49 @@
 		)
 	</insert>
 	
-	<select id="listProductInventory" resultMap="productResultMap" parameterType="com.kh.healthDao.admin.model.vo.Product">
-	SELECT
-	      PRODUCT_NO
-	    , PRODUCT_TITLE
-	    , PRODUCT_BRAND
-	    , PRODUCT_PRICE
-	    , PRODUCT_INFO
-	    , PRODUCT_STOCK
-	 FROM PRODUCT
-	 </select>
 	 
-	 <update id="insertproductStock" parameterType="com.kh.healthDao.admin.model.vo.Product">
+
+	
+	<select id="listProductInventory" resultMap="productResultMap2" parameterType="hashmap">
+        SELECT *
+		FROM
+		    (SELECT ROWNUM RNUM, A.*
+            FROM
+		      (SELECT 
+		     	  PRODUCT_NO
+			    , PRODUCT_BRAND
+			    , PRODUCT_TITLE
+			    , PRODUCT_PRICE
+			    , PRODUCT_INFO
+			    , PRODUCT_STOCK
+		 FROM PRODUCT
+        ORDER BY PRODUCT_NO DESC) A
+		    )
+			WHERE RNUM BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="getinventoryCount" resultType="_int">
+		SELECT
+		    COUNT(*)
+		FROM
+		(SELECT 
+              PRODUCT_NO
+		    , PRODUCT_BRAND
+		    , PRODUCT_TITLE
+		    , PRODUCT_PRICE
+		    , PRODUCT_INFO
+		    , PRODUCT_STOCK
+		FROM PRODUCT
+		ORDER BY PRODUCT_NO DESC)
+	</select>
+	
+	<update id="stockPlus" parameterType="com.kh.healthDao.admin.model.vo.Product">
 	 UPDATE PRODUCT
 		SET PRODUCT_STOCK = #{productStock}
 	  WHERE PRODUCT_NO = #{productNo}
 	</update>
 	
+
 	<!-- 쿠폰 등록 -->
 	<insert id="couponInput" parameterType="com.kh.healthDao.admin.model.vo.Coupon">
 		INSERT INTO COUPON(

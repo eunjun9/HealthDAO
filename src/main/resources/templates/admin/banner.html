@@ -74,6 +74,7 @@
 												<span class="inp_check">
 													<input type="checkbox" name="inp_check1" th:id="@{inp_check1_}+${banner.main_no}" th:value="${banner.main_no}">
 													<label th:for="@{inp_check1_}+${banner.main_no}"></label>
+													<input type="hidden" name="f_no" th:id="@{inp_check1_}+${banner.main_no}" th:value="${banner.f_no}">
 												</span>
 											</td>
 											<td th:text="${banner.main_no}"></td>
@@ -406,27 +407,27 @@
 				}
 			});
 		}
-	
+		
 		function deleteBanner(){
+			var addList = [], data = {};
 			let chk = $('.checked:not(.allChk) input[name="inp_check1"]:checked');		
 			let chkLength = chk.length;	// 체크된 갯수
-			let arr = {
-				"arrVal" : []
-			};	
+			
+			jQuery.ajaxSettings.traditional = true;
 			if(chkLength >= 1){
 				for(var i = 0; i < chkLength; i++){
-					arr.arrVal.push(chk[i].value);	// 체크된 값 배열에 담기
+					addList[i] = chk[i].value;
+				    data.addList = addList;	// 체크된 값 배열에 담기
 				}
-				console.log(arr.arrVal);			// 배열에 담긴 값
+				console.log(data);			// 배열에 담긴 값
 				$.ajax({
 					url : "/banner/delete",
-					data : JSON.stringify(arr),
+					data : JSON.stringify(addList),
 					contentType: 'application/json',
 					type : "post",
-					success : function(arr){
-						console.log(arr);
-						if(arr){
-							alert('삭제되었습니다');
+					success : function(data){
+						console.log(data);
+						if(chkLength == data){
 							location.reload();
 						}else{
 							alert('실패');

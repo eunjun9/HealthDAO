@@ -18,6 +18,7 @@
 		<result property="userPhone" column="USER_PHONE"/>
 	</resultMap>
 	
+	<!-- 
 	<select id="listAllQna" resultMap="QnaResultMap">
 	SELECT
 		  Q_NO
@@ -37,7 +38,7 @@
      JOIN QNA_DEPT USING(Q_DEPT_CODE)
      JOIN MEMBER USING(USER_NO)
 	</select>
-	
+	 -->
 	
 	<select id="listQna" resultMap="QnaResultMap" parameterType="_int">
 	SELECT
@@ -67,6 +68,59 @@
 		     , Q_STATUS = '답변완료'
 		 WHERE Q_NO = #{qNo}
 	</update>
+	
+	<select id="getInquiryCount" resultType="_int">
+		SELECT
+			    COUNT(*)
+			FROM
+			(	SELECT
+			  Q_NO
+			, Q_DEPT_CODE
+			, USER_NO
+			, Q_TITLE
+			, Q_CONTENT
+			, Q_DATE
+			, Q_STATUS
+			, REPLY
+			, REPLY_DATE
+			, REPLY_MODIFY_DATE
+			, Q_DEPT
+	        , USER_NICKNAME
+	        , USER_PHONE
+		 FROM QNA 
+	     JOIN QNA_DEPT USING(Q_DEPT_CODE)
+	     JOIN MEMBER USING(USER_NO)
+	   <!-- WHERE Q_DEPT_CODE = #{qDeptCode} --> 
+		ORDER BY Q_NO DESC)
+	</select>
+	
+	<select id="listInquiryInventory" resultMap="QnaResultMap" parameterType="hashmap">
+     SELECT *
+		FROM
+		    (SELECT ROWNUM RNUM, A.*
+	         FROM
+			      (SELECT
+				  Q_NO
+				, Q_DEPT_CODE
+				, USER_NO
+				, Q_TITLE
+				, Q_CONTENT
+				, Q_DATE
+				, Q_STATUS
+				, REPLY
+				, REPLY_DATE
+				, REPLY_MODIFY_DATE
+				, Q_DEPT
+		        , USER_NICKNAME
+		        , USER_PHONE
+			 FROM QNA 
+		     JOIN QNA_DEPT USING(Q_DEPT_CODE)
+		     JOIN MEMBER USING(USER_NO)
+		  <!-- WHERE Q_DEPT_CODE = #{qDeptCode} -->  
+	        ORDER BY Q_NO DESC) A
+		    )
+		WHERE RNUM BETWEEN #{startRow} AND #{endRow}
+	</select>
 
 	
 

@@ -34,6 +34,7 @@
 		<result property="pCategoryName" column="P_CATEGORY_NAME" />
 	</resultMap>
 	
+
 	<resultMap id="reviewMap" type="com.kh.healthDao.review.model.vo.Review">
 		<id property="reviewNo" column="REVIEW_NO"/>
 		<result property="category" column="CATEGORY" />
@@ -42,6 +43,11 @@
 		<result property="rDate" column="R_DATE" />
 		<result property="modifyDate" column="MODIFY_DATE" />
 		<result property="payNo" column="PAY_NO" />
+  </resultMap>
+
+	<resultMap id="AttMap" type="com.kh.healthDao.mypage.model.vo.AttCheck">
+		<id property="attendanceId" column="ATTENDANCE_ID"/>
+		<result property="attendanceDate" column="ATTENDANCE_DATE" />
 		<result property="userNo" column="USER_NO" />
 	</resultMap>
 	
@@ -186,6 +192,19 @@
 		  FROM POINT
 		  JOIN POINT_CATEGORY USING(P_CATEGORY_NO)		  
 	</select>
+
+	<insert id="attendanceCheck" parameterType="com.kh.healthDao.mypage.model.vo.AttCheck">
+		INSERT INTO ATT_CHECK(
+	        ATTENDANCE_ID
+	      , ATTENDANCE_DATE
+	      , USER_NO
+		)VALUES (
+	        SEQ_ATTENDANCE_ID.NEXTVAL
+	      , SYSDATE
+	      , #{userNo}
+		)
+	</insert>
+
 	
 	<select id="myCouponList" parameterType="_int" resultMap="couponResultMap">
 		SELECT

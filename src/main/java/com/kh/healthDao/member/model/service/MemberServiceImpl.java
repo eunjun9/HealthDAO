@@ -94,5 +94,10 @@ public class MemberServiceImpl implements MemberService{
 		int result = memberMapper.idChk(member);
 		return result;
 	}
+
+	@Override
+	public Member findId(String userName, String userEmail) {
+		return memberMapper.selectId(userName, userEmail);
+	}
 	
 }

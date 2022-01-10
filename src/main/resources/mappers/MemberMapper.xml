@@ -157,5 +157,15 @@
 		SELECT COUNT(*) FROM MEMBER
 		WHERE USER_ID = #{ userId }
 	</select>
+	
+	<!-- 아이디 찾기 -->
+	<select id="selectId" resultMap="loginMemberResultMap">
+		SELECT
+			   USER_ID
+			 , JOIN_DATE
+		  FROM MEMBER
+		 WHERE USER_NAME = #{ userName }
+		   AND USER_EMAIL = #{ userEmail }
+	</select>
 
 </mapper>
