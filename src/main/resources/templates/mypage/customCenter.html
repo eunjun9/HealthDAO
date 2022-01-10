@@ -187,7 +187,7 @@
                         <div class="center_list_box">                            
                             <div class="center_tit tblBar mgt50">
                                 <h3>공지사항</h3>
-								<a href="#" class="btn_txt">전체보기</a>
+								<a href="/admin/notice?page=1" class="btn_txt">전체보기</a>
                             </div>
                             <div class="js_tblList">
                                 <table class="tblType1" summary="">
@@ -207,11 +207,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><a href="./noticeDetail.html" class="js_ListTtl ListTtl">2021년 성탄절 배송 안내</a></td>
+                                        <tr th:each="notice : ${noticeList}">
+                                            <td><a href="/mypage/noticeDetail?nNo=" th:attrappend="href=${notice.nNo}" class="js_ListTtl ListTtl" th:text="${notice.nTitle}"></a></td>
                                             <td>관리자</td>
-                                            <td>2021-12-01</td>
-											<td>20</td>
+                                            <td th:text="${#dates.format(notice.nDate, 'yyyy-MM-dd')}"></td>
+											<td th:text="${notice.nView}"></td>
                                         </tr>
                                     </tbody>
                                 </table>                               

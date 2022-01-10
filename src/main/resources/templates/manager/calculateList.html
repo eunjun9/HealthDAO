@@ -1,210 +1,203 @@
-<div th:replace="common/header.html"></div>
-<!-- //container -->
-<div id="container" class="pdt0">
-	<div class="site_location">
-		<span><a href="/">HOME</a></span>
-		<em>마이페이지</em>
-	</div>
-	<div class="mypage">
-		<div class="myMain myCon">
-			<div class="contents">
-				<!-- mypage lnb -->
-				<div class="myPageLnb">
-					<div class="myRank">
-						<p class="rank userLv1" id="Lv">
-							<span class="btnMain">관리자</span>
-						</p><!-- 기본등급 userLv1 ~ 최고등급 userLv4 -->
-						<p class="txt">
-							<span>HELLO, VIP!</span><br>
-							<em id="name">류상훈님</em>
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title></title>
+<!-- 메타태그, 스타일 -->
+<th:block th:replace="common/head.html"></th:block>
+<!--// 메타태그, 스타일 -->
+<body>
+
+	<div id="wrap" class="main">
+		<!-- HEADER + GNB -->
+		<th:block th:replace="common/header.html"></th:block>
+		
+		<!--// HEADER + GNB -->
+		
+		<!-- container -->
+	
+	<div id="container" class="pdt0">
+		<div class="site_location">
+			<span><a href="/">HOME</a></span>
+			<em>마이페이지</em>
+		</div>
+		<div class="mypage">
+			<div class="myMain myCon">
+				<div class="contents">
+					<!-- mypage lnb -->
+					<div th:replace="common/adminGnb.html"></div>
+					<!-- //mypage lnb -->
+
+					<!-- myPageCon -->
+					<div class="myPageCon">
+						<p class="tit mgb40">
+							정산내역
 						</p>
-					</div>
-					<div class="myPageMenu">
-						<ul class="dep1">
-							<li>
-								<p>주문관리</p>
-								<ul class="dep2">
-									<li><a href="/mypage/myorder">주문배송 조회</a></li>
-									<li><a href="/mypage/storebuy">매장구매내역</a></li>
-									<li><a href="/mypage/evidence">증빙서류 발급</a></li>
-								</ul>
-							</li>
-							<li>
-								<a href="/mypage/mycoupon">쿠폰</a>
-							</li>
-							<li>
-								<a href="/mypage/mypoint">포인트</a>
-							</li>
-							<li>
-								<p>내 활동</p>
-								<ul class="dep2">
-									<li><a href="/mypage/counsel">1:1 문의</a></li>
-									<li><a href="/mypage/mywish">위시리스트</a></li>
-									<li><a href="/mypage/mystock">입고 알림</a></li>
-								</ul>
-							</li>
-							<li>
-								<a href="/mypage/myreview">상품 리뷰</a>
-							</li>
-							<li>
-								<p>내 정보 관리</p>
-								<ul class="dep2">
-									<li><a href="/mypage/confirmpw">회원정보수정</a></li>
-									<li><a href="/mypage/myaddress">배송지 관리</a></li>
-									<li><a href="/mypage/skininfo">피부 프로필 관리</a></li>
-									<li><a href="javascript:;" onclick="goLeaveMemberInfo();return false;">회원탈퇴 하기</a></li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<!-- //mypage lnb -->
+						<!-- myOrder tab -->
 
-				<!-- myPageCon -->
-				<div class="myPageCon">
-					<p class="tit mgb40">
-						정산/환불/재고
-					</p>
-					<!-- myOrder tab -->
-					<div class="tabType tabType4 mgt40 no_link">
-						<ul>
-							<li><a href="#" class="current"><span>정산내역<span class="count">10</span></span></a></li>
-							<li><a href="#"><span>환불내역<span class="count">10</span></span></a></li>
-							<li><a href="#"><span>재고수량<span class="count">10</span></span></a></li>
-						</ul>
-					</div>
-					<!-- //myOrder tab -->
+						<!-- //myOrder tab -->
 
-					<div class="myOrderList mgt40">
-						<div class="tblBar mgt50">
-										<p class="tblList">총 <span>48개</span></p>
-										<div class="inp_wrap">
-											<div class="inp_text searchType">
-												<div class="btn_wrap">
-													
-													<div class="inp_wrap">
-														<div class="inp_select">
-															<div class="selectBox">
-																<button class="title" type="button">정렬(년도)</button>
-																<ul class="selList">
-																	<li>
-																		<input type="radio" value="" class="option" id="select1_1" name="select1">
-																		<label for="select1_1">2021</label>
-																	</li>
-																	<li>
-																		<input type="radio" value="" class="option" id="select1_2" name="select1">
-																		<label for="select1_2">2020</label>
-																	</li>
-																	<li>
-																		<input type="radio" value="" class="option" id="select1_3" name="select1">
-																		<label for="select1_3">2019</label>
-																	</li>
-																	<li>
-																		<input type="radio" value="" class="option" id="select1_4" name="select1">
-																		<label for="select1_4">2018</label>
-																	</li>
-																	<li>
-																		<input type="radio" value="" class="option" id="select1_5" name="select1">
-																		<label for="select1_5">2017</label>
-																	</li>
-																</ul>
-															</div>
+						<div class="myOrderList mgt40">
+							<div class="tblBar mgt50">
+											<p class="tblList">총 <span>48개</span></p>
+											<div class="inp_wrap">
+												<div class="inp_text searchType">
+													<div class="btn_wrap">
+														
+														<div class="inp_wrap">
+															<div class="inp_select">
+																<div class="selectBox">
+																	<button class="title" type="button">정렬(년도)</button>
+																	<ul class="selList">
+																		<li>
+																			<input type="radio" value="" class="option" id="select1_1" name="select1">
+																			<label for="select1_1">2021</label>
+																		</li>
+																		<li>
+																			<input type="radio" value="" class="option" id="select1_2" name="select1">
+																			<label for="select1_2">2020</label>
+																		</li>
+																		<li>
+																			<input type="radio" value="" class="option" id="select1_3" name="select1">
+																			<label for="select1_3">2019</label>
+																		</li>
+																		<li>
+																			<input type="radio" value="" class="option" id="select1_4" name="select1">
+																			<label for="select1_4">2018</label>
+																		</li>
+																		<li>
+																			<input type="radio" value="" class="option" id="select1_5" name="select1">
+																			<label for="select1_5">2017</label>
+																		</li>
+																	</ul>
+																</div>
+															
 														</div>
-													</div>
-													<a href="#" class="btn btnSizeL btnColorW btnTypeB" style="width:100px;"><span>Excel</span></a>
+														</div>
+
+														<a href="#" class="btn btnSizeL btnColorW btnTypeB" style="width:100px;"><span>Excel</span></a>
+														</div>
 													</div>
 												</div>
 											</div>
 										</div>
-									</div>
-									<div class="js_tblList">
-										<table class="tblType1" summary="">
-											<caption></caption>
-											<colgroup>
-												<col width="80px"></col>
-												<col width="150px"></col>
-												<col width="150px"></col>
-												<col width="150px"></col>
-												<col width="150px"></col>
-											</colgroup>
-											<thead>
-												<tr>
-													<th>제품번호</th>
-													<th>제품명</th>
-													<th>회사명</th>
-													<th>총판매금액</th>
-													<th>정산금액</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td class="fc88">11</td>
-													<td class="ta_l"><a href="javascript:void(0)" class="js_ListTtl ListTtl" title="">맛있닭 닭가슴살 한끼 만두 혼합...</a></td>
-													<td class="fc88">맛있닭</td>
-													<td>500,000</td>
-													<td>500,000</td>
-												</tr>
-												<tr class="js_ListCtt ListCtt">
-													<td></td>
-													<td>
-														<div class="ta_l js_replyCtt replyCtt">
-															<div>
-																맛있닭 닭가슴살 한끼 만두 혼합맛 8개
+										<div class="js_tblList">
+											<table class="tblType1" summary="">
+												<caption></caption>
+												<colgroup>
+													<col width="80px"></col>
+													<col width="150px"></col>
+													<col width="150px"></col>
+													<col width="150px"></col>
+													<col width="150px"></col>
+												</colgroup>
+												<thead>
+													<tr>
+														<th>제품번호</th>
+														<th>제품명</th>
+														<th>회사명</th>
+														<th>총판매금액</th>
+														<th>정산금액</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td class="fc88">11</td>
+														<td class="ta_l"><a href="javascript:void(0)" class="js_ListTtl ListTtl" title="">맛있닭 닭가슴살 한끼 만두 혼합...</a></td>
+														<td class="fc88">맛있닭</td>
+														<td>500,000</td>
+														<td>500,000</td>
+													</tr>
+													<tr class="js_ListCtt ListCtt">
+														<td></td>
+														<td>
+															<div class="ta_l js_replyCtt replyCtt">
+																<div>
+																	맛있닭 닭가슴살 한끼 만두 혼합맛 8개
+																</div>
 															</div>
-														</div>
-													</td>
-													<td></td>
-													<td></td>
-													<td></td>
-												</tr>
-												<tr>
-													<td class="fc88">11</td>
-													<td class="ta_l"><a href="javascript:void(0)" class="js_ListTtl ListTtl" title="">맛있닭 닭가슴살 한끼 만두 혼합...</a></td>
-													<td class="fc88">맛있닭</td>
-													<td>500,000</td>
-													<td>500,000</td>
-												</tr>
-												<tr class="js_ListCtt ListCtt">
-													<td></td>
-													<td>
-														<div class="ta_l js_replyCtt replyCtt">
-															<div>
-																맛있닭 닭가슴살 한끼 만두 혼합맛 8개
+														</td>
+														<td></td>
+														<td></td>
+														<td></td>
+													</tr>
+													<tr>
+														<td class="fc88">11</td>
+														<td class="ta_l"><a href="javascript:void(0)" class="js_ListTtl ListTtl" title="">맛있닭 닭가슴살 한끼 만두 혼합...</a></td>
+														<td class="fc88">맛있닭</td>
+														<td>500,000</td>
+														<td>500,000</td>
+													</tr>
+													<tr class="js_ListCtt ListCtt">
+														<td></td>
+														<td>
+															<div class="ta_l js_replyCtt replyCtt">
+																<div>
+																	맛있닭 닭가슴살 한끼 만두 혼합맛 8개
+																</div>
 															</div>
-														</div>
-													</td>
-													<td></td>
-													<td></td>
-													<td></td>
-												</tr>
-											</tbody>
-										</table>
-										<div class="paging mgt40">
-											<a href="#" class="first"><span class="hide">첫페이지</span></a>
-											<a href="#" class="prev"><span class="hide">이전페이지</span></a>
-											<a href="#">1</a>
-											<a href="#" class="active">2</a>
-											<a href="#">3</a>
-											<a href="#">4</a>
-											<a href="#">5</a>
-											<a href="#">6</a>
-											<a href="#">7</a>
-											<a href="#">8</a>
-											<a href="#">9</a>
-											<a href="#">10</a>
-											<a href="#" class="next"><span class="hide">다음페이지</span></a>
-											<a href="#" class="last"><span class="hide">마지막페이지</span></a>
+														</td>
+														<td></td>
+														<td></td>
+														<td></td>
+													</tr>
+												</tbody>
+											</table>
+											<div class="paging mgt40">
+												<a href="#" class="first"><span class="hide">첫페이지</span></a>
+												<a href="#" class="prev"><span class="hide">이전페이지</span></a>
+												<a href="#">1</a>
+												<a href="#" class="active">2</a>
+												<a href="#">3</a>
+												<a href="#">4</a>
+												<a href="#">5</a>
+												<a href="#">6</a>
+												<a href="#">7</a>
+												<a href="#">8</a>
+												<a href="#">9</a>
+												<a href="#">10</a>
+												<a href="#" class="next"><span class="hide">다음페이지</span></a>
+												<a href="#" class="last"><span class="hide">마지막페이지</span></a>
+											</div>
 										</div>
+
 									</div>
 								</li>
+								
+								
+								
+								
 
 							</ul>
-								</div>
-					</div>
-				<!-- //myPageCon -->
+						</div>
+
+
+
+						
+					<!-- //myPageCon -->
+				</div>
 			</div>
 		</div>
 	</div>
-<div th:replace="common/footer.html"></div>
+	<!-- //container -->
+		<!-- 스크립트 -->
+	<th:block th:replace="common/script.html"></th:block>
+	<!--// 스크립트 -->
+	<!-- FOOTER -->
+	<th:block th:replace="common/footer.html"></th:block>
+	<!--// FOOTER -->
+
+
+	<!-- 퀵메뉴 + 톡톡 -->
+	<th:block th:replace="common/quickNtalk.html"></th:block>
+	<!--// 퀵메뉴 + 톡톡 -->
+	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+	<script type="text/javascript">
+		$('#quick .quickArea').css({
+			'position' : 'absolute',
+			'top' : 290
+		});
+	</script>
+	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 </body>
 </html>
+	

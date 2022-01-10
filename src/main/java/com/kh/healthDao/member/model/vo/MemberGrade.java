@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MemberGrade {
 	
-	private int UserNo;			// 유저번호
+	private int userNo;			// 유저번호
 	private String userGrade;	// 등급명
 
 }

@@ -22,7 +22,7 @@ public class Product {
 	private int productStock;		// 재고량
 	private int pMembership;		// 적립혜택
 	private String productOption;
-	private String categoryId;
+	private String categoryId;  // 카테고리ID
 	
 	
 	private List<Option> option;	// 옵션 테이블

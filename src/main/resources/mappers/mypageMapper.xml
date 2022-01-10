@@ -34,6 +34,23 @@
 		<result property="pCategoryName" column="P_CATEGORY_NAME" />
 	</resultMap>
 	
+
+	<resultMap id="reviewMap" type="com.kh.healthDao.review.model.vo.Review">
+		<id property="reviewNo" column="REVIEW_NO"/>
+		<result property="category" column="CATEGORY" />
+		<result property="star" column="STAR" />
+		<result property="rContent" column="R_CONTENT" />
+		<result property="rDate" column="R_DATE" />
+		<result property="modifyDate" column="MODIFY_DATE" />
+		<result property="payNo" column="PAY_NO" />
+  </resultMap>
+
+	<resultMap id="AttMap" type="com.kh.healthDao.mypage.model.vo.AttCheck">
+		<id property="attendanceId" column="ATTENDANCE_ID"/>
+		<result property="attendanceDate" column="ATTENDANCE_DATE" />
+		<result property="userNo" column="USER_NO" />
+	</resultMap>
+	
 	<select id="findQnaList" resultMap="qnaResultMap" parameterType="hashmap">
 		SELECT *
 		FROM
@@ -54,13 +71,13 @@
 		        FROM QNA
 		        JOIN QNA_DEPT USING(Q_DEPT_CODE)
 		        JOIN MEMBER USING(USER_NO)
-		        WHERE USER_NO = 6
+		        WHERE USER_NO = #{userNo}
 		        ORDER BY Q_NO DESC) A
 		    )
 			WHERE RNUM BETWEEN #{startRow} AND #{endRow}
 	</select>
 	
-	<select id="getQnaListCount" resultType="_int">
+	<select id="getQnaListCount" parameterType="com.kh.healthDao.mypage.model.vo.Qna" resultType="_int">
 		SELECT
 		    COUNT(*)
 		FROM
@@ -79,7 +96,7 @@
 		FROM QNA
 		JOIN QNA_DEPT USING(Q_DEPT_CODE)
 		JOIN MEMBER USING(USER_NO)
-		WHERE USER_NO = 6
+		WHERE USER_NO = #{userNo}
 		ORDER BY Q_NO DESC)
 	</select>
 	
@@ -145,13 +162,25 @@
 		    , END_DATE
 		FROM COUPON
 		<![CDATA[
-		WHERE START_DATE < SYSDATE 
-		AND END_DATE > SYSDATE
+		WHERE START_DATE > SYSDATE 
+		OR END_DATE > SYSDATE
 		]]>
 	</select>
+	
+	<insert id="myCouponInsert" parameterType="hashmap">
+		INSERT INTO MEMBER_COUPON(
+			  P_NO
+			, USER_NO
+			, P_STATUS
+		)VALUES(
+		      #{pNo}
+		    , #{userNo}
+		    , DEFAULT
+		)
+	</insert>
 
 	
-	<select id="pointList" resultMap="pointMap" parameterType="com.kh.healthDao.mypage.model.vo.Point">
+<!-- 	<select id="pointList" resultMap="pointMap" parameterType="com.kh.healthDao.mypage.model.vo.Point">
 		SELECT 
 		      POINT_NO
 		    , POINT_AMOUNT
@@ -161,9 +190,128 @@
 		    , P_CATEGORY_NO
 		    , P_CATEGORY_NAME
 		  FROM POINT
-		  JOIN POINT_CATEGORY USING(P_CATEGORY_NO)
+		  JOIN POINT_CATEGORY USING(P_CATEGORY_NO)		  
+	</select> -->
+	
+	<select id="listPoint" resultMap="pointMap" parameterType="hashmap">
+		SELECT *
+		FROM
+		    (SELECT ROWNUM RNUM, A.*
+		            FROM
+		            (SELECT 
+		      POINT_NO
+		    , POINT_AMOUNT
+		    , POINT_ISSUEDATE
+		    , POINT_ENDDATE
+		    , USER_NO
+		    , P_CATEGORY_NO
+		    , P_CATEGORY_NAME
+		  FROM POINT
+		  JOIN POINT_CATEGORY USING(P_CATEGORY_NO)) A
+		    )
+			WHERE RNUM BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="pointListCount" resultType="_int" parameterType="hashmap">
+    	SELECT
+			    COUNT(*)
+			FROM
+			(SELECT ROWNUM RNUM, A.*
+	            FROM
+	            (SELECT 
+				      POINT_NO
+				  FROM POINT) A
+				ORDER BY POINT_NO DESC)
 	</select>
 
-	
+	<insert id="attendCheck" parameterType="com.kh.healthDao.mypage.model.vo.AttCheck">
+		INSERT INTO ATT_CHECK(
+	        ATTENDANCE_ID
+	      , ATTENDANCE_DATE
+	      , USER_NO
+		)VALUES (
+	        SEQ_ATTENDANCE_ID.NEXTVAL
+	      , TO_CHAR(#{attendanceDate}, 'YY-MM-DD')
+	      , #{userNo}
+		)
+	</insert>
 
+	
+	<select id="myCouponList" parameterType="_int" resultMap="couponResultMap">
+		SELECT
+		      P_NO
+		    , P_NAME
+		    , P_SALE
+		    , START_DATE
+		    , END_DATE
+		FROM MEMBER_COUPON
+		JOIN COUPON USING(P_NO)
+		WHERE USER_NO = #{userNo}
+		AND P_STATUS = 'N'
+		<![CDATA[
+		AND (
+		START_DATE > SYSDATE 
+		OR END_DATE > SYSDATE
+		)
+		]]>
+	</select>
+	
+	<select id="userReviewListCount" parameterType="_int" resultType="_int">
+		SELECT 
+    		COUNT(*)
+		FROM(
+		SELECT 
+		    REVIEW_NO
+		    , CATEGORY
+		    , STAR
+		    , R_CONTENT
+		    , R_DATE
+		    , MODIFY_DATE
+		    , PAY_NO
+		    , USER_NO
+		FROM REVIEW
+		WHERE USER_NO = #{userNo})
+	</select>
+	
+	<select id="userReviewList" parameterType="hashmap" resultMap="reviewMap">
+		SELECT *
+		FROM
+		    (SELECT ROWNUM RNUM, A.*
+		            FROM
+		            (SELECT 
+					    REVIEW_NO
+					    , CATEGORY
+					    , STAR
+					    , R_CONTENT
+					    , R_DATE
+					    , MODIFY_DATE
+					    , PAY_NO
+					    , USER_NO
+					FROM REVIEW
+					WHERE USER_NO = #{userNo}
+		        ORDER BY REVIEW_NO DESC) A
+		    )
+			WHERE RNUM BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="reviewDetail" parameterType="_int" resultMap="reviewMap">
+		SELECT 
+		      REVIEW_NO
+		    , CATEGORY
+		    , STAR
+		    , R_CONTENT
+		    , R_DATE
+		    , MODIFY_DATE
+		    , PAY_NO
+		    , USER_NO
+		FROM REVIEW
+		WHERE REVIEW_NO = #{reviewNo}
+	</select>
+	
+	<update id="reviewModify" parameterType="com.kh.healthDao.review.model.vo.Review">
+		UPDATE REVIEW
+		SET STAR = #{star}
+		  , R_CONTENT = #{rContent}
+		WHERE REVIEW_NO = #{reviewNo}
+	</update>
 </mapper>

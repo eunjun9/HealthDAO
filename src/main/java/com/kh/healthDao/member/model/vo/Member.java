@@ -30,4 +30,6 @@ public class Member {
 	
 	/* 한 멤버는 여러 권한을 가질 수 있음 - MEMBER_ROLE과 조인한 결과 값 */
 	private List<MemberRole> memberRoleList;	// 보유권한목록
+	
+	private MemberGrade memberGrade;	// 유저등급
 }

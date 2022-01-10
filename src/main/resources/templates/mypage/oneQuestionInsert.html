@@ -30,6 +30,7 @@
 							1:1문의하기
 						</p>
 						<form action="/mypage/qnaInsert" method="post">
+							<input type="hidden" th:value="${#authentication.principal.userNo}" name="userNo" />
 	                        <div class="inp_wrap">
 	                            <label class="inp_lab" for="ipt_label">문의유형</label>
 	                            <div class="inp_select">
@@ -42,19 +43,19 @@
 	                                        </li>         
 	                                        <li>
 	                                            <input type="radio" value="2" class="option" id="select1_2" name="qDeptCode">
-	                                            <label for="select1_1">코치 가입 문의</label>
+	                                            <label for="select1_2">코치 가입 문의</label>
 	                                        </li>
 	                                        <li>
 	                                            <input type="radio" value="3" class="option" id="select1_3" name="qDeptCode">
-	                                            <label for="select1_1">잘못된 정보 신고</label>
+	                                            <label for="select1_3">잘못된 정보 신고</label>
 	                                        </li>
 	                                        <li>
 	                                            <input type="radio" value="4" class="option" id="select1_4" name="qDeptCode">
-	                                            <label for="select1_1">신고</label>
+	                                            <label for="select1_4">신고</label>
 	                                        </li>
 	                                        <li>
 	                                            <input type="radio" value="5" class="option" id="select1_5" name="qDeptCode">
-	                                            <label for="select1_1">기타</label>
+	                                            <label for="select1_5">기타</label>
 	                                        </li>   
 	                                    </ul>
 	                                </div>

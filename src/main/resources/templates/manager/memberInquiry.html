@@ -12,7 +12,13 @@
 <!--// HEADER + GNB -->
 
 	<!-- container -->
-	
+	<script>
+		const msg = '[[${msg}]]';
+		
+		if(msg){
+			alert(msg);			
+		}
+	</script>
 	<div id="container" class="pdt0">
 		<div class="site_location">
 			<span><a href="/">HOME</a></span>
@@ -22,55 +28,7 @@
 			<div class="myMain myCon">
 				<div class="contents">
 					<!-- mypage lnb -->
-					<div class="myPageLnb">
-						<div class="myRank">
-							<p class="rank userLv1" id="Lv">
-								<span class="btnMain">관리자</span>
-							</p><!-- 기본등급 userLv1 ~ 최고등급 userLv4 -->
-							<p class="txt">
-								<span>HELLO, VIP!</span><br>
-								<em id="name">류상훈님</em>
-							</p>
-						</div>
-						<div class="myPageMenu">
-							<ul class="dep1">
-								<li>
-									<p>주문관리</p>
-									<ul class="dep2">
-										<li><a href="/mypage/myorder">주문배송 조회</a></li>
-										<li><a href="/mypage/storebuy">매장구매내역</a></li>
-										<li><a href="/mypage/evidence">증빙서류 발급</a></li>
-									</ul>
-								</li>
-								<li>
-									<a href="/mypage/mycoupon">쿠폰</a>
-								</li>
-								<li>
-									<a href="/mypage/mypoint">포인트</a>
-								</li>
-								<li>
-									<p>내 활동</p>
-									<ul class="dep2">
-										<li><a href="/mypage/counsel">1:1 문의</a></li>
-										<li><a href="/mypage/mywish">위시리스트</a></li>
-										<li><a href="/mypage/mystock">입고 알림</a></li>
-									</ul>
-								</li>
-								<li>
-									<a href="/mypage/myreview">상품 리뷰</a>
-								</li>
-								<li>
-									<p>내 정보 관리</p>
-									<ul class="dep2">
-										<li><a href="/mypage/confirmpw">회원정보수정</a></li>
-										<li><a href="/mypage/myaddress">배송지 관리</a></li>
-										<li><a href="/mypage/skininfo">피부 프로필 관리</a></li>
-										<li><a href="javascript:;" onclick="goLeaveMemberInfo();return false;">회원탈퇴 하기</a></li>
-									</ul>
-								</li>
-							</ul>
-						</div>
-					</div>
+					<div th:replace="common/adminGnb.html"></div>
 					<!-- //mypage lnb -->
 
 					<!-- myPageCon -->
@@ -84,7 +42,7 @@
 
 						<div class="myOrderList mgt40">
 							<div class="tblBar mgt50">
-											<p class="tblList">총 <span>48개</span></p>
+											<p class="tblList">총 <span th:text="${listCount}"></span>개</p>
 											<div class="inp_wrap">
 												<div class="inp_text searchType">
 													<div class="btn_wrap">
@@ -166,22 +124,16 @@
 													</tr>
 												</tbody>
 											</table>
-											<div class="paging mgt40">
-												<a href="#" class="first"><span class="hide">첫페이지</span></a>
-												<a href="#" class="prev"><span class="hide">이전페이지</span></a>
-												<a href="#">1</a>
-												<a href="#" class="active">2</a>
-												<a href="#">3</a>
-												<a href="#">4</a>
-												<a href="#">5</a>
-												<a href="#">6</a>
-												<a href="#">7</a>
-												<a href="#">8</a>
-												<a href="#">9</a>
-												<a href="#">10</a>
-												<a href="#" class="next"><span class="hide">다음페이지</span></a>
-												<a href="#" class="last"><span class="hide">마지막페이지</span></a>
-											</div>
+											
+											<div class="paging mgt50"
+				                                	th:with="prev=${pi.page - 1}, next=${pi.page + 1}">
+				                                    <a th:href="@{/manager/memberInquiry(page=1)}" class="first"><span class="hide">첫페이지</span></a>
+				                                    <a class="prev" href="/manager/memberInquiry?page=" th:attrappend="href=${prev}"><span class="hide">이전페이지</span></a>
+				                                    <a th:each="page : ${#numbers.sequence(pi.startPage, pi.endPage)}" href="/manager/memberInquiry?page=" th:attrappend="href=${page}" th:text="${page}" th:classappend="${page} == ${#httpServletRequest.getParameter('page')} ? active"></a>	                                   
+				                                    <a class="next" href="/manager/memberInquiry?page=" th:attrappend="href=${next}"><span class="hide">다음페이지</span></a>
+				                                    <a href="/manager/memberInquiry?page=" th:attrappend="href=${pi.maxPage}" class="last"><span class="hide">마지막페이지</span></a>
+				                             </div>
+
 										</div>
 
 									</div>

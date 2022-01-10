@@ -1,6 +1,6 @@
 package com.kh.healthDao.manager.controller;
 
-import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.healthDao.manager.model.service.ManagerService;
 import com.kh.healthDao.manager.model.vo.Qna;
@@ -32,20 +33,16 @@ public class ManagerController {
 		return "manager/calculateList";
 	}
 	
-	// 재고내역
-//	@GetMapping("/inventoryList")
-//	public String managerInventoryList() {
-		
-//		return "manager/inventoryList";
-//	}
 	
-	// 회원문의
+	// 회원문의 페이징 된
 	@GetMapping("/memberInquiry")
-	public ModelAndView managerMemberInquiry(ModelAndView mv) {
+	public ModelAndView managerMemberInquiry(ModelAndView mv, @RequestParam int page) {
 		
-		List<Qna> QnaList = managerService.listAllQna();
+		Map<String, Object> map = managerService.InquiryPaging(page);
 		
-		mv.addObject("QnaList", QnaList);
+		mv.addObject("QnaList", map.get("QnaList"));
+		mv.addObject("listCount", map.get("listCount"));
+		mv.addObject("pi", map.get("pi"));
 		mv.setViewName("manager/memberInquiry");
 		
 		return mv;
@@ -64,18 +61,19 @@ public class ManagerController {
 	}
 	
 	@PostMapping("/qanswer")
-	@ResponseBody
-	public ModelAndView managerQAnswer(ModelAndView mv, Qna qna) {
+	public String managerQAnswer(Qna qna, RedirectAttributes rttr) {
 		
-		int result = managerService.managerQAnswer(qna);
-
-		if(result > 0) {
-			mv.setViewName("redirect:/manager/memberInquiry");
-			return mv;
-		}else {
-			mv.setViewName("redirect:/manager/memberInquiry");
-			return mv;
-		}
+		String result = managerService.managerQAnswer(qna) > 0 ? "문의 답변 수정 성공" : "문의 답변 수정 실패";
+		rttr.addFlashAttribute("msg", result);
+		
+		return "redirect:/manager/memberInquiry?page=1";
+	}
+	
+	// 환불내역
+	@GetMapping("/refundList")
+	public String managerRefundList() {
+		
+		return "manager/refundList";
 	}
 	
 
