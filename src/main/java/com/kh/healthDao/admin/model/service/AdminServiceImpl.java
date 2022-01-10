@@ -1,5 +1,6 @@
 package com.kh.healthDao.admin.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.healthDao.admin.model.dao.AdminMapper;
+import com.kh.healthDao.admin.model.vo.Category;
 import com.kh.healthDao.admin.model.vo.Coupon;
+import com.kh.healthDao.admin.model.vo.Option;
 import com.kh.healthDao.admin.model.vo.Notice;
 import com.kh.healthDao.admin.model.vo.Product;
 import com.kh.healthDao.common.model.vo.Paging;
@@ -25,11 +28,13 @@ public class AdminServiceImpl implements AdminService, CouponService, NoticeServ
 		this.adminMapper = adminMapper;
 	}
 	
-	// 상품 등록
+	/* 상품 등록 */
 	@Override
-	public int RegistProduct(Product product) {
-		return adminMapper.RegistProduct(product);
+	public int registProduct(Product product) {
+				
+		return adminMapper.registProduct(product);
 	}
+	
 
 	
 	@Override
@@ -55,7 +60,7 @@ public class AdminServiceImpl implements AdminService, CouponService, NoticeServ
 		
 		return inv;
 	}
-
+	
 
 	@Override
 	public Product pLPopupSu(Product product) {
@@ -77,8 +82,7 @@ public class AdminServiceImpl implements AdminService, CouponService, NoticeServ
 		return adminMapper.couponInput(coupon);
 	}
 
-
-
+	
 	@Override
 	public Map<String, Object> allCouponList(int page) {
 		int listCount = adminMapper.allCouponListCount();
@@ -103,6 +107,17 @@ public class AdminServiceImpl implements AdminService, CouponService, NoticeServ
 		return coupon;
 	}
 
+	@Override
+	public int registCategory(Product product) {
+		return adminMapper.registCategory(product);
+	}
+
+	@Override
+	public int registOption(Product product) {
+		return adminMapper.registOption(product);
+	}
+
+	
 	@Override
 	public void registNewProduct(Product newProduct) {
 		// TODO Auto-generated method stub
@@ -169,7 +184,12 @@ public class AdminServiceImpl implements AdminService, CouponService, NoticeServ
 		return adminMapper.memberSoundInsert(ms);
 	}
 
-	
+
+	/* @Override
+	public List<Product> listProduct(Product product) {
+		return  adminMapper.RegistProduct(product);
+	}
+	*/
 	
 	
 	

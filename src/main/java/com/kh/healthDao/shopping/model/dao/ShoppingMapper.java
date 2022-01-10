@@ -34,5 +34,7 @@ public interface ShoppingMapper {
 	List<Product> goodsShoppingList(Map<String, Object> pageRow);
 
 	int goodsShoppingListCount();
+
+	Product shoppingPayment(int productNo);
 	
 }

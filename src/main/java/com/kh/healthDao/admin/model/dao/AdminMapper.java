@@ -5,7 +5,9 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.kh.healthDao.admin.model.vo.Category;
 import com.kh.healthDao.admin.model.vo.Coupon;
+import com.kh.healthDao.admin.model.vo.Option;
 import com.kh.healthDao.admin.model.vo.Notice;
 import com.kh.healthDao.admin.model.vo.Product;
 import com.kh.healthDao.mypage.model.vo.MemberSound;
@@ -16,12 +18,10 @@ import com.kh.healthDao.mypage.model.vo.Qna;
 @Mapper
 public interface AdminMapper {
 
-	
-
 	public void register(Product product);
 
 	// 상품 등록
-	public int RegistProduct(Product product);
+	public int registProduct(Product product);
 
 	// 상품 재고
 	public List<Product> listProductInventory();
@@ -74,6 +74,16 @@ public interface AdminMapper {
 	public List<Notice> newfiveNoticeList();
 
 	public int memberSoundInsert(MemberSound ms);
+
+	public int registCategory(Product product);
+
+	public int registOption(Product product);
+
+	
+
+	
+
+	// public List<Product> RegistProduct(Product product);
 
 	
 }
