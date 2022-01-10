@@ -13,6 +13,7 @@ import com.kh.healthDao.mypage.model.dao.MypageMapper;
 import com.kh.healthDao.mypage.model.vo.AttCheck;
 import com.kh.healthDao.mypage.model.vo.Point;
 import com.kh.healthDao.mypage.model.vo.Qna;
+import com.kh.healthDao.review.model.vo.Review;
 
 
 @Service("mypageService")
@@ -124,6 +125,16 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 		
 		return mypageMapper.attendanceCheck(att);
 
+	}
+
+	@Override
+	public Review reviewDetail(int reviewNo) {
+		return mypageMapper.reviewDetail(reviewNo);
+	}
+
+	@Override
+	public int reviewModify(Review review) {
+		return mypageMapper.reviewModify(review);
 	}
 
 }

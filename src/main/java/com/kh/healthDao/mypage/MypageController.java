@@ -25,6 +25,7 @@ import com.kh.healthDao.mypage.model.service.QnaService;
 import com.kh.healthDao.mypage.model.vo.AttCheck;
 import com.kh.healthDao.mypage.model.vo.Point;
 import com.kh.healthDao.mypage.model.vo.Qna;
+import com.kh.healthDao.review.model.vo.Review;
 
 @Controller
 @RequestMapping("/mypage/*")
@@ -149,6 +150,22 @@ public class MypageController {
 		mv.setViewName("mypage/reivewList");
 		
 		return mv;
+	}
+	
+	@PostMapping("/reviewDetail")
+	@ResponseBody
+	public Review reviewDetail(int reviewNo) {
+		Review review = myReviewService.reviewDetail(reviewNo);
+		
+		return review;
+	}
+	
+	@PostMapping("/reviewModify")
+	public String reviewModify(Review review, RedirectAttributes rttr) {
+		String msg = myReviewService.reviewModify(review) > 0 ? "리뷰 수정 성공" : "리뷰 수정 실패";		
+		rttr.addFlashAttribute("msg", msg);
+		
+		return "redirect:/mypage/review?page=1";
 	}
 	
 	/* 고객센터 */
