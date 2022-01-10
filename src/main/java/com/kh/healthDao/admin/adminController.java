@@ -1,6 +1,8 @@
 package com.kh.healthDao.admin;
 
 
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,11 +19,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.healthDao.admin.model.service.AdminService;
 import com.kh.healthDao.admin.model.service.CouponService;
+import com.kh.healthDao.admin.model.vo.Category;
 import com.kh.healthDao.admin.model.service.NoticeService;
 import com.kh.healthDao.admin.model.vo.Coupon;
 import com.kh.healthDao.admin.model.vo.Notice;
 import com.kh.healthDao.admin.model.vo.Product;
 import com.kh.healthDao.member.model.vo.UserImpl;
+
 
 
 @Controller
@@ -48,7 +52,16 @@ public class adminController {
 	@PostMapping("productRegist")
 	@ResponseBody
 	public ModelAndView registProduct(Product product, ModelAndView mv) {
-		int result = adminService.RegistProduct(product);
+		/* List<Option> options = new ArrayList<>();
+		options.add(option);
+		
+		product.setOption(options);
+		product.setCategory(category); */
+		
+		System.out.println(product);
+		int result = adminService.registProduct(product);
+		//int result2 = adminService.registCategory(product);
+		int result3 = adminService.registOption(product);
 		if(result > 0) {
 			mv.setViewName("redirect:/admin/productRegist");
 			return mv;
@@ -59,39 +72,50 @@ public class adminController {
 		}
 	}
 	
-	@GetMapping("inventoryList")
-	public ModelAndView managerInventoryList(ModelAndView mv) {
+	/*@ResponseBody
+	@RequestMapping(value = "/productRegist", method = RequestMethod.POST)
+	public ModelAndView registProduct(Product product, ModelAndView mv) {
 		
-		List<Product> ProductList = adminService.listProductInventory();
-
+		List<Product> ProductList = adminService.listProduct(product);
 		
 		mv.addObject("ProductList", ProductList);
-		mv.setViewName("admin/inventoryList");
+		mv.setViewName("redirect:/admin/productRegist");
+		
+		return mv;
+		
+	}
+	*/
+	
+	
+
+	// 페이징 된 리스트
+
+	@GetMapping("inventoryList")
+	public ModelAndView managerInventoryList(ModelAndView mv, @RequestParam int page) {
 		
 
-		return mv;
-	}
-	
-	// 팝업
-	@GetMapping("/pLPopup")
-	public String managerpLPopup() {
+		List<Product> ProductList = adminService.listProductInventory();
+
+		Map<String, Object> map = adminService.inventoryPaging(page);
 		
-		return "admin/pLPopup";
+		mv.addObject("ProductList", map.get("ProductList"));
+		mv.addObject("listCount", map.get("listCount"));
+		mv.addObject("pi", map.get("pi"));
+		mv.setViewName("admin/inventoryList");
+
+		return mv;
 	}
 	
 	// 팝업 수량 입력
 	@PostMapping("/pLPopupSu")
 	@ResponseBody
-	public ModelAndView pLPopupSu(ModelAndView mv, Product product) {
+	public ModelAndView pLPopupSu(Product product, ModelAndView mv) {
+		System.out.println(product.getProductStock());
+		System.out.println(product.getProductNo());
 		
-		int result = adminService.pLPopupSu(product);
+		int result = adminService.stockPlus(product);
 		
-		if(result > 0) {
-			System.out.println("성공");
-		} else {
-			System.out.println("실패");
-		}
-
+		mv.setViewName("redirect:/");
 		return mv;
 	}
 	

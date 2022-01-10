@@ -178,4 +178,8 @@ public class ShoppingServiceImpl implements ShoppingService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public Product shoppingPayment(int productNo) {
+		return shoppingMapper.shoppingPayment(productNo);
+	}
 }

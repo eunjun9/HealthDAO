@@ -85,7 +85,7 @@ public class ShoppingController {
 	// 쇼핑 운동용품
 	@GetMapping("/goodsProduct")
 	public ModelAndView shoppingGoodsProduct(ModelAndView mv, @RequestParam int page) {
-Map<String, Object> map = shoppingService.goodsShoppingList(page);
+		Map<String, Object> map = shoppingService.goodsShoppingList(page);
 		
 		mv.addObject("shoppingList", map.get("shoppingList"));
 		mv.addObject("listCount", map.get("listCount"));
@@ -96,6 +96,7 @@ Map<String, Object> map = shoppingService.goodsShoppingList(page);
 		return mv;
 	}
 	
+	// 쇼핑 상세페이지
 	@GetMapping("/detail")
 	public ModelAndView shoppingDetail(ModelAndView mv, @RequestParam int productNo) {
 		
@@ -106,5 +107,21 @@ Map<String, Object> map = shoppingService.goodsShoppingList(page);
 		
 		return mv;
 	}
+	
+	// 쇼핑 주문
+	@GetMapping("/payment")
+	public ModelAndView shoppingPayment(ModelAndView mv, @RequestParam int productNo) {
+		
+		Product shoppingPayment = shoppingService.shoppingPayment(productNo);
+		
+		mv.addObject("shoppingPayment", shoppingPayment);
+		mv.setViewName("shopping/shoppingPayment");
+		
+		return mv;
+	}
 
+	
+	
+	
+	
 }

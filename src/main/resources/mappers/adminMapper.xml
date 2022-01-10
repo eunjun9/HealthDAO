@@ -16,6 +16,15 @@
 		<result property="productRank" column="PRODUCT_RANK"/>
 	</resultMap>
 	
+	<resultMap id="productResultMap2" type="com.kh.healthDao.admin.model.vo.Product">
+		<id property="productNo" column="PRODUCT_NO"/>
+		<result property="productBrand" column="PRODUCT_BRAND" />
+		<result property="productTitle" column="PRODUCT_TITLE" />
+		<result property="productPrice" column="PRODUCT_PRICE" />
+		<result property="productInfo" column="PRODUCT_INFO" />
+		<result property="productStock" column="PRODUCT_STOCK" />
+	</resultMap>
+	
 	<resultMap id="couponResultMap" type="com.kh.healthDao.admin.model.vo.Coupon">
 		<id property="pNo" column="P_NO" />
 		<result property="pName" column="P_NAME" />
@@ -23,8 +32,11 @@
 		<result property="startDate" column="START_DATE" />
 		<result property="endDate" column="END_DATE" />
 	</resultMap>
-	
-	<resultMap id="noticeResultMap" type="com.kh.healthDao.admin.model.vo.Notice">
+
+	<resultMap id="categoryResultMap" type="com.kh.healthDao.admin.model.vo.Category">
+		<id property="categoryId" column="CATEGORY_ID" />
+		<result property="categoryName" column="CATEGORY_NAME" />
+	  <resultMap id="noticeResultMap" type="com.kh.healthDao.admin.model.vo.Notice">
 		<id property="nNo" column="N_NO" />
 		<result property="nTitle" column="N_TITLE" />
 		<result property="nContent" column="N_CONTENT" />
@@ -34,7 +46,7 @@
 	</resultMap>
 	
  	<!-- 상품 등록 -->
-	<insert id="RegistProduct" parameterType="com.kh.healthDao.admin.model.vo.Product">
+	<insert id="registProduct" parameterType="com.kh.healthDao.admin.model.vo.Product">
 		INSERT 
 		INTO PRODUCT
 		(
@@ -64,6 +76,38 @@
 		)
 	</insert>
 	
+	<insert id="registOption" parameterType="com.kh.healthDao.admin.model.vo.Product">
+		INSERT
+		  INTO PRODUCT_OPTION
+		(
+			OPTION_NO
+		  , PRODUCT_OPTION
+		  , PRODUCT_NO
+		)
+		VALUES
+		(
+			SEQ_OPTION_NO.NEXTVAL
+		  , #{productOption}
+		  , SEQ_PRODUCT_NO.CURRVAL
+		)
+	</insert>
+	
+	 <!-- <insert id="registCategory" parameterType="com.kh.healthDao.admin.model.vo.Product">
+		INSERT
+		  INTO PRODUCT_CATEGORY
+		(
+			CATEGORY_ID
+		  , CATEGORY_NAME
+		  
+		)
+		VALUES
+		(
+			SEQ_CATEGORY_ID.NEXTVAL
+		  , #{categoryName}
+		  
+		)
+	</insert>  -->
+	
 	<select id="listProductInventory" resultMap="productResultMap" parameterType="com.kh.healthDao.admin.model.vo.Product">
 	SELECT
 	      PRODUCT_NO
@@ -75,12 +119,48 @@
 	 FROM PRODUCT
 	 </select>
 	 
-	 <update id="insertproductStock" parameterType="com.kh.healthDao.admin.model.vo.Product">
+
+	
+	<select id="listProductInventory" resultMap="productResultMap2" parameterType="hashmap">
+        SELECT *
+		FROM
+		    (SELECT ROWNUM RNUM, A.*
+            FROM
+		      (SELECT 
+		     	  PRODUCT_NO
+			    , PRODUCT_BRAND
+			    , PRODUCT_TITLE
+			    , PRODUCT_PRICE
+			    , PRODUCT_INFO
+			    , PRODUCT_STOCK
+		 FROM PRODUCT
+        ORDER BY PRODUCT_NO DESC) A
+		    )
+			WHERE RNUM BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="getinventoryCount" resultType="_int">
+		SELECT
+		    COUNT(*)
+		FROM
+		(SELECT 
+              PRODUCT_NO
+		    , PRODUCT_BRAND
+		    , PRODUCT_TITLE
+		    , PRODUCT_PRICE
+		    , PRODUCT_INFO
+		    , PRODUCT_STOCK
+		FROM PRODUCT
+		ORDER BY PRODUCT_NO DESC)
+	</select>
+	
+	<update id="stockPlus" parameterType="com.kh.healthDao.admin.model.vo.Product">
 	 UPDATE PRODUCT
 		SET PRODUCT_STOCK = #{productStock}
 	  WHERE PRODUCT_NO = #{productNo}
 	</update>
 	
+
 	<!-- 쿠폰 등록 -->
 	<insert id="couponInput" parameterType="com.kh.healthDao.admin.model.vo.Coupon">
 		INSERT INTO COUPON(
@@ -160,7 +240,8 @@
 		    , N_DATE
 		    , MODIFY_DATE
 		    , N_VIEW
-		FROM NOTICE)
+		FROM NOTICE
+		WHERE N_STATUS = 'Y')
 	</select>
 	
 	<select id="allNoticeList" parameterType="hashmap" resultMap="noticeResultMap">
@@ -176,6 +257,7 @@
 					    , MODIFY_DATE
 					    , N_VIEW
 					FROM NOTICE
+					WHERE N_STATUS = 'Y'
 		        	ORDER BY N_NO DESC) A
 		    )
 		WHERE RNUM BETWEEN #{startRow} AND #{endRow}
@@ -205,4 +287,42 @@
 		SET N_VIEW = N_VIEW + 1
 		WHERE N_NO = #{nNo}
 	</update>
+	
+	<select id="newfiveNoticeList" resultMap="noticeResultMap">
+		SELECT
+		    N_NO
+		    , N_TITLE
+		    , N_CONTENT
+		    , N_DATE
+		    , MODIFY_DATE
+		    , N_VIEW
+		FROM NOTICE
+		WHERE N_STATUS = 'Y'
+		<![CDATA[
+		AND ROWNUM < 6
+		]]>
+		ORDER BY ROWNUM DESC
+	</select>
+	
+	<insert id="memberSoundInsert" parameterType="com.kh.healthDao.mypage.model.vo.MemberSound">
+		INSERT INTO MEMBER_SOUND(
+		    C_NO
+		    , C_DEPT
+		    , C_CONTENT
+		    , C_DATE
+		    , USER_NO
+		    , IMG_LOCATION
+		    , IMG_NAME
+		    , C_STATUS
+		)VALUES(
+		    SEQ_C_NO.NEXTVAL
+		    , #{cDept}
+		    , #{cContent}
+		    , SYSDATE
+		    , #{userNo}
+		    , NULL
+		    , NULL
+		    , 'Y'
+		)
+	</insert>
 </mapper>

@@ -258,11 +258,24 @@
 				PRODUCT_NO
 			  , PRODUCT_BRAND
 			  , PRODUCT_TITLE
-			  
+			  , PRODUCT_PRICE
+			  , PRODUCT_NOTICE
+			  , PRODUCT_BENEFIT
 		   FROM PRODUCT
 		  WHERE PRODUCT_NO = #{productNo}
 	</select>
 	
+	<select id="shoppingPayment" resultMap="productResultMap" parameterType="_int">
+		SELECT
+				PRODUCT_NO
+			  , PRODUCT_BRAND
+			  , PRODUCT_TITLE
+			  , PRODUCT_PRICE
+			  , PRODUCT_NOTICE
+			  , PRODUCT_BENEFIT
+		   FROM PRODUCT
+		  WHERE PRODUCT_NO = #{productNo}
+	</select>
 	
 	
 	

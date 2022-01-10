@@ -1,10 +1,158 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+<title></title>
+<!-- 메타태그, 스타일 -->
+<th:block th:replace="common/head.html"></th:block>
+<!--// 메타태그, 스타일 -->
 <body>
 
+	<div id="wrap" class="main">
+		<!-- HEADER + GNB -->
+		<th:block th:replace="common/header.html"></th:block>
+		
+		<!--// HEADER + GNB -->
+
+<!-- container -->
+	
+	<div id="container" class="pdt0">
+		<div class="site_location">
+			<span><a href="/">HOME</a></span>
+			<em>마이페이지</em>
+		</div>
+		<div class="mypage">
+			<div class="myMain myCon">
+				<div class="contents">
+					<!-- mypage lnb -->
+					<div th:replace="common/adminGnb.html"></div>
+					<!-- //mypage lnb -->
+
+					<!-- myPageCon -->
+					<div class="myPageCon">
+						<p class="tit mgb40">
+							환불 관리
+						</p>
+
+
+						<div class="myOrderList mgt40">
+							<div class="tblBar mgt50">
+											<p class="tblList">총 <span>48개</span></p>
+											<div class="inp_wrap">
+												<div class="inp_text searchType">
+													<div class="btn_wrap">
+														
+														<div class="inp_wrap">
+															
+															
+														</div>
+														</div>
+
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="js_tblList">
+											<table class="tblType1" summary="">
+												<caption></caption>
+												<colgroup>
+													<col width="100px"></col>
+													<col width="150px"></col>
+													<col width="150px"></col>
+													<col width="150px"></col>
+													<col width="150px"></col>
+													<col width="150px"></col>
+												</colgroup>
+												<thead>
+													<tr>
+														<th>결제번호</th>
+														<th>아이디</th>
+														<th>결제일</th>
+														<th>환불일</th>
+														<th>환불금액</th>
+														<th>처리현황</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td class="fc88">11</td>
+														<td>enjoung_love</td>
+														<td>맛있닭</td>
+														<td>500,000</td>
+														<td>500,000</td>
+														<td>												<!--btn btnSizeL btnColorW btnTypeB-->
+															<button type="button" onclick="showLayer('optChange');" class=""><span>처리중</span></button>
+															
+
+
+														</td>
+													</tr>
+													<tr>
+														<td class="fc88">11</td>
+														<td>yelimee</td>
+														<td>맛있닭</td>
+														<td>500,000</td>
+														<td>500,000</td>
+														<td>환불완료</td>
+													</tr>
+												</tbody>
+											</table>
+											<div class="paging mgt40">
+												<a href="#" class="first"><span class="hide">첫페이지</span></a>
+												<a href="#" class="prev"><span class="hide">이전페이지</span></a>
+												<a href="#">1</a>
+												<a href="#" class="active">2</a>
+												<a href="#">3</a>
+												<a href="#">4</a>
+												<a href="#">5</a>
+												<a href="#">6</a>
+												<a href="#">7</a>
+												<a href="#">8</a>
+												<a href="#">9</a>
+												<a href="#">10</a>
+												<a href="#" class="next"><span class="hide">다음페이지</span></a>
+												<a href="#" class="last"><span class="hide">마지막페이지</span></a>
+											</div>
+										</div>
+
+									</div>
+								</li>
+								
+								
+								
+								
+
+							</ul>
+						</div>
+
+
+
+						
+					<!-- //myPageCon -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //container -->
+	
+		<!-- //container -->
+	<!-- 스크립트 -->
+	<th:block th:replace="common/script.html"></th:block>
+	<!--// 스크립트 -->
+	<!-- FOOTER -->
+	<th:block th:replace="common/footer.html"></th:block>
+	<!--// FOOTER -->
+
+
+	<!-- 퀵메뉴 + 톡톡 -->
+	<th:block th:replace="common/quickNtalk.html"></th:block>
+	<!--// 퀵메뉴 + 톡톡 -->
+	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+	<script type="text/javascript">
+		$('#quick .quickArea').css({
+			'position' : 'absolute',
+			'top' : 290
+		});
+	</script>
+	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 </body>
 </html>

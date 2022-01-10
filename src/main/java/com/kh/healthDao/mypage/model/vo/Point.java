@@ -19,5 +19,6 @@ public class Point {
 	private int pCategoryNo;		// 카테고리번호
 	private String pCategoryName;	// 발급명
 	
+	
 
 }

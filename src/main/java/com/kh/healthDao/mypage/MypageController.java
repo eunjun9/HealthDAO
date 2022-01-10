@@ -1,5 +1,6 @@
 package com.kh.healthDao.mypage;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -15,14 +16,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.healthDao.admin.model.service.MemberSoundService;
 import com.kh.healthDao.admin.model.service.NoticeService;
 import com.kh.healthDao.admin.model.vo.Coupon;
 import com.kh.healthDao.admin.model.vo.Notice;
 import com.kh.healthDao.member.model.vo.UserImpl;
 import com.kh.healthDao.mypage.model.service.MyCouponService;
+import com.kh.healthDao.mypage.model.service.MyReviewService;
 import com.kh.healthDao.mypage.model.service.QnaService;
+import com.kh.healthDao.mypage.model.vo.AttCheck;
+import com.kh.healthDao.mypage.model.vo.MemberSound;
 import com.kh.healthDao.mypage.model.vo.Point;
 import com.kh.healthDao.mypage.model.vo.Qna;
+import com.kh.healthDao.review.model.vo.Review;
 
 @Controller
 @RequestMapping("/mypage/*")
@@ -32,13 +38,17 @@ public class MypageController {
 	private MyCouponService couponService;
 	private MessageSource messageSource;
 	private NoticeService noticeService;
+	private MyReviewService myReviewService;
+	private MemberSoundService memberSoundService;
 	
 	@Autowired
-	public MypageController(QnaService qnaService, MyCouponService couponService, MessageSource messageSource, NoticeService noticeService) {
+	public MypageController(QnaService qnaService, MyCouponService couponService, MessageSource messageSource, NoticeService noticeService, MyReviewService myReviewService, MemberSoundService memberSoundService) {
 		this.qnaService = qnaService;
 		this.couponService = couponService;
 		this.messageSource = messageSource;
 		this.noticeService = noticeService;
+		this.myReviewService = myReviewService;
+		this.memberSoundService = memberSoundService;
 	}
 	
 	@GetMapping(value= {"/", "/myOrder"})
@@ -82,6 +92,8 @@ public class MypageController {
 	
 	@PostMapping("/qnaInsert")
 	public String qnaInsert(Qna newQna, RedirectAttributes rttr) {
+		System.out.println(newQna.getQDeptCode());
+		
 		String msg = qnaService.qnaInsert(newQna) > 0 ? "문의 등록 성공" : "문의 등록 실패";		
 		rttr.addFlashAttribute("msg", msg);
 		
@@ -132,14 +144,45 @@ public class MypageController {
 	
 	/* 내가 쓴 리뷰 */
 	@GetMapping("/review")
-	public String review() {
-		return "mypage/reivewList";
+	public ModelAndView review(ModelAndView mv, @RequestParam int page, @AuthenticationPrincipal UserImpl userImpl) {
+		int userNo = userImpl.getUserNo();
+		
+		Map<String, Object> map = myReviewService.userReviewList(page, userNo);
+		
+		mv.addObject("reviewList", map.get("reviewList"));
+		mv.addObject("listCount", map.get("listCount"));
+		mv.addObject("pi", map.get("pi"));
+		mv.setViewName("mypage/reivewList");
+		
+		return mv;
+	}
+	
+	@PostMapping("/reviewDetail")
+	@ResponseBody
+	public Review reviewDetail(int reviewNo) {
+		Review review = myReviewService.reviewDetail(reviewNo);
+		
+		return review;
+	}
+	
+	@PostMapping("/reviewModify")
+	public String reviewModify(Review review, RedirectAttributes rttr) {
+		String msg = myReviewService.reviewModify(review) > 0 ? "리뷰 수정 성공" : "리뷰 수정 실패";		
+		rttr.addFlashAttribute("msg", msg);
+		
+		return "redirect:/mypage/review?page=1";
 	}
 	
 	/* 고객센터 */
 	@GetMapping("/customCenter")
-	public String customCenter() {
-		return "mypage/customCenter";
+	public ModelAndView customCenter(ModelAndView mv) {
+		
+		List<Notice> noticeList = noticeService.newfiveNoticeList();
+		
+		mv.addObject("noticeList", noticeList);
+		mv.setViewName("mypage/customCenter");
+		
+		return mv;
 	}
 	
 	/* 자주묻는질문 */
@@ -180,6 +223,17 @@ public class MypageController {
 		return "mypage/memberSoundInput";
 	}
 	
+	@PostMapping("/memberSoundInsert")
+	public String memberSoundInsert(MemberSound ms, RedirectAttributes rttr, @AuthenticationPrincipal UserImpl userImpl) {
+		int userNo = userImpl.getUserNo();
+		ms.setUserNo(userNo);
+		
+		String msg = memberSoundService.memberSoundInsert(ms) > 0 ? "고객의소리 등록 성공" : "고객의소리 등록 실패";		
+		rttr.addFlashAttribute("msg", msg);
+		
+		return "redirect:/mypage/memberSound";
+	}
+	
 	/* 배송지 관리 */
 	@GetMapping("/deli")
 	public String deliModify() {
@@ -200,19 +254,42 @@ public class MypageController {
 		
 	/* 보유 포인트 내역 */
 	@GetMapping("/point")
-	public ModelAndView point(ModelAndView mv) {
+	public ModelAndView point(ModelAndView mv,  @RequestParam int page) {
 		
-		List<Point> PointList = qnaService.pointList();
+		Map<String, Object> map = qnaService.pointList(page);
 		
-		mv.addObject("pointList", PointList);
+		mv.addObject("PointList", map.get("PointList"));
+		mv.addObject("listCount", map.get("listCount"));
+		mv.addObject("pi", map.get("pi"));
 		mv.setViewName("mypage/point");
 		
 		return mv;
 	}
 	
-	/* 출석 체크 */
+	/* 출석체크 화면이동 */
 	@GetMapping("/attendanceCheck")
 	public String attendanceCheck() {
 		return "mypage/attendanceCheck";
+	}
+	
+	/* 출석 체크 */
+	@PostMapping("/attCheck")
+	@ResponseBody
+	public String attendanceCheck(Date attendanceDate, int userNo) {
+		
+		System.out.println(attendanceDate);
+		System.out.println(userNo);
+		AttCheck attcheck = new AttCheck();
+		attcheck.setAttendanceDate(attendanceDate);
+		attcheck.setUserNo(userNo);
+		System.out.println(attcheck.getAttendanceDate());
+		int result = qnaService.attendCheck(attcheck);
+
+		if(result > 0) {
+			return "성공";
+		}else {
+			return "실패";
+		}
+		
 	}
 }

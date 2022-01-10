@@ -81,7 +81,7 @@ public class MemberServiceImpl implements MemberService{
 		/* MEMBER_ROLE INSERT */
 		MemberRole memberRole = new MemberRole();
 		memberRole.setAuthorityCode(1);
-		memberMapper.insertMemberRole(memberRole);
+		memberMapper.insertMemberRole(memberRole); 
 		
 		/* MEMBER_GRADE INSERT */
 		MemberGrade memberGrade = new MemberGrade();
