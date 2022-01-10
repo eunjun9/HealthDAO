@@ -6,115 +6,126 @@
 <th:block th:replace="common/head.html"></th:block>
 <!--// 메타태그, 스타일 -->
 <body>
-<div id="wrap" class="main">
-<!-- HEADER + GNB -->
-<th:block th:replace="common/header.html"></th:block>
-<!--// HEADER + GNB -->
+	<div id="wrap" class="main">
+		<!-- HEADER + GNB -->
+		<th:block th:replace="common/header.html"></th:block>
+		<!--// HEADER + GNB -->
 
-	<!-- container -->
-	
-	<div id="container" class="pdt0">
-		<div class="site_location">
-			<span><a href="/">HOME</a></span>
-			<em>마이페이지</em>
-		</div>
-		<div class="mypage">
-			<div class="myMain myCon">
-				<div class="contents">
-					<!-- mypage lnb -->
-					<div th:replace="common/mypageGnb.html"></div>
-					<!-- //mypage lnb -->
+		<!-- container -->
 
-					<!-- myPageCon -->
-					<div class="myPageCon">
-						<p class="atten1"><img class="a_check" src="/images/point/A_check.png"></p>
-						<div class="attCheckContArea">
-							<p>이준우님 반가워요,<br>이번달 출석체크 현황입니다 :)</p>
-							<dl class="dayCount">
-								<dt>나의 출석 일수</dt>
-								<dd><em>10</em>회</dd>
-							</dl>
-							<dl class="couponCount">
-								<dt>지금은<a href="javascript:boid()" onclick="showLayer('AttCheckMyCoupon');"><span class="hide">쿠폰보기</span></a></dt>
-								<dd><em th:text="${#calendars.format(#calendars.createNow(), 'MM')}"></em>월</dd>
-							</dl>
-						</div>
-						
+		<div id="container" class="pdt0">
+			<div class="site_location">
+				<span><a href="/">HOME</a></span> <em>마이페이지</em>
+			</div>
+			<div class="mypage">
+				<div class="myMain myCon">
+					<div class="contents">
+						<!-- mypage lnb -->
+						<div th:replace="common/mypageGnb.html"></div>
+						<!-- //mypage lnb -->
 
-							<div class="attenCheckOutline"> 							
+						<!-- myPageCon -->
+						<div class="myPageCon">
+							<p class="atten1">
+								<img class="a_check" src="/images/point/A_check.png">
+							</p>
+							<div class="attCheckContArea">
+								<p>
+									이준우님 반가워요,<br>이번달 출석체크 현황입니다 :)
+								</p>
+								<dl class="dayCount">
+									<dt>나의 출석 일수</dt>
+									<dd>
+										<em>10</em>회
+									</dd>
+								</dl>
+								<dl class="couponCount">
+									<dt>
+										지금은<a href="javascript:boid()"
+											onclick="showLayer('AttCheckMyCoupon');"><span
+											class="hide">쿠폰보기</span></a>
+									</dt>
+									<dd>
+										<em
+											th:text="${#calendars.format(#calendars.createNow(), 'MM')}"></em>월
+									</dd>
+								</dl>
+							</div>
+
+
+							<div class="attenCheckOutline">
 								<ul class="atten2_check_list">
 									<li>
 										<div class="today">
-											<em class="n">일</em><br>
-											<em class="d"></em>
+											<em class="n">일</em><br> <em class="d"></em>
 										</div>
 									</li>
 									<li>
 										<div class="today">
-											<em class="n">월</em><br>
-											<em class="d"></em>
+											<em class="n">월</em><br> <em class="d"></em>
 										</div>
 									</li>
 									<li>
 										<div class="today">
-											<em class="n">화</em><br>
-											<em class="d"></em>
+											<em class="n">화</em><br> <em class="d"></em>
 										</div>
 									</li>
 									<li>
 										<div class="today">
-											<em class="n">수</em><br>
-											<em class="d"></em>
+											<em class="n">수</em><br> <em class="d"></em>
 										</div>
 									</li>
 									<li>
 										<div class="today">
-											<em class="n">목</em><br>
-											<em class="d"></em>
+											<em class="n">목</em><br> <em class="d"></em>
 										</div>
 									</li>
 									<li>
 										<div class="today">
-											<em class="n">금</em><br>
-											<em class="d"></em>
+											<em class="n">금</em><br> <em class="d"></em>
 										</div>
 									</li>
 									<li>
 										<div class="today">
-											<em class="n">토</em><br>
-											<em class="d"></em>
+											<em class="n">토</em><br> <em class="d"></em>
 										</div>
 									</li>
 									<li th:each="notDate : ${#numbers.sequence(26,31)}">
 										<div class="today">
-											<em class="no"  th:text="${notDate}"></em><br>
-											<em class="do">DAY</em>
+											<em class="no" th:text="${notDate}"></em><br> <em
+												class="do">DAY</em>
 										</div>
 									</li>
-									<li class="todayOutline" th:each="date : ${#numbers.sequence(1,31)}">
+									<li class="todayOutline"
+										th:each="date : ${#numbers.sequence(1,31)}">
 										<div class="today">
-											<em class="n" th:text="${date}"></em><br>
-											<em class="d">DAY</em>
-											
+											<em class="n" th:text="${date}"></em><br> <em class="d">DAY</em>
+
 										</div>
-										
-										<div><button class="btnClass" th:id="'attBtn' + ${date}" th:value="${date}"><img class="heart"  src="/images/point/heart.png"></button></div>
-										
+
+										<div>
+											<button class="btnClass" th:id="'attBtn' + ${date}"
+												th:value="${date}">
+												<img class="heart" src="/images/point/heart.png">
+											</button>
+										</div>
+
 									</li>
 								</ul>
 							</div>
-						
+
+						</div>
+						<!-- //myPageCon -->
 					</div>
-					<!-- //myPageCon -->
 				</div>
 			</div>
 		</div>
 	</div>
-	</div>
-	
-	
+	<input type="hidden" id="inputuId"
+		th:value="${#authentication.principal.userNo}">
+
 	<!-- //container -->
-	
+
 	<!-- 스크립트 -->
 	<th:block th:replace="common/script.html"></th:block>
 	<!--// 스크립트 -->
@@ -122,10 +133,10 @@
 	<th:block th:replace="common/footer.html"></th:block>
 	<!--// FOOTER -->
 	</div>
-	
+
 	<!-- 퀵메뉴 + 톡톡 -->
 	<th:block th:replace="common/quickNtalk.html"></th:block>
-	<!--// 퀵메뉴 + 톡톡 -->	
+	<!--// 퀵메뉴 + 톡톡 -->
 	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 	<script type="text/javascript">
 		$('#quick .quickArea').css({'position':'absolute', 'top':290});
@@ -135,64 +146,40 @@
 		 
 		
 	</script>
-	
-<!--  	<script>
-	$(document).ready(function() {
-		/* $(document).on("click",".todayOutline div button",function(){
-			var idx = $(this).index();
-            
-            alert('버튼 {}을 눌렀습니다.'.replace('{}', idx))
-		
-		}); */
-		
-		var cancel_button = [];
-		for(i=0;i<=30; i++){
-			// alert($("#attBtn"+(i+1)).val());
-			cancel_button[i] = $("#attBtn"+(i+1));
-			/* cancel_button[i].on('click', function(event){
-								alert(cancel_button[i]) 
-								}); 
-			}; */
-			$(document).on("click",cancel_button[i],function(){
-				alert(cancel_button[i]);
-			}); 
-	}
-	});
-	
-	</script>  -->
-  	<script th:inline="javascript" > 
+
+	<script th:inline="javascript"> 
  	
    		$(function(){
    			$(".btnClass").on('click', function(){
-   				//var data = '[(${date})]';
    				
    				let param = {};
    				param.btnValue = $(this).val();
    				console.log(param);
+   				var attendanceDate = new Date();
+   				attendanceDate.setDate(param.btnValue);
+   				console.log(attendanceDate);
+   				var userNo = document.getElementById("inputuId").value;
+   				console.log(userNo);
+   				var result = {"attendanceDate" : attendanceDate, "userNo" : userNo};
    				
-   				/*
    				$.ajax({
-   					url : "/book",
-   					data : JSON.stringify(param),
-   					dataType : "json",
-   					contentType : "application/json; charset=utf-8",
+   					url : "/mypage/attCheck",
+   					data : result,
    					type : "post",
    					success : function(data){
    						console.log(data);
-   						alert(data.msg);
+   						alert(data);
    						
-   						$("#bookEnrollForm")[0].reset();
-   					
    					},
    					error : function(e){
    						console.log(e)
    					}
    				
-   				});    */	
+   				});    	
    			});
    		});
    		
-   </script> 
+   </script>
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 </body>
 </html>

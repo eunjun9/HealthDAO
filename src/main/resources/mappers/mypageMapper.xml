@@ -224,14 +224,14 @@
 				ORDER BY POINT_NO DESC)
 	</select>
 
-	<insert id="attendanceCheck" parameterType="com.kh.healthDao.mypage.model.vo.AttCheck">
+	<insert id="attendCheck" parameterType="com.kh.healthDao.mypage.model.vo.AttCheck">
 		INSERT INTO ATT_CHECK(
 	        ATTENDANCE_ID
 	      , ATTENDANCE_DATE
 	      , USER_NO
 		)VALUES (
 	        SEQ_ATTENDANCE_ID.NEXTVAL
-	      , SYSDATE
+	      , TO_CHAR(#{attendanceDate}, 'YY-MM-DD')
 	      , #{userNo}
 		)
 	</insert>

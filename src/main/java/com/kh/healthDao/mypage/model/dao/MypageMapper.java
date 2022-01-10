@@ -27,8 +27,6 @@ public interface MypageMapper {
 
 	List<Point> pointList();
 
-
-	int attendanceCheck(AttCheck att);
 	int myCouponInsert(Map<String, Object> map);
 
 	List<Coupon> myCouponList(int userNo);
@@ -46,6 +44,8 @@ public interface MypageMapper {
 	Review reviewDetail(int reviewNo);
 
 	int reviewModify(Review review);
+
+	int attendCheck(AttCheck attcheck);
 
 
 
