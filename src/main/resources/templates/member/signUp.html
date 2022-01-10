@@ -83,7 +83,7 @@
 										<button class="title" type="button">년도</button>
 										<ul class="selList">
 											<li th:each="m : ${#numbers.sequence(#calendars.format(#calendars.createNow(), 'yyyy'),1910)}">
-												<input type="radio" value="${m}" class="option" id="select1_1" name="userBirth">
+												<input type="radio" th:value="${m}" class="option" id="select1_1" name="userBirth">
 												<label for="select1_1" th:text="${m}"></label>
 											</li>
 										</ul>
@@ -94,7 +94,7 @@
 										<button class="title" type="button">월</button>
 										<ul class="selList">
 											<li th:each="m : ${#numbers.sequence(1,12)}">
-												<input type="radio" value="${m}<=9 ? 0+${m} : ${m}" class="option" id="select1_1" name="userBirth2">
+												<input type="radio" th:value="${m}" class="option" id="select1_1" name="userBirth2">
 												<label for="select1_1" th:text="${m}"></label>
 											</li>
 										</ul>
@@ -105,7 +105,7 @@
 										<button class="title" type="button">일</button>
 										<ul class="selList">
 											<li th:each="m : ${#numbers.sequence(1,31)}">
-												<input type="radio" value="${m}<=9 ? 0+${m} : ${m}" class="option" id="select1_1" name="userBirth3">
+												<input type="radio" th:value="${m}" class="option" id="select1_1" name="userBirth3">
 												<label for="select1_1" th:text="${m}"></label>
 											</li>
 										</ul>

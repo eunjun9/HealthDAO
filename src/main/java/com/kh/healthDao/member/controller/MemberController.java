@@ -42,9 +42,13 @@ public class MemberController {
 	public String signUp(HttpServletRequest hsr, Member member) {
 		
 		String b1 = hsr.getParameter("userBirth");
-		String b2 = hsr.getParameter("userBirth2");
-		String b3 = hsr.getParameter("userBirth3");
-		String birth = b1+b2+b3;
+		int b2 = Integer.parseInt(hsr.getParameter("userBirth2"));
+		int b3 = Integer.parseInt(hsr.getParameter("userBirth2"));
+		
+		String bb2 = b2 <= 9 ? "0"+Integer.valueOf(b2).toString() : Integer.valueOf(b2).toString();
+	    String bb3 = b3 <= 9 ? "0"+Integer.valueOf(b3).toString() : Integer.valueOf(b3).toString();
+		
+		String birth = b1 + bb2 + bb3;
 		member.setUserBirth(birth);
 		
 		memberService.signUp(member);
@@ -74,13 +78,24 @@ public class MemberController {
 	}
 	
 	@ResponseBody
-	@GetMapping("/findIdPwd/{userName}/{userEmail}")
-	public Member findId(ModelAndView mv, @PathVariable String userName, @PathVariable String userEmail) {
+	@GetMapping("/findId/{userName}/{userEmail}")
+	public Member findId(@PathVariable String userName, @PathVariable String userEmail) {
 		
 		log.info("조회 요청 이름 : {}", userName);
 		log.info("조회 요청 이메일 : {}", userEmail);
 		
 		return memberService.findId(userName, userEmail);
 	}
+	/*
+	@ResponseBody
+	@GetMapping("/findPwd/{userId}/{userName}/{userEmail}")
+	public Member findPwd(@PathVariable String userId, @PathVariable String userName, @PathVariable String userEmail) {
+		
+		log.info("조회 요청 아이디 : {}", userId);
+		log.info("조회 요청 이름 : {}", userName);
+		log.info("조회 요청 이메일 : {}", userEmail);
+		
+		return memberService.findPwd(userId, userName, userEmail);
+	} */
 	
 }

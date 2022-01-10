@@ -49,6 +49,7 @@
 						</form>
 					</div>
 					<div class="guideTab findPwdTab" id="guideTab2" style="display: none;">
+						<form id="findPwdForm">
 						<div class="inp_wrap">
 							<label class="inp_lab" for="ipt_label">아이디</label>
 							<div class="inp_text">
@@ -76,6 +77,7 @@
 						<div class="btn_wrap">
 							<a href="#" onclick="showLayer('findPwSuccess');" class="btn btnArr btnSizeL btnColorG btnTypeB findPwdBtn" style="width:180px;"><span><b>확인</b></span></a>
 						</div>
+						</form>
 					</div>
 					<div class="find_cc">
 						<p>아이디/비밀번호 찾기가 잘 안되시나요?</p>
@@ -115,7 +117,7 @@
 				let userEmail = $("#findIdForm [name=userEmail]").val();
 				
 				$.ajax({
-					url : "/member/findIdPwd/" + userName + "/" + userEmail,
+					url : "/member/findId/" + userName + "/" + userEmail,
 					type : "get",
 					dataType : "json",
 					success : function(data) {
@@ -123,6 +125,25 @@
 						
 						$('#resultId').html(data.userId);
 						$('#resultDate').html(resultDate);
+					},
+					error : function(e) {
+						console.log(e);
+					}
+				});
+			});
+			
+			$("#findPwdForm .findPwdBtn").on('click', function(){
+				
+				let userId = $("#findPwdForm [name=userId]").val();
+				let userName = $("#findPwdForm [name=userName]").val();
+				let userEmail = $("#findPwdForm [name=userEmail]").val();
+				
+				$.ajax({
+					url : "/member/findPwd/" + userId + "/" + userName + "/" + userEmail,
+					type : "get",
+					dataType : "json",
+					success : function(data) {
+						
 					},
 					error : function(e) {
 						console.log(e);
@@ -153,7 +174,7 @@
 						</div>
 					</div>
 					<div class="btn_wrap">
-						<a href="javascript:void(0);" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>로그인</span></a>
+						<a href="/member/login" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>로그인</span></a>
 					</div>
 				</div>
 			</div>
