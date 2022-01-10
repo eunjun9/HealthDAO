@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.kh.healthDao.admin.model.vo.Coupon;
 import com.kh.healthDao.admin.model.vo.Notice;
 import com.kh.healthDao.admin.model.vo.Product;
+import com.kh.healthDao.mypage.model.vo.MemberSound;
 import com.kh.healthDao.mypage.model.vo.Qna;
 
 
@@ -71,6 +72,8 @@ public interface AdminMapper {
 	public int viewUpdate(int nNo);
 	// 공지사항 최근 5개
 	public List<Notice> newfiveNoticeList();
+
+	public int memberSoundInsert(MemberSound ms);
 
 	
 }

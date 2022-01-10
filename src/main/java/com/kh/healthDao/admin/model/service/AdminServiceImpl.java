@@ -12,11 +12,11 @@ import com.kh.healthDao.admin.model.vo.Coupon;
 import com.kh.healthDao.admin.model.vo.Notice;
 import com.kh.healthDao.admin.model.vo.Product;
 import com.kh.healthDao.common.model.vo.Paging;
-import com.kh.healthDao.mypage.model.vo.Qna;
+import com.kh.healthDao.mypage.model.vo.MemberSound;
 
 
 @Service("adminService")
-public class AdminServiceImpl implements AdminService, CouponService, NoticeService{
+public class AdminServiceImpl implements AdminService, CouponService, NoticeService, MemberSoundService{
 
 	private final AdminMapper adminMapper; 
 	
@@ -156,6 +156,17 @@ public class AdminServiceImpl implements AdminService, CouponService, NoticeServ
 	@Override
 	public List<Notice> newfiveNoticeList() {
 		return adminMapper.newfiveNoticeList();
+	}
+
+	@Override
+	public int insertproductStock(Product product) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int memberSoundInsert(MemberSound ms) {
+		return adminMapper.memberSoundInsert(ms);
 	}
 
 	

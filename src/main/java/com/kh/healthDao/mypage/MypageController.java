@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.healthDao.admin.model.service.MemberSoundService;
 import com.kh.healthDao.admin.model.service.NoticeService;
 import com.kh.healthDao.admin.model.vo.Coupon;
 import com.kh.healthDao.admin.model.vo.Notice;
@@ -23,6 +24,7 @@ import com.kh.healthDao.mypage.model.service.MyCouponService;
 import com.kh.healthDao.mypage.model.service.MyReviewService;
 import com.kh.healthDao.mypage.model.service.QnaService;
 import com.kh.healthDao.mypage.model.vo.AttCheck;
+import com.kh.healthDao.mypage.model.vo.MemberSound;
 import com.kh.healthDao.mypage.model.vo.Point;
 import com.kh.healthDao.mypage.model.vo.Qna;
 import com.kh.healthDao.review.model.vo.Review;
@@ -36,14 +38,16 @@ public class MypageController {
 	private MessageSource messageSource;
 	private NoticeService noticeService;
 	private MyReviewService myReviewService;
+	private MemberSoundService memberSoundService;
 	
 	@Autowired
-	public MypageController(QnaService qnaService, MyCouponService couponService, MessageSource messageSource, NoticeService noticeService, MyReviewService myReviewService) {
+	public MypageController(QnaService qnaService, MyCouponService couponService, MessageSource messageSource, NoticeService noticeService, MyReviewService myReviewService, MemberSoundService memberSoundService) {
 		this.qnaService = qnaService;
 		this.couponService = couponService;
 		this.messageSource = messageSource;
 		this.noticeService = noticeService;
 		this.myReviewService = myReviewService;
+		this.memberSoundService = memberSoundService;
 	}
 	
 	@GetMapping(value= {"/", "/myOrder"})
@@ -216,6 +220,17 @@ public class MypageController {
 	@GetMapping("/memberSound")
 	public String memberSound() {
 		return "mypage/memberSoundInput";
+	}
+	
+	@PostMapping("/memberSoundInsert")
+	public String memberSoundInsert(MemberSound ms, RedirectAttributes rttr, @AuthenticationPrincipal UserImpl userImpl) {
+		int userNo = userImpl.getUserNo();
+		ms.setUserNo(userNo);
+		
+		String msg = memberSoundService.memberSoundInsert(ms) > 0 ? "고객의소리 등록 성공" : "고객의소리 등록 실패";		
+		rttr.addFlashAttribute("msg", msg);
+		
+		return "redirect:/mypage/memberSound";
 	}
 	
 	/* 배송지 관리 */

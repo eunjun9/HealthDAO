@@ -257,4 +257,26 @@
 		]]>
 		ORDER BY ROWNUM DESC
 	</select>
+	
+	<insert id="memberSoundInsert" parameterType="com.kh.healthDao.mypage.model.vo.MemberSound">
+		INSERT INTO MEMBER_SOUND(
+		    C_NO
+		    , C_DEPT
+		    , C_CONTENT
+		    , C_DATE
+		    , USER_NO
+		    , IMG_LOCATION
+		    , IMG_NAME
+		    , C_STATUS
+		)VALUES(
+		    SEQ_C_NO.NEXTVAL
+		    , #{cDept}
+		    , #{cContent}
+		    , SYSDATE
+		    , #{userNo}
+		    , NULL
+		    , NULL
+		    , 'Y'
+		)
+	</insert>
 </mapper>
