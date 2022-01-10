@@ -35,7 +35,9 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter{
    /* 정적 리소스는 권한 없이도 접근 가능하게끔 무시할 경로 작성 */
    @Override
    public void configure(WebSecurity web) {
+
       web.ignoring().antMatchers("/css/**", "/js/**", "/images/**", "/trainer/**", "/banner/**");
+
    }
    
    /* HTTP 요청에 대한 설정 */
@@ -56,9 +58,9 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter{
              * "/mypage/**"요청은 인증이 되어야 함을 명시 */         
             //.antMatchers("/mypage/**").authenticated()
             /* hasRole 안의 값 앞에는 자동으로 ROLE_ 가 붙음 */
-            .antMatchers("/mypage/**").hasRole("MEMBER")
+            .antMatchers("/mypage/**", "/trainer/**").hasRole("MEMBER")
             /* "/trainer/**"의 요청은 ROLE_TRAINER 권한을 가진 사람에게만 허용 */
-            .antMatchers("/trainer/**").hasRole("TRAINER")
+            // .antMatchers("/trainer/**").hasRole("TRAINER")
             /* "/admin/**"의 요청은 ROLE_ADMIN 권한을 가진 사람에게만 허용 */
             .antMatchers("/admin/**").hasRole("ADMIN")
             .antMatchers("/manager/**").hasRole("ADMIN")

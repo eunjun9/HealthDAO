@@ -106,7 +106,7 @@
 		  , NULL
 		  <choose>
 		  <when test="emailReceive != null">
-		  , #{ emailReceive }
+		  , #{emailReceive}
 		  </when>
 		  <otherwise>
 		  , 'N'
@@ -114,7 +114,7 @@
 		  </choose>
 		  <choose>
 		  <when test="smsReceive != null">
-		  , #{ smsReceive }
+		  , #{smsReceive}
 		  </when>
 		  <otherwise>
 		  , 'N'

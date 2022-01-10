@@ -8,13 +8,13 @@ import com.kh.healthDao.trainer.model.vo.Trainer;
 
 
 public interface TrainerService {
-	List<Trainer> trainerList();
+	List<Trainer> trainerList(String searchTrainer);
 
 	Trainer trainerSelect(int tNo);
 
 	int trainerModify(Trainer trainer);
 
-	List<PtOrder> trainerOrderList();
+	List<PtOrder> trainerOrderList(int userNo);
 
 	List<Review> trainerReviewList(int tNo);
 
