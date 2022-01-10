@@ -23,7 +23,40 @@ public class ShoppingServiceImpl implements ShoppingService{
 	public ShoppingServiceImpl(ShoppingMapper shoppingMapper) {
 		this.shoppingMapper = shoppingMapper;
 	}
-	
+
+	@Override
+	public Map<String, Object> pdtList() {
+		int listCount = shoppingMapper.pdtListCount();
+		List<Product> pdtList = shoppingMapper.pdtList();
+		List<Product> recoList = shoppingMapper.recoList();
+		
+		Map<String, Object> pdtMap = new HashMap<>();
+		pdtMap.put("listCount", listCount);
+		pdtMap.put("pdtList", pdtList);
+		pdtMap.put("recoList", recoList);
+		
+		return pdtMap;
+	}
+
+	@Override
+	public Product detailPdt(int productNo) {
+		return shoppingMapper.detailPdt(productNo);
+	}
+
+	@Override
+	public int insertReco(int productNo, int productRank) {
+		return shoppingMapper.insertReco(productNo, productRank);
+	}
+
+	@Override
+	public Product selectReco(int productNo) {
+		return shoppingMapper.selectReco(productNo);
+	}
+
+	@Override
+	public int modifyReco(int productNo, int productRank) {
+		return shoppingMapper.modifyReco(productNo, productRank);
+	}
 	
 	@Override
 	public List<Product> beverageShoppingList() {
@@ -145,13 +178,4 @@ public class ShoppingServiceImpl implements ShoppingService{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
-	
-
-	
-
-	
-
-
 }

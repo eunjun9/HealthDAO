@@ -37,14 +37,14 @@
 									<a href="javascript:void(0)" onclick="showLayer('recoDel');" class="wishBtn btn btnSizeS btnColorW btnTypeB"><span>삭제하기</span></a>
 								</div>
 							</div>
-							<div class="pdt_list1 type02 mgt60">
+							<div class="pdt_list1 type02 mgt60" th:if="${recoList != null}">
 								<ul class="list_box">
-									<li>
+									<li th:each="list : ${recoList}">
 										<div class="pdtImg">
-											<a href="javascript:showLayer('optChange');" class="imgLink"><img src="./images/temp/pdt_img3.png" alt=""></a>
+											<a th:href="|javascript:selectReco(${list.productNo});|" class="imgLink"><img src="./images/temp/pdt_img3.png" alt=""></a>
 										</div>
 										<div class="pdtTxt">
-											<p class="pdtHead" style="color:#4f8ffa;">순번 가져오기</p>
+											<p class="pdtHead" style="color:#4f8ffa;" th:text="@{랭킹 }+${list.productRank}"></p>
 											<p class="pdtName"><a href="#">제품명제품명제품명제품명제품명</a></p>
 											<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
 											<div class="pdtReview">
@@ -53,11 +53,17 @@
 											</div>
 										</div>
 										<span class="inp_check OtPdtCheckBox">
-											<input type="checkbox" name="chkReco" id="chkReco1" class="js_checkbox">
-											<label for="chkReco1"><span class="hide">제품명제품명제품명제품명제품명</span></label>
+											<input type="checkbox" name="inp_check1" th:id="@{inp_check1_}+${list.productNo}" th:value="${list.productNo}">
+											<label th:for="@{inp_check1_}+${list.productNo}"></label>
+											<input type="hidden" name="productRank" th:id="@{inp_check1_}+${list.productRank}" th:value="${list.productRank}">
 										</span>
 									</li>
 								</ul>
+							</div>
+							<div th:unless="${recoList != null}">
+								<div class="noData">
+									<span>등록된 내용이 없습니다.<br>지금 바로 등록 해보세요.</span>
+								</div>
 							</div>
 						</div>
 						<!-- //myPageCon -->
@@ -84,52 +90,199 @@
 	</script>
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 
-<!-- 상품검색 -->
+<!-- 제품 찾기 -->
 <div id="pdtSearch" class="lyPopArea">
     <div class="lyPop">
         <div class="lyWrap">
             <button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
-            <div class="lyTit">상품검색</div>
+            <div class="lyTit">제품 찾기</div>
             <div class="lyBody">
-                <div class="searchBox">
-                    <div class="selec">
-                        <div class="inp_wrap">
-                            <div class="inp_text sizeS searchType mgt10">
-                                <input type="text" name="" id="" placeholder="상품명을 입력해주세요.">
-                                <button type="button" class="btn_clear"><span>clear</span></button>
-                                <button type="button" class="btn_search"><span>search</span></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="listBox">
-                    <ul class="vScroll">
-                        <li><a href="javascript:void(0)"><img src="./images/temp/pdtsearchImg01.jpg" alt=""></a><p><span>바닐라코</span>커버리셔스 파워 핏 쿠션 리필 14g</p></li>
-                        <li th:each="newProduct:${shoppingList}">
-                        	<a href="javascript:void(0)">
+                    <ul class="vScroll" th:if="${pdt != 0}">
+                        <li th:each="pdt:${pdtList}">
+                        	<a href="javascript:void(0);" th:onclick="|selectPdt('${pdt.productNo}');|">
                         		<img src="./images/temp/pdtsearchImg01.jpg" alt="">
                         	</a>
                         	<p>
-                        		<span th:text="${newProduct.productBrand}"></span>
-                        		<span th:text="${newProduct.productTitle}"></span>
+                        		<span th:text="${pdt.productBrand}"></span>
+                        		[[${pdt.productTitle}]]
                         	</p>
                         </li>
                     </ul>
-                    <div class="noData">
-                        <span>검색된 결과가 없습니다.</span>
+                    <div class="noData" th:if="${pdt == 0}">
+                        <span>결과가 없습니다.</span>
                     </div>
-                    <span>총 <span class="fcPink">10</span>개</span>
+                    <span>총 <span class="fcRed" th:text="${listCount}">10</span>개</span>
                 </div>
-                <div class="paging mgt40">
-                    <a href="#" class="first"><span class="hide">첫페이지</span></a>
-                    <a href="#" class="prev"><span class="hide">이전페이지</span></a>
-                    <a href="#" class="active">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">4</a>
-                    <a href="#">5</a>
-                    <a href="#" class="next"><span class="hide">다음페이지</span></a>
-                    <a href="#" class="last"><span class="hide">마지막페이지</span></a>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+	.pNo{height:50px;line-height:50px;}
+</style>
+<script>
+	function selectPdt(val){
+		var sendData = {"productNo":val};
+		$.ajax({
+			url : "/reco/detail",
+			method : "POST",
+			data : sendData,
+			success : function(data){
+				if(data.productRank == 0){
+					showLayer('optSelect');
+					if($("#optSelect .pNo")){
+						$("#optSelect .pNo").remove();
+						$("#optSelect input[name=recoRank]").val('');
+					}
+					let html = '';
+					html = '<div class="pNo">'
+						 + data.productNo
+						 + '번 제품'
+						 + '<input type="hidden" name="pdtNo" id="pdtNo" value="'
+						 + data.productNo
+						 + '"/>'
+						 + '</div>';
+					$("#optSelect .lyBody").prepend(html);
+				}else{
+					alert("이미 순서가 지정되어 있습니다.");
+				}
+			},
+			error: function(e){
+				console.log(e);
+			}
+		});
+	}
+	function insertReco(){
+		let productNo = $("#optSelect input[name=pdtNo]").val();
+		let productRank = $("#optSelect input[name=recoRank]").val();
+		$.ajax({
+			url : "/reco/insert",
+			method : "POST",
+			data : {
+				"productNo" : productNo,
+				"productRank" : productRank
+			},
+			success : function(result){
+				console.log(result);
+				if(result == "1"){
+					alert("성공적으로 적용되었습니다.");
+					location.reload();
+				}else{
+					alert("업데이트가 되지 않았습니다ㅜㅜ");
+				}
+			},
+			error : function(e){
+				console.log(e);
+			}
+		});
+	}
+	
+	function selectReco(val){
+		var sendData = {"productNo":val};
+		$.ajax({
+			url : "/reco/select",
+			method : "POST",
+			data : sendData,
+			success : function(data){
+				showLayer('optChange');
+				if($("#optChange .pNo")){
+					$("#optChange .pNo").remove();
+					$("#optChange input[name=recoRank]").val('');
+				}
+				let html = '';
+				html = '<div class="pNo">'
+					 + data.productNo
+					 + '번 제품'
+					 + '<input type="hidden" name="pdtNo" id="pdtNo" value="'
+					 + data.productNo
+					 + '"/>'
+					 + '</div>';
+				$("#optChange .lyBody").prepend(html);
+				$("#optChange input[name=recoRank]").val(data.productRank);
+			},
+			error: function(e){
+				console.log(e);
+			}
+		});
+	}
+	
+	function modifyReco(){
+		let productNo = $("#optChange input[name=pdtNo]").val();
+		let productRank = $("#optChange input[name=recoRank]").val();
+		console.log(productNo, productRank);
+		$.ajax({
+			url : "/reco/modify",
+			method : "POST",
+			data : {
+				"productNo" : productNo,
+				"productRank" : productRank
+			},
+			success : function(result){
+				if(result == "1"){
+					alert("성공적으로 적용되었습니다.");
+					location.reload();
+				}else{
+					alert("업데이트가 되지 않았습니다ㅜㅜ");
+				}
+			},
+			error : function(e){
+				console.log(e);
+			}
+		});
+	}
+
+	function deleteReco(){
+		var addList = [], data = {};
+		let chk = $('.checked:not(.allChk) input[name="inp_check1"]:checked');		
+		let chkLength = chk.length;	// 체크된 갯수
+		
+		jQuery.ajaxSettings.traditional = true;
+		if(chkLength >= 1){
+			for(var i = 0; i < chkLength; i++){
+				addList[i] = chk[i].value;
+			    data.addList = addList;	// 체크된 값 배열에 담기
+			}
+			console.log(data);			// 배열에 담긴 값
+			$.ajax({
+				url : "/banner/delete",
+				data : JSON.stringify(addList),
+				contentType: 'application/json',
+				type : "post",
+				success : function(data){
+					console.log(data);
+					if(chkLength == data){
+						location.reload();
+					}else{
+						alert('실패');
+					}
+				},
+				error : function(e){
+					console.log(e);
+				}
+			});
+		}else{
+			alert('선택된 값이 없습니다.');
+		}
+	}
+</script>
+<!-- 추천상품 순서추가 -->
+<div id="optSelect" class="lyPopArea">
+    <div class="lyPop">
+        <div class="lyWrap">
+            <button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
+            <div class="lyTit">순서 추가</div>
+            <div class="lyBody">
+                <div class="inp_wrap">
+					<div class="inp_text">
+						<input type="text" name="recoRank" id="recoRank" placeholder="순서를 입력해주세요">
+						<button class="btn_clear"><span>clear</span></button>
+					</div>
+					<p class="error">잘못 입력했습니다</p>
+				</div>
+                <div class="btn_wrap length2">
+                    <a href="javascript:void(0);" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorW btnTypeR"><span>취소</span></a>
+                    <a href="javascript:void(0);" onclick="insertReco();" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></a>
                 </div>
             </div>
         </div>
@@ -140,18 +293,18 @@
     <div class="lyPop">
         <div class="lyWrap">
             <button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
-            <div class="lyTit">순서 변경</div>
+            <div class="lyTit">순서 추가</div>
             <div class="lyBody">
                 <div class="inp_wrap">
 					<div class="inp_text">
-						<input type="text" name="" id="" placeholder="1">
+						<input type="text" name="recoRank" id="recoRank" placeholder="순서를 입력해주세요">
 						<button class="btn_clear"><span>clear</span></button>
 					</div>
 					<p class="error">잘못 입력했습니다</p>
 				</div>
                 <div class="btn_wrap length2">
                     <a href="javascript:void(0);" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorW btnTypeR"><span>취소</span></a>
-                    <a href="#" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></a>
+                    <a href="javascript:void(0);" onclick="modifyReco();" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></a>
                 </div>
             </div>
         </div>
@@ -174,7 +327,48 @@
     </div>
 </div>
 <script>
+$(document).on('click', '.inp_check label', function (){
+	if ($(this).parent().hasClass('readOnly')){return false;}
+	if ($(this).parent().hasClass('disabled')){return false;}
+	
+	var tar = $(this).parent().find('input');
+	var chk = tar.prop('checked');
+	var grpNm = tar.attr('name');
 
+
+	if ($(this).parent('.inp_check').hasClass('allChk')){
+		var chkStatus = tar.prop('checked');
+		$("input:checkbox[name=" + grpNm + "]").each(function() {
+			if (chkStatus) {
+				$(this).closest(".inp_check").removeClass("checked");
+				$(this).prop("checked",false);
+			} else {
+				$(this).closest(".inp_check").addClass("checked");
+				$(this).prop("checked",true);
+			}
+		});
+	} else {
+		if ($(this).parent().hasClass('checked')) {
+			$("input:checkbox[name=" + grpNm + "]").each(function() {
+				$(this).closest('.inp_check.allChk').removeClass('checked');;
+				$(this).closest('.inp_check.allChk input').prop("checked",false);
+			});
+			$(this).parent().removeClass('checked');				
+			if($(this).attr('for') == 'remember'){
+				deleteCookie("rememberId");
+			}
+			tar.prop("checked",false);
+		} else {
+			$(this).parent().addClass('checked');				
+			if($(this).attr('for') == 'remember'){
+				setCookie("rememberId", userId.value, 7);
+			}
+			tar.prop("checked",true);
+		}
+	}
+	console.log(tar.prop('checked'));
+	return false;
+});
 </script>
 </body>
 </html>

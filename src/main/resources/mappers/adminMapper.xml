@@ -13,7 +13,7 @@
 		<result property="productStock" column="PRODUCT_STOCK" />
 		<result property="CategoryId" column="CATEGORY_ID" />
 		<result property="pMembership" column="P_MEMBERSHIP"/>
-		
+		<result property="productRank" column="PRODUCT_RANK"/>
 	</resultMap>
 	
 	<resultMap id="couponResultMap" type="com.kh.healthDao.admin.model.vo.Coupon">

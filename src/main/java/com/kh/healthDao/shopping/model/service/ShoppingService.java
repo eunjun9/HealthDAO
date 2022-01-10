@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.healthDao.admin.model.vo.Product;
+import com.kh.healthDao.shopping.model.vo.Shopping;
 
 
 
 public interface ShoppingService {
-	
 	Map<String, Object> ShoppingList(int page);
 
 	Map<String, Object> foodShoppingList(int page);
@@ -26,5 +26,13 @@ public interface ShoppingService {
 	Product shoppingDetail(int productNo);
 
 	Map<String, Object> pdtList();
+
+	Product detailPdt(int productNo);
+
+	int insertReco(int productNo, int productRank);
+
+	Product selectReco(int productNo);
+
+	int modifyReco(int productNo, int productRank);
 
 }

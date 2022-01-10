@@ -13,8 +13,110 @@
 		<result property="productStock" column="PRODUCT_STOCK" />
 		<result property="categoryId" column="CATEGORY_ID" />
 		<result property="pMembership" column="P_MEMBERSHIP"/>
-		
+		<result property="productRank" column="PRODUCT_RANK"/>
 	</resultMap>
+	
+	<insert id="insertReco" parameterType="com.kh.healthDao.admin.model.vo.Product">
+		INSERT 
+		INTO PRODUCT_RECOMMEND
+		(
+			PRODUCT_NO
+		  , PRODUCT_RANK
+		)VALUES(
+		    #{productNo}
+		  , #{productRank}
+		)
+	</insert>
+	<select id="detailPdt" resultMap="productResultMap" parameterType="_int">
+		SELECT
+				PRODUCT_NO
+              , PRODUCT_RANK
+			  , PRODUCT_BRAND
+			  , PRODUCT_TITLE
+			  , PRODUCT_PRICE
+			  , PRODUCT_BENEFIT
+			  , PRODUCT_NOTICE
+			  , PRODUCT_INFO
+			  , PRODUCT_VIEW
+			  , PRODUCT_STOCK
+			  , CATEGORY_ID
+			  , P_MEMBERSHIP
+		 FROM PRODUCT
+         LEFT JOIN PRODUCT_RECOMMEND USING (PRODUCT_NO)
+		WHERE PRODUCT_NO = #{productNo}
+	</select>
+	<select id="recoList" resultMap="productResultMap">
+		SELECT
+				PRODUCT_NO
+              , PRODUCT_RANK
+			  , PRODUCT_BRAND
+			  , PRODUCT_TITLE
+			  , PRODUCT_PRICE
+			  , PRODUCT_BENEFIT
+			  , PRODUCT_NOTICE
+			  , PRODUCT_INFO
+			  , PRODUCT_VIEW
+			  , PRODUCT_STOCK
+			  , CATEGORY_ID
+			  , P_MEMBERSHIP
+		 FROM PRODUCT
+         RIGHT JOIN PRODUCT_RECOMMEND USING (PRODUCT_NO)
+	</select>
+	
+	<select id="pdtList" resultMap="productResultMap">
+		SELECT
+				PRODUCT_NO
+			  , PRODUCT_BRAND
+			  , PRODUCT_TITLE
+			  , PRODUCT_PRICE
+			  , PRODUCT_BENEFIT
+			  , PRODUCT_NOTICE
+			  , PRODUCT_INFO
+			  , PRODUCT_VIEW
+			  , PRODUCT_STOCK
+			  , CATEGORY_ID
+			  , P_MEMBERSHIP
+		 FROM PRODUCT
+	</select>
+	
+	<select id="selectReco" resultMap="productResultMap" parameterType="_int">
+		SELECT
+				PRODUCT_NO
+              , PRODUCT_RANK
+		 FROM PRODUCT_RECOMMEND
+		WHERE PRODUCT_NO = #{productNo}
+	</select>
+	
+	 <update id="modifyReco" parameterType="com.kh.healthDao.admin.model.vo.Product">
+	 UPDATE PRODUCT_RECOMMEND
+		SET PRODUCT_RANK = #{productRank}
+	  WHERE PRODUCT_NO = #{productNo}
+	</update>
+	
+	<delete id="deleteReco">
+		DELETE
+			   PRODUCT_RECOMMEND
+		 WHERE PRODUCT_NO = #{productNo}
+	</delete>
+	
+	<select id="pdtListCount" resultType="_int">
+		SELECT
+		    COUNT(*)
+		FROM
+		(SELECT
+				PRODUCT_NO
+			  , PRODUCT_BRAND
+			  , PRODUCT_TITLE
+			  , PRODUCT_PRICE
+			  , PRODUCT_BENEFIT
+			  , PRODUCT_NOTICE
+			  , PRODUCT_INFO
+			  , PRODUCT_VIEW
+			  , PRODUCT_STOCK
+			  , CATEGORY_ID
+			  , P_MEMBERSHIP
+		 FROM PRODUCT)
+	</select>
 	
 	<select id="shoppingList" resultMap="productResultMap" parameterType="hashmap">
 		SELECT *
