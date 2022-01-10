@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.healthDao.admin.model.vo.Product;
 import com.kh.healthDao.main.model.service.BannerService;
 import com.kh.healthDao.main.model.vo.Banner;
 import com.kh.healthDao.shopping.model.service.ShoppingService;
+import com.kh.healthDao.shopping.model.vo.Shopping;
 
 
 @Controller
@@ -43,20 +45,18 @@ public class MainController {
 		return "redirect:/";
 	}
 	
-	@GetMapping("/reco")
-	public String reco() {
-		return "admin/reco";
-	}
 	@GetMapping("/time")
 	public String time() {
 		return "admin/time";
 	}
 
 	private BannerService bannerService;
+	private ShoppingService shoppingService;
 	
 	@Autowired
-	public MainController(BannerService bannerService) {
+	public MainController(BannerService bannerService, ShoppingService shoppingService) {
 		this.bannerService = bannerService;
+		this.shoppingService = shoppingService;
 	}
 	
 	
@@ -75,7 +75,7 @@ public class MainController {
 	
 	@ResponseBody
 	@PostMapping("/banner/delete")
-	public int deleteBanner(@RequestBody int[] addList) {
+	public int deleteBanner(int[] addList) {
 		int result = 0;
 		for(int i = 0; i < addList.length; i++) {
 			result += bannerService.deleteBanner(addList[i]);			
@@ -108,32 +108,49 @@ public class MainController {
 		int result = bannerService.bannerUpdate(map);
 		return result;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
-//	private ShoppingService shoppingService;
-//	
-//	@Autowired
-//	public MainController(ShoppingService shoppingService) {
-//		this.shoppingService = shoppingService;
-//	}
-//	// 추천상품 검색
-//	@GetMapping("/reco")
-//	public ModelAndView pdtList(ModelAndView mv) {
-//		Map<String, Object> map = shoppingService.pdtList();
-//		mv.addObject("pdtList", map.get("pdtList"));
-//		mv.setViewName("admin/reco");
-//		return mv;
-//	}
+	// 추천상품 검색
+	@GetMapping("/reco")
+	public ModelAndView shoppingNewProduct(ModelAndView mv) {
+		Map<String, Object> map = shoppingService.pdtList();
+		
+		mv.addObject("pdtList", map.get("pdtList"));
+		mv.addObject("listCount", map.get("listCount"));
+		mv.addObject("recoList", map.get("recoList"));
+		mv.setViewName("admin/reco");
+		return mv;
+	}
+
+	// 상품 선택
+	@ResponseBody
+	@PostMapping("/reco/detail")
+	public Product detailPdt(int productNo) {
+		Product pdt = shoppingService.detailPdt(productNo);
+		return pdt;
+	}
+	
+	// 추천상품 추가
+	@ResponseBody
+	@PostMapping("/reco/insert")
+	public int insertPdt(int productNo, int productRank) {
+		int result = shoppingService.insertReco(productNo, productRank);
+		return result;
+	}
+
+	// 추천 상품 선택
+	@ResponseBody
+	@PostMapping("/reco/select")
+	public Product selectReco(int productNo) {
+		Product pdt = shoppingService.selectReco(productNo);
+		return pdt;
+	}
+
+	// 추천 상품 수정
+	@ResponseBody
+	@PostMapping("/reco/modify")
+	public int modifyReco(int productNo, int productRank) {
+		int result = shoppingService.modifyReco(productNo, productRank);
+		return result;
+	}
+	
 }

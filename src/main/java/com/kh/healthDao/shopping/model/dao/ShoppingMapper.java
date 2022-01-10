@@ -10,6 +10,13 @@ import com.kh.healthDao.admin.model.vo.Product;
 
 @Mapper
 public interface ShoppingMapper {
+	List<Product> pdtList();
+	int pdtListCount();
+	Product detailPdt(int productNo);
+	int insertReco(int productNo, int productRank);
+	List<Product> recoList();
+	Product selectReco(int productNo);
+	int modifyReco(int productNo, int productRank);
 
 	List<Product> ShoppingList();
 	
@@ -36,5 +43,4 @@ public interface ShoppingMapper {
 	int goodsShoppingListCount();
 
 	Product shoppingPayment(int productNo);
-	
 }

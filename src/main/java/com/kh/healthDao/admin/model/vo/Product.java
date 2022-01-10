@@ -36,5 +36,6 @@ public class Product {
 	 * */
 	
 
+	private int productRank;		// 순번
 	
 }
