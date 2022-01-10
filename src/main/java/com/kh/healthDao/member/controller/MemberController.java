@@ -42,13 +42,10 @@ public class MemberController {
 	public String signUp(HttpServletRequest hsr, Member member) {
 		
 		String b1 = hsr.getParameter("userBirth");
-		int b2 = Integer.parseInt(hsr.getParameter("userBirth2"));
-		int b3 = Integer.parseInt(hsr.getParameter("userBirth2"));
+		String b2 = hsr.getParameter("userBirth2");
+		String b3 = hsr.getParameter("userBirth2");
 		
-		String bb2 = b2 <= 9 ? "0"+Integer.valueOf(b2).toString() : Integer.valueOf(b2).toString();
-	    String bb3 = b3 <= 9 ? "0"+Integer.valueOf(b3).toString() : Integer.valueOf(b3).toString();
-		
-		String birth = b1 + bb2 + bb3;
+		String birth = b1 + b2 + b3;
 		member.setUserBirth(birth);
 		
 		memberService.signUp(member);
