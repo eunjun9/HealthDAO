@@ -1,5 +1,6 @@
 package com.kh.healthDao.mypage;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -272,18 +273,22 @@ public class MypageController {
 	}
 	
 	/* 출석 체크 */
-	@PostMapping("/attendance")
+	@PostMapping("/attCheck")
 	@ResponseBody
-	public ModelAndView attendanceCheck(ModelAndView mv, AttCheck att) {
+	public String attendanceCheck(Date attendanceDate, int userNo) {
 		
-		int result = qnaService.attendanceCheck(att);
+		System.out.println(attendanceDate);
+		System.out.println(userNo);
+		AttCheck attcheck = new AttCheck();
+		attcheck.setAttendanceDate(attendanceDate);
+		attcheck.setUserNo(userNo);
+		System.out.println(attcheck.getAttendanceDate());
+		int result = qnaService.attendCheck(attcheck);
 
 		if(result > 0) {
-			mv.setViewName("redirect:/mypage/attendanceCheck");
-			return mv;
+			return "성공";
 		}else {
-			mv.setViewName("redirect:/mypage/attendanceCheck");
-			return mv;
+			return "실패";
 		}
 		
 	}

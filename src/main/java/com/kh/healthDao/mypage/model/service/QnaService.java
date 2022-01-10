@@ -21,6 +21,6 @@ public interface QnaService {
 	Map<String, Object> pointList(int page);
 	
 	// 출석체크
-	int attendanceCheck(AttCheck att);
+	int attendCheck(AttCheck attcheck);
 	
 }

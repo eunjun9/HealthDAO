@@ -47,15 +47,6 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 		return mypageMapper.couponEventList();
 	}
 	
-	/*
-	 * // 포인트 내역
-	 * 
-	 * @Override public List<Point> pointList() {
-	 * 
-	 * return mypageMapper.pointList();
-	 * 
-	 * }
-	 */
 
 	@Override
 	public Map<String, Object> findQnaList(int page, int userNo) {
@@ -121,14 +112,6 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 		return review;
    }
   
-	// 출석체크
-	@Override
-	public int attendanceCheck(AttCheck att) {
-		
-		return mypageMapper.attendanceCheck(att);
-
-	}
-
 
 	// 페이징 된 포인트 내역
 	@Override
@@ -153,6 +136,7 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 		point.put("pi", pi);
 		
 		return point;
+	}
 
 	@Override
 	public Review reviewDetail(int reviewNo) {
@@ -163,6 +147,13 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 	public int reviewModify(Review review) {
 		return mypageMapper.reviewModify(review);
 
+	}
+
+	
+	// 출석체크
+	@Override
+	public int attendCheck(AttCheck attcheck) {
+		return mypageMapper.attendCheck(attcheck);
 	}
 
 }
