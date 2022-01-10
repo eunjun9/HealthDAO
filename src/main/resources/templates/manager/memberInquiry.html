@@ -132,7 +132,7 @@
 				                                    <a th:each="page : ${#numbers.sequence(pi.startPage, pi.endPage)}" href="/manager/memberInquiry?page=" th:attrappend="href=${page}" th:text="${page}" th:classappend="${page} == ${#httpServletRequest.getParameter('page')} ? active"></a>	                                   
 				                                    <a class="next" href="/manager/memberInquiry?page=" th:attrappend="href=${next}"><span class="hide">다음페이지</span></a>
 				                                    <a href="/manager/memberInquiry?page=" th:attrappend="href=${pi.maxPage}" class="last"><span class="hide">마지막페이지</span></a>
-				                                </div>
+				                             </div>
 
 										</div>
 

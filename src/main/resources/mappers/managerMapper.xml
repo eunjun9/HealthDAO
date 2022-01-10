@@ -18,28 +18,6 @@
 		<result property="userPhone" column="USER_PHONE"/>
 	</resultMap>
 	
-	<!-- 
-	<select id="listAllQna" resultMap="QnaResultMap">
-	SELECT
-		  Q_NO
-		, Q_DEPT_CODE
-		, USER_NO
-		, Q_TITLE
-		, Q_CONTENT
-		, Q_DATE
-		, Q_STATUS
-		, REPLY
-		, REPLY_DATE
-		, REPLY_MODIFY_DATE
-		, Q_DEPT
-        , USER_NICKNAME
-        , USER_PHONE
-	 FROM QNA 
-     JOIN QNA_DEPT USING(Q_DEPT_CODE)
-     JOIN MEMBER USING(USER_NO)
-	</select>
-	 -->
-	
 	<select id="listQna" resultMap="QnaResultMap" parameterType="_int">
 	SELECT
 		  Q_NO

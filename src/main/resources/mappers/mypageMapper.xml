@@ -180,7 +180,7 @@
 	</insert>
 
 	
-	<select id="pointList" resultMap="pointMap" parameterType="com.kh.healthDao.mypage.model.vo.Point">
+<!-- 	<select id="pointList" resultMap="pointMap" parameterType="com.kh.healthDao.mypage.model.vo.Point">
 		SELECT 
 		      POINT_NO
 		    , POINT_AMOUNT
@@ -191,6 +191,37 @@
 		    , P_CATEGORY_NAME
 		  FROM POINT
 		  JOIN POINT_CATEGORY USING(P_CATEGORY_NO)		  
+	</select> -->
+	
+	<select id="listPoint" resultMap="pointMap" parameterType="hashmap">
+		SELECT *
+		FROM
+		    (SELECT ROWNUM RNUM, A.*
+		            FROM
+		            (SELECT 
+		      POINT_NO
+		    , POINT_AMOUNT
+		    , POINT_ISSUEDATE
+		    , POINT_ENDDATE
+		    , USER_NO
+		    , P_CATEGORY_NO
+		    , P_CATEGORY_NAME
+		  FROM POINT
+		  JOIN POINT_CATEGORY USING(P_CATEGORY_NO)) A
+		    )
+			WHERE RNUM BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="pointListCount" resultType="_int" parameterType="hashmap">
+    	SELECT
+			    COUNT(*)
+			FROM
+			(SELECT ROWNUM RNUM, A.*
+	            FROM
+	            (SELECT 
+				      POINT_NO
+				  FROM POINT) A
+				ORDER BY POINT_NO DESC)
 	</select>
 
 	<insert id="attendanceCheck" parameterType="com.kh.healthDao.mypage.model.vo.AttCheck">
@@ -241,6 +272,7 @@
 		FROM REVIEW
 		WHERE USER_NO = #{userNo})
 	</select>
+	
 	<select id="userReviewList" parameterType="hashmap" resultMap="reviewMap">
 		SELECT *
 		FROM
