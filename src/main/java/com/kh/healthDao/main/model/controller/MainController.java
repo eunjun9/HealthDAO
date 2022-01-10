@@ -1,5 +1,6 @@
 package com.kh.healthDao.main.model.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,10 +11,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.healthDao.admin.model.vo.Product;
 import com.kh.healthDao.main.model.service.BannerService;
 import com.kh.healthDao.main.model.vo.Banner;
+import com.kh.healthDao.shopping.model.service.ShoppingService;
+import com.kh.healthDao.shopping.model.vo.Shopping;
 
 
 @Controller
@@ -40,38 +45,20 @@ public class MainController {
 		return "redirect:/";
 	}
 	
-	@GetMapping("/reco")
-	public String reco() {
-		return "admin/reco";
-	}
 	@GetMapping("/time")
 	public String time() {
 		return "admin/time";
 	}
-	@GetMapping("/file")
-	public String file() {
-		return "admin/fileuploadTest";
-	}
-
 
 	private BannerService bannerService;
+	private ShoppingService shoppingService;
 	
 	@Autowired
-	public MainController(BannerService bannerService) {
+	public MainController(BannerService bannerService, ShoppingService shoppingService) {
 		this.bannerService = bannerService;
+		this.shoppingService = shoppingService;
 	}
 	
-//	왜 안돼
-//	@GetMapping("/banner")
-//	public ModelAndView findBannerList(ModelAndView mv, @RequestParam int page){
-//		page=1;
-//		Map<String, Object> map = bannerService.bannerAllList(page);
-//
-//		mv.addObject("pi", map.get("pi"));
-//		mv.addObject("bannerList", map.get("bannerList"));
-//		mv.setViewName("admin/banner");
-//		return mv;
-//	}
 	
 	@GetMapping("/banner")
 	public ModelAndView findBannerList(ModelAndView mv, @RequestParam int page) {
@@ -88,23 +75,82 @@ public class MainController {
 	
 	@ResponseBody
 	@PostMapping("/banner/delete")
-	public ModelAndView deleteBanner(ModelAndView mv, @RequestBody String[] arr) {
+	public int deleteBanner(int[] addList) {
+		int result = 0;
+		for(int i = 0; i < addList.length; i++) {
+			result += bannerService.deleteBanner(addList[i]);			
+		}
+		System.out.println(result);
 		
-		System.out.println(arr);
-		int result = bannerService.deleteBanner(arr);
-		
-		mv.addObject("result", result);
-		mv.setViewName("banner/bannerDetail");
-		
-		return mv;
+		return result;
 	}
-	
-	@PostMapping("/banner/modify")
+
+	@PostMapping("/banner/select")
 	@ResponseBody
 	public Banner modifyBanner(int main_no) {
 		Banner banner = bannerService.bannerSelect(main_no);
 		return banner;
 	}
+
+	@PostMapping("/banner/update")
+	@ResponseBody
+	public int updateBanner(int main_no, String main_name, String main_url, String imgUpload, String main_status, int main_rank) {
+		System.out.println(imgUpload);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("main_no", main_no);
+		map.put("main_name", main_name);
+		map.put("main_url", main_url);
+		map.put("imgUpload", imgUpload);
+		map.put("main_status", main_status);
+		map.put("main_rank", main_rank);
+		
+		int result = bannerService.bannerUpdate(map);
+		return result;
+	}
+
+	// 추천상품 검색
+	@GetMapping("/reco")
+	public ModelAndView shoppingNewProduct(ModelAndView mv) {
+		Map<String, Object> map = shoppingService.pdtList();
+		
+		mv.addObject("pdtList", map.get("pdtList"));
+		mv.addObject("listCount", map.get("listCount"));
+		mv.addObject("recoList", map.get("recoList"));
+		mv.setViewName("admin/reco");
+		return mv;
+	}
+
+	// 상품 선택
+	@ResponseBody
+	@PostMapping("/reco/detail")
+	public Product detailPdt(int productNo) {
+		Product pdt = shoppingService.detailPdt(productNo);
+		return pdt;
+	}
 	
+	// 추천상품 추가
+	@ResponseBody
+	@PostMapping("/reco/insert")
+	public int insertPdt(int productNo, int productRank) {
+		int result = shoppingService.insertReco(productNo, productRank);
+		return result;
+	}
+
+	// 추천 상품 선택
+	@ResponseBody
+	@PostMapping("/reco/select")
+	public Product selectReco(int productNo) {
+		Product pdt = shoppingService.selectReco(productNo);
+		return pdt;
+	}
+
+	// 추천 상품 수정
+	@ResponseBody
+	@PostMapping("/reco/modify")
+	public int modifyReco(int productNo, int productRank) {
+		int result = shoppingService.modifyReco(productNo, productRank);
+		return result;
+	}
 	
 }

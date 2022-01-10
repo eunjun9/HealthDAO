@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<title></title>
+<meta name="title" content="">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta property="og:title" content="">
+<meta property="og:description" content="">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no, address=no, email=no">
+
+<meta property="og:url" content="">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="">
+<meta property="og:image" content="">
+
+<link rel="shortcut icon" href="">
+<link rel="apple-touch-icon" sizes="180x180" href="">
+<link rel="icon" type="image/png" sizes="32x32" href="">
+<link rel="icon" type="image/png" sizes="16x16" href="">
+<link rel="manifest" href="">
+<link rel="mask-icon" href="" color="">
+<meta name="msapplication-TileColor" content="">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="stylesheet" type="text/css" href="./resources/web/css/fonts.css">
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title></title>
+<!-- 메타태그, 스타일 -->
+<th:block th:replace="common/head.html"></th:block>
+<!--// 메타태그, 스타일 -->
+<body>
+<div id="wrap" class="main">
+<!-- HEADER + GNB -->
+<th:block th:replace="common/header.html"></th:block>
+<!--// HEADER + GNB -->
+	<!-- container -->
+	
+	<div id="container" class="pdt0">
+		<div class="site_location">
+			<span><a href="/">HOME</a></span>
+			<span><em>관리자</em></span>
+            <span><em>쿠폰</em></span>
+            <em>쿠폰등록</em>
+		</div>
+		<div class="mypage">
+			<div class="myMain myCon">
+				<div class="contents">
+					<!-- admin lnb -->
+					<div th:replace="common/adminGnb.html"></div>
+					<!-- //admin lnb -->
+
+					<!-- myPageCon -->
+					<div class="myPageCon coupon_input">
+						<p class="tit mgb40">
+							쿠폰등록
+						</p>
+                        <form action="/admin/couponInput" method="post">
+                            <div class="inp_wrap">
+                                <label class="inp_lab" for="ipt_label">쿠폰명</label>
+                                <div class="inp_text">
+                                    <input type="text" name="pName" id="pName" placeholder="쿠폰명을 입력해주세요">
+                                    <button class="btn_clear"><span>clear</span></button>
+                                </div>
+                            </div>
+                            <div class="inp_wrap">
+                                <label class="inp_lab" for="ipt_label">할인금액</label>
+                                <div class="inp_text">
+                                    <input type="text" name="pSale" id="pSale" placeholder="할인되는 금액을 입력해주세요">
+                                    <button class="btn_clear"><span>clear</span></button>
+                                </div>
+                            </div>                            
+                            <div class="inp_wrap">
+                                <label class="inp_lab" for="ipt_label">사용기간</label>
+                                <div class="inp_text using_date">
+                                    <input type="date" name="startDate" id="startDate" placeholder="시작날짜">
+                                    <span>~</span>
+                                    <input type="date" name="endDate" id="endDate" placeholder="종료날짜">
+                                </div>
+                            </div>
+                            <div class="btn_wrap mgt50">
+                                <button type="submit" class="btn btnSizeL btnColorW btnTypeR" style="width:150px;"><span>등록하기</span></button>
+                            </div>
+                        </form>
+					</div>
+					<!-- //myPageCon -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //container -->
+	<!-- 스크립트 -->
+		<th:block th:replace="common/script.html"></th:block>
+		<!--// 스크립트 -->
+		<!-- FOOTER -->
+		<th:block th:replace="common/footer.html"></th:block>
+		<!--// FOOTER -->
+	</div>
+	
+	<!-- 퀵메뉴 + 톡톡 -->
+	<th:block th:replace="common/quickNtalk.html"></th:block>
+	<!--// 퀵메뉴 + 톡톡 -->	
+</body>
+</html>
