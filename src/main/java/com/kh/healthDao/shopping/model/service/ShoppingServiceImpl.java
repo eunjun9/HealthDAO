@@ -147,6 +147,12 @@ public class ShoppingServiceImpl implements ShoppingService{
 	}
 
 
+	@Override
+	public Product shoppingPayment(int productNo) {
+		return shoppingMapper.shoppingPayment(productNo);
+	}
+
+
 	
 
 	

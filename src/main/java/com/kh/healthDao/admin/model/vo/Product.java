@@ -1,5 +1,7 @@
 package com.kh.healthDao.admin.model.vo;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,13 +18,15 @@ public class Product {
 	private String productBenefit;	// 추가 혜택
 	private String productNotice;	// 공지 사항
 	private String productInfo;		// 상품 정보
-	private String productView;		// 조회수
-	private int productStock;	// 재고량
-	private String categoryId;		// 카테고리ID
+	private int productView;		// 조회수
+	private int productStock;		// 재고량
 	private int pMembership;		// 적립혜택
-	private String productOption;	//임시 옵션번호
+	private String productOption;
+	private String categoryId;
 	
 	
+	private List<Option> option;	// 옵션 테이블
+	private Category category;		// 카테고리 테이블
 	
 	/* + 추가할 것
 	 * MEMBER 조인 -> 트레이너 이름, 트레이너 전화번호

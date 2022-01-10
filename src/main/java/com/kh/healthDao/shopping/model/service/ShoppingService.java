@@ -25,6 +25,8 @@ public interface ShoppingService {
 
 	Product shoppingDetail(int productNo);
 
+	Product shoppingPayment(int productNo);
+
 
 
 

@@ -24,8 +24,13 @@
 		<result property="endDate" column="END_DATE" />
 	</resultMap>
 	
+	<resultMap id="categoryResultMap" type="com.kh.healthDao.admin.model.vo.Category">
+		<id property="categoryId" column="CATEGORY_ID" />
+		<result property="categoryName" column="CATEGORY_NAME" />
+	</resultMap>
+	
  	<!-- 상품 등록 -->
-	<insert id="RegistProduct" parameterType="com.kh.healthDao.admin.model.vo.Product">
+	<insert id="registProduct" parameterType="com.kh.healthDao.admin.model.vo.Product">
 		INSERT 
 		INTO PRODUCT
 		(
@@ -54,6 +59,38 @@
 		  , #{pMembership}
 		)
 	</insert>
+	
+	<insert id="registOption" parameterType="com.kh.healthDao.admin.model.vo.Product">
+		INSERT
+		  INTO PRODUCT_OPTION
+		(
+			OPTION_NO
+		  , PRODUCT_OPTION
+		  , PRODUCT_NO
+		)
+		VALUES
+		(
+			SEQ_OPTION_NO.NEXTVAL
+		  , #{productOption}
+		  , SEQ_PRODUCT_NO.CURRVAL
+		)
+	</insert>
+	
+	 <!-- <insert id="registCategory" parameterType="com.kh.healthDao.admin.model.vo.Product">
+		INSERT
+		  INTO PRODUCT_CATEGORY
+		(
+			CATEGORY_ID
+		  , CATEGORY_NAME
+		  
+		)
+		VALUES
+		(
+			SEQ_CATEGORY_ID.NEXTVAL
+		  , #{categoryName}
+		  
+		)
+	</insert>  -->
 	
 	<select id="listProductInventory" resultMap="productResultMap" parameterType="com.kh.healthDao.admin.model.vo.Product">
 	SELECT

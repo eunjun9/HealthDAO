@@ -37,9 +37,9 @@
 						</div>
 						<div class="pdtInfo">							
 							<a href="javascript:void(0)" onclick="jsShopFloating('like_floating');" class="btn_like likeL_type2"><span class="hide">찜하기</span></a>
-							<div class="pdtBrand" th:text="${shoppingDetail.productBrand}">아령하세요</div>
-							<div class="pdtName" th:text="${shoppingDetail.productTitle}">러브잇 닭가슴살 100g</div>
-							<div class="pdtDesc">100ml</div>
+							<div class="pdtBrand" th:text="${shoppingDetail.productBrand}"></div>
+							<div class="pdtName" th:text="${shoppingDetail.productTitle}"></div>
+							<div class="pdtDesc"></div>
 							<div class="pdtGrade">
 								<div class="gradeStar js_rating ratingM"><span>3.5</span></div>
 								<span class="gradeText">4.7</span>
@@ -52,7 +52,7 @@
 									판매가
 									<!-- none 클래스 추가시 취소선 처리  -->
 									<span class="num none">
-										<span class="txt">18,000</span>원
+										<span class="txt" th:text="${shoppingDetail.productPrice}"></span>원
 									</span>
 								</div>
 								<div class="price">
@@ -66,7 +66,7 @@
 									타임세일
 									<span class="num sale">
 										<span class="percent">10<span>%</span></span>
-										<span class="txt">18,000</span>원
+										<span class="txt">16,200</span>원
 									</span>
 								</div>
 							</div>
@@ -80,17 +80,12 @@
 									<div class="pdtReview_wrap js_acoCon" style="display:none;">
 										<div class="pdtReviewTit">리뷰 적립</div>
 										<dl>
-											<dt>텍스트 리뷰 작성 시</dt>
-											<dd>
-												<span class="num">200</span>포인트
-											</dd>
-										</dl>
-										<dl>
-											<dt>포토 리뷰 작성 시</dt>
+											<dt>리뷰 작성 시</dt>
 											<dd>
 												<span class="num">500</span>포인트
 											</dd>
 										</dl>
+										
 									</div>
 								</div>
 								<div class="pdtPoint_wrap">
@@ -98,7 +93,7 @@
 										<div class="pointCmt">포인트 더 받는 법</div>
 										<span class="pointCon total">
 											<span class="txt">+ 최대 </span>
-											<span class="num">6,000</span>포인트
+											<span class="num">5,000</span>포인트
 										</span>
 									</div>
 									<div class="pointDetail">
@@ -107,17 +102,12 @@
 											<span class="num">5,000</span>포인트
 										</span>
 									</div>
-									<div class="pointDetail">
-										<div class="tit">피부 프로필 입력 시</div>
-										<span class="pointCon">
-											<span class="num">1,000</span>포인트
-										</span>
-									</div>
+									
 								</div>
 							</div>
 							<div class="prmtInfo">
-								<div class="infoTit">1+1 상품안내</div>
-								<div class="InfoDetail">해당 상품은 동일한 상품만 1+1으로 구매 가능한 상품입니다.<br>수량을 2개로 선택해주세요.<br>2개 선택 시, 주문/결제 단에서 1개 가격으로 구매 가능합니다. </div>
+								<div class="infoTit">배송안내</div>
+								<div class="InfoDetail" th:text="${shoppingDetail.productNotice}">해당 상품은 동일한 상품만 1+1으로 구매 가능한 상품입니다.<br>수량을 2개로 선택해주세요.<br>2개 선택 시, 주문/결제 단에서 1개 가격으로 구매 가능합니다. </div>
 							</div>
 
 
@@ -131,13 +121,13 @@
 												<li>
 													<input type="radio" value="" class="option" id="productDetail_radio1_1" name="productDetail_radio1">
 													<label for="productDetail_radio1_1">
-														<span class="selectColor colorShipM"><img src="./resources/web/images/temp/colorChip03.jpg"></span>벨벳 블러드 립-BE01 밀크티 필터01
+														<span class="selectColor colorShipM" th:text="${shoppingDetail.productTitle}"><img src="./resources/web/images/temp/colorChip03.jpg"></span>
 													</label>
 												</li>
 												<li class="soldOut"><!-- 일시 품절일 경우 soldOut 클래스 추가 -->
 													<input type="radio" value="" class="option" id="productDetail_radio1_2" name="productDetail_radio1" disabled><!-- 일시 품절일 경우 disabled 추가 -->
 													<label for="productDetail_radio1_2">
-														<span class="selectColor colorShipM"><img src="./resources/web/images/temp/colorChip04.jpg"></span>벨벳 블러드 립-BE01 밀크티 필터02
+														<span class="selectColor colorShipM" th:text="${shoppingDetail.productTitle}"><img src="./resources/web/images/temp/colorChip04.jpg"></span>
 													</label>
 													<span class="soldOutTxt">[일시품절]</span><!-- 일시 품절일 경우 항목 추가 -->
 													<button class="soldOutBtn btn_txt" onclick="showLayer('stockAlt');" type="button">입고알림신청</button><!-- 일시 품절일 경우 항목 추가 -->
@@ -148,7 +138,7 @@
 								</div>
 							</div>
 							<div class="pdtSelectedOption"> 
-								<div class="optionName">벨벳 블러드 립-BE01 밀크티 필터</div>
+								<div class="optionName" th:text="${shoppingDetail.productTitle}">벨벳 블러드 립-BE01 밀크티 필터</div>
 								<div class="optionDetail">
 									<div class="js_pdtCount pdtUiSpinner">
 										<button class="js_pdtCountMinus spinnerDecrease" type="button" onclick="productCountMinus(this)" disabled>
@@ -163,7 +153,7 @@
 								</div>
 							</div>
 							<div class="pdtSelectedOption"> 
-								<div class="optionName">벨벳 블러드 립-BE01 밀크티 필터</div>
+								<div class="optionName" th:text="${shoppingDetail.productTitle}">벨벳 블러드 립-BE01 밀크티 필터</div>
 								<div class="optionDetail">
 									<!-- 일시 품절일 경우 항목 추가 -->
 									<span class="soldOutTxt">[일시품절]</span>
@@ -179,65 +169,9 @@
 									</div>
 								</div>
 							</div>
-							<div class="pdtSelectedOption type02"> 
-								<div class="optionName"><span class="selectColor colorShipM"><img src="./resources/web/images/temp/colorChip01.jpg"></span><span>벨벳 블러드 립-BE01 밀크티 필터</span></div>
-								<div class="optionDetail">
-									<div class="js_pdtCount pdtUiSpinner">
-										<button class="js_pdtCountMinus spinnerDecrease" type="button" onclick="productCountMinus(this)" disabled>
-											<span class="hide">제품 수량 감소</span>
-										</button>
-										<!-- 구매수량이 정해져 있을 경우 data-max 추가 -->
-										<input class="spinnerInput" type="text" title="선택품목갯수" value="1" data-max="10" readonly>
-										<button class="js_pdtCountPlus spinnerIncrease" type="button" onclick="productCountPlus(this)">
-											<span class="hide">제품 수량 증가</span>
-										</button>
-									</div>
-								</div>	
-								<div class="price"> 
-									<span class="dftPrice"><span>80,000</span>원</span>
-								</div>
-								<a href="javascript:void(0)" class="close"><span class="hide">닫기</span></a>
-							</div>
-							<div class="pdtSelectedOption type02"> 
-								<div class="optionName"><span class="selectColor colorShipM"><img src="./resources/web/images/temp/colorChip03.jpg"></span><span>벨벳 블러드 립-BE01 밀크티 필터</span></div>
-								<div class="optionDetail">
-									<div class="js_pdtCount pdtUiSpinner">
-										<button class="js_pdtCountMinus spinnerDecrease" type="button" onclick="productCountMinus(this)" disabled>
-											<span class="hide">제품 수량 감소</span>
-										</button>
-										<!-- 구매수량이 정해져 있을 경우 data-max 추가 -->
-										<input class="spinnerInput" type="text" title="선택품목갯수" value="1" data-max="10" readonly>
-										<button class="js_pdtCountPlus spinnerIncrease" type="button" onclick="productCountPlus(this)">
-											<span class="hide">제품 수량 증가</span>
-										</button>
-									</div>
-								</div>	
-								<div class="price"> 
-									<span class="dftPrice"><span>80,000</span>원</span>
-								</div>
-								<a href="javascript:void(0)" class="close"><span class="hide">닫기</span></a>
-							</div>
-							<div class="pdtSelectedOption type02"> 
-								<div class="optionName"><span class="selectColor colorShipM"><img src="./resources/web/images/temp/colorChip03.jpg"></span><span>벨벳 블러드 립-BE01 밀크티 필터</span></div>
-								<div class="optionDetail">
-									<div class="js_pdtCount pdtUiSpinner">
-										<button class="js_pdtCountMinus spinnerDecrease" type="button" onclick="productCountMinus(this)" disabled>
-											<span class="hide">제품 수량 감소</span>
-										</button>
-										<!-- 구매수량이 정해져 있을 경우 data-max 추가 -->
-										<input class="spinnerInput" type="text" title="선택품목갯수" value="1" data-max="10" readonly>
-										<button class="js_pdtCountPlus spinnerIncrease" type="button" onclick="productCountPlus(this)">
-											<span class="hide">제품 수량 증가</span>
-										</button>
-									</div>
-								</div>	
-								<div class="price"> 
-									<!-- 할인 들어갈 경우 기존 가격 태그에 'none' 클래스 추가 -->
-									<span class="dftPrice none"><span>80,000</span>원</span>
-									<span class="dftPrice"><span>64,000</span>원</span>
-								</div>
-								<a href="javascript:void(0)" class="close"><span class="hide">닫기</span></a>
-							</div>
+							
+							
+							
 							<!-- 200424 삭제 
 							<div class="pdtStockOff">재고가 부족하여 추가 수량만큼 주문할 수 없습니다.</div>
 							<div class="pdtStockOff">일일 최대 구매수량을 초과하였습니다.</div> 
@@ -255,26 +189,21 @@
 							<div class="pdtbuyBtnArea">
 								<div class="btn_wrap">
 									<a href="javascript:void(0)" class="btn btnArr btnSizeL btnColorW btnTypeR"><span>장바구니</span></a>
-									<a href="javascript:void(0)" class="btn btnSizeL btnColorB btnTypeR"><span>바로구매</span></a>
+									<a href="/shopping/payment?productNo=" th:attrappend="href=${shoppingDetail.productNo}" class="btn btnSizeL btnColorB btnTypeR"><span>바로구매</span></a>
 								</div>
 							</div>
 							
 							<div class="pdtGift js_acoBox">
 								<div class="js_acoList on">
-									<a href="javascript:void(0)" class="pdtGiftTtl js_acoLink">추가혜택(2)<span class="arrow"><span class="hide">닫기</span></span></a>
+									<a href="javascript:void(0)" class="pdtGiftTtl js_acoLink">추가혜택(1)<span class="arrow"><span class="hide">닫기</span></span></a>
 									<ul class="js_acoCon">
 										<li>
 											<a href="javascript:void(0)">
 												<div><img src="./resources/web/images/temp/thumbImg01.jpg" alt=""></div>
-												<p>바닐라코 제로 스페츌러 세트</p>
+												<p th:text="${shoppingDetail.productBenefit}">바닐라코 제로 스페츌러 세트</p>
 											</a>
 										</li>
-										<li>
-											<a href="javascript:void(0)">
-												<div><img src="./resources/web/images/temp/thumbImg01.jpg" alt=""></div>
-												<p>바닐라코 제로 스페츌러 세트</p>
-											</a>
-										</li>
+										
 									</ul>
 								</div>
 							</div>

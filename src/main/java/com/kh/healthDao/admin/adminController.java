@@ -1,9 +1,8 @@
 package com.kh.healthDao.admin;
 
 
+import java.util.ArrayList;
 import java.util.List;
-
-import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +17,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.healthDao.admin.model.service.AdminService;
 import com.kh.healthDao.admin.model.service.CouponService;
+import com.kh.healthDao.admin.model.vo.Category;
 import com.kh.healthDao.admin.model.vo.Coupon;
+import com.kh.healthDao.admin.model.vo.Option;
 import com.kh.healthDao.admin.model.vo.Product;
-import com.kh.healthDao.manager.model.vo.Qna;
 
 
 @Controller
@@ -45,7 +45,16 @@ public class adminController {
 	@PostMapping("productRegist")
 	@ResponseBody
 	public ModelAndView registProduct(Product product, ModelAndView mv) {
-		int result = adminService.RegistProduct(product);
+		/* List<Option> options = new ArrayList<>();
+		options.add(option);
+		
+		product.setOption(options);
+		product.setCategory(category); */
+		
+		System.out.println(product);
+		int result = adminService.registProduct(product);
+		//int result2 = adminService.registCategory(product);
+		int result3 = adminService.registOption(product);
 		if(result > 0) {
 			mv.setViewName("redirect:/admin/productRegist");
 			return mv;
@@ -56,16 +65,30 @@ public class adminController {
 		}
 	}
 	
+	
+	/*@ResponseBody
+	@RequestMapping(value = "/productRegist", method = RequestMethod.POST)
+	public ModelAndView registProduct(Product product, ModelAndView mv) {
+		
+		List<Product> ProductList = adminService.listProduct(product);
+		
+		mv.addObject("ProductList", ProductList);
+		mv.setViewName("redirect:/admin/productRegist");
+		
+		return mv;
+		
+	}
+	*/
+	
+	
 	@GetMapping("inventoryList")
 	public ModelAndView managerInventoryList(ModelAndView mv) {
 		
 		List<Product> ProductList = adminService.listProductInventory();
-
 		
 		mv.addObject("ProductList", ProductList);
 		mv.setViewName("admin/inventoryList");
 		
-
 		return mv;
 	}
 	
