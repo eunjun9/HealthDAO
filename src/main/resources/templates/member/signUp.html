@@ -94,9 +94,9 @@
 										<button class="title" type="button">월</button>
 										<ul class="selList">
 											<li th:each="m : ${#numbers.sequence(1,12)}">
-												<input type="radio" value="${m}<=9 ? 0+${m} : ${m}" class="option" id="select1_1" name="userBirth2">
+												<input type="radio" value="${m}" class="option" id="select1_1" name="userBirth2">
 												<label for="select1_1" th:text="${m}"></label>
-											</li>
+											</li> <!-- ${m}<=9 ? 0+${m} : ${m} -->
 										</ul>
 									</div>
 								</div>
@@ -105,7 +105,7 @@
 										<button class="title" type="button">일</button>
 										<ul class="selList">
 											<li th:each="m : ${#numbers.sequence(1,31)}">
-												<input type="radio" value="${m}<=9 ? 0+${m} : ${m}" class="option" id="select1_1" name="userBirth3">
+												<input type="radio" value="${m}" class="option" id="select1_1" name="userBirth3">
 												<label for="select1_1" th:text="${m}"></label>
 											</li>
 										</ul>

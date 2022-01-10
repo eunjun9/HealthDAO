@@ -61,6 +61,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter{
             .antMatchers("/trainer/**").hasRole("TRAINER")
             /* "/admin/**"의 요청은 ROLE_ADMIN 권한을 가진 사람에게만 허용 */
             .antMatchers("/admin/**").hasRole("ADMIN")
+            .antMatchers("/manager/**").hasRole("ADMIN")
             /* 그 외의 요청은 모두 허가함 - 게스트 사용자도 접근 가능 */
             .anyRequest().permitAll()
          .and()

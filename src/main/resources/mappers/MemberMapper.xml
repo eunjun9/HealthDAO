@@ -93,14 +93,14 @@
 		VALUES
 		(
 			SEQ_USER_NO.NEXTVAL
-		  , #{ userId }
-		  , #{ userPwd }
-		  , #{ userName }
-		  , #{ userNickName }
-		  , #{ userPhone }
-		  , #{ userEmail }
-		  , #{ userBirth }
-		  , #{ userGender }
+		  , #{userId}
+		  , #{userPwd}
+		  , #{userName}
+		  , #{userNickName}
+		  , #{userPhone}
+		  , #{userEmail}
+		  , #{userBirth}
+		  , #{userGender}
 		  , SYSDATE
 		  , DEFAULT
 		  , NULL
@@ -124,7 +124,7 @@
 		)
 	</insert>
 	
-	<insert id="insertMemberRole" parameterType="com.kh.healthDao.member.model.vo.MemberRole">
+ 	<insert id="insertMemberRole" parameterType="com.kh.healthDao.member.model.vo.MemberRole">
 		INSERT
 		  INTO MEMBER_ROLE
 		(
@@ -134,9 +134,9 @@
 		VALUES
 		(
 			SEQ_USER_NO.CURRVAL
-		  , #{ authorityCode }
+		  , #{authorityCode}
 		)
-	</insert>
+	</insert> 
 	
 	<insert id="insertMemberGrade" parameterType="com.kh.healthDao.member.model.vo.MemberGrade">
 		INSERT
@@ -148,7 +148,7 @@
 		VALUES
 		(
 			SEQ_USER_NO.CURRVAL
-		  , #{ userGrade }
+		  , #{userGrade}
 		)
 	</insert>
 	
