@@ -1,0 +1,115 @@
+		<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title></title>
+<!-- 메타태그, 스타일 -->
+<th:block th:replace="common/head.html"></th:block>
+<!--// 메타태그, 스타일 -->
+<body>
+<div id="wrap" class="main">
+<!-- HEADER + GNB -->
+<th:block th:replace="common/header.html"></th:block>
+<!--// HEADER + GNB -->
+<!-- container -->
+	<script>
+		const msg = '[[${msg}]]';
+		
+		if(msg){
+			alert(msg);			
+		}
+	</script>
+	<div id="container" class="pdt0">
+		<div class="site_location">
+			<span><a href="/">HOME</a></span>
+			<span><em>마이페이지</em></span>
+            <em>1:1문의</em>
+		</div>
+		<div class="mypage">
+			<div class="myMain myCon">
+				<div class="contents">
+					<div th:replace="common/mypageGnb.html"></div>
+
+					<!-- myPageCon -->
+					<div class="myPageCon one_question">
+						<p class="tit mgb40">
+							1:1문의
+						</p>
+						<div class="question_input_link">
+							<p>고객님! 도움이 필요하신가요? 빠르고 신속하게 답변드리겠습니다.</p>
+							<div class="btn_wrap">
+								<a href="/mypage/qnaInsert" class="btn btnSizeL btnColorW btnTypeR" style="width:150px;"><span>1:1문의하기</span></a>
+							</div>
+						</div>
+                        <!-- 사용가능 쿠폰 리스트 -->
+                        <div class="tab-pannel" id="useableCoupon">  
+                        	<div th:if="${listCount > 0}">                          
+	                            <div class="couponList tblBar mgt50">
+	                                <p class="tblList">총 <span th:text="${listCount}"></span>개</p>
+	                            </div>
+	                            <div class="js_tblList">
+	                                <table class="tblType1" summary="">
+	                                    <caption></caption>
+	                                    <colgroup>
+	                                        <col width="15%" />
+	                                        <col width="15%" />
+	                                        <col width="50%" />
+	                                        <col width="20%" />
+	                                    </colgroup>
+	                                    <thead>
+	                                        <tr>
+	                                            <th>문의유형</th>
+	                                            <th>진행상태</th>
+	                                            <th>제목</th>
+	                                            <th>등록일</th>
+	                                        </tr>
+	                                    </thead>
+	                                    <tbody>
+	                                        <tr th:each="qna : ${qnaList}">
+	                                            <td th:text="${qna.qDept}"></td>
+	                                            <td><span class="gr" th:text="${qna.qStatus}"></span></td>
+	                                            <td><a href="/mypage/qnaDetail?qNo=" th:attrappend="href=${qna.qNo}" class="js_ListTtl ListTtl"><span th:text="${qna.qTitle}"></span></a></td>
+	                                            <td th:text="${#dates.format(qna.qDate, 'yyyy-MM-dd')}"></td>
+	                                        </tr>
+	                                    </tbody>
+	                                </table>
+	                                <div class="paging mgt50"
+	                                	th:with="prev=${pi.page - 1}, next=${pi.page + 1}">
+	                                    <a th:href="@{/mypage/qna(page=1)}" class="first"><span class="hide">첫페이지</span></a>
+	                                    <a class="prev" href="/mypage/qna?page=" th:attrappend="href=${prev}"><span class="hide">이전페이지</span></a>
+	                                    <a th:each="page : ${#numbers.sequence(pi.startPage, pi.endPage)}" href="/mypage/qna?page=" th:attrappend="href=${page}" th:text="${page}" th:classappend="${page} == ${#httpServletRequest.getParameter('page')} ? active"></a>	                                   
+	                                    <a class="next" href="/mypage/qna?page=" th:attrappend="href=${next}"><span class="hide">다음페이지</span></a>
+	                                    <a href="/mypage/qna?page=" th:attrappend="href=${pi.maxPage}" class="last"><span class="hide">마지막페이지</span></a>
+	                                </div>
+	                            </div>
+                            </div>
+                            <!-- 데이터 없을 때 -->
+                            <div class="noData" th:unless="${listCount > 0}">
+                                <span>1:1문의하신 이력이 없습니다.<br>궁금하신 점이 있으시면 1:1문의를 이용해주세요</span>
+                            </div>
+
+                        </div>
+                    </div>
+					<!-- //myPageCon -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //container -->
+<!-- 스크립트 -->
+		<th:block th:replace="common/script.html"></th:block>
+		<!--// 스크립트 -->
+		<!-- FOOTER -->
+		<th:block th:replace="common/footer.html"></th:block>
+		<!--// FOOTER -->
+	</div>
+	
+	<!-- 퀵메뉴 + 톡톡 -->
+	<th:block th:replace="common/quickNtalk.html"></th:block>
+	<!--// 퀵메뉴 + 톡톡 -->	
+	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+	<script type="text/javascript">
+		$('#quick .quickArea').css({'position':'absolute', 'top':290});
+	</script>
+	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+</body>
+</html>

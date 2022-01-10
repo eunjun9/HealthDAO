@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.healthDao.trainer.model.dao.TrainerMapper">
+
+	<resultMap id="trainerResultMap" type="com.kh.healthDao.trainer.model.vo.Trainer">
+		<id property="tNo" column="T_NO"/>
+		<result property="tGymName" column="T_GYM_NAME"/>
+		<result property="tGymAddress" column="T_GYM_ADDRESS"/>
+		<result property="tArea" column="T_AREA"/>
+		<result property="tMetro" column="T_METRO"/>
+		<result property="tAreaIntro" column="T_AREA_INTRO"/>
+		<result property="tOneIntro" column="T_ONE_INTRO"/>
+		<result property="tPrice" column="T_PRICE"/>
+		<result property="weekDaySc" column="WEEKDAY_SC"/>
+		<result property="weekAndSc" column="WEEKAND_SC"/>
+		<result property="tIntro" column="T_INTRO"/>
+		<result property="queIntro" column="QUE_INTRO"/>
+		<result property="sumReview" column="SUM_REVIEW"/>
+		<result property="avgStar" column="AVG_STAR"/>
+		
+		<association javaType="com.kh.healthDao.member.model.vo.Member" property="member">
+			<id column="USER_NO" property="userNo"/>
+			<result column="USER_NAME" property="userName"/>
+			<result column="USER_PHONE" property="userPhone"/>
+		</association>
+	</resultMap>
+	
+	<resultMap id="trainerOrderMap" type="com.kh.healthDao.trainer.model.vo.PtOrder">
+		<id property="ptNo" column="PT_NO"/>
+		<result property="ptDate" column="PT_DATE"/>
+		<result property="userId" column="USER_ID"/>
+		<result property="payNo" column="PAY_NO"/>
+		<result property="TNo" column="T_NO"/>
+		
+		<association javaType="com.kh.healthDao.trainer.model.vo.Trainer" property="trainer">
+			<id column="T_NO" property="tNo"/>
+			<result column="T_PRICE" property="TPrice"/>
+			<result column="T_AREA_INTRO" property="TAreaIntro"/>
+				<association javaType="com.kh.healthDao.member.model.vo.Member" property="member">
+					<id column="USER_NO" property="userNo"/>
+					<result column="USER_NAME" property="userName"/>
+					<result column="USER_PHONE" property="userPhone"/>
+				</association>
+		</association>
+	</resultMap>
+
+	<resultMap id="trainerReviewListMap" type="com.kh.healthDao.review.model.vo.Review">
+		<id property="reviewNo" column="REVIEW_NO"/>
+		<result property="category" column="CATEGORY"/>
+		<result property="star" column="STAR"/>
+		<result property="rContent" column="R_CONTENT"/>
+		<result property="rDate" column="R_DATE"/>
+		<result property="modifyDate" column="MODIFY_DATE"/>
+		<result property="payNo" column="PAY_NO"/>
+		<result property="userNo" column="USER_NO"/>
+			<association javaType="com.kh.healthDao.member.model.vo.Member" property="member">
+				<id property="userNo" column="USER_NO"/>
+				<result property="userName" column="USER_NAME"/>
+			</association>
+	</resultMap>
+	
+	<select id="trainerList" resultMap="trainerResultMap">
+		SELECT
+		       T.T_NO
+		     , T.T_GYM_NAME
+		     , T.T_GYM_ADDRESS
+		     , T.T_AREA
+		     , T.T_METRO
+		     , T.T_AREA_INTRO
+		     , T.T_ONE_INTRO
+		     , T.T_PRICE
+		     , T.WEEKDAY_SC
+		     , T.WEEKAND_SC
+		     , T.T_INTRO
+		     , T.QUE_INTRO
+             , COUNT(R.REVIEW_NO) AS SUM_REVIEW
+             , ROUND((SUM(R.STAR)) / COUNT(R.REVIEW_NO), 1) AS AVG_STAR
+		     , M.USER_NO
+		     , M.USER_NAME
+		     , M.USER_PHONE
+		  FROM TRAINER T
+		  JOIN MEMBER M ON(T.T_NO = M.USER_NO)
+          LEFT OUTER JOIN PT_ORDER O ON(T.T_NO = O.T_NO)
+          LEFT OUTER JOIN REVIEW R ON(O.PAY_NO = R.PAY_NO)
+         GROUP BY T.T_NO
+		     , T.T_GYM_NAME
+		     , T.T_GYM_ADDRESS
+		     , T.T_AREA
+		     , T.T_METRO
+		     , T.T_AREA_INTRO
+		     , T.T_ONE_INTRO
+		     , T.T_PRICE
+		     , T.WEEKDAY_SC
+		     , T.WEEKAND_SC
+		     , T.T_INTRO
+		     , T.QUE_INTRO
+		     , M.USER_NO
+		     , M.USER_NAME
+		     , M.USER_PHONE
+	</select>
+
+	<select id="trainerSelect" resultMap="trainerResultMap" parameterType="_int">
+		 SELECT
+		       T.T_NO
+		     , T.T_GYM_NAME
+		     , T.T_GYM_ADDRESS
+		     , T.T_AREA
+		     , T.T_METRO
+		     , T.T_AREA_INTRO
+		     , T.T_ONE_INTRO
+		     , T.T_PRICE
+		     , T.WEEKDAY_SC
+		     , T.WEEKAND_SC
+		     , T.T_INTRO
+		     , T.QUE_INTRO
+		     , M.USER_NO
+		     , M.USER_NAME
+		     , M.USER_PHONE
+             , COUNT(R.REVIEW_NO) AS SUM_REVIEW
+             , ROUND((SUM(R.STAR)) / COUNT(R.REVIEW_NO), 1) AS AVG_STAR
+		  FROM TRAINER T
+		  JOIN MEMBER M ON(T.T_NO = M.USER_NO)
+          LEFT OUTER JOIN PT_ORDER O ON(T.T_NO = O.T_NO)
+          LEFT OUTER JOIN REVIEW R ON(O.PAY_NO = R.PAY_NO)
+         GROUP BY T.T_NO
+		     , T.T_GYM_NAME
+		     , T.T_GYM_ADDRESS
+		     , T.T_AREA
+		     , T.T_METRO
+		     , T.T_AREA_INTRO
+		     , T.T_ONE_INTRO
+		     , T.T_PRICE
+		     , T.WEEKDAY_SC
+		     , T.WEEKAND_SC
+		     , T.T_INTRO
+		     , T.QUE_INTRO
+		     , M.USER_NO
+		     , M.USER_NAME
+		     , M.USER_PHONE
+		HAVING T.T_NO = #{tNo}
+	</select> 
+	
+	<update id="trainerModify" parameterType="com.kh.healthDao.trainer.model.vo.Trainer">
+		UPDATE TRAINER
+		   SET T_AREA_INTRO = #{tAreaIntro}
+		     , T_ONE_INTRO = #{tOneIntro}
+		     , T_PRICE = #{tPrice}
+		     , T_AREA = #{tArea}
+		     , T_METRO = #{tMetro}
+		     , WEEKDAY_SC = #{weekDaySc}
+		     , WEEKAND_SC = #{weekAndSc}
+		     , T_INTRO = #{tIntro}
+		 where T_NO = #{tNo}
+	</update>
+	
+	<select id="trainerOrderList" resultMap="trainerOrderMap">
+		SELECT
+		       P.PT_NO
+		     , P.PT_DATE
+		     , P.USER_ID
+		     , P.T_NO
+		     , T.T_PRICE
+		     , T.T_AREA_INTRO
+		     , M.USER_NAME
+		     , M.USER_PHONE
+		  FROM PT_ORDER P
+		  JOIN TRAINER T ON(P.T_NO = T.T_NO)
+		  JOIN MEMBER M ON(T.T_NO = M.USER_NO)
+		 <!-- WHERE P.USER_ID=1 -->
+	</select>
+	
+	<select id="trainerReviewList" resultMap="trainerReviewListMap" parameterType="_int">
+		SELECT
+		       R.REVIEW_NO
+		     , R.STAR
+		     , R.R_CONTENT
+		     , R.R_DATE
+		     , R.MODIFY_DATE
+		     , M.USER_NO
+		     , M.USER_NAME
+		  FROM REVIEW R
+		  JOIN PT_ORDER O ON(R.PAY_NO = O.PAY_NO)
+		  JOIN TRAINER T ON(O.T_NO = T.T_NO)
+		  JOIN MEMBER M ON(R.USER_NO = M.USER_NO)
+		 WHERE T.T_NO = #{tNo}
+	</select>
+	
+	<insert id="trainerInsert" parameterType="com.kh.healthDao.trainer.model.vo.Trainer">
+		INSERT
+		  INTO TRAINER
+		  (
+		    T_NO
+		  , T_GYM_NAME
+		  , T_GYM_ADDRESS
+		  , T_AREA
+		  , T_METRO
+		  , T_AREA_INTRO
+		  , T_ONE_INTRO
+		  , T_PRICE
+		  , WEEKDAY_SC
+		  , WEEKAND_SC
+		  , T_INTRO
+		  , QUE_INTRO
+		  )
+		  VALUES
+		  (
+		    4
+		  , #{tGymName}
+		  , '없음'
+		  , #{tArea}
+		  , #{tMetro}
+		  , #{tAreaIntro}
+		  , #{tOneIntro}
+		  , #{tPrice}
+		  , #{weekDaySc}
+		  , #{weekAndSc}
+		  , #{tIntro}
+		  , #{queIntro}
+		  )
+	</insert>
+	
+	<select id="sumPtOrder" resultType="_int">
+		SELECT
+		       COUNT(*)
+		  FROM PT_ORDER
+	</select>
+	
+	<select id="sumTrainer" resultType="_int">
+		SELECT
+		       COUNT(*)
+		  FROM TRAINER
+	</select>
+	
+	<select id="sumReview" resultType="_int">
+		SELECT
+		       COUNT(*)
+		  FROM REVIEW
+		 WHERE CATEGORY='PT'
+	</select>
+	
+	
+	
+	
+</mapper>

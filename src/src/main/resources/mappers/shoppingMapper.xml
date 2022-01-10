@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.healthDao.shopping.model.dao.ShoppingMapper">
+	<resultMap id="productResultMap" type="com.kh.healthDao.admin.model.vo.Product">
+		<id property="productNo" column="PRODUCT_NO"/>
+		<result property="productBrand" column="PRODUCT_BRAND" />
+		<result property="productTitle" column="PRODUCT_TITLE" />
+		<result property="productPrice" column="PRODUCT_PRICE" />
+		<result property="productBenefit" column="PRODUCT_BENEFIT" />
+		<result property="productNotice" column="PRODUCT_NOTICE" />
+		<result property="productInfo" column="PRODUCT_INFO" />
+		<result property="productView" column="PRODUCT_VIEW" />
+		<result property="productStock" column="PRODUCT_STOCK" />
+		<result property="categoryId" column="CATEGORY_ID" />
+		<result property="pMembership" column="P_MEMBERSHIP"/>
+		
+	</resultMap>
+	
+	<select id="shoppingList" resultMap="productResultMap" parameterType="hashmap">
+		SELECT *
+				FROM
+				    (SELECT ROWNUM RNUM, A.*
+				            FROM
+				            (SELECT
+						PRODUCT_NO
+					  , PRODUCT_BRAND
+					  , PRODUCT_TITLE
+					  , PRODUCT_PRICE
+					  , PRODUCT_BENEFIT
+					  , PRODUCT_NOTICE
+					  , PRODUCT_INFO
+					  , PRODUCT_VIEW
+					  , PRODUCT_STOCK
+					  , CATEGORY_ID
+					  , P_MEMBERSHIP
+				 FROM PRODUCT
+				 ORDER BY PRODUCT_NO DESC) A
+		    )
+			WHERE RNUM BETWEEN #{startRow} AND #{endRow}
+		
+	</select>
+	
+	<!-- 신상품 -->
+	<select id="shoppingListCount" resultType="_int">
+		SELECT
+		    COUNT(*)
+		FROM
+		(SELECT
+				PRODUCT_NO
+			  , PRODUCT_BRAND
+			  , PRODUCT_TITLE
+			  , PRODUCT_PRICE
+			  
+		 FROM PRODUCT
+		 ORDER BY PRODUCT_NO DESC)
+	</select>
+	
+	<!-- 식품 -->
+	<select id="foodShoppingListCount" resultType="_int">
+		SELECT
+		    COUNT(*)
+		FROM
+		(SELECT
+				PRODUCT_NO
+			  , PRODUCT_BRAND
+			  , PRODUCT_TITLE
+			  , PRODUCT_PRICE
+			  , CATEGORY_ID 
+		 FROM PRODUCT
+		WHERE CATEGORY_ID='식품'
+		ORDER BY PRODUCT_NO DESC)
+	</select>
+	
+	<!-- 음료 -->
+	<select id="beverageShoppingListCount" resultType="_int">
+		SELECT
+		    COUNT(*)
+		FROM
+		(SELECT
+				PRODUCT_NO
+			  , PRODUCT_BRAND
+			  , PRODUCT_TITLE
+			  , PRODUCT_PRICE
+			  , CATEGORY_ID 
+		 FROM PRODUCT
+		WHERE CATEGORY_ID='음료'
+		ORDER BY PRODUCT_NO DESC)
+	</select>
+	
+	<!-- 음료 -->
+	<select id="goodsShoppingListCount" resultType="_int">
+		SELECT
+		    COUNT(*)
+		FROM
+		(SELECT
+				PRODUCT_NO
+			  , PRODUCT_BRAND
+			  , PRODUCT_TITLE
+			  , PRODUCT_PRICE
+			  , CATEGORY_ID 
+		 FROM PRODUCT
+		WHERE CATEGORY_ID='운동기구'
+		ORDER BY PRODUCT_NO DESC)
+	</select>
+	
+	
+	<select id="NewProductSelect" resultMap="productResultMap" parameterType="_int">
+		SELECT
+				PRODUCT_NO
+			  , PRODUCT_BRAND
+			  , PRODUCT_TITLE
+			  , PRODUCT_PRICE
+			  
+		 FROM PRODUCT
+		 ORDER BY PRODUCT_NO DESC
+	</select>
+	
+	<select id="foodShoppingList" resultMap="productResultMap">
+		SELECT
+				PRODUCT_NO
+			  , PRODUCT_BRAND
+			  , PRODUCT_TITLE
+			  , PRODUCT_PRICE
+			  , CATEGORY_ID 
+		 FROM PRODUCT
+		WHERE CATEGORY_ID='식품'
+		ORDER BY PRODUCT_NO DESC
+	</select>
+	
+	<select id="beverageShoppingList" resultMap="productResultMap">
+		SELECT
+				PRODUCT_NO
+			  , PRODUCT_BRAND
+			  , PRODUCT_TITLE
+			  , PRODUCT_PRICE
+			  , CATEGORY_ID 
+		 FROM PRODUCT
+		WHERE CATEGORY_ID='음료'
+		ORDER BY PRODUCT_NO DESC
+	</select>
+	
+	<select id="goodsShoppingList" resultMap="productResultMap">
+		SELECT
+				PRODUCT_NO
+			  , PRODUCT_BRAND
+			  , PRODUCT_TITLE
+			  , PRODUCT_PRICE
+			  , CATEGORY_ID 
+		 FROM PRODUCT
+		WHERE CATEGORY_ID='운동기구'
+		ORDER BY PRODUCT_NO DESC
+	</select>
+	
+	<select id="shoppingDetail" resultMap="productResultMap" parameterType="_int">
+		SELECT
+				PRODUCT_NO
+			  , PRODUCT_BRAND
+			  , PRODUCT_TITLE
+			  , PRODUCT_PRICE
+			  , PRODUCT_NOTICE
+			  , PRODUCT_BENEFIT
+		   FROM PRODUCT
+		  WHERE PRODUCT_NO = #{productNo}
+	</select>
+	
+	<select id="shoppingPayment" resultMap="productResultMap" parameterType="_int">
+		SELECT
+				PRODUCT_NO
+			  , PRODUCT_BRAND
+			  , PRODUCT_TITLE
+			  , PRODUCT_PRICE
+			  , PRODUCT_NOTICE
+			  , PRODUCT_BENEFIT
+		   FROM PRODUCT
+		  WHERE PRODUCT_NO = #{productNo}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

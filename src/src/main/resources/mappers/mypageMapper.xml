@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.healthDao.mypage.model.dao.MypageMapper">
+	<resultMap id="qnaResultMap" type="com.kh.healthDao.mypage.model.vo.Qna">
+		<id property="qNo" column="Q_NO"/>
+		<result property="qDept" column="Q_DEPT" />
+		<result property="qDeptCode" column="Q_DEPT_CODE" />
+		<result property="userId" column="USER_ID" />
+		<result property="qTitle" column="Q_TITLE" />
+		<result property="qContent" column="Q_CONTENT" />
+		<result property="qDate" column="Q_DATE" />
+		<result property="qStatus" column="Q_STATUS" />
+		<result property="reply" column="REPLY" />
+		<result property="replyDate" column="REPLY_DATE" />
+		<result property="replyModifyDate" column="REPLY_MODIFY_DATE" />
+	</resultMap>
+	
+
+	<resultMap id="couponResultMap" type="com.kh.healthDao.admin.model.vo.Coupon">
+		<id property="pNo" column="P_NO" />
+		<result property="pName" column="P_NAME" />
+		<result property="pSale" column="P_SALE" />
+		<result property="startDate" column="START_DATE" />
+		<result property="endDate" column="END_DATE" />
+  </resultMap>
+  
+	<resultMap id="pointMap" type="com.kh.healthDao.mypage.model.vo.Point">
+		<id property="pointNo" column="POINT_NO"/>
+		<result property="pointamount" column="POINT_AMOUNT" />
+		<result property="pointIssueDate" column="POINT_ISSUEDATE" />
+		<result property="pointEndDate" column="POINT_ENDDATE" />
+		<result property="userNo" column="USER_NO" />
+		<result property="pCategoryNo" column="P_CATEGORY_NO" />
+		<result property="pCategoryName" column="P_CATEGORY_NAME" />
+	</resultMap>
+	
+
+	<resultMap id="reviewMap" type="com.kh.healthDao.review.model.vo.Review">
+		<id property="reviewNo" column="REVIEW_NO"/>
+		<result property="category" column="CATEGORY" />
+		<result property="star" column="STAR" />
+		<result property="rContent" column="R_CONTENT" />
+		<result property="rDate" column="R_DATE" />
+		<result property="modifyDate" column="MODIFY_DATE" />
+		<result property="payNo" column="PAY_NO" />
+  </resultMap>
+
+	<resultMap id="AttMap" type="com.kh.healthDao.mypage.model.vo.AttCheck">
+		<id property="attendanceId" column="ATTENDANCE_ID"/>
+		<result property="attendanceDate" column="ATTENDANCE_DATE" />
+		<result property="userNo" column="USER_NO" />
+	</resultMap>
+	
+	<select id="findQnaList" resultMap="qnaResultMap" parameterType="hashmap">
+		SELECT *
+		FROM
+		    (SELECT ROWNUM RNUM, A.*
+		            FROM
+		            (SELECT 
+		            Q_NO
+		            , Q_DEPT
+		            , Q_DEPT_CODE
+		            , USER_ID
+		            , Q_TITLE
+		            , Q_CONTENT
+		            , Q_DATE
+		            , Q_STATUS
+		            , REPLY
+		            , REPLY_DATE
+		            , REPLY_MODIFY_DATE
+		        FROM QNA
+		        JOIN QNA_DEPT USING(Q_DEPT_CODE)
+		        JOIN MEMBER USING(USER_NO)
+		        WHERE USER_NO = #{userNo}
+		        ORDER BY Q_NO DESC) A
+		    )
+			WHERE RNUM BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="getQnaListCount" parameterType="com.kh.healthDao.mypage.model.vo.Qna" resultType="_int">
+		SELECT
+		    COUNT(*)
+		FROM
+		(SELECT 
+		    Q_NO
+		    , Q_DEPT
+		    , Q_DEPT_CODE
+		    , USER_ID
+		    , Q_TITLE
+		    , Q_CONTENT
+		    , Q_DATE
+		    , Q_STATUS
+		    , REPLY
+		    , REPLY_DATE
+		    , REPLY_MODIFY_DATE
+		FROM QNA
+		JOIN QNA_DEPT USING(Q_DEPT_CODE)
+		JOIN MEMBER USING(USER_NO)
+		WHERE USER_NO = #{userNo}
+		ORDER BY Q_NO DESC)
+	</select>
+	
+	<select id="qnaDetail" resultMap="qnaResultMap" parameterType="_int">
+		SELECT 
+		    Q_NO
+		    , Q_DEPT
+		    , Q_DEPT_CODE
+		    , USER_ID
+		    , Q_TITLE
+		    , Q_CONTENT
+		    , Q_DATE
+		    , Q_STATUS
+		    , REPLY
+		    , REPLY_DATE
+		    , REPLY_MODIFY_DATE
+		FROM QNA
+		JOIN QNA_DEPT USING(Q_DEPT_CODE)
+		JOIN MEMBER USING(USER_NO)
+		WHERE Q_NO = #{qNo}
+	</select>
+	
+	<insert id="qnaInsert" parameterType="com.kh.healthDao.mypage.model.vo.Qna">
+		INSERT INTO QNA(
+		      Q_NO
+		    , Q_DEPT_CODE
+		    , USER_NO
+		    , Q_TITLE
+		    , Q_CONTENT
+		    , Q_DATE
+		    , Q_STATUS
+		    , REPLY
+		    , REPLY_DATE
+		    , REPLY_MODIFY_DATE
+		)VALUES(
+		     SEQ_Q_NO.NEXTVAL
+		   , #{qDeptCode}
+		   , #{userNo}
+		   , #{qTitle}
+		   , #{qContent}
+		   , SYSDATE
+		   , '문의'
+		   , NULL
+		   , NULL
+		   , NULL
+		)
+	</insert>
+	<update id="qnaModify" parameterType="com.kh.healthDao.mypage.model.vo.Qna">
+		UPDATE QNA
+		SET Q_DEPT_CODE = #{qDeptCode}
+			, Q_TITLE = #{qTitle}
+			, Q_CONTENT = #{qContent}
+		WHERE Q_NO = #{qNo}
+	</update>
+
+	<!-- 쿠폰 이벤트 리스트  -->
+	<select id="couponEventList" resultMap="couponResultMap">
+		SELECT
+		    P_NO
+		    , P_NAME
+		    , P_SALE
+		    , START_DATE
+		    , END_DATE
+		FROM COUPON
+		<![CDATA[
+		WHERE START_DATE > SYSDATE 
+		OR END_DATE > SYSDATE
+		]]>
+	</select>
+	
+	<insert id="myCouponInsert" parameterType="hashmap">
+		INSERT INTO MEMBER_COUPON(
+			  P_NO
+			, USER_NO
+			, P_STATUS
+		)VALUES(
+		      #{pNo}
+		    , #{userNo}
+		    , DEFAULT
+		)
+	</insert>
+
+	
+<!-- 	<select id="pointList" resultMap="pointMap" parameterType="com.kh.healthDao.mypage.model.vo.Point">
+		SELECT 
+		      POINT_NO
+		    , POINT_AMOUNT
+		    , POINT_ISSUEDATE
+		    , POINT_ENDDATE
+		    , USER_NO
+		    , P_CATEGORY_NO
+		    , P_CATEGORY_NAME
+		  FROM POINT
+		  JOIN POINT_CATEGORY USING(P_CATEGORY_NO)		  
+	</select> -->
+	
+	<select id="listPoint" resultMap="pointMap" parameterType="hashmap">
+		SELECT *
+		FROM
+		    (SELECT ROWNUM RNUM, A.*
+		            FROM
+		            (SELECT 
+		      POINT_NO
+		    , POINT_AMOUNT
+		    , POINT_ISSUEDATE
+		    , POINT_ENDDATE
+		    , USER_NO
+		    , P_CATEGORY_NO
+		    , P_CATEGORY_NAME
+		  FROM POINT
+		  JOIN POINT_CATEGORY USING(P_CATEGORY_NO)) A
+		    )
+			WHERE RNUM BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="pointListCount" resultType="_int" parameterType="hashmap">
+    	SELECT
+			    COUNT(*)
+			FROM
+			(SELECT ROWNUM RNUM, A.*
+	            FROM
+	            (SELECT 
+				      POINT_NO
+				  FROM POINT) A
+				ORDER BY POINT_NO DESC)
+	</select>
+
+	<insert id="attendCheck" parameterType="com.kh.healthDao.mypage.model.vo.AttCheck">
+		INSERT INTO ATT_CHECK(
+	        ATTENDANCE_ID
+	      , ATTENDANCE_DATE
+	      , USER_NO
+		)VALUES (
+	        SEQ_ATTENDANCE_ID.NEXTVAL
+	      , TO_CHAR(#{attendanceDate}, 'YY-MM-DD')
+	      , #{userNo}
+		)
+	</insert>
+
+	
+	<select id="myCouponList" parameterType="_int" resultMap="couponResultMap">
+		SELECT
+		      P_NO
+		    , P_NAME
+		    , P_SALE
+		    , START_DATE
+		    , END_DATE
+		FROM MEMBER_COUPON
+		JOIN COUPON USING(P_NO)
+		WHERE USER_NO = #{userNo}
+		AND P_STATUS = 'N'
+		<![CDATA[
+		AND (
+		START_DATE > SYSDATE 
+		OR END_DATE > SYSDATE
+		)
+		]]>
+	</select>
+	
+	<select id="userReviewListCount" parameterType="_int" resultType="_int">
+		SELECT 
+    		COUNT(*)
+		FROM(
+		SELECT 
+		    REVIEW_NO
+		    , CATEGORY
+		    , STAR
+		    , R_CONTENT
+		    , R_DATE
+		    , MODIFY_DATE
+		    , PAY_NO
+		    , USER_NO
+		FROM REVIEW
+		WHERE USER_NO = #{userNo})
+	</select>
+	
+	<select id="userReviewList" parameterType="hashmap" resultMap="reviewMap">
+		SELECT *
+		FROM
+		    (SELECT ROWNUM RNUM, A.*
+		            FROM
+		            (SELECT 
+					    REVIEW_NO
+					    , CATEGORY
+					    , STAR
+					    , R_CONTENT
+					    , R_DATE
+					    , MODIFY_DATE
+					    , PAY_NO
+					    , USER_NO
+					FROM REVIEW
+					WHERE USER_NO = #{userNo}
+		        ORDER BY REVIEW_NO DESC) A
+		    )
+			WHERE RNUM BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="reviewDetail" parameterType="_int" resultMap="reviewMap">
+		SELECT 
+		      REVIEW_NO
+		    , CATEGORY
+		    , STAR
+		    , R_CONTENT
+		    , R_DATE
+		    , MODIFY_DATE
+		    , PAY_NO
+		    , USER_NO
+		FROM REVIEW
+		WHERE REVIEW_NO = #{reviewNo}
+	</select>
+	
+	<update id="reviewModify" parameterType="com.kh.healthDao.review.model.vo.Review">
+		UPDATE REVIEW
+		SET STAR = #{star}
+		  , R_CONTENT = #{rContent}
+		WHERE REVIEW_NO = #{reviewNo}
+	</update>
+</mapper>

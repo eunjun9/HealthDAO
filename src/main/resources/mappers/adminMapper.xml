@@ -36,7 +36,8 @@
 	<resultMap id="categoryResultMap" type="com.kh.healthDao.admin.model.vo.Category">
 		<id property="categoryId" column="CATEGORY_ID" />
 		<result property="categoryName" column="CATEGORY_NAME" />
-	  <resultMap id="noticeResultMap" type="com.kh.healthDao.admin.model.vo.Notice">
+	</resultMap>
+	<resultMap id="noticeResultMap" type="com.kh.healthDao.admin.model.vo.Notice">
 		<id property="nNo" column="N_NO" />
 		<result property="nTitle" column="N_TITLE" />
 		<result property="nContent" column="N_CONTENT" />
@@ -108,17 +109,7 @@
 		)
 	</insert>  -->
 	
-	<select id="listProductInventory" resultMap="productResultMap" parameterType="com.kh.healthDao.admin.model.vo.Product">
-	SELECT
-	      PRODUCT_NO
-	    , PRODUCT_TITLE
-	    , PRODUCT_BRAND
-	    , PRODUCT_PRICE
-	    , PRODUCT_INFO
-	    , PRODUCT_STOCK
-	 FROM PRODUCT
-	 </select>
-	 
+
 
 	
 	<select id="listProductInventory" resultMap="productResultMap2" parameterType="hashmap">

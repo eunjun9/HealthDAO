@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title></title>
+<!-- 메타태그, 스타일 -->
+<th:block th:replace="common/head.html"></th:block>
+<!--// 메타태그, 스타일 -->
+<body>
+	<div id="wrap" class="main">
+		<!-- HEADER + GNB -->
+		<th:block th:replace="common/header.html"></th:block>
+		<!--// HEADER + GNB -->
+
+	<!-- container -->
+	<div id="container" class="pdt0">
+		<div class="site_location">
+			<span><a href="/">HOME</a></span>
+			<em>마이페이지</em>
+		</div>
+		<div class="mypage myPageDeliMf">
+			<div class="myMain myCon">
+				<div class="contents">
+					<!-- mypage lnb -->
+					<div class="myPageLnb">
+						<div class="myRank">
+							<p class="rank userLv1" id="Lv">
+								<span class="btnMain">회원</span>
+							</p><!-- 기본등급 userLv1 ~ 최고등급 userLv4 -->
+							<p class="txt">
+								<span>HELLO, VIP!</span><br>
+								<em id="name">류상훈님</em>
+							</p>
+						</div>
+						<div class="myPageMenu">
+							<ul class="dep1">
+								<li>
+									<p>주문관리</p>
+									<ul class="dep2">
+										<li><a href="/mypage/myorder">주문배송 조회</a></li>
+										<li><a href="/mypage/storebuy">매장구매내역</a></li>
+										<li><a href="/mypage/evidence">증빙서류 발급</a></li>
+									</ul>
+								</li>
+								<li>
+									<a href="/mypage/mycoupon">쿠폰</a>
+								</li>
+								<li>
+									<a href="/mypage/mypoint">포인트</a>
+								</li>
+								<li>
+									<p>내 활동</p>
+									<ul class="dep2">
+										<li><a href="/mypage/counsel">1:1 문의</a></li>
+										<li><a href="/mypage/mywish">위시리스트</a></li>
+										<li><a href="/mypage/mystock">입고 알림</a></li>
+									</ul>
+								</li>
+								<li>
+									<a href="/mypage/myreview">상품 리뷰</a>
+								</li>
+								<li>
+									<p>내 정보 관리</p>
+									<ul class="dep2">
+										<li><a href="/mypage/confirmpw">회원정보수정</a></li>
+										<li><a href="/mypage/myaddress">배송지 관리</a></li>
+										<li><a href="/mypage/skininfo">피부 프로필 관리</a></li>
+										<li><a href="javascript:;" onclick="goLeaveMemberInfo();return false;">회원탈퇴 하기</a></li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<!-- //mypage lnb -->
+
+					<!-- myPageCon -->
+					<div class="myPageCon">
+						<p class="tit mgb40">
+							배송지 관리
+						</p>
+						<!-- //myPageDeliMf tab -->
+						<div class="tblBar mgt50">
+							<div class="inp_wrap">
+								<div class="btn_wrap">
+									<a onclick="showLayer('deliRegister');" class="btn btnArr btnSizeL btnColorW btnTypeB" style="width:200px;"><span>신규 배송지 추가</span></a>				
+								</div>
+							</div>
+						</div>
+						<div class="js_tblList">
+							<table class="tblType1" summary="">
+								<caption></caption>
+								<colgroup>
+									<col width="50px"></col>
+									<col width="60px"></col>
+									<col width="120px"></col>
+									<col width="70px"></col>
+									<col width="50px"></col>
+								</colgroup>
+								<thead>
+									<tr>
+										<th>선택</th>
+										<th>받으실 분</th>
+										<th>배송주소</th>
+										<th>연락처</th>
+										<th>관리</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td class="fc22">
+											<span class="inp_radio">
+												<input type="radio" name="inp_radio1" id="inp_radio1_1">
+												<label for="inp_radio1_1"></label>
+											</span>
+										</td>
+										<td class="fc22">김치킨</td>
+										<td class="fc22">서울특별시 강남구 테헤란로 428(대치동, 테헤란로대우아이빌) 123</td>
+										<td class="fc22">010-1234-5678</td>
+										<td>
+											<a onclick="showLayer('deliRegister');" href="javascript:void(0)" class="btn btnSizeS btnColorG btnTypeB btnMf" style="width:70px;"><span>수정</span></a>
+											<div style="height: 12px;"></div>
+											<a onclick="" href="javascript:void(0)" class="btn btnSizeS btnColorG btnTypeB btnDt" style="width:70px;"><span>삭제</span></a>
+										</td>
+									</tr>
+									<tr>
+										<td class="fc22">
+											<span class="inp_radio">
+												<input type="radio" name="inp_radio1" id="inp_radio1_2">
+												<label for="inp_radio1_2"></label>
+											</span>
+										</td>
+										<td class="fc22">김치킨</td>
+										<td class="fc22">서울특별시 강남구 테헤란로 428(대치동, 테헤란로대우아이빌) 123</td>
+										<td class="fc22">010-1234-5678</td>
+										<td>
+											<a onclick="showLayer('deliRegister');" href="javascript:void(0)" class="btn btnSizeS btnColorG btnTypeB btnMf" style="width:70px;"><span>수정</span></a>
+											<div style="height: 12px;"></div>
+											<a onclick="" href="javascript:void(0)" class="btn btnSizeS btnColorG btnTypeB btnDt" style="width:70px;"><span>삭제</span></a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="mgt30 alct">
+							<div class="inp_wrap">
+								<div class="btn_wrap">
+									<a href="#" class="btn btnArr btnSizeL btnColorB btnTypeB" style="width:200px;"><span>기본배송지로 설정</span></a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- //myPageCon -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //container -->
+
+		<!-- 스크립트 -->
+		<th:block th:replace="common/script.html"></th:block>
+		<!--// 스크립트 -->
+		<!-- FOOTER -->
+		<th:block th:replace="common/footer.html"></th:block>
+		<!--// FOOTER -->
+	</div>
+	
+	<!-- 퀵메뉴 + 톡톡 -->
+	<!-- <th:block th:replace="common/quickNtalk.html"></th:block> -->
+	<!--// 퀵메뉴 + 톡톡 -->
+	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+	<link rel="stylesheet" type="text/css" href="../../css/main.css">
+	<script type="text/javascript" src="../../js/main.js"></script>
+	<script type="text/javascript" src="../../js/eunjung.js"></script>
+	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+</body>
+</html>

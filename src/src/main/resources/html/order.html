@@ -1,0 +1,1184 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<title></title>
+<meta name="title" content="">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta property="og:title" content="">
+<meta property="og:description" content="">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no, address=no, email=no">
+
+<meta property="og:url" content="">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="">
+<meta property="og:image" content="">
+
+<link rel="shortcut icon" href="">
+<link rel="apple-touch-icon" sizes="180x180" href="">
+<link rel="icon" type="image/png" sizes="32x32" href="">
+<link rel="icon" type="image/png" sizes="16x16" href="">
+<link rel="manifest" href="">
+<link rel="mask-icon" href="" color="">
+<meta name="msapplication-TileColor" content="">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="stylesheet" type="text/css" href="./resources/web/css/fonts.css">
+<link rel="stylesheet" type="text/css" href="./resources/web/css/common.css">
+<link rel="stylesheet" type="text/css" href="./resources/web/css/contents.css">
+<link rel="stylesheet" type="text/css" href="./resources/web/css/changSeop.css">
+
+<body>
+<div id="wrap" class="loadingNot">
+	<div id="loading">
+		<span class="hide">로딩중</span>
+	</div>
+
+	<!-- HEADER + GNB -->
+	<header id="header">
+		<!-- HEADERTOP -->
+		<div class="headerTop">
+			<div class="contents">
+				<div class="utilMenu">
+					<ul>
+						<li><a href="#loginLayer" onclick="loginLayer();return false;">로그인</a></li>
+						<li><a href="#">회원가입</a></li>
+						<li><a href="#">주문 조회</a></li>
+						<li><a href="#">고객센터</a></li>
+					</ul>
+					
+					<!-- 로그인 레이어 -->
+					<div id="loginLayer">
+						<div class="loginTabH">
+							<div class="inp_wrap">
+								<div class="inp_text sizeS">
+									<input type="text" title="아이디" placeholder="아이디">
+								</div>
+								<p class="error">아이디를 입력해주세요.</p>
+							</div>
+							<div class="inp_wrap mgt10">
+								<div class="inp_text sizeS">
+									<input type="password" title="비밀번호" placeholder="비밀번호">
+								</div>
+								<p class="error">비밀번호를 입력해주세요.</p>
+							</div>
+							<span class="inp_check mgt15">
+								<input type="checkbox" id="id_auto_loing_H">
+								<label for="id_auto_loing_H">자동 로그인</label>
+							</span>
+							<a href="#" class="btn btnSizeM btnColorP btnTypeR w100 mgt17"><span>로그인</span></a>
+						</div>
+						<div class="btn_member">
+							<ul>
+								<li><a href="#">회원가입</a></li>
+								<li><a href="#">아이디 찾기</a></li>
+								<li><a href="#">비밀번호 찾기</a></li>
+							</ul>
+						</div>
+						<div class="btn_sns">
+							<ul>
+								<li class="sns_n"><a href="javascript:void(0);"><span>네이버 로그인</span></a></li>
+								<li class="sns_k"><a href="javascript:void(0);"><span>카카오 로그인</span></a></li>
+							</ul>
+						</div>
+						<div class="loginLayerClose">
+							<a href="javascript:void(0);" onclick="loginLayer();">닫기</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- // HEADERTOP -->
+
+		<!-- HEADER -->
+		<div class="daoHeader">
+			<h1><a href="#"><img class="logoClass" src="./resources/web/images/common/logo.png" alt="BANILA.COM"></a></h1>
+			<div class="searchH">
+				<div class="searchWrap">
+					<div class="inp_wrap">
+						<div class="inp_text">
+							<input type="text" id="headerSearch">
+							<button class="btn_clear"><span>clear</span></button>
+							<button class="btn_search" type="button"><span class="hide">검색</span></button>
+						</div>
+					</div>
+				</div>
+				<div class="jsSearchTxt">
+					<div class="rollCon">
+						<div class="txt">검색어 순위 1위 노출</div>
+						<div class="txt">검색어 순위 2위 노출</div>
+						<div class="txt">검색어 순위 3위 노출</div>
+						<div class="txt">검색어 순위 4위 노출</div>
+						<div class="txt">검색어 순위 5위 노출</div>
+					</div>
+				</div>
+			</div>
+			<div class="myMenuH">
+				<ul>
+					<li><a href="#">마이페이지</a></li>
+					<li><a href="#">장바구니 <span>99</span></a></li>
+				</ul>
+			</div>
+		</div>
+		<!-- //HEADER -->
+		<!-- GNB -->
+		<div class="gnbWrap">
+			<div class="gnb">
+				<div class="contents">
+					<ul class="gnbLink">
+						<li><a href="#">랭킹</a></li>
+						<li><a href="#">신상품</a></li>
+						<li><a href="#">식품</a></li>
+						<li><a href="#">음료</a></li>
+						<li><a href="#">운동·생활용품</a></li>
+						<li><a href="#">주변 PT 찾기</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- //GNB -->
+	</header>
+	<!-- //HEADER + GNB -->
+
+	<!-- container -->
+	
+	<div id="container" class="pd0">
+		<div class="order_wrap">
+			<div class="contents">
+				<p class="order_leng">주문상품 (6개)</p>
+				<div class="order_box js_orderFloating">
+
+					<div class="order_user order_con">
+						<p class="orderTit">주문고객정보</p>
+						<dl>
+							<dt><label for="order_name"><span class="fcRed">*</span>이름</label></dt>
+							<dd>
+								<div class="inp_wrap">
+									<div class="inp_text sizeS">
+										<input type="text" name="" id="order_name" value="지유">
+									</div>
+									<p class="error">주문고객 이름을 입력해주세요.</p>
+								</div>
+							</dd>
+						</dl>
+						<dl>
+							<dt><label for="order_phone"><span class="fcRed">*</span>휴대폰</label></dt>
+							<dd>
+								<div class="inp_wrap">
+									<div class="inp_text sizeS">
+										<input type="text" name="" id="order_phone" value="01012345678">
+									</div>
+									<p class="error">휴대폰번호를 입력해주세요.</p>
+								</div>
+							</dd>
+						</dl>
+						<dl>
+							<dt><label for="order_email"><span class="fcRed">*</span>이메일</label></dt>
+							<dd>
+								<div class="inp_wrap inp_email2">
+									<div class="inp_text sizeS">
+										<input type="text" id="order_email" value="asdf">
+									</div>
+									<span class="hyphen">@</span>
+									<div class="inp_text email_input sizeS">
+										<input type="text" title="이메일 직접입력" value="naver.com" readonly>
+									</div>
+									<div class="inp_select sizeS">
+										<div class="selectBox">
+											<button class="title" type="button" title=""></button>
+											<ul class="selList">
+												<li>
+													<input type="radio" value="" class="option" id="join_email1" name="join_email" checked>
+													<label for="join_email1">naver.com</label>
+												</li>
+												<li>
+													<input type="radio" value="" class="option" id="join_email2" name="join_email">
+													<label for="join_email2">google.com</label>
+												</li>
+												<li>
+													<input type="radio" value="" class="option" id="join_email3" name="join_email">
+													<label for="join_email3">직접선택</label>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<p class="error">이메일을 입력해주세요.</p>
+								</div>
+							</dd>
+						</dl>
+					</div>
+
+					<div class="order_delivery order_con">
+						<p class="orderTit">배송지 정보</p>
+						<div class="delivery_list">
+							<a href="#" class="btn btnSizeS btnColorB btnTypeB"><span>배송지관리</span></a>
+							<!-- 총 리스트를 불러와도 css에서 처리하도록 작업 -->
+							<ul>
+								<li>
+									<input type="radio" name="deliveryList" id="deliveryList1" checked>
+									<label for="deliveryList1">
+										<p class="deliName">[기본배송지] 지유 집</p>
+										<p class="deliUser">박지유  010-1234-5678 / 02-3254-8976</p>
+										<p class="deliAddr">
+											서울특별시 금천구 가산디지털 1로<br>
+											에이스 하이엔드 3차 705호<br>
+											(우)123-456
+										</p>
+									</label>
+									<ul class="btn_wrap">
+										<li>
+											<a href="javascript:void();" onclick="showLayer('deliRegister');">수정</a>
+										</li>
+										<li>
+											<a href="javascript:void();" onclick="showLayer('deliDel');">삭제</a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="javascript:void();" onclick="showLayer('deliRegister');" class="new_addr">
+										신규 배송지를 등록해주세요
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="delivMesg" >
+							<dl id="selAddMsgList">
+								<dt >배송 메시지 선택</dt>
+								<dd>
+									<div class="inp_wrap inp_mesg">
+										<div class="inp_select sizeS">
+											<div class="selectBox">
+												<button class="title" type="button">메시지를 선택해주세요.</button>
+												<ul class="selList" >
+													<li>
+														<input type="radio" value="" class="option" id="orderCard1" name="orderCard">
+														<label for="orderCard1">메시지 직집 입력하기</label>
+													</li>
+													<li>
+														<input type="radio" value="" class="option" id="orderCard2" name="orderCard">
+														<label for="orderCard2">부재 시 경비실에 맡겨 주세요.</label>
+													</li>
+													<li>
+														<input type="radio" value="" class="option" id="orderCard3" name="orderCard">
+														<label for="orderCard3">부재 시 문앞에 놔주세요.</label>
+													</li>
+													<li>
+														<input type="radio" value="" class="option" id="orderCard4" name="orderCard">
+														<label for="orderCard4">배송 전에 미리 연락주세요.</label>
+													</li>
+													<li>
+														<input type="radio" value="" class="option" id="orderCard5" name="orderCard">
+														<label for="orderCard5">배송 전에 전화주시거나 문자 남겨 주세요.</label>
+													</li>
+												</ul>
+											</div>
+										</div>
+										<div class="inp_text mesg_input sizeS mgt10">
+											<input type="text" name="" id="order_name" placeholder="메시지를 입력해주세요.">
+										</div>
+									</div>
+								</dd>
+							</dl>
+							<ul class="lineInfo mgt30">
+								<li>신규 주소로 배송 시 배송지 등록 후 이용 가능합니다.</li>
+								
+							</ul>
+						</div>
+					</div>
+					
+					<div class="order_list order_con">
+						<ul class="list_box">
+							<li>
+								<div class="tbl_wrap">
+									<div class="pdtImg"><a href="#"><img src="./resources/web/images/temp/pdt_img3.png" alt="아이크러쉬 디테일 아이라이너"></a></div>
+									<div class="pdtTxt">
+										<p class="pdtHead" style="color:#4f8ffa;">[이벤트] 아이라이너 전 제품 3개 구매 시 1개 무료</p>
+										<p class="pdtBrand">바닐라코</p><!-- 20200317 수정 -->
+										<p class="pdtName">아이크러쉬 디테일 아이라이너</p>
+										<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
+										<p class="pdtOpt">옵션 : BE01 밀크티 필터</p>
+									</div>
+									<div class="pdtCount">
+										<p>1개</p>
+									</div>
+									<div class="totalPrice">
+										<div class="state">
+											<p>일시품절</p>
+										</div>
+									</div>
+								</div>
+								<div class="pdtSet">
+									<p class="tit">SET 상품</p>
+									<ul>
+										<li>
+											<div class="setImg">
+												<img src="./resources/web/images/temp/pdt_img3.png" alt="아이크러쉬 디테일 아이라이너">
+											</div>
+											<div class="pdtTxt">
+												<p class="pdtBrand">바닐라코</p><!-- 20200317 수정 -->
+												<p class="pdtName">아이크러쉬 디테일 아이라이너</p>
+												<p class="pdtOpt">옵션 : BE01 밀크티 필터</p>
+												<p class="soldOut">일시품절</p>
+											</div>
+											<p class="setPrice">15,000<em>원</em></p>
+										</li>
+										<li>
+											<div class="setImg">
+												<img src="./resources/web/images/temp/pdt_img3.png" alt="아이크러쉬 디테일 아이라이너">
+											</div>
+											<div class="pdtTxt">
+												<p class="pdtBrand">바닐라코</p><!-- 20200317 수정 -->
+												<p class="pdtName">아이크러쉬 디테일 아이라이너</p>
+												<p class="pdtOpt">옵션 : BE01 밀크티 필터</p>
+											</div>
+											<p class="setPrice">15,000<em>원</em></p>
+										</li>
+									</ul>
+								</div>
+							</li>
+							<li>
+								<div class="tbl_wrap">
+									<div class="pdtImg"><a href="#"><img src="./resources/web/images/temp/pdt_img3.png" alt="아이크러쉬 디테일 아이라이너"></a></div>
+									<div class="pdtTxt">
+										<p class="pdtHead" style="color:#4f8ffa;">[이벤트] 아이라이너 전 제품 3개 구매 시 1개 무료</p>
+										<p class="pdtBrand">바닐라코</p><!-- 20200317 수정 -->
+										<p class="pdtName">아이크러쉬 디테일 아이라이너</p>
+										<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
+										<p class="pdtOpt">옵션 : BE01 밀크티 필터</p>
+									</div>
+									<div class="pdtCount error"><!-- 에러문구 노출시 error 클래스 추가 -->
+										<p>1개</p>
+										<p class="error">재고가 부족하여 수량만큼 주문하실 수 없습니다.</p><!-- 20200507 수정 -->
+									</div>
+									<div class="totalPrice">
+										<p class="price">15,000<em>원</em></p>
+										<!-- 20200317 수정
+										<p class="free">무료</p>
+										<p class="free">증정</p>
+										-->
+									</div>
+								</div>
+								<div class="pdtSet">
+									<p class="tit">SET 상품</p>
+									<ul>
+										<li>
+											<div class="setImg">
+												<img src="./resources/web/images/temp/pdt_img3.png" alt="아이크러쉬 디테일 아이라이너">
+											</div>
+											<div class="pdtTxt">
+												<p class="pdtBrand">바닐라코</p><!-- 20200317 수정 -->
+												<p class="pdtName">아이크러쉬 디테일 아이라이너</p>
+												<p class="pdtOpt">옵션 : BE01 밀크티 필터</p>
+												<p class="soldOut">일시품절</p>
+											</div>
+											<p class="setPrice">15,000<em>원</em></p>
+										</li>
+										<li>
+											<div class="setImg">
+												<img src="./resources/web/images/temp/pdt_img3.png" alt="아이크러쉬 디테일 아이라이너">
+											</div>
+											<div class="pdtTxt">
+												<p class="pdtBrand">바닐라코</p><!-- 20200317 수정 -->
+												<p class="pdtName">아이크러쉬 디테일 아이라이너</p>
+												<p class="pdtOpt">옵션 : BE01 밀크티 필터</p>
+											</div>
+											<p class="setPrice">15,000<em>원</em></p>
+										</li>
+									</ul>
+								</div>
+								<div class="freeGift">
+									<p class="tit">추가 사은품</p>
+									<ul>
+										<li>
+											<div class="giftImg">
+												<img src="./resources/web/images/temp/freeGift.jpg" alt="디어 하이드레이션 토너 샘플">
+												<p>사은품</p>
+											</div>
+											<p class="giftName">
+												디어 하이드레이션 토너 샘플
+												<span class="fcRed">일시품절</span>
+											</p>
+										</li>
+										<li>
+											<div class="giftImg">
+												<img src="./resources/web/images/temp/freeGift.jpg" alt="디어 하이드레이션 토너 샘플">
+												<p>사은품</p>
+											</div>
+											<p class="giftName">
+												디어 하이드레이션 토너 샘플
+												<span>1개</span>
+											</p>
+										</li>
+									</ul>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div class="order_coupon order_con">
+						<p class="orderTit">쿠폰/포인트 사용</p>
+						<div class="coupon_wrap">
+							<div class="couponType">
+								<dl>
+									<dt><label for="order_coupon">장바구니/사은품 쿠폰사용</label></dt><!-- 20200410 수정 -->
+									<dd>
+										<div class="inp_wrap">
+											<div class="inp_text sizeS inp_order">
+												<input type="text" name="" id="order_coupon" value="0" disabled>
+											</div>
+											<a href="javascript:void(0);" onclick="order_couponPop();" class="btn btnArr3 btnSizeM btnColorB btnTypeB order_cpBtn"><span>쿠폰 사용/조회</span></a>
+											<p class="info_txt">사용가능쿠폰 <span class="fcPink">1</span>장&nbsp;&nbsp;<span class="fcbf">│</span>&nbsp;&nbsp;보유쿠폰 <span class="fcPink">2</span>장</p>
+										</div>
+										<!-- 쿠폰을 선택했을 경우 출력 -->
+										<ul class="app_list">
+											<li>
+												<p>[장바구니 할인] 쿠폰코드 또는 쿠폰명</p>
+												<a href="#" class="btn_txt">사용취소</a>
+											</li>
+											<li>
+												<p>[사은품 쿠폰] 하이 바이 수딩 마스크 1매 증정</p>
+												<a href="#" class="btn_txt">사용취소</a>
+											</li>
+											<li>
+												<p>[배송비 쿠폰] 배송비 무료</p>
+												<a href="#" class="btn_txt">사용취소</a>
+											</li>
+										</ul>
+										<!-- //쿠폰을 선택했을 경우 -->
+									</dd>
+								</dl>
+								<div class="coupon_layer" id="coupon_layer">
+									<div class="inp_wrap sale_code">
+										<div class="inp_lab"><label for="ipt_label">쿠폰코드를 입력하시고 할인 받으세요.</label></div>
+										<div class="inp_text sizeS">
+											<input type="text" name="" id="ipt_label" placeholder="쿠폰 코드 입력">
+											<button class="btn_clear"><span>clear</span></button>
+										</div>
+										<a href="#" class="btn btnSizeM btnColorW btnTypeB"><span>등록</span></a>
+										<p class="error">쿠폰코드를 입력해 주세요.</p>
+									</div>
+									<ul class="order_cpList">
+										<li>
+											<span class="inp_radio">
+												<input type="radio" name="cpCart" id="cpCart1">
+												<label for="cpCart1">
+													<span class="notoM">VIP 등급 쿠폰</span> <span class="fcPink">/ 1,000원 할인</span>
+													<em>최대 000원 이하 결제시<br> 최대 000원 할인</em><!-- 20200317 수정 -->
+												</label>
+											</span>
+										</li>
+										<li>
+											<span class="inp_radio">
+												<input type="radio" name="cpCart" id="cpCart2" disabled>
+												<label for="cpCart2">
+													<span class="notoM">클린 잇 제로 라인</span> <span class="fcPink">/ 30% 할인</span>
+													<em>총 결제금액 2만원 이상 구매 시</em>
+												</label>
+											</span>
+										</li>
+										<li>
+											<span class="inp_radio">
+												<input type="radio" name="cpGift" id="cpGift1">
+												<label for="cpGift1">
+													<span class="notoM">프라임 프라이머 샘플KIT</span>
+													<em>총 결제금액 1만원 이상 구매 시</em>
+												</label>
+											</span>
+										</li>									
+										<li class="noData">
+											<span>사용 가능한 쿠폰이 없습니다.</span>
+										</li>
+									</ul>
+									<div class="order_cpBottom">
+										<div class="btn_wrap">
+											<a href="javascript:void(0);" onclick="order_couponPop();" class="btn btnSizeM btnColorW btnTypeR"><span>취소</span></a>
+											<a href="javascript:void(0);" onclick="order_couponPop();" class="btn btnSizeM btnColorB btnTypeR"><span>적용 완료</span></a>
+										</div>
+										<p class="info_tit">꼭 확인하세요!</p>
+										<ul class="dotInfo mgt20">
+											<li>주문에 사용하실 쿠폰 선택 또는 쿠폰코드를 입력해 주세요.</li>
+											<li>쿠폰리스트에는 사용가능한 쿠폰만 노출됩니다.</li>
+											<li>장바구니 할인쿠폰은 중복 사용이 불가합니다.</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<dl>
+								<dt><label for="order_point">포인트 사용</label></dt>
+								<dd>
+									<div class="inp_wrap">
+										<div class="inp_text sizeS inp_point">
+											<input type="text" name="" id="order_point" placeholder="0">
+										</div>
+										<a href="#" class="btn btnSizeM btnColorB btnTypeB"><span>적용하기</span></a><!-- 20200317 수정 -->
+										<!-- 20200317 수정
+										<a href="#" class="btn btnSizeM btnColorW btnTypeB"><span>사용 취소</span></a>
+										-->
+										<p class="info_txt">보유 포인트 <span class="fcPink">100</span>P<a href="#" class="btn_txt">전체사용</a></p>
+										<p class="error">포인트를 입력해주세요.</p>
+										<p class="error">주문금액 최소 000,  최대 000 내 적용이 가능합니다.</p>
+										<p class="error">00p 단위로 입력해주세요.</p>
+									</div>
+								</dd>
+							</dl>
+							<!-- 20200410 수정 -->
+							<div class="couponType">
+								<div class="coupon_layer" id="coupon_layer2">
+									<ul class="order_cpList">
+										<li>
+											<span class="inp_radio">
+												<input type="radio" name="cpDeli" id="cpDeli1">
+												<label for="cpDeli1">
+													<span class="notoM">VIP 등급 쿠폰</span> <span class="fcPink">/ 1,000원 할인</span>
+													<em>최대 000원 이하 결제시<br> 최대 000원 할인</em><!-- 20200317 수정 -->
+												</label>
+											</span>
+										</li>
+										<li>
+											<span class="inp_radio">
+												<input type="radio" name="cpDeli" id="cpDeli2" disabled>
+												<label for="cpDeli2">
+													<span class="notoM">클린 잇 제로 라인</span> <span class="fcPink">/ 30% 할인</span>
+													<em>총 결제금액 2만원 이상 구매 시</em>
+												</label>
+											</span>
+										</li>
+										<li>
+											<span class="inp_radio">
+												<input type="radio" name="cpDeli" id="cpDeli3">
+												<label for="cpDeli3">
+													<span class="notoM">VIP 등급 무료배송 쿠폰</span>
+													<em>총 결제금액 1만원 이상 구매 시</em>
+												</label>
+											</span>
+										</li>
+										<li>
+											<span class="inp_radio">
+												<input type="radio" name="cpGift" id="cpDeli4">
+												<label for="cpDeli4">
+													<span class="notoM">프라임 프라이머 샘플KIT</span>
+													<em>총 결제금액 1만원 이상 구매 시</em>
+												</label>
+											</span>
+										</li>									
+										<li class="noData">
+											<span>사용 가능한 쿠폰이 없습니다.</span>
+										</li>
+									</ul>
+									<div class="order_cpBottom">
+										<div class="btn_wrap">
+											<a href="javascript:void(0);" onclick="order_couponPop2();" class="btn btnSizeM btnColorW btnTypeR"><span>취소</span></a>
+											<a href="javascript:void(0);" onclick="order_couponPop2();" class="btn btnSizeM btnColorB btnTypeR"><span>적용 완료</span></a>
+										</div>
+										<p class="info_tit">꼭 확인하세요!</p>
+										<ul class="dotInfo mgt20">
+											<li>배송비 쿠폰 사용시 배송비 무료로 주문하실 수 있습니다.</li>
+											<li>1 주문당 1개의 배송비 쿠폰을 사용하실 수 있습니다.</li>
+											<li>타 쿠폰과 중복 사용이 가능합니다.</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<!-- //20200410 수정 -->
+						</div>
+						<ul class="lineInfo mgt30">
+							<li>쿠폰 사용은 주문 한 건당 사용 가능하며 다른 쿠폰과 중복사용이 불가합니다.</li>
+							<li>일부 프로모션 상품은 쿠폰과 포인트 사용이 제외될 수 있습니다.</li>
+							<li>사용하신 쿠폰은 교환/반품 시 쿠폰이 복구되지 않으며 재사용 불가합니다.<br> (단, 재고 소진 및 내부 사정으로 인해 불가피한 교환/반품 시에는 복구 가능)</li>
+							<li>포인트 사용은 최소 2000p이상으로 사용 가능합니다.</li>
+							<li>포인트 사용은 배송비를 제외한 주문 결제 금액 기준으로 전액 사용 가능합니다.</li>
+							<li>쇼핑백은 쿠폰할인에서 제외되지만 포인트 사용은 가능합니다.</li>
+						</ul>
+					</div>
+
+					<div class="order_payment order_con">
+						<p class="orderTit">결제방법</p>
+						<span class="inp_check payment_save">
+							<input type="checkbox" name="payment_save" id="payment_save">
+							<label for="payment_save" class="fc88">선택한 결제수단을 다음에도 사용</label>
+						</span>
+						<div class="payment_list">
+							<ul>
+								<li class="payment_list1">
+									<input type="radio" name="sttlmethod" id="payment_list1">
+									<label for="payment_list1">네이버페이</label>
+								</li>
+								<li class="payment_list2">
+									<input type="radio" name="sttlmethod" id="payment_list2">
+									<label for="payment_list2">카카오 페이</label>
+								</li>
+								<li class="payment_list3">
+									<input type="radio" name="sttlmethod" id="payment_list3">
+									<label for="payment_list3">페이코</label>
+								</li>
+								<li class="payment_list4">
+									<input type="radio" name="sttlmethod" id="payment_list4">
+									<label for="payment_list4">스마일 페이</label>
+								</li>
+								<li class="payment_list5">
+									<input type="radio" name="sttlmethod" id="payment_list5">
+									<label for="payment_list5">신용카드</label>
+								</li>
+								<li class="payment_list6">
+									<input type="radio" name="sttlmethod" id="payment_list6">
+									<label for="payment_list6">실시간 계좌이체</label>
+								</li>
+								<li class="payment_list7">
+									<input type="radio" name="sttlmethod" id="payment_list7">
+									<label for="payment_list7">가상계좌 (무통장)</label>
+								</li>
+								<li class="payment_list8">
+									<input type="radio" name="sttlmethod" id="payment_list8">
+									<label for="payment_list8">휴대폰결제</label>
+								</li>
+								<!-- 결제금액이 없을때 -->
+								<li class="noData"><span>실제 결제를 진행 할 금액이 없습니다.<br> 약관동의 후 결제 하기 버튼 클릭 시 바로 결제가 완료 됩니다.</span></li>
+							</ul>
+						</div>
+						<div class="payment_info">
+							<div class="payment_info1 info_wrap">
+								<ul class="dotInfo">
+									<li>주문 변경 시 카드사 혜택 및 할부 적용 여부는 해당 카드사 정책에 따라 변경될 수 있습니다.</li>
+									<li>네이버페이는 네이버ID로 별도 앱 설치 없이 신용카드 또는 은행계좌 정보를 등록하여 네이버페이<br> 비밀번호로 결제할 수 있는 간편결제 서비스입니다.</li>
+									<li>결제 가능한 신용카드 : 신한, 삼성, 현대, BC, 국민, 하나, 롯데, NH농협, 씨티, 카카오뱅크</li>
+									<li>결제 가능한 은행 : NH농협, 국민, 신한, 우리, 기업, SC제일, 부산, 경남, 수협, 우체국, 미래에셋대우, 광주, 대구, 전북, 새마을금고, 제주은행, 신협, 하나은행, 케이뱅크, 카카오뱅크, 삼성증권, KDB산업은행, SBI저축은행, 유안타증권, 씨티, 유진투자증권</li>
+									<li>네이버페이 카드 간편결제는 네이버페이에서 제공하는 카드사 별 무이자, 청구할인 혜택을 받을 수 있습니다.</li>
+								</ul>
+							</div>
+							<div class="payment_info2 info_wrap">
+								<ul class="dotInfo">
+									<li>결제메시지 요청 시 입력하신 휴대폰 번호로 카카오페이 플친으로부터 메시지가 발송됩니다.</li>
+									<li>메시지안의 링크를 열어 결제를 진행해주세요.</li>
+								</ul>
+							</div>
+							<div class="payment_info3 info_wrap">
+								<ul class="dotInfo">
+									<li>PAYCO는 NHN엔터테인먼트가 만든 안전한 간편결제 서비스입니다.</li>
+									<li>휴대폰과 카드 명의자가 동일해야 결제가 가능합니다.<br>- 지원카드 - 모든 신용/체크카드</li>
+								</ul>
+							</div>
+							<div class="payment_info4 info_wrap">
+								<ul class="dotInfo">
+									<li>스마일페이는 본인명의 신용카드/체크카드 등록 후 비밀번호만으로 결제 할 수 있는 간편 결제 서비스 입니다.</li>
+									<li>휴대폰과 카드 명의자가 동일해야 결제가 가능합니다.<br> - 지원카드 - 모든 신용카드/체크카드 (단, 온라인 업종 결제 제한 적용카드 결제 불가)</li>
+									<li>스마일페이로 결제할 경우 무이자 할부는 스마일페이에서 제공하는 카드사별 무이자 혜택만 제공합니다.</li>
+								</ul>
+							</div>
+							<div class="payment_info5 info_wrap">
+								<!-- <div class="select_wrap">
+									<dl>
+										<dt>카드종류</dt>
+										<dd>
+											<div class="inp_wrap">
+												<div class="inp_select sizeS">
+													<div class="selectBox">
+														<button class="title" type="button">카드를 선택해주세요.</button>
+														<ul class="selList">
+															<li>
+																<input type="radio" value="" class="option" id="orderCard1" name="orderCard">
+																<label for="orderCard1">현대카드</label>
+															</li>
+															<li>
+																<input type="radio" value="" class="option" id="orderCard2" name="orderCard">
+																<label for="orderCard2">삼성카드</label>
+															</li>
+															<li>
+																<input type="radio" value="" class="option" id="orderCard3" name="orderCard">
+																<label for="orderCard3">롯데카드</label>
+															</li>
+															<li>
+																<input type="radio" value="" class="option" id="orderCard4" name="orderCard">
+																<label for="orderCard4">신한카드</label>
+															</li>
+															<li>
+																<input type="radio" value="" class="option" id="orderCard5" name="orderCard">
+																<label for="orderCard5">KB카드</label>
+															</li>
+														</ul>
+													</div>
+												</div>
+											</div>
+										</dd>
+									</dl>
+								</div> -->
+								<ul class="dotInfo">
+									<li>신용카드 결제 창을 통해 전송된 고객님의 정보는 암호화하여 전송되며 승인 성공/ 실패 여부에 상관없이 자동으로 폐기되므로, 안전합니다.</li>
+									<li>실시간 이체 결제 신청 시 승인 진행에 다소 시간이 소요될 수 있으므로 '중지', '새로고침'을 누르지 마시고 결과 화면이 나타날 때까지 기다려 주십시오.</li>
+								</ul>
+								<ul class="card_info">
+									<li><a href="javascript:void(0);" onclick="showLayer('orderCardInfo','tab1');" class="btn_txt"><span>공인인증서 안내</span></a></li>
+									<li><a href="javascript:void(0);" onclick="showLayer('orderCardInfo','tab2');" class="btn_txt"><span>안심클릭 안내</span></a></li>
+									<li><a href="javascript:void(0);" onclick="showLayer('orderCardInfo','tab3');" class="btn_txt"><span>안전결제 (ISP)안내</span></a></li>
+								</ul>
+							</div>
+							<div class="payment_info6 info_wrap">
+								<ul class="dotInfo">
+									<li>실시간 계좌이체 창을 통해 전송된 고객님의 정보는 암호화하여 전송되며 승인 성공/ 실패 여부에 상관없이 자동으로 폐기되므로, 안전합니다.</li>
+									<li>실시간 이체 결제 신청 시 승인 진행에 다소 시간이 소요될 수 있으므로 '중지', '새로고침'을 누르지 마시고 결과 화면이 나타날 때까지 기다려 주십시오.</li>
+									<li>실시간 계좌이체 결제시 공인인증서가 반드시 필요합니다.</li>
+									<li>결제 후 1시간 이내 입금 확인 후 배송이 이루어 집니다.</li>
+									<li>은행 이용가능 서비스 시간은 은행사정에 따라 다소 변동될 수 있습니다.</li>
+									<li>현금영수증 신청은 사업자, 현금영수증카드, 휴대폰번호가 유효하지 않으면 발급되지 않습니다.</li>
+									<li class="fcRed">세금계산서는 고객상담실과 상담 후 발급이 가능합니다.</li>
+								</ul>
+							</div>
+							<div class="payment_info7 info_wrap">
+								<!-- <div class="select_wrap">
+									<dl>
+										<dt>은행</dt>
+										<dd>
+											<div class="inp_wrap">
+												<div class="inp_select sizeS">
+													<div class="selectBox">
+														<button class="title" type="button">입금은행 선택</button>
+														<ul class="selList">
+															<li>
+																<input type="radio" value="" class="option" id="orderBank1" name="orderBank">
+																<label for="orderBank1">신한</label>
+															</li>
+															<li>
+																<input type="radio" value="" class="option" id="orderBank2" name="orderBank">
+																<label for="orderBank2">KB</label>
+															</li>
+															<li>
+																<input type="radio" value="" class="option" id="orderBank3" name="orderBank">
+																<label for="orderBank3">농협</label>
+															</li>
+															<li>
+																<input type="radio" value="" class="option" id="orderBank4" name="orderBank">
+																<label for="orderBank4">기업</label>
+															</li>
+															<li>
+																<input type="radio" value="" class="option" id="orderBank5" name="orderBank">
+																<label for="orderBank5">우리</label>
+															</li>
+														</ul>
+													</div>
+												</div>
+											</div>
+										</dd>
+									</dl>
+									<dl>
+										<dt>현금영수증</dt>
+										<dd>
+											<div class="inp_wrap">
+												<div class="inp_select sizeS">
+													<div class="selectBox">
+														<button class="title" type="button">사용 안함</button>
+														<ul class="selList">
+															<li>
+																<input type="radio" value="" class="option" id="receiptsY" name="receipts">
+																<label for="receiptsY">사용</label>
+															</li>
+															<li>
+																<input type="radio" value="" class="option" id="receiptsN" name="receipts" checked>
+																<label for="receiptsN">사용 안함</label>
+															</li>
+														</ul>
+													</div>
+												</div>
+											</div>
+										</dd>
+									</dl>
+								</div> -->
+								<ul class="dotInfo">
+									<li>무통장 입금의 경우 주문접수 후 입금이 되지 않고 3일이 지나면 자동 취소됩니다.</li>
+									<li>입금하실 은행만 선택하시면 해당주문에 대한 전용 계좌번호는 다음단계인 [주문 완료] 페이지에서 확인하실 수 있으며 알림톡으로도 안내해 드립니다.</li>
+									<li>현금영수증 신청은 사업자, 현금영수증카드, 휴대폰번호가 유효하지 않으면 발급되지 않습니다.</li>
+									<li class="fcRed">세금계산서는 고객상담실과 상담 후 발급이 가능합니다.</li>
+								</ul>
+							</div>
+							<div class="payment_info8 info_wrap">
+								<ul class="dotInfo">
+									<li>결제월이 지난 휴대폰결제의 취소건은 별도의 반품계좌로 환불됩니다.</li>
+									<li>주문건의 반품 시 반품금액은 별도의 반품계좌로 환불됩니다.</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<div class="order_floating">
+						<div class="shadow_box">
+							<div class="order_price bd_no">
+								<dl>
+									<dt>총 주문금액</dt>
+									<dd>80,000<em>원</em></dd>
+								</dl>
+								<!-- 20200317 수정 하단 쇼핑백 삭제되고 이곳에 추가 -->
+								<div class="detail_price">
+									<dl>
+										<dt>상품금액</dt>
+										<dd>+ 396,300원</dd>
+									</dl>
+									<dl>
+										<dt>쇼핑백</dt>
+										<dd>+ 1,000원</dd>
+									</dl>
+								</div>
+								<!-- //20200317 수정 -->
+							</div>
+							<div class="order_price">
+								<dl>
+									<dt>총 할인금액</dt>
+									<dd><span class="fcRed">- 11,800</span><em>원</em></dd>
+								</dl>
+								<div class="detail_price">
+									<dl>
+										<dt>멤버십 할인</dt>
+										<dd>- 8,000원</dd>
+									</dl>
+									<dl>
+										<dt>프로모션 할인</dt>
+										<dd>- 4,700원</dd>
+									</dl>
+								</div>
+							</div>
+							<div class="order_price">
+								<dl>
+									<dt>배송비</dt>
+									<dd>0<em>원</em></dd>
+								</dl>
+							</div>
+							<div class="floating_bottom">
+								<div class="total_price">
+									<dl>
+										<dt>최종 결제금액</dt>
+										<dd>55,200<em>원</em></dd>
+									</dl>
+									<p>회원님은 총 <span>13,800</span>원 할인 받으실 예정입니다.</p>
+								</div>
+							</div>
+						</div>
+						<div class="shadow_box">
+							<div class="pdtPoint floating js_acoBox">
+								<div class="js_acoList noScrolling">
+									<a href="javascript:void(0)" class="pdtPointTtl js_acoLink">
+										<div class="tit">포인트 혜택 :  <span class="color">최대 500포인트</span></div>
+										<span class="arrow"><span class="hide">닫기</span></span>
+									</a>
+									<div class="pdtReview_wrap js_acoCon" style="display:none;">
+										<div class="pdtReviewTit">리뷰 적립</div>
+										<dl>
+											<dt>텍스트 리뷰 작성 시</dt>
+											<dd>
+												<span class="num">200</span>포인트
+											</dd>
+										</dl>
+										<dl>
+											<dt>포토 리뷰 작성 시</dt>
+											<dd>
+												<span class="num">500</span>포인트
+											</dd>
+										</dl>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="shadow_box">
+							<div class="floating_terms">
+								<span class="inp_check">
+									<input type="checkbox" name="" id="order_terms">
+									<label for="order_terms">구매조건 및 결제진행 동의</label>
+								</span>
+								<p>주문 정보 및 결제대행 서비스 이용약관에 모두 동의<br> 합니다. (전자상거래법  제8조 2항)</p>
+								<p class="fcRed">상품정보 및 결제대행 서비스 이용약관에 동의하셔야<br> 결제가 진행됩니다.</p>
+							</div>
+						</div>
+						<a href="#" class="btn btnSizeL btnColorP btnTypeB w100 mgt10"><span>결제하기 (4개)</span></a>
+						<!-- 비회원일경우 -->
+						<ul class="starInfo mgt20">
+							<li class="fcRed">비회원으로 구매하시면 회원/이벤트/쿠폰혜택을 받으실<br> 수 없습니다.</li>
+						</ul>
+						<!-- //비회원일경우 -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //container -->
+	
+	<!-- footer -->
+	<footer id="footer">
+		<div class="copyArea">
+			<div class="copyLink">
+				<ul>
+					<li><a href="#">회사 소개</a></li>
+					<li><a href="#">공지사항</a></li>
+					<li><a href="#">입점·제휴문의</a></li>
+					<li><a href="#">이용약관</a></li>
+					<li><a href="#">개인정보처리방침</a></li>
+				</ul>
+			</div>
+			<div class="copySns">
+				<a href="https://www.instagram.com/ryuu4512/" class="instar"target="_blank" >RYU</a>
+				<a href="https://www.instagram.com/gahee_0305/" class="instar"target="_blank" >YU</a>
+			</div>
+			<div class="copyRight">
+				<div class="copyInfo">
+					<em class="noLine">㈜아령하세요</em>
+					<em>서울시 강남구 아령빌딩 1F ~ 123F</em>
+					<em>대표: 이창섭</em>
+					<em>사업자등록번호 1991-0722</em>
+					<br>
+					<em class="noLine">고객센터 : 010-9535-0371</em>
+					<em>FAX : 9535-0371</em>
+					<em>관리자이메일 : <a href="mailto:roksellid02@gmail.com">roksellid02@gmail.com</a></em>
+				</div>
+				<p>Copyright HealthDao. Co. Ltd All Right Reserved</p>
+			</div>
+		</div>
+	</footer>
+	<!-- //footer -->
+	<!-- javascript -->
+	<script type="text/javascript" src="./resources/web/js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="./resources/web/js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="./resources/web/js/slick.min.js"></script>
+	<script type="text/javascript" src="./resources/web/js/jquery.mCustomScrollbar.js"></script>
+	<script type="text/javascript" src="./resources/web/js/circle-progress.min.js"></script>
+	<script type="text/javascript" src="./resources/web/js/ui.js"></script>
+	<!-- //javascript -->
+</div>
+<!-- 퀵메뉴 -->
+<div id="quick">
+	<div class="contents">
+		<div class="quickArea">
+			<p class="tit">QUICK MENU</p>
+			<div class="recentArea">
+				<div class="tit">최근 본 상품</div>
+				<div class="recoQuick">
+					<div class="list">
+						<a href="#">
+							<img src="./resources/web/images/temp/pdt02.png" alt="">
+						</a>
+					</div>
+					<div class="list">
+						<a href="#">
+							<img src="./resources/web/images/temp/pdt01.png" alt="">
+						</a>
+					</div>
+					<div class="list">
+						<a href="#">
+							<img src="./resources/web/images/temp/pdt03.png" alt="">
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="likeArea">
+				<a href="#">					
+					<span>찜한 상품</span>
+				</a>
+			</div>
+			<div class="cartArea">
+				<a href="#"><span>장바구니</span></a>
+			</div>
+			<div class="bottomArea">
+				<ul>
+					<li><a class="btnTop" href="javascript:void(0);">△</a></li>
+					<li><a href="#"><span class="hide">마이페이지</span></a></li>
+					<li><a class="btnBtm" href="javascript:void(0);">▽</a></li>
+				</ul>				
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 톡톡 -->
+<button type="button" class="btnTalk" onclick="showLayer('talk');"><span class="hide">TalkBtn</span></button>
+<div id="talk" class="lyPopArea bgnone">
+	<div class="lyPop">
+		<div class="lyWrap">
+			<button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
+			<div class="lyTit">토크토크~</div>
+			<div class="lyBody basic">
+				<p>궁금증을 해결해드립니다😁</p>
+				<div class="chatArea">
+					<div class="chatCon">
+						<div class="row">
+							<div class="imgArea">
+								<img src="./resources/web/images/common/talk_chun.gif" alt="">
+							</div>
+							<div class="textArea left">
+								<div>너의 궁금증을 해결해줄게!<br>나는 헬춘식이야<span class="time">11:50:19</span></div>								
+							</div>
+							<div class="textArea left">
+								<div>
+									<ul class="talkSelect">
+										<li><button>1.궁금한거 1번</button></li>
+										<li><button>2.궁금한거 2번</button></li>
+										<li><button>3.궁금한거 3번</button></li>
+										<li><button>4.궁금한거 4번</button></li>
+										<li><button>5.궁금한거 5번</button></li>
+									</ul>
+									<span class="time">11:50:19</span>
+								</div>								
+							</div>
+							<div class="textArea right">
+								<div class="right">고마워요 헬춘식<span class="time">11:50:19</span></div>								
+							</div>
+							<div class="textArea left">
+								<div>헬춘식 헬스 매니아<br>춘식이처럼 몸짱이 되고 싶다면<br>헬스Dao에서<br>시작하라구😎<span class="time">11:50:19</span></div>								
+							</div>
+							<div class="textArea right">
+								<div class="right">헬춘식 짱짱맨<br>멋진 헬춘식<span class="time">11:50:19</span></div>								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	recoQuick();
+	$('#quick .quickArea').css({'position':'absolute', 'top':290});
+</script>
+
+<!-- 위시 리스트 삭제 -->
+<div id="myWishDel" class="lyPopArea">
+    <div class="lyPop">
+        <div class="lyWrap">
+            <button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
+            <div class="lyTit">위시 리스트 삭제</div>
+            <div class="lyBody basic">
+                <p>선택하신 상품을 정말 삭제하시겠습니까?</p>
+                <div class="btn_wrap length2">
+                    <a href="javascript:void(0);" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorW btnTypeR"><span>취소</span></a>
+                    <a href="javascript:void(0);" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+	$(window).on('load', function(){
+		/* 포토리뷰 슬라이드 */
+		if ($('.photoReview').length > 0){
+			$('.photoReview').find('.photoReviewSlide').not('.slick-initialized').slick({
+				slidesToShow: 9,
+				slidesToScroll: 9,
+				arrows: true,
+				dots: false,
+				infinite: false
+			});
+		}
+		/* 바닐라룩 */
+		if ($('.MakeUpBox').length > 0){
+			$('.makeUpAnchor').on('mouseover', function(){
+				$(this).next('.makeUpText').show()
+			})
+			$('.AnchorPosition .posiBox').on('mouseleave', function(){
+				$(this).find('.makeUpText').hide()
+			})
+			$('.MakeUpBox').not('.slick-initialized').slick({
+				slidesToShow: 3,
+				slidesToScroll: 1,
+				arrows: true,
+				dots: false,
+				infinite: false,
+				swipe : false,
+				centerPadding: '7.5px'
+			});
+			$('.posiBox').each(function(){
+				var targetTop = parseFloat($(this).css('top')),
+					targetLeft = parseFloat($(this).css('left')),
+					parentHeight = $(this).closest('.AnchorPosition').outerHeight(),
+					parentWidth = $(this).closest('.AnchorPosition').outerWidth();
+
+				if (targetTop < parentHeight*(1/3)){
+					$(this).find('.makeUpText').addClass('abTop')
+				} else if (targetTop < parentHeight*(2/3)){
+					$(this).find('.makeUpText').addClass('abMiddle')
+				} else {
+					$(this).find('.makeUpText').addClass('abBottom')
+				}
+				if (targetLeft < parentWidth*(1/3)){
+					$(this).find('.makeUpText').addClass('abLeft')
+				} else if (targetLeft < parentWidth*(2/3)){
+					$(this).find('.makeUpText').addClass('abCenter')
+				} else {
+					$(this).find('.makeUpText').addClass('abRight')
+				}
+			})
+		}
+	});
+
+	/* 핫딜 */
+	var nowDate = new Date().getTime(),//현재시간(서버시간으로 동작되어야 할꺼같습니다.)
+		stDate = new Date(2019, 11, 20, 0, 0, 0).getTime(), // 한국 9999년 12월 20일 0시 0분 0초 시작시간
+		edDate = new Date(2019, 11, 29, 0, 0, 0).getTime(); // 한국 9999년 12월 29일 0시 0분 0초 종료시간
+
+	$(function(){
+		if ($('.hotdeal').length > 0){
+			var ele = (edDate-nowDate) / (edDate-stDate)
+			$('.hotdeal .bg').css({'width' : '100%'});
+			$('.hotdeal .bg').one("webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend", function() {
+				$(this).find('span').css('width', ele*100+'%')
+			});
+		}
+	});
+
+	/* 상단 이미지 영역 */
+	function slickOn (){
+		$('.js_pdtVisual .js_pdtVisualImg').slick({
+			slidesToShow: 1,
+			slidesToScroll: 1,
+			arrows: false,
+			dots: false,
+			infinite: false,
+			asNavFor: '.js_pdtVisual .js_pdtVisualImgThumb'
+		});
+		$('.js_pdtVisual .js_pdtVisualImgThumb').slick({
+			slidesToShow: 4,
+			slidesToScroll: 1,
+			arrows: false,
+			dots: false,
+			infinite: false,
+			swipe : false,
+			asNavFor: '.js_pdtVisual .js_pdtVisualImg',
+			focusOnSelect: true
+		});
+	}
+	slickOn()
+	$(document).on('click', '.slideNext', function(){
+		$('.js_pdtVisual .js_pdtVisualImg').slick('slickNext');
+	})
+	$(document).on('click', '.slidePrev', function(){
+		$('.js_pdtVisual .js_pdtVisualImg').slick('slickPrev');
+	})
+	$(document).on('click', '.pdtColorArea .pdtColor a', function(){
+		$(this).parent('.pdtColor').find('a').removeClass('on')
+		$(this).parent('.pdtColor').prev().find('.toColor').html($(this).find('span').html());
+		$(this).addClass('on')
+		$('.js_pdtVisual .js_pdtVisualImg, .js_pdtVisual .js_pdtVisualImgThumb').slick('unslick')
+		
+		// ajax start
+		var pdtSlideImgHTML = '',
+			pdtSlideImgThumbHTML = '',
+			ele = $(this).attr('data-image').split(','),
+			eleCount = ele.length;
+
+		for (var i=0; i<eleCount; i++){
+			pdtSlideImgHTML += '<div class="pdtItem"><img src="./resources/web/images/temp/' + ele[i] + '" alt=""></div>'
+			pdtSlideImgThumbHTML += '<div class="pdtItem"><a href="javascript:void(0)" class="pdtLink"><img src="./resources/web/images/temp/' + ele[i] + '" alt=""></a></div>'
+		}
+
+		$('.js_pdtVisual .js_pdtVisualImg').html(pdtSlideImgHTML);
+		$('.js_pdtVisual .js_pdtVisualImgThumb').html(pdtSlideImgThumbHTML);
+		// ajax end
+
+		slickOn()
+	})
+</script>
+<style>
+	.pdtDetailHead{z-index:0;}
+	#detailOrder{font-size: 14px;}
+	#detailOrder .myOrderStep .stepInfo li:nth-child(1),
+	#detailOrder .myOrderStep .stepInfo li:nth-child(2){width:380px;}
+	#detailOrder .myOrderStep .stepInfo li:nth-child(3),
+	#detailOrder .myOrderStep .stepInfo li:nth-child(4){width:190px;}
+</style>
+</body>
+</html>

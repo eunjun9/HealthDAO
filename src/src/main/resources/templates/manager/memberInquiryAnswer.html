@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title></title>
+<!-- 메타태그, 스타일 -->
+<th:block th:replace="common/head.html"></th:block>
+<!--// 메타태그, 스타일 -->
+<body>
+<div id="wrap" class="main"></div>
+<!-- HEADER + GNB -->
+<th:block th:replace="common/header.html"></th:block>
+<!--// HEADER + GNB -->
+
+
+	<!-- container -->
+	
+	<div id="container" class="pdt0">
+		<div class="site_location">
+			<span><a href="/">HOME</a></span>
+			<em>마이페이지</em>
+		</div>
+		<div class="mypage">
+			<div class="myMain myCon">
+				<div class="contents">
+					<!-- mypage lnb -->
+					<div th:replace="common/adminGnb.html"></div>
+					<!-- //mypage lnb -->
+					<!-- myPageCon -->
+					
+					<div class="myPageCon">
+						<p class="tit mgb40">
+							회원문의답변
+						</p>
+						<div class="answerOutline">
+						  	<div class="answerMain">
+								<p th:text="'문의번호 : '+${QnaList.qNo}"/>
+								<p th:text="'문의유형 : '+${QnaList.qDept}"/>
+								<p th:text="'아이디 : '+${QnaList.userNickName}"></p>
+								<p th:text="'아이디 : '+${QnaList.userPhone}"></p> 
+							</div>
+							<p class="answerTitle" th:text="'제목 : '+${QnaList.qTitle}"></p>
+							<p class="answerContentTitle">문의내용</p>
+							<div class="inp_wrap">
+								<div class="inp_textArea">
+									<textarea rows="10" th:text="${QnaList.qContent}"></textarea>
+									<div class="textarea-clone"></div>
+								</div>
+							</div>
+							<p class="answerContentArea">답변</p>
+								<form action="/manager/qanswer" class="qAnswerForm" name="qAnswerForm" method="post">
+									<div class="inp_wrap">
+										<div class="inp_textArea lengthCheck" >
+											<textarea name="reply" rows="10">답변쓰는곳</textarea>
+											<div class="textarea-clone"></div>
+										</div>
+										<span class="charCnt">(<em>0</em>/500)</span>
+									</div>
+									<input type="hidden" name="qNo" class="qNo" th:value="${QnaList.qNo}">
+									<div class="btn_wrap">	
+										<!-- 수정하기 일경우 수정하기로 Text 변경-->
+										<a href="#" onclick="document.qAnswerForm.submit();" class="btn btnSizeL btnColorW btnTypeB" style="width:250px;"><span>등록하기</span></a>
+									</div>
+								</form>
+						</div>
+					</div>	
+					<!-- //myPageCon -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //container -->
+		<!-- 스크립트 -->
+		<th:block th:replace="common/script.html"></th:block>
+		<!--// 스크립트 -->
+		<!-- FOOTER -->
+		<th:block th:replace="common/footer.html"></th:block>
+		<!--// FOOTER -->
+	
+	
+	<!-- 퀵메뉴 + 톡톡 -->
+	<th:block th:replace="common/quickNtalk.html"></th:block>
+	<!--// 퀵메뉴 + 톡톡 -->	
+	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+	<script type="text/javascript">
+		$('#quick .quickArea').css({'position':'absolute', 'top':290});
+	</script>
+	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+</body>
+</html>
