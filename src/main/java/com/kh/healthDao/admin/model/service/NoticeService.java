@@ -1,5 +1,6 @@
 package com.kh.healthDao.admin.model.service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.kh.healthDao.admin.model.vo.Notice;
@@ -15,5 +16,7 @@ public interface NoticeService {
 	int noticeModify(Notice notice);
 
 	int viewUpdate(int nNo);
+
+	List<Notice> newfiveNoticeList();
 	
 }

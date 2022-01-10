@@ -31,5 +31,9 @@ public interface MypageMapper {
 
 	List<Coupon> myCouponList(int userNo);
 
+	int userReviewListCount(int userNo);
+
+	List<Qna> userReviewList(Map<String, Object> pageRow);
+
 
 }

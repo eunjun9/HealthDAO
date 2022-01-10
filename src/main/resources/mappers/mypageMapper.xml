@@ -34,6 +34,17 @@
 		<result property="pCategoryName" column="P_CATEGORY_NAME" />
 	</resultMap>
 	
+	<resultMap id="reviewMap" type="com.kh.healthDao.review.model.vo.Review">
+		<id property="reviewNo" column="REVIEW_NO"/>
+		<result property="category" column="CATEGORY" />
+		<result property="star" column="STAR" />
+		<result property="rContent" column="R_CONTENT" />
+		<result property="rDate" column="R_DATE" />
+		<result property="modifyDate" column="MODIFY_DATE" />
+		<result property="payNo" column="PAY_NO" />
+		<result property="userNo" column="USER_NO" />
+	</resultMap>
+	
 	<select id="findQnaList" resultMap="qnaResultMap" parameterType="hashmap">
 		SELECT *
 		FROM
@@ -173,10 +184,10 @@
 		    , P_CATEGORY_NO
 		    , P_CATEGORY_NAME
 		  FROM POINT
-		  JOIN POINT_CATEGORY USING(P_CATEGORY_NO)
+		  JOIN POINT_CATEGORY USING(P_CATEGORY_NO)		  
 	</select>
 	
-	<select id="myCouponList" resultMap="couponResultMap">
+	<select id="myCouponList" parameterType="_int" resultMap="couponResultMap">
 		SELECT
 		      P_NO
 		    , P_NAME
@@ -185,7 +196,7 @@
 		    , END_DATE
 		FROM MEMBER_COUPON
 		JOIN COUPON USING(P_NO)
-		WHERE USER_NO = 21
+		WHERE USER_NO = #{userNo}
 		AND P_STATUS = 'N'
 		<![CDATA[
 		AND (
@@ -195,5 +206,40 @@
 		]]>
 	</select>
 	
-
+	<select id="userReviewListCount" parameterType="_int" resultType="_int">
+		SELECT 
+    		COUNT(*)
+		FROM(
+		SELECT 
+		    REVIEW_NO
+		    , CATEGORY
+		    , STAR
+		    , R_CONTENT
+		    , R_DATE
+		    , MODIFY_DATE
+		    , PAY_NO
+		    , USER_NO
+		FROM REVIEW
+		WHERE USER_NO = #{userNo})
+	</select>
+	<select id="userReviewList" parameterType="hashmap" resultMap="reviewMap">
+		SELECT *
+		FROM
+		    (SELECT ROWNUM RNUM, A.*
+		            FROM
+		            (SELECT 
+					    REVIEW_NO
+					    , CATEGORY
+					    , STAR
+					    , R_CONTENT
+					    , R_DATE
+					    , MODIFY_DATE
+					    , PAY_NO
+					    , USER_NO
+					FROM REVIEW
+					WHERE USER_NO = #{userNo}
+		        ORDER BY REVIEW_NO DESC) A
+		    )
+			WHERE RNUM BETWEEN #{startRow} AND #{endRow}
+	</select>
 </mapper>
