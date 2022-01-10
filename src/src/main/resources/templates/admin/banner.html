@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title></title>
+<!-- 메타태그, 스타일 -->
+<th:block th:replace="common/head.html"></th:block>
+<!--// 메타태그, 스타일 -->
+<body>
+
+	<div id="wrap" class="main">
+		<!-- HEADER + GNB -->
+		<th:block th:replace="common/header.html"></th:block>
+		<!--// HEADER + GNB -->
+	
+		<!-- container -->		
+		<div id="container" class="pdt0">
+			<div class="site_location">
+				<span><a href="/">HOME</a></span>
+				<span><a href="/">마이페이지</a></span>
+				<em>메인 롤링 관리</em>
+			</div>
+			<div class="mypage">
+				<div class="myWish myCon">
+					<div class="contents">
+						<th:block th:replace="common/mypageGnb.html"></th:block>
+						<!-- myPageCon -->
+						<div class="myPageCon">
+							<p class="tit mgb40">
+								매인 롤링 관리
+							</p>
+							<div class="pdtWishBar mgb40">
+								<span class="inp_check allChk">
+									<input type="checkbox" name="inp_check1" id="inp_check1">
+									<label for="inp_check1">전체선택</label>
+								</span>
+								<div class="btn_wrap">
+									<a href="javascript:void(0)" onclick="showLayer('enrollMain');" class="basketBtn btn btnSizeS btnColorW btnTypeB"><span>등록하기</span></a>
+									<a href="javascript:void(0)" onclick="showLayer('mainDel');" class="wishBtn btn btnSizeS btnColorW btnTypeB"><span>삭제하기</span></a>
+								</div>
+							</div>
+							<div class="tblType1">
+								<table summary="매인 롤링 관리 테이블">
+									<caption>매인 롤링 관리 테이블</caption>
+									<colgroup>
+										<col width="6%">
+										<col width="8%">
+										<col width="*">
+										<col width="12%">
+										<col width="30%">
+										<col width="6%">
+										<col width="8%">
+									</colgroup>
+									<thead>
+										<tr>
+											<th>선택</th>
+											<th>NO</th>
+											<th>배너명</th>
+											<th>이미지</th>
+											<th>URL</th>
+											<th>순위</th>
+											<th>노출상태</th>
+										</tr>
+									</thead>
+									<tbody th:if="${listCount == 0 }">
+										<tr>
+											<td colspan="7" class="noData">
+												<span>등록된 내용이 없습니다.<br>지금 바로 등록 해보세요.</span>
+											</td>
+										</tr>
+									</tbody>
+									<tbody th:unless="${listCount == 0 }">
+										<tr th:each="banner : ${bannerList}">
+											<td>
+												<span class="inp_check">
+													<input type="checkbox" name="inp_check1" th:id="@{inp_check1_}+${banner.main_no}" th:value="${banner.main_no}">
+													<label th:for="@{inp_check1_}+${banner.main_no}"></label>
+													<input type="hidden" name="f_no" th:id="@{inp_check1_}+${banner.main_no}" th:value="${banner.f_no}">
+												</span>
+											</td>
+											<td th:text="${banner.main_no}"></td>
+											<td class="tdName" th:value="${banner.main_no}"><a href="javascript:void(0);" th:onclick="|showLayer('modifyMain');selectBanner('${banner.main_no}');|"><span th:text="${banner.main_name}"></span></a></td>
+											<td class="tdImg"><img th:src="${banner.file_path}+${banner.change_file}" /></td>
+											<td th:text="${banner.main_url}"></td>
+											<td th:text="${banner.main_rank}"></td>
+											<td th:text="${banner.main_status}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="paging mgt50" th:unless="${listCount == 0 }" th:with="prev=${pi.page - 1}, next=${pi.page + 1}">
+							    <a th:href="@{/banner(page=1)}" class="first"><span class="hide">첫페이지</span></a>
+							    <a class="prev" href="/banner?page=" th:attrappend="href=${prev}"><span class="hide">이전페이지</span></a>
+							    <a th:each="page : ${#numbers.sequence(pi.startPage, pi.endPage)}" href="/banner?page=" th:attrappend="href=${page}" th:text="${page}" th:classappend="${page} == ${#httpServletRequest.getParameter('page')} ? active"></a>	                                   
+							    <a class="next" href="/banner?page=" th:attrappend="href=${next}"><span class="hide">다음페이지</span></a>
+							    <a href="/banner?page=" th:attrappend="href=${pi.maxPage}" class="last"><span class="hide">마지막페이지</span></a>
+							</div>
+						</div>
+						<!-- //myPageCon -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- //container -->
+		
+		<!-- 스크립트 -->
+		<th:block th:replace="common/script.html"></th:block>
+		<!--// 스크립트 -->
+		<!-- FOOTER -->
+		<th:block th:replace="common/footer.html"></th:block>
+		<!--// FOOTER -->
+	</div>
+	
+	<!-- 퀵메뉴 + 톡톡 -->
+	<th:block th:replace="common/quickNtalk.html"></th:block>
+	<!--// 퀵메뉴 + 톡톡 -->	
+	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+	<script type="text/javascript">
+		$('#quick .quickArea').css({'position':'absolute', 'top':290});
+
+	    function submit(){
+	    	if($('input[name="main_name"]').val() == ''){
+	       		alert('배너명을 넣어주세요');
+	       		console.log($('input[name="imgUpload"]').val());
+	       		return false;	    		
+	    	}
+	    	if($('input[name="main_url"]').val() == ''){
+	       		alert('url을 넣어주세요');
+	       		return false;	    		
+	    	}
+	    	if($('input[name="imgUpload"]').val() == ''){
+	       		alert('이미지는 꼭 넣어야 됩니다😵');
+	       		return false;
+	    	}
+	    	if($('input[name="main_rank"]').val() == ''){
+	       		alert('순위를 넣어야 됩니다');
+	       		return false;
+	    	}
+	       	document.enroll.submit();
+	    }
+
+	    var loadFile = function(event) {
+	        var reader = new FileReader();
+	        $(".imgCutting").remove();	// 클릭하면 일단 삭제
+	        $(".imgUpload").val('');	// 클릭하면 일단 삭제
+			var html = '';
+	        reader.onload = function(e){
+				html+= '<li class="imgCutting">';
+				html+= '<div class="imgBox">';
+				html+= '	<img id="img" src="'+e.target.result+'" alt="">';
+				html+= '</div>';
+				html+= '</li>';
+				$('.fileUploadArea').append(html);
+				//이미지 맞추기
+				imgCrop();
+				html = "";
+	        };
+	        
+	        reader.readAsDataURL(event.target.files[0]);
+	      };
+	</script>
+	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+	<!-- 메인롤링 등록 -->
+	<div id="enrollMain" class="lyPopArea bannerPop">
+	    <div class="lyPop">
+	        <div class="lyWrap">
+	            <button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
+	            <div class="lyTit">메인 롤링 등록</div>
+	            <form action="banner/upload" name="enroll" method="post" enctype="multipart/form-data">
+		            <div class="lyBody">			
+						<ul class="inputArea">
+							<li>
+								<dl>
+									<dt>배너명</dt>
+									<dd>
+										<div class="inp_wrap">
+											<div class="inp_text sizeS">
+												<input type="text" name="main_name" id="name" placeholder="메인 롤링 배너 뇽뇽🎄🎄">
+												<button class="btn_clear" type="button"><span>clear</span></button>
+											</div>
+										</div>
+									</dd>
+								</dl>
+								<dl class="mgt20">
+									<dt>URL</dt>
+									<dd>
+										<div class="inp_wrap">
+											<div class="inp_text sizeS">
+												<input type="text" name="main_url" id="url" placeholder="/event?no=1">
+												<button class="btn_clear" type="button"><span>clear</span></button>
+											</div>
+										</div>
+									</dd>
+								</dl>
+								<dl class="mgt15">
+									<dt>사진 추가</dt>
+									<dd>
+										<ul class="fileUploadArea">
+											<li>
+												<label for="imgUpload"><span class="hide">업로드</span>
+												</label><input type="file" class="hide" name="imgUpload" id="imgUpload" multiple accept="image/*" onchange="loadFile(event)">												
+											</li>
+										</ul>
+										<p class="mgt5 fs14">파일첨부 (1개) <span class="fc88">5MB미만 jpg,gif,png 파일 가능</span></p>
+									</dd>
+								</dl>
+							</li>
+							<li>
+								<dl class="mgt20">
+									<dt>순위</dt>
+									<dd>
+										<div class="inp_wrap">
+											<div class="inp_text sizeS">
+												<input type="text" name="main_rank" id="rank" placeholder="1">
+												<button class="btn_clear" type="button"><span>clear</span></button>
+											</div>
+										</div>
+									</dd>
+								</dl>
+								<dl class="mgt20">
+									<dt>노출상태</dt>
+									<dd class="mgt7">
+										<div class="inp_wrap">
+											<span class="inp_radio">
+												<input type="radio" name="main_status" id="bannerStatus1_1" value="Y" checked>
+												<label for="bannerStatus1_1">노출</label>
+											</span>
+											<span class="inp_radio mgl40">
+												<input type="radio" name="main_status" id="bannerStatus1_2" value="N">
+												<label for="bannerStatus1_2">비노출</label>
+											</span>
+										</div>
+										<p class="fs13 fc88 mgt10">* 노출로 등록시 메인화면에 등록됩니다.</p>
+									</dd>
+								</dl>
+							</li>
+						</ul>
+						<div class="btn_wrap mgt30">
+							<a href="javascript:void(0);" class="btn btnSizeL btnArr btnColorW btnTypeR" style="width:200px;" onclick="layerPopClose();"><span>취소</span></a>
+							<a href="javascript:void(0);" class="btn btnSizeL btnArr btnColorB btnTypeR" style="width:200px;" onclick="return submit();"><span>등록</span></a>
+						</div>
+				     </div>
+				</form>
+	        </div>
+	    </div>
+	</div>
+	<!-- 메인롤링 수정 -->
+	<div id="modifyMain" class="lyPopArea bannerPop">
+	    <div class="lyPop">
+	        <div class="lyWrap">
+	            <button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
+	            <div class="lyTit">메인 롤링 수정</div>
+	            <div class="lyBody">			
+					<ul class="inputArea">
+						<li>
+							<dl>
+								<dt>배너명</dt>
+								<dd>
+									<div class="inp_wrap">
+										<div class="inp_text sizeS">
+											<input type="hidden" name="no" id="no" value="">
+											<input type="text" name="name" id="name" value="메인 롤링 배너 뇽뇽🎄🎄">
+											<button class="btn_clear" type="button"><span>clear</span></button>
+										</div>
+									</div>
+								</dd>
+							</dl>
+							<dl class="mgt20">
+								<dt>URL</dt>
+								<dd>
+									<div class="inp_wrap">
+										<div class="inp_text sizeS">
+											<input type="text" name="url" id="url" value="/event?no=1">
+											<button class="btn_clear" type="button"><span>clear</span></button>
+										</div>
+									</div>
+								</dd>
+							</dl>
+							<dl class="mgt15">
+								<dt>사진 추가</dt>
+								<dd>
+									<ul class="fileUploadArea">
+										<li><label for="imgUpload"><span class="hide">업로드</span></label><input type="file" class="hide" name="imgUpload" id="imgUpload"></li>
+										<li class="imgCutting">
+											<div class="imgBox">
+												<img id="img" src="./resources/web/images/temp/main01.jpg" alt="">
+											</div>
+										</li>
+									</ul>
+									<p class="mgt5 fs14">파일첨부 (1개) <span class="fc88">5MB미만 jpg,gif,png 파일 가능</span></p>
+								</dd>
+							</dl>
+						</li>
+						<li>
+							<dl class="mgt20">
+								<dt>순위</dt>
+								<dd>
+									<div class="inp_wrap">
+										<div class="inp_text sizeS">
+											<input type="text" name="rank" id="rank" value="1">
+											<button class="btn_clear" type="button"><span>clear</span></button>
+										</div>
+									</div>
+								</dd>
+							</dl>
+							<dl class="mgt20">
+								<dt>노출상태</dt>
+								<dd class="mgt7">
+									<div id="modifyStatus" class="inp_wrap">
+										<span class="inp_radio">
+											<input type="radio" name="modify_status" id="bannerStatus1" value="Y" checked>
+											<label for="bannerStatus1">노출</label>
+										</span>
+										<span class="inp_radio mgl40">
+											<input type="radio" name="modify_status" id="bannerStatus2" value="N">
+											<label for="bannerStatus2">비노출</label>
+										</span>
+									</div>
+									<p class="fs13 fc88 mgt10">* 노출로 등록시 메인화면에 등록됩니다.</p>
+								</dd>
+							</dl>
+						</li>
+					</ul>
+					<div class="btn_wrap mgt30">
+						<a href="javascript:void(0);" class="btn btnSizeL btnArr btnColorW btnTypeR" style="width:200px;" onclick="layerPopClose();"><span>취소</span></a>
+						<a href="javascript:void(0);" class="btn btnSizeL btnArr btnColorB btnTypeR" style="width:200px;" onclick="bannerUpdate();"><span>수정</span></a>
+					</div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	<!-- 메인롤링 삭제 -->
+	<div id="mainDel" class="lyPopArea bannerPop">
+	    <div class="lyPop">
+	        <div class="lyWrap">
+	            <button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
+	            <div class="lyTit">메인 롤링 삭제</div>
+	            <div class="lyBody basic">
+	                <p>정말 삭제하시겠습니까?</p>
+	                <div class="btn_wrap length2">
+	                    <a href="javascript:void(0);" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorW btnTypeR"><span>취소</span></a>
+	                    <a href="javascript:void(0);" onclick="deleteBanner();" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></a>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	<script>
+		function selectBanner(e){
+			console.log(e);
+			var result = e;
+			var sendData = {"main_no":result};
+			$.ajax({
+				url: "/banner/select",
+				method: 'POST',
+				data: sendData,
+				success: function(data){
+					console.log(data);
+					$("#modifyMain #no").val(data.main_no);
+					$("#modifyMain #name").val(data.main_name);
+					$("#modifyMain #url").val(data.main_url);
+					$("#modifyMain #img").attr('src', data.file_path + data.change_file);
+					$("#modifyMain #rank").val(data.main_rank);				
+
+					//상태
+					let stateHtml = "";					
+					if(data.main_status == "Y"){
+						stateHtml = '<span class="inp_radio">'
+								  + '<input type="radio" name="modify_status" id="bannerStatus1" value="Y" checked><label for="bannerStatus1">노출</label></span>'
+								  + '<span class="inp_radio mgl40">'
+								  + '<input type="radio" name="modify_status" id="bannerStatus2" value="N"><label for="bannerStatus2">비노출</label></span>';
+					}else{
+						stateHtml = '<span class="inp_radio">'
+								  + '<input type="radio" name="modify_status" id="bannerStatus1" value="Y" ><label for="bannerStatus1">노출</label></span>'
+								  + '<span class="inp_radio mgl40">'
+								  + '<input type="radio" name="modify_status" id="bannerStatus2" value="N" checked><label for="bannerStatus2">비노출</label></span>';
+					}					
+					document.getElementById("modifyStatus").innerHTML = stateHtml;					
+				},
+				error: function(e){
+					console.log(e);
+				}
+			});
+		}
+		
+		function bannerUpdate(){
+			$.ajax({
+				url : "/banner/update",
+				method: 'POST',
+				data : {
+					"main_no" : $("#modifyMain #no").val(),
+					"main_name" : $("#modifyMain #name").val(),
+					"main_url" : $("#modifyMain #url").val(),
+					"imgUpload" : $("#modifyMain #img").attr('src'),
+					"main_rank" : $("#modifyMain #rank").val(),
+					"main_status" : $("#modifyMain input[name='modify_status']:checked").val()
+				},
+				success : function(result){	
+					if(result == "1"){
+						alert("성공적으로 적용되었습니다.");
+						location.reload();
+					}else{
+						alert("업데이트가 되지 않았습니다ㅜㅜ");
+					}
+				},
+				error : function(e){
+					console.log(e);
+				}
+			});
+		}
+		
+		function deleteBanner(){
+			var addList = [], data = {};
+			let chk = $('.checked:not(.allChk) input[name="inp_check1"]:checked');		
+			let chkLength = chk.length;	// 체크된 갯수
+			
+			jQuery.ajaxSettings.traditional = true;
+			if(chkLength >= 1){
+				for(var i = 0; i < chkLength; i++){
+					addList[i] = chk[i].value;
+				    data.addList = addList;	// 체크된 값 배열에 담기
+				}
+				console.log(data);			// 배열에 담긴 값
+				$.ajax({
+					url : "/banner/delete",
+					data : JSON.stringify(addList),
+					contentType: 'application/json',
+					type : "post",
+					success : function(data){
+						console.log(data);
+						if(chkLength == data){
+							location.reload();
+						}else{
+							alert('실패');
+						}
+					},
+					error : function(e){
+						console.log(e);
+					}
+				});
+			}else{
+				alert('선택된 값이 없습니다.');
+			}
+		}
+
+		$(document).on('click', '.inp_check label', function (){
+			if ($(this).parent().hasClass('readOnly')){return false;}
+			if ($(this).parent().hasClass('disabled')){return false;}
+			
+			var tar = $(this).parent().find('input');
+			var chk = tar.prop('checked');
+			var grpNm = tar.attr('name');
+
+
+			if ($(this).parent('.inp_check').hasClass('allChk')){
+				var chkStatus = tar.prop('checked');
+				$("input:checkbox[name=" + grpNm + "]").each(function() {
+					if (chkStatus) {
+						$(this).closest(".inp_check").removeClass("checked");
+						$(this).prop("checked",false);
+					} else {
+						$(this).closest(".inp_check").addClass("checked");
+						$(this).prop("checked",true);
+					}
+				});
+			} else {
+				if ($(this).parent().hasClass('checked')) {
+					$("input:checkbox[name=" + grpNm + "]").each(function() {
+						$(this).closest('.inp_check.allChk').removeClass('checked');;
+						$(this).closest('.inp_check.allChk input').prop("checked",false);
+					});
+					$(this).parent().removeClass('checked');				
+					if($(this).attr('for') == 'remember'){
+						deleteCookie("rememberId");
+					}
+					tar.prop("checked",false);
+				} else {
+					$(this).parent().addClass('checked');				
+					if($(this).attr('for') == 'remember'){
+						setCookie("rememberId", userId.value, 7);
+					}
+					tar.prop("checked",true);
+				}
+			}
+			console.log(tar.prop('checked'));
+			return false;
+		});
+	</script>
+</body>
+</html>

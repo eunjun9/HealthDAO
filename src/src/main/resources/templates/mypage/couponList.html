@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title></title>
+<!-- 메타태그, 스타일 -->
+<th:block th:replace="common/head.html"></th:block>
+<!--// 메타태그, 스타일 -->
+<body>
+<div id="wrap" class="main">
+<!-- HEADER + GNB -->
+<th:block th:replace="common/header.html"></th:block>
+<!--// HEADER + GNB -->
+	<!-- container -->
+	
+	<div id="container" class="pdt0">
+		<div class="site_location">
+			<span><a href="/">HOME</a></span>
+			<span><em>마이페이지</em></span>
+            <em>쿠폰</em>
+		</div>
+		<div class="mypage">
+			<div class="myMain myCon">
+				<div class="contents">
+					<!-- mypage lnb -->
+					<div th:replace="common/mypageGnb.html"></div>
+					<!-- //mypage lnb -->
+
+					<!-- myPageCon -->
+					<div class="myPageCon coupon">
+						<p class="tit mgb40">
+							내 쿠폰
+						</p>
+                        <!-- 사용가능 쿠폰 리스트 -->
+                        <div class="tab-pannel" id="useableCoupon">
+                        	<div th:if="${couponList.size > 0}">	                            
+	                            <div class="js_tblList">
+	                                <table class="tblType1" summary="">
+	                                    <caption></caption>
+	                                    <colgroup>
+	                                        <col width="50%" />
+	                                        <col width="25%" />
+	                                        <col width="25%" />
+	                                    </colgroup>
+	                                    <thead>
+	                                        <tr>
+	                                            <th>제목</th>
+	                                            <th>할인금액</th>
+	                                            <th>사용기간</th>
+	                                        </tr>
+	                                    </thead>
+	                                    <tbody>
+	                                        <tr th:each="coupon : ${couponList}">
+	                                            <td class="fc88" th:text="${coupon.pName}">크리스마스 맞이 쿠폰</td>
+	                                            <td class="fc88"><span th:text="${coupon.pSale}"></span>원</td>
+	                                            <td class="fc88"><span th:text="${#dates.format(coupon.startDate, 'yyyy-MM-dd')}">2021-12-01</span> ~ <span th:text="${#dates.format(coupon.endDate, 'yyyy-MM-dd')}">2021-12-25</span></td>
+	                                        </tr>
+	                                    </tbody>
+	                                </table>
+	                            </div>
+	                         </div>
+                            <!-- 쿠폰 데이터 없을 때 -->
+                            <div class="noData" th:unless="${couponList.size > 0}">
+                                <span>쿠폰이 없습니다.<br>쿠폰이벤트로 쿠폰을 받아보세요!</span>
+                            </div>
+                        </div>
+                     </div>
+					<!-- //myPageCon -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //container -->
+	<!-- 스크립트 -->
+		<th:block th:replace="common/script.html"></th:block>
+		<!--// 스크립트 -->
+		<!-- FOOTER -->
+		<th:block th:replace="common/footer.html"></th:block>
+		<!--// FOOTER -->
+	</div>
+	
+	<!-- 퀵메뉴 + 톡톡 -->
+	<th:block th:replace="common/quickNtalk.html"></th:block>
+	<!--// 퀵메뉴 + 톡톡 -->	
+	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+	<script type="text/javascript">
+		$('#quick .quickArea').css({'position':'absolute', 'top':290});
+	</script>
+	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+</body>
+</html>

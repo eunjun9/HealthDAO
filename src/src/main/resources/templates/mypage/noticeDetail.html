@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title></title>
+<!-- 메타태그, 스타일 -->
+<th:block th:replace="common/head.html"></th:block>
+<!--// 메타태그, 스타일 -->
+<body>
+<div id="wrap" class="main">
+<!-- HEADER + GNB -->
+<th:block th:replace="common/header.html"></th:block>
+<!--// HEADER + GNB -->
+
+	<!-- container -->
+	
+	<div id="container">
+		<div class="site_location">
+			<span><a href="/">HOME</a></span>
+			<span><em>마이페이지</em></span>
+            <span><em>고객센터</em></span>
+            <em>공지사항</em>
+		</div>
+        <div class="event_winner notice_detail">
+            <div class="contents">
+                <div class="eventDetailTit">
+                    <h1 th:text="${notice.nTitle}"></h1>
+                    <p class="txt"><span th:text="${notice.nDate}"></span> | 작성자 관리자 | 조회수 <span th:text="${notice.nView}">20</span></p>
+                </div>
+
+                <div class="eventWinnerCon" th:text="${notice.nContent}">
+                    공지사항 내용내용
+                </div>
+
+                <div class="btn_wrap mgt40">
+                    <a href="/mypage/notice?page=1" class="btnSpin btnList"><span>목록</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+	<!-- //container -->
+<!-- 스크립트 -->
+		<th:block th:replace="common/script.html"></th:block>
+		<!--// 스크립트 -->
+		<!-- FOOTER -->
+		<th:block th:replace="common/footer.html"></th:block>
+		<!--// FOOTER -->
+	</div>
+	
+	<!-- 퀵메뉴 + 톡톡 -->
+	<th:block th:replace="common/quickNtalk.html"></th:block>
+	<!--// 퀵메뉴 + 톡톡 -->	
+	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+	<script type="text/javascript">
+		$('#quick .quickArea').css({'position':'absolute', 'top':290});
+	</script>
+	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+</body>
+</html>

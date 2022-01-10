@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title></title>
+<!-- 메타태그, 스타일 -->
+<th:block th:replace="common/head.html"></th:block>
+<!--// 메타태그, 스타일 -->
+<body>
+<div id="wrap" class="main">
+<!-- HEADER + GNB -->
+<th:block th:replace="common/header.html"></th:block>
+<!--// HEADER + GNB -->
+
+	<!-- container -->
+	
+	<div id="container" class="pdt0">
+		<div class="site_location">
+			<span><a href="/">HOME</a></span>
+			<em>마이페이지</em>
+		</div>
+		<div class="mypage">
+			<div class="myMain myCon">
+				<div class="contents">
+					<!-- mypage lnb -->
+					<div th:replace="common/mypageGnb.html"></div>	
+					<!-- //mypage lnb -->
+
+					<!-- myPageCon -->
+					<div class="myPageCon">
+						<p class="tit mgb40">
+							포인트
+						</p>
+						<div class="profileOutline">
+							<div class="profile"><img class="p_profile" src="/images/point/profile.gif"></div>
+							<div class="nicetomeetyou">옐림님 반갑습니다</div>
+							<div class="grade">일반회원</div>
+							<div class="gradeCondition">100,000원 더 구매시, VIP 등급! >></div>
+							<div class="coupon1"><p>쿠폰</p></div>
+							<div class="coupon2"><p>1개</p></div>
+							<div class="point1"><p>포인트</p></div>
+							<div class="point2"><p>3000</p></div>
+						</div>	
+						<div class="pointOutline">
+							<div class="pointInline" th:each="pList : ${PointList}">
+								<div class="pointTitle" >
+									<p th:text=${pList.pCategoryName}></p>
+									<span class="pointPrice" th:text="${pList.pointamount} + '원'"></span>
+								</div>
+								<p class="pointDay" th:text=${pList.pointEndDate}></p>
+							</div>
+							
+							<div class="clear"></div>
+							
+							<div class="paging mgt50"
+                               	th:with="prev=${pi.page - 1}, next=${pi.page + 1}">
+                                   <a th:href="@{/mypage/point(page=1)}" class="first"><span class="hide">첫페이지</span></a>
+                                   <a class="prev" href="/mypage/point?page=" th:attrappend="href=${prev}"><span class="hide">이전페이지</span></a>
+                                   <a th:each="page : ${#numbers.sequence(pi.startPage, pi.endPage)}" href="/mypage/point?page=" th:attrappend="href=${page}" th:text="${page}" th:classappend="${page} == ${#httpServletRequest.getParameter('page')} ? active"></a>	                                   
+                                   <a class="next" href="/mypage/point?page=" th:attrappend="href=${next}"><span class="hide">다음페이지</span></a>
+                                   <a href="/mypage/point?page=" th:attrappend="href=${pi.maxPage}" class="last"><span class="hide">마지막페이지</span></a>
+                            </div>
+							
+						
+					</div>
+					<!-- //myPageCon -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<br><br><br>
+	<!-- //container -->
+		<!-- 스크립트 -->
+		<th:block th:replace="common/script.html"></th:block>
+		<!--// 스크립트 -->
+		<!-- FOOTER -->
+		<th:block th:replace="common/footer.html"></th:block>
+		<!--// FOOTER -->
+	</div>
+	
+	<!-- 퀵메뉴 + 톡톡 -->
+	<th:block th:replace="common/quickNtalk.html"></th:block>
+	<!--// 퀵메뉴 + 톡톡 -->	
+	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+	<script type="text/javascript">
+		$('#quick .quickArea').css({'position':'absolute', 'top':290});
+
+	</script>
+	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+</body>
+</html>

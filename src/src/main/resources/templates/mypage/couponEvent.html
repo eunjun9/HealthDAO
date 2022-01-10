@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title></title>
+<!-- 메타태그, 스타일 -->
+<th:block th:replace="common/head.html"></th:block>
+<!--// 메타태그, 스타일 -->
+<body>
+<div id="wrap" class="main">
+<!-- HEADER + GNB -->
+<th:block th:replace="common/header.html"></th:block>
+<!--// HEADER + GNB -->
+
+	<!-- container -->
+	
+	<div id="container" class="pdt0">
+		<div class="site_location">
+			<span><a href="/">HOME</a></span>
+			<span><em>마이페이지</em></span>
+            <span><em>이벤트</em></span>
+            <em>쿠폰이벤트</em>
+		</div>
+		<div class="mypage">
+			<div class="myMain myCon">
+				<div class="contents">
+					<!-- mypage lnb -->
+					<div th:replace="common/mypageGnb.html"></div>
+					<!-- //mypage lnb -->
+
+					<!-- myPageCon -->
+					<div class="myPageCon coupon_event">
+						<p class="tit mgb40">
+							쿠폰이벤트
+						</p>                        
+                        <div class="coupon_list">
+                            <ul>
+                                <li th:each="coupon : ${couponList}">
+                                    <div class="couponCard">
+                                        <p class="tit_coupon fs14 notoR" th:text="${coupon.pName}">신규가입 웰컴 쿠폰</p>
+                                        <p class="percent" th:text="${coupon.pSale}"></p>
+                                    </div>
+                                    <p class="date">사용기간 : <span th:text="${#dates.format(coupon.startDate, 'yyyy-MM-dd')}">2021-01-01</span> ~ <span th:text="${#dates.format(coupon.endDate, 'yyyy-MM-dd')}">2021-02-01</span></p>
+                                    <div class="btn_wrap">
+                                        <a href="#" class="btn btnArr btnSizeL btnColorB btnTypeB" style="width:150px;" th:onclick="|javascript:selectPop('${coupon.pNo}')|" ><span>쿠폰 다운받기</span></a>
+                                    </div>
+                                </li>
+                            </ul>                            
+                        </div>
+                    </div>
+					<!-- //myPageCon -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //container -->
+		<!-- 스크립트 -->
+		<th:block th:replace="common/script.html"></th:block>
+		<!--// 스크립트 -->
+		<!-- FOOTER -->
+		<th:block th:replace="common/footer.html"></th:block>
+		<!--// FOOTER -->
+	</div>
+	
+	<!-- 퀵메뉴 + 톡톡 -->
+	<th:block th:replace="common/quickNtalk.html"></th:block>
+	<!--// 퀵메뉴 + 톡톡 -->	
+	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+	<script type="text/javascript">
+		$('#quick .quickArea').css({'position':'absolute', 'top':290});
+	</script>
+	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+	<div id="couponResult" class="lyPopArea">
+	<div class="lyPop">
+		<div class="lyWrap">
+			<button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
+			<div class="lyTit">응모 안내</div>
+			<div class="lyBody">
+				<p class="fs15">쿠폰이 발급 되었습니다.</p>
+				<p class="fs15 fc88">발급된 쿠폰은 마이페이지에서 확인 가능합니다.</p>
+				<div class="btn_wrap">
+					<a href="#" class="btn btnSizeL btnArr btnColorB btnTypeR" onclick="layerPopClose();"><span>확인</span></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
+<script>
+	function selectPop(pNo){
+		var couponNo = pNo;
+		var sendData = {"pNo":couponNo};
+		$.ajax({
+			url : "/mypage/event/couponEvent",
+			data : sendData,
+			type : "post",
+			success : function(data){
+				if(data == "success"){
+					showLayer('couponResult');
+				}
+			},
+			error : function(e){
+				console.log(e)
+			}
+		});
+	}
+</script>

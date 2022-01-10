@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title></title>
+<!-- 메타태그, 스타일 -->
+<th:block th:replace="common/head.html"></th:block>
+<!--// 메타태그, 스타일 -->
+<body>
+	<div id="wrap" class="main">
+		<!-- HEADER + GNB -->
+		<th:block th:replace="common/header.html"></th:block>
+		<!--// HEADER + GNB -->
+
+	<!-- container -->
+	<div id="container" class="pdt0">
+		<div class="memberJoin">
+			<div class="joinMain">
+				<div class="contents">
+					<div class="pageTitArea">
+						<h1>회원가입</h1>
+						<p>Welcome to HealthDao</p>
+					</div>
+					<form id="memberJoinForm" th:action="@{/member/signUp}" method="post">
+						<div class="inp_wrap inp_id">
+							<label class="inp_lab" for="ipt_label">아이디 <b>*</b></label>
+							<div class="inp_text sizeS">
+								<input type="text" name="userId" id="inp_id" placeholder="input text">
+								<a href="#" id="idChk" class="btn btnSizeM btnColorM btnTypeB" onclick="return fn_idChk();"><span>중복확인</span></a>
+								<input type="hidden" id="idChk2" value="N">
+							</div>
+							<p class="error">잘못 입력했습니다</p>
+						</div>
+						<div class="inp_wrap">
+							<label class="inp_lab" for="ipt_label">비밀번호 <b>*</b></label>
+							<div class="inp_text sizeS">
+								<input type="password" name="userPwd" id="inp_pwd" placeholder="input text">
+							</div>
+							<p class="error">잘못 입력했습니다</p>
+						</div>
+						<div class="inp_wrap">
+							<label class="inp_lab" for="ipt_label">비밀번호 확인 <b>*</b></label>
+							<div class="inp_text sizeS">
+								<input type="password" name="userPwd2" id="inp_pwd2" placeholder="input text">
+							</div>
+							<p class="error">잘못 입력했습니다</p>
+						</div>
+						<div class="inp_wrap">
+							<label class="inp_lab" for="ipt_label">이름 <b>*</b></label>
+							<div class="inp_text sizeS">
+								<input type="text" name="userName" id="inp_name" placeholder="input text">
+							</div>
+							<p class="error">잘못 입력했습니다</p>
+						</div>
+						<div class="inp_wrap inp_nic">
+							<label class="inp_lab" for="ipt_label">닉네임 <b>*</b></label>
+							<div class="inp_text sizeS">
+								<input type="text" name="userNickName" id="inp_nic" placeholder="input text">
+								<a href="#" class="btn btnSizeM btnColorM btnTypeB"><span>중복확인</span></a>
+							</div>
+							<p class="error">잘못 입력했습니다</p>
+						</div>
+						<div class="inp_wrap inp_phn">
+							<label class="inp_lab" for="ipt_label">휴대폰번호 <b>*</b></label>
+							<div class="inp_text sizeS">
+								<input type="text" name="userPhone" id="inp_phn" placeholder="input text">
+								<a href="#" class="btn btnSizeM btnColorM btnTypeB"><span>인증번호</span></a>
+							</div>
+							<p class="error">잘못 입력했습니다</p>
+						</div>
+						<div class="inp_wrap inp_eml">
+							<label class="inp_lab" for="ipt_label">이메일 <b>*</b></label>
+							<div class="inp_text sizeS">
+								<input type="text" name="userEmail" id="inp_eml" placeholder="input text">
+								<a href="#" class="btn btnSizeM btnColorM btnTypeB"><span>중복확인</span></a>
+							</div>
+							<p class="error">잘못 입력했습니다</p>
+						</div>
+						<div class="inp_wrap inp_birth">
+							<label class="inp_lab" for="ipt_label">생년월일 <b>*</b></label>
+							<div class="birth">
+								<div class="inp_select sizeS birth_year">
+									<div class="selectBox">
+										<button class="title" type="button">년도</button>
+										<ul class="selList">
+											<li th:each="m : ${#numbers.sequence(#calendars.format(#calendars.createNow(), 'yyyy'),1910)}">
+												<input type="radio" th:value="${m}" class="option" id="select1_1" name="userBirth">
+												<label for="select1_1" th:text="${m}"></label>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="inp_select sizeS birth_month">
+									<div class="selectBox">
+										<button class="title" type="button">월</button>
+										<ul class="selList">
+											<li th:each="m : ${#numbers.sequence(1,12)}">
+												<input type="radio" th:value="${m}" class="option" id="select1_1" name="userBirth2">
+												<label for="select1_1" th:text="${m}"></label>
+											</li> <!-- ${m}<=9 ? 0+${m} : ${m} -->
+										</ul>
+									</div>
+								</div>
+								<div class="inp_select sizeS birth_day">
+									<div class="selectBox">
+										<button class="title" type="button">일</button>
+										<ul class="selList">
+											<li th:each="m : ${#numbers.sequence(1,31)}">
+												<input type="radio" th:value="${m}" class="option" id="select1_1" name="userBirth3">
+												<label for="select1_1" th:text="${m}"></label>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="inp_wrap inp_gender">
+							<label class="inp_lab" for="ipt_label">성별</label>
+							<div class="btn_wrap2">
+								<a class="btn btnSizeM btnColorR btnTypeB btnMale" style="width:130px;"><span>남자</span></a>
+								<a class="btn btnSizeM btnColorR btnTypeB btnFemale" style="width:130px;"><span>여자</span></a>
+							</div>
+							<div style="display: none;">
+								<input type="radio" id="male" name="userGender" value="M">
+								<input type="radio" id="female" name="userGender" value="F">
+							</div>
+						</div>
+						<div class="agree_wrap">
+							<span class="inp_check">
+								<input type="checkbox" name="inp_check1_1" id="inp_check1_1" onclick='selectAll(this)'>
+								<label for="inp_check1_1">전체동의</label>
+							</span>
+						</div>
+						<div class="js_tblList checkboxes">
+							<table class="tblType1 fqaType" summary="">
+								<caption></caption>
+								<colgroup>
+									<col width="350px"></col>
+									<col width="100px"></col>
+									<col width="50px"></col>
+								</colgroup>
+								<tbody>
+									<tr>
+										<td class="ta_l">
+											<span class="inp_check">
+												<input type="checkbox" name="inp_check1_2" id="inp_check1_2">
+												<label for="inp_check1_2"><b>[필수]</b> 회원가입약관 동의</label>
+											</span>
+										</td>
+										<td class="ta_l"><a href="javascript:void(0)" class="js_ListTtl ListTtl">내용 자세히보기</a></td>
+										<td><div class="js_arrow arrow"><span>닫힘</span></div></td>
+									</tr>
+									<tr class="js_ListCtt ListCtt">
+										<td colspan="3">
+											<div class="ta_l js_replyCtt replyCtt fc66">
+												<div>
+													회원이 되시면 각종 이벤트와 상품정보, 추천상품등에 대한 정보를 받아 보실 수 있으며 <br>온라인 쇼핑몰에서 적립하신 구매 마일리지와 쇼핑몰 전용 활동 포인트를 확인하실 수 있습니다.<br><br>온라인 쇼핑몰에서 상품 구매 시 마일리지가 적립되며 이 마일리지는 쇼핑몰에서 현금처럼 사용하실 수 있습니다. <br>등급별 각종 쿠폰혜택을 받으실 수 있습니다.
+												</div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td class="ta_l">
+											<span class="inp_check">
+												<input type="checkbox" name="inp_check1_3" id="inp_check1_3">
+												<label for="inp_check1_3"><b>[필수]</b> 개인정보처리방침 동의</label>
+											</span>
+										</td>
+										<td class="ta_l"><a href="javascript:void(0)" class="js_ListTtl ListTtl">내용 자세히보기</a></td>
+										<td><div class="js_arrow arrow"><span>닫힘</span></div></td>
+									</tr>
+									<tr class="js_ListCtt ListCtt">
+										<td colspan="3">
+											<div class="ta_l js_replyCtt replyCtt fc66">
+												<div>
+													회원이 되시면 각종 이벤트와 상품정보, 추천상품등에 대한 정보를 받아 보실 수 있으며 <br>온라인 쇼핑몰에서 적립하신 구매 마일리지와 쇼핑몰 전용 활동 포인트를 확인하실 수 있습니다.<br><br>온라인 쇼핑몰에서 상품 구매 시 마일리지가 적립되며 이 마일리지는 쇼핑몰에서 현금처럼 사용하실 수 있습니다. <br>등급별 각종 쿠폰혜택을 받으실 수 있습니다.
+												</div>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="agree_wrap2">
+							<span class="inp_check">
+								<input type="checkbox" name="emailReceive" id="inp_check1_4" value='Y'>
+								<label for="inp_check1_4"><b>[선택]</b> 이메일 수신동의 (할인쿠폰, 이벤트, 기획전, 특가 상품정보)</label>
+							</span>
+							<span class="inp_check">
+								<input type="checkbox" name="smsReceive" id="inp_check1_5" value='Y'>
+								<label for="inp_check1_5"><b>[선택]</b> SMS 수신동의 (할인쿠폰, 이벤트, 기획전, 특가 상품정보)</label>
+							</span>
+						</div>
+						<div class="info_wrap">
+							<p class="infoMsg">※ 회원정보 수정에서 언제든지 수신거부 하실 수 있습니다.</p>
+							<p class="infoMsg">※ 상품 구매정보는 수신동의 여부 관계없이 받아 보실 수 있습니다.</p>
+						</div>
+						<div class="btn_wrap">
+							<button type="submit" onclick="return chk_signUp()" class="btn btnArr btnSizeL btnColorB btnTypeB" style="width:500px;"><span>회원가입</span></button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //container -->
+
+		<!-- 스크립트 -->
+		<th:block th:replace="common/script.html"></th:block>
+		<!--// 스크립트 -->
+		<!-- FOOTER -->
+		<th:block th:replace="common/footer.html"></th:block>
+		<!--// FOOTER -->
+	</div>
+	
+	<!-- 퀵메뉴 + 톡톡 -->
+	<!-- <th:block th:replace="common/quickNtalk.html"></th:block> -->
+	<!--// 퀵메뉴 + 톡톡 -->
+	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+	<link rel="stylesheet" type="text/css" href="../../css/main.css">
+	<script type="text/javascript" src="../../js/main.js"></script>
+	<script type="text/javascript" src="../../js/eunjung.js"></script>
+	<script th:inline="javascript">
+		$(document).ready(function(){
+			
+			/* $("#submit").on("click", function(){
+				if($("#inp_id").val()==""){
+					alert("아이디를 입력해주세요.");
+					$("#inp_id").focus();
+					return false;
+				}
+				if($("#inp_pwd").val()==""){
+					alert("비밀번호를 입력해주세요.");
+					$("#inp_pwd").focus();
+					return false;
+				}
+				if($("#inp_pwd2").val()==""){
+					alert("비밀번호를 확인해주세요.");
+					$("#inp_pwd2").focus();
+					return false;
+				}
+				if($("#inp_name").val()==""){
+					alert("이름을 입력해주세요.");
+					$("#inp_name").focus();
+					return false;
+				}
+				if($("#inp_nic").val()==""){
+					alert("이름을 입력해주세요.");
+					$("#inp_nic").focus();
+					return false;
+				}
+				if($("#inp_phn").val()==""){
+					alert("핸드폰번호를 입력해주세요.");
+					$("#inp_phn").focus();
+					return false;
+				}
+				var idChkVal = $("#idChk2").val();
+				if(idChkVal == "N"){
+					alert("중복확인 버튼을 눌러주세요.");
+				}else if(idChkVal == "Y"){
+					$("#memberJoinForm").submit();
+				}
+			});
+		})
+		
+		function fn_idChk(){
+			$.ajax({
+				url : "/member/idChk",
+				type : "post",
+				dataType : "json",
+				data : {"userId" : $("#userId").val()},
+				success : function(data){
+					if(data == 1){
+						alert("중복된 아이디입니다.");
+					}else if(data == 0){
+						$("#idChk2").attr("value", "Y");
+						alert("사용가능한 아이디입니다.");
+					}
+				}
+			}) */
+		})
+	</script>
+	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+</body>
+</html>

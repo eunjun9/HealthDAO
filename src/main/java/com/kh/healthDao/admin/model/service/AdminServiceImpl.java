@@ -1,6 +1,5 @@
 package com.kh.healthDao.admin.model.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.healthDao.admin.model.dao.AdminMapper;
-import com.kh.healthDao.admin.model.vo.Category;
 import com.kh.healthDao.admin.model.vo.Coupon;
-import com.kh.healthDao.admin.model.vo.Option;
 import com.kh.healthDao.admin.model.vo.Notice;
 import com.kh.healthDao.admin.model.vo.Product;
 import com.kh.healthDao.common.model.vo.Paging;
@@ -27,15 +24,6 @@ public class AdminServiceImpl implements AdminService, CouponService, NoticeServ
 	public AdminServiceImpl(AdminMapper adminMapper) {
 		this.adminMapper = adminMapper;
 	}
-	
-	/* 상품 등록 */
-	@Override
-	public int registProduct(Product product) {
-				
-		return adminMapper.registProduct(product);
-	}
-	
-
 	
 	@Override
 	public Map<String, Object> inventoryPaging(int page) {
@@ -108,23 +96,6 @@ public class AdminServiceImpl implements AdminService, CouponService, NoticeServ
 	}
 
 	@Override
-	public int registCategory(Product product) {
-		return adminMapper.registCategory(product);
-	}
-
-	@Override
-	public int registOption(Product product) {
-		return adminMapper.registOption(product);
-	}
-
-	
-	@Override
-	public void registNewProduct(Product newProduct) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public int noticeInsert(Notice notice) {		
 		return adminMapper.noticeInsert(notice);
 	}
@@ -173,15 +144,25 @@ public class AdminServiceImpl implements AdminService, CouponService, NoticeServ
 		return adminMapper.newfiveNoticeList();
 	}
 
-	@Override
-	public int insertproductStock(Product product) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public int memberSoundInsert(MemberSound ms) {
 		return adminMapper.memberSoundInsert(ms);
+	}
+
+	@Override
+	public int insertproductStock(Product product) {
+		return adminMapper.insertproductStock(product);
+	}
+
+	@Override
+	public int registProduct(Product product) {
+		return adminMapper.registProduct(product);
+	}
+
+	@Override
+	public int registOption(Product product) {
+		return adminMapper.registOption(product);
 	}
 
 

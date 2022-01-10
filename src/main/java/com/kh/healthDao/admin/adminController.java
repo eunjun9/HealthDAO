@@ -2,8 +2,6 @@ package com.kh.healthDao.admin;
 
 
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +17,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.healthDao.admin.model.service.AdminService;
 import com.kh.healthDao.admin.model.service.CouponService;
-import com.kh.healthDao.admin.model.vo.Category;
 import com.kh.healthDao.admin.model.service.NoticeService;
 import com.kh.healthDao.admin.model.vo.Coupon;
 import com.kh.healthDao.admin.model.vo.Notice;
@@ -92,9 +89,6 @@ public class adminController {
 
 	@GetMapping("inventoryList")
 	public ModelAndView managerInventoryList(ModelAndView mv, @RequestParam int page) {
-		
-
-		List<Product> ProductList = adminService.listProductInventory();
 
 		Map<String, Object> map = adminService.inventoryPaging(page);
 		

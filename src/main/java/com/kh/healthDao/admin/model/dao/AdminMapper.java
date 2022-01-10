@@ -26,7 +26,7 @@ public interface AdminMapper {
 	// 상품 재고
 	public List<Product> listProductInventory();
 
-	public String insertproductStock(Product product);
+	public int insertproductStock(Product product);
 
 	public int getinventoryCount();
 

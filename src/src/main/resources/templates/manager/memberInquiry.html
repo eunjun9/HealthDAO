@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title></title>
+<!-- 메타태그, 스타일 -->
+<th:block th:replace="common/head.html"></th:block>
+<!--// 메타태그, 스타일 -->
+<body>
+<div id="wrap" class="main">
+<!-- HEADER + GNB -->
+<th:block th:replace="common/header.html"></th:block>
+<!--// HEADER + GNB -->
+
+	<!-- container -->
+	<script>
+		const msg = '[[${msg}]]';
+		
+		if(msg){
+			alert(msg);			
+		}
+	</script>
+	<div id="container" class="pdt0">
+		<div class="site_location">
+			<span><a href="/">HOME</a></span>
+			<em>마이페이지</em>
+		</div>
+		<div class="mypage">
+			<div class="myMain myCon">
+				<div class="contents">
+					<!-- mypage lnb -->
+					<div th:replace="common/adminGnb.html"></div>
+					<!-- //mypage lnb -->
+
+					<!-- myPageCon -->
+					<div class="myPageCon">
+						<p class="tit mgb40">
+							회원문의
+						</p>
+						<!-- myOrder tab -->
+
+						<!-- //myOrder tab -->
+
+						<div class="myOrderList mgt40">
+							<div class="tblBar mgt50">
+											<p class="tblList">총 <span th:text="${listCount}"></span>개</p>
+											<div class="inp_wrap">
+												<div class="inp_text searchType">
+													<div class="btn_wrap">
+														
+														<div class="inp_wrap">
+															<div class="inp_select">
+																<div class="selectBox">
+																	<button class="title" type="button">문의유형</button>
+																	<ul class="selList">
+
+																			<li>
+																				<input type="radio" value="select1_1" class="option" id="select1_1" name="select1">
+																				<label for="select1_1">전체</label>
+																			</li>
+																			<li>
+																				<input type="radio" value="select1_1" class="option" id="select1_2" name="select1">
+																				<label for="select1_2">일반문의</label>
+																			</li>
+																			<li>
+																				<input type="radio" value="select1_2" class="option" id="select1_3" name="select1">
+																				<label for="select1_3">트레이너가입문의</label>
+																			</li>
+																			<li>
+																				<input type="radio" value="select1_3" class="option" id="select1_4" name="select1">
+																				<label for="select1_4">잘못된정보신고</label>
+																			</li>
+																			<li>
+																				<input type="radio" value="select1_4" class="option" id="select1_5" name="select1">
+																				<label for="select1_5">신고</label>
+																			</li>
+																			<li>
+																				<input type="radio" value="select1_5" class="option" id="select1_5" name="select1">
+																				<label for="select1_5">기타</label>
+																			</li>
+																		
+																	</ul>
+																</div>
+														</div>
+														</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="js_tblList">
+											<table class="tblType1" summary="">
+												<caption></caption>
+												<colgroup>
+													<col width="80px"></col>
+													<col width="100px"></col>
+													<col width="150px"></col>
+													<col width="100px"></col>
+													<col width="150px"></col>
+													<col width="100px"></col>
+												</colgroup>
+												<thead>
+													<tr>
+														<th>문의번호</th>
+														<th>문의유형</th>
+														<th>제목</th>
+														<th>아이디</th>
+														<th>휴대폰번호</th>
+														<th>답변입력</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr th:each="qna : ${QnaList}">
+														<td class="fc88" th:text=${qna.qNo}></td>
+														<td class="ta_l" th:text=${qna.qDept}></td>
+														<td class="fc88" th:text=${qna.qTitle}></td>
+														<td th:text=${qna.userNickName}></td>
+														<td th:text=${qna.userPhone}></td>
+														<td>
+															<div class="btn_wrap_yl">
+																<a href="/manager/memberInquiryAnswer?qNo=" th:attrappend="href=${qna.qNo}" class="btn btnSizeM btnColorW btnTypeB" style="width:100px;"><span>문의글보기</span></a> 
+																
+															</div>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+											
+											<div class="paging mgt50"
+				                                	th:with="prev=${pi.page - 1}, next=${pi.page + 1}">
+				                                    <a th:href="@{/manager/memberInquiry(page=1)}" class="first"><span class="hide">첫페이지</span></a>
+				                                    <a class="prev" href="/manager/memberInquiry?page=" th:attrappend="href=${prev}"><span class="hide">이전페이지</span></a>
+				                                    <a th:each="page : ${#numbers.sequence(pi.startPage, pi.endPage)}" href="/manager/memberInquiry?page=" th:attrappend="href=${page}" th:text="${page}" th:classappend="${page} == ${#httpServletRequest.getParameter('page')} ? active"></a>	                                   
+				                                    <a class="next" href="/manager/memberInquiry?page=" th:attrappend="href=${next}"><span class="hide">다음페이지</span></a>
+				                                    <a href="/manager/memberInquiry?page=" th:attrappend="href=${pi.maxPage}" class="last"><span class="hide">마지막페이지</span></a>
+				                             </div>
+
+										</div>
+
+									</div>
+						</div>
+
+
+
+						
+					<!-- //myPageCon -->
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- //container -->
+	
+		<!-- 스크립트 -->
+		<th:block th:replace="common/script.html"></th:block>
+		<!--// 스크립트 -->
+		<!-- FOOTER -->
+		<th:block th:replace="common/footer.html"></th:block>
+		<!--// FOOTER -->
+	
+	
+	<!-- 퀵메뉴 + 톡톡 -->
+	<th:block th:replace="common/quickNtalk.html"></th:block>
+	<!--// 퀵메뉴 + 톡톡 -->	
+	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+	<script type="text/javascript">
+		$('#quick .quickArea').css({'position':'absolute', 'top':290});
+	</script>
+	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+</body>
+</html>
