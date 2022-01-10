@@ -7,6 +7,7 @@ import com.kh.healthDao.mypage.model.vo.AttCheck;
 import com.kh.healthDao.admin.model.vo.Coupon;
 import com.kh.healthDao.mypage.model.vo.Point;
 import com.kh.healthDao.mypage.model.vo.Qna;
+import com.kh.healthDao.review.model.vo.Review;
 
 
 @Mapper
@@ -36,10 +37,16 @@ public interface MypageMapper {
 
 	List<Qna> userReviewList(Map<String, Object> pageRow);
 
+
 	// 포인트 페이징
 	int pointListCount();
 	List<Point> listPoint(Map<String, Object> pageRow);
 	
+
+	Review reviewDetail(int reviewNo);
+
+	int reviewModify(Review review);
+
 
 
 

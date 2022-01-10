@@ -13,6 +13,7 @@ import com.kh.healthDao.mypage.model.dao.MypageMapper;
 import com.kh.healthDao.mypage.model.vo.AttCheck;
 import com.kh.healthDao.mypage.model.vo.Point;
 import com.kh.healthDao.mypage.model.vo.Qna;
+import com.kh.healthDao.review.model.vo.Review;
 
 
 @Service("mypageService")
@@ -128,6 +129,7 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 
 	}
 
+
 	// 페이징 된 포인트 내역
 	@Override
 	public Map<String, Object> pointList(int page) {
@@ -151,6 +153,16 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 		point.put("pi", pi);
 		
 		return point;
+
+	@Override
+	public Review reviewDetail(int reviewNo) {
+		return mypageMapper.reviewDetail(reviewNo);
+	}
+
+	@Override
+	public int reviewModify(Review review) {
+		return mypageMapper.reviewModify(review);
+
 	}
 
 }

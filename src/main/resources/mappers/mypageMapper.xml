@@ -293,4 +293,25 @@
 		    )
 			WHERE RNUM BETWEEN #{startRow} AND #{endRow}
 	</select>
+	
+	<select id="reviewDetail" parameterType="_int" resultMap="reviewMap">
+		SELECT 
+		      REVIEW_NO
+		    , CATEGORY
+		    , STAR
+		    , R_CONTENT
+		    , R_DATE
+		    , MODIFY_DATE
+		    , PAY_NO
+		    , USER_NO
+		FROM REVIEW
+		WHERE REVIEW_NO = #{reviewNo}
+	</select>
+	
+	<update id="reviewModify" parameterType="com.kh.healthDao.review.model.vo.Review">
+		UPDATE REVIEW
+		SET STAR = #{star}
+		  , R_CONTENT = #{rContent}
+		WHERE REVIEW_NO = #{reviewNo}
+	</update>
 </mapper>
