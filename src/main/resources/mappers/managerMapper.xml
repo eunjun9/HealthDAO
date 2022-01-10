@@ -57,7 +57,7 @@
         , USER_PHONE
 	 FROM QNA 
      JOIN QNA_DEPT USING(Q_DEPT_CODE)
-     JOIN MEMBER USING(USER_NO)
+     LEFT JOIN MEMBER USING(USER_NO)
      WHERE Q_NO = #{qNo}
 	</select>
 	
@@ -89,8 +89,7 @@
 	        , USER_PHONE
 		 FROM QNA 
 	     JOIN QNA_DEPT USING(Q_DEPT_CODE)
-	     JOIN MEMBER USING(USER_NO)
-	   <!-- WHERE Q_DEPT_CODE = #{qDeptCode} --> 
+	     left JOIN MEMBER USING(USER_NO)
 		ORDER BY Q_NO DESC)
 	</select>
 	
@@ -115,8 +114,7 @@
 		        , USER_PHONE
 			 FROM QNA 
 		     JOIN QNA_DEPT USING(Q_DEPT_CODE)
-		     JOIN MEMBER USING(USER_NO)
-		  <!-- WHERE Q_DEPT_CODE = #{qDeptCode} -->  
+		     LEFT JOIN MEMBER USING(USER_NO) 
 	        ORDER BY Q_NO DESC) A
 		    )
 		WHERE RNUM BETWEEN #{startRow} AND #{endRow}
