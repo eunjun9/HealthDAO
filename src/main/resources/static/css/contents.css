@@ -2859,13 +2859,11 @@ filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#555555', endC
 }
 .memberJoin #inp_id,
 .memberJoin #inp_nic,
-.memberJoin #inp_phn,
 .memberJoin #inp_eml {
     width: 390px;
 }
 .memberJoin .inp_id .btn,
 .memberJoin .inp_nic .btn,
-.memberJoin .inp_phn .btn,
 .memberJoin .inp_eml .btn {
     width: 148px;
     margin-left: 8px;
@@ -3067,14 +3065,12 @@ filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#555555', endC
 .myPageMIMf .inp_gender {
     margin-top: 4px !important;
 }
-.myPageMIMf #inp_nic,
-.myPageMIMf #inp_eml {
+.myPageMIMf #inp_nic {
     width: 388px;
 }
 .myPageMIMf .inp_id .btn,
 .myPageMIMf .inp_nic .btn,
-.myPageMIMf .inp_phn .btn,
-.myPageMIMf .inp_eml .btn {
+.myPageMIMf .inp_phn .btn {
     width: 148px;
     margin-left: 8px;
 }

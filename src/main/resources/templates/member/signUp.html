@@ -63,7 +63,6 @@
 							<label class="inp_lab" for="ipt_label">휴대폰번호 <b>*</b></label>
 							<div class="inp_text sizeS">
 								<input type="text" name="userPhone" id="inp_phn" placeholder="input text">
-								<a href="#" class="btn btnSizeM btnColorM btnTypeB"><span>인증번호</span></a>
 							</div>
 							<p class="error">잘못 입력했습니다</p>
 						</div>
@@ -71,7 +70,7 @@
 							<label class="inp_lab" for="ipt_label">이메일 <b>*</b></label>
 							<div class="inp_text sizeS">
 								<input type="text" name="userEmail" id="inp_eml" placeholder="input text">
-								<a href="#" class="btn btnSizeM btnColorM btnTypeB"><span>중복확인</span></a>
+								<a href="#" onclick="showLayer('phoneCert');" class="btn btnSizeM btnColorM btnTypeB"><span>인증번호</span></a>
 							</div>
 							<p class="error">잘못 입력했습니다</p>
 						</div>
@@ -280,5 +279,29 @@
 		})
 	</script>
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+	<div id="phoneCert" class="lyPopArea">
+		<div class="lyPop">
+			<div class="lyWrap">
+				<button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
+				<div class="lyTit">이메일 인증</div>
+				<div class="lyBody basic">
+					<div class="lyBody basic">
+						<p>이메일이 발송되었습니다.<br> 인증번호를 입력해주세요.</p>
+						<div class="inp_wrap mgt20">
+							<label class="inp_lab" for="find_new_pw_chk">인증번호</label>
+							<div class="inp_text">
+								<input type="password" id="find_new_pw_chk" placeholder="인증번호를 입력해주세요.">
+								<button type="button" class="btn_clear"><span>clear</span></button>
+							</div>
+							<p class="error">인증번호가 일치하지 않습니다.</p>
+						</div>
+						<div class="btn_wrap">
+							<a href="javascript:void(0);" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
