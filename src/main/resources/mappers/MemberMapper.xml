@@ -84,20 +84,20 @@
 		VALUES
 		(
 			SEQ_USER_NO.NEXTVAL
-		  , #{ userId }
-		  , #{ userPwd }
-		  , #{ userName }
-		  , #{ userNickName }
-		  , #{ userPhone }
-		  , #{ userEmail }
-		  , #{ userBirth }
-		  , #{ userGender }
+		  , #{userId}
+		  , #{userPwd}
+		  , #{userName}
+		  , #{userNickName}
+		  , #{userPhone}
+		  , #{userEmail}
+		  , #{userBirth}
+		  , #{userGender}
 		  , SYSDATE
 		  , DEFAULT
 		  , NULL
 		  <choose>
 		  <when test="emailReceive != null">
-		  , #{ emailReceive }
+		  , #{emailReceive}
 		  </when>
 		  <otherwise>
 		  , 'N'
@@ -105,7 +105,7 @@
 		  </choose>
 		  <choose>
 		  <when test="smsReceive != null">
-		  , #{ smsReceive }
+		  , #{smsReceive}
 		  </when>
 		  <otherwise>
 		  , 'N'

@@ -59,7 +59,7 @@
 			</association>
 	</resultMap>
 	
-	<select id="trainerList" resultMap="trainerResultMap">
+	<select id="trainerList" resultMap="trainerResultMap" parameterType="String">
 		SELECT
 		       T.T_NO
 		     , T.T_GYM_NAME
@@ -97,6 +97,7 @@
 		     , M.USER_NO
 		     , M.USER_NAME
 		     , M.USER_PHONE
+		HAVING T_METRO=#{searchTrainer}
 	</select>
 
 	<select id="trainerSelect" resultMap="trainerResultMap" parameterType="_int">
@@ -153,7 +154,7 @@
 		 where T_NO = #{tNo}
 	</update>
 	
-	<select id="trainerOrderList" resultMap="trainerOrderMap">
+	<select id="trainerOrderList" resultMap="trainerOrderMap" parameterType="_int">
 		SELECT
 		       P.PT_NO
 		     , P.PT_DATE
@@ -166,7 +167,7 @@
 		  FROM PT_ORDER P
 		  JOIN TRAINER T ON(P.T_NO = T.T_NO)
 		  JOIN MEMBER M ON(T.T_NO = M.USER_NO)
-		 <!-- WHERE P.USER_ID=1 -->
+		 WHERE P.USER_ID=#{userNo}
 	</select>
 	
 	<select id="trainerReviewList" resultMap="trainerReviewListMap" parameterType="_int">
@@ -204,7 +205,7 @@
 		  )
 		  VALUES
 		  (
-		    4
+		    #{tNo}
 		  , #{tGymName}
 		  , '없음'
 		  , #{tArea}

@@ -41,11 +41,12 @@ public class TrainerController {
 		return mv;
 	}
 	
-	@GetMapping("/search")
-	public ModelAndView trainerSearch(ModelAndView mv) {
+	@PostMapping("search")
+	public ModelAndView trainerSearch(ModelAndView mv, String searchTrainer) {
 		
-		List<Trainer> trainerList = trainerService.trainerList();
+		List<Trainer> trainerList = trainerService.trainerList(searchTrainer);
 		
+		mv.addObject("searchTrainer", searchTrainer);
 		mv.addObject("trainerList", trainerList);
 		mv.setViewName("trainer/trainerSearch");
 		
@@ -81,9 +82,9 @@ public class TrainerController {
 	}
 	
 	@GetMapping("/orderList")
-	public ModelAndView trainerOrderList(ModelAndView mv) {
+	public ModelAndView trainerOrderList(ModelAndView mv, @RequestParam int userNo) {
 		
-		List<PtOrder> trainerOrderList = trainerService.trainerOrderList();
+		List<PtOrder> trainerOrderList = trainerService.trainerOrderList(userNo);
 		
 		mv.addObject("trainerOrderList", trainerOrderList);
 		mv.setViewName("/trainer/trainerOrderList");
@@ -107,7 +108,6 @@ public class TrainerController {
 
 	@PostMapping("insert")
 	public ModelAndView trainerInsert(ModelAndView mv, Trainer trainer) {
-		// 세션으로 유저 id 받아와서 등록
 		int result = trainerService.trainerInsert(trainer);
 		if(result > 0) {
 			mv.addObject("msg", "수정 성공");

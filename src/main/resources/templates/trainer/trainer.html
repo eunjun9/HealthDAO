@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+				xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <title></title>
 <!-- 메타태그, 스타일 -->
@@ -17,19 +18,21 @@
     </div>
 	<div class="contents">
 		<div class="searchTrainer" style="height: 100px;">
-			<div class="searchTrainer2" style="display: flex; justify-content: center; align-items: center; margin-top: 35px;">
-				<div class="inp_text searchType">
-					<div class="inp_wrap">
-						<div class="inp_text searchType">
-							<input type="text" id="searchTrainer" placeholder="지역, 지하철역 검색" style="width: 500px; border: 3px solid #CCCCCC;">
-							<button class="btn_clear"><span>clear</span></button>
+			<form action="/trainer/search" method="post" name="searchForm">
+				<div class="searchTrainer2" style="display: flex; justify-content: center; align-items: center; margin-top: 35px;">
+					<div class="inp_text searchType">
+						<div class="inp_wrap">
+							<div class="inp_text searchType">
+								<input type="text" id="searchTrainer" name="searchTrainer" placeholder="지하철역 검색" style="width: 500px; border: 3px solid #CCCCCC;">
+								<button class="btn_clear"><span>clear</span></button>
+							</div>
 						</div>
 					</div>
+					<div class="btn_wrap">
+						<a href="#" onclick="document.searchForm.submit();" class="btn btnSizeL btnColorP btnTypeB" style="width:150px;"><span>트레이너 찾기</span></a>
+					</div>
 				</div>
-				<div class="btn_wrap">
-					<a href="/trainer/search" class="btn btnSizeL btnColorP btnTypeB" style="width:150px;"><span>트레이너 찾기</span></a>
-				</div>
-			</div>
+			</form>
 		</div>
 		
 		<div class="trainerMain">
@@ -50,8 +53,12 @@
 			</div>
 		</div>
 		<div class="btn_wrap" style="margin-top: 50px">
-			<a href="#" class="btn btnSizeL btnColorW btnTypeR" onclick="showLayer('deliRegister');" style="width:150px;"><span>트레이너 등록</span></a>
-			<a href="/trainer/orderList" class="btn btnSizeL btnColorW btnTypeR" style="width:150px;"><span>신청 목록 조회</span></a>
+			<th:block sec:authorize="hasRole('ROLE_TRAINER')">
+				<a href="#" class="btn btnSizeL btnColorW btnTypeR" onclick="showLayer('deliRegister');" style="width:150px;"><span>트레이너 등록</span></a>
+			</th:block>
+			<th:block sec:authorize="hasRole('ROLE_MEMBER')">
+				<a href="/trainer/orderList?userNo=" th:attrappend="href=${#authentication.principal.userNo}" class="btn btnSizeL btnColorW btnTypeR" style="width:150px;"><span>신청 목록 조회</span></a>
+			</th:block>
 		</div>
 	</div>
 </div>
@@ -185,6 +192,8 @@
 							</div>
 						</dd>
 					</dl>
+					<!-- <sec:csrfInput /> -->
+					<input type="hidden" name="tNo" th:value="${#authentication.principal.userNo}">
 					</form>
 				</div>
 				<div class="btn_wrap length2">

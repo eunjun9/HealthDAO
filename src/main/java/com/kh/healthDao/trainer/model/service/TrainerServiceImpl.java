@@ -22,8 +22,8 @@ public class TrainerServiceImpl implements TrainerService{
 	}
 	
 	@Override
-	public List<Trainer> trainerList() {
-		return trainerMapper.trainerList();
+	public List<Trainer> trainerList(String searchTrainer) {
+		return trainerMapper.trainerList(searchTrainer);
 	}
 
 	@Override
@@ -37,8 +37,8 @@ public class TrainerServiceImpl implements TrainerService{
 	}
 
 	@Override
-	public List<PtOrder> trainerOrderList() {
-		return trainerMapper.trainerOrderList();
+	public List<PtOrder> trainerOrderList(int userNo) {
+		return trainerMapper.trainerOrderList(userNo);
 	}
 
 	@Override
