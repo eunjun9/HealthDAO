@@ -153,6 +153,11 @@ public class AdminServiceImpl implements AdminService, CouponService, NoticeServ
 		return adminMapper.viewUpdate(nNo);
 	}
 
+	@Override
+	public List<Notice> newfiveNoticeList() {
+		return adminMapper.newfiveNoticeList();
+	}
+
 	
 	
 	

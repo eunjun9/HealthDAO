@@ -69,6 +69,8 @@ public interface AdminMapper {
 	public int noticeModify(Notice notice);
 	// 공지사항 조회수
 	public int viewUpdate(int nNo);
+	// 공지사항 최근 5개
+	public List<Notice> newfiveNoticeList();
 
 	
 }

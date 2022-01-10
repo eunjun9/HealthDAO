@@ -20,6 +20,7 @@ import com.kh.healthDao.admin.model.vo.Coupon;
 import com.kh.healthDao.admin.model.vo.Notice;
 import com.kh.healthDao.member.model.vo.UserImpl;
 import com.kh.healthDao.mypage.model.service.MyCouponService;
+import com.kh.healthDao.mypage.model.service.MyReviewService;
 import com.kh.healthDao.mypage.model.service.QnaService;
 import com.kh.healthDao.mypage.model.vo.AttCheck;
 import com.kh.healthDao.mypage.model.vo.Point;
@@ -33,13 +34,15 @@ public class MypageController {
 	private MyCouponService couponService;
 	private MessageSource messageSource;
 	private NoticeService noticeService;
+	private MyReviewService myReviewService;
 	
 	@Autowired
-	public MypageController(QnaService qnaService, MyCouponService couponService, MessageSource messageSource, NoticeService noticeService) {
+	public MypageController(QnaService qnaService, MyCouponService couponService, MessageSource messageSource, NoticeService noticeService, MyReviewService myReviewService) {
 		this.qnaService = qnaService;
 		this.couponService = couponService;
 		this.messageSource = messageSource;
 		this.noticeService = noticeService;
+		this.myReviewService = myReviewService;
 	}
 	
 	@GetMapping(value= {"/", "/myOrder"})
@@ -83,6 +86,8 @@ public class MypageController {
 	
 	@PostMapping("/qnaInsert")
 	public String qnaInsert(Qna newQna, RedirectAttributes rttr) {
+		System.out.println(newQna.getQDeptCode());
+		
 		String msg = qnaService.qnaInsert(newQna) > 0 ? "문의 등록 성공" : "문의 등록 실패";		
 		rttr.addFlashAttribute("msg", msg);
 		
@@ -133,14 +138,29 @@ public class MypageController {
 	
 	/* 내가 쓴 리뷰 */
 	@GetMapping("/review")
-	public String review() {
-		return "mypage/reivewList";
+	public ModelAndView review(ModelAndView mv, @RequestParam int page, @AuthenticationPrincipal UserImpl userImpl) {
+		int userNo = userImpl.getUserNo();
+		
+		Map<String, Object> map = myReviewService.userReviewList(page, userNo);
+		
+		mv.addObject("reviewList", map.get("reviewList"));
+		mv.addObject("listCount", map.get("listCount"));
+		mv.addObject("pi", map.get("pi"));
+		mv.setViewName("mypage/reivewList");
+		
+		return mv;
 	}
 	
 	/* 고객센터 */
 	@GetMapping("/customCenter")
-	public String customCenter() {
-		return "mypage/customCenter";
+	public ModelAndView customCenter(ModelAndView mv) {
+		
+		List<Notice> noticeList = noticeService.newfiveNoticeList();
+		
+		mv.addObject("noticeList", noticeList);
+		mv.setViewName("mypage/customCenter");
+		
+		return mv;
 	}
 	
 	/* 자주묻는질문 */
