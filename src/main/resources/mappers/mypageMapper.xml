@@ -34,6 +34,12 @@
 		<result property="pCategoryName" column="P_CATEGORY_NAME" />
 	</resultMap>
 	
+	<resultMap id="AttMap" type="com.kh.healthDao.mypage.model.vo.AttCheck">
+		<id property="attendanceId" column="ATTENDANCE_ID"/>
+		<result property="attendanceDate" column="ATTENDANCE_DATE" />
+		<result property="userNo" column="USER_NO" />
+	</resultMap>
+	
 	<select id="findQnaList" resultMap="qnaResultMap" parameterType="hashmap">
 		SELECT *
 		FROM
@@ -175,6 +181,19 @@
 		  FROM POINT
 		  JOIN POINT_CATEGORY USING(P_CATEGORY_NO)
 	</select>
+
+	<insert id="attendanceCheck" parameterType="com.kh.healthDao.mypage.model.vo.AttCheck">
+		INSERT INTO ATT_CHECK(
+	        ATTENDANCE_ID
+	      , ATTENDANCE_DATE
+	      , USER_NO
+		)VALUES (
+	        SEQ_ATTENDANCE_ID.NEXTVAL
+	      , SYSDATE
+	      , #{userNo}
+		)
+	</insert>
+
 	
 	<select id="myCouponList" resultMap="couponResultMap">
 		SELECT

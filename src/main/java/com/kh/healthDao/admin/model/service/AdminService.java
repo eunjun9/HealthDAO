@@ -1,6 +1,6 @@
 package com.kh.healthDao.admin.model.service;
 
-import java.util.List;
+import java.util.Map;
 
 import com.kh.healthDao.admin.model.vo.Product;
 
@@ -13,13 +13,13 @@ public interface AdminService {
 	public int RegistProduct(Product product);
 	
 	// 재고내역
-	List<Product> listProductInventory();
+	Map<String, Object> inventoryPaging(int page);
 
-	// 재고 수량 입력
-	public int pLPopupSu(Product product);
+	public Product pLPopupSu(Product product);
+
+	public int stockPlus(Product product);
 
 	public int insertproductStock(Product product);
-
 
 
 	

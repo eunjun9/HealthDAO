@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.kh.healthDao.admin.model.vo.Coupon;
 import com.kh.healthDao.common.model.vo.Paging;
 import com.kh.healthDao.mypage.model.dao.MypageMapper;
+import com.kh.healthDao.mypage.model.vo.AttCheck;
 import com.kh.healthDao.mypage.model.vo.Point;
 import com.kh.healthDao.mypage.model.vo.Qna;
 
@@ -90,6 +91,13 @@ public class MypageServiceImpl implements QnaService, MyCouponService{
 	@Override
 	public List<Coupon> myCouponList(int userNo) {
 		return mypageMapper.myCouponList(userNo);
+	}
+
+	// 출석체크
+	@Override
+	public int attendanceCheck(AttCheck att) {
+		
+		return mypageMapper.attendanceCheck(att);
 	}
 
 }

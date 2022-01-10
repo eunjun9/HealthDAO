@@ -75,7 +75,7 @@
 
 					<!-- myPageCon -->
 					<div class="myPageCon">
-						<p class="atten1"><img class="a_check" src="./resources/web/images/point/A_check.png"></p>
+						<p class="atten1"><img class="a_check" src="/images/point/A_check.png"></p>
 						<div class="attCheckContArea">
 							<p>이준우님 반가워요,<br>이번달 출석체크 현황입니다 :)</p>
 							<dl class="dayCount">
@@ -83,292 +83,75 @@
 								<dd><em>10</em>회</dd>
 							</dl>
 							<dl class="couponCount">
-								<dt>나의 당첨 쿠폰<a href="javascript:boid()" onclick="showLayer('AttCheckMyCoupon');"><span class="hide">쿠폰보기</span></a></dt>
-								<dd><em>5</em>개</dd>
+								<dt>지금은<a href="javascript:boid()" onclick="showLayer('AttCheckMyCoupon');"><span class="hide">쿠폰보기</span></a></dt>
+								<dd><em th:text="${#calendars.format(#calendars.createNow(), 'MM')}"></em>월</dd>
 							</dl>
 						</div>
-						<div class="attenCheckOutline"> 							
-							<ul class="atten2_check_list">
-								<li>
-									<div class="today">
-										<em class="n">일</em><br>
-										<em class="d"></em>
-									</div>
-								</li>
-								<li>
-									<div class="today">
-										<em class="n">월</em><br>
-										<em class="d"></em>
-									</div>
-								</li>
-								<li>
-									<div class="today">
-										<em class="n">화</em><br>
-										<em class="d"></em>
-									</div>
-								</li>
-								<li>
-									<div class="today">
-										<em class="n">수</em><br>
-										<em class="d"></em>
-									</div>
-								</li>
-								<li>
-									<div class="today">
-										<em class="n">목</em><br>
-										<em class="d"></em>
-									</div>
-								</li>
-								<li>
-									<div class="today">
-										<em class="n">금</em><br>
-										<em class="d"></em>
-									</div>
-								</li>
-								<li>
-									<div class="today">
-										<em class="n">토</em><br>
-										<em class="d"></em>
-									</div>
-								</li>
-								<li>
-									<div class="today">
-										<em class="no">26</em><br>
-										<em class="do">DAY</em>
-									</div>
-								</li>
-								<li>
-									<div class="today">
-										<em class="no">27</em><br>
-										<em class="do">DAY</em>
-									</div>
-								</li>
-								<li>
-									<div class="today">
-										<em class="no">28</em><br>
-										<em class="do">DAY</em>
-									</div>
-								</li>
-								<li>
-									<div class="today">
-										<em class="no">29</em><br>
-										<em class="do">DAY</em>
-									</div>
-								</li>
-								<li>
-									<div class="today">
-										<em class="no">30</em><br>
-										<em class="do">DAY</em>
-									</div>
-								</li>
-								<li>
-									<div class="today">
-										<em class="no">31</em><br>
-										<em class="do">DAY</em>
-									</div>
-								</li>
-								<li class="todayOutline">
-									<div class="today">
-										<em class="n">01</em><br>
-										<em class="d">DAY</em>
-									</div>
-									<div><img class="heart"  src="./resources/web/images/point/heart.png"></div>
-								</li>
-								<li class="todayOutline">
-									<div class="today">
-										<em class="n">02</em><br>
-										<em class="d">DAY</em>
-									</div>
-									<div><img class="heart"  src="./resources/web/images/point/heart.png"></div>
-								</li>
-								<li class="todayOutline">
-									<div class="today">
-										<em class="n">03</em><br>
-										<em class="d">DAY</em>
-									</div>
-									<div><img class="heart"  src="./resources/web/images/point/heart.png"></div>
-								</li>
-								<li class="todayOutline">
-									<div class="today">
-										<em class="n">04</em><br>
-										<em class="d">DAY</em>
-									</div>
-									<div><img class="heart"  src="./resources/web/images/point/heart.png"></div>
-								</li>
-								<li class="todayOutline">
-									<div class="today">
-										<em class="n">05</em><br>
-										<em class="d">DAY</em>
-									</div>
-									<div><img class="heart"  src="./resources/web/images/point/heart.png"></div>
-								</li>
-								<li class="todayOutline">
-									<div class="today">
-										<em class="n">06</em><br>
-										<em class="d">DAY</em>
-									</div>
-									<div><img class="heart"  src="./resources/web/images/point/heart.png"></div>
-								</li>
-								<li class="todayOutline">
-									<div class="today">
-										<em class="n">07</em><br>
-										<em class="d">DAY</em>
-									</div>
-									<div><img class="heart"  src="./resources/web/images/point/heart.png"></div>
-								</li>
-								<li class="todayOutline">
-									<div class="today">
-										<em class="n">08</em><br>
-										<em class="d">DAY</em>
-									</div>
-									<div><img class="heart"  src="./resources/web/images/point/heart.png"></div>
-								</li>
-								<li class="todayOutline">
-									<div class="today">
-										<em class="n">09</em><br>
-										<em class="d">DAY</em>
-									</div>
-									<div><img class="heart"  src="./resources/web/images/point/heart.png"></div>
-								</li>
-								<li class="todayOutline">
-									<div class="today">
-										<em class="n">10</em><br>
-										<em class="d">DAY</em>
-									</div>
-									<div><img class="heart"  src="./resources/web/images/point/heart.png"></div>
-								</li>
-								<li class="todayOutline">
-									<div class="today">
-										<em class="n">11</em><br>
-										<em class="d">DAY</em>
-									</div>
-									<div><img class="heart"  src="./resources/web/images/point/heart.png"></div>
-								</li>
-								<li class="todayOutline">
-									<div class="today">
-										<em class="n">12</em><br>
-										<em class="d">DAY</em>
-									</div>
-									<div><img class="heart"  src="./resources/web/images/point/heart.png"></div>
-								</li>
-								<li class="todayOutline">
-									<div class="today">
-										<em class="n">13</em><br>
-										<em class="d">DAY</em>
-									</div>
-									<div><img class="heart"  src="./resources/web/images/point/heart.png"></div>
-								</li>
-								<li class="todayOutline">
-									<div class="today">
-										<em class="n">14</em><br>
-										<em class="d">DAY</em>
-									</div>
-									<div><img class="heart"  src="./resources/web/images/point/heart.png"></div>
-								</li>
-								<li>
-									<div class="today">
-										<em class="n">15</em><br>
-										<em class="d">DAY</em>
-									</div>
-								</li>
-								<li>
-									<div class="today">
-										<em class="n">16</em><br>
-										<em class="d">DAY</em>
-									</div>
-								</li>
-								<li>
-									<div class="today">
-										<em class="n">17</em><br>
-										<em class="d">DAY</em>
-									</div>
-								</li>
-								<li>
-									<div class="today">
-										<em class="n">18</em><br>
-										<em class="d">DAY</em>
-									</div>
-								</li>
-								<li>
-									<div class="today">
-										<em class="n">19</em><br>
-										<em class="d">DAY</em>
-									</div>
-								</li>
-								<li>
-									<div class="today">
-										<em class="n">20</em><br>
-										<em class="d">DAY</em>
-									</div>
-								</li>
-								<li>
-									<div class="today">
-										<em class="n">21</em><br>
-										<em class="d">DAY</em>
-									</div>
-								</li>
-								<li>
-									<div class="today">
-										<em class="n">22</em><br>
-										<em class="d">DAY</em>
-									</div>
-								</li>
-								<li>
-									<div class="today">
-										<em class="n">23</em><br>
-										<em class="d">DAY</em>
-									</div>
-								</li>
-								<li>
-									<div class="today">
-										<em class="n">24</em><br>
-										<em class="d">DAY</em>
-									</div>
-								</li>
-								<li>
-									<div class="today">
-										<em class="n">25</em><br>
-										<em class="d">DAY</em>
-									</div>
-								</li>
-								<li>
-									<div class="today">
-										<em class="n">26</em><br>
-										<em class="d">DAY</em>
-									</div>
-								</li>
-								<li>
-									<div class="today">
-										<em class="n">27</em><br>
-										<em class="d">DAY</em>
-									</div>
-								</li>
-								<li>
-									<div class="today">
-										<em class="n">28</em><br>
-										<em class="d">DAY</em>
-									</div>
-								</li>
-								<li>
-									<div class="today">
-										<em class="n">29</em><br>
-										<em class="d">DAY</em>
-									</div>
-								</li>
-								<li>
-									<div class="today">
-										<em class="n">30</em><br>
-										<em class="d">DAY</em>
-									</div>
-								</li>
-								<li>
-									<div class="today">
-										<em class="n">31</em><br>
-										<em class="d">DAY</em>
-									</div>
-								</li>
-							</ul>
-						</div>
+						
+
+							<div class="attenCheckOutline"> 							
+								<ul class="atten2_check_list">
+									<li>
+										<div class="today">
+											<em class="n">일</em><br>
+											<em class="d"></em>
+										</div>
+									</li>
+									<li>
+										<div class="today">
+											<em class="n">월</em><br>
+											<em class="d"></em>
+										</div>
+									</li>
+									<li>
+										<div class="today">
+											<em class="n">화</em><br>
+											<em class="d"></em>
+										</div>
+									</li>
+									<li>
+										<div class="today">
+											<em class="n">수</em><br>
+											<em class="d"></em>
+										</div>
+									</li>
+									<li>
+										<div class="today">
+											<em class="n">목</em><br>
+											<em class="d"></em>
+										</div>
+									</li>
+									<li>
+										<div class="today">
+											<em class="n">금</em><br>
+											<em class="d"></em>
+										</div>
+									</li>
+									<li>
+										<div class="today">
+											<em class="n">토</em><br>
+											<em class="d"></em>
+										</div>
+									</li>
+									<li th:each="notDate : ${#numbers.sequence(26,31)}">
+										<div class="today">
+											<em class="no"  th:text="${notDate}"></em><br>
+											<em class="do">DAY</em>
+										</div>
+									</li>
+									<li class="todayOutline" th:each="date : ${#numbers.sequence(1,31)}">
+										<div class="today">
+											<em class="n" th:text="${date}"></em><br>
+											<em class="d">DAY</em>
+											
+										</div>
+										
+										<div><button class="btnClass" th:id="'attBtn' + ${date}" th:value="${date}"><img class="heart"  src="/images/point/heart.png"></button></div>
+										
+									</li>
+								</ul>
+							</div>
+						
 					</div>
 					<!-- //myPageCon -->
 				</div>
@@ -376,7 +159,7 @@
 		</div>
 	</div>
 	</div>
-	</div>
+	
 	
 	<!-- //container -->
 	
@@ -394,7 +177,71 @@
 	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 	<script type="text/javascript">
 		$('#quick .quickArea').css({'position':'absolute', 'top':290});
+		
+		
+		 
+		 
+		
 	</script>
+	
+<!--  	<script>
+	$(document).ready(function() {
+		/* $(document).on("click",".todayOutline div button",function(){
+			var idx = $(this).index();
+            
+            alert('버튼 {}을 눌렀습니다.'.replace('{}', idx))
+		
+		}); */
+		
+		var cancel_button = [];
+		for(i=0;i<=30; i++){
+			// alert($("#attBtn"+(i+1)).val());
+			cancel_button[i] = $("#attBtn"+(i+1));
+			/* cancel_button[i].on('click', function(event){
+								alert(cancel_button[i]) 
+								}); 
+			}; */
+			$(document).on("click",cancel_button[i],function(){
+				alert(cancel_button[i]);
+			}); 
+	}
+	});
+	
+	</script>  -->
+	
+<!--  	<script th:inline="javascript" > 
+ 	
+   		$(function(){
+   			$(".btnClass").on('click', function(){
+   				var data = '[(${date})]';
+   				
+   				let param = {};
+   				param.btnValue = $(".btnClass").eq(date).attr("id");
+   				console.log(param);
+   				
+   				/*
+   				$.ajax({
+   					url : "/book",
+   					data : JSON.stringify(param),
+   					dataType : "json",
+   					contentType : "application/json; charset=utf-8",
+   					type : "post",
+   					success : function(data){
+   						console.log(data);
+   						alert(data.msg);
+   						
+   						$("#bookEnrollForm")[0].reset();
+   					
+   					},
+   					error : function(e){
+   						console.log(e)
+   					}
+   				
+   				});    */	
+   			});
+   		});
+   		
+   </script>  -->
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 </body>
 </html>

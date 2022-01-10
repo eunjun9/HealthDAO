@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.kh.healthDao.admin.model.vo.Coupon;
 import com.kh.healthDao.admin.model.vo.Notice;
 import com.kh.healthDao.admin.model.vo.Product;
+import com.kh.healthDao.mypage.model.vo.Qna;
 
 
 
@@ -15,6 +16,7 @@ import com.kh.healthDao.admin.model.vo.Product;
 public interface AdminMapper {
 
 	
+
 	public void register(Product product);
 
 	// 상품 등록
@@ -23,10 +25,25 @@ public interface AdminMapper {
 	// 상품 재고
 	public List<Product> listProductInventory();
 
-	// 재고 수량 입력
-	public int pLPopupSu(Product product);
+	public String insertproductStock(Product product);
 
-	public int insertproductStock(Product product);
+	public int getinventoryCount();
+
+	public List<Product> listProductInventory(Map<String, Object> pageRow);
+
+	public Product pLPopupSu(Product product);
+
+	// 재고 추가
+	public int stockPlus(Product product);
+
+
+
+
+
+
+
+
+
 
 	// 쿠폰등록
 	public int couponInput(Coupon coupon);
