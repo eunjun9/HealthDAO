@@ -16,7 +16,7 @@ import com.kh.healthDao.mypage.model.vo.Qna;
 
 
 @Service("mypageService")
-public class MypageServiceImpl implements QnaService, MyCouponService{
+public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewService{
 	
 	private final MypageMapper mypageMapper; 
 	
@@ -93,11 +93,37 @@ public class MypageServiceImpl implements QnaService, MyCouponService{
 		return mypageMapper.myCouponList(userNo);
 	}
 
+	@Override
+	public Map<String, Object> userReviewList(int page, int userNo) {
+		int listCount = mypageMapper.userReviewListCount(userNo);
+		Paging pi = new Paging(page, listCount, 5, 10);
+		
+		int startRow = (pi.getPage() - 1) * pi.getBoardLimit() + 1;
+		int endRow = startRow + pi.getBoardLimit() - 1;
+		
+		Map<String, Object> pageRow = new HashMap<>();
+		pageRow.put("page", page);
+		pageRow.put("startRow", startRow);
+		pageRow.put("endRow", endRow);
+		pageRow.put("userNo", userNo);
+		
+		List<Qna> reviewList = mypageMapper.userReviewList(pageRow);
+		
+		Map<String, Object> review = new HashMap<>();
+		
+		review.put("listCount", listCount);
+		review.put("reviewList", reviewList);
+		review.put("pi", pi);
+		
+		return review;
+   }
+  
 	// 출석체크
 	@Override
 	public int attendanceCheck(AttCheck att) {
 		
 		return mypageMapper.attendanceCheck(att);
+
 	}
 
 }

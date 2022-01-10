@@ -194,7 +194,8 @@
 		    , N_DATE
 		    , MODIFY_DATE
 		    , N_VIEW
-		FROM NOTICE)
+		FROM NOTICE
+		WHERE N_STATUS = 'Y')
 	</select>
 	
 	<select id="allNoticeList" parameterType="hashmap" resultMap="noticeResultMap">
@@ -210,6 +211,7 @@
 					    , MODIFY_DATE
 					    , N_VIEW
 					FROM NOTICE
+					WHERE N_STATUS = 'Y'
 		        	ORDER BY N_NO DESC) A
 		    )
 		WHERE RNUM BETWEEN #{startRow} AND #{endRow}
@@ -239,4 +241,20 @@
 		SET N_VIEW = N_VIEW + 1
 		WHERE N_NO = #{nNo}
 	</update>
+	
+	<select id="newfiveNoticeList" resultMap="noticeResultMap">
+		SELECT
+		    N_NO
+		    , N_TITLE
+		    , N_CONTENT
+		    , N_DATE
+		    , MODIFY_DATE
+		    , N_VIEW
+		FROM NOTICE
+		WHERE N_STATUS = 'Y'
+		<![CDATA[
+		AND ROWNUM < 6
+		]]>
+		ORDER BY ROWNUM DESC
+	</select>
 </mapper>
