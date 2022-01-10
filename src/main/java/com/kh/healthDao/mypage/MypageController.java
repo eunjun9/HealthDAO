@@ -238,11 +238,13 @@ public class MypageController {
 		
 	/* 보유 포인트 내역 */
 	@GetMapping("/point")
-	public ModelAndView point(ModelAndView mv) {
+	public ModelAndView point(ModelAndView mv,  @RequestParam int page) {
 		
-		List<Point> PointList = qnaService.pointList();
+		Map<String, Object> map = qnaService.pointList(page);
 		
-		mv.addObject("pointList", PointList);
+		mv.addObject("PointList", map.get("PointList"));
+		mv.addObject("listCount", map.get("listCount"));
+		mv.addObject("pi", map.get("pi"));
 		mv.setViewName("mypage/point");
 		
 		return mv;

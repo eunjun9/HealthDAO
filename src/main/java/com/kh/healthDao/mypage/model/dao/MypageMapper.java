@@ -37,9 +37,16 @@ public interface MypageMapper {
 
 	List<Qna> userReviewList(Map<String, Object> pageRow);
 
+
+	// 포인트 페이징
+	int pointListCount();
+	List<Point> listPoint(Map<String, Object> pageRow);
+	
+
 	Review reviewDetail(int reviewNo);
 
 	int reviewModify(Review review);
+
 
 
 

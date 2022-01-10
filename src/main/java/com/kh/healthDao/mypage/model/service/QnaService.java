@@ -17,8 +17,8 @@ public interface QnaService {
 	// 문의 디테일
 	Qna qnaDetail(int qNo);
 	
-	// 포인트 내역
-	List<Point> pointList();
+	// 포인트 내역 페이징
+	Map<String, Object> pointList(int page);
 	
 	// 출석체크
 	int attendanceCheck(AttCheck att);

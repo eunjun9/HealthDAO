@@ -47,13 +47,15 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 		return mypageMapper.couponEventList();
 	}
 	
-	// 포인트 내역
-	@Override
-	public List<Point> pointList() {
-		
-		return mypageMapper.pointList();
-
-	}
+	/*
+	 * // 포인트 내역
+	 * 
+	 * @Override public List<Point> pointList() {
+	 * 
+	 * return mypageMapper.pointList();
+	 * 
+	 * }
+	 */
 
 	@Override
 	public Map<String, Object> findQnaList(int page, int userNo) {
@@ -127,6 +129,31 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 
 	}
 
+
+	// 페이징 된 포인트 내역
+	@Override
+	public Map<String, Object> pointList(int page) {
+		int listCount = mypageMapper.pointListCount();
+		Paging pi = new Paging(page, listCount, 5, 6);
+		
+		int startRow = (pi.getPage() - 1) * pi.getBoardLimit() + 1;
+		int endRow = startRow + pi.getBoardLimit() - 1;
+		
+		Map<String, Object> pageRow = new HashMap<>();
+		pageRow.put("page", page);
+		pageRow.put("startRow", startRow);
+		pageRow.put("endRow", endRow);
+		
+		List<Point> PointList = mypageMapper.listPoint(pageRow);
+		
+		Map<String, Object> point = new HashMap<>();
+		
+		point.put("listCount", listCount);
+		point.put("PointList", PointList);
+		point.put("pi", pi);
+		
+		return point;
+
 	@Override
 	public Review reviewDetail(int reviewNo) {
 		return mypageMapper.reviewDetail(reviewNo);
@@ -135,6 +162,7 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 	@Override
 	public int reviewModify(Review review) {
 		return mypageMapper.reviewModify(review);
+
 	}
 
 }
