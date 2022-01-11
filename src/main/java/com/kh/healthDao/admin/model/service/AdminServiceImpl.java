@@ -165,6 +165,30 @@ public class AdminServiceImpl implements AdminService, CouponService, NoticeServ
 		return adminMapper.registOption(product);
 	}
 
+	@Override
+	public Map<String, Object> memberSoundList(int page) {
+		int listCount = adminMapper.memberSoundListCount();
+		Paging pi = new Paging(page, listCount, 5, 10);
+		
+		int startRow = (pi.getPage() - 1) * pi.getBoardLimit() + 1;
+		int endRow = startRow + pi.getBoardLimit() - 1;
+		
+		Map<String, Object> pageRow = new HashMap<>();
+		pageRow.put("page", page);
+		pageRow.put("startRow", startRow);
+		pageRow.put("endRow", endRow);
+		
+		List<Coupon> memberSoundList = adminMapper.memberSoundList(pageRow);
+		
+		Map<String, Object> memberSound = new HashMap<>();
+		
+		memberSound.put("listCount", listCount);
+		memberSound.put("memberSoundList", memberSoundList);
+		memberSound.put("pi", pi);
+		
+		return memberSound;
+	}
+
 
 	/* @Override
 	public List<Product> listProduct(Product product) {

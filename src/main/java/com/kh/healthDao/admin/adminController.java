@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.healthDao.admin.model.service.AdminService;
 import com.kh.healthDao.admin.model.service.CouponService;
+import com.kh.healthDao.admin.model.service.MemberSoundService;
 import com.kh.healthDao.admin.model.service.NoticeService;
 import com.kh.healthDao.admin.model.vo.Coupon;
 import com.kh.healthDao.admin.model.vo.Notice;
@@ -32,12 +33,14 @@ public class adminController {
 	private AdminService adminService;
 	private CouponService couponService;
 	private NoticeService noticeService;
+	private MemberSoundService memberSoundService;
 	
 	@Autowired
-	public adminController(AdminService adminService, CouponService couponService, NoticeService noticeService) {
+	public adminController(AdminService adminService, CouponService couponService, NoticeService noticeService,  MemberSoundService memberSoundService) {
 		this.adminService = adminService;
 		this.couponService = couponService;
 		this.noticeService = noticeService;
+		this.memberSoundService = memberSoundService;
 	}
 	
 	@GetMapping("/productRegist")
@@ -192,5 +195,17 @@ public class adminController {
 		rttr.addFlashAttribute("msg", msg);
 		
 		return "redirect:/admin/noticeList?page=1";
+	}
+	
+	@GetMapping("/memberSoundList")
+	public ModelAndView memberSoundList(ModelAndView mv, @RequestParam int page) {
+		Map<String, Object> map = memberSoundService.memberSoundList(page);
+		
+		mv.addObject("memberSoundList", map.get("memberSoundList"));
+		mv.addObject("listCount", map.get("listCount"));
+		mv.addObject("pi", map.get("pi"));
+		mv.setViewName("admin/memberSoundList");
+		
+		return mv;
 	}
 }
