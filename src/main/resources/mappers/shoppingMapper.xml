@@ -16,6 +16,24 @@
 		<result property="productRank" column="PRODUCT_RANK"/>
 	</resultMap>
 	
+	<select id="recoRankList" resultMap="productResultMap" parameterType="_int">
+		SELECT
+				PRODUCT_NO
+              , PRODUCT_RANK
+			  , PRODUCT_BRAND
+			  , PRODUCT_TITLE
+			  , PRODUCT_PRICE
+			  , PRODUCT_BENEFIT
+			  , PRODUCT_NOTICE
+			  , PRODUCT_INFO
+			  , PRODUCT_VIEW
+			  , PRODUCT_STOCK
+			  , CATEGORY_ID
+			  , P_MEMBERSHIP
+		 FROM PRODUCT
+         JOIN PRODUCT_RECOMMEND USING (PRODUCT_NO)
+        ORDER BY PRODUCT_RANK ASC
+	</select>
 	<insert id="insertReco" parameterType="com.kh.healthDao.admin.model.vo.Product">
 		INSERT 
 		INTO PRODUCT_RECOMMEND
