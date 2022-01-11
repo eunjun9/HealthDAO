@@ -57,6 +57,11 @@ public class ShoppingServiceImpl implements ShoppingService{
 	public int modifyReco(int productNo, int productRank) {
 		return shoppingMapper.modifyReco(productNo, productRank);
 	}
+
+	@Override
+	public int deleteReco(int productNo) {
+		return shoppingMapper.deleteReco(productNo);
+	}
 	
 	@Override
 	public List<Product> beverageShoppingList() {

@@ -96,10 +96,10 @@ public class BannerServiceImpl implements BannerService{
 	}
 
 	@Override
-	public int deleteBanner(int value) {
-		int result1 = bannerMapper.deleteBanner(value);
-		int result2 = bannerMapper.deleteBanner2(value);
-		int result3 = bannerMapper.deleteBanner3(value);
+	public int deleteBanner(int main_no, int f_no) {
+		int result1 = bannerMapper.deleteBanner(main_no);
+		int result2 = bannerMapper.deleteBanner2(f_no);
+		int result3 = bannerMapper.deleteBanner3(main_no);
 
 		int result = 0;
 		System.out.println("r1" + result1);

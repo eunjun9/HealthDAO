@@ -409,22 +409,26 @@
 		}
 		
 		function deleteBanner(){
-			var addList = [], data = {};
+			let addList = [], addList2 = [], data = {};
 			let chk = $('.checked:not(.allChk) input[name="inp_check1"]:checked');		
 			let chkLength = chk.length;	// 체크된 갯수
+			let chk2 = $('.checked:not(.allChk) input[name="inp_check1"]:checked').siblings('input[name="f_no"]');	
 			
-			jQuery.ajaxSettings.traditional = true;
 			if(chkLength >= 1){
 				for(var i = 0; i < chkLength; i++){
 					addList[i] = chk[i].value;
-				    data.addList = addList;	// 체크된 값 배열에 담기
+					addList2[i] = chk2[i].value;
+
+				    data.addList = addList;		// 체크된 값 배열에 담기
+				    data.addList2 = addList2;	// 체크된 값 배열에 담기
 				}
 				console.log(data);			// 배열에 담긴 값
 				$.ajax({
 					url : "/banner/delete",
-					data : JSON.stringify(addList),
-					contentType: 'application/json',
-					type : "post",
+					dataType : "JSON",
+					data : data,
+					type : "POST",
+					traditional : true,		// 배열로 값 넘길때 필요한 선언
 					success : function(data){
 						console.log(data);
 						if(chkLength == data){

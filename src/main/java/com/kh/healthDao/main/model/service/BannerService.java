@@ -17,5 +17,5 @@ public interface BannerService {
 
 	int bannerUpdate(Map<String, Object> map);
 
-	int deleteBanner(int value);
+	int deleteBanner(int main_no, int f_no);
 }
