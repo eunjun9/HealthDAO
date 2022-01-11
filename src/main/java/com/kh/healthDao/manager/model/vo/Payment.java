@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Payment {
 	
+	
 	private int payNo; 					// 결제번호
 	private Date payDate;				// 결제일
 	private String payMethod;			// 결제수단
@@ -22,6 +23,11 @@ public class Payment {
 	private int userNo;					// 주문자번호
 	private int ProductNo;				// 상품번호
 	private int quantity;				// 수량
+	private String productBrand;		// 브랜드
+	private String productTitle;		// 상품명
+	private int productPrice;		// 상품가격
+	
+	
 	
 	
 
