@@ -25,6 +25,11 @@ public class ShoppingServiceImpl implements ShoppingService{
 	}
 
 	@Override
+	public List<Product> recoRankList() {
+		return shoppingMapper.recoRankList();
+	}
+
+	@Override
 	public Map<String, Object> pdtList() {
 		int listCount = shoppingMapper.pdtListCount();
 		List<Product> pdtList = shoppingMapper.pdtList();

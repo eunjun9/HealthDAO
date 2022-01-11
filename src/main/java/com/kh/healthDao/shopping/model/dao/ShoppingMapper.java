@@ -10,6 +10,7 @@ import com.kh.healthDao.admin.model.vo.Product;
 
 @Mapper
 public interface ShoppingMapper {
+	List<Product> recoRankList();
 	List<Product> pdtList();
 	int pdtListCount();
 	Product detailPdt(int productNo);

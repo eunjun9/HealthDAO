@@ -193,7 +193,7 @@
 						<div class="pdt_list1">
 							<button class="set-arrow set-prev" type="button">Previous</button>
 							<div class="list_box">
-								<div class="pdtCon">
+								<div class="pdtCon" th:each="reco : ${recoList}">
 									<div class="pdtImg">
 										<ul class="pdt_type">
 											<li class="bg_p">NEW</li>
@@ -202,115 +202,10 @@
 										<a href="#" class="imgLink"><img src="/images/temp/pdt01.png" alt=""></a>
 									</div>
 									<div class="pdtTxt">
-										<p class="pdtHead" style="color:#4f8ffa;">추가혜택 문구</p>
-										<p class="pdtBrand">상품명</p>
-										<p class="pdtName">상품제목</p>
-										<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
-										<div class="pdtReview">
-											<div class="js_rating ratingS"><span>4.5</span></div>
-											4.5 <span class="count">(리뷰 18)</span>
-										</div>
-									</div>
-									<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM on"><span class="hide">찜하기</span></a><!-- 좋아요 선택시 class on 추가 -->
-									<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
-								</div>
-								<div class="pdtCon">
-									<div class="pdtImg">
-										<ul class="pdt_type">
-											<li class="bg_p">NEW</li>
-											<li class="bg_p">BEST</li>
-										</ul>
-										<a href="#" class="imgLink"><img src="/images/temp/pdt02.png" alt=""></a>
-									</div>
-									<div class="pdtTxt">
-										<p class="pdtHead" style="color:#4f8ffa;">추가혜택 문구</p>
-										<p class="pdtBrand">상품명</p>
-										<p class="pdtName">상품제목</p>
-										<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
-										<div class="pdtReview">
-											<div class="js_rating ratingS"><span>4.5</span></div>
-											4.5 <span class="count">(리뷰 18)</span>
-										</div>
-									</div>
-									<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM on"><span class="hide">찜하기</span></a><!-- 좋아요 선택시 class on 추가 -->
-									<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
-								</div>
-								<div class="pdtCon">
-									<div class="pdtImg">
-										<ul class="pdt_type">
-											<li class="bg_p">NEW</li>
-											<li class="bg_p">BEST</li>
-										</ul>
-										<a href="#" class="imgLink"><img src="/images/temp/pdt03.png" alt=""></a>
-									</div>
-									<div class="pdtTxt">
-										<p class="pdtHead" style="color:#4f8ffa;">추가혜택 문구</p>
-										<p class="pdtBrand">상품명</p>
-										<p class="pdtName">상품제목</p>
-										<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
-										<div class="pdtReview">
-											<div class="js_rating ratingS"><span>4.5</span></div>
-											4.5 <span class="count">(리뷰 18)</span>
-										</div>
-									</div>
-									<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM on"><span class="hide">찜하기</span></a><!-- 좋아요 선택시 class on 추가 -->
-									<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
-								</div>
-								<div class="pdtCon">
-									<div class="pdtImg">
-										<ul class="pdt_type">
-											<li class="bg_p">NEW</li>
-											<li class="bg_p">BEST</li>
-										</ul>
-										<a href="#" class="imgLink"><img src="/images/temp/pdt01.png" alt=""></a>
-									</div>
-									<div class="pdtTxt">
-										<p class="pdtHead" style="color:#4f8ffa;">추가혜택 문구</p>
-										<p class="pdtBrand">상품명</p>
-										<p class="pdtName">상품제목</p>
-										<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
-										<div class="pdtReview">
-											<div class="js_rating ratingS"><span>4.5</span></div>
-											4.5 <span class="count">(리뷰 18)</span>
-										</div>
-									</div>
-									<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM on"><span class="hide">찜하기</span></a><!-- 좋아요 선택시 class on 추가 -->
-									<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
-								</div>
-								<div class="pdtCon">
-									<div class="pdtImg">
-										<ul class="pdt_type">
-											<li class="bg_p">NEW</li>
-											<li class="bg_p">BEST</li>
-										</ul>
-										<a href="#" class="imgLink"><img src="/images/temp/pdt02.png" alt=""></a>
-									</div>
-									<div class="pdtTxt">
-										<p class="pdtHead" style="color:#4f8ffa;">추가혜택 문구</p>
-										<p class="pdtBrand">상품명</p>
-										<p class="pdtName">상품제목</p>
-										<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
-										<div class="pdtReview">
-											<div class="js_rating ratingS"><span>4.5</span></div>
-											4.5 <span class="count">(리뷰 18)</span>
-										</div>
-									</div>
-									<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM on"><span class="hide">찜하기</span></a><!-- 좋아요 선택시 class on 추가 -->
-									<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
-								</div>
-								<div class="pdtCon">
-									<div class="pdtImg">
-										<ul class="pdt_type">
-											<li class="bg_p">NEW</li>
-											<li class="bg_p">BEST</li>
-										</ul>
-										<a href="#" class="imgLink"><img src="/images/temp/pdt03.png" alt=""></a>
-									</div>
-									<div class="pdtTxt">
-										<p class="pdtHead" style="color:#4f8ffa;">추가혜택 문구</p>
-										<p class="pdtBrand">상품명</p>
-										<p class="pdtName">상품제목</p>
-										<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
+										<p class="pdtHead" style="color:#4f8ffa;" th:text="${reco.productBenefit}"></p>
+										<p class="pdtBrand" th:text="${reco.productBrand}"></p>
+										<p class="pdtName" th:text="${reco.productTitle}"></p>
+										<p class="pdtPrice" th:text="${#numbers.formatInteger(reco.productPrice, 0, 'COMMA')+'원'}"></p>
 										<div class="pdtReview">
 											<div class="js_rating ratingS"><span>4.5</span></div>
 											4.5 <span class="count">(리뷰 18)</span>

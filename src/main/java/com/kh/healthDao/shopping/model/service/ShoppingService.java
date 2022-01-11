@@ -38,4 +38,6 @@ public interface ShoppingService {
 	int modifyReco(int productNo, int productRank);
 
 	int deleteReco(int productNo);
+
+	List<Product> recoRankList();
 }

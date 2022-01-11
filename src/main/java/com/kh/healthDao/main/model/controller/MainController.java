@@ -33,8 +33,10 @@ public class MainController {
 	public ModelAndView findBannerRankList(ModelAndView mv) {
 		
 		List<Banner> bannerList = bannerService.bannerRankList();
-		
+		List<Product> recoList = shoppingService.recoRankList();
+
 		mv.addObject("bannerList", bannerList);
+		mv.addObject("recoList", recoList);
 		mv.setViewName("main/main");
 		
 		return mv;
