@@ -18,6 +18,9 @@ public interface ManagerService{
 
 	// 페이징된 전체 문의글
 	Map<String, Object> InquiryPaging(int page);
+
+	// 정산내역
+	Map<String, Object> calculateList(int page);
 	
 
 	

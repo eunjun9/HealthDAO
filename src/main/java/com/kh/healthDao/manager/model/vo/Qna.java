@@ -2,9 +2,15 @@ package com.kh.healthDao.manager.model.vo;
 
 import java.util.Date;
 
+import com.kh.healthDao.admin.model.vo.Category;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Qna {
 	
 	private int qNo;					// 문의번호 

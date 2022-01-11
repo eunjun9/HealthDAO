@@ -28,9 +28,16 @@ public class ManagerController {
 
 	// 정산내역
 	@GetMapping("/calculateList")
-	public String managerCalculateList() {
+	public ModelAndView managerCalculateList(ModelAndView mv, @RequestParam int page) {
 		
-		return "manager/calculateList";
+		Map<String, Object> map = managerService.calculateList(page);
+		
+		mv.addObject("calculateList", map.get("calculateList"));
+		mv.addObject("listCount", map.get("listCount"));
+		mv.addObject("pi", map.get("pi"));
+		mv.setViewName("manager/calculateList");
+		
+		return mv;
 	}
 	
 	

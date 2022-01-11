@@ -104,12 +104,17 @@ public class adminController {
 	@PostMapping("/pLPopupSu")
 	@ResponseBody
 	public ModelAndView pLPopupSu(Product product, ModelAndView mv) {
-		System.out.println(product.getProductStock());
-		System.out.println(product.getProductNo());
+		// System.out.println(product.getProductStock());
+		// System.out.println(product.getProductNo());
 		
 		int result = adminService.stockPlus(product);
 		
-		mv.setViewName("redirect:/");
+		if(result > 0) {
+			
+		}
+		
+		
+		mv.setViewName("redirect:/admin/inventoryList?page=1");
 		return mv;
 	}
 	

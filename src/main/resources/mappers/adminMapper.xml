@@ -146,7 +146,7 @@
 	
 	<update id="stockPlus" parameterType="com.kh.healthDao.admin.model.vo.Product">
 	 UPDATE PRODUCT
-		SET PRODUCT_STOCK = #{productStock}
+		SET PRODUCT_STOCK = PRODUCT_STOCK+#{productStock}
 	  WHERE PRODUCT_NO = #{productNo}
 	</update>
 	
