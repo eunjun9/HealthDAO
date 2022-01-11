@@ -82,6 +82,8 @@
 		  JOIN MEMBER M ON(T.T_NO = M.USER_NO)
           LEFT OUTER JOIN PT_ORDER O ON(T.T_NO = O.T_NO)
           LEFT OUTER JOIN REVIEW R ON(O.PAY_NO = R.PAY_NO)
+         WHERE T_METRO=#{searchTrainer}
+            OR T_AREA=#{searchTrainer}
          GROUP BY T.T_NO
 		     , T.T_GYM_NAME
 		     , T.T_GYM_ADDRESS
@@ -97,7 +99,6 @@
 		     , M.USER_NO
 		     , M.USER_NAME
 		     , M.USER_PHONE
-		HAVING T_METRO=#{searchTrainer}
 	</select>
 
 	<select id="trainerSelect" resultMap="trainerResultMap" parameterType="_int">
