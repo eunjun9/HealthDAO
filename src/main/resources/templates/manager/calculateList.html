@@ -69,25 +69,13 @@
 												</thead>
 												<tbody>
 													<tr th:each="clist : ${calculateList}">
-														<td class="fc88" th:text=${clist.payNo}>11</td>
-														<td class="ta_l" th:text=${clist.payNo}>맛있닭 닭가슴살 한끼 만두 혼합..</td>
-														<td class="fc88">맛있닭</td>
-														<td>50</td>
-														<td>500,000</td>
+														<td class="fc88" th:text=${clist.payNo}></td>
+														<td class="ta_l" th:text=${clist.productTitle}></td>
+														<td class="fc88" th:text=${clist.productBrand}></td>
+														<td th:text=${clist.quantity}></td>
+														<td th:text="${#numbers.formatInteger(clist.quantity * clist.productPrice, 0, 'COMMA')+'원'}"></td>
 													</tr>
-													<tr class="js_ListCtt ListCtt">
-														<td></td>
-														<td>
-															<div class="ta_l js_replyCtt replyCtt">
-																<div>
-																	맛있닭 닭가슴살 한끼 만두 혼합맛 8개
-																</div>
-															</div>
-														</td>
-														<td></td>
-														<td></td>
-														<td></td>
-													</tr>
+													
 													
 												</tbody>
 											</table>
