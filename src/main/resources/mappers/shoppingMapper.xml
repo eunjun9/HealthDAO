@@ -66,6 +66,7 @@
 	<select id="pdtList" resultMap="productResultMap">
 		SELECT
 				PRODUCT_NO
+              , PRODUCT_RANK
 			  , PRODUCT_BRAND
 			  , PRODUCT_TITLE
 			  , PRODUCT_PRICE
@@ -77,6 +78,7 @@
 			  , CATEGORY_ID
 			  , P_MEMBERSHIP
 		 FROM PRODUCT
+		 LEFT JOIN PRODUCT_RECOMMEND USING (PRODUCT_NO)
 	</select>
 	
 	<select id="selectReco" resultMap="productResultMap" parameterType="_int">

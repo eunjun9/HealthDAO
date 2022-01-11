@@ -75,10 +75,10 @@ public class MainController {
 	
 	@ResponseBody
 	@PostMapping("/banner/delete")
-	public int deleteBanner(int[] addList) {
+	public int deleteBanner(int[] addList, int[] addList2) {
 		int result = 0;
 		for(int i = 0; i < addList.length; i++) {
-			result += bannerService.deleteBanner(addList[i]);			
+			result += bannerService.deleteBanner(addList[i], addList2[i]);			
 		}
 		System.out.println(result);
 		
@@ -150,6 +150,19 @@ public class MainController {
 	@PostMapping("/reco/modify")
 	public int modifyReco(int productNo, int productRank) {
 		int result = shoppingService.modifyReco(productNo, productRank);
+		return result;
+	}
+
+	// 추천 상품 삭제
+	@ResponseBody
+	@PostMapping("/reco/delete")
+	public int deleteBanner(int[] addList) {
+		int result = 0;
+		for(int i = 0; i < addList.length; i++) {
+			result += shoppingService.deleteReco(addList[i]);			
+		}
+		System.out.println(result);
+		
 		return result;
 	}
 	
