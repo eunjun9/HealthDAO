@@ -79,6 +79,10 @@ public interface AdminMapper {
 
 	public int registOption(Product product);
 
+	public int memberSoundListCount();
+
+	public List<Coupon> memberSoundList(Map<String, Object> pageRow);
+
 	
 
 	

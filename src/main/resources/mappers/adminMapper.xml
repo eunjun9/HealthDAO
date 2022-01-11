@@ -37,6 +37,7 @@
 		<id property="categoryId" column="CATEGORY_ID" />
 		<result property="categoryName" column="CATEGORY_NAME" />
 	</resultMap>
+	
 	<resultMap id="noticeResultMap" type="com.kh.healthDao.admin.model.vo.Notice">
 		<id property="nNo" column="N_NO" />
 		<result property="nTitle" column="N_TITLE" />
@@ -44,6 +45,15 @@
 		<result property="nDate" column="N_DATE" />
 		<result property="modifyDate" column="MODIFY_DATE" />
 		<result property="nView" column="N_VIEW" />
+	</resultMap>
+	
+	<resultMap id="MemberSoundResultMap" type="com.kh.healthDao.mypage.model.vo.MemberSound">
+		<id property="cNo" column="C_NO" />
+		<result property="cDept" column="C_DEPT" />
+		<result property="cContent" column="C_CONTENT" />
+		<result property="cDate" column="C_DATE" />
+		<result property="userNo" column="USER_NO" />
+		<result property="userId" column="USER_ID" />
 	</resultMap>
 	
  	<!-- 상품 등록 -->
@@ -316,4 +326,40 @@
 		    , 'Y'
 		)
 	</insert>
+	
+	<select id="memberSoundListCount" resultType="_int">
+		SELECT
+		    COUNT(*)
+		FROM(
+		SELECT
+		    C_NO
+		    , C_DEPT
+		    , C_CONTENT
+		    , C_DATE
+		    , USER_NO
+		    , USER_ID
+		FROM MEMBER_SOUND
+		JOIN MEMBER USING(USER_NO)
+		WHERE C_STATUS = 'Y')
+	</select>
+	
+	<select id="memberSoundList" parameterType="hashmap" resultMap="MemberSoundResultMap">
+		SELECT *
+		FROM
+		    (SELECT ROWNUM RNUM, A.*
+		            FROM
+		            (SELECT
+					    C_NO
+					    , C_DEPT
+					    , C_CONTENT
+					    , C_DATE
+					    , USER_NO
+					    , USER_ID
+					FROM MEMBER_SOUND
+					JOIN MEMBER USING(USER_NO)
+					WHERE C_STATUS = 'Y'
+		        	ORDER BY C_NO DESC) A
+		    )
+		WHERE RNUM BETWEEN #{startRow} AND #{endRow}
+	</select>
 </mapper>
