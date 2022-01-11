@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.kh.healthDao.manager.model.vo.Payment;
 import com.kh.healthDao.manager.model.vo.Qna;
 
 @Mapper
@@ -22,6 +23,10 @@ public interface ManagerMapper{
 	// 페이징 된 게시물 조회
 	int getInquiryCount();
 	List<Qna> listInquiryInventory(Map<String, Object> pageRow);
+
+	// 페이징 된 정산내역
+	int calculateListCount();
+	List<Payment> calculateList(Map<String, Object> pageRow);
 
 	
 

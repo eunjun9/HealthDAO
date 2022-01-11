@@ -38,43 +38,11 @@
 
 						<div class="myOrderList mgt40">
 							<div class="tblBar mgt50">
-											<p class="tblList">총 <span>48개</span></p>
+											<p class="tblList">총 <span th:text="${listCount}"></span>개</p>
 											<div class="inp_wrap">
 												<div class="inp_text searchType">
 													<div class="btn_wrap">
-														
-														<div class="inp_wrap">
-															<div class="inp_select">
-																<div class="selectBox">
-																	<button class="title" type="button">정렬(년도)</button>
-																	<ul class="selList">
-																		<li>
-																			<input type="radio" value="" class="option" id="select1_1" name="select1">
-																			<label for="select1_1">2021</label>
-																		</li>
-																		<li>
-																			<input type="radio" value="" class="option" id="select1_2" name="select1">
-																			<label for="select1_2">2020</label>
-																		</li>
-																		<li>
-																			<input type="radio" value="" class="option" id="select1_3" name="select1">
-																			<label for="select1_3">2019</label>
-																		</li>
-																		<li>
-																			<input type="radio" value="" class="option" id="select1_4" name="select1">
-																			<label for="select1_4">2018</label>
-																		</li>
-																		<li>
-																			<input type="radio" value="" class="option" id="select1_5" name="select1">
-																			<label for="select1_5">2017</label>
-																		</li>
-																	</ul>
-																</div>
-															
-														</div>
-														</div>
-
-														<a href="#" class="btn btnSizeL btnColorW btnTypeB" style="width:100px;"><span>Excel</span></a>
+														<a href="#" class="btnn btnSizeL btnColorW btnTypeB" style="width:100px;"><span>Excel</span></a>
 														</div>
 													</div>
 												</div>
@@ -95,16 +63,16 @@
 														<th>제품번호</th>
 														<th>제품명</th>
 														<th>회사명</th>
-														<th>총판매금액</th>
+														<th>총판매수량</th>
 														<th>정산금액</th>
 													</tr>
 												</thead>
 												<tbody>
-													<tr>
-														<td class="fc88">11</td>
-														<td class="ta_l"><a href="javascript:void(0)" class="js_ListTtl ListTtl" title="">맛있닭 닭가슴살 한끼 만두 혼합...</a></td>
+													<tr th:each="clist : ${calculateList}">
+														<td class="fc88" th:text=${clist.payNo}>11</td>
+														<td class="ta_l" th:text=${clist.payNo}>맛있닭 닭가슴살 한끼 만두 혼합..</td>
 														<td class="fc88">맛있닭</td>
-														<td>500,000</td>
+														<td>50</td>
 														<td>500,000</td>
 													</tr>
 													<tr class="js_ListCtt ListCtt">
@@ -120,44 +88,26 @@
 														<td></td>
 														<td></td>
 													</tr>
-													<tr>
-														<td class="fc88">11</td>
-														<td class="ta_l"><a href="javascript:void(0)" class="js_ListTtl ListTtl" title="">맛있닭 닭가슴살 한끼 만두 혼합...</a></td>
-														<td class="fc88">맛있닭</td>
-														<td>500,000</td>
-														<td>500,000</td>
-													</tr>
-													<tr class="js_ListCtt ListCtt">
-														<td></td>
-														<td>
-															<div class="ta_l js_replyCtt replyCtt">
-																<div>
-																	맛있닭 닭가슴살 한끼 만두 혼합맛 8개
-																</div>
-															</div>
-														</td>
-														<td></td>
-														<td></td>
-														<td></td>
-													</tr>
+													
 												</tbody>
 											</table>
-											<div class="paging mgt40">
-												<a href="#" class="first"><span class="hide">첫페이지</span></a>
-												<a href="#" class="prev"><span class="hide">이전페이지</span></a>
-												<a href="#">1</a>
-												<a href="#" class="active">2</a>
-												<a href="#">3</a>
-												<a href="#">4</a>
-												<a href="#">5</a>
-												<a href="#">6</a>
-												<a href="#">7</a>
-												<a href="#">8</a>
-												<a href="#">9</a>
-												<a href="#">10</a>
-												<a href="#" class="next"><span class="hide">다음페이지</span></a>
-												<a href="#" class="last"><span class="hide">마지막페이지</span></a>
-											</div>
+												<div class="paging mgt50"
+													th:with="prev=${pi.page - 1}, next=${pi.page + 1}">
+													<a th:href="@{/manager/calculateList(page=1)}" class="first"><span
+														class="hide">첫페이지</span></a> <a class="prev"
+														href="/manager/calculateList?page="
+														th:attrappend="href=${prev}"><span class="hide">이전페이지</span></a>
+													<a
+														th:each="page : ${#numbers.sequence(pi.startPage, pi.endPage)}"
+														href="/manager/calculateList?page="
+														th:attrappend="href=${page}" th:text="${page}"
+														th:classappend="${page} == ${#httpServletRequest.getParameter('page')} ? active"></a>
+													<a class="next" href="/manager/calculateList?page="
+														th:attrappend="href=${next}"><span class="hide">다음페이지</span></a>
+													<a href="/manager/calculateList?page="
+														th:attrappend="href=${pi.maxPage}" class="last"><span
+														class="hide">마지막페이지</span></a>
+												</div>
 										</div>
 
 									</div>
