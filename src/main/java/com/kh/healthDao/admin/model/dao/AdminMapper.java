@@ -83,6 +83,10 @@ public interface AdminMapper {
 
 	public List<Coupon> memberSoundList(Map<String, Object> pageRow);
 
+	public MemberSound memberSoundDetail(int cNo);
+
+	public int memberSoundModify(MemberSound ms);
+
 	
 
 	
