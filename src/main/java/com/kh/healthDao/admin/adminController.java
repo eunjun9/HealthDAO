@@ -23,6 +23,7 @@ import com.kh.healthDao.admin.model.vo.Coupon;
 import com.kh.healthDao.admin.model.vo.Notice;
 import com.kh.healthDao.admin.model.vo.Product;
 import com.kh.healthDao.member.model.vo.UserImpl;
+import com.kh.healthDao.mypage.model.vo.MemberSound;
 
 
 
@@ -208,4 +209,47 @@ public class adminController {
 		
 		return mv;
 	}
+	
+	@PostMapping("memberSoundDetail")
+	@ResponseBody
+	public MemberSound memberSoundDetail(int cNo) {
+		MemberSound memberSound  = memberSoundService.memberSoundDetail(cNo);
+		
+		return memberSound;
+	}
+	
+	@PostMapping("memberSoundModify")
+	public String memberSoundModify(MemberSound ms, RedirectAttributes rttr) {
+		String msg = memberSoundService.memberSoundModify(ms) > 0 ? "진행상황 적용 완료" : "진행상황 적용 실패";
+		
+		rttr.addFlashAttribute("msg", msg);
+		
+		return "redirect:/admin/memberSoundList?page=1";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
