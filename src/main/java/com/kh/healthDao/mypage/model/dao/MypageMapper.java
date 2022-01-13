@@ -39,13 +39,15 @@ public interface MypageMapper {
 	// 포인트 페이징
 	int pointListCount();
 	List<Point> listPoint(Map<String, Object> pageRow);
-	
+	int pointCount();
 
 	Review reviewDetail(int reviewNo);
 
 	int reviewModify(Review review);
 
 	int attendCheck(AttCheck attcheck);
+
+	
 
 
 

@@ -72,25 +72,10 @@ public class adminController {
 			return mv;
 		}
 	}
-	
-	/*@ResponseBody
-	@RequestMapping(value = "/productRegist", method = RequestMethod.POST)
-	public ModelAndView registProduct(Product product, ModelAndView mv) {
-		
-		List<Product> ProductList = adminService.listProduct(product);
-		
-		mv.addObject("ProductList", ProductList);
-		mv.setViewName("redirect:/admin/productRegist");
-		
-		return mv;
-		
-	}
-	*/
-	
+
 	
 
 	// 페이징 된 리스트
-
 	@GetMapping("inventoryList")
 	public ModelAndView managerInventoryList(ModelAndView mv, @RequestParam int page) {
 
@@ -107,17 +92,14 @@ public class adminController {
 	// 팝업 수량 입력
 	@PostMapping("/pLPopupSu")
 	@ResponseBody
-	public ModelAndView pLPopupSu(Product product, ModelAndView mv) {
+	public ModelAndView pLPopupSu(Product product, ModelAndView mv, RedirectAttributes rttr) {
 		// System.out.println(product.getProductStock());
 		// System.out.println(product.getProductNo());
 		
-		int result = adminService.stockPlus(product);
+		String msg = adminService.stockPlus(product) > 0 ? "답변 등록 성공" : "답변 등록 실패";
 		
-		if(result > 0) {
+		rttr.addFlashAttribute("msg", msg);
 			
-		}
-		
-		
 		mv.setViewName("redirect:/admin/inventoryList?page=1");
 		return mv;
 	}

@@ -3220,7 +3220,7 @@ filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#555555', endC
 .pointOutline .pointInline .pointTitle{font-weight:500; font-size: 20px; margin-left: 25px;margin-top: 25px;width: 100px;}
 .pointOutline .pointInline .pointPrice{font-weight:400; font-size: 15px; margin-top: 60px;}
 .pointOutline .pointInline .pointDay{font-weight:400; font-size: 15px; margin-left: 130px; margin-top: 60px;}
-
+.yelimListCount {margin-left:75%;}
 
 
 /**

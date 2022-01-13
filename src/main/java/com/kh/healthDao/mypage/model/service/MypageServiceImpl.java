@@ -119,6 +119,8 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 		int listCount = mypageMapper.pointListCount();
 		Paging pi = new Paging(page, listCount, 5, 6);
 		
+		int pointCount = mypageMapper.pointCount();
+		
 		int startRow = (pi.getPage() - 1) * pi.getBoardLimit() + 1;
 		int endRow = startRow + pi.getBoardLimit() - 1;
 		
@@ -133,6 +135,7 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 		
 		point.put("listCount", listCount);
 		point.put("PointList", PointList);
+		point.put("pointCount", pointCount);
 		point.put("pi", pi);
 		
 		return point;

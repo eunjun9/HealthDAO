@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.kh.healthDao.manager.model.vo.Payment;
 import com.kh.healthDao.manager.model.vo.Qna;
+import com.kh.healthDao.manager.model.vo.Refund;
 
 @Mapper
 public interface ManagerMapper{
@@ -27,6 +28,13 @@ public interface ManagerMapper{
 	// 페이징 된 정산내역
 	int calculateListCount();
 	List<Payment> calculateList(Map<String, Object> pageRow);
+
+	// 페이징 된 환불내역
+	int refundListCount();
+	List<Refund> refundList(Map<String, Object> pageRow);
+
+	// 환불 완료 버튼
+	int managerRefundOk(Refund refund);
 
 	
 
