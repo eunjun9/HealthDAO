@@ -1,3 +1,20 @@
+/* 로그인 */
+/*$(document).ready(function() {
+	$('#subbtn').click(function() {
+		let name = $.trim($("#ip_name").val());
+		
+		if(!name) {
+			alert("아이디를 입력해주세요.");
+			return false;
+		}
+		
+		if($('#ip_name').val() == "") {
+			alert("아이디를 입력해주세요.");
+			return false;
+		}
+	})
+});*/
+
 /* 회원가입 */
 function selectAll(selectAll)  {
     const checkboxes = document.querySelectorAll('.js_tblList input[type="checkbox"]');
@@ -27,6 +44,10 @@ $(document).ready(function() {
         }
     });
 });
+
+function chk_signUp() {
+	document.getElementById('memberJoinForm').submit();
+}
 
 /* 아이디/비밀번호 찾기 */
 document.getElementById('ht-custom2').addEventListener('click', function(e) {

@@ -16,7 +16,7 @@
 		<div class="site_location">
 			<span><a href="/">HOME</a></span>
 			<span><a href="#">전체상품</a></span>
-			<em>신상품</em>
+			<em>식품</em>
 		</div>
 		<div class="productList contents">
 			<div class="pageTitArea">
@@ -24,7 +24,7 @@
 			</div>
             <div class="pdt_list1">
                 <ul class="list_box">
-                    <li>
+                    <li th:each="foodProduct:${shoppingList}">
                         <div class="pdtImg">
                             <ul class="pdt_type">
                                 <li class="bg_p">NEW</li>
@@ -34,13 +34,13 @@
                                 <li class="bg_r">FREE</li>
                                 <li class="bg_r">GIFT</li>
                             </ul>
-                            <a href="#" class="imgLink"><img src="./resources/web/images/temp/pdt_img1.png" alt="바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널"></a>
+                            <a href="/shopping/detail?productNo=" th:attrappend="href=${foodProduct.productNo}" class="imgLink"><img src="/resources/web/images/temp/pdt_img1.png" alt="바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널"></a>
                         </div>
                         <div class="pdtTxt">
                             <p class="pdtHead" style="color:#4f8ffa;">2019 누적판매 15,591건!</p><!-- 문구가 없어도 태그삭제 X -->
-                            <p class="pdtBrand">바닐라코</p>
-                            <p class="pdtName"><a href="#">바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널</a></p>
-                            <p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
+                            <p class="pdtBrand" th:text="${foodProduct.productBrand}"></p>
+                            <p class="pdtName" th:text="${foodProduct.productTitle}"><a href="#"></a></p>
+                            <p class="pdtPrice"><span class="sasle" th:text="${#numbers.formatInteger(foodProduct.productPrice, 0, 'COMMA')+'원'}"></span><span class="cost">15,000원</span></p>
                             <div class="pdtReview">
                                 <div class="js_rating ratingS"><span>4.5</span></div>
                                 4.5 <span class="count">(리뷰 18)</span>
@@ -48,88 +48,17 @@
                         </div>
                         <a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM on"><span class="hide">찜하기</span></a>
                         <a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
-                    </li>
-                    <li>
-                        <div class="pdtImg">
-                            <ul class="pdt_type">
-                                <li class="bg_p">NEW</li>
-                                <li class="bg_p">BEST</li>
-                                <li class="bg_p">한정판</li>
-                                <li class="bg_r">SALE</li>
-                                <li class="bg_r">FREE</li>
-                                <li class="bg_r">GIFT</li>
-                            </ul>
-                            <a href="#" class="imgLink"><img src="./resources/web/images/temp/pdt_img1.png" alt="바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널"></a>
-                        </div>
-                        <div class="pdtTxt">
-                            <p class="pdtHead" style="color:#4f8ffa;">2019 누적판매 15,591건!</p><!-- 문구가 없어도 태그삭제 X -->
-                            <p class="pdtBrand">바닐라코</p>
-                            <p class="pdtName"><a href="#">바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널</a></p>
-                            <p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
-                            <div class="pdtReview">
-                                <div class="js_rating ratingS"><span>4.5</span></div>
-                                4.5 <span class="count">(리뷰 18)</span>
-                            </div>
-                        </div>
-                        <a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM on"><span class="hide">찜하기</span></a>
-                        <a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
-                    </li>
-                    <li>
-                        <div class="pdtImg">
-                            <ul class="pdt_type">
-                                <li class="bg_p">NEW</li>
-                                <li class="bg_p">BEST</li>
-                                <li class="bg_p">한정판</li>
-                                <li class="bg_r">SALE</li>
-                                <li class="bg_r">FREE</li>
-                                <li class="bg_r">GIFT</li>
-                            </ul>
-                            <a href="#" class="imgLink"><img src="./resources/web/images/temp/pdt_img1.png" alt="바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널"></a>
-                        </div>
-                        <div class="pdtTxt">
-                            <p class="pdtHead" style="color:#4f8ffa;">2019 누적판매 15,591건!</p><!-- 문구가 없어도 태그삭제 X -->
-                            <p class="pdtBrand">바닐라코</p>
-                            <p class="pdtName"><a href="#">바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널</a></p>
-                            <p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
-                            <div class="pdtReview">
-                                <div class="js_rating ratingS"><span>4.5</span></div>
-                                4.5 <span class="count">(리뷰 18)</span>
-                            </div>
-                        </div>
-                        <a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM on"><span class="hide">찜하기</span></a>
-                        <a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
-                    </li>
-                    <li>
-                        <div class="pdtImg">
-                            <ul class="pdt_type">
-                                <li class="bg_p">NEW</li>
-                                <li class="bg_p">BEST</li>
-                                <li class="bg_p">한정판</li>
-                                <li class="bg_r">SALE</li>
-                                <li class="bg_r">FREE</li>
-                                <li class="bg_r">GIFT</li>
-                            </ul>
-                            <a href="#" class="imgLink"><img src="./resources/web/images/temp/pdt_img1.png" alt="바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널"></a>
-                        </div>
-                        <div class="pdtTxt">
-                            <p class="pdtHead" style="color:#4f8ffa;">2019 누적판매 15,591건!</p><!-- 문구가 없어도 태그삭제 X -->
-                            <p class="pdtBrand">바닐라코</p>
-                            <p class="pdtName"><a href="#">바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널</a></p>
-                            <p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
-                            <div class="pdtReview">
-                                <div class="js_rating ratingS"><span>4.5</span></div>
-                                4.5 <span class="count">(리뷰 18)</span>
-                            </div>
-                        </div>
-                        <a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM on"><span class="hide">찜하기</span></a>
-                        <a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
-                    </li>
-                    <li class="noData">
-                        <span>선택하신 속성에 대한 검색결과가 없습니다.<br> 다른 옵션을 선택해보세요.</span>
                     </li>
                 </ul>
             </div>
 		</div>
+		<div class="paging mgt50" th:with="prev=${pi.page - 1}, next=${pi.page + 1}">
+        	<a th:href="@{/shopping/foodProduct(page=1)}" class="first"><span class="hide">첫페이지</span></a>
+        	<a class="prev" href="/shopping/foodProduct?page=" th:attrappend="href=${prev}"><span class="hide">이전페이지</span></a>
+        	<a th:each="page : ${#numbers.sequence(pi.startPage, pi.endPage)}" href="/shopping/foodProduct?page=" th:attrappend="href=${page}" th:text="${page}" th:classappend="${page} == ${#httpServletRequest.getParameter('page')} ? active"></a>	                                   
+        	<a class="next" href="/shopping/foodProduct?page=" th:attrappend="href=${next}"><span class="hide">다음페이지</span></a>
+        	<a href="/shopping/foodProduct?page=" th:attrappend="href=${pi.maxPage}" class="last"><span class="hide">마지막페이지</span></a>
+	    </div>
 	</div>
 	<!-- //container -->
 

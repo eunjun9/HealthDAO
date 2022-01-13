@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" type="text/css" href="../../css/fonts.css">
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<link rel="stylesheet" type="text/css" href="../../css/contents.css">
+<script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
+<meta charset="UTF-8">
+<title>재고수량</title>
+</head>
+<body>
+	
+	
+		<p class="poptext">해당 제품의<br><br>입고된 수량을 입력하세요</p>
+		
+		<form action="/admin/pLPopupSu" class="pLPopupSuForm" name="pLPopupSuForm" method="post">
+			<div class="inp_wrap">
+				<div class="inp_text yl">
+					<input type="number" name="productStock" id="productStock" placeholder="수량을 입력하시오." >
+				</div>
+			</div>
+			<div class="btn_wrap">
+				<a id="plpp" onclick="document.pLPopupSuForm.submit();window.close();"  class="btn btnSizeM btnColorB btnTypeB" style="width:150px;"><span>입력하기</span></a>
+			</div>
+		</form>
+
+	
+</body>
+</html>
+
+
+
+
+
+

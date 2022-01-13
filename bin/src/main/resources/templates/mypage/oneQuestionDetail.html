@@ -32,64 +32,65 @@
                         <p class="fc88 mgb30">
                         	문의번호 : <span th:text="${qna.qNo}"></span> | 
                         	작성일 : <span th:text="${#dates.format(qna.qDate, 'yyyy-MM-dd')}"></span>
-                        </p>                       
-                        <div class="inp_wrap">
-                            <label class="inp_lab" for="ipt_label">문의유형</label>
-                            <div class="inp_select">
-                                <div class="selectBox">
-                                    <button class="title" type="button" th:text="${qna.qDept}">문의유형을 선택해주세요</button>
-                                    <ul class="selList">
-                                        <li>
-                                            <input type="radio" value="1" class="option" id="select1_1" name="qDeptCode" th:checked="${qna.qDeptCode eq '1'}">
-                                            <label for="select1_1">일반문의(상품/주문/배송)</label>
-                                        </li>         
-                                        <li>
-                                            <input type="radio" value="2" class="option" id="select1_1" name="qDeptCode" th:checked="${qna.qDeptCode == 2}">
-                                            <label for="select1_1">코치 가입 문의</label>
-                                        </li>
-                                        <li>
-                                            <input type="radio" value="3" class="option" id="select1_1" name="qDeptCode" th:checked="${qna.qDeptCode == 3}">
-                                            <label for="select1_1">잘못된 정보 신고</label>
-                                        </li>
-                                        <li>
-                                            <input type="radio" value="4" class="option" id="select1_1" name="qDeptCode" th:checked="${qna.qDeptCode == 5}"> 
-                                            <label for="select1_1">신고</label>
-                                        </li>
-                                        <li>
-                                            <input type="radio" value="5" class="option" id="select1_1" name="qDeptCode" th:checked="${qna.qDeptCode == 5}"> 
-                                            <label for="select1_1">기타</label>
-                                        </li>   
-                                    </ul>
-                                </div>
-                            </div>
-                            <label class="inp_lab" for="ipt_label">제목</label>
-                            <div class="inp_text">
-                                <input type="text" name="" id="ipt_label" placeholder="제목을 입력해주세요">
-                            </div>
-                            <label class="inp_lab" for="ipt_label">내용</label>
-                            <div class="inp_textArea">
-                                <textarea rows="10"></textarea>
-                                <div class="textarea-clone"></div>
-                            </div>
-                        </div>    
-                        <div class="btn_wrap mgt40">
-                            <a href="#" class="btn btnSizeL btnColorW btnTypeR" style="width:150px;"><span>수정하기</span></a>
-                        </div>  
-                        <div class="hr"></div>    
-                        <p class="tit mgb40">
-							문의 답변
-						</p>
-                        <div class="question_reply">
-                            <p class="fc88">답변날짜 : 2021-01-01 00:00:00</p>
-                            <div class="reply">
-                                안녕하세요 고객님 불편을 드려 죄송합니다.<br>
-                                고객님을 위해 최선을 다하는 헬스DAO가 되겠습니다!<br>
-                                감사합니다!<br>
-                            </div>
-                        </div>
-                        <div class="btn_wrap mgt40">
-                            <a href="#" class="btn btnSizeL btnColorW btnTypeR" style="width:150px;"><span>목록</span></a>
-                        </div>  
+                        </p>              
+                        <form action="/mypage/qnaModify" method="post"> 
+                        	<input type="hidden" th:value="${qna.qNo}" name="qNo" />        
+	                        <div class="inp_wrap">
+	                            <label class="inp_lab" for="ipt_label">문의유형</label>
+	                            <div class="inp_select">
+	                                <div class="selectBox">
+	                                    <button class="title" type="button" th:text="${qna.qDept}">문의유형을 선택해주세요</button>
+	                                    <ul class="selList">
+	                                        <li>
+	                                            <input type="radio" value="1" class="option" id="select1_1" name="qDeptCode" th:checked="${(qna.qDeptCode.equals('1'))}">
+	                                            <label for="select1_1">일반문의(상품/주문/배송)</label>
+	                                        </li>         
+	                                        <li>
+	                                            <input type="radio" value="2" class="option" id="select1_1" name="qDeptCode" th:checked="${(qna.qDeptCode.equals('2'))}">
+	                                            <label for="select1_1">코치 가입 문의</label>
+	                                        </li>
+	                                        <li>
+	                                            <input type="radio" value="3" class="option" id="select1_1" name="qDeptCode" th:checked="${(qna.qDeptCode.equals('3'))}">
+	                                            <label for="select1_1">잘못된 정보 신고</label>
+	                                        </li>
+	                                        <li>
+	                                            <input type="radio" value="4" class="option" id="select1_1" name="qDeptCode" th:checked="${(qna.qDeptCode.equals('4'))}"> 
+	                                            <label for="select1_1">신고</label>
+	                                        </li>
+	                                        <li>
+	                                            <input type="radio" value="5" class="option" id="select1_1" name="qDeptCode" th:checked="${(qna.qDeptCode.equals('5'))}"> 
+	                                            <label for="select1_1">기타</label>
+	                                        </li>   
+	                                    </ul>
+	                                </div>
+	                            </div>
+	                            <label class="inp_lab" for="ipt_label">제목</label>
+	                            <div class="inp_text">
+	                                <input type="text" name="qTitle" id="ipt_label" th:value="${qna.qTitle}" />
+	                            </div>
+	                            <label class="inp_lab" for="ipt_label">내용</label>
+	                            <div class="inp_textArea">
+	                                <textarea rows="10" th:text="${qna.qContent}" name="qContent"></textarea>
+	                                <div class="textarea-clone"></div>
+	                            </div>
+	                        </div>    
+	                        <div class="btn_wrap mgt40" th:if="${qna.qStatus.equals('문의')}">
+	                            <button type="submit" class="btn btnSizeL btnColorW btnTypeR" style="width:150px;"><span>수정하기</span></button>
+	                        </div> 
+                        </form> 
+                        <div th:if="${qna.qStatus.equals('답변완료')}">
+	                        <div class="hr"></div>    
+	                        <p class="tit mgb40">
+								문의 답변
+							</p>
+	                        <div class="question_reply">
+	                            <p class="fc88">답변날짜 : <span th:text="${#dates.format(qna.replyDate, 'yyyy-MM-dd')}"></span></p>
+	                            <div class="reply" th:text="${qna.reply}"></div>
+	                        </div>
+	                        <div class="btn_wrap mgt40">
+	                            <a href="/mypage/qna?page=1" class="btn btnSizeL btnColorW btnTypeR" style="width:150px;"><span>목록</span></a>
+	                        </div>  
+	                    </div>
                     </div>
 					<!-- //myPageCon -->
 				</div>
