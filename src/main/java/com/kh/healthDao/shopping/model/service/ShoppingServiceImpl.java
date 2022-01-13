@@ -9,9 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.healthDao.admin.model.vo.Product;
 import com.kh.healthDao.common.model.vo.Paging;
-import com.kh.healthDao.mypage.model.vo.Qna;
 import com.kh.healthDao.shopping.model.dao.ShoppingMapper;
-import com.kh.healthDao.shopping.model.vo.Shopping;
 
 
 @Service("ShoppingService")
@@ -34,11 +32,13 @@ public class ShoppingServiceImpl implements ShoppingService{
 		int listCount = shoppingMapper.pdtListCount();
 		List<Product> pdtList = shoppingMapper.pdtList();
 		List<Product> recoList = shoppingMapper.recoList();
+		int recoCount = shoppingMapper.recoListCount();
 		
 		Map<String, Object> pdtMap = new HashMap<>();
 		pdtMap.put("listCount", listCount);
 		pdtMap.put("pdtList", pdtList);
 		pdtMap.put("recoList", recoList);
+		pdtMap.put("recoCount", recoCount);
 		
 		return pdtMap;
 	}

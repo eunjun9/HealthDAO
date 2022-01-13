@@ -184,11 +184,11 @@
 				</div>
 	
 				<!-- 제품 추천 -->
-				<div class="mainReco">
+				<div class="mainReco" th:if="${recoCount != 0}">
 					<div class="contents">
 						<p class="mainTit">
 							<em>MD 추천 상품</em><span>✨✨ 헬스Dao에서 추천하는 EAT 템 ✨✨</span>
-							<i class="btn_tit"><a href="#">+ 전체보기</a></i>
+							<i class="btn_tit"><a href="/shopping/newProduct?page=1">+ 전체보기</a></i>
 						</p>
 						<div class="pdt_list1">
 							<button class="set-arrow set-prev" type="button">Previous</button>
@@ -199,7 +199,7 @@
 											<li class="bg_p">NEW</li>
 											<li class="bg_p">BEST</li>
 										</ul>
-										<a href="#" class="imgLink"><img src="/images/temp/pdt01.png" alt=""></a>
+										<a th:href="|/shopping/detail?productNo=${reco.productNo}|" class="imgLink"><img src="/images/temp/pdt01.png" alt=""></a>
 									</div>
 									<div class="pdtTxt">
 										<p class="pdtHead" style="color:#4f8ffa;" th:text="${reco.productBenefit}"></p>
