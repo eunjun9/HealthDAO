@@ -51,6 +51,29 @@
 		<result property="userNo" column="USER_NO" />
 	</resultMap>
 	
+	<resultMap type="com.kh.healthDao.member.model.vo.Member" id="memberResultMap">
+		<id property="userNo" column="USER_NO"/>
+		<result property="userId" column="USER_ID"/>
+		<result property="userPwd" column="USER_PWD"/>
+		<result property="userName" column="USER_NAME"/>
+		<result property="userNickName" column="USER_NICKNAME"/>
+		<result property="userPhone" column="USER_PHONE"/>
+		<result property="userEmail" column="USER_EMAIL"/>
+		<result property="userBirth" column="USER_BIRTH"/>
+		<result property="userGender" column="USER_GENDER"/>
+		<result property="emailReceive" column="EMAIL_RECEIVE"/>
+		<result property="smsReceive" column="SMS_RECEIVE"/>
+	</resultMap>
+	
+	<resultMap id="addressResultMap" type="com.kh.healthDao.mypage.model.vo.Address">
+		<id property="addressNo" column="ADDRESS_NO"/>
+		<result property="receiver" column="RECEIVER"/>
+		<result property="address" column="ADDRESS"/>
+		<result property="recPhone" column="RECEIVER_PHONE"/>
+		<result property="defAddress" column="DEFAULT_ADDRESS"/>
+		<result property="userNo" column="USER_NO"/>
+	</resultMap>
+	
 	<select id="findQnaList" resultMap="qnaResultMap" parameterType="hashmap">
 		SELECT *
 		FROM
@@ -314,4 +337,102 @@
 		  , R_CONTENT = #{rContent}
 		WHERE REVIEW_NO = #{reviewNo}
 	</update>
+	
+	<!-- 내 정보 수정 -->
+	<select id="myInfoView" resultMap="memberResultMap" parameterType="_int">
+		SELECT
+		       USER_ID
+		     , USER_PWD
+		     , USER_NAME
+			 , USER_NICKNAME
+			 , USER_PHONE
+			 , USER_EMAIL
+			 , USER_BIRTH
+			 , USER_GENDER
+			 , EMAIL_RECEIVE
+			 , SMS_RECEIVE
+	     FROM MEMBER
+	    WHERE USER_NO = #{userNo}
+	</select>
+	
+	<update id="myInfoModify" parameterType="com.kh.healthDao.member.model.vo.Member">
+		 UPDATE MEMBER
+		    SET 
+			  <if test="userPwd != ''">
+			    USER_PWD = #{userPwd} ,
+			  </if>
+		        USER_NICKNAME = #{userNickName}
+		      , USER_PHONE = #{userPhone}
+		      , USER_BIRTH = #{userBirth}
+		      , USER_GENDER = #{userGender}
+		      <choose>
+			  <when test="emailReceive != null">
+			  , EMAIL_RECEIVE = #{emailReceive}
+			  </when>
+			  <otherwise>
+			  , EMAIL_RECEIVE = 'N'
+			  </otherwise>
+			  </choose>
+			  <choose>
+			  <when test="smsReceive != null">
+			  , SMS_RECEIVE = #{smsReceive}
+			  </when>
+			  <otherwise>
+			  , SMS_RECEIVE = 'N'
+			  </otherwise>
+			  </choose>
+		  WHERE USER_NO = #{userNo}
+	</update>
+	
+	<!-- 배송지 관리 -->
+	<select id="deliView" parameterType="_int" resultMap="addressResultMap">
+		SELECT
+			   ADDRESS_NO
+			 , RECEIVER
+			 , ADDRESS
+			 , RECEIVER_PHONE
+			 , DEFAULT_ADDRESS
+		  FROM ADDRESS
+		 WHERE USER_NO = #{userNo}
+	</select>
+	
+	<insert id="insertDeli" parameterType="com.kh.healthDao.mypage.model.vo.Address">
+		INSERT
+		  INTO ADDRESS
+		(
+			ADDRESS_NO
+		  , RECEIVER
+		  , ADDRESS
+		  , RECEIVER_PHONE
+		  , DEFAULT_ADDRESS
+		  , USER_NO
+		)
+		VALUES
+		(
+			SEQ_ADDRESS_NO.NEXTVAL
+		  , #{receiver}
+		  , #{address}
+		  , #{recPhone}
+		  <choose>
+		  <when test="defAddress != null">
+		  , #{defAddress}
+		  </when>
+		  <otherwise>
+		  , 'N'
+		  </otherwise>
+		  </choose>
+		  , #{userNo}
+		)
+	</insert>
+	
+	<select id="selectDeil" parameterType="_int" resultMap="addressResultMap">
+		SELECT
+			   RECEIVER
+			 , ADDRESS
+			 , RECEIVER_PHONE
+			 , DEFAULT_ADDRESS
+		  FROM ADDRESS
+		 WHERE ADDRESS_NO = #{addressNo}
+	</select>
+	
 </mapper>

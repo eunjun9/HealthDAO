@@ -3040,6 +3040,16 @@ filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#555555', endC
     display: inline-block;
 }
 
+#deliInsert .lyPop{width:520px;}
+#deliInsert .userInfoLoad{width:100%;padding-bottom:17px;margin-bottom:30px;border-bottom:1px solid #e8e8e8;}
+#deliInsert .userInfoLoad label{display:inline-block;}
+#deliInsert .form_area{margin-top:-15px;}
+#deliInsert .form_area dl{overflow:hidden;margin-top:20px;}
+#deliInsert .form_area dt{float:left;line-height:40px;}
+#deliInsert .form_area dd{margin-left:90px;}
+#deliInsert .inp_post .post_num{width:196px;}
+#deliInsert .deliRegFirst{margin:7px 0 0 90px;}
+
 /* 마이페이지 내정보수정 ---------------------------------------------------------------------------------------------------- */
 .myPageMIMf .myPageForm {
     border: 1px solid #E8E8E8;
@@ -3168,7 +3178,7 @@ filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#555555', endC
     background: #FF5B5D;
 }
 .myPageMIMf .btnArr.btnColorG span:after {background:url('../images/common/btn_arr_white.png') no-repeat left center;}
-.myPageMIMf .btn_wrap a:not(:first-child) {
+#btnCancel, #btnUpdate {
     margin-left: 13px !important;
 }
 

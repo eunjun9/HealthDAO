@@ -58,9 +58,6 @@ public class MemberServiceImpl implements MemberService{
 			}
 		}
 		
-		/* 스프링 시큐리티 모듈에서 사용되는 타입인 User 객체로 id, pwd, 접근권한을 담아 객체 만들어 리턴 */
-//		return new User(member.getId(), member.getPwd(), authorities);
-		
 		/* 멤버의 id, pwd 외의 다른 정보를 담기 위해 User를 상속한 UserImpl 클래스를 만들고 해당 타입으로 처리 */
 		UserImpl user = new UserImpl(member.getUserId(), member.getUserPwd(), authorities);
 		user.setDetails(member);	// 위에서 조회해온 member를 여기에서 사용
