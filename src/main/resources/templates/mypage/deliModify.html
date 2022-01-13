@@ -21,55 +21,7 @@
 			<div class="myMain myCon">
 				<div class="contents">
 					<!-- mypage lnb -->
-					<div class="myPageLnb">
-						<div class="myRank">
-							<p class="rank userLv1" id="Lv">
-								<span class="btnMain">회원</span>
-							</p><!-- 기본등급 userLv1 ~ 최고등급 userLv4 -->
-							<p class="txt">
-								<span>HELLO, VIP!</span><br>
-								<em id="name">류상훈님</em>
-							</p>
-						</div>
-						<div class="myPageMenu">
-							<ul class="dep1">
-								<li>
-									<p>주문관리</p>
-									<ul class="dep2">
-										<li><a href="/mypage/myorder">주문배송 조회</a></li>
-										<li><a href="/mypage/storebuy">매장구매내역</a></li>
-										<li><a href="/mypage/evidence">증빙서류 발급</a></li>
-									</ul>
-								</li>
-								<li>
-									<a href="/mypage/mycoupon">쿠폰</a>
-								</li>
-								<li>
-									<a href="/mypage/mypoint">포인트</a>
-								</li>
-								<li>
-									<p>내 활동</p>
-									<ul class="dep2">
-										<li><a href="/mypage/counsel">1:1 문의</a></li>
-										<li><a href="/mypage/mywish">위시리스트</a></li>
-										<li><a href="/mypage/mystock">입고 알림</a></li>
-									</ul>
-								</li>
-								<li>
-									<a href="/mypage/myreview">상품 리뷰</a>
-								</li>
-								<li>
-									<p>내 정보 관리</p>
-									<ul class="dep2">
-										<li><a href="/mypage/confirmpw">회원정보수정</a></li>
-										<li><a href="/mypage/myaddress">배송지 관리</a></li>
-										<li><a href="/mypage/skininfo">피부 프로필 관리</a></li>
-										<li><a href="javascript:;" onclick="goLeaveMemberInfo();return false;">회원탈퇴 하기</a></li>
-									</ul>
-								</li>
-							</ul>
-						</div>
-					</div>
+					<th:block th:replace="common/mypageGnb.html"></th:block>
 					<!-- //mypage lnb -->
 
 					<!-- myPageCon -->
@@ -81,7 +33,7 @@
 						<div class="tblBar mgt50">
 							<div class="inp_wrap">
 								<div class="btn_wrap">
-									<a onclick="showLayer('deliRegister');" class="btn btnArr btnSizeL btnColorW btnTypeB" style="width:200px;"><span>신규 배송지 추가</span></a>				
+									<a onclick="showLayer('deliInsert');" class="btn btnArr btnSizeL btnColorW btnTypeB" style="width:200px;"><span>신규 배송지 추가</span></a>				
 								</div>
 							</div>
 						</div>
@@ -104,33 +56,24 @@
 										<th>관리</th>
 									</tr>
 								</thead>
-								<tbody>
-									<tr>
+								<tbody id="deliList">
+									<tr th:each="address, i : ${addressList}">
+										<td style="display:none;"><input type="hidden" name="addressNo" th:value="${address.addressNo}"></td>
 										<td class="fc22">
 											<span class="inp_radio">
-												<input type="radio" name="inp_radio1" id="inp_radio1_1">
-												<label for="inp_radio1_1"></label>
+												<th:block th:if="${address.defAddress == 'Y'}">
+												<input type="radio" name="defAddress" th:id="'inp_radio1_'+${i.index+1}" checked>
+												<label th:for="'inp_radio1_'+${i.index+1}"></label>
+												</th:block>
+												<th:block th:if="${address.defAddress == 'N'}">
+												<input type="radio" name="defAddress" th:id="'inp_radio1_'+${i.index+1}">
+												<label th:for="'inp_radio1_'+${i.index+1}"></label>
+												</th:block>
 											</span>
 										</td>
-										<td class="fc22">김치킨</td>
-										<td class="fc22">서울특별시 강남구 테헤란로 428(대치동, 테헤란로대우아이빌) 123</td>
-										<td class="fc22">010-1234-5678</td>
-										<td>
-											<a onclick="showLayer('deliRegister');" href="javascript:void(0)" class="btn btnSizeS btnColorG btnTypeB btnMf" style="width:70px;"><span>수정</span></a>
-											<div style="height: 12px;"></div>
-											<a onclick="" href="javascript:void(0)" class="btn btnSizeS btnColorG btnTypeB btnDt" style="width:70px;"><span>삭제</span></a>
-										</td>
-									</tr>
-									<tr>
-										<td class="fc22">
-											<span class="inp_radio">
-												<input type="radio" name="inp_radio1" id="inp_radio1_2">
-												<label for="inp_radio1_2"></label>
-											</span>
-										</td>
-										<td class="fc22">김치킨</td>
-										<td class="fc22">서울특별시 강남구 테헤란로 428(대치동, 테헤란로대우아이빌) 123</td>
-										<td class="fc22">010-1234-5678</td>
+										<td class="fc22" id="deliName" th:text="${address.receiver}"></td>
+										<td class="fc22" id="deliAddress" th:text="${address.address}"></td>
+										<td class="fc22" id="deliPhone" th:text="${address.recPhone}"></td>
 										<td>
 											<a onclick="showLayer('deliRegister');" href="javascript:void(0)" class="btn btnSizeS btnColorG btnTypeB btnMf" style="width:70px;"><span>수정</span></a>
 											<div style="height: 12px;"></div>
@@ -170,6 +113,205 @@
 	<link rel="stylesheet" type="text/css" href="../../css/main.css">
 	<script type="text/javascript" src="../../js/main.js"></script>
 	<script type="text/javascript" src="../../js/eunjung.js"></script>
+	<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+	<script type="text/javascript">
+		$('#quick .quickArea').css({'position':'absolute', 'top':290});
+		mainStart();
+		mainVisual();
+		
+		$(function() { $("#postcodify_search_button").postcodifyPopUp(); });
+	</script>
+	<script>
+		$(function(){
+			$("#deliInsertForm .addInsBtn").on('click', function(){
+				let param = {};
+				param.receiver = $("#deliInsertForm [name=receiver]").val();
+				param.address = "(" + $("#deliInsertForm [name=address1]").val() + ")";
+				param.address += " " + $("#deliInsertForm [name=address2]").val();
+				param.address += " " + $("#deliInsertForm [name=address3]").val();
+				param.recPhone = $("#deliInsertForm [name=recPhone]").val();
+				param.defAddress = $("#deliInsertForm [name=defAddress]").val();
+				
+				$.ajax({
+					url : "/mypage/deli/insert",
+					data : JSON.stringify(param),
+					dataType : "json",
+					contentType : "application/json; charset=utf-8",
+					type : "post",
+					success : function(data) {
+						alert(data.msg);
+						
+					},
+					error : function(e) {
+						console.log(e);
+					}
+				});
+			});
+			
+			$("#deliList .btnMf").on('click', function(){
+				let addressNo = $("#deliList [name=addressNo]").val();
+				
+				$.ajax({
+					url : "/mypage/deli/" + addressNo,
+					data : JSON.stringify(param),
+					dataType : "json",
+					contentType : "application/json; charset=utf-8",
+					type : "post",
+					success : function(data) {
+						let form = $("#deliUpdateForm");
+						
+						form.find("[name=receiver]").val(data.receiver);
+						/* form.find("[name=address1]").val();
+						form.find("[name=address2]").val();
+						form.find("[name=address3]").val(); */
+						form.find("[name=recPhone]").val(data.recPhone);
+						if(form.find("[name=defAddress]").val('Y')) {
+							form.find("[name=defAddress]").prop("checked", true);
+						}
+					},
+					error : function(e) {
+						console.log(e);
+					}
+				});
+			});
+			
+			$("#deliList .btnDt").on('click', function(){
+				let addressNo = $("#deliList [name=addressNo]").val();
+				
+				$.ajax({
+					url : "/mypage/deli/delete" + addressNo,
+					data : JSON.stringify(param),
+					dataType : "json",
+					contentType : "application/json; charset=utf-8",
+					type : "post",
+					success : function(data) {
+						alert(data.msg);
+					},
+					error : function(e) {
+						console.log(e);
+					}
+				});
+			});
+		});
+	</script>
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+	
+	<!-- 배송지 등록 -->
+	<div id="deliInsert" class="lyPopArea">
+		<div class="lyPop">
+			<div class="lyWrap">
+				<button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
+				<div class="lyTit">배송지 등록</div>
+				<div class="lyBody">
+					<form id="deliInsertForm">
+					<div class="form_area">
+						<dl>
+							<dt><label for="deliRegName"><span class="fcRed">*</span>받는 분</label></dt>
+							<dd>
+								<div class="inp_text sizeS">
+									<input type="text" name="receiver" id="deliRegName" required>
+								</div>
+							</dd>
+						</dl>
+						<dl>
+							<dt><span class="fcRed">*</span>주소</dt>
+							<dd>
+								<div class="inp_wrap inp_post">
+									<div class="inp_text sizeS post_num">
+										<input type="text" name="address1" id="join_post" class="postcodify_postcode5" readonly="" disabled>
+									</div>
+									<a id="postcodify_search_button" class="btn btnSizeM btnColorB btnTypeB"><span>우편번호 찾기</span></a>
+									<div class="inp_text sizeS mgt10">
+										<input type="text" name="address2" title="기본주소" class="postcodify_address" readonly="" disabled>
+									</div>
+								</div>
+								<div class="inp_wrap">
+									<div class="inp_text sizeS mgt10">
+										<input type="text" name="address3" title="상세주소" class="postcodify_details" required>
+									</div>
+								</div>
+							</dd>
+						</dl>
+						<dl>
+							<dt><label for="deliRegHphone"><span class="fcRed">*</span>휴대전화</label></dt>
+							<dd>
+								<div class="inp_text sizeS">
+									<input type="text" name="recPhone" id="deliRegHphone" required>
+								</div>
+							</dd>
+						</dl>
+						<span class="inp_check deliRegFirst">
+							<input type="checkbox" name="defAddress" id="deliRegFirst" value="Y">
+							<label for="deliRegFirst"><span class="fc88">기본 배송지로 설정</span></label>
+						</span>
+					</div>
+					<div class="btn_wrap length2">
+						<a onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorW btnTypeR"><span>취소</span></a>
+						<button class="btn btnSizeL btnArr btnColorB btnTypeR addInsBtn"><span>확인</span></button>
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 배송지 수정 -->
+	<div id="deliRegister" class="lyPopArea">
+		<div class="lyPop">
+			<div class="lyWrap">
+				<button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
+				<div class="lyTit">배송지 수정</div>
+				<div class="lyBody">
+					<form id="deliUpdateForm">
+					<div class="form_area">
+						<dl>
+							<dt><label for="deliRegName"><span class="fcRed">*</span>받는 분</label></dt>
+							<dd>
+								<div class="inp_text sizeS">
+									<input type="text" name="receiver" id="deliRegName" value="" required>
+								</div>
+							</dd>
+						</dl>
+						<dl>
+							<dt><span class="fcRed">*</span>주소</dt>
+							<dd>
+								<div class="inp_wrap inp_post">
+									<div class="inp_text sizeS post_num">
+										<input type="text" name="address1" id="join_post" class="postcodify_postcode5" value="" readonly="" disabled>
+									</div>
+									<a id="postcodify_search_button" class="btn btnSizeM btnColorB btnTypeB"><span>우편번호 찾기</span></a>
+									<div class="inp_text sizeS mgt10">
+										<input type="text" name="address2" title="기본주소" class="postcodify_address" value="" readonly="" disabled>
+									</div>
+								</div>
+								<div class="inp_wrap">
+									<div class="inp_text sizeS mgt10">
+										<input type="text" name="address3" title="상세주소" class="postcodify_details" value="" required>
+									</div>
+								</div>
+							</dd>
+						</dl>
+						<dl>
+							<dt><label for="deliRegHphone"><span class="fcRed">*</span>휴대전화</label></dt>
+							<dd>
+								<div class="inp_text sizeS">
+									<input type="text" name="recPhone" id="deliRegHphone" value="" required>
+								</div>
+							</dd>
+						</dl>
+						<span class="inp_check deliRegFirst">
+							<input type="checkbox" name="defAddress" id="deliRegFirst" value="Y">
+							<label for="deliRegFirst"><span class="fc88">기본 배송지로 설정</span></label>
+						</span>
+					</div>
+					<div class="btn_wrap length2">
+						<a onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorW btnTypeR"><span>취소</span></a>
+						<button class="btn btnSizeL btnArr btnColorB btnTypeR addUpdBtn"><span>확인</span></button>
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

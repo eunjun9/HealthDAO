@@ -3,9 +3,12 @@ package com.kh.healthDao.mypage.model.dao;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
+
+import com.kh.healthDao.mypage.model.vo.Address;
 import com.kh.healthDao.mypage.model.vo.AttCheck;
 import com.kh.healthDao.mypage.model.vo.Cart;
 import com.kh.healthDao.admin.model.vo.Coupon;
+import com.kh.healthDao.member.model.vo.Member;
 import com.kh.healthDao.mypage.model.vo.Point;
 import com.kh.healthDao.mypage.model.vo.Qna;
 import com.kh.healthDao.review.model.vo.Review;
@@ -48,15 +51,24 @@ public interface MypageMapper {
 
 	int attendCheck(AttCheck attcheck);
 
+	/* 내 정보 수정 */
+	Member myInfoView(int userNo);
+	
+	int myInfoModify(Member member);
 
+	/* 배송지 등록 */
+	List<Address> deliView(int userNo);
+	
+	int insertDeli(Address address);
+  
+  Address selectDeil(int addressNo);
+
+  /* 장바구니 */
 	int cartInsert(Cart cartinfo);
 
 	List<Cart> cartList(int userNo);
 
 	Cart cartProductChk(Cart cartinfo);
-
-
-
 
 
 }
