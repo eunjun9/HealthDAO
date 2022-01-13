@@ -16,6 +16,22 @@
 		<result property="productRank" column="PRODUCT_RANK"/>
 	</resultMap>
 	
+	<select id="recentList" resultMap="productResultMap">
+		SELECT
+				PRODUCT_NO
+			  , PRODUCT_BRAND
+			  , PRODUCT_TITLE
+			  , PRODUCT_PRICE
+			  , PRODUCT_BENEFIT
+			  , PRODUCT_NOTICE
+			  , PRODUCT_INFO
+			  , PRODUCT_VIEW
+			  , PRODUCT_STOCK
+			  , CATEGORY_ID
+			  , P_MEMBERSHIP
+		 FROM PRODUCT
+		WHERE PRODUCT_NO = #{productNo}
+	</select>
 	<select id="recoRankList" resultMap="productResultMap" parameterType="_int">
 		SELECT
 				PRODUCT_NO
@@ -136,6 +152,27 @@
 			  , CATEGORY_ID
 			  , P_MEMBERSHIP
 		 FROM PRODUCT)
+	</select>
+	
+	<select id="recoListCount" resultType="_int">
+		SELECT
+		    COUNT(*)
+		FROM
+		(SELECT
+				PRODUCT_NO
+              , PRODUCT_RANK
+			  , PRODUCT_BRAND
+			  , PRODUCT_TITLE
+			  , PRODUCT_PRICE
+			  , PRODUCT_BENEFIT
+			  , PRODUCT_NOTICE
+			  , PRODUCT_INFO
+			  , PRODUCT_VIEW
+			  , PRODUCT_STOCK
+			  , CATEGORY_ID
+			  , P_MEMBERSHIP
+		 FROM PRODUCT
+         RIGHT JOIN PRODUCT_RECOMMEND USING (PRODUCT_NO))
 	</select>
 	
 	<select id="shoppingList" resultMap="productResultMap" parameterType="hashmap">

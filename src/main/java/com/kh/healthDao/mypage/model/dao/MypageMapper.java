@@ -40,7 +40,7 @@ public interface MypageMapper {
 	// 포인트 페이징
 	int pointListCount();
 	List<Point> listPoint(Map<String, Object> pageRow);
-	
+	int pointCount();
 
 	Review reviewDetail(int reviewNo);
 
@@ -48,11 +48,13 @@ public interface MypageMapper {
 
 	int attendCheck(AttCheck attcheck);
 
+
 	int cartInsert(Cart cartinfo);
 
 	List<Cart> cartList(int userNo);
 
 	Cart cartProductChk(Cart cartinfo);
+
 
 
 

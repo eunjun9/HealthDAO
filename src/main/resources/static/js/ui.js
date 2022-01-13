@@ -1,34 +1,6 @@
 "use strict";
 
 /**
-디바이스체크
-**/
-var _Device={};_Device.smartphone=false;_Device.tablet=false;_Device.type=0;_Device.os=0;function checkDevice(){if(navigator.userAgent.match(/Android/)!=null){if(navigator.userAgent.match(/mobile|Mobile/)!=null){_Device.type=2}else{_Device.type=1}_Device.os=0}else{var minSiteWidth=480;var maxSiteWidth=1024;var w=($(window).width()<window.screen.width)?$(window).width():window.screen.width;if(navigator.userAgent.match(/iPhone|iPad|iPod/)!=null){_Device.os=1}else{_Device.os=2}if(navigator.userAgent.match(/webOS|iPhone|iPad|iPod|BlackBerry/)!=null){if(w<=minSiteWidth||(navigator.userAgent.match(/iPhone|iPod|BlackBerry/)!=null&&navigator.platform.match(/iPad/)==null)){_Device.type=2}else{_Device.type=1}}else{_Device.type=0}}if(_Device.type==2){_Device.tablet=false;_Device.smartphone=true}else if(_Device.type==1){_Device.tablet=true;_Device.smartphone=false}else{_Device.smartphone=_Device.tablet=false}}var _Browser={};function browserDetect(){_Browser.ie6=false;_Browser.ie7=false;_Browser.ie8=false;_Browser.ie9=false;_Browser.ie10=false;_Browser.ie11_over=false;_Browser.msie=false;_Browser.mozilla=false;_Browser.safari=false;_Browser.chrome=false;_Browser.version=0;_Browser.name="etc";var objappVersion=navigator.appVersion;var objAgent=navigator.userAgent;var objbrowserName=navigator.appName;var objfullVersion=''+parseFloat(navigator.appVersion);var objBrMajorVersion=parseInt(navigator.appVersion,10);var objOffsetName,objOffsetVersion,ix;var iev=0;var ieold=(/MSIE (\d+\.\d+);/.test(navigator.userAgent));var trident=!!navigator.userAgent.match(/Trident\/7.0/);var rv=navigator.userAgent.indexOf("rv:11.0");if(ieold)iev=new Number(RegExp.$1);if(navigator.appVersion.indexOf("MSIE 10")!=-1)iev=10;if(trident&&rv!=-1)iev=11;if(iev!=0||(objOffsetVersion=objAgent.indexOf("MSIE"))!=-1){_Browser.name="Microsoft Internet Explorer";_Browser.msie=true;_Browser.version=iev;if(_Browser.version<7){_Browser.ie6=true}else if(_Browser.version<8){_Browser.ie7=true}else if(_Browser.version<9){_Browser.ie8=true}else if(_Browser.version<10){_Browser.ie9=true}else if(_Browser.version<11){_Browser.ie10=true}else{_Browser.ie11_over=true}}else{if((objOffsetVersion=objAgent.indexOf("Chrome"))!=-1){_Browser.chrome=true;objbrowserName="Chrome";objfullVersion=objAgent.substring(objOffsetVersion+7)}else if((objOffsetVersion=objAgent.indexOf("Firefox"))!=-1){_Browser.mozilla=true;objbrowserName="Firefox"}else if((objOffsetVersion=objAgent.indexOf("Safari"))!=-1){_Browser.safari=true;objbrowserName="Safari";objfullVersion=objAgent.substring(objOffsetVersion+7);if((objOffsetVersion=objAgent.indexOf("Version"))!=-1)objfullVersion=objAgent.substring(objOffsetVersion+8)}else if((objOffsetName=objAgent.lastIndexOf(' ')+1)<(objOffsetVersion=objAgent.lastIndexOf('/'))){objbrowserName=objAgent.substring(objOffsetName,objOffsetVersion);objfullVersion=objAgent.substring(objOffsetVersion+1);if(objbrowserName.toLowerCase()==objbrowserName.toUpperCase()){objbrowserName=navigator.appName}}if((ix=objfullVersion.indexOf(";"))!=-1)objfullVersion=objfullVersion.substring(0,ix);if((ix=objfullVersion.indexOf(" "))!=-1)objfullVersion=objfullVersion.substring(0,ix);objBrMajorVersion=parseInt(''+objfullVersion,10);if(isNaN(objBrMajorVersion)){objfullVersion=''+parseFloat(navigator.appVersion);objBrMajorVersion=parseInt(navigator.appVersion,10)}_Browser.name=objbrowserName;_Browser.version=objBrMajorVersion}}checkDevice();browserDetect();
-// 디바이스체크 Pc = 0, Tablet = 1, Mobile = 2
-// console.log(_Device.type);
-
-/**
-IE 버전체크
-**/
-function GetIEVersion() {
-	var sAgent = window.navigator.userAgent;
-	var Idx = sAgent.indexOf("MSIE");
-
-	// If IE, return version number.
-	if (Idx > 0)
-		return parseInt(sAgent.substring(Idx+ 5, sAgent.indexOf(".", Idx)));
-
-	// If IE 11 then look for Updated user agent string.
-	else if (!!navigator.userAgent.match(/Trident\/7\./))
-		return 11;
-
-	else
-		return 100; //It is not IE
-}
-// console.log(GetIEVersion());
-
-
-/**
 CSS ANIMATION CHECK
 **/
 function whichAnimationEvent(){
@@ -1137,5 +1109,45 @@ function quickMenu(){
 		} else {
 			$('#quick').css({'position':'fixed'});
 		}
+	}
+}
+
+
+// 쿠키 설정
+function setCookie(cookie_name, value, days) {
+	const exdate = new Date();
+	exdate.setDate(exdate.getDate() + days); // 설정 일수만큼 현재시간에 만료값으로 지정
+	const cookie_value = escape(value) + ((days == null) ? '' : ';path=/;expires=' + exdate.toUTCString());
+	document.cookie = cookie_name + '=' + cookie_value;
+}
+// 쿠키 가져오기
+function getCookie(cookie_name) {
+	var x, y; var val = document.cookie.split(';');
+	for (var i = 0; i < val.length; i++) {
+		x = val[i].substr(0, val[i].indexOf('='));
+		y = val[i].substr(val[i].indexOf('=') + 1);
+		x = x.replace(/^\s+|\s+$/g, ''); // 앞과 뒤의 공백 제거하기
+		if (x == cookie_name) {
+			return unescape(y); // unescape로 디코딩 후 값 리턴
+		}
+	}
+}
+// 쿠키 추가
+function addCookie(id) {
+	var items = getCookie('productItems'); // 이미 저장된 값을 쿠키에서 가져오기
+	var maxItemNum = 5; // 최대 저장 가능한 아이템개수
+	var expire = 1; // 쿠키값을 저장할 기간
+	if (items) {
+		var itemArray = items.split(',');
+		if (itemArray.indexOf(id) != -1) { // 이미 존재하는 경우 종료
+			console.log('Already exists.');
+		} else { // 새로운 값 저장 및 최대 개수 유지하기
+			itemArray.unshift(id);
+			if (itemArray.length > maxItemNum )
+			itemArray.length = 5; items = itemArray.join(',');
+			setCookie('productItems', items, expire);
+		}
+	} else { // 신규 id값 저장하기
+		setCookie('productItems', id, expire);
 	}
 }

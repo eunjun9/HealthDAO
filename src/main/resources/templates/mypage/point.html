@@ -38,9 +38,11 @@
 							<div class="coupon1"><p>쿠폰</p></div>
 							<div class="coupon2"><p>1개</p></div>
 							<div class="point1"><p>포인트</p></div>
-							<div class="point2"><p>3000</p></div>
-						</div>	
+							<div class="point2"><p th:text="${pointCount}+'원'"></p></div>
+						</div>		
+						
 						<div class="pointOutline">
+							<p class="tblList yelimListCount">총 <span th:text="${listCount}"></span>개의 포인트 적립내역이 있습니다.</p>				
 							<div class="pointInline" th:each="pList : ${PointList}">
 								<div class="pointTitle" >
 									<p th:text=${pList.pCategoryName}></p>

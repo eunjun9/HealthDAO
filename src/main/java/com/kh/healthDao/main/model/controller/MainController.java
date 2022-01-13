@@ -23,7 +23,6 @@ import com.kh.healthDao.shopping.model.vo.Shopping;
 
 @Controller
 public class MainController {
-
 	/*
 	 * @GetMapping(value= {"/", "/main"}) public String main() { return "main/main";
 	 * }
@@ -33,10 +32,11 @@ public class MainController {
 	public ModelAndView findBannerRankList(ModelAndView mv) {
 		
 		List<Banner> bannerList = bannerService.bannerRankList();
-		List<Product> recoList = shoppingService.recoRankList();
+		Map<String, Object> map = shoppingService.pdtList();
 
 		mv.addObject("bannerList", bannerList);
-		mv.addObject("recoList", recoList);
+		mv.addObject("recoList", map.get("recoList"));
+		mv.addObject("recoCount", map.get("recoCount"));
 		mv.setViewName("main/main");
 		
 		return mv;
@@ -119,6 +119,7 @@ public class MainController {
 		mv.addObject("pdtList", map.get("pdtList"));
 		mv.addObject("listCount", map.get("listCount"));
 		mv.addObject("recoList", map.get("recoList"));
+		mv.addObject("recoCount", map.get("recoCount"));
 		mv.setViewName("admin/reco");
 		return mv;
 	}
@@ -168,4 +169,12 @@ public class MainController {
 		return result;
 	}
 	
+	
+	// 최근 본 상품
+	@ResponseBody
+	@PostMapping("/recentPdt")
+	public List<Product> recentPdt(int[] addList) {
+		List<Product> recentList = shoppingService.recentList(addList);
+		return recentList;
+	}
 }
