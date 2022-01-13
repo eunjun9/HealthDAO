@@ -11,13 +11,14 @@ import com.kh.healthDao.admin.model.vo.Coupon;
 import com.kh.healthDao.common.model.vo.Paging;
 import com.kh.healthDao.mypage.model.dao.MypageMapper;
 import com.kh.healthDao.mypage.model.vo.AttCheck;
+import com.kh.healthDao.mypage.model.vo.Cart;
 import com.kh.healthDao.mypage.model.vo.Point;
 import com.kh.healthDao.mypage.model.vo.Qna;
 import com.kh.healthDao.review.model.vo.Review;
 
 
 @Service("mypageService")
-public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewService{
+public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewService, CartService{
 	
 	private final MypageMapper mypageMapper; 
 	
@@ -157,6 +158,23 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 	@Override
 	public int attendCheck(AttCheck attcheck) {
 		return mypageMapper.attendCheck(attcheck);
+	}
+
+	@Override
+	public int cartInsert(Cart cartinfo) {
+		Cart cartProductChk = mypageMapper.cartProductChk(cartinfo);
+		
+		int result = 1;
+		if(cartProductChk == null) {
+			result = mypageMapper.cartInsert(cartinfo);
+		}
+		
+		return result;
+	}
+
+	@Override
+	public List<Cart> cartList(int userNo) {
+		return mypageMapper.cartList(userNo);
 	}
 
 }

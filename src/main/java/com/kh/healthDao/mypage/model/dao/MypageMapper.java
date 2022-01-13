@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import com.kh.healthDao.mypage.model.vo.AttCheck;
+import com.kh.healthDao.mypage.model.vo.Cart;
 import com.kh.healthDao.admin.model.vo.Coupon;
 import com.kh.healthDao.mypage.model.vo.Point;
 import com.kh.healthDao.mypage.model.vo.Qna;
@@ -47,7 +48,13 @@ public interface MypageMapper {
 
 	int attendCheck(AttCheck attcheck);
 
-	
+
+	int cartInsert(Cart cartinfo);
+
+	List<Cart> cartList(int userNo);
+
+	Cart cartProductChk(Cart cartinfo);
+
 
 
 

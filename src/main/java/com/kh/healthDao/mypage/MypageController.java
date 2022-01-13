@@ -10,6 +10,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,12 +22,13 @@ import com.kh.healthDao.admin.model.service.NoticeService;
 import com.kh.healthDao.admin.model.vo.Coupon;
 import com.kh.healthDao.admin.model.vo.Notice;
 import com.kh.healthDao.member.model.vo.UserImpl;
+import com.kh.healthDao.mypage.model.service.CartService;
 import com.kh.healthDao.mypage.model.service.MyCouponService;
 import com.kh.healthDao.mypage.model.service.MyReviewService;
 import com.kh.healthDao.mypage.model.service.QnaService;
 import com.kh.healthDao.mypage.model.vo.AttCheck;
+import com.kh.healthDao.mypage.model.vo.Cart;
 import com.kh.healthDao.mypage.model.vo.MemberSound;
-import com.kh.healthDao.mypage.model.vo.Point;
 import com.kh.healthDao.mypage.model.vo.Qna;
 import com.kh.healthDao.review.model.vo.Review;
 
@@ -40,15 +42,18 @@ public class MypageController {
 	private NoticeService noticeService;
 	private MyReviewService myReviewService;
 	private MemberSoundService memberSoundService;
+	private CartService cartService;
 	
 	@Autowired
-	public MypageController(QnaService qnaService, MyCouponService couponService, MessageSource messageSource, NoticeService noticeService, MyReviewService myReviewService, MemberSoundService memberSoundService) {
+	public MypageController(QnaService qnaService, MyCouponService couponService, MessageSource messageSource, NoticeService noticeService, 
+			MyReviewService myReviewService, MemberSoundService memberSoundService, CartService cartService) {
 		this.qnaService = qnaService;
 		this.couponService = couponService;
 		this.messageSource = messageSource;
 		this.noticeService = noticeService;
 		this.myReviewService = myReviewService;
 		this.memberSoundService = memberSoundService;
+		this.cartService = cartService;
 	}
 	
 	@GetMapping(value= {"/", "/myOrder"})
@@ -293,4 +298,32 @@ public class MypageController {
 		}
 		
 	}
+	
+	// 장바구니
+	@GetMapping("/cart")
+	public ModelAndView cartList(ModelAndView mv, @AuthenticationPrincipal UserImpl userImpl) {
+		int userNo = userImpl.getUserNo();
+		
+		List<Cart> cartList = cartService.cartList(userNo);
+		
+		mv.addObject("cartList", cartList);
+		mv.setViewName("mypage/cart"); 
+		
+		return mv;
+	}
+	
+	@PostMapping("cartInsert")
+	@ResponseBody
+	public String cartInsert(@AuthenticationPrincipal UserImpl userImpl, int productNo, int cartStock) {
+		Cart cartinfo = new Cart();
+		cartinfo.setUserNo(userImpl.getUserNo());
+		cartinfo.setProductNo(productNo);
+		cartinfo.setCartStock(cartStock);
+		
+		String msg = cartService.cartInsert(cartinfo) > 0 ? "success" : "fail";
+		
+		return msg;
+	}
+	
+	
 }
