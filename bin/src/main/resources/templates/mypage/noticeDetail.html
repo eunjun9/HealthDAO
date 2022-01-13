@@ -23,16 +23,16 @@
         <div class="event_winner notice_detail">
             <div class="contents">
                 <div class="eventDetailTit">
-                    <h1>공지사항 제목입니다</h1>
-                    <p class="txt">2019.12.13 | 작성자 관리자 | 조회수 20</p>
+                    <h1 th:text="${notice.nTitle}"></h1>
+                    <p class="txt"><span th:text="${notice.nDate}"></span> | 작성자 관리자 | 조회수 <span th:text="${notice.nView}">20</span></p>
                 </div>
 
-                <div class="eventWinnerCon">
+                <div class="eventWinnerCon" th:text="${notice.nContent}">
                     공지사항 내용내용
                 </div>
 
                 <div class="btn_wrap mgt40">
-                    <a class="btnSpin btnList"><span>목록</span></a>
+                    <a href="/mypage/notice?page=1" class="btnSpin btnList"><span>목록</span></a>
                 </div>
             </div>
         </div>

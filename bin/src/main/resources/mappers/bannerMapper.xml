@@ -10,9 +10,51 @@
 		<result property="main_status" column="MAIN_STATUS"/>
 		<result property="file_path" column="FILE_PATH"/>
 		<result property="change_file" column="CHANGE_FILE"/>
+		<result property="f_no" column="F_NO"/>
 	</resultMap>
 
-	<select id="bannerAllList" resultMap="bannerResultMap">
+	<select id="findBannreList" resultMap="bannerResultMap" parameterType="hashmap">
+		SELECT *
+		FROM
+		    (SELECT ROWNUM RNUM, A.*
+		            FROM
+		            (SELECT 
+			            MAIN_NO
+					  , MAIN_NAME
+					  , MAIN_RANK
+					  , MAIN_URL
+					  , MAIN_STATUS
+					  , FILE_PATH
+					  , CHANGE_FILE
+					  , F_NO
+		        FROM BANNER
+		        JOIN BANNER_FILE USING(MAIN_NO)
+		        JOIN AT_FILE USING(F_NO)
+		       ORDER BY MAIN_NO DESC) A
+		    )
+			WHERE RNUM BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="getBannerListCount" resultType="_int">
+		SELECT
+		    COUNT(*)
+		FROM
+		(SELECT 
+            MAIN_NO
+		  , MAIN_NAME
+		  , MAIN_RANK
+		  , MAIN_URL
+		  , MAIN_STATUS
+		  , FILE_PATH
+		  , CHANGE_FILE
+		  , F_NO
+      FROM BANNER
+      JOIN BANNER_FILE USING(MAIN_NO)
+      JOIN AT_FILE USING(F_NO)
+     ORDER BY MAIN_NO DESC)
+	</select>
+	
+	<select id="bannerRankList" resultMap="bannerResultMap">
 		SELECT					   
 			    MAIN_NO
 			  , MAIN_NAME
@@ -21,9 +63,12 @@
 			  , MAIN_STATUS
 			  , FILE_PATH
 			  , CHANGE_FILE
+			  , F_NO
 		  FROM BANNER
 		  JOIN BANNER_FILE USING(MAIN_NO)
 		  JOIN AT_FILE USING(F_NO)
+		 WHERE MAIN_STATUS = 'Y'
+         ORDER BY MAIN_RANK ASC
 	</select>
 	
 	<select id="getListCount" resultMap="bannerResultMap">
@@ -34,5 +79,97 @@
 		  JOIN AT_FILE USING(F_NO)
 	</select>
 	
-
+	
+	<insert id="insertBanner" parameterType="hashmap">
+		INSERT 
+		INTO BANNER
+		(
+		    MAIN_NO
+		  , MAIN_NAME
+		  , MAIN_RANK
+		  , MAIN_URL
+		  , MAIN_STATUS
+		)VALUES(
+		    SEQ_MAIN_NO.NEXTVAL
+		  , #{banner.main_name}
+		  , #{banner.main_rank}
+		  , #{banner.main_url}
+		  , #{banner.main_status}
+		)
+	</insert>
+	<insert id="insertFile" parameterType="hashmap">
+		INSERT 
+		INTO AT_FILE
+		(
+		    F_NO
+		  , ORIGIN_FILE
+		  , CHANGE_FILE
+		  , FILE_PATH
+		  , STATUS
+		)VALUES(
+		    SEQ_F_NO.NEXTVAL
+		  , #{originFileName}
+		  , #{banner.change_file}
+		  , #{banner.file_path}
+		  , 'Y'
+		)
+	</insert>
+	<insert id="insertFileDB">
+		INSERT 
+		INTO BANNER_FILE
+		(
+		    F_NO
+		  , MAIN_NO
+		)VALUES(
+		    SEQ_F_NO.CURRVAL
+		  , SEQ_MAIN_NO.CURRVAL
+		)
+	</insert>
+	<delete id="deleteBanner">
+		DELETE
+				BANNER_FILE
+		 WHERE MAIN_NO = #{main_no}
+	</delete>
+	<delete id="deleteBanner2">
+		DELETE
+				AT_FILE
+		 WHERE F_NO = #{f_no}
+	</delete>
+	<delete id="deleteBanner3">
+		DELETE
+				BANNER
+		 WHERE MAIN_NO = #{main_no}
+	</delete>
+	
+	<select id="bannerSelect" resultMap="bannerResultMap" parameterType="_int">
+		SELECT
+			    MAIN_NO
+			  , MAIN_NAME
+			  , MAIN_RANK
+			  , MAIN_URL
+			  , MAIN_STATUS
+			  , FILE_PATH
+			  , CHANGE_FILE
+			  , F_NO
+		  FROM BANNER
+		  JOIN BANNER_FILE USING(MAIN_NO)
+		  JOIN AT_FILE USING(F_NO)
+		 WHERE MAIN_NO=#{main_no}
+	</select>
+	
+	<update id="bannerUpdate" parameterType="hashmap">
+		UPDATE BANNER
+			SET 
+			    MAIN_NAME = #{main_name}
+			  , MAIN_RANK = #{main_rank}
+			  , MAIN_URL = #{main_url}
+			  , MAIN_STATUS = #{main_status}
+		WHERE MAIN_NO = #{main_no}
+	</update>
+	<!-- <update id="bannerImgUpdate" parameterType="hashmap">
+		UPDATE AT_FILE
+			SET 
+			    CHANGE_FILE = #{change_file}
+		WHERE MAIN_NO = #{main_no}
+	</update> -->
 </mapper>

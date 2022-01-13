@@ -22,55 +22,7 @@
 			<div class="myMain myCon">
 				<div class="contents">
 					<!-- mypage lnb -->
-					<div class="myPageLnb">
-						<div class="myRank">
-							<p class="rank userLv1" id="Lv">
-								<span class="btnMain">관리자</span>
-							</p><!-- 기본등급 userLv1 ~ 최고등급 userLv4 -->
-							<p class="txt">
-								<span>HELLO, VIP!</span><br>
-								<em id="name">류상훈님</em>
-							</p>
-						</div>
-						<div class="myPageMenu">
-							<ul class="dep1">
-								<li>
-									<p>주문관리</p>
-									<ul class="dep2">
-										<li><a href="/mypage/myorder">주문배송 조회</a></li>
-										<li><a href="/mypage/storebuy">매장구매내역</a></li>
-										<li><a href="/mypage/evidence">증빙서류 발급</a></li>
-									</ul>
-								</li>
-								<li>
-									<a href="/mypage/mycoupon">쿠폰</a>
-								</li>
-								<li>
-									<a href="/mypage/mypoint">포인트</a>
-								</li>
-								<li>
-									<p>내 활동</p>
-									<ul class="dep2">
-										<li><a href="/mypage/counsel">1:1 문의</a></li>
-										<li><a href="/mypage/mywish">위시리스트</a></li>
-										<li><a href="/mypage/mystock">입고 알림</a></li>
-									</ul>
-								</li>
-								<li>
-									<a href="/mypage/myreview">상품 리뷰</a>
-								</li>
-								<li>
-									<p>내 정보 관리</p>
-									<ul class="dep2">
-										<li><a href="/mypage/confirmpw">회원정보수정</a></li>
-										<li><a href="/mypage/myaddress">배송지 관리</a></li>
-										<li><a href="/mypage/skininfo">피부 프로필 관리</a></li>
-										<li><a href="javascript:;" onclick="goLeaveMemberInfo();return false;">회원탈퇴 하기</a></li>
-									</ul>
-								</li>
-							</ul>
-						</div>
-					</div>
+					<div th:replace="common/mypageGnb.html"></div>	
 					<!-- //mypage lnb -->
 
 					<!-- myPageCon -->
@@ -79,70 +31,43 @@
 							포인트
 						</p>
 						<div class="profileOutline">
-							<div class="profile"><img class="p_profile" src="./resources/web/images/point/profile.png"></div>
+							<div class="profile"><img class="p_profile" src="/images/point/profile.gif"></div>
 							<div class="nicetomeetyou">옐림님 반갑습니다</div>
 							<div class="grade">일반회원</div>
 							<div class="gradeCondition">100,000원 더 구매시, VIP 등급! >></div>
 							<div class="coupon1"><p>쿠폰</p></div>
 							<div class="coupon2"><p>1개</p></div>
 							<div class="point1"><p>포인트</p></div>
-							<div class="point2"><p>3,000p</p></div>
+							<div class="point2"><p>3000</p></div>
 						</div>	
 						<div class="pointOutline">
-							<div class="pointInline">
-								<p class="pointTitle">크리스마스 맞이 쿠폰</p>
-								<p class="pointPrice">1225원</p>
-								<p class="pointDay">~21/12/25</p>
+							<div class="pointInline" th:each="pList : ${PointList}">
+								<div class="pointTitle" >
+									<p th:text=${pList.pCategoryName}></p>
+									<span class="pointPrice" th:text="${pList.pointamount} + '원'"></span>
+								</div>
+								<p class="pointDay" th:text=${pList.pointEndDate}></p>
 							</div>
-							<div class="pointInline">
-								<p class="pointTitle">크리스마스 맞이 쿠폰</p>
-								<p class="pointPrice">1225원</p>
-								<p class="pointDay">~21/12/25</p>
-							</div>
-							<div class="pointInline">
-								<p class="pointTitle">크리스마스 맞이 쿠폰</p>
-								<p class="pointPrice">1225원</p>
-								<p class="pointDay">~21/12/25</p>
-							</div>
-							<div class="pointInline">
-								<p class="pointTitle">크리스마스 맞이 쿠폰</p>
-								<p class="pointPrice">1225원</p>
-								<p class="pointDay">~21/12/25</p>
-							</div>
-							<div class="pointInline">
-								<p class="pointTitle">크리스마스 맞이 쿠폰</p>
-								<p class="pointPrice">1225원</p>
-								<p class="pointDay">~21/12/25</p>
-							</div>
-							<div class="pointInline">
-								<p class="pointTitle">크리스마스 맞이 쿠폰</p>
-								<p class="pointPrice">1225원</p>
-								<p class="pointDay">~21/12/25</p>
-							</div>
+							
 							<div class="clear"></div>
-							<div class="paging mgt40">
-								<a href="#" class="first"><span class="hide">첫페이지</span></a>
-								<a href="#" class="prev"><span class="hide">이전페이지</span></a>
-								<a href="#">1</a>
-								<a href="#" class="active">2</a>
-								<a href="#">3</a>
-								<a href="#">4</a>
-								<a href="#">5</a>
-								<a href="#">6</a>
-								<a href="#">7</a>
-								<a href="#">8</a>
-								<a href="#">9</a>
-								<a href="#">10</a>
-								<a href="#" class="next"><span class="hide">다음페이지</span></a>
-								<a href="#" class="last"><span class="hide">마지막페이지</span></a>
-							</div>
-						</div>
+							
+							<div class="paging mgt50"
+                               	th:with="prev=${pi.page - 1}, next=${pi.page + 1}">
+                                   <a th:href="@{/mypage/point(page=1)}" class="first"><span class="hide">첫페이지</span></a>
+                                   <a class="prev" href="/mypage/point?page=" th:attrappend="href=${prev}"><span class="hide">이전페이지</span></a>
+                                   <a th:each="page : ${#numbers.sequence(pi.startPage, pi.endPage)}" href="/mypage/point?page=" th:attrappend="href=${page}" th:text="${page}" th:classappend="${page} == ${#httpServletRequest.getParameter('page')} ? active"></a>	                                   
+                                   <a class="next" href="/mypage/point?page=" th:attrappend="href=${next}"><span class="hide">다음페이지</span></a>
+                                   <a href="/mypage/point?page=" th:attrappend="href=${pi.maxPage}" class="last"><span class="hide">마지막페이지</span></a>
+                            </div>
+							
+						
 					</div>
 					<!-- //myPageCon -->
 				</div>
 			</div>
 		</div>
 	</div>
+	<br><br><br>
 	<!-- //container -->
 		<!-- 스크립트 -->
 		<th:block th:replace="common/script.html"></th:block>
@@ -158,6 +83,7 @@
 	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 	<script type="text/javascript">
 		$('#quick .quickArea').css({'position':'absolute', 'top':290});
+
 	</script>
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 </body>

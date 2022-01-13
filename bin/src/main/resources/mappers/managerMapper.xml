@@ -18,26 +18,20 @@
 		<result property="userPhone" column="USER_PHONE"/>
 	</resultMap>
 	
-	<select id="listAllQna" resultMap="QnaResultMap">
-	SELECT
-		  Q_NO
-		, Q_DEPT_CODE
-		, USER_NO
-		, Q_TITLE
-		, Q_CONTENT
-		, Q_DATE
-		, Q_STATUS
-		, REPLY
-		, REPLY_DATE
-		, REPLY_MODIFY_DATE
-		, Q_DEPT
-        , USER_NICKNAME
-        , USER_PHONE
-	 FROM QNA 
-     JOIN QNA_DEPT USING(Q_DEPT_CODE)
-     JOIN MEMBER USING(USER_NO)
-	</select>
-	
+	<resultMap id="PaymentResultMap" type="com.kh.healthDao.manager.model.vo.Payment">
+		<id property="payNo" column="PAY_NO"/>
+		<result property="payDate" column="PAY_DATE"/>
+		<result property="payMethod" column="PAY_METHOD"/>
+		<result property="ordererPhone" column="ORDERER_PHONE"/>
+		<result property="ordererEmail" column="ORDERER_EMAIL"/>
+		<result property="orderStatus" column="ORDER_STATUS"/>
+		<result property="userNo" column="USER_NO"/>
+		<result property="ProductNo" column="PRODUCT_NO"/>
+		<result property="quantity" column="QUANTITY"/>
+		<result property="productBrand" column="PRODUCT_BRAND"/>
+		<result property="productTitle" column="PRODUCT_TITLE"/>
+		<result property="productPrice" column="PRODUCT_PRICE"/>
+	</resultMap>
 	
 	<select id="listQna" resultMap="QnaResultMap" parameterType="_int">
 	SELECT
@@ -56,7 +50,7 @@
         , USER_PHONE
 	 FROM QNA 
      JOIN QNA_DEPT USING(Q_DEPT_CODE)
-     JOIN MEMBER USING(USER_NO)
+     LEFT JOIN MEMBER USING(USER_NO)
      WHERE Q_NO = #{qNo}
 	</select>
 	
@@ -64,8 +58,97 @@
 		UPDATE QNA
 		   SET REPLY = #{reply}
 		     , REPLY_DATE = SYSDATE
+		     , Q_STATUS = '답변완료'
 		 WHERE Q_NO = #{qNo}
 	</update>
+	
+	<select id="getInquiryCount" resultType="_int">
+		SELECT
+			    COUNT(*)
+			FROM
+			(	SELECT
+			  Q_NO
+			, Q_DEPT_CODE
+			, USER_NO
+			, Q_TITLE
+			, Q_CONTENT
+			, Q_DATE
+			, Q_STATUS
+			, REPLY
+			, REPLY_DATE
+			, REPLY_MODIFY_DATE
+			, Q_DEPT
+	        , USER_NICKNAME
+	        , USER_PHONE
+		 FROM QNA 
+	     JOIN QNA_DEPT USING(Q_DEPT_CODE)
+	     left JOIN MEMBER USING(USER_NO)
+		ORDER BY Q_NO DESC)
+	</select>
+	
+	<select id="listInquiryInventory" resultMap="QnaResultMap" parameterType="hashmap">
+     SELECT *
+		FROM
+		    (SELECT ROWNUM RNUM, A.*
+	         FROM
+			      (SELECT
+				  Q_NO
+				, Q_DEPT_CODE
+				, USER_NO
+				, Q_TITLE
+				, Q_CONTENT
+				, Q_DATE
+				, Q_STATUS
+				, REPLY
+				, REPLY_DATE
+				, REPLY_MODIFY_DATE
+				, Q_DEPT
+		        , USER_NICKNAME
+		        , USER_PHONE
+			 FROM QNA 
+		     JOIN QNA_DEPT USING(Q_DEPT_CODE)
+		     LEFT JOIN MEMBER USING(USER_NO) 
+	        ORDER BY Q_NO DESC) A
+		    )
+		WHERE RNUM BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="calculateListCount" resultType="_int">
+		SELECT
+		    COUNT(*)
+				FROM
+				(	SELECT
+				  PAY_NO
+				, PAY_DATE
+				FROM PAYMENT
+		ORDER BY PAY_NO DESC)
+	</select>
+	
+	<select id="calculateList" resultMap="PaymentResultMap" parameterType="hashmap">
+		     SELECT *
+		FROM
+		    (SELECT ROWNUM RNUM, A.*
+	         FROM
+			      (SELECT
+				  P.PAY_NO
+                , P.PAY_DATE
+				, P.PAY_METHOD
+				, P.ORDERER_PHONE
+				, P.ORDERER_EMAIL
+				, P.ORDER_STATUS
+				, P.USER_NO
+				, D.PRODUCT_NO
+				, D.QUANTITY
+				, T.PRODUCT_BRAND
+				, T.PRODUCT_TITLE
+				, T.PRODUCT_PRICE
+			 FROM PAYMENT P
+		     JOIN PAY_DETAIL D ON(P.PAY_NO=D.PAY_NO)
+		     JOIN PRODUCT T ON(D.PRODUCT_NO=T.PRODUCT_NO)
+	        ORDER BY P.PAY_NO DESC) A
+		    )
+		WHERE RNUM BETWEEN #{startRow} AND #{endRow}
+	</select>
 
 	
 

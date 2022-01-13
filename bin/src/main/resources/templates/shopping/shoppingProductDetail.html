@@ -1,147 +1,15 @@
 <!doctype html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
 <title></title>
-<meta name="title" content="">
-<meta name="keywords" content="">
-<meta name="description" content="">
-<meta property="og:title" content="">
-<meta property="og:description" content="">
-
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="format-detection" content="telephone=no, address=no, email=no">
-
-<meta property="og:url" content="">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="">
-<meta property="og:image" content="">
-
-<link rel="shortcut icon" href="">
-<link rel="apple-touch-icon" sizes="180x180" href="">
-<link rel="icon" type="image/png" sizes="32x32" href="">
-<link rel="icon" type="image/png" sizes="16x16" href="">
-<link rel="manifest" href="">
-<link rel="mask-icon" href="" color="">
-<meta name="msapplication-TileColor" content="">
-<meta name="theme-color" content="#ffffff">
-
-<link rel="stylesheet" type="text/css" href="./resources/web/css/fonts.css">
-<link rel="stylesheet" type="text/css" href="./resources/web/css/common.css">
-<link rel="stylesheet" type="text/css" href="./resources/web/css/contents.css">
-<link rel="stylesheet" type="text/css" href="./resources/web/css/changSeop.css">
+<!-- 메타태그, 스타일 -->
+<th:block th:replace="common/head.html"></th:block>
+<!--// 메타태그, 스타일 -->
 <body>
-<div id="wrap" class="loadingNot">
-	<div id="loading">
-		<span class="hide">로딩중</span>
-	</div>
-
-	<!-- HEADER + GNB -->
-	<header id="header">
-		<!-- HEADERTOP -->
-		<div class="headerTop">
-			<div class="contents">
-				<div class="utilMenu">
-					<ul>
-						<li><a href="#loginLayer" onclick="loginLayer();return false;">로그인</a></li>
-						<li><a href="#">회원가입</a></li>
-						<li><a href="#">주문 조회</a></li>
-						<li><a href="#">고객센터</a></li>
-					</ul>
-					
-					<!-- 로그인 레이어 -->
-					<div id="loginLayer">
-						<div class="loginTabH">
-							<div class="inp_wrap">
-								<div class="inp_text sizeS">
-									<input type="text" title="아이디" placeholder="아이디">
-								</div>
-								<p class="error">아이디를 입력해주세요.</p>
-							</div>
-							<div class="inp_wrap mgt10">
-								<div class="inp_text sizeS">
-									<input type="password" title="비밀번호" placeholder="비밀번호">
-								</div>
-								<p class="error">비밀번호를 입력해주세요.</p>
-							</div>
-							<span class="inp_check mgt15">
-								<input type="checkbox" id="id_auto_loing_H">
-								<label for="id_auto_loing_H">자동 로그인</label>
-							</span>
-							<a href="#" class="btn btnSizeM btnColorP btnTypeR w100 mgt17"><span>로그인</span></a>
-						</div>
-						<div class="btn_member">
-							<ul>
-								<li><a href="#">회원가입</a></li>
-								<li><a href="#">아이디 찾기</a></li>
-								<li><a href="#">비밀번호 찾기</a></li>
-							</ul>
-						</div>
-						<div class="btn_sns">
-							<ul>
-								<li class="sns_n"><a href="javascript:void(0);"><span>네이버 로그인</span></a></li>
-								<li class="sns_k"><a href="javascript:void(0);"><span>카카오 로그인</span></a></li>
-							</ul>
-						</div>
-						<div class="loginLayerClose">
-							<a href="javascript:void(0);" onclick="loginLayer();">닫기</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- // HEADERTOP -->
-
-		<!-- HEADER -->
-		<div class="daoHeader">
-			<h1><a href="#"><img class="logoClass" src="./resources/web/images/common/logo.png" alt="BANILA.COM"></a></h1>
-			<div class="searchH">
-				<div class="searchWrap">
-					<div class="inp_wrap">
-						<div class="inp_text">
-							<input type="text" id="headerSearch">
-							<button class="btn_clear"><span>clear</span></button>
-							<button class="btn_search" type="button"><span class="hide">검색</span></button>
-						</div>
-					</div>
-				</div>
-				<div class="jsSearchTxt">
-					<div class="rollCon">
-						<div class="txt">검색어 순위 1위 노출</div>
-						<div class="txt">검색어 순위 2위 노출</div>
-						<div class="txt">검색어 순위 3위 노출</div>
-						<div class="txt">검색어 순위 4위 노출</div>
-						<div class="txt">검색어 순위 5위 노출</div>
-					</div>
-				</div>
-			</div>
-			<div class="myMenuH">
-				<ul>
-					<li><a href="#">마이페이지</a></li>
-					<li><a href="#">장바구니 <span>99</span></a></li>
-				</ul>
-			</div>
-		</div>
-		<!-- //HEADER -->
-		<!-- GNB -->
-		<div class="gnbWrap">
-			<div class="gnb">
-				<div class="contents">
-					<ul class="gnbLink">
-						<li><a href="#">랭킹</a></li>
-						<li><a href="#">신상품</a></li>
-						<li><a href="#">식품</a></li>
-						<li><a href="#">음료</a></li>
-						<li><a href="#">운동·생활용품</a></li>
-						<li><a href="#">주변 PT 찾기</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<!-- //GNB -->
-	</header>
-	<!-- //HEADER + GNB -->
+	<div id="wrap" class="main">
+		<!-- HEADER + GNB -->
+		<th:block th:replace="common/header.html"></th:block>
+		<!--// HEADER + GNB -->
 
 	<!-- container -->	
 	<div id="container">				
@@ -169,9 +37,9 @@
 						</div>
 						<div class="pdtInfo">							
 							<a href="javascript:void(0)" onclick="jsShopFloating('like_floating');" class="btn_like likeL_type2"><span class="hide">찜하기</span></a>
-							<div class="pdtBrand">아령하세요</div>
-							<div class="pdtName">러브잇 닭가슴살 100g</div>
-							<div class="pdtDesc">100ml</div>
+							<div class="pdtBrand" th:text="${shoppingDetail.productBrand}"></div>
+							<div class="pdtName" th:text="${shoppingDetail.productTitle}"></div>
+							<div class="pdtDesc"></div>
 							<div class="pdtGrade">
 								<div class="gradeStar js_rating ratingM"><span>3.5</span></div>
 								<span class="gradeText">4.7</span>
@@ -184,7 +52,7 @@
 									판매가
 									<!-- none 클래스 추가시 취소선 처리  -->
 									<span class="num none">
-										<span class="txt">18,000</span>원
+										<span class="txt" th:text="${shoppingDetail.productPrice}"></span>원
 									</span>
 								</div>
 								<div class="price">
@@ -198,7 +66,7 @@
 									타임세일
 									<span class="num sale">
 										<span class="percent">10<span>%</span></span>
-										<span class="txt">18,000</span>원
+										<span class="txt">16,200</span>원
 									</span>
 								</div>
 							</div>
@@ -212,17 +80,12 @@
 									<div class="pdtReview_wrap js_acoCon" style="display:none;">
 										<div class="pdtReviewTit">리뷰 적립</div>
 										<dl>
-											<dt>텍스트 리뷰 작성 시</dt>
-											<dd>
-												<span class="num">200</span>포인트
-											</dd>
-										</dl>
-										<dl>
-											<dt>포토 리뷰 작성 시</dt>
+											<dt>리뷰 작성 시</dt>
 											<dd>
 												<span class="num">500</span>포인트
 											</dd>
 										</dl>
+										
 									</div>
 								</div>
 								<div class="pdtPoint_wrap">
@@ -230,7 +93,7 @@
 										<div class="pointCmt">포인트 더 받는 법</div>
 										<span class="pointCon total">
 											<span class="txt">+ 최대 </span>
-											<span class="num">6,000</span>포인트
+											<span class="num">5,000</span>포인트
 										</span>
 									</div>
 									<div class="pointDetail">
@@ -239,17 +102,12 @@
 											<span class="num">5,000</span>포인트
 										</span>
 									</div>
-									<div class="pointDetail">
-										<div class="tit">피부 프로필 입력 시</div>
-										<span class="pointCon">
-											<span class="num">1,000</span>포인트
-										</span>
-									</div>
+									
 								</div>
 							</div>
 							<div class="prmtInfo">
-								<div class="infoTit">1+1 상품안내</div>
-								<div class="InfoDetail">해당 상품은 동일한 상품만 1+1으로 구매 가능한 상품입니다.<br>수량을 2개로 선택해주세요.<br>2개 선택 시, 주문/결제 단에서 1개 가격으로 구매 가능합니다. </div>
+								<div class="infoTit">배송안내</div>
+								<div class="InfoDetail" th:text="${shoppingDetail.productNotice}">해당 상품은 동일한 상품만 1+1으로 구매 가능한 상품입니다.<br>수량을 2개로 선택해주세요.<br>2개 선택 시, 주문/결제 단에서 1개 가격으로 구매 가능합니다. </div>
 							</div>
 
 
@@ -263,13 +121,13 @@
 												<li>
 													<input type="radio" value="" class="option" id="productDetail_radio1_1" name="productDetail_radio1">
 													<label for="productDetail_radio1_1">
-														<span class="selectColor colorShipM"><img src="./resources/web/images/temp/colorChip03.jpg"></span>벨벳 블러드 립-BE01 밀크티 필터01
+														<span class="selectColor colorShipM" th:text="${shoppingDetail.productTitle}"><img src="./resources/web/images/temp/colorChip03.jpg"></span>
 													</label>
 												</li>
 												<li class="soldOut"><!-- 일시 품절일 경우 soldOut 클래스 추가 -->
 													<input type="radio" value="" class="option" id="productDetail_radio1_2" name="productDetail_radio1" disabled><!-- 일시 품절일 경우 disabled 추가 -->
 													<label for="productDetail_radio1_2">
-														<span class="selectColor colorShipM"><img src="./resources/web/images/temp/colorChip04.jpg"></span>벨벳 블러드 립-BE01 밀크티 필터02
+														<span class="selectColor colorShipM" th:text="${shoppingDetail.productTitle}"><img src="./resources/web/images/temp/colorChip04.jpg"></span>
 													</label>
 													<span class="soldOutTxt">[일시품절]</span><!-- 일시 품절일 경우 항목 추가 -->
 													<button class="soldOutBtn btn_txt" onclick="showLayer('stockAlt');" type="button">입고알림신청</button><!-- 일시 품절일 경우 항목 추가 -->
@@ -280,7 +138,7 @@
 								</div>
 							</div>
 							<div class="pdtSelectedOption"> 
-								<div class="optionName">벨벳 블러드 립-BE01 밀크티 필터</div>
+								<div class="optionName" th:text="${shoppingDetail.productTitle}">벨벳 블러드 립-BE01 밀크티 필터</div>
 								<div class="optionDetail">
 									<div class="js_pdtCount pdtUiSpinner">
 										<button class="js_pdtCountMinus spinnerDecrease" type="button" onclick="productCountMinus(this)" disabled>
@@ -295,7 +153,7 @@
 								</div>
 							</div>
 							<div class="pdtSelectedOption"> 
-								<div class="optionName">벨벳 블러드 립-BE01 밀크티 필터</div>
+								<div class="optionName" th:text="${shoppingDetail.productTitle}">벨벳 블러드 립-BE01 밀크티 필터</div>
 								<div class="optionDetail">
 									<!-- 일시 품절일 경우 항목 추가 -->
 									<span class="soldOutTxt">[일시품절]</span>
@@ -311,65 +169,9 @@
 									</div>
 								</div>
 							</div>
-							<div class="pdtSelectedOption type02"> 
-								<div class="optionName"><span class="selectColor colorShipM"><img src="./resources/web/images/temp/colorChip01.jpg"></span><span>벨벳 블러드 립-BE01 밀크티 필터</span></div>
-								<div class="optionDetail">
-									<div class="js_pdtCount pdtUiSpinner">
-										<button class="js_pdtCountMinus spinnerDecrease" type="button" onclick="productCountMinus(this)" disabled>
-											<span class="hide">제품 수량 감소</span>
-										</button>
-										<!-- 구매수량이 정해져 있을 경우 data-max 추가 -->
-										<input class="spinnerInput" type="text" title="선택품목갯수" value="1" data-max="10" readonly>
-										<button class="js_pdtCountPlus spinnerIncrease" type="button" onclick="productCountPlus(this)">
-											<span class="hide">제품 수량 증가</span>
-										</button>
-									</div>
-								</div>	
-								<div class="price"> 
-									<span class="dftPrice"><span>80,000</span>원</span>
-								</div>
-								<a href="javascript:void(0)" class="close"><span class="hide">닫기</span></a>
-							</div>
-							<div class="pdtSelectedOption type02"> 
-								<div class="optionName"><span class="selectColor colorShipM"><img src="./resources/web/images/temp/colorChip03.jpg"></span><span>벨벳 블러드 립-BE01 밀크티 필터</span></div>
-								<div class="optionDetail">
-									<div class="js_pdtCount pdtUiSpinner">
-										<button class="js_pdtCountMinus spinnerDecrease" type="button" onclick="productCountMinus(this)" disabled>
-											<span class="hide">제품 수량 감소</span>
-										</button>
-										<!-- 구매수량이 정해져 있을 경우 data-max 추가 -->
-										<input class="spinnerInput" type="text" title="선택품목갯수" value="1" data-max="10" readonly>
-										<button class="js_pdtCountPlus spinnerIncrease" type="button" onclick="productCountPlus(this)">
-											<span class="hide">제품 수량 증가</span>
-										</button>
-									</div>
-								</div>	
-								<div class="price"> 
-									<span class="dftPrice"><span>80,000</span>원</span>
-								</div>
-								<a href="javascript:void(0)" class="close"><span class="hide">닫기</span></a>
-							</div>
-							<div class="pdtSelectedOption type02"> 
-								<div class="optionName"><span class="selectColor colorShipM"><img src="./resources/web/images/temp/colorChip03.jpg"></span><span>벨벳 블러드 립-BE01 밀크티 필터</span></div>
-								<div class="optionDetail">
-									<div class="js_pdtCount pdtUiSpinner">
-										<button class="js_pdtCountMinus spinnerDecrease" type="button" onclick="productCountMinus(this)" disabled>
-											<span class="hide">제품 수량 감소</span>
-										</button>
-										<!-- 구매수량이 정해져 있을 경우 data-max 추가 -->
-										<input class="spinnerInput" type="text" title="선택품목갯수" value="1" data-max="10" readonly>
-										<button class="js_pdtCountPlus spinnerIncrease" type="button" onclick="productCountPlus(this)">
-											<span class="hide">제품 수량 증가</span>
-										</button>
-									</div>
-								</div>	
-								<div class="price"> 
-									<!-- 할인 들어갈 경우 기존 가격 태그에 'none' 클래스 추가 -->
-									<span class="dftPrice none"><span>80,000</span>원</span>
-									<span class="dftPrice"><span>64,000</span>원</span>
-								</div>
-								<a href="javascript:void(0)" class="close"><span class="hide">닫기</span></a>
-							</div>
+							
+							
+							
 							<!-- 200424 삭제 
 							<div class="pdtStockOff">재고가 부족하여 추가 수량만큼 주문할 수 없습니다.</div>
 							<div class="pdtStockOff">일일 최대 구매수량을 초과하였습니다.</div> 
@@ -387,26 +189,21 @@
 							<div class="pdtbuyBtnArea">
 								<div class="btn_wrap">
 									<a href="javascript:void(0)" class="btn btnArr btnSizeL btnColorW btnTypeR"><span>장바구니</span></a>
-									<a href="javascript:void(0)" class="btn btnSizeL btnColorB btnTypeR"><span>바로구매</span></a>
+									<a href="/shopping/payment?productNo=" th:attrappend="href=${shoppingDetail.productNo}" class="btn btnSizeL btnColorB btnTypeR"><span>바로구매</span></a>
 								</div>
 							</div>
 							
 							<div class="pdtGift js_acoBox">
 								<div class="js_acoList on">
-									<a href="javascript:void(0)" class="pdtGiftTtl js_acoLink">추가혜택(2)<span class="arrow"><span class="hide">닫기</span></span></a>
+									<a href="javascript:void(0)" class="pdtGiftTtl js_acoLink">추가혜택(1)<span class="arrow"><span class="hide">닫기</span></span></a>
 									<ul class="js_acoCon">
 										<li>
 											<a href="javascript:void(0)">
 												<div><img src="./resources/web/images/temp/thumbImg01.jpg" alt=""></div>
-												<p>바닐라코 제로 스페츌러 세트</p>
+												<p th:text="${shoppingDetail.productBenefit}">바닐라코 제로 스페츌러 세트</p>
 											</a>
 										</li>
-										<li>
-											<a href="javascript:void(0)">
-												<div><img src="./resources/web/images/temp/thumbImg01.jpg" alt=""></div>
-												<p>바닐라코 제로 스페츌러 세트</p>
-											</a>
-										</li>
+										
 									</ul>
 								</div>
 							</div>
@@ -1185,179 +982,25 @@
 	</div>
 	<!-- //container -->
 	
-	<!-- footer -->
-	<footer id="footer">
-		<div class="copyArea">
-			<div class="copyLink">
-				<ul>
-					<li><a href="#">회사 소개</a></li>
-					<li><a href="#">공지사항</a></li>
-					<li><a href="#">입점·제휴문의</a></li>
-					<li><a href="#">이용약관</a></li>
-					<li><a href="#">개인정보처리방침</a></li>
-				</ul>
-			</div>
-			<div class="copySns">
-				<a href="https://www.instagram.com/ryuu4512/" class="instar"target="_blank" >RYU</a>
-				<a href="https://www.instagram.com/gahee_0305/" class="instar"target="_blank" >YU</a>
-			</div>
-			<div class="copyRight">
-				<div class="copyInfo">
-					<em class="noLine">㈜아령하세요</em>
-					<em>서울시 강남구 아령빌딩 1F ~ 123F</em>
-					<em>대표: 이창섭</em>
-					<em>사업자등록번호 1991-0722</em>
-					<br>
-					<em class="noLine">고객센터 : 010-9535-0371</em>
-					<em>FAX : 9535-0371</em>
-					<em>관리자이메일 : <a href="mailto:roksellid02@gmail.com">roksellid02@gmail.com</a></em>
-				</div>
-				<p>Copyright HealthDao. Co. Ltd All Right Reserved</p>
-			</div>
-		</div>
-	</footer>
-	<!-- //footer -->
-	<!-- javascript -->
-	<script type="text/javascript" src="./resources/web/js/jquery-3.3.1.min.js"></script>
-	<script type="text/javascript" src="./resources/web/js/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="./resources/web/js/slick.min.js"></script>
-	<script type="text/javascript" src="./resources/web/js/jquery.mCustomScrollbar.js"></script>
-	<script type="text/javascript" src="./resources/web/js/circle-progress.min.js"></script>
-	<script type="text/javascript" src="./resources/web/js/ui.js"></script>
-	<!-- //javascript -->
-</div>
-<!-- 퀵메뉴 -->
-<div id="quick">
-	<div class="contents">
-		<div class="quickArea">
-			<p class="tit">QUICK MENU</p>
-			<div class="recentArea">
-				<div class="tit">최근 본 상품</div>
-				<div class="recoQuick">
-					<div class="list">
-						<a href="#">
-							<img src="./resources/web/images/temp/pdt02.png" alt="">
-						</a>
-					</div>
-					<div class="list">
-						<a href="#">
-							<img src="./resources/web/images/temp/pdt01.png" alt="">
-						</a>
-					</div>
-					<div class="list">
-						<a href="#">
-							<img src="./resources/web/images/temp/pdt03.png" alt="">
-						</a>
-					</div>
-				</div>
-			</div>
-			<div class="likeArea">
-				<a href="#">					
-					<span>찜한 상품</span>
-				</a>
-			</div>
-			<div class="cartArea">
-				<a href="#"><span>장바구니</span></a>
-			</div>
-			<div class="bottomArea">
-				<ul>
-					<li><a class="btnTop" href="javascript:void(0);">△</a></li>
-					<li><a href="#"><span class="hide">마이페이지</span></a></li>
-					<li><a class="btnBtm" href="javascript:void(0);">▽</a></li>
-				</ul>				
-			</div>
-		</div>
+	<!-- 스크립트 -->
+		<th:block th:replace="common/script.html"></th:block>
+		<!--// 스크립트 -->
+		<!-- FOOTER -->
+		<th:block th:replace="common/footer.html"></th:block>
+		<!--// FOOTER -->
 	</div>
-</div>
-<!-- 톡톡 -->
-<button type="button" class="btnTalk" onclick="showLayer('talk');"><span class="hide">TalkBtn</span></button>
-<div id="talk" class="lyPopArea bgnone">
-	<div class="lyPop">
-		<div class="lyWrap">
-			<button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
-			<div class="lyTit">토크토크~</div>
-			<div class="lyBody basic">
-				<p>궁금증을 해결해드립니다😁</p>
-				<div class="chatArea">
-					<div class="chatCon">
-						<div class="row">
-							<div class="imgArea">
-								<img src="./resources/web/images/common/talk_chun.gif" alt="">
-							</div>
-							<div class="textArea left">
-								<div>너의 궁금증을 해결해줄게!<br>나는 헬춘식이야<span class="time">11:50:19</span></div>								
-							</div>
-							<div class="textArea left">
-								<div>
-									<ul class="talkSelect">
-										<li><button>1.궁금한거 1번</button></li>
-										<li><button>2.궁금한거 2번</button></li>
-										<li><button>3.궁금한거 3번</button></li>
-										<li><button>4.궁금한거 4번</button></li>
-										<li><button>5.궁금한거 5번</button></li>
-									</ul>
-									<span class="time">11:50:19</span>
-								</div>								
-							</div>
-							<div class="textArea right">
-								<div class="right">고마워요 헬춘식<span class="time">11:50:19</span></div>								
-							</div>
-							<div class="textArea left">
-								<div>헬춘식 헬스 매니아<br>춘식이처럼 몸짱이 되고 싶다면<br>헬스Dao에서<br>시작하라구😎<span class="time">11:50:19</span></div>								
-							</div>
-							<div class="textArea right">
-								<div class="right">헬춘식 짱짱맨<br>멋진 헬춘식<span class="time">11:50:19</span></div>								
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<script type="text/javascript">
-	recoQuick();
-	$('#quick .quickArea').css({'position':'absolute', 'top':290});
-</script>
-
-<!-- 위시 리스트 삭제 -->
-<div id="myWishDel" class="lyPopArea">
-    <div class="lyPop">
-        <div class="lyWrap">
-            <button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
-            <div class="lyTit">위시 리스트 삭제</div>
-            <div class="lyBody basic">
-                <p>선택하신 상품을 정말 삭제하시겠습니까?</p>
-                <div class="btn_wrap length2">
-                    <a href="javascript:void(0);" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorW btnTypeR"><span>취소</span></a>
-                    <a href="javascript:void(0);" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-	$(window).on('load', function(){
-		/* 포토리뷰 슬라이드 */
-		if ($('.photoReview').length > 0){
-			$('.photoReview').find('.photoReviewSlide').not('.slick-initialized').slick({
-				slidesToShow: 9,
-				slidesToScroll: 9,
-				arrows: true,
-				dots: false,
-				infinite: false
-			});
-		}
-	});
-</script>
-<style>
-	.pdtDetailHead{z-index:0;}
-	#detailOrder{font-size: 14px;}
-	#detailOrder .myOrderStep .stepInfo li:nth-child(1),
-	#detailOrder .myOrderStep .stepInfo li:nth-child(2){width:380px;}
-	#detailOrder .myOrderStep .stepInfo li:nth-child(3),
-	#detailOrder .myOrderStep .stepInfo li:nth-child(4){width:190px;}
-</style>
+	
+	<!-- 퀵메뉴 + 톡톡 -->
+	<th:block th:replace="common/quickNtalk.html"></th:block>
+	<!--// 퀵메뉴 + 톡톡 -->	
+	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+	<link rel="stylesheet" type="text/css" href="../../css/main.css">
+	<script type="text/javascript" src="../../js/main.js"></script>
+	<script type="text/javascript">
+		$('#quick .quickArea').css({'position':'absolute', 'top':936});
+		mainStart();
+		mainVisual();
+	</script>
+	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 </body>
 </html>

@@ -28,84 +28,42 @@
 					<!-- myPageCon -->
 					<div class="myPageCon coupon">
 						<p class="tit mgb40">
-							쿠폰
+							내 쿠폰
 						</p>
-						<!-- myOrder tab -->
-						<div class="tabType tabType4 mgt40 no_link">
-							<ul>
-								<li><a href="#" class="current" onclick="tabOpen('useableCoupon')"><span>사용가능쿠폰</span></a></li>							
-								<li><a href="#" onclick="tabOpen('useunableCoupon')"><span>사용만료쿠폰</span></a></li>
-							</ul>
-						</div>
-						<!-- //myOrder tab -->
                         <!-- 사용가능 쿠폰 리스트 -->
                         <div class="tab-pannel" id="useableCoupon">
-                            <div class="couponList tblBar mgt50">
-                                <p class="tblList">총 <span>1개</span></p>                               
-                            </div>
-                            <div class="js_tblList">
-                                <table class="tblType1" summary="">
-                                    <caption></caption>
-                                    <colgroup>
-                                        <col width="50%" />
-                                        <col width="25%" />
-                                        <col width="25%" />
-                                    </colgroup>
-                                    <thead>
-                                        <tr>
-                                            <th>제목</th>
-                                            <th>할인금액</th>
-                                            <th>사용기간</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="fc88"><a href="#" class="js_ListTtl ListTtl">크리스마스 맞이 쿠폰</a></td>
-                                            <td class="fc88">2000원</td>
-                                            <td class="fc88">2021-12-01 ~ 2021-12-25</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                        	<div th:if="${couponList.size > 0}">	                            
+	                            <div class="js_tblList">
+	                                <table class="tblType1" summary="">
+	                                    <caption></caption>
+	                                    <colgroup>
+	                                        <col width="50%" />
+	                                        <col width="25%" />
+	                                        <col width="25%" />
+	                                    </colgroup>
+	                                    <thead>
+	                                        <tr>
+	                                            <th>제목</th>
+	                                            <th>할인금액</th>
+	                                            <th>사용기간</th>
+	                                        </tr>
+	                                    </thead>
+	                                    <tbody>
+	                                        <tr th:each="coupon : ${couponList}">
+	                                            <td class="fc88" th:text="${coupon.pName}">크리스마스 맞이 쿠폰</td>
+	                                            <td class="fc88"><span th:text="${coupon.pSale}"></span>원</td>
+	                                            <td class="fc88"><span th:text="${#dates.format(coupon.startDate, 'yyyy-MM-dd')}">2021-12-01</span> ~ <span th:text="${#dates.format(coupon.endDate, 'yyyy-MM-dd')}">2021-12-25</span></td>
+	                                        </tr>
+	                                    </tbody>
+	                                </table>
+	                            </div>
+	                         </div>
                             <!-- 쿠폰 데이터 없을 때 -->
-                            <div class="noData">
+                            <div class="noData" th:unless="${couponList.size > 0}">
                                 <span>쿠폰이 없습니다.<br>쿠폰이벤트로 쿠폰을 받아보세요!</span>
                             </div>
                         </div>
-                         <!-- 사용만표 쿠폰 리스트 -->
-                         <div class="tab-pannel" id="useunableCoupon" style="display: none;">
-                            <div class="couponList tblBar mgt50">
-                                <p class="tblList">총 <span>1개</span></p>                               
-                            </div>
-                            <div class="js_tblList">
-                                <table class="tblType1" summary="">
-                                    <caption></caption>
-                                    <colgroup>
-                                        <col width="50%" />
-                                        <col width="25%" />
-                                        <col width="25%" />
-                                    </colgroup>
-                                    <thead>
-                                        <tr>
-                                            <th>제목</th>
-                                            <th>할인금액</th>
-                                            <th>사용기간</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="fc88"><a href="#" class="js_ListTtl ListTtl">크리스마스 맞이 쿠폰</a></td>
-                                            <td class="fc88">2000원</td>
-                                            <td class="fc88">2021-12-01 ~ 2021-12-25</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- 쿠폰 데이터 없을 때 -->
-                            <div class="noData">
-                                <span>만료된 쿠폰이 없습니다.</span>
-                            </div>
-                        </div>                       
+                     </div>
 					<!-- //myPageCon -->
 				</div>
 			</div>
