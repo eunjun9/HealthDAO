@@ -61,7 +61,42 @@
 	</div>
 </div>
 <!--// 퀵메뉴 / 톡 -->
-<script>	
+<script>
+	recentPdt();
+	function recentPdt(){
+		let value = getCookie("productItems").split(',');
+		let list = value.length;
+		let addList = [], data = {};
+		if(list >0){
+			for(let i = 0; i < list; i++){
+				addList[i] = value[i];
+				data.addList = addList;
+			}
+			console.log(data);
+			
+			$.ajax({
+				url : "/recentPdt",
+				dataType : "JSON",
+				data : data,
+				type : "POST",
+				traditional : true,		// 배열로 값 넘길때 필요한 선언
+				success : function(data){
+					console.log(data);
+					if(chkLength == data){
+						location.reload();
+					}else{
+						alert('실패');
+					}
+				},
+				error : function(e){
+					console.log(e);
+				}
+			});
+			
+			data = {};
+		}
+	}
+
 	function timeStamp(){	// 시간 설정
 		let today = new Date();   
 		let hours = ('0' + today.getHours()).slice(-2); 

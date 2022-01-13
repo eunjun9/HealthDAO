@@ -37,7 +37,7 @@
 									<a href="javascript:void(0)" onclick="showLayer('recoDel');" class="wishBtn btn btnSizeS btnColorW btnTypeB"><span>삭제하기</span></a>
 								</div>
 							</div>
-							<div class="pdt_list1 type02 mgt60" th:if="${recoList != null}">
+							<div class="pdt_list1 type02 mgt60" th:if="${recoCount != 0}">
 								<ul class="list_box">
 									<li th:each="list : ${recoList}">
 										<div class="pdtImg">
@@ -60,7 +60,7 @@
 									</li>
 								</ul>
 							</div>
-							<div th:unless="${recoList != null}">
+							<div th:unless="${recoCount != 0}">
 								<div class="noData">
 									<span>등록된 내용이 없습니다.<br>지금 바로 등록 해보세요.</span>
 								</div>
