@@ -40,4 +40,8 @@ public interface ShoppingService {
 	int deleteReco(int productNo);
 
 	List<Product> recoRankList();
+
+	List<Product> recentList(int[] addList);
+
+	Map<String, Object> wishList(int userNo);
 }

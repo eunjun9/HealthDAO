@@ -52,6 +52,7 @@
 		<result property="cDept" column="C_DEPT" />
 		<result property="cContent" column="C_CONTENT" />
 		<result property="cDate" column="C_DATE" />
+		<result property="cStatus" column="C_STATUS" />
 		<result property="userNo" column="USER_NO" />
 		<result property="userId" column="USER_ID" />
 	</resultMap>
@@ -157,7 +158,7 @@
 	
 	<update id="stockPlus" parameterType="com.kh.healthDao.admin.model.vo.Product">
 	 UPDATE PRODUCT
-		SET PRODUCT_STOCK = #{productStock}
+		SET PRODUCT_STOCK = PRODUCT_STOCK+#{productStock}
 	  WHERE PRODUCT_NO = #{productNo}
 	</update>
 	
@@ -323,7 +324,7 @@
 		    , #{userNo}
 		    , NULL
 		    , NULL
-		    , 'Y'
+		    , 'N'
 		)
 	</insert>
 	
@@ -338,9 +339,9 @@
 		    , C_DATE
 		    , USER_NO
 		    , USER_ID
+		    , C_STATUS
 		FROM MEMBER_SOUND
-		JOIN MEMBER USING(USER_NO)
-		WHERE C_STATUS = 'Y')
+		JOIN MEMBER USING(USER_NO))
 	</select>
 	
 	<select id="memberSoundList" parameterType="hashmap" resultMap="MemberSoundResultMap">
@@ -355,11 +356,31 @@
 					    , C_DATE
 					    , USER_NO
 					    , USER_ID
+					    , C_STATUS
 					FROM MEMBER_SOUND
 					JOIN MEMBER USING(USER_NO)
-					WHERE C_STATUS = 'Y'
 		        	ORDER BY C_NO DESC) A
 		    )
 		WHERE RNUM BETWEEN #{startRow} AND #{endRow}
 	</select>
+	
+	<select id="memberSoundDetail" parameterType="_int" resultMap="MemberSoundResultMap">
+		SELECT
+		    C_NO
+		    , C_DEPT
+		    , C_CONTENT
+		    , C_DATE
+		    , USER_NO
+		    , USER_ID
+		    , C_STATUS
+		FROM MEMBER_SOUND
+		JOIN MEMBER USING(USER_NO)
+		WHERE C_NO = #{cNo}
+	</select>
+	
+	<update id="memberSoundModify" parameterType="com.kh.healthDao.mypage.model.vo.MemberSound">
+		UPDATE MEMBER_SOUND
+		SET C_STATUS = #{cStatus}
+		WHERE C_NO = #{cNo}
+	</update>
 </mapper>

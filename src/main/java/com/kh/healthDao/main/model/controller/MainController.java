@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,13 +18,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.healthDao.admin.model.vo.Product;
 import com.kh.healthDao.main.model.service.BannerService;
 import com.kh.healthDao.main.model.vo.Banner;
+import com.kh.healthDao.member.model.vo.UserImpl;
 import com.kh.healthDao.shopping.model.service.ShoppingService;
 import com.kh.healthDao.shopping.model.vo.Shopping;
 
 
 @Controller
 public class MainController {
-
 	/*
 	 * @GetMapping(value= {"/", "/main"}) public String main() { return "main/main";
 	 * }
@@ -33,10 +34,11 @@ public class MainController {
 	public ModelAndView findBannerRankList(ModelAndView mv) {
 		
 		List<Banner> bannerList = bannerService.bannerRankList();
-		List<Product> recoList = shoppingService.recoRankList();
+		Map<String, Object> map = shoppingService.pdtList();
 
 		mv.addObject("bannerList", bannerList);
-		mv.addObject("recoList", recoList);
+		mv.addObject("recoList", map.get("recoList"));
+		mv.addObject("recoCount", map.get("recoCount"));
 		mv.setViewName("main/main");
 		
 		return mv;
@@ -119,6 +121,7 @@ public class MainController {
 		mv.addObject("pdtList", map.get("pdtList"));
 		mv.addObject("listCount", map.get("listCount"));
 		mv.addObject("recoList", map.get("recoList"));
+		mv.addObject("recoCount", map.get("recoCount"));
 		mv.setViewName("admin/reco");
 		return mv;
 	}
@@ -166,6 +169,33 @@ public class MainController {
 		System.out.println(result);
 		
 		return result;
+	}
+	
+	
+	// 최근 본 상품
+	@ResponseBody
+	@PostMapping("/recentPdt")
+	public List<Product> recentPdt(int[] addList) {
+		List<Product> recentList = shoppingService.recentList(addList);
+		return recentList;
+	}
+	
+	// 찜한 상품
+	@ResponseBody
+	@GetMapping("/mypage/wish")
+	public ModelAndView wishProduct(ModelAndView mv, @AuthenticationPrincipal UserImpl userImpl) {
+		int userNo = userImpl.getUserNo();
+		
+		System.out.println(userNo);
+		
+		Map<String, Object> map = shoppingService.wishList(userNo);
+		
+		mv.addObject("pdtList", map.get("pdtList"));
+		mv.addObject("listCount", map.get("listCount"));
+		mv.addObject("recoList", map.get("recoList"));
+		mv.addObject("recoCount", map.get("recoCount"));
+		mv.setViewName("mypage/mywish");
+		return mv;
 	}
 	
 }

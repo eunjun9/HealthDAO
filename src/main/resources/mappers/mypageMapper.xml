@@ -72,6 +72,18 @@
 		<result property="recPhone" column="RECEIVER_PHONE"/>
 		<result property="defAddress" column="DEFAULT_ADDRESS"/>
 		<result property="userNo" column="USER_NO"/>
+  </resultMap>
+  
+	<resultMap id="cartResultMap" type="com.kh.healthDao.mypage.model.vo.Cart">
+		<id property="cartNo" column="CART_NO"/>
+		<result property="cartStock" column="CART_STOCK" />		
+		<association javaType="com.kh.healthDao.shopping.model.vo.Shopping" property="product">
+			<id property="productNo" column="PRODUCT_NO"/>
+			<result property="productName" column="PRODUCT_BRAND"/>
+			<result property="productTitle" column="PRODUCT_TITLE"/>
+			<result property="productPrice" column="PRODUCT_PRICE"/>
+			<result property="productOption" column="PRODUCT_OPTION"/>
+		</association>
 	</resultMap>
 	
 	<select id="findQnaList" resultMap="qnaResultMap" parameterType="hashmap">
@@ -202,20 +214,6 @@
 		)
 	</insert>
 
-	
-<!-- 	<select id="pointList" resultMap="pointMap" parameterType="com.kh.healthDao.mypage.model.vo.Point">
-		SELECT 
-		      POINT_NO
-		    , POINT_AMOUNT
-		    , POINT_ISSUEDATE
-		    , POINT_ENDDATE
-		    , USER_NO
-		    , P_CATEGORY_NO
-		    , P_CATEGORY_NAME
-		  FROM POINT
-		  JOIN POINT_CATEGORY USING(P_CATEGORY_NO)		  
-	</select> -->
-	
 	<select id="listPoint" resultMap="pointMap" parameterType="hashmap">
 		SELECT *
 		FROM
@@ -230,7 +228,9 @@
 		    , P_CATEGORY_NO
 		    , P_CATEGORY_NAME
 		  FROM POINT
-		  JOIN POINT_CATEGORY USING(P_CATEGORY_NO)) A
+		  JOIN POINT_CATEGORY USING(P_CATEGORY_NO)
+		 WHERE POINT_ENDDATE > SYSDATE
+		  ) A
 		    )
 			WHERE RNUM BETWEEN #{startRow} AND #{endRow}
 	</select>
@@ -243,8 +243,18 @@
 	            FROM
 	            (SELECT 
 				      POINT_NO
-				  FROM POINT) A
+				     , POINT_ENDDATE
+				  FROM POINT
+				   WHERE POINT_ENDDATE > SYSDATE
+				   ) A
 				ORDER BY POINT_NO DESC)
+	</select>
+	
+	<select id="pointCount" resultType="_int" parameterType="hashmap">
+		SELECT
+		   SUM(POINT_AMOUNT)
+		  FROM POINT
+		 WHERE POINT_ENDDATE > SYSDATE
 	</select>
 
 	<insert id="attendCheck" parameterType="com.kh.healthDao.mypage.model.vo.AttCheck">
@@ -435,4 +445,49 @@
 		 WHERE ADDRESS_NO = #{addressNo}
 	</select>
 	
+	<select id="cartProductChk" parameterType="com.kh.healthDao.mypage.model.vo.Cart" resultMap="cartResultMap">
+		SELECT
+		    CART_NO
+		    , CART_STOCK
+		    , PRODUCT_NO
+		    , PRODUCT_BRAND
+		    , PRODUCT_TITLE
+		    , PRODUCT_PRICE
+		    , PRODUCT_OPTION
+		FROM CART C
+		JOIN PRODUCT P USING(PRODUCT_NO)
+		JOIN PRODUCT_OPTION O USING(PRODUCT_NO)
+		WHERE USER_NO = #{userNo}
+		AND PRODUCT_NO = #{productNo}
+	</select>
+	
+	<insert id="cartInsert" parameterType="com.kh.healthDao.mypage.model.vo.Cart">
+		INSERT INTO CART(
+		    CART_NO
+		    , CART_STOCK
+		    , USER_NO
+		    , PRODUCT_NO
+		)VALUES(
+		    SEQ_CART_NO.NEXTVAL
+		    , #{cartStock}
+		    , #{userNo}
+		    , #{productNo}
+		)
+	</insert>
+	
+	<select id="cartList" parameterType="_int" resultMap="cartResultMap">
+		SELECT
+		    CART_NO
+		    , CART_STOCK
+		    , PRODUCT_NO
+		    , PRODUCT_BRAND
+		    , PRODUCT_TITLE
+		    , PRODUCT_PRICE
+		    , PRODUCT_OPTION
+		FROM CART C
+		JOIN PRODUCT P USING(PRODUCT_NO)
+		JOIN PRODUCT_OPTION O USING(PRODUCT_NO)
+		WHERE USER_NO = #{userNo}
+	</select>
+
 </mapper>

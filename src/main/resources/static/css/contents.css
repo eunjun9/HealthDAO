@@ -1500,7 +1500,7 @@ CUSTOMER
 ORDER
 **/
 /* 주문WRAP */
-.order_wrap{background:#f8f8f8;padding:60px 0 100px 0;}
+.order_wrap{background:#f8f8f8;padding:60px 0 100px 0; min-height: 600px;}
 .order_wrap .order_box{position:relative;padding-right:345px;}
 .order_wrap .orderTit{font-size:18px;line-height:1;font-weight:500;padding-bottom:20px}
 .order_wrap .order_con{position:relative;padding:30px 40px;margin-top:10px;border:1px solid #e8e8e8;background:#fff;border-radius:6px;
@@ -3230,7 +3230,7 @@ filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#555555', endC
 .pointOutline .pointInline .pointTitle{font-weight:500; font-size: 20px; margin-left: 25px;margin-top: 25px;width: 100px;}
 .pointOutline .pointInline .pointPrice{font-weight:400; font-size: 15px; margin-top: 60px;}
 .pointOutline .pointInline .pointDay{font-weight:400; font-size: 15px; margin-left: 130px; margin-top: 60px;}
-
+.yelimListCount {margin-left:75%;}
 
 
 /**

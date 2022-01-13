@@ -27,12 +27,14 @@ import com.kh.healthDao.admin.model.vo.Coupon;
 import com.kh.healthDao.admin.model.vo.Notice;
 import com.kh.healthDao.member.model.vo.Member;
 import com.kh.healthDao.member.model.vo.UserImpl;
+import com.kh.healthDao.mypage.model.service.CartService;
 import com.kh.healthDao.mypage.model.service.MyCouponService;
 import com.kh.healthDao.mypage.model.service.MyInfoService;
 import com.kh.healthDao.mypage.model.service.MyReviewService;
 import com.kh.healthDao.mypage.model.service.QnaService;
 import com.kh.healthDao.mypage.model.vo.Address;
 import com.kh.healthDao.mypage.model.vo.AttCheck;
+import com.kh.healthDao.mypage.model.vo.Cart;
 import com.kh.healthDao.mypage.model.vo.MemberSound;
 import com.kh.healthDao.mypage.model.vo.Qna;
 import com.kh.healthDao.review.model.vo.Review;
@@ -51,10 +53,11 @@ public class MypageController {
 	private MyReviewService myReviewService;
 	private MemberSoundService memberSoundService;
 	private MyInfoService myInfoService;
+  private CartService cartService;
 	
 	@Autowired
 	public MypageController(QnaService qnaService, MyCouponService couponService, MessageSource messageSource, NoticeService noticeService, 
-			MyReviewService myReviewService, MemberSoundService memberSoundService, MyInfoService myInfoService) {
+			MyReviewService myReviewService, MemberSoundService memberSoundService, MyInfoService myInfoService, CartService cartService) {
 		this.qnaService = qnaService;
 		this.couponService = couponService;
 		this.messageSource = messageSource;
@@ -62,6 +65,7 @@ public class MypageController {
 		this.myReviewService = myReviewService;
 		this.memberSoundService = memberSoundService;
 		this.myInfoService = myInfoService;
+		this.cartService = cartService;
 	}
 	
 	@GetMapping(value= {"/", "/myOrder"})
@@ -347,6 +351,7 @@ public class MypageController {
 		
 		mv.addObject("PointList", map.get("PointList"));
 		mv.addObject("listCount", map.get("listCount"));
+		mv.addObject("pointCount", map.get("pointCount"));
 		mv.addObject("pi", map.get("pi"));
 		mv.setViewName("mypage/point");
 		
@@ -379,4 +384,32 @@ public class MypageController {
 		}
 		
 	}
+	
+	// 장바구니
+	@GetMapping("/cart")
+	public ModelAndView cartList(ModelAndView mv, @AuthenticationPrincipal UserImpl userImpl) {
+		int userNo = userImpl.getUserNo();
+		
+		List<Cart> cartList = cartService.cartList(userNo);
+		
+		mv.addObject("cartList", cartList);
+		mv.setViewName("mypage/cart"); 
+		
+		return mv;
+	}
+	
+	@PostMapping("cartInsert")
+	@ResponseBody
+	public String cartInsert(@AuthenticationPrincipal UserImpl userImpl, int productNo, int cartStock) {
+		Cart cartinfo = new Cart();
+		cartinfo.setUserNo(userImpl.getUserNo());
+		cartinfo.setProductNo(productNo);
+		cartinfo.setCartStock(cartStock);
+		
+		String msg = cartService.cartInsert(cartinfo) > 0 ? "success" : "fail";
+		
+		return msg;
+	}
+	
+	
 }

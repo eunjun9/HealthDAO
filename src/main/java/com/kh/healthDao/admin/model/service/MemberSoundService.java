@@ -10,4 +10,8 @@ public interface MemberSoundService {
 
 	Map<String, Object> memberSoundList(int page);
 
+	MemberSound memberSoundDetail(int cNo);
+
+	int memberSoundModify(MemberSound ms);
+
 }

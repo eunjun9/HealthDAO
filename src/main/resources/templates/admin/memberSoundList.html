@@ -42,7 +42,13 @@
 <!--// HEADER + GNB -->
 
 	<!-- container -->
-	
+	<script>
+		const msg = '[[${msg}]]';
+		
+		if(msg){
+			alert(msg);			
+		}
+	</script>
 	<div id="container" class="pdt0">
 		<div class="site_location">
 			<span><a href="/">HOME</a></span>
@@ -61,7 +67,8 @@
 						<p class="tit mgb40">
 							고객의소리
 						</p>
-						<div class="tab-pannel" id="useableCoupon">                            
+						<div class="tab-pannel" id="useableCoupon">
+							<div th:if="${listCount > 0}">                            
                             <div class="couponList tblBar mgt50">
                                 <p class="tblList">총 <span th:text="${listCount}">1</span>개</p>
                             </div>
@@ -85,34 +92,44 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>서비스 칭찬</td>
-                                            <td><span class="gr">해결전</span></td>
-                                            <td><a href="#" class="js_ListTtl ListTtl" onclick="showLayer('memberSoundDetail');">리뉴얼한 홈페이지 너무 좋아요!</a></td>
-                                            <td>chusik</td>
-                                            <td>2021-12-01</td>
+                                        <tr th:each="memberSound : ${memberSoundList}">
+                                            <td th:if="${memberSound.cDept == '1'}">
+                                            	<span>서비스 칭찬</span>
+                                            </td>
+                                            <td th:if="${memberSound.cDept == '2'}">
+                                            	<span>서비스 개선 의견</span>
+                                            </td>
+                                            <td th:if="${memberSound.cDept == '3'}">
+                                            	<span>상품제안</span>
+                                            </td>
+                                            <td th:if="${memberSound.cDept == '4'}">
+                                            	<span>사이트 오류 문의</span>
+                                            </td>
+                                            <td th:if="${memberSound.cDept == '5'}">
+                                            	<span>서비스 불편/제안</span>
+                                            </td>
+                                            <td>
+                                            	<span class="gr" th:if="${memberSound.cStatus == 'N'}">해결전</span>
+                                            	<span class="gr" th:if="${memberSound.cStatus == 'Y'}">해결완료</span>
+                                            </td>
+                                            <td><a href="#" class="js_ListTtl ListTtl" th:onclick="|javascript:selectPop('${memberSound.cNo}')|" th:text="${memberSound.cContent}"></a></td>
+                                            <td th:text="${memberSound.userId}"></td>
+                                            <td th:text="${#dates.format(memberSound.cDate, 'yyyy-MM-dd')}"></td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <div class="paging mgt50">
-                                    <a href="#" class="first"><span class="hide">첫페이지</span></a>
-                                    <a href="#" class="prev"><span class="hide">이전페이지</span></a>
-                                    <a href="#">1</a>
-                                    <a href="#" class="active">2</a>
-                                    <a href="#">3</a>
-                                    <a href="#">4</a>
-                                    <a href="#">5</a>
-                                    <a href="#">6</a>
-                                    <a href="#">7</a>
-                                    <a href="#">8</a>
-                                    <a href="#">9</a>
-                                    <a href="#">10</a>
-                                    <a href="#" class="next"><span class="hide">다음페이지</span></a>
-                                    <a href="#" class="last"><span class="hide">마지막페이지</span></a>
+                                <div class="paging mgt50"
+                                	th:with="prev=${pi.page - 1}, next=${pi.page + 1}">
+                                    <a th:href="@{/admin/memberSoundList(page=1)}" class="first"><span class="hide">첫페이지</span></a>
+                                    <a class="prev" href="/admin/memberSoundList?page=" th:attrappend="href=${prev}"><span class="hide">이전페이지</span></a>
+                                    <a th:each="page : ${#numbers.sequence(pi.startPage, pi.endPage)}" href="/admin/memberSoundList?page=" th:attrappend="href=${page}" th:text="${page}" th:classappend="${page} == ${#httpServletRequest.getParameter('page')} ? active"></a>	                                   
+                                    <a class="next" href="/admin/memberSoundList?page=" th:attrappend="href=${next}"><span class="hide">다음페이지</span></a>
+                                    <a href="/admin/memberSoundList?page=" th:attrappend="href=${pi.maxPage}" class="last"><span class="hide">마지막페이지</span></a>
                                 </div>
                             </div>
+                            </div>
                             <!-- 데이터 없을 때 -->
-                            <div class="noData">
+                            <div class="noData" th:unless="${listCount > 0}">
                                 <span>고객의 소리가 없습니다.</span>
                             </div>
                         </div>
@@ -137,11 +154,22 @@
             <button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
             <div class="lyTit">리뷰 상세/수정</div>
             <div class="lyBody">
+            	<form action="/admin/memberSoundModify" method="post">
+            	<input type="hidden" name="cNo" id="cNo" />
                 <div class="form_area">
+                	<dl>
+                        <dt>작성자</dt>
+                        <dd class="fc88" id="userName">
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>작성일</dt>
+                        <dd class="fc88" id="cDate">
+                        </dd>
+                    </dl>
                     <dl>
                         <dt>유형</dt>
-                        <dd class="fc88">
-                           서비스 칭찬
+                        <dd class="fc88" id="cDept">
                         </dd>
                     </dl>
                     <dl>
@@ -149,7 +177,7 @@
                         <dd>
 							<div class="inp_wrap">
 								<div class="inp_textArea disabled">
-									<textarea rows="10">정말정말 맛있어요!!!</textarea>
+									<textarea rows="10" id="cContent" disabled></textarea>
 									<div class="textarea-clone"></div>
 								</div>
 							</div>
@@ -159,30 +187,79 @@
                         <dt>진행상황</dt>
                         <dd>
 							<div class="inp_select">
-								<div class="selectBox">
-									<button class="title" type="button">해결전</button>
-									<ul class="selList">
-										<li>
-											<input type="radio" value="" class="option" id="select1_1" name="select1">
-											<label for="select1_1">해결전</label>
-										</li>
-                                        <li>
-											<input type="radio" value="" class="option" id="select1_1" name="select1">
-											<label for="select1_1">해결완료</label>
-										</li>
-									</ul>
+								<div class="selectBox" id="cStarusBox">
+									
 								</div>
 							</div>
                         </dd>
                     </dl>                   
                 </div>
                 <div class="btn_wrap length2">
-                    <a href="#" class="btn btnSizeL btnArr btnColorW btnTypeR"><span>수정</span></a>
-                    <a href="#" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></a>
+                    <button type="submit" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>적용</span></button>
                 </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
 </body>
 </html>
+<script>
+	function selectPop(no){
+		var cNo = no;
+		var sendData = {"cNo":cNo};
+		$.ajax({
+			url : "/admin/memberSoundDetail",
+			data : sendData,
+			type : "post",
+			success : function(data){
+				console.log(data);
+				document.getElementById("userName").textContent = data.userId;
+				
+				let date = new Date(data.cdate);
+				const year = date.getFullYear(); 
+				const month = date.getMonth() + 1; 
+				const day = date.getDate();
+				
+				let dateFormat = year + "-" + month + "-" + day;
+
+				document.getElementById("cDate").textContent = dateFormat;
+				
+				let cdeptName = "";
+				switch (data.cdept){
+					case '1' : cdeptName = '서비스 칭찬'; break;
+					case '2' : cdeptName = '서비스 개선 의견'; break;
+					case '3' : cdeptName = '상품제안'; break;
+					case '4' : cdeptName = '사이트 오류 문의'; break;
+					case '5' : cdeptName = '서비스 불편/제안'; break;
+				}
+				document.getElementById("cDept").textContent = cdeptName;
+				
+				document.getElementById("cContent").textContent = data.ccontent;
+				
+				let html = "";
+				if(data.cstatus == "Y"){
+					html = '<button class="title" type="button">해결완료</button>'
+						 + '<ul class="selList">'
+						 + '<li><input type="radio" value="N" class="option" id="select1_1" name="cStatus"><label for="select1_1">해결전</label></li>'
+                    	 + '<li><input type="radio" value="Y" class="option" id="select1_2" name="cStatus"><label for="select1_2" checked>해결완료</label></li>'
+						 + '</ul>';
+				}else{
+					html = '<button class="title" type="button">해결전</button>'
+						 + '<ul class="selList">'
+						 + '<li><input type="radio" value="N" class="option" id="select1_1" name="cStatus"><label for="select1_1" checked>해결전</label></li>'
+                   	     + '<li><input type="radio" value="Y" class="option" id="select1_2" name="cStatus"><label for="select1_2">해결완료</label></li>'
+						 + '</ul>';
+				}
+				
+				document.getElementById("cStarusBox").innerHTML = html;
+				document.getElementById("cNo").value = data.cno;
+				
+				showLayer('memberSoundDetail');
+			},
+			error : function(e){
+				console.log(e)
+			}
+		});
+	}
+</script>

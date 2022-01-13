@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.kh.healthDao.mypage.model.vo.Address;
 import com.kh.healthDao.mypage.model.vo.AttCheck;
+import com.kh.healthDao.mypage.model.vo.Cart;
 import com.kh.healthDao.admin.model.vo.Coupon;
 import com.kh.healthDao.member.model.vo.Member;
 import com.kh.healthDao.mypage.model.vo.Point;
@@ -42,7 +43,7 @@ public interface MypageMapper {
 	// 포인트 페이징
 	int pointListCount();
 	List<Point> listPoint(Map<String, Object> pageRow);
-	
+	int pointCount();
 
 	Review reviewDetail(int reviewNo);
 
@@ -59,9 +60,15 @@ public interface MypageMapper {
 	List<Address> deliView(int userNo);
 	
 	int insertDeli(Address address);
+  
+  Address selectDeil(int addressNo);
 
-	Address selectDeil(int addressNo);
+  /* 장바구니 */
+	int cartInsert(Cart cartinfo);
 
-	
+	List<Cart> cartList(int userNo);
+
+	Cart cartProductChk(Cart cartinfo);
+
 
 }
