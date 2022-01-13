@@ -1,9 +1,9 @@
 package com.kh.healthDao.manager.model.service;
 
-import java.util.List;
 import java.util.Map;
 
 import com.kh.healthDao.manager.model.vo.Qna;
+import com.kh.healthDao.manager.model.vo.Refund;
 
 public interface ManagerService{
 	
@@ -21,6 +21,12 @@ public interface ManagerService{
 
 	// 정산내역
 	Map<String, Object> calculateList(int page);
+
+	// 환불내역
+	Map<String, Object> refundListPaging(int page);
+
+	// 환불완료버튼
+	int managerRefundOk(Refund refund);
 	
 
 	

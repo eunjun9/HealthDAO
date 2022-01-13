@@ -10,7 +10,13 @@
 <!-- HEADER + GNB -->
 <th:block th:replace="common/header.html"></th:block>
 <!--// HEADER + GNB -->
-
+	<script>
+		const msg = '[[${msg}]]';
+		
+		if(msg){
+			alert(msg);			
+		}
+	</script>
 
 	<!-- container -->
 	

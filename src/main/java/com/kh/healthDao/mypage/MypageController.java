@@ -260,6 +260,7 @@ public class MypageController {
 		
 		mv.addObject("PointList", map.get("PointList"));
 		mv.addObject("listCount", map.get("listCount"));
+		mv.addObject("pointCount", map.get("pointCount"));
 		mv.addObject("pi", map.get("pi"));
 		mv.setViewName("mypage/point");
 		

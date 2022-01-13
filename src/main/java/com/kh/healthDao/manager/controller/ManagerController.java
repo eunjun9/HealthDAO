@@ -2,18 +2,20 @@ package com.kh.healthDao.manager.controller;
 
 import java.util.Map;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.healthDao.manager.model.service.ManagerService;
 import com.kh.healthDao.manager.model.vo.Qna;
+import com.kh.healthDao.manager.model.vo.Refund;
+
 
 @Controller
 @RequestMapping("/manager/*")
@@ -26,7 +28,7 @@ public class ManagerController {
 		this.managerService = managerService;
 	}
 
-	// 정산내역
+	// 정산내역 페이징 된
 	@GetMapping("/calculateList")
 	public ModelAndView managerCalculateList(ModelAndView mv, @RequestParam int page) {
 		
@@ -55,6 +57,20 @@ public class ManagerController {
 		return mv;
 	}
 	
+	// 환불내역 페이징 된
+	@GetMapping("/refundList")
+	public ModelAndView managerRefundList(ModelAndView mv, @RequestParam int page) {
+		
+		Map<String, Object> map = managerService.refundListPaging(page);
+		
+		mv.addObject("refundList", map.get("refundList"));
+		mv.addObject("listCount", map.get("listCount"));
+		mv.addObject("pi", map.get("pi"));
+		mv.setViewName("manager/refundList");
+		
+		return mv;
+	}
+	
 	// 회원문의답변
 	@GetMapping("memberInquiryAnswer")
 	public ModelAndView managerMemberInquiryAnswer(ModelAndView mv, @RequestParam int qNo) {
@@ -76,13 +92,17 @@ public class ManagerController {
 		return "redirect:/manager/memberInquiry?page=1";
 	}
 	
-	// 환불내역
-	@GetMapping("/refundList")
-	public String managerRefundList() {
+	// 환불 성공 버튼 업데이트
+	@PostMapping("/refundOk")
+	public String managerRefundOk(Refund refund, RedirectAttributes rttr) {
 		
-		return "manager/refundList";
+		String result = managerService.managerRefundOk(refund) > 0 ? "환불 수정 성공" : "환불 수정 실패";
+		rttr.addFlashAttribute("msg", result);
+		
+		return "redirect:/manager/refundList?page=1";
 	}
 	
+
 
 	
 	
