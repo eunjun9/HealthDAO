@@ -51,6 +51,18 @@
 		<result property="userNo" column="USER_NO" />
 	</resultMap>
 	
+	<resultMap id="cartResultMap" type="com.kh.healthDao.mypage.model.vo.Cart">
+		<id property="cartNo" column="CART_NO"/>
+		<result property="cartStock" column="CART_STOCK" />		
+		<association javaType="com.kh.healthDao.shopping.model.vo.Shopping" property="product">
+			<id property="productNo" column="PRODUCT_NO"/>
+			<result property="productName" column="PRODUCT_BRAND"/>
+			<result property="productTitle" column="PRODUCT_TITLE"/>
+			<result property="productPrice" column="PRODUCT_PRICE"/>
+			<result property="productOption" column="PRODUCT_OPTION"/>
+		</association>
+	</resultMap>
+	
 	<select id="findQnaList" resultMap="qnaResultMap" parameterType="hashmap">
 		SELECT *
 		FROM
@@ -314,4 +326,49 @@
 		  , R_CONTENT = #{rContent}
 		WHERE REVIEW_NO = #{reviewNo}
 	</update>
+	
+	<select id="cartProductChk" parameterType="com.kh.healthDao.mypage.model.vo.Cart" resultMap="cartResultMap">
+		SELECT
+		    CART_NO
+		    , CART_STOCK
+		    , PRODUCT_NO
+		    , PRODUCT_BRAND
+		    , PRODUCT_TITLE
+		    , PRODUCT_PRICE
+		    , PRODUCT_OPTION
+		FROM CART C
+		JOIN PRODUCT P USING(PRODUCT_NO)
+		JOIN PRODUCT_OPTION O USING(PRODUCT_NO)
+		WHERE USER_NO = #{userNo}
+		AND PRODUCT_NO = #{productNo}
+	</select>
+	
+	<insert id="cartInsert" parameterType="com.kh.healthDao.mypage.model.vo.Cart">
+		INSERT INTO CART(
+		    CART_NO
+		    , CART_STOCK
+		    , USER_NO
+		    , PRODUCT_NO
+		)VALUES(
+		    SEQ_CART_NO.NEXTVAL
+		    , #{cartStock}
+		    , #{userNo}
+		    , #{productNo}
+		)
+	</insert>
+	
+	<select id="cartList" parameterType="_int" resultMap="cartResultMap">
+		SELECT
+		    CART_NO
+		    , CART_STOCK
+		    , PRODUCT_NO
+		    , PRODUCT_BRAND
+		    , PRODUCT_TITLE
+		    , PRODUCT_PRICE
+		    , PRODUCT_OPTION
+		FROM CART C
+		JOIN PRODUCT P USING(PRODUCT_NO)
+		JOIN PRODUCT_OPTION O USING(PRODUCT_NO)
+		WHERE USER_NO = #{userNo}
+	</select>
 </mapper>

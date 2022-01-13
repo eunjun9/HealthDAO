@@ -18,6 +18,7 @@ public class Shopping {
 	private String productInfo;		// 상품 정보
 	private String productView;		// 조회수
 	private String productStock;	// 재고량
+	private String productOption;	// 옵션
 	
 	/* + 추가할 것
 	 * MEMBER 조인 -> 트레이너 이름, 트레이너 전화번호
