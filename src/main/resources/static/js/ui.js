@@ -1139,8 +1139,11 @@ function addCookie(id) {
 	var expire = 1; // 쿠키값을 저장할 기간
 	if (items) {
 		var itemArray = items.split(',');
-		if (itemArray.indexOf(id) != -1) { // 이미 존재하는 경우 종료
-			console.log('Already exists.');
+		if (itemArray.indexOf(id) != -1) { // 이미 존재하는 경우 순서 변경
+			itemArray = itemArray.filter(function(item) {return item !== id});	// 존재하는 애 삭제
+			itemArray.unshift(id);	// 다시 배열 맨 앞 추가
+			items = itemArray.join(',');
+			setCookie('productItems', items, expire);
 		} else { // 새로운 값 저장 및 최대 개수 유지하기
 			itemArray.unshift(id);
 			if (itemArray.length > maxItemNum )
