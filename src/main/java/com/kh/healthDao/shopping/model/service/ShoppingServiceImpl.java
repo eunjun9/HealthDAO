@@ -1,5 +1,6 @@
 package com.kh.healthDao.shopping.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +28,21 @@ public class ShoppingServiceImpl implements ShoppingService{
 		return shoppingMapper.recoRankList();
 	}
 
+	@Override
+	public List<Product> recentList(int[] addList) {
+		List<Product> pdtList = new ArrayList<>();
+		Product pdt = new Product();
+		
+		System.out.println("length : "+addList.length);
+
+		for(int i=0; i<addList.length; i++) {
+			pdt = shoppingMapper.recentList(addList[i]);
+			pdtList.add(pdt);
+		}
+		System.out.println("리스트 : " + pdtList);
+		return pdtList;
+	}
+	
 	@Override
 	public Map<String, Object> pdtList() {
 		int listCount = shoppingMapper.pdtListCount();

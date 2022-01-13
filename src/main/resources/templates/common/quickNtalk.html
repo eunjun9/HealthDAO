@@ -6,21 +6,11 @@
 			<div class="recentArea">
 				<div class="tit">최근 본 상품</div>
 				<div class="recoQuick">
-					<div class="list">
+					<!-- <div class="list">
 						<a href="#">
 							<img src="/images/temp/pdt02.png" alt="">
 						</a>
-					</div>
-					<div class="list">
-						<a href="#">
-							<img src="/images/temp/pdt01.png" alt="">
-						</a>
-					</div>
-					<div class="list">
-						<a href="#">
-							<img src="/images/temp/pdt03.png" alt="">
-						</a>
-					</div>
+					</div> -->
 				</div>
 			</div>
 			<div class="likeArea">
@@ -62,38 +52,51 @@
 </div>
 <!--// 퀵메뉴 / 톡 -->
 <script>
-	recentPdt();
+	setTimeout(recentPdt, 0);	// 업로드 후에 실행
 	function recentPdt(){
-		let value = getCookie("productItems").split(',');
-		let list = value.length;
-		let addList = [], data = {};
-		if(list >0){
-			for(let i = 0; i < list; i++){
-				addList[i] = value[i];
-				data.addList = addList;
-			}
-			console.log(data);
-			
-			$.ajax({
-				url : "/recentPdt",
-				dataType : "JSON",
-				data : data,
-				type : "POST",
-				traditional : true,		// 배열로 값 넘길때 필요한 선언
-				success : function(data){
-					console.log(data);
-					if(chkLength == data){
-						location.reload();
-					}else{
-						alert('실패');
-					}
-				},
-				error : function(e){
-					console.log(e);
+		let items = getCookie('productItems'); // 이미 저장된 값을 쿠키에서 가져오기
+		if(items != undefined){
+			let value = getCookie("productItems").split(',');
+			let list = value.length;
+			let addList = [], data = {};
+			if(list >0){
+				for(let i = 0; i < list; i++){
+					addList[i] = value[i];
+					data.addList = addList;
 				}
-			});
-			
-			data = {};
+				console.log(data);
+				
+				$.ajax({
+					url : "/recentPdt",
+					dataType : "JSON",	// 200에러나서 삭제
+					data : data,
+					type : "POST",
+					traditional : true,		// 배열로 값 넘길때 필요한 선언
+					success : function(data){
+						console.log(data.length);
+						html = '';
+						if(data.length > 0){
+							for(let i = 0; i < data.length; i++){
+								html += '<div class="list"><a href="/shopping/detail?productNo=' + data[i].productNo + '">'
+									  + '<img src="/images/temp/pdt02.png" alt=""></a></div>';
+								$(".recoQuick").append(html);
+								html='';
+							}
+							recoQuick();
+						}else{
+							html += '<div>최근 본 상품이<br>없습니다.</div>';
+							$(".recoQuick").append(html);
+						}
+					},
+					error : function(e){
+						console.log(e);
+					}
+				});
+				
+				data = {};
+			}			
+		}else{
+			setCookie('productItems', '', 1);
 		}
 	}
 
@@ -182,5 +185,4 @@
 		html = '';
 		btnVal();
 	}
-	recoQuick();
 </script>

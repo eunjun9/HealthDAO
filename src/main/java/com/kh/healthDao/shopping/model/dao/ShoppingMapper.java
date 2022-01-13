@@ -46,4 +46,5 @@ public interface ShoppingMapper {
 	int goodsShoppingListCount();
 
 	Product shoppingPayment(int productNo);
+	Product recentList(int productNo);
 }
