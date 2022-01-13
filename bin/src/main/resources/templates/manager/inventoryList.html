@@ -10,7 +10,6 @@
 <!-- HEADER + GNB -->
 <th:block th:replace="common/header.html"></th:block>
 <!--// HEADER + GNB -->
-
 	<!-- container -->
 	
 	<div id="container" class="pdt0">
@@ -76,10 +75,16 @@
 					<!-- myPageCon -->
 					<div class="myPageCon">
 						<p class="tit mgb40">
-							회원문의
+							재고 관리
 						</p>
 						<!-- myOrder tab -->
-
+						<div class="tabType tabType4 mgt40 no_link">
+							<ul>
+								<li><a href="/manager/inventoryList" class="current"><span>정산내역<span class="count">10</span></span></a></li>
+								<li><a href="/manager/RefundList"><span>환불내역<span class="count">10</span></span></a></li>
+								<li><a href="/manager/inventoryList"><span>재고수량<span class="count">10</span></span></a></li>
+							</ul>
+						</div>
 						<!-- //myOrder tab -->
 
 						<div class="myOrderList mgt40">
@@ -90,41 +95,12 @@
 													<div class="btn_wrap">
 														
 														<div class="inp_wrap">
-															<div class="inp_select">
-																<div class="selectBox">
-																	<button class="title" type="button">문의유형</button>
-																	<ul class="selList">
+															<div class="inp_select yelim">
+																
+															
+														</div>
+														</div>
 
-																			<li>
-																				<input type="radio" value="select1_1" class="option" id="select1_1" name="select1">
-																				<label for="select1_1">전체</label>
-																			</li>
-																			<li>
-																				<input type="radio" value="select1_1" class="option" id="select1_2" name="select1">
-																				<label for="select1_2">일반문의</label>
-																			</li>
-																			<li>
-																				<input type="radio" value="select1_2" class="option" id="select1_3" name="select1">
-																				<label for="select1_3">트레이너가입문의</label>
-																			</li>
-																			<li>
-																				<input type="radio" value="select1_3" class="option" id="select1_4" name="select1">
-																				<label for="select1_4">잘못된정보신고</label>
-																			</li>
-																			<li>
-																				<input type="radio" value="select1_4" class="option" id="select1_5" name="select1">
-																				<label for="select1_5">신고</label>
-																			</li>
-																			<li>
-																				<input type="radio" value="select1_5" class="option" id="select1_5" name="select1">
-																				<label for="select1_5">기타</label>
-																			</li>
-																		
-																	</ul>
-																</div>
-														</div>
-														</div>
-														</div>
 													</div>
 												</div>
 											</div>
@@ -134,35 +110,49 @@
 												<caption></caption>
 												<colgroup>
 													<col width="80px"></col>
-													<col width="100px"></col>
 													<col width="150px"></col>
 													<col width="100px"></col>
-													<col width="150px"></col>
+													<col width="100px"></col>
+													<col width="80x"></col>
+													<col width="80px"></col>
 													<col width="100px"></col>
 												</colgroup>
 												<thead>
 													<tr>
-														<th>문의번호</th>
-														<th>문의유형</th>
-														<th>제목</th>
-														<th>아이디</th>
-														<th>휴대폰번호</th>
-														<th>답변입력</th>
+														<th>제품번호</th>
+														<th>제품명</th>
+														<th>회사명</th>
+														<th>가격</th>
+														<th>입고수량</th>
+														<th>재고수량</th>
+														<th>관리</th>
 													</tr>
 												</thead>
 												<tbody>
-													<tr th:each="qna : ${QnaList}">
-														<td class="fc88" th:text=${qna.qNo}></td>
-														<td class="ta_l" th:text=${qna.qDept}></td>
-														<td class="fc88" th:text=${qna.qTitle}></td>
-														<td th:text=${qna.userNickName}></td>
-														<td th:text=${qna.userPhone}></td>
+													<tr>
+														<td class="fc88">11</td>
+														<td class="ta_l"><a href="javascript:void(0)" class="js_ListTtl ListTtl" title="">맛있닭 닭가슴살 한끼 만두 혼합...</a></td>
+														<td class="fc88">맛있닭</td>
+														<td>5,000</td>
+														<td>500</td>
+														<td>300</td>
+														<td>									
+															<button type="button" onclick="showLayer('pdtQna');" class="btn btnSizeS btnColorW btnTypeB" style="width:100px;"><span>추가 입고</span></button>
+														</td>
+													</tr>
+													<tr class="js_ListCtt ListCtt">
+														<td></td>
 														<td>
-															<div class="btn_wrap_yl">
-																<a href="/manager/memberInquiryAnswer?qNo=" th:attrappend="href=${qna.qNo}" class="btn btnSizeM btnColorW btnTypeB" style="width:100px;"><span>문의글보기</span></a> 
-																
+															<div class="ta_l js_replyCtt replyCtt">
+																<div>
+																	맛있닭 닭가슴살 한끼 만두 혼합맛
+																</div>
 															</div>
 														</td>
+														<td></td>
+														<td></td>
+														<td></td>
+														<td></td>
 													</tr>
 												</tbody>
 											</table>
@@ -186,18 +176,13 @@
 
 									</div>
 						</div>
-
-
-
-						
-					<!-- //myPageCon -->
+		<!-- //myPageCon -->
 				</div>
-
 			</div>
 		</div>
 	</div>
+	</div>
 	<!-- //container -->
-	
 		<!-- 스크립트 -->
 		<th:block th:replace="common/script.html"></th:block>
 		<!--// 스크립트 -->

@@ -22,7 +22,55 @@
 			<div class="myMain myCon">
 				<div class="contents">
 					<!-- mypage lnb -->
-					<div th:replace="common/mypageGnb.html"></div>
+					<div class="myPageLnb">
+						<div class="myRank">
+							<p class="rank userLv1" id="Lv">
+								<span class="btnMain">관리자</span>
+							</p><!-- 기본등급 userLv1 ~ 최고등급 userLv4 -->
+							<p class="txt">
+								<span>HELLO, VIP!</span><br>
+								<em id="name">류상훈님</em>
+							</p>
+						</div>
+						<div class="myPageMenu">
+							<ul class="dep1">
+								<li>
+									<p>주문관리</p>
+									<ul class="dep2">
+										<li><a href="/mypage/myorder">주문배송 조회</a></li>
+										<li><a href="/mypage/storebuy">매장구매내역</a></li>
+										<li><a href="/mypage/evidence">증빙서류 발급</a></li>
+									</ul>
+								</li>
+								<li>
+									<a href="/mypage/mycoupon">쿠폰</a>
+								</li>
+								<li>
+									<a href="/mypage/mypoint">포인트</a>
+								</li>
+								<li>
+									<p>내 활동</p>
+									<ul class="dep2">
+										<li><a href="/mypage/counsel">1:1 문의</a></li>
+										<li><a href="/mypage/mywish">위시리스트</a></li>
+										<li><a href="/mypage/mystock">입고 알림</a></li>
+									</ul>
+								</li>
+								<li>
+									<a href="/mypage/myreview">상품 리뷰</a>
+								</li>
+								<li>
+									<p>내 정보 관리</p>
+									<ul class="dep2">
+										<li><a href="/mypage/confirmpw">회원정보수정</a></li>
+										<li><a href="/mypage/myaddress">배송지 관리</a></li>
+										<li><a href="/mypage/skininfo">피부 프로필 관리</a></li>
+										<li><a href="javascript:;" onclick="goLeaveMemberInfo();return false;">회원탈퇴 하기</a></li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
 					<!-- //mypage lnb -->
 
 					<!-- myPageCon -->
@@ -31,19 +79,19 @@
 							포인트
 						</p>
 						<div class="profileOutline">
-							<div class="profile"><img class="p_profile" src="/images/point/profile.gif"></div>
+							<div class="profile"><img class="p_profile" src="./resources/web/images/point/profile.png"></div>
 							<div class="nicetomeetyou">옐림님 반갑습니다</div>
 							<div class="grade">일반회원</div>
 							<div class="gradeCondition">100,000원 더 구매시, VIP 등급! >></div>
 							<div class="coupon1"><p>쿠폰</p></div>
 							<div class="coupon2"><p>1개</p></div>
 							<div class="point1"><p>포인트</p></div>
-							<div class="point2"><p>3000</p></div>
+							<div class="point2"><p>3,000p</p></div>
 						</div>	
 						<div class="rouletteOutline">
 							<p class="atten1">
-								<img class="b_roulette" src="/images/point/roulette3.png">
-								<img class="r_roulette" src="/images/point/roulette1.png">
+								<img class="b_roulette" src="./resources/web/images/point/roulette3.png">
+								<img class="r_roulette" src="./resources/web/images/point/roulette1.png">
 								<p class="c_roulette"><b>참여방법</b>|Start버튼을 누르면 자동으로 멈춥니다.</p>
 							</p>
 							<div class="container">
@@ -122,6 +170,10 @@
 			{ transform: `rotate(${totalDeg}deg)` }
 		];
 		roulette.animate(loopAnimation, loopAnimationOptions);
+		}
+		</script>
+		<script>
+		
 		var result = totalDeg / 360 % 1 * 360;
 	      setTimeout(function(){
 	         if(result == 67.5){
@@ -135,9 +187,7 @@
 	         } else if(result == 337.5){
 	            alert("1000P");
 	         } else alert("꽝");
-	      }, 7000);
-		}
-		
+	      }, 8000);
 		
 		</script>
 </body>

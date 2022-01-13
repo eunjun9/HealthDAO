@@ -411,7 +411,7 @@ SHOPPING
 #stockAlt .stockApply .btn{position:absolute;right:0;bottom:-35px;width:86px;}
 #stockAlt .btn_wrap{margin-top:30px;}
 #stockAlt .btn_wrap .btn{width:320px;}
-#stockAlt .stockRecom{padding:30px 30px 40px 30px;margin:40px -30px -50px -30px;background:#f8f8f8}
+#stockAlt .stockRecom{;padding:30px 30px 40px 30px;margin:40px -30px -50px -30px;background:#f8f8f8}
 #stockAlt .stockRecom .tit{font-size:16px;font-weight:500;line-height:24px;}
 
 /* 리뷰 상세보기 */
@@ -2818,19 +2818,11 @@ filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#555555', endC
 
 .tdName a{border-bottom:1px solid #222;box-sizing: border-box;}
 .tdImg img{width:100%;}
-.bannerPop .fileUploadArea li,
-.bannerPop .fileUploadArea li{width:188px;height:118px;}
+#enrollMain .fileUploadArea li,
+#mainRollDetail .fileUploadArea li{width:188px;height:118px;}
 
 /* 은정 part */
-/* 로그인 ---------------------------------- */
-.login .contents {
-	width: 500px;
-	margin-top: 100px;
-}
-.login .btn_sns li {
-	width: 240px;
-}
-/* 회원가입 --------------------------------- */
+/* 회원가입 ---------------------------------------------------------------------------------------------------- */
 .memberJoin .joinMain { 
     padding-top: 80px; 
 }
@@ -2859,12 +2851,12 @@ filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#555555', endC
 }
 .memberJoin #inp_id,
 .memberJoin #inp_nic,
-.memberJoin #inp_eml {
+.memberJoin #inp_phn {
     width: 390px;
 }
 .memberJoin .inp_id .btn,
 .memberJoin .inp_nic .btn,
-.memberJoin .inp_eml .btn {
+.memberJoin .inp_phn .btn {
     width: 148px;
     margin-left: 8px;
 }
@@ -3066,7 +3058,7 @@ filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#555555', endC
     margin-top: 4px !important;
 }
 .myPageMIMf #inp_nic {
-    width: 388px;
+    width: 388px; /*340*/
 }
 .myPageMIMf .inp_id .btn,
 .myPageMIMf .inp_nic .btn,
@@ -3115,14 +3107,11 @@ filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#555555', endC
 	-webkit-transition:Transform 0.5s ease;-o-transition:Transform 0.5s ease;transition:Transform 0.5s ease;}
 .myPageMIMf .btnColorR:hover:before{-webkit-transform:scale(0,1);-ms-transform:scale(0,1);transform:scale(0,1);
 	-webkit-transform-origin:right center;transform-origin:right center;}
-.myPageMIMf .btnColorR:after{color:#fff;}
-.myPageMIMf .btnColorR:hover{color:#FF5B5D; border-color:#FF5B5D;}
+.myPageMIMf .btnColorR:after{color:#fff; background:#FF5B5D;}
+.myPageMIMf .btnColorR:hover{color:#fff; border-color:#FF5B5D;}
 .myPageMIMf .btnColorR:hover:after{
 	-webkit-transform-origin:left center;transform-origin:left center;
 	-webkit-transform:scale(1);-ms-transform:scale(1);transform:scale(1);}
-.myPageMIMf .inp_gender .active {
-    color:#FF5B5D; border-color:#FF5B5D;
-}
 .myPageMIMf .tblType1 {
     border-top: 0px;
 }
@@ -3217,9 +3206,9 @@ filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#555555', endC
 .pointOutline {border : 2px solid #CCCCCC; height: auto; margin-top: 30px; padding-bottom: 50px;}
 .pointOutline .pointInline {border : 1px solid #CCCCCC; height: 100px; width:350px; display:flex; float: left;margin-left: 78px; margin-top: 47px;
 	font-family:'noto','맑은고딕',sans-serif;color:#222;}
-.pointOutline .pointInline .pointTitle{font-weight:500; font-size: 20px; margin-left: 25px;margin-top: 25px;width: 100px;}
-.pointOutline .pointInline .pointPrice{font-weight:400; font-size: 15px; margin-top: 60px;}
-.pointOutline .pointInline .pointDay{font-weight:400; font-size: 15px; margin-left: 130px; margin-top: 60px;}
+.pointOutline .pointInline .pointTitle{font-weight:500; font-size: 20px; margin-left: 25px;margin-top: 25px;}
+.pointOutline .pointInline .pointPrice{font-weight:400; font-size: 15px; margin-left: -175px; margin-top: 60px;}
+.pointOutline .pointInline .pointDay{font-weight:400; font-size: 15px; margin-left: 180px; margin-top: 60px;}
 
 
 
@@ -3838,8 +3827,6 @@ filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#555555', endC
 
 .coupon_input .using_date { display:flex; align-items: center; justify-content: space-between; }
 .coupon_input .using_date span { margin: 0 10px; }
-.coupon_input .inp_text { width: 100%; }
-.coupon_input .inp_wrap { margin-top: 20px; }
 
 /* 쿠폰 이벤트? */
 .coupon_event .info_text_box { width: 100%; height: 70px; padding: 30px 0; text-align: center; background: url('../images/chunsik2.gif') no-repeat left 20px bottom -29px; }

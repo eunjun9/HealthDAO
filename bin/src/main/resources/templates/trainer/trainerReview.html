@@ -1,14 +1,149 @@
 <!doctype html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
 <head>
 <title></title>
-<!-- 메타태그, 스타일 -->
-<th:block th:replace="common/head.html"></th:block>
-<!--// 메타태그, 스타일 -->
+<meta name="title" content="">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta property="og:title" content="">
+<meta property="og:description" content="">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no, address=no, email=no">
+
+<meta property="og:url" content="">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="">
+<meta property="og:image" content="">
+
+<link rel="shortcut icon" href="">
+<link rel="apple-touch-icon" sizes="180x180" href="">
+<link rel="icon" type="image/png" sizes="32x32" href="">
+<link rel="icon" type="image/png" sizes="16x16" href="">
+<link rel="manifest" href="">
+<link rel="mask-icon" href="" color="">
+<meta name="msapplication-TileColor" content="">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="stylesheet" type="text/css" href="./resources/web/css/fonts.css">
+<link rel="stylesheet" type="text/css" href="./resources/web/css/common.css">
+<link rel="stylesheet" type="text/css" href="./resources/web/css/contents.css">
+<link rel="stylesheet" type="text/css" href="./resources/web/css/main.css">
+<link rel="stylesheet" type="text/css" href="./resources/web/css/yonghan.css">
+</head>
 <body>
-<div id="wrap" class="main">
-<!-- HEADER + GNB -->
-<th:block th:replace="common/header.html"></th:block>
+<div id="wrap" class="loadingNot">
+	<div id="loading">
+		<span class="hide">로딩중</span>
+	</div>
+
+	<!-- HEADER + GNB -->
+	<header id="header">
+		<!-- HEADERTOP -->
+		<div class="headerTop">
+			<div class="contents">
+				<div class="utilMenu">
+					<ul>
+						<li><a href="#loginLayer" onclick="loginLayer();return false;">로그인</a></li>
+						<li><a href="#">회원가입</a></li>
+						<li><a href="#">주문 조회</a></li>
+						<li><a href="#">고객센터</a></li>
+					</ul>
+					
+					<!-- 로그인 레이어 -->
+					<div id="loginLayer">
+						<div class="loginTabH">
+							<p class="info_txt">통합회원은 바닐라닷컴 전 브랜드를<br> 이용하실 수 있습니다.</p>
+							<div class="inp_wrap">
+								<div class="inp_text sizeS">
+									<input type="text" title="아이디" placeholder="아이디">
+								</div>
+								<p class="error">아이디를 입력해주세요.</p>
+							</div>
+							<div class="inp_wrap mgt10">
+								<div class="inp_text sizeS">
+									<input type="password" title="비밀번호" placeholder="비밀번호">
+								</div>
+								<p class="error">비밀번호를 입력해주세요.</p>
+							</div>
+							<span class="inp_check mgt15">
+								<input type="checkbox" id="id_auto_loing_H">
+								<label for="id_auto_loing_H">자동 로그인</label>
+							</span>
+							<a href="#" class="btn btnSizeM btnColorP btnTypeR w100 mgt17"><span>로그인</span></a>
+						</div>
+						<div class="btn_member">
+							<ul>
+								<li><a href="#">회원가입</a></li>
+								<li><a href="#">아이디 찾기</a></li>
+								<li><a href="#">비밀번호 찾기</a></li>
+							</ul>
+						</div>
+						<div class="btn_sns">
+							<ul>
+								<li class="sns_n"><a href="javascript:void(0);"><span>네이버 로그인</span></a></li>
+								<li class="sns_k"><a href="javascript:void(0);"><span>카카오 로그인</span></a></li>
+							</ul>
+						</div>
+						<div class="loginLayerClose">
+							<a href="javascript:void(0);" onclick="loginLayer();">닫기</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- // HEADERTOP -->
+
+		<!-- HEADER -->
+		<div class="daoHeader">
+			<h1><a href="#"><img class="logoClass" src="./resources/web/images/common/logo.png" alt="BANILA.COM"></a></h1>
+			<div class="searchH">
+				<div class="searchWrap">
+					<div class="inp_wrap">
+						<div class="inp_text">
+							<input type="text" id="headerSearch">
+							<button class="btn_clear"><span>clear</span></button>
+							<button class="btn_search" type="button"><span class="hide">검색</span></button>
+						</div>
+					</div>
+				</div>
+				<div class="jsSearchTxt">
+					<div class="rollCon">
+						<div class="txt">검색어 순위 1위 노출</div>
+						<div class="txt">검색어 순위 2위 노출</div>
+						<div class="txt">검색어 순위 3위 노출</div>
+						<div class="txt">검색어 순위 4위 노출</div>
+						<div class="txt">검색어 순위 5위 노출</div>
+					</div>
+				</div>
+			</div>
+			<div class="myMenuH">
+				<ul>
+					<li><a href="#">마이페이지</a></li>
+					<li><a href="#">장바구니 <span>99</span></a></li>
+				</ul>
+			</div>
+		</div>
+		<!-- //HEADER -->
+		<!-- GNB -->
+		<div class="gnbWrap">
+			<div class="gnb">
+				<div class="contents">
+					<ul class="gnbLink">
+						<li><a href="#">랭킹</a></li>
+						<li><a href="#">신상품</a></li>
+						<li><a href="#">식품</a></li>
+						<li><a href="#">음료</a></li>
+						<li><a href="#">운동·생활용품</a></li>
+						<li><a href="#">주변 PT 찾기</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- //GNB -->
+	</header>
 	<!-- //HEADER + GNB -->
 
 	<!-- container -->
@@ -16,8 +151,8 @@
     <div class="guideTab" id="guideTab1">
         <div style="display: flex;">
             <!-- 헬스장 사진 넣는 곳 -->
-            <img class="imgCutting" style="width:50%; height:350px;" src="/images/yonghan/aa1.jpg">
-            <img class="imgCutting" style="width:50%; height:350px;" src="/images/yonghan/aa2.jpg">
+            <img class="imgCutting" style="width:50%; height:350px;" src="./resources/web/images/yonghan/aa1.jpg">
+            <img class="imgCutting" style="width:50%; height:350px;" src="./resources/web/images/yonghan/aa2.jpg">
         </div>
     </div>
 	<div class="contents">
@@ -28,13 +163,13 @@
                 <div class="trainerReview1">
                     <div class="trainerReviewGrade">
                         <!-- 평점 넣는 곳 -->
-                        <p style="font-weight:600; font-size: 30px; margin-top: 20px; margin-left: 20px;" th:text="${trainer.avgStar}"/>
+                        <p style="font-weight:600; font-size: 30px; margin-top: 20px; margin-left: 20px;">5.0</p>
 
                         <div class="js_rating ratingS" style="margin-top: 20px; margin-left: 10px;">
                         <!-- 평균 별점 넣는 곳 -->
-                            <span th:text="${trainer.avgStar}"/>
+                            <span>5</span>
                             <!-- 리뷰 수 넣는 곳 -->
-                            <p style="font-size: 12px; color: #666666;" th:text="${trainer.sumReview}+'개의 후기'"/>
+                            <p style="font-size: 12px; color: #666666;">12개의 후기</p>
                         </div>
                     </div>
                     <button class="trainerReviewBtn" onclick="showLayer('reViewWritePop');" >✍ 리뷰 남기기</button>
@@ -47,29 +182,126 @@
                     <hr style="border: 1px solid #BFBFBF; width: 95%; margin-left: 10px; margin-top: 10px;">
                     <br>
 
-					<ul>
-	                    <li th:each="review:${reviewList}">
-	                        <div class="trainerReviewList">
-	                            <div style="margin-left: 10px; display: flex;">
-	                                <p style="font-size: 25px;">🧑</p>
-	                                <!-- 유저 이름 넣는 곳 -->
-	                                <p style="font-weight: 600; font-size: 16px; color: #222; margin-left: 5px;" th:text="${review.member.userName}"/>
-	                                <!-- 유저 리뷰 등록일 넣는 곳 -->
-	                                <p style="font-weight: 500; font-size: 13px; color: #666666; margin-left: 5px; margin-top: 2px;" th:text="${#dates.format(review.rDate, 'yyyy-MM-DD')}"/>
-	                            </div>
-	                            <div class="js_rating ratingS" style="margin-top: 5px; margin-right: 10px;">
-	                                <!-- 별점 넣는 곳 -->
-	                                <span th:text="${review.star}"/>
-	                            </div>
-	                        </div>
-	                        <div class="trainerUserReview">
-	                            <!-- 유저 리뷰 내용 넣는 곳 -->
-	                            <p style="font-weight: 500; font-size: 12px; color: #666666;" th:text="${review.rContent}"/>
-	                        </div>
-	                        <br>
-	                    </li>
-					</ul>
-				
+                    <li>
+                        <div class="trainerReviewList">
+                            <div style="margin-left: 10px; display: flex;">
+                                <p style="font-size: 25px;">🧑</p>
+                                <!-- 유저 이름 넣는 곳 -->
+                                <p style="font-weight: 600; font-size: 16px; color: #222; margin-left: 5px;">이촹섭</p>
+                                <!-- 유저 리뷰 등록일 넣는 곳 -->
+                                <p style="font-weight: 500; font-size: 13px; color: #666666; margin-left: 5px; margin-top: 2px;">2021-11-26</p>
+                            </div>
+                            <div class="js_rating ratingS" style="margin-top: 5px; margin-right: 10px;">
+                                <!-- 평균 별점 넣는 곳 -->
+                                <span>5</span>
+                            </div>
+                        </div>
+                        <div class="trainerUserReview">
+                            <!-- 유저 리뷰 내용 넣는 곳 -->
+                            <p style="font-weight: 500; font-size: 12px; color: #666666;">까만 리무진 보며 꿈을 키웠지
+                                언젠가는 나도 저걸 갖게 될 거야
+                                커다란 리무진에서 내가 내리지
+                                변한 것은 내가 아닌 삶의 무게 they don’t know</p>
+                        </div>
+                        <br>
+                    </li>
+
+                    <li>
+                        <div class="trainerReviewList">
+                            <div style="margin-left: 10px; display: flex;">
+                                <p style="font-size: 25px;">🧑</p>
+                                <!-- 유저 이름 넣는 곳 -->
+                                <p style="font-weight: 600; font-size: 16px; color: #222; margin-left: 5px;">유가회</p>
+                                <!-- 유저 리뷰 등록일 넣는 곳 -->
+                                <p style="font-weight: 500; font-size: 13px; color: #666666; margin-left: 5px; margin-top: 2px;">2021-11-25</p>
+                            </div>
+                            <div class="js_rating ratingS" style="margin-top: 5px; margin-right: 10px;">
+                                <!-- 평균 별점 넣는 곳 -->
+                                <span>5</span>
+                            </div>
+                        </div>
+                        <div class="trainerUserReview">
+                            <!-- 유저 리뷰 내용 넣는 곳 -->
+                            <p style="font-weight: 500; font-size: 12px; color: #666666;">빙빙 돌아가는 회전목마처럼
+                                영원히 계속될 것처럼
+                                빙빙 돌아올 우리의 시간처럼
+                                인생은 회전목마</p>
+                        </div>
+                        <br>
+                    </li>
+
+                    <li>
+                        <div class="trainerReviewList">
+                            <div style="margin-left: 10px; display: flex;">
+                                <p style="font-size: 25px;">🧑</p>
+                                <!-- 유저 이름 넣는 곳 -->
+                                <p style="font-weight: 600; font-size: 16px; color: #222; margin-left: 5px;">원은징</p>
+                                <!-- 유저 리뷰 등록일 넣는 곳 -->
+                                <p style="font-weight: 500; font-size: 13px; color: #666666; margin-left: 5px; margin-top: 2px;">2021-11-26</p>
+                            </div>
+                            <div class="js_rating ratingS" style="margin-top: 5px; margin-right: 10px;">
+                                <!-- 평균 별점 넣는 곳 -->
+                                <span>5</span>
+                            </div>
+                        </div>
+                        <div class="trainerUserReview">
+                            <!-- 유저 리뷰 내용 넣는 곳 -->
+                            <p style="font-weight: 500; font-size: 12px; color: #666666;">까만 리무진 보며 꿈을 키웠지
+                                언젠가는 나도 저걸 갖게 될 거야
+                                커다란 리무진에서 내가 내리지
+                                변한 것은 내가 아닌 삶의 무게 they don’t know</p>
+                        </div>
+                        <br>
+                    </li>
+
+                    <li>
+                        <div class="trainerReviewList">
+                            <div style="margin-left: 10px; display: flex;">
+                                <p style="font-size: 25px;">🧑</p>
+                                <!-- 유저 이름 넣는 곳 -->
+                                <p style="font-weight: 600; font-size: 16px; color: #222; margin-left: 5px;">류상흔</p>
+                                <!-- 유저 리뷰 등록일 넣는 곳 -->
+                                <p style="font-weight: 500; font-size: 13px; color: #666666; margin-left: 5px; margin-top: 2px;">2021-11-26</p>
+                            </div>
+                            <div class="js_rating ratingS" style="margin-top: 5px; margin-right: 10px;">
+                                <!-- 평균 별점 넣는 곳 -->
+                                <span>5</span>
+                            </div>
+                        </div>
+                        <div class="trainerUserReview">
+                            <!-- 유저 리뷰 내용 넣는 곳 -->
+                            <p style="font-weight: 500; font-size: 12px; color: #666666;">까만 리무진 보며 꿈을 키웠지
+                                언젠가는 나도 저걸 갖게 될 거야
+                                커다란 리무진에서 내가 내리지
+                                변한 것은 내가 아닌 삶의 무게 they don’t know</p>
+                        </div>
+                        <br>
+                    </li>
+
+                    <li>
+                        <div class="trainerReviewList">
+                            <div style="margin-left: 10px; display: flex;">
+                                <p style="font-size: 25px;">🧑</p>
+                                <!-- 유저 이름 넣는 곳 -->
+                                <p style="font-weight: 600; font-size: 16px; color: #222; margin-left: 5px;">이왜림</p>
+                                <!-- 유저 리뷰 등록일 넣는 곳 -->
+                                <p style="font-weight: 500; font-size: 13px; color: #666666; margin-left: 5px; margin-top: 2px;">2021-11-26</p>
+                            </div>
+                            <div class="js_rating ratingS" style="margin-top: 5px; margin-right: 10px;">
+                                <!-- 평균 별점 넣는 곳 -->
+                                <span>5</span>
+                            </div>
+                        </div>
+                        <div class="trainerUserReview">
+                            <!-- 유저 리뷰 내용 넣는 곳 -->
+                            <p style="font-weight: 500; font-size: 12px; color: #666666;">까만 리무진 보며 꿈을 키웠지
+                                언젠가는 나도 저걸 갖게 될 거야
+                                커다란 리무진에서 내가 내리지
+                                변한 것은 내가 아닌 삶의 무게 they don’t know</p>
+                        </div>
+                        <br>
+                    </li>
+
                 </div>
             </div>
 
@@ -79,37 +311,37 @@
                         <div style="width: 100%; height: 100px; display: flex; justify-content: center; margin-top: 10px; padding-bottom: 30px;">
                             <div style="width: 90px; height: 100px;">
                                 <!-- 트레이너 사진 넣는 곳 -->
-                                <img src="/images/yonghan/trainer.png" style="width: 100%; height: 100%;">
+                                <img src="resources/web/images/yonghan/trainer.png" style="width: 100%; height: 100%;">
                             </div>
                         </div>
                         <div style="text-align: center;">
                             <!-- 트레이너 이름 넣는 곳 -->
-                            <p class="trainerDetailName" th:text="${trainer.member.userName}+' 선생님'"/>
+                            <p class="trainerDetailName">이애림 선생님</p>
                             <!-- 헬스장 이름 넣는 곳 -->
-                            <p class="trainerDetailPitName" th:text="${trainer.tGymName}"/>
+                            <p class="trainerDetailPitName">별림 휘트니스</p>
 
                             <a href="#" style="display: flex; justify-content: center;">
                                 <p style="font-size: 12px; color:#FFBB33;">★</p>
 							    <!-- 평균 별점 넣는 곳 -->
-								<p class="trainerDetailReview" th:text="${trainer.avgStar}"/>
+								<p class="trainerDetailReview">5.0</p>
 								<!-- 리뷰 수 넣는 곳 -->
-								<p class="traninerDetailReviewSum" th:text="'('+${trainer.sumReview}+')'"/>
+								<p class="traninerDetailReviewSum">(23)</p>
                             </a>
 
                             <!-- 한 줄 소개 넣는 곳 -->
-                            <p class="trainerDetailOneP" th:text="${trainer.tOneIntro}"/>
+                            <p class="trainerDetailOneP">"13년 경력/다이어트. 근력증가. 바디프로필 전문"</p>
                         </div>
                     </div>
                     <div style="height: 45%; background-color: #F8F8F8; border-radius: 10px;">
                         <div class="trainerDetailPrice">
 							<br>
 							<!-- 가격 넣는 곳 -->
-							<h2 th:text="${#numbers.formatInteger(trainer.tPrice, 0, 'COMMA')+'원'}"/>
+							<h2>1회 이용권 25,000원</h2>
 							<br>
 							<h5>회원권을 등록하지 않아도 가능해요</h5>
 						</div>
 						<div class="trainerDetailOrderAndQue">
-							<button class="trainerDetailOrder" onclick="location.href='#'">1회 체험 신청하기</button>
+							<button class="trainerDetailOrder">1회 체험 신청하기</button>
 							<button class="trainerDetailQue">문의</button>
 						</div>
                     </div>
@@ -124,58 +356,143 @@
 		<div style="display: flex;">
 			<div class="tD1">
 				<!-- 트레이너 사진 넣는 곳 -->
-				<img src="/images/yonghan/trainer.png" style="width: 100%; height: 100%; border-radius: 5px;">
+				<img src="resources/web/images/yonghan/trainer.png" style="width: 100%; height: 100%; border-radius: 5px;">
 			</div>
 			<div style="display: block;">
 				<!-- 트레이너 이름 넣는 곳 -->
 				<p class="tD2">이애림</p>
 				<!-- 헬스장 이름 넣는 곳 -->
-				<p class="tD3" th:text="${trainer.tGymName}"/>
+				<p class="tD3">별림 휘트니스</p>
 			</div>
 		</div>
 		<div class="tD4">
 			<p style="margin-left: 10px; text-align: center;">코치님에게 직접 상담받을 수 있어요</p>
 		</div>
 		<!-- 트레이너 문의 소개 넣는 곳 -->
-		<textarea class="tD5" readonly style="resize: none;" th:text="${trainer.queIntro}"/>
+		<textarea class="tD5" readonly style="resize: none;">안녕하세요 이애림 트레이너입니다 수업 중이면 연락을 못 받을 수 있으니 나중에 다시 한번 더 연락 부탁드립니다 감사합니다</textarea>
 		<button id="callBtn">📞전화</button>
 	</div>
 </div>
-
-	
-	<!-- 스크립트 -->
-		<th:block th:replace="common/script.html"></th:block>
-		<!--// 스크립트 -->
-		<!-- FOOTER -->
-		<th:block th:replace="common/footer.html"></th:block>
-		<!--// FOOTER -->
-	</div>
-	
-	<!-- 퀵메뉴 + 톡톡 -->
-	<th:block th:replace="common/quickNtalk.html"></th:block>
-	<!--// 퀵메뉴 + 톡톡 -->	
-	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
-	<script type="text/javascript" th:inline="javascript">
-
-		$(document).ready(function(){
-			$(".trainerDetailQue").click(function(){
-				$("#modal2").show();
-			});
-			$("#xBtn").click(function(){
-				$("#modal2").hide();
-				$("#callBtn").text("📞전화");
-			});
-			$("#callBtn").click(function(){
-				// 트레이너 번호 넣는 곳
-				$("#callBtn").text('[[${trainer.member.userPhone}]]');
-			});
-		});
+	<!-- footer -->
+	<footer id="footer">
+		<div class="copyArea">
+			<div class="copyLink">
+				<ul>
+					<li><a href="#">회사 소개</a></li>
+					<li><a href="#">공지사항</a></li>
+					<li><a href="#">입점·제휴문의</a></li>
+					<li><a href="#">이용약관</a></li>
+					<li><a href="#">개인정보처리방침</a></li>
+				</ul>
+			</div>
+			<div class="copySns">
+				<a href="https://www.instagram.com/ryuu4512/" class="instar"target="_blank" >RYU</a>
+				<a href="https://www.instagram.com/gahee_0305/" class="instar"target="_blank" >YU</a>
+			</div>
+			<div class="copyRight">
+				<div class="copyInfo">
+					<em class="noLine">㈜아령하세요</em>
+					<em>서울시 강남구 아령빌딩 1F ~ 123F</em>
+					<em>대표: 이창섭</em>
+					<em>사업자등록번호 1991-0722</em>
+					<br>
+					<em class="noLine">고객센터 : 010-9535-0371</em>
+					<em>FAX : 9535-0371</em>
+					<em>관리자이메일 : <a href="mailto:roksellid02@gmail.com">roksellid02@gmail.com</a></em>
+				</div>
+				<p>Copyright HealthDao. Co. Ltd All Right Reserved</p>
+			</div>
+		</div>
+	</footer>
+	<!-- //footer -->
+	<!-- javascript -->
+	<script type="text/javascript" src="./resources/web/js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="./resources/web/js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="./resources/web/js/slick.min.js"></script>
+	<script type="text/javascript" src="./resources/web/js/jquery.mCustomScrollbar.js"></script>
+	<script type="text/javascript" src="./resources/web/js/circle-progress.min.js"></script>
+	<script type="text/javascript" src="./resources/web/js/ui.js"></script>
+	<script type="text/javascript" src="./resources/web/js/main.js"></script>
+	<!-- //javascript -->
+	<script type="text/javascript">
+		mainStart();
+		mainVisual();
 	</script>
-	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
-	<style>
-		#quick{display:none;}
-	</style>
-	
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".trainerDetailQue").click(function(){
+                $("#modal2").show();
+            });
+            $("#xBtn").click(function(){
+                $("#modal2").hide();
+                $("#callBtn").text("📞전화");
+            });
+            $("#callBtn").click(function(){
+                // 트레이너 번호 넣는 곳
+                $("#callBtn").text("010-1234-5678");
+            });
+        });
+    </script>
+</div>
+<!-- 리뷰 작성 -->
+<div id="reViewWritePop" class="lyPopArea">
+    <div class="lyPop">
+        <div class="lyWrap">
+            <button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
+            <div class="lyTit">리뷰 작성</div>
+            <div class="lyBody">
+                <div class="WrtAreaRating">
+                    <div class="ratingBox">
+                        <p class="ratingTtl">상품은 만족하셨나요?</p>
+                        <div class="js_rating js_userRating ratingXL">
+                            <span>2</span>
+                            <div class="userRatingBox">
+                                <button class="rating_1">1</button>
+                                <button class="rating_2">2</button>
+                                <button class="rating_3">3</button>
+                                <button class="rating_4">4</button>
+                                <button class="rating_5">5</button>
+                            </div>
+                        </div>							
+                    </div>
+                </div>
+                <div class="WrtAreaCtt">
+                    <p class="cmt ncsry"><label for="reViewWritePop_text1">사용후기를 적어주세요(필수)</label></p>
+                    <div class="reviewPoint mgt23"><span class="point01">좋았던 점</span><span class="point02">사용팁</span><span class="point03">개선점을 솔직하게 적어주세요</span></div>
+                    <div class="coachMarkArea">
+                        <div class="inp_wrap error mgt10">
+                            <div class="inp_textArea lengthCheck">
+                                <textarea></textarea>
+                                <div class="textarea-clone"></div>
+                            </div>
+                            <span class="charCnt">
+                                <em>0</em>/250자
+                                <span class="charCommen">최소 20자 이상 250자 이내로 작성해 주세요.</span>
+                            </span>								
+                            <p class="error">error message</p>
+                        </div>
+                        <div class="coachMarkBox">
+                            <a href="javascript:void(0)" class="coachMarkClose" onclick="coachMarkClose(this)"><span class="hide">닫기</span></a>
+                            <div class="coachMarkCtt">
+                                <p class="ttl">리뷰는 이렇게 써주시면 좋아요</p>
+                                <ul>
+                                    <li><span class="coachmark01"></span><p>제품을 사용하시면서 좋았던 점</p></li>
+                                    <li><span class="coachmark02"></span><p>나만의 유용한 제품 사용 방법</p></li>
+                                    <li><span class="coachmark03"></span><p>보완해주세요! 개선이 필요한 점</p></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
 
+                <div class="btn_wrap length2">
+                    <a href="javascript:void(0);" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorW btnTypeR"><span>취소</span></a>
+                    <a href="javascript:void(0);" onclick="layerPopClose();showLayer('reViewCompletePop');" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

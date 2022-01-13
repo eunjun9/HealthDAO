@@ -12,13 +12,7 @@
 <!--// HEADER + GNB -->
 
 	<!-- container -->
-	<script>
-		const msg = '[[${msg}]]';
-		
-		if(msg){
-			alert(msg);			
-		}
-	</script>
+	
 	<div id="container" class="pdt0">
 		<div class="site_location">
 			<span><a href="/">HOME</a></span>
@@ -35,14 +29,14 @@
 					<!-- myPageCon -->
 					<div class="myPageCon coupon">
 						<p class="tit mgb40">
-							내가 쓴 리뷰
+							리뷰
 						</p>
                         <!-- 사용가능 쿠폰 리스트 -->
                         <div class="tab-pannel" id="useableCoupon">
                             <div class="couponList tblBar mgt50">
-                                <p class="tblList">총 <span th:text="${listCount}">1</span>개</p>                               
+                                <p class="tblList">총 <span>1개</span></p>                               
                             </div>
-                            <div class="js_tblList" th:if="${listCount > 0}">
+                            <div class="js_tblList">
                                 <table class="tblType1" summary="">
                                     <caption></caption>
                                     <colgroup>
@@ -62,26 +56,18 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr th:each="review : ${reviewList}">
-                                            <td class="fc88" th:text="${review.category}"></td>
-                                            <td class="fc88" >잇메이트 소고기볼 혼합 100g</td>
-                                            <td class="fc88"><div class="js_rating ratingS"><span th:text="${review.star}"></span></div></td>
-                                            <td class="fc88"><a href="#" class="js_ListTtl ListTtl" th:onclick="|javascript:selectPop('${review.reviewNo}')|" th:text="${review.rContent}"></a></td>
-                                            <td class="fc88" th:text="${#dates.format(review.rDate, 'yyyy-MM-dd')}"></td>
+                                        <tr>
+                                            <td class="fc88">제품</td>
+                                            <td class="fc88">잇메이트 소고기볼 혼합 100g</td>
+                                            <td class="fc88"><div class="js_rating ratingS"><span>4.5</span></div></td>
+                                            <td class="fc88"><a href="#" class="js_ListTtl ListTtl" onclick="showLayer('reviewDetail');">완전 최고예요!! 까아아아아아아아ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</a></td>
+                                            <td class="fc88">2021-12-01</td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <div class="paging mgt50"
-                                	th:with="prev=${pi.page - 1}, next=${pi.page + 1}">
-                                    <a th:href="@{/mypage/review(page=1)}" class="first"><span class="hide">첫페이지</span></a>
-                                    <a class="prev" href="/mypage/review?page=" th:attrappend="href=${prev}"><span class="hide">이전페이지</span></a>
-                                    <a th:each="page : ${#numbers.sequence(pi.startPage, pi.endPage)}" href="/mypage/review?page=" th:attrappend="href=${page}" th:text="${page}" th:classappend="${page} == ${#httpServletRequest.getParameter('page')} ? active"></a>	                                   
-                                    <a class="next" href="/mypage/review?page=" th:attrappend="href=${next}"><span class="hide">다음페이지</span></a>
-                                    <a href="/mypage/review?page=" th:attrappend="href=${pi.maxPage}" class="last"><span class="hide">마지막페이지</span></a>
-                                </div>
                             </div>
                             <!-- 데이터 없을 때 -->
-                            <div class="noData" th:unless="${listCount > 0}">
+                            <div class="noData">
                                 <span>리뷰를 남기신 이력이 없습니다.</span>
                             </div>
                         </div>
@@ -108,99 +94,5 @@
 		$('#quick .quickArea').css({'position':'absolute', 'top':290});
 	</script>
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
-	<!-- 리뷰 상세 팝업 -->
-<div id="reviewDetail" class="lyPopArea">
-    <div class="lyPop">
-        <div class="lyWrap">
-            <button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
-            <div class="lyTit">리뷰 상세/수정</div>
-            <div class="lyBody">
-                <form action="/mypage/reviewModify" method="post">
-	                <input type="hidden" name="reviewNo" id="reviewNo" />
-	                <input type="hidden" name="star" id="star" />
-	                <div class="form_area">
-	                    <dl>
-	                        <dt>구분</dt>
-	                        <dd class="fc88" id="reviewDept">
-	                           제품
-	                        </dd>
-	                    </dl>
-	                    <dl>
-	                        <dt>상품명</dt>
-	                        <dd class="fc88" id="productName">
-								잇메이트 소고기볼 혼합 100g
-	                        </dd>
-	                    </dl>
-	                    <dl>
-	                        <dt>별점</dt>
-	                        <dd>
-								<div class="js_rating js_userRating ratingXL">
-									<span id="starScore">1</span>
-									<div class="userRatingBox">
-										<button type="button" onclick="starScoreInput(1)" class="rating_1">1</button>
-										<button type="button" onclick="starScoreInput(2)" class="rating_2">2</button>
-										<button type="button" onclick="starScoreInput(3)" class="rating_3">3</button>
-										<button type="button" onclick="starScoreInput(4)" class="rating_4">4</button>
-										<button type="button" onclick="starScoreInput(5)" class="rating_5">5</button>
-									</div>
-								</div>
-	                        </dd>
-	                    </dl>
-	                    <dl>
-	                        <dt>리뷰</dt>
-	                        <dd>
-								<div class="inp_wrap">
-									<div class="inp_textArea">
-										<textarea rows="10" id="reviewContent" name="rContent"></textarea>
-										<div class="textarea-clone"></div>
-									</div>
-								</div>
-	                        </dd>
-	                    </dl>          
-	                </div>
-	                <div class="btn_wrap length2">
-	                    <button type="submit" class="btn btnSizeL btnArr btnColorW btnTypeR"><span>수정</span></button>
-	                    <a href="#" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></a>
-	                </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 </body>
 </html>
-<script>
-	function selectPop(rNo){
-		var reviewNo = rNo;
-		var sendData = {"reviewNo":reviewNo};
-		$.ajax({
-			url : "/mypage/reviewDetail",
-			data : sendData,
-			type : "post",
-			success : function(data){
-				console.log(data);
-				document.getElementById("reviewDept").textContent = data.category;
-				let starScore = document.getElementById("starScore");
-				starScore.textContent = data.star;
-				switch (data.star){
-					case 1 : starScore.style.width = '39px'; break;
-					case 2 : starScore.style.width = '78px'; break;
-					case 3 : starScore.style.width = '117px'; break;
-					case 4 : starScore.style.width = '156px'; break;
-					case 5 : starScore.style.width = '195px'; break;
-				}
-				document.getElementById("reviewContent").textContent = data.rcontent;
-				document.getElementById("star").value = data.star;
-				document.getElementById("reviewNo").value = data.reviewNo;
-				showLayer('reviewDetail');
-			},
-			error : function(e){
-				console.log(e)
-			}
-		});
-	}
-	
-	function starScoreInput(num){
-		document.getElementById("star").value = num;
-	}
-</script>

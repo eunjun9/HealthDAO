@@ -12,13 +12,7 @@
 <!--// HEADER + GNB -->
 
 	<!-- container -->
-	<script>
-		const msg = '[[${msg}]]';
-		
-		if(msg){
-			alert(msg);			
-		}
-	</script>
+	
 	<div id="container" class="pdt0">
 		<div class="site_location">
 			<span><a href="/">HOME</a></span>
@@ -29,7 +23,7 @@
 			<div class="myMain myCon">
 				<div class="contents">
 					<!-- mypage lnb -->
-					<div th:replace="common/mypageGnb.html"></div>
+					<div th:replace="common/customCenterGnb.html"></div>
 					<!-- //mypage lnb -->
 
 					<!-- myPageCon -->
@@ -46,11 +40,10 @@
 								상품/주문/배송 문의는 1:1문의로 해주세요.
 							</p>
 							<div class="btn_wrap">
-								<a href="/mypage/qnaInsert" class="btn btnSizeL btnColorW btnTypeR" style="width:150px;"><span>1:1문의하기</span></a>
+								<a href="./oneQuestionInput.html" class="btn btnSizeL btnColorW btnTypeR" style="width:150px;"><span>1:1문의하기</span></a>
 							</div>
 						</div>
                         <div class="hr"></div>
-                        <form action="/mypage/memberSoundInsert" method="post">
 						<div class="inp_wrap mgt30">
 							<div class="inp_lab"><label for="select1">의견 유형</label></div>
 							<div class="inp_select">
@@ -58,38 +51,47 @@
 									<button class="title" type="button">옵션을 선택해주세요</button>
 									<ul class="selList">
 										<li>
-											<input type="radio" value="1" class="option" id="select1_1" name="cDept">
+											<input type="radio" value="" class="option" id="select1_1" name="select1">
 											<label for="select1_1">서비스 칭찬</label>
 										</li>
 										<li>
-											<input type="radio" value="2" class="option" id="select1_2" name="cDept">
-											<label for="select1_2">서비스 개선 의견</label>
+											<input type="radio" value="" class="option" id="select1_1" name="select1">
+											<label for="select1_1">서비스 개선 의견</label>
 										</li>
 										<li>
-											<input type="radio" value="3" class="option" id="select1_3" name="cDept">
-											<label for="select1_3">상품제안</label>
+											<input type="radio" value="" class="option" id="select1_1" name="select1">
+											<label for="select1_1">상품제안</label>
 										</li>
 										<li>
-											<input type="radio" value="3" class="option" id="select1_4" name="cDept">
-											<label for="select1_4">사이트 오류 문의</label>
+											<input type="radio" value="" class="option" id="select1_1" name="select1">
+											<label for="select1_1">사이트 오류 문의</label>
 										</li>
 										<li>
-											<input type="radio" value="4" class="option" id="select1_5" name="cDept">
-											<label for="select1_5">서비스 불편/제안</label>
+											<input type="radio" value="" class="option" id="select1_1" name="select1">
+											<label for="select1_1">서비스 불편/제안</label>
 										</li>
 									</ul>
 								</div>
 							</div>
 							<label class="inp_lab" for="ipt_label">내용</label>
                             <div class="inp_textArea">
-                                <textarea rows="10" name="cContent"></textarea>
+                                <textarea rows="10"></textarea>
                                 <div class="textarea-clone"></div>
                             </div>
+							<label class="inp_lab" for="ipt_label">이미지</label>
+							<ul class="fileUploadArea">
+								<li><label for="imgUpload"><span class="hide">업로드</span></label><input type="file" class="hide" id="imgUpload"></li>
+								<li class="imgCutting">
+									<div class="imgBox">
+										<img src="../resources/web/images/temp/480X480.png" alt="" class="wh" style="margin-top: 0px; margin-left: 0px;">
+									</div>
+									<a href="javascript:void(0)" class="closeLink"><span class="hide">close</span></a>
+								</li>
+							</ul>
 							<div class="btn_wrap mgt40">
-								<button type="submit" class="btn btnSizeL btnColorW btnTypeR" style="width:150px;"><span>보내기</span></button>
+								<a href="#" class="btn btnSizeL btnColorW btnTypeR" style="width:150px;"><span>보내기</span></a>
 							</div>
 						</div>
-						</form>
                     </div>
 					<!-- //myPageCon -->
 				</div>

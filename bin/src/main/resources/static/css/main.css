@@ -37,7 +37,6 @@ MAIN
 .mainVisual .visualRoll .btnPrev{position:absolute;right:50%;top:0;z-index:4;width:50%;height:100%;margin-right:440px;background:rgba(0,0,0,0.4);}
 .mainVisual .visualRoll .btnNext{position:absolute;left:50%;top:0;z-index:4;width:50%;height:100%;margin-left:520px;background:rgba(0,0,0,0.4);}
 .mainVisual .jsVisualRoll{margin-left:80px;}
-.mainVisual .jsVisualRoll img{max-width:920px;}
 .mainVisual .visualRoll .slick-list{overflow:visible;}
 .mainVisual .visualRoll .slick-slide{margin:0 10px;}
 .mainVisual .visualRoll .slick-arrow{position:absolute;left:50%;top:50%;z-index:5;width:38px;height:38px;margin-top:-20px;font-size:0;line-height:0;text-indent:-50000px;border:1px solid #e8e8e8;border-radius:50%;

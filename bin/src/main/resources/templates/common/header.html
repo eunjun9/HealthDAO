@@ -4,16 +4,50 @@
 			<div class="contents">
 				<div class="utilMenu">
 					<ul>
-						<th:block sec:authorize="isAnonymous()">
-							<li><a href="/member/login">로그인</a></li>
-							<li><a href="/member/signUp">회원가입</a></li>
-						</th:block>
-						<th:block sec:authorize="isAuthenticated()">
-							<li><a href="/member/logout">로그아웃</a></li>
-						</th:block>
+						<li><a href="#loginLayer" onclick="loginLayer();return false;">로그인</a></li>
+						<li><a href="#">회원가입</a></li>
 						<li><a href="#">주문 조회</a></li>
 						<li><a href="#">고객센터</a></li>
 					</ul>
+					
+					<!-- 로그인 레이어 -->
+					<div id="loginLayer">
+						<div class="loginTabH">
+							<div class="inp_wrap">
+								<div class="inp_text sizeS">
+									<input type="text" title="아이디" placeholder="아이디">
+								</div>
+								<p class="error">아이디를 입력해주세요.</p>
+							</div>
+							<div class="inp_wrap mgt10">
+								<div class="inp_text sizeS">
+									<input type="password" title="비밀번호" placeholder="비밀번호">
+								</div>
+								<p class="error">비밀번호를 입력해주세요.</p>
+							</div>
+							<span class="inp_check mgt15">
+								<input type="checkbox" id="id_auto_loing_H">
+								<label for="id_auto_loing_H">자동 로그인</label>
+							</span>
+							<a href="#" class="btn btnSizeM btnColorP btnTypeR w100 mgt17"><span>로그인</span></a>
+						</div>
+						<div class="btn_member">
+							<ul>
+								<li><a href="/member/join">회원가입</a></li>
+								<li><a href="#">아이디 찾기</a></li>
+								<li><a href="#">비밀번호 찾기</a></li>
+							</ul>
+						</div>
+						<div class="btn_sns">
+							<ul>
+								<li class="sns_n"><a href="javascript:void(0);"><span>네이버 로그인</span></a></li>
+								<li class="sns_k"><a href="javascript:void(0);"><span>카카오 로그인</span></a></li>
+							</ul>
+						</div>
+						<div class="loginLayerClose">
+							<a href="javascript:void(0);" onclick="loginLayer();">닫기</a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -44,7 +78,7 @@
 			</div>
 			<div class="myMenuH">
 				<ul>
-					<li><a href="/mypage/">마이페이지</a></li>
+					<li><a href="#">마이페이지</a></li>
 					<li><a href="#">장바구니 <span>99</span></a></li>
 				</ul>
 			</div>
@@ -56,10 +90,10 @@
 				<div class="contents">
 					<ul class="gnbLink">
 						<li><a href="/shopping/ranking/">랭킹</a></li>
-						<li><a href="/shopping/newProduct?page=1">신상품</a></li>
-						<li><a href="/shopping/foodProduct?page=1">식품</a></li>
-						<li><a href="/shopping/beverageProduct?page=1">음료</a></li>
-						<li><a href="/shopping/goodsProduct?page=1">운동·생활용품</a></li>
+						<li><a href="/shopping/newProduct/">신상품</a></li>
+						<li><a href="/shopping/foodProduct">식품</a></li>
+						<li><a href="/shopping/beverageProduct/">음료</a></li>
+						<li><a href="/shopping/goodsProduct/">운동·생활용품</a></li>
 						<li><a href="/trainer/">주변 PT 찾기</a></li>
 					</ul>
 				</div>

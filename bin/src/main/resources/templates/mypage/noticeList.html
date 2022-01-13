@@ -34,9 +34,9 @@
                         <!-- 사용가능 쿠폰 리스트 -->
                         <div class="tab-pannel" id="useableCoupon">                            
                             <div class="couponList tblBar mgt50">
-                                <p class="tblList">총 <span th:text="${listCount}">1</span>개</p>
+                                <p class="tblList">총 <span>1개</span></p>
                             </div>
-                            <div class="js_tblList" th:if="${listCount > 0}">
+                            <div class="js_tblList">
                                 <table class="tblType1" summary="">
                                     <caption></caption>
                                     <colgroup>
@@ -54,25 +54,33 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr th:each="notice : ${noticeList}">
-                                            <td><a href="/mypage/noticeDetail?nNo=" th:attrappend="href=${notice.nNo}" class="js_ListTtl ListTtl" th:text="${notice.nTitle}"></a></td>
+                                        <tr>
+                                            <td><a href="./noticeDetail.html" class="js_ListTtl ListTtl">2021년 성탄절 배송 안내</a></td>
                                             <td>관리자</td>
-                                            <td th:text="${#dates.format(notice.nDate, 'yyyy-MM-dd')}">2021-12-01</td>
-											<td th:text="${notice.nView}">20</td>
+                                            <td>2021-12-01</td>
+											<td>20</td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <div class="paging mgt50"
-                                	th:with="prev=${pi.page - 1}, next=${pi.page + 1}">
-                                    <a th:href="@{/mypage/noticeList(page=1)}" class="first"><span class="hide">첫페이지</span></a>
-                                    <a class="prev" href="/mypage/noticeList?page=" th:attrappend="href=${prev}"><span class="hide">이전페이지</span></a>
-                                    <a th:each="page : ${#numbers.sequence(pi.startPage, pi.endPage)}" href="/mypage/noticeList?page=" th:attrappend="href=${page}" th:text="${page}" th:classappend="${page} == ${#httpServletRequest.getParameter('page')} ? active"></a>	                                   
-                                    <a class="next" href="/mypage/noticeList?page=" th:attrappend="href=${next}"><span class="hide">다음페이지</span></a>
-                                    <a href="/mypage/noticeList?page=" th:attrappend="href=${pi.maxPage}" class="last"><span class="hide">마지막페이지</span></a>
+                                <div class="paging mgt50">
+                                    <a href="#" class="first"><span class="hide">첫페이지</span></a>
+                                    <a href="#" class="prev"><span class="hide">이전페이지</span></a>
+                                    <a href="#">1</a>
+                                    <a href="#" class="active">2</a>
+                                    <a href="#">3</a>
+                                    <a href="#">4</a>
+                                    <a href="#">5</a>
+                                    <a href="#">6</a>
+                                    <a href="#">7</a>
+                                    <a href="#">8</a>
+                                    <a href="#">9</a>
+                                    <a href="#">10</a>
+                                    <a href="#" class="next"><span class="hide">다음페이지</span></a>
+                                    <a href="#" class="last"><span class="hide">마지막페이지</span></a>
                                 </div>
                             </div>
                             <!-- 데이터 없을 때 -->
-                            <div class="noData" th:unless="${listCount > 0}">
+                            <div class="noData">
                                 <span>등록된 공지사항이 없습니다.</span>
                             </div>
 

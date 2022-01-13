@@ -55,11 +55,11 @@
                         </div>
                         <div style="text-align: center;">
                             <!-- 트레이너 이름 넣는 곳 -->
-                            <p class="trainerDetailName" th:text="${trainer.member.userName}+' 선생님'"/>
+                            <p class="trainerDetailName" th:text="${trainer.member?.userName}"/>
                             <!-- 헬스장 이름 넣는 곳 -->
                             <p class="trainerDetailPitName" th:text="${trainer.tGymName}"/>
 
-                            <a href="/trainer/review?tNo=" th:attrappend="href=${trainer.tNo}" style="display: flex; justify-content: center;">
+                            <a href="#" style="display: flex; justify-content: center;">
                                 <p style="font-size: 12px; color:#FFBB33;">★</p>
 							    <!-- 평균 별점 넣는 곳 -->
 								<p class="trainerDetailReview" th:text="${trainer.avgStar}"/>
@@ -103,7 +103,7 @@
 							<!-- 200330 에러 메세지 추가 -->
 							<div class="inp_wrap error">
 								<div class="inp_text sizeS">
-									<input type="text" name="tGymName" id="deliRegId" th:value="${trainer.tGymName}" placeholder="ex) 별림 휘트니스">
+									<input type="text" name="tGymName" id="deliRegId" th:value="${trainer.tGymName}">
 								</div>
 								<p class="error">센터 이름을 입력해주세요.</p>
 							</div>
@@ -116,7 +116,7 @@
 							<!-- 200330 에러 메세지 추가 -->
 							<div class="inp_wrap error">
 								<div class="inp_text sizeS">
-									<input type="text" name="tAreaIntro" id="deliRegName" th:value="${trainer.tAreaIntro}" placeholder="ex) 강남역 도보 6분">
+									<input type="text" name="tAreaIntro" id="deliRegName" th:value="${trainer.tAreaIntro}">
 								</div>
 								<p class="error">위치를 입력하세요.</p>
 							</div>
@@ -129,7 +129,7 @@
 							<!-- 200330 에러 메세지 추가 -->
 							<div class="inp_wrap error">
 								<div class="inp_text sizeS">
-									<input type="text" name="tOneIntro" id="deliRegName" th:value="${trainer.tOneIntro}" placeholder="ex) 13년 경력/ 다이어트. 근력증가. 바디프로필 전문">
+									<input type="text" name="tOneIntro" id="deliRegName" th:value="${trainer.tOneIntro}">
 								</div>
 								<p class="error">소개를 입력하세요.</p>
 							</div>
@@ -155,22 +155,9 @@
 							<!-- 200330 에러 메세지 추가 -->
 							<div class="inp_wrap error">
 								<div class="inp_text sizeS" style="width: 150px;">
-									<input type="text" name="tArea" id="deliRegHphone" th:value="${trainer.tArea}" placeholder="ex) 전북">
+									<input type="text" name="tArea" id="deliRegHphone" th:value="${trainer.tArea}">
 								</div>
 								<p class="error">지역을 입력해주세요.</p>
-							</div>
-							<!-- // 200330 에러 메세지 추가 -->
-						</dd>
-					</dl>
-					<dl>
-						<dt><label for="deliRegHphone"><span class="fcRed">*</span>지하철역</label></dt>
-						<dd>
-							<!-- 200330 에러 메세지 추가 -->
-							<div class="inp_wrap error">
-								<div class="inp_text sizeS" style="width: 150px;">
-									<input type="text" name="tMetro" id="deliRegHphone" th:value="${trainer.tMetro}" placeholder="ex) 가양역">
-								</div>
-								<p class="error">지하철역을 입력해주세요.</p>
 							</div>
 							<!-- // 200330 에러 메세지 추가 -->
 						</dd>
@@ -179,7 +166,7 @@
 						<dt><label for="deliRegName"><span class="fcRed">*</span>평일 스케줄</label></dt>
 						<dd>
 							<div class="inp_text sizeS">
-								<input type="text" name="weekDaySc" id="deliRegName" th:value="${trainer.weekDaySc}" placeholder="ex) 09:00~21:00">
+								<input type="text" name="weekDaySc" id="deliRegName" th:value="${trainer.weekDaySc}">
 							</div>
 						</dd>
 					</dl>
@@ -187,7 +174,7 @@
 						<dt><label for="deliRegName"><span class="fcRed">*</span>주말 스케줄</label></dt>
 						<dd>
 							<div class="inp_text sizeS">
-								<input type="text" name="weekAndSc" id="deliRegName" th:value="${trainer.weekAndSc}" placeholder="ex) 09:00~18:00">
+								<input type="text" name="weekAndSc" id="deliRegName" th:value="${trainer.weekAndSc}">
 							</div>
 						</dd>
 					</dl>
@@ -195,16 +182,7 @@
 						<dt style="margin-right: 20px;"><label for="deliRegName"><span class="fcRed"></span>선생님 소개</label></dt>
 							<div class="inp_wrap">
 								<div class="inp_textArea yn">
-									<textarea name="tIntro" th:value="${trainer.tIntro}" th:text="${trainer.tIntro}" placeholder="선생님 소개를 입력해주세요."></textarea>
-									<div class="textarea-clone"></div>
-								</div>
-							</div>
-					</dl>
-					<dl>
-						<dt style="margin-right: 20px;"><label for="deliRegName"><span class="fcRed"></span>문의 소개</label></dt>
-							<div class="inp_wrap">
-								<div class="inp_textArea yn">
-									<textarea name="queIntro" th:value="${trainer.queIntro}" th:text="${trainer.queIntro}" placeholder="ex)수업 중에는 연락을 못 받을 수 있습니다."></textarea>
+									<textarea name="tIntro" th:value="${trainer.tIntro}" th:text="${trainer.tIntro}"></textarea>
 									<div class="textarea-clone"></div>
 								</div>
 							</div>
@@ -241,7 +219,7 @@
 			</div>
 			<div style="display: block;">
 				<!-- 트레이너 이름 넣는 곳 -->
-				<p class="tD2" th:text="${trainer.member.userName}"></p>
+				<p class="tD2">이애림</p>
 				<!-- 헬스장 이름 넣는 곳 -->
 				<p class="tD3" th:text="${trainer.tGymName}"/>
 			</div>

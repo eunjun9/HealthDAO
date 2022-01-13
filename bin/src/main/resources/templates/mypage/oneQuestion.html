@@ -1,4 +1,4 @@
-		<!doctype html>
+<!doctype html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
 <title></title>
@@ -42,7 +42,7 @@
 						</div>
                         <!-- 사용가능 쿠폰 리스트 -->
                         <div class="tab-pannel" id="useableCoupon">  
-                        	<div th:if="${listCount > 0}">                          
+                        	<div th:if="${qnaList != null}">                          
 	                            <div class="couponList tblBar mgt50">
 	                                <p class="tblList">총 <span th:text="${listCount}"></span>개</p>
 	                            </div>
@@ -72,18 +72,17 @@
 	                                        </tr>
 	                                    </tbody>
 	                                </table>
-	                                <div class="paging mgt50"
-	                                	th:with="prev=${pi.page - 1}, next=${pi.page + 1}">
+	                                <div class="paging mgt50">
 	                                    <a th:href="@{/mypage/qna(page=1)}" class="first"><span class="hide">첫페이지</span></a>
-	                                    <a class="prev" href="/mypage/qna?page=" th:attrappend="href=${prev}"><span class="hide">이전페이지</span></a>
-	                                    <a th:each="page : ${#numbers.sequence(pi.startPage, pi.endPage)}" href="/mypage/qna?page=" th:attrappend="href=${page}" th:text="${page}" th:classappend="${page} == ${#httpServletRequest.getParameter('page')} ? active"></a>	                                   
-	                                    <a class="next" href="/mypage/qna?page=" th:attrappend="href=${next}"><span class="hide">다음페이지</span></a>
-	                                    <a href="/mypage/qna?page=" th:attrappend="href=${pi.maxPage}" class="last"><span class="hide">마지막페이지</span></a>
+	                                    <a href="#" class="prev"><span class="hide">이전페이지</span></a>
+	                                    <a th:each="page : ${#numbers.sequence(pi.startPage, pi.endPage)}" class="active">1</a>	                                   
+	                                    <a href="#" class="next"><span class="hide">다음페이지</span></a>
+	                                    <a href="#" class="last"><span class="hide">마지막페이지</span></a>
 	                                </div>
 	                            </div>
                             </div>
                             <!-- 데이터 없을 때 -->
-                            <div class="noData" th:unless="${listCount > 0}">
+                            <div class="noData" th:unless="${qnaList != null}">
                                 <span>1:1문의하신 이력이 없습니다.<br>궁금하신 점이 있으시면 1:1문의를 이용해주세요</span>
                             </div>
 
