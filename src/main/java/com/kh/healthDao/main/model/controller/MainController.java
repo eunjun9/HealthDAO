@@ -173,14 +173,8 @@ public class MainController {
 	// 최근 본 상품
 	@ResponseBody
 	@PostMapping("/recentPdt")
-	public ModelAndView recentPdt(ModelAndView mv, int[] addList) {
-		Map<String, Object> map = shoppingService.pdtList();
-		
-		mv.addObject("pdtList", map.get("pdtList"));
-		mv.addObject("listCount", map.get("listCount"));
-		mv.addObject("recoList", map.get("recoList"));
-		mv.addObject("recoCount", map.get("recoCount"));
-		mv.setViewName("admin/reco");
-		return mv;
+	public List<Product> recentPdt(int[] addList) {
+		List<Product> recentList = shoppingService.recentList(addList);
+		return recentList;
 	}
 }
