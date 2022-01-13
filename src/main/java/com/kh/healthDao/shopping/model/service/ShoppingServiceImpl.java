@@ -31,15 +31,14 @@ public class ShoppingServiceImpl implements ShoppingService{
 	@Override
 	public List<Product> recentList(int[] addList) {
 		List<Product> pdtList = new ArrayList<>();
-		Product pdt = new Product();
-		
-		System.out.println("length : "+addList.length);
+		Product pdt = new Product();		
+		//System.out.println("length : "+addList.length);
 
 		for(int i=0; i<addList.length; i++) {
 			pdt = shoppingMapper.recentList(addList[i]);
 			pdtList.add(pdt);
 		}
-		System.out.println("리스트 : " + pdtList);
+		// System.out.println("리스트 : " + pdtList);
 		return pdtList;
 	}
 	
@@ -57,6 +56,18 @@ public class ShoppingServiceImpl implements ShoppingService{
 		pdtMap.put("recoCount", recoCount);
 		
 		return pdtMap;
+	}
+	
+	// 찜한 상품
+	public Map<String, Object> wishList(int userNo) {
+		int listCount = shoppingMapper.wishListCount(userNo);
+		List<Product> wishList = shoppingMapper.wishList(userNo);
+		
+		Map<String, Object> wishMap = new HashMap<>();
+		wishMap.put("wishListCount", listCount);
+		wishMap.put("wishList", wishList);
+		
+		return wishMap;
 	}
 
 	@Override

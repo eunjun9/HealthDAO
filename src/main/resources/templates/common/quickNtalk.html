@@ -6,25 +6,18 @@
 			<div class="recentArea">
 				<div class="tit">최근 본 상품</div>
 				<div class="recoQuick">
-					<!-- <div class="list">
-						<a href="#">
-							<img src="/images/temp/pdt02.png" alt="">
-						</a>
-					</div> -->
 				</div>
 			</div>
 			<div class="likeArea">
-				<a href="#">					
-					<span>찜한 상품</span>
-				</a>
+				<a href="/mypage/wish"><span>찜한 상품</span></a>
 			</div>
 			<div class="cartArea">
-				<a href="#"><span>장바구니</span></a>
+				<a href="/mypage/cart"><span>장바구니</span></a>
 			</div>
 			<div class="bottomArea">
 				<ul>
 					<li><a class="btnTop" href="javascript:void(0);">△</a></li>
-					<li><a href="#"><span class="hide">마이페이지</span></a></li>
+					<li><a href="/mypage/"><span class="hide">마이페이지</span></a></li>
 					<li><a class="btnBtm" href="javascript:void(0);">▽</a></li>
 				</ul>				
 			</div>
@@ -122,7 +115,7 @@
 				 + '<div class="textArea left"><div>너의 궁금증을 해결해줄게! 나는 헬춘식이야<span class="time">'
 				 + msgTime
 				 + '</span></div></div>'
-				 + '<div class="textArea left"><div><ul class="talkSelect">'
+				 + '<div class="textArea left menuList"><div><ul class="talkSelect">'
 				 + '<li><button value="1">궁금한거 1번</button></li>'
 				 + '<li><button value="2">궁금한거 2번</button></li>'
 				 + '<li><button value="3">궁금한거 3번</button></li>'
@@ -139,10 +132,12 @@
 	function qnaData(val){
 		var index = val;
 		let msgTime = timeStamp();	// 시간 재설정
+		$(".menuList").remove();
+		
         switch (index){
         	case '1' :
     			html = '<div class="textArea right"><div class="right">1번이 궁금해<span class="time">'+msgTime+'</span></div></div>'
-    				 + '<div class="textArea left"><div>헬춘식 헬스 매니아<br>춘식이처럼 몸짱이 되고 싶다면<br>헬스Dao에서<br>시작하라구😎<span class="time">'+msgTime+'</span></div></div>';
+    				 + '<div class="textArea left"><div>헬춘식 헬스 매니아<br>춘식이처럼 몸짱이 되고 싶다면<br>헬스Dao에서 시작하라구😎<span class="time">'+msgTime+'</span></div></div>';
     			$("#chatData").append(html);
     			html = '';
     			break;
@@ -172,7 +167,7 @@
     			break;
     		default : break;
         }
-		html = '<div class="textArea left"><div><span>더 궁금한게 있어?</span><ul class="talkSelect">'
+		html = '<div class="textArea left menuList"><div><span>더 궁금한게 있어?</span><ul class="talkSelect">'
 			 + '<li><button value="1">궁금한거 1번</button></li>'
 			 + '<li><button value="2">궁금한거 2번</button></li>'
 			 + '<li><button value="3">궁금한거 3번</button></li>'
@@ -184,5 +179,6 @@
 		$("#chatData").append(html);
 		html = '';
 		btnVal();
+		$('.chatCon').animate({'scrollTop' : $('#chatData').height()},500)
 	}
 </script>

@@ -42,4 +42,6 @@ public interface ShoppingService {
 	List<Product> recoRankList();
 
 	List<Product> recentList(int[] addList);
+
+	Map<String, Object> wishList(int userNo);
 }
