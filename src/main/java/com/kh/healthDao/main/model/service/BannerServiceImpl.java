@@ -24,7 +24,7 @@ public class BannerServiceImpl implements BannerService{
 	}
 
 	@Override
-	public int insertBanner(Banner banner, String originFileName, String path, String savedName) {
+	public int insertBanner(Banner banner, String originFileName, String savedName) {
 		Map<String, Object> map = new HashMap<>();
 		banner.setFile_path("/images/upload/main/");
 		banner.setChange_file(savedName);
@@ -80,19 +80,6 @@ public class BannerServiceImpl implements BannerService{
 	@Override
 	public Banner bannerSelect(int main_no) {
 		return bannerMapper.bannerSelect(main_no);
-	}
-
-	@Override
-	public int bannerUpdate(Map<String, Object> map) {
-		int result1 = bannerMapper.bannerUpdate(map);
-		//int result2 = bannerMapper.bannerImgUpdate(map);
-				
-		int result = 0;
-		
-		if(result1 > 0) {
-			result = 1;
-		}
-		return result;
 	}
 
 	@Override

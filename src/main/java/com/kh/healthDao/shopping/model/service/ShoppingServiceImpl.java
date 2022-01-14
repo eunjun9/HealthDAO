@@ -75,6 +75,8 @@ public class ShoppingServiceImpl implements ShoppingService{
 		return shoppingMapper.detailPdt(productNo);
 	}
 
+	
+	/* 추천 상품 */
 	@Override
 	public int insertReco(int productNo, int productRank) {
 		return shoppingMapper.insertReco(productNo, productRank);
@@ -94,6 +96,24 @@ public class ShoppingServiceImpl implements ShoppingService{
 	public int deleteReco(int productNo) {
 		return shoppingMapper.deleteReco(productNo);
 	}
+	
+
+	/* 찜한 상품 */
+	@Override
+	public Product wishChk(int productNo, int userNo) {
+		return shoppingMapper.wishChk(productNo, userNo);
+	}
+	@Override
+	public int insertWish(int productNo, int userNo) {
+		return shoppingMapper.insertWish(productNo, userNo);
+	}
+	@Override
+	public int deleteWish(int productNo, int userNo) {
+		return shoppingMapper.deleteWish(productNo, userNo);
+	}
+	
+	
+	
 	
 	@Override
 	public List<Product> beverageShoppingList() {

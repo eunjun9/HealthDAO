@@ -12,7 +12,7 @@
 		<result property="change_file" column="CHANGE_FILE"/>
 		<result property="f_no" column="F_NO"/>
 	</resultMap>
-
+	
 	<select id="findBannreList" resultMap="bannerResultMap" parameterType="hashmap">
 		SELECT *
 		FROM
@@ -157,7 +157,7 @@
 		 WHERE MAIN_NO=#{main_no}
 	</select>
 	
-	<update id="bannerUpdate" parameterType="hashmap">
+	<!-- <update id="bannerUpdate" parameterType="hashmap">
 		UPDATE BANNER
 			SET 
 			    MAIN_NAME = #{main_name}
@@ -165,11 +165,14 @@
 			  , MAIN_URL = #{main_url}
 			  , MAIN_STATUS = #{main_status}
 		WHERE MAIN_NO = #{main_no}
-	</update>
-	<!-- <update id="bannerImgUpdate" parameterType="hashmap">
-		UPDATE AT_FILE
-			SET 
-			    CHANGE_FILE = #{change_file}
-		WHERE MAIN_NO = #{main_no}
 	</update> -->
+	
+	
+	<!-- <select id="bannerUpdate" resultType="String">
+		SELECT 
+	           CHANGE_FILE
+	    FROM AT_FILE
+	    JOIN BANNER_FILE USING (F_NO)
+	   WHERE MAIN_NO =#{banner.main_no}
+	</select> -->
 </mapper>

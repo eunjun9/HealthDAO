@@ -120,7 +120,6 @@
 	    function submit(){
 	    	if($('input[name="main_name"]').val() == ''){
 	       		alert('배너명을 넣어주세요');
-	       		console.log($('input[name="imgUpload"]').val());
 	       		return false;	    		
 	    	}
 	    	if($('input[name="main_url"]').val() == ''){
@@ -136,6 +135,26 @@
 	       		return false;
 	    	}
 	       	document.enroll.submit();
+	    }
+	    
+	    function update(){
+	    	/* if($('#modifyMain input[name="name"]').val() == ''){
+	       		alert('배너명을 넣어주세요');
+	       		return false;	    		
+	    	}
+	    	if($('#modifyMain input[name="url"]').val() == ''){
+	       		alert('url을 넣어주세요');
+	       		return false;	    		
+	    	}
+	    	if($('#modifyMain input[name="imgUpload"]').val() == ''){
+	       		alert('이미지는 꼭 넣어야 됩니다😵');
+	       		return false;
+	    	}
+	    	if($('#modifyMain input[name="rank"]').val() == ''){
+	       		alert('순위를 넣어야 됩니다');
+	       		return false;
+	    	} */
+	       	document.updated.submit();
 	    }
 
 	    var loadFile = function(event) {
@@ -249,82 +268,84 @@
 	        <div class="lyWrap">
 	            <button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
 	            <div class="lyTit">메인 롤링 수정</div>
-	            <div class="lyBody">			
-					<ul class="inputArea">
-						<li>
-							<dl>
-								<dt>배너명</dt>
-								<dd>
-									<div class="inp_wrap">
-										<div class="inp_text sizeS">
-											<input type="hidden" name="no" id="no" value="">
-											<input type="text" name="name" id="name" value="메인 롤링 배너 뇽뇽🎄🎄">
-											<button class="btn_clear" type="button"><span>clear</span></button>
-										</div>
-									</div>
-								</dd>
-							</dl>
-							<dl class="mgt20">
-								<dt>URL</dt>
-								<dd>
-									<div class="inp_wrap">
-										<div class="inp_text sizeS">
-											<input type="text" name="url" id="url" value="/event?no=1">
-											<button class="btn_clear" type="button"><span>clear</span></button>
-										</div>
-									</div>
-								</dd>
-							</dl>
-							<dl class="mgt15">
-								<dt>사진 추가</dt>
-								<dd>
-									<ul class="fileUploadArea">
-										<li><label for="imgUpload"><span class="hide">업로드</span></label><input type="file" class="hide" name="imgUpload" id="imgUpload"></li>
-										<li class="imgCutting">
-											<div class="imgBox">
-												<img id="img" src="./resources/web/images/temp/main01.jpg" alt="">
+	            <form action="banner/update" name="updated" method="post" enctype="multipart/form-data">
+		            <div class="lyBody">			
+						<ul class="inputArea">
+							<li>
+								<dl>
+									<dt>배너명</dt>
+									<dd>
+										<div class="inp_wrap">
+											<div class="inp_text sizeS">
+												<input type="hidden" name="main_no" id="no" value="">
+												<input type="text" name="main_name" id="name" value="메인 롤링 배너 뇽뇽🎄🎄">
+												<button class="btn_clear" type="button"><span>clear</span></button>
 											</div>
-										</li>
-									</ul>
-									<p class="mgt5 fs14">파일첨부 (1개) <span class="fc88">5MB미만 jpg,gif,png 파일 가능</span></p>
-								</dd>
-							</dl>
-						</li>
-						<li>
-							<dl class="mgt20">
-								<dt>순위</dt>
-								<dd>
-									<div class="inp_wrap">
-										<div class="inp_text sizeS">
-											<input type="text" name="rank" id="rank" value="1">
-											<button class="btn_clear" type="button"><span>clear</span></button>
 										</div>
-									</div>
-								</dd>
-							</dl>
-							<dl class="mgt20">
-								<dt>노출상태</dt>
-								<dd class="mgt7">
-									<div id="modifyStatus" class="inp_wrap">
-										<span class="inp_radio">
-											<input type="radio" name="modify_status" id="bannerStatus1" value="Y" checked>
-											<label for="bannerStatus1">노출</label>
-										</span>
-										<span class="inp_radio mgl40">
-											<input type="radio" name="modify_status" id="bannerStatus2" value="N">
-											<label for="bannerStatus2">비노출</label>
-										</span>
-									</div>
-									<p class="fs13 fc88 mgt10">* 노출로 등록시 메인화면에 등록됩니다.</p>
-								</dd>
-							</dl>
-						</li>
-					</ul>
-					<div class="btn_wrap mgt30">
-						<a href="javascript:void(0);" class="btn btnSizeL btnArr btnColorW btnTypeR" style="width:200px;" onclick="layerPopClose();"><span>취소</span></a>
-						<a href="javascript:void(0);" class="btn btnSizeL btnArr btnColorB btnTypeR" style="width:200px;" onclick="bannerUpdate();"><span>수정</span></a>
-					</div>
-	            </div>
+									</dd>
+								</dl>
+								<dl class="mgt20">
+									<dt>URL</dt>
+									<dd>
+										<div class="inp_wrap">
+											<div class="inp_text sizeS">
+												<input type="text" name="main_url" id="url" value="/event?no=1">
+												<button class="btn_clear" type="button"><span>clear</span></button>
+											</div>
+										</div>
+									</dd>
+								</dl>
+								<dl class="mgt15">
+									<dt>사진 추가</dt>
+									<dd>
+										<ul class="fileUploadArea">
+											<li><label for="imgUpload"><span class="hide">업로드</span></label><input type="file" class="hide" name="imgUpload" id="imgUpload"></li>
+											<li class="imgCutting">
+												<div class="imgBox">
+													<img id="img" src="./resources/web/images/temp/main01.jpg" alt="">
+												</div>
+											</li>
+										</ul>
+										<p class="mgt5 fs14">파일첨부 (1개) <span class="fc88">5MB미만 jpg,gif,png 파일 가능</span></p>
+									</dd>
+								</dl>
+							</li>
+							<li>
+								<dl class="mgt20">
+									<dt>순위</dt>
+									<dd>
+										<div class="inp_wrap">
+											<div class="inp_text sizeS">
+												<input type="text" name="main_rank" id="rank" value="1">
+												<button class="btn_clear" type="button"><span>clear</span></button>
+											</div>
+										</div>
+									</dd>
+								</dl>
+								<dl class="mgt20">
+									<dt>노출상태</dt>
+									<dd class="mgt7">
+										<div id="modifyStatus" class="inp_wrap">
+											<span class="inp_radio">
+												<input type="radio" name="main_status" id="bannerStatus1" value="Y" checked>
+												<label for="bannerStatus1">노출</label>
+											</span>
+											<span class="inp_radio mgl40">
+												<input type="radio" name="main_status" id="bannerStatus2" value="N">
+												<label for="bannerStatus2">비노출</label>
+											</span>
+										</div>
+										<p class="fs13 fc88 mgt10">* 노출로 등록시 메인화면에 등록됩니다.</p>
+									</dd>
+								</dl>
+							</li>
+						</ul>
+						<div class="btn_wrap mgt30">
+							<a href="javascript:void(0);" class="btn btnSizeL btnArr btnColorW btnTypeR" style="width:200px;" onclick="layerPopClose();"><span>취소</span></a>
+							<a href="javascript:void(0);" class="btn btnSizeL btnArr btnColorB btnTypeR" style="width:200px;" onclick="return update();"><span>수정</span></a>
+						</div>
+	            	</div>
+	            </form>
 	        </div>
 	    </div>
 	</div>
@@ -365,14 +386,14 @@
 					let stateHtml = "";					
 					if(data.main_status == "Y"){
 						stateHtml = '<span class="inp_radio">'
-								  + '<input type="radio" name="modify_status" id="bannerStatus1" value="Y" checked><label for="bannerStatus1">노출</label></span>'
+								  + '<input type="radio" name="main_status" id="bannerStatus1" value="Y" checked><label for="bannerStatus1">노출</label></span>'
 								  + '<span class="inp_radio mgl40">'
-								  + '<input type="radio" name="modify_status" id="bannerStatus2" value="N"><label for="bannerStatus2">비노출</label></span>';
+								  + '<input type="radio" name="main_status" id="bannerStatus2" value="N"><label for="bannerStatus2">비노출</label></span>';
 					}else{
 						stateHtml = '<span class="inp_radio">'
-								  + '<input type="radio" name="modify_status" id="bannerStatus1" value="Y" ><label for="bannerStatus1">노출</label></span>'
+								  + '<input type="radio" name="main_status" id="bannerStatus1" value="Y" ><label for="bannerStatus1">노출</label></span>'
 								  + '<span class="inp_radio mgl40">'
-								  + '<input type="radio" name="modify_status" id="bannerStatus2" value="N" checked><label for="bannerStatus2">비노출</label></span>';
+								  + '<input type="radio" name="main_status" id="bannerStatus2" value="N" checked><label for="bannerStatus2">비노출</label></span>';
 					}					
 					document.getElementById("modifyStatus").innerHTML = stateHtml;					
 				},
@@ -382,7 +403,7 @@
 			});
 		}
 		
-		function bannerUpdate(){
+		/* function bannerUpdate(){
 			$.ajax({
 				url : "/banner/update",
 				method: 'POST',
@@ -399,14 +420,14 @@
 						alert("성공적으로 적용되었습니다.");
 						location.reload();
 					}else{
-						alert("업데이트가 되지 않았습니다ㅜㅜ");
+						alert("업데이트가 되지 않았습니다");
 					}
 				},
 				error : function(e){
 					console.log(e);
 				}
 			});
-		}
+		} */
 		
 		function deleteBanner(){
 			let addList = [], addList2 = [], data = {};

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.healthDao.main.model.service.BannerService;
@@ -47,8 +48,22 @@ public class FileUploadController {
 		}
 		
 		
-		String msg = bannerService.insertBanner(banner, originFileName, path, savedName) > 0 ? "등록 성공" : "등록 실패";
+		String msg = bannerService.insertBanner(banner, originFileName, savedName) > 0 ? "등록 성공" : "등록 실패";
 
 		return "redirect:/banner?page=1";
 	}
+	
+	@PostMapping("/banner/update")
+	public String updateBanner(Banner banner, @RequestParam MultipartFile imgUpload, @Value("${custom.path.upload-images}") String uploadImagesPath) {
+		System.out.println(banner);
+		System.out.println(imgUpload.getOriginalFilename());
+		
+		if(imgUpload.getOriginalFilename() != null) {
+			
+		}
+		System.out.println(uploadImagesPath);
+		
+		return "redirect:/banner?page=1";
+	}
+
 }
