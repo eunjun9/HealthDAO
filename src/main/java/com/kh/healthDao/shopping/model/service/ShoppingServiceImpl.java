@@ -95,16 +95,19 @@ public class ShoppingServiceImpl implements ShoppingService{
 		return shoppingMapper.deleteReco(productNo);
 	}
 	
+	/* 상품 음료 */
 	@Override
 	public List<Product> beverageShoppingList() {
 		return shoppingMapper.beverageShoppingList();
 	}
 
+	/* 상품 운동기구 */
 	@Override
 	public List<Product> goodsShoppingList() {
 		return shoppingMapper.goodsShoppingList();
 	}
 
+	/* 상품 상세페이지 */
 	@Override
 	public Product shoppingDetail(int productNo) {
 		return shoppingMapper.shoppingDetail(productNo);
@@ -160,7 +163,7 @@ public class ShoppingServiceImpl implements ShoppingService{
 		return foodProductMap;
 	}
 
-
+	/* 상품 음료 페이지 */
 	@Override
 	public Map<String, Object> beverageShoppingList(int page) {
 		int listCount = shoppingMapper.beverageShoppingListCount();
@@ -186,6 +189,7 @@ public class ShoppingServiceImpl implements ShoppingService{
 		
 	}
 
+	/* 상품 운동기구 */
 	@Override
 	public Map<String, Object> goodsShoppingList(int page) {
 		int listCount = shoppingMapper.goodsShoppingListCount();
@@ -215,6 +219,8 @@ public class ShoppingServiceImpl implements ShoppingService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	/* 상품 주문 */
 	@Override
 	public Product shoppingPayment(int productNo) {
 		return shoppingMapper.shoppingPayment(productNo);
