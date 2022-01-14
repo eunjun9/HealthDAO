@@ -1,6 +1,7 @@
 package com.kh.healthDao.mypage;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,8 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,16 +25,23 @@ import com.kh.healthDao.admin.model.service.MemberSoundService;
 import com.kh.healthDao.admin.model.service.NoticeService;
 import com.kh.healthDao.admin.model.vo.Coupon;
 import com.kh.healthDao.admin.model.vo.Notice;
+import com.kh.healthDao.member.model.vo.Member;
 import com.kh.healthDao.member.model.vo.UserImpl;
+import com.kh.healthDao.mypage.model.service.CartService;
 import com.kh.healthDao.mypage.model.service.MyCouponService;
+import com.kh.healthDao.mypage.model.service.MyInfoService;
 import com.kh.healthDao.mypage.model.service.MyReviewService;
 import com.kh.healthDao.mypage.model.service.QnaService;
+import com.kh.healthDao.mypage.model.vo.Address;
 import com.kh.healthDao.mypage.model.vo.AttCheck;
+import com.kh.healthDao.mypage.model.vo.Cart;
 import com.kh.healthDao.mypage.model.vo.MemberSound;
-import com.kh.healthDao.mypage.model.vo.Point;
 import com.kh.healthDao.mypage.model.vo.Qna;
 import com.kh.healthDao.review.model.vo.Review;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping("/mypage/*")
 public class MypageController {
@@ -40,15 +52,20 @@ public class MypageController {
 	private NoticeService noticeService;
 	private MyReviewService myReviewService;
 	private MemberSoundService memberSoundService;
+	private MyInfoService myInfoService;
+  private CartService cartService;
 	
 	@Autowired
-	public MypageController(QnaService qnaService, MyCouponService couponService, MessageSource messageSource, NoticeService noticeService, MyReviewService myReviewService, MemberSoundService memberSoundService) {
+	public MypageController(QnaService qnaService, MyCouponService couponService, MessageSource messageSource, NoticeService noticeService, 
+			MyReviewService myReviewService, MemberSoundService memberSoundService, MyInfoService myInfoService, CartService cartService) {
 		this.qnaService = qnaService;
 		this.couponService = couponService;
 		this.messageSource = messageSource;
 		this.noticeService = noticeService;
 		this.myReviewService = myReviewService;
 		this.memberSoundService = memberSoundService;
+		this.myInfoService = myInfoService;
+		this.cartService = cartService;
 	}
 	
 	@GetMapping(value= {"/", "/myOrder"})
@@ -236,14 +253,88 @@ public class MypageController {
 	
 	/* 배송지 관리 */
 	@GetMapping("/deli")
-	public String deliModify() {
-		return "mypage/deliModify";
+	public ModelAndView deliView(ModelAndView mv, @AuthenticationPrincipal UserImpl userImpl) {
+		int userNo = userImpl.getUserNo();
+		
+		List<Address> addressList = myInfoService.deliView(userNo);
+		
+		mv.addObject("addressList", addressList);
+		mv.setViewName("mypage/deliModify");
+		
+		return mv;
 	}
+	
+	@PostMapping("deli/insert")
+	public Map<String, String> insertDeli(@RequestBody Address address, @AuthenticationPrincipal UserImpl userImpl) {
+		int userNo = userImpl.getUserNo();
+		address.setUserNo(userNo);
+		
+		log.info("입력 요청 주소 : {}", address);
+		
+		String msg = myInfoService.insertDeli(address) > 0 ? "배송지가 등록되었습니다." : "배송지 등록에 실패하였습니다.";
+		
+		Map<String, String> map = new HashMap<>();
+		map.put("msg", msg);
+		
+		return map;
+	}
+	
+	@GetMapping("deli/{addressNo}")
+	public Address selectDeli(@PathVariable int addressNo) {
+		Address address = myInfoService.selectDeli(addressNo);
+		
+		return address;
+	}
+	
+	/*@PutMapping("deli/update/{addressNo}")
+	public Map<String, String> updateDeli(@PathVariable int addressNo, @RequestBody Address address) {
+		address.setAddressNo(addressNo);
+		
+		String msg = myInfoService.updateDeil(address) > 0 ? "주소 수정 성공" : "주소 수정 실패";
+		
+		Map<String, String> map = new HashMap<>();
+	    map.put("msg", msg);
+	    
+	    return map;
+	}*/
+	
+	/*@DeleteMapping("deli/delete/{addressNo}")
+	public Map<String, String> deleteDeli(@PathVariable int addressNo) {
+		String msg = myInfoService.deleteDeil(addressNo) > 0 ? "주소 삭제 성공" : "주소 삭제 실패";
+		
+		Map<String, String> map = new HashMap<>();
+	    map.put("msg", msg);
+	    
+	    return map;
+	}*/
 	
 	/* 내 정보 수정 */
 	@GetMapping("/myInfo")
-	public String myInfoModify() {
-		return "mypage/myInfoModify";
+	public ModelAndView myInfo(ModelAndView mv, @AuthenticationPrincipal UserImpl userImpl) {
+		int userNo = userImpl.getUserNo();
+		
+		Member member = myInfoService.myInfoView(userNo);
+		
+		mv.addObject("member", member);
+		mv.setViewName("mypage/myInfoModify");
+		
+		return mv;
+	}
+	
+	@PostMapping("/myInfo/modify")
+	public String myInfoModify(Member member, @RequestParam int userBirth, @RequestParam int userBirth2, @RequestParam int userBirth3, RedirectAttributes rttr) {
+		String b1 = Integer.valueOf(userBirth).toString();
+		String b2 = Integer.valueOf(userBirth2).toString();
+		String b3 = Integer.valueOf(userBirth3).toString();
+		
+		String birth = b1 + b2 + b3;
+		member.setUserBirth(birth);
+		
+//		myInfoService.myInfoModify(member);
+		String msg = myInfoService.myInfoModify(member) > 0 ? "정보 수정에 성공했습니다." : "정보 수정에 실패했습니다.";		
+		rttr.addFlashAttribute("msg", msg);
+		
+		return "redirect:/mypage/";
 	}
 	
 	/* 룰렛 */
@@ -260,6 +351,7 @@ public class MypageController {
 		
 		mv.addObject("PointList", map.get("PointList"));
 		mv.addObject("listCount", map.get("listCount"));
+		mv.addObject("pointCount", map.get("pointCount"));
 		mv.addObject("pi", map.get("pi"));
 		mv.setViewName("mypage/point");
 		
@@ -292,4 +384,32 @@ public class MypageController {
 		}
 		
 	}
+	
+	// 장바구니
+	@GetMapping("/cart")
+	public ModelAndView cartList(ModelAndView mv, @AuthenticationPrincipal UserImpl userImpl) {
+		int userNo = userImpl.getUserNo();
+		
+		List<Cart> cartList = cartService.cartList(userNo);
+		
+		mv.addObject("cartList", cartList);
+		mv.setViewName("mypage/cart"); 
+		
+		return mv;
+	}
+	
+	@PostMapping("cartInsert")
+	@ResponseBody
+	public String cartInsert(@AuthenticationPrincipal UserImpl userImpl, int productNo, int cartStock) {
+		Cart cartinfo = new Cart();
+		cartinfo.setUserNo(userImpl.getUserNo());
+		cartinfo.setProductNo(productNo);
+		cartinfo.setCartStock(cartStock);
+		
+		String msg = cartService.cartInsert(cartinfo) > 0 ? "success" : "fail";
+		
+		return msg;
+	}
+	
+	
 }

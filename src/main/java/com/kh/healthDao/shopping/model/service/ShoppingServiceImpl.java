@@ -1,5 +1,6 @@
 package com.kh.healthDao.shopping.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,9 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.healthDao.admin.model.vo.Product;
 import com.kh.healthDao.common.model.vo.Paging;
-import com.kh.healthDao.mypage.model.vo.Qna;
 import com.kh.healthDao.shopping.model.dao.ShoppingMapper;
-import com.kh.healthDao.shopping.model.vo.Shopping;
 
 
 @Service("ShoppingService")
@@ -30,17 +29,45 @@ public class ShoppingServiceImpl implements ShoppingService{
 	}
 
 	@Override
+	public List<Product> recentList(int[] addList) {
+		List<Product> pdtList = new ArrayList<>();
+		Product pdt = new Product();		
+		//System.out.println("length : "+addList.length);
+
+		for(int i=0; i<addList.length; i++) {
+			pdt = shoppingMapper.recentList(addList[i]);
+			pdtList.add(pdt);
+		}
+		// System.out.println("리스트 : " + pdtList);
+		return pdtList;
+	}
+	
+	@Override
 	public Map<String, Object> pdtList() {
 		int listCount = shoppingMapper.pdtListCount();
 		List<Product> pdtList = shoppingMapper.pdtList();
 		List<Product> recoList = shoppingMapper.recoList();
+		int recoCount = shoppingMapper.recoListCount();
 		
 		Map<String, Object> pdtMap = new HashMap<>();
 		pdtMap.put("listCount", listCount);
 		pdtMap.put("pdtList", pdtList);
 		pdtMap.put("recoList", recoList);
+		pdtMap.put("recoCount", recoCount);
 		
 		return pdtMap;
+	}
+	
+	// 찜한 상품
+	public Map<String, Object> wishList(int userNo) {
+		int listCount = shoppingMapper.wishListCount(userNo);
+		List<Product> wishList = shoppingMapper.wishList(userNo);
+		
+		Map<String, Object> wishMap = new HashMap<>();
+		wishMap.put("wishListCount", listCount);
+		wishMap.put("wishList", wishList);
+		
+		return wishMap;
 	}
 
 	@Override

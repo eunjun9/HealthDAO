@@ -18,6 +18,31 @@
 		<result property="userPhone" column="USER_PHONE"/>
 	</resultMap>
 	
+	<resultMap id="PaymentResultMap" type="com.kh.healthDao.manager.model.vo.Payment">
+		<id property="payNo" column="PAY_NO"/>
+		<result property="payDate" column="PAY_DATE"/>
+		<result property="payMethod" column="PAY_METHOD"/>
+		<result property="ordererPhone" column="ORDERER_PHONE"/>
+		<result property="ordererEmail" column="ORDERER_EMAIL"/>
+		<result property="orderStatus" column="ORDER_STATUS"/>
+		<result property="userNo" column="USER_NO"/>
+		<result property="ProductNo" column="PRODUCT_NO"/>
+		<result property="quantity" column="QUANTITY"/>
+		<result property="productBrand" column="PRODUCT_BRAND"/>
+		<result property="productTitle" column="PRODUCT_TITLE"/>
+		<result property="productPrice" column="PRODUCT_PRICE"/>
+	</resultMap>
+	
+	<resultMap id="RefundResultMap" type="com.kh.healthDao.manager.model.vo.Refund">
+		<id property="refundNo" column="REFUND_NO"/>
+		<result property="refundDate" column="REFUND_DATE"/>
+		<result property="refundStatus" column="REFUND_STATUS"/>
+		<result property="payNo" column="PAY_NO"/>
+		<result property="userId" column="USER_ID"/>
+		<result property="payDate" column="PAY_DATE"/>
+		<result property="quantity" column="QUANTITY"/>
+		<result property="productPrice" column="PRODUCT_PRICE"/>
+	</resultMap>
 	<select id="listQna" resultMap="QnaResultMap" parameterType="_int">
 	SELECT
 		  Q_NO
@@ -97,6 +122,85 @@
 		    )
 		WHERE RNUM BETWEEN #{startRow} AND #{endRow}
 	</select>
+	
+	<select id="calculateListCount" resultType="_int">
+		SELECT
+		    COUNT(*)
+				FROM
+				(	SELECT
+				  PAY_NO
+				, PAY_DATE
+				FROM PAYMENT
+		ORDER BY PAY_NO DESC)
+	</select>
+	
+	<select id="calculateList" resultMap="PaymentResultMap" parameterType="hashmap">
+		     SELECT *
+		FROM
+		    (SELECT ROWNUM RNUM, A.*
+	         FROM
+			      (SELECT
+				  P.PAY_NO
+                , P.PAY_DATE
+				, P.PAY_METHOD
+				, P.ORDERER_PHONE
+				, P.ORDERER_EMAIL
+				, P.ORDER_STATUS
+				, P.USER_NO
+				, D.PRODUCT_NO
+				, D.QUANTITY
+				, T.PRODUCT_BRAND
+				, T.PRODUCT_TITLE
+				, T.PRODUCT_PRICE
+			 FROM PAYMENT P
+		     JOIN PAY_DETAIL D ON(P.PAY_NO=D.PAY_NO)
+		     JOIN PRODUCT T ON(D.PRODUCT_NO=T.PRODUCT_NO)
+	        ORDER BY P.PAY_NO DESC) A
+		    )
+		WHERE RNUM BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="refundListCount" resultType="_int">
+	SELECT
+		 COUNT(*)
+			FROM
+			(	SELECT
+			  REFUND_NO
+			, REFUND_DATE
+		 FROM REFUND
+		ORDER BY REFUND_NO DESC)
+	</select>
+	
+	<select id="refundList" resultMap="RefundResultMap" parameterType="hashmap">
+	SELECT *
+		FROM
+		    (SELECT ROWNUM RNUM, A.*
+	         FROM
+			      (SELECT
+				      R.REFUND_NO
+				    , R.REFUND_DATE
+				    , R.REFUND_STATUS
+				    , R.PAY_NO
+				    , P.PAY_DATE
+				    , D.QUANTITY
+				    , P.PRODUCT_PRICE
+				    , M.USER_ID
+				 FROM REFUND R
+				 JOIN PAYMENT P ON(P.PAY_NO=R.PAY_NO)
+				 JOIN PAY_DETAIL D ON(R.PAY_NO=D.PAY_NO)
+				 JOIN PRODUCT P ON(P.PRODUCT_NO=D.PRODUCT_NO)
+				 JOIN MEMBER M ON(P.USER_NO=M.USER_NO)
+				 ORDER BY R.REFUND_NO DESC) A
+		    )
+		WHERE RNUM BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<update id="managerRefundOk" parameterType="com.kh.healthDao.manager.model.vo.Refund">
+		UPDATE REFUND
+		   SET REFUND_DATE = SYSDATE
+		     , REFUND_STATUS = '환불완료'
+		 WHERE REFUND_NO = #{refundNo}
+	</update>
 
 	
 

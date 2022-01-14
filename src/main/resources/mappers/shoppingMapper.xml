@@ -14,6 +14,7 @@
 		<result property="categoryId" column="CATEGORY_ID" />
 		<result property="pMembership" column="P_MEMBERSHIP"/>
 		<result property="productRank" column="PRODUCT_RANK"/>
+
 		<result property="productOption" column="PRODUCT_OPTION"/>
 		<result property="quantity" column="QUANTITY"/>
 	</resultMap>
@@ -22,8 +23,29 @@
 		<id property="optionNo" column="OPTION_NO" />
 		<result property="productOption" column="PRODUCT_OPTION" />
 		<result property="productNo" column="PRODUCT_NO" />
+
+		<association javaType="com.kh.healthDao.member.model.vo.Member" property="member">
+			<id column="USER_NO" property="userNo"/>
+		</association>
+
 	</resultMap>
 	
+	<select id="recentList" resultMap="productResultMap">
+		SELECT
+				PRODUCT_NO
+			  , PRODUCT_BRAND
+			  , PRODUCT_TITLE
+			  , PRODUCT_PRICE
+			  , PRODUCT_BENEFIT
+			  , PRODUCT_NOTICE
+			  , PRODUCT_INFO
+			  , PRODUCT_VIEW
+			  , PRODUCT_STOCK
+			  , CATEGORY_ID
+			  , P_MEMBERSHIP
+		 FROM PRODUCT
+		WHERE PRODUCT_NO = #{productNo}
+	</select>
 	<select id="recoRankList" resultMap="productResultMap" parameterType="_int">
 		SELECT
 				PRODUCT_NO
@@ -144,6 +166,69 @@
 			  , CATEGORY_ID
 			  , P_MEMBERSHIP
 		 FROM PRODUCT)
+	</select>
+	
+	<select id="recoListCount" resultType="_int">
+		SELECT
+		    COUNT(*)
+		FROM
+		(SELECT
+				PRODUCT_NO
+              , PRODUCT_RANK
+			  , PRODUCT_BRAND
+			  , PRODUCT_TITLE
+			  , PRODUCT_PRICE
+			  , PRODUCT_BENEFIT
+			  , PRODUCT_NOTICE
+			  , PRODUCT_INFO
+			  , PRODUCT_VIEW
+			  , PRODUCT_STOCK
+			  , CATEGORY_ID
+			  , P_MEMBERSHIP
+		 FROM PRODUCT
+         RIGHT JOIN PRODUCT_RECOMMEND USING (PRODUCT_NO))
+	</select>
+	
+	<select id="wishList" resultMap="productResultMap">
+		SELECT
+				LIKE_NO
+              , PRODUCT_NO
+			  , PRODUCT_BRAND
+			  , PRODUCT_TITLE
+			  , PRODUCT_PRICE
+			  , PRODUCT_BENEFIT
+			  , PRODUCT_NOTICE
+			  , PRODUCT_INFO
+			  , PRODUCT_VIEW
+			  , PRODUCT_STOCK
+			  , CATEGORY_ID
+			  , P_MEMBERSHIP
+              , USER_NO
+		 FROM PRODUCT_LIKE
+		 JOIN PRODUCT USING (PRODUCT_NO)
+        WHERE USER_NO = #{userNo}
+	</select>
+	<select id="wishListCount" resultType="_int">
+		SELECT
+		    COUNT(*)
+		FROM
+		(SELECT
+				LIKE_NO
+              , PRODUCT_NO
+			  , PRODUCT_BRAND
+			  , PRODUCT_TITLE
+			  , PRODUCT_PRICE
+			  , PRODUCT_BENEFIT
+			  , PRODUCT_NOTICE
+			  , PRODUCT_INFO
+			  , PRODUCT_VIEW
+			  , PRODUCT_STOCK
+			  , CATEGORY_ID
+			  , P_MEMBERSHIP
+              , USER_NO
+		 FROM PRODUCT_LIKE
+		 JOIN PRODUCT USING (PRODUCT_NO)
+        WHERE USER_NO = #{userNo})
 	</select>
 	
 	<select id="shoppingList" resultMap="productResultMap" parameterType="hashmap">

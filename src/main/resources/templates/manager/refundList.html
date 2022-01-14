@@ -4,8 +4,17 @@
 <title></title>
 <!-- 메타태그, 스타일 -->
 <th:block th:replace="common/head.html"></th:block>
+</style>
 <!--// 메타태그, 스타일 -->
+
 <body>
+	<script>
+		const msg = '[[${msg}]]';
+		
+		if(msg){
+			alert(msg);			
+		}
+	</script>
 
 	<div id="wrap" class="main">
 		<!-- HEADER + GNB -->
@@ -32,100 +41,72 @@
 						<p class="tit mgb40">
 							환불 관리
 						</p>
-
-
 						<div class="myOrderList mgt40">
 							<div class="tblBar mgt50">
-											<p class="tblList">총 <span>48개</span></p>
-											<div class="inp_wrap">
-												<div class="inp_text searchType">
-													<div class="btn_wrap">
-														
-														<div class="inp_wrap">
-															
-															
-														</div>
-														</div>
-
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="js_tblList">
-											<table class="tblType1" summary="">
-												<caption></caption>
-												<colgroup>
-													<col width="100px"></col>
-													<col width="150px"></col>
-													<col width="150px"></col>
-													<col width="150px"></col>
-													<col width="150px"></col>
-													<col width="150px"></col>
-												</colgroup>
-												<thead>
-													<tr>
-														<th>결제번호</th>
-														<th>아이디</th>
-														<th>결제일</th>
-														<th>환불일</th>
-														<th>환불금액</th>
-														<th>처리현황</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td class="fc88">11</td>
-														<td>enjoung_love</td>
-														<td>맛있닭</td>
-														<td>500,000</td>
-														<td>500,000</td>
-														<td>												<!--btn btnSizeL btnColorW btnTypeB-->
-															<button type="button" onclick="showLayer('optChange');" class=""><span>처리중</span></button>
-															
-
-
-														</td>
-													</tr>
-													<tr>
-														<td class="fc88">11</td>
-														<td>yelimee</td>
-														<td>맛있닭</td>
-														<td>500,000</td>
-														<td>500,000</td>
-														<td>환불완료</td>
-													</tr>
-												</tbody>
-											</table>
-											<div class="paging mgt40">
-												<a href="#" class="first"><span class="hide">첫페이지</span></a>
-												<a href="#" class="prev"><span class="hide">이전페이지</span></a>
-												<a href="#">1</a>
-												<a href="#" class="active">2</a>
-												<a href="#">3</a>
-												<a href="#">4</a>
-												<a href="#">5</a>
-												<a href="#">6</a>
-												<a href="#">7</a>
-												<a href="#">8</a>
-												<a href="#">9</a>
-												<a href="#">10</a>
-												<a href="#" class="next"><span class="hide">다음페이지</span></a>
-												<a href="#" class="last"><span class="hide">마지막페이지</span></a>
-											</div>
-										</div>
-
-									</div>
-								</li>
-								
-								
-								
-								
-
-							</ul>
+								<p class="tblList">총 <span th:text="${listCount}"></span>개</p>
+							<div>
 						</div>
+						<div class="js_tblList">
+							<table class="tblType1" summary="">
+								<caption></caption>
+								<colgroup>
+									<col width="100px"></col>
+									<col width="150px"></col>
+									<col width="150px"></col>
+									<col width="150px"></col>
+									<col width="150px"></col>
+									<col width="150px"></col>
+								</colgroup>
+								<thead>
+									<tr>
+										<th>결제번호</th>
+										<th>아이디</th>
+										<th>결제일</th>
+										<th>환불일</th>
+										<th>환불금액</th>
+										<th>처리현황</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="rlist : ${refundList}">
+										<td class="fc88" th:text=${rlist.refundNo}></td>
+										<td th:text=${rlist.userId}></td>
+										<td th:text=${rlist.payDate}></td>
+										<td th:text=${rlist.refundDate}></td>
+										<td th:text="${#numbers.formatInteger(rlist.quantity * rlist.productPrice, 0, 'COMMA')+'원'}"></td>
+										<form action="/manager/refundOk" method="post">
+											<td>
+												<button type="submit" class="btn btnSizeS btnColorW btnTypeB" style="width:80px;" th:text="${rlist.refundStatus}"><span></span></button>		
+											</td>
+											<input type="hidden" name="refundNo" th:value="${rlist.refundNo}">
+										</form>
+									</tr>
 
-
-
+								</tbody>
+							</table>
+								<div class="paging mgt50"
+									th:with="prev=${pi.page - 1}, next=${pi.page + 1}">
+									<a th:href="@{/manager/refundList(page=1)}" class="first"><span
+										class="hide">첫페이지</span></a> <a class="prev"
+										href="/manager/refundList?page="
+										th:attrappend="href=${prev}"><span class="hide">이전페이지</span></a>
+									<a
+										th:each="page : ${#numbers.sequence(pi.startPage, pi.endPage)}"
+										href="/manager/refundList?page="
+										th:attrappend="href=${page}" th:text="${page}"
+										th:classappend="${page} == ${#httpServletRequest.getParameter('page')} ? active"></a>
+									<a class="next" href="/manager/refundList?page="
+										th:attrappend="href=${next}"><span class="hide">다음페이지</span></a>
+									<a href="/manager/refundList?page="
+										th:attrappend="href=${pi.maxPage}" class="last"><span
+										class="hide">마지막페이지</span></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		
 						
 					<!-- //myPageCon -->
 				</div>
@@ -153,6 +134,8 @@
 			'top' : 290
 		});
 	</script>
+	
+
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 </body>
 </html>

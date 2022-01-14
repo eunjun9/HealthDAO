@@ -189,6 +189,16 @@ public class AdminServiceImpl implements AdminService, CouponService, NoticeServ
 		return memberSound;
 	}
 
+	@Override
+	public MemberSound memberSoundDetail(int cNo) {
+		return adminMapper.memberSoundDetail(cNo);
+	}
+
+	@Override
+	public int memberSoundModify(MemberSound ms) {
+		return adminMapper.memberSoundModify(ms);
+	}
+
 
 	/* @Override
 	public List<Product> listProduct(Product product) {

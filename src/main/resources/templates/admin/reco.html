@@ -37,11 +37,11 @@
 									<a href="javascript:void(0)" onclick="showLayer('recoDel');" class="wishBtn btn btnSizeS btnColorW btnTypeB"><span>삭제하기</span></a>
 								</div>
 							</div>
-							<div class="pdt_list1 type02 mgt60" th:if="${recoList != null}">
+							<div class="pdt_list1 type02 mgt60" th:if="${recoCount != 0}">
 								<ul class="list_box">
 									<li th:each="list : ${recoList}">
 										<div class="pdtImg">
-											<a th:href="|javascript:selectReco(${list.productNo});|" class="imgLink"><img src="./images/temp/pdt03.png" alt=""></a>
+											<a th:href="|javascript:selectReco(${list.productNo});|" class="imgLink"><img src="/images/temp/pdt03.png" alt=""></a>
 										</div>
 										<div class="pdtTxt">
 											<p class="pdtHead" style="color:#4f8ffa;" th:text="@{랭킹 }+${list.productRank}"></p>
@@ -60,7 +60,7 @@
 									</li>
 								</ul>
 							</div>
-							<div th:unless="${recoList != null}">
+							<div th:unless="${recoCount != 0}">
 								<div class="noData">
 									<span>등록된 내용이 없습니다.<br>지금 바로 등록 해보세요.</span>
 								</div>
@@ -101,7 +101,7 @@
                     <ul class="vScroll" th:if="${pdt != 0}">
                         <li th:each="pdt:${pdtList}" th:classappend="${pdt.productRank} == 0 ? noRank : isRank">
                         	<a href="javascript:void(0);" th:onclick="|selectPdt('${pdt.productNo}');|">
-                        		<img src="./images/temp/pdt03.png" alt="">
+                        		<img src="/images/temp/pdt03.png" alt="">
                         	</a>
                         	<p>
                         		<span th:text="${pdt.productBrand}"></span>
@@ -113,6 +113,67 @@
                         <span>결과가 없습니다.</span>
                     </div>
                     <span>총 <span class="fcRed" th:text="${listCount}">10</span>개</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 추천상품 순서추가 -->
+<div id="optSelect" class="lyPopArea">
+    <div class="lyPop">
+        <div class="lyWrap">
+            <button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
+            <div class="lyTit">순서 추가</div>
+            <div class="lyBody">
+                <div class="inp_wrap">
+					<div class="inp_text">
+						<input type="text" name="recoRank" id="recoRank" placeholder="순서를 입력해주세요">
+						<button class="btn_clear"><span>clear</span></button>
+					</div>
+					<p class="error">잘못 입력했습니다</p>
+				</div>
+                <div class="btn_wrap length2">
+                    <a href="javascript:void(0);" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorW btnTypeR"><span>취소</span></a>
+                    <a href="javascript:void(0);" onclick="insertReco();" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 추천상품 순서변경 -->
+<div id="optChange" class="lyPopArea">
+    <div class="lyPop">
+        <div class="lyWrap">
+            <button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
+            <div class="lyTit">순서 추가</div>
+            <div class="lyBody">
+                <div class="inp_wrap">
+					<div class="inp_text">
+						<input type="text" name="recoRank" id="recoRank" placeholder="순서를 입력해주세요">
+						<button class="btn_clear"><span>clear</span></button>
+					</div>
+					<p class="error">잘못 입력했습니다</p>
+				</div>
+                <div class="btn_wrap length2">
+                    <a href="javascript:void(0);" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorW btnTypeR"><span>취소</span></a>
+                    <a href="javascript:void(0);" onclick="modifyReco();" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 추천상품 삭제 -->
+<div id="recoDel" class="lyPopArea">
+    <div class="lyPop">
+        <div class="lyWrap">
+            <button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
+            <div class="lyTit">추천 상품 삭제</div>
+            <div class="lyBody basic">
+                <p>선택하신 상품을 정말 삭제하시겠습니까?</p>
+                <div class="btn_wrap length2">
+                    <a href="javascript:void(0);" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorW btnTypeR"><span>취소</span></a>
+                    <a href="javascript:void(0);" onclick="deleteReco();" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></a>
                 </div>
             </div>
         </div>
@@ -266,110 +327,48 @@
 			alert('선택된 값이 없습니다.');
 		}
 	}
-</script>
-<!-- 추천상품 순서추가 -->
-<div id="optSelect" class="lyPopArea">
-    <div class="lyPop">
-        <div class="lyWrap">
-            <button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
-            <div class="lyTit">순서 추가</div>
-            <div class="lyBody">
-                <div class="inp_wrap">
-					<div class="inp_text">
-						<input type="text" name="recoRank" id="recoRank" placeholder="순서를 입력해주세요">
-						<button class="btn_clear"><span>clear</span></button>
-					</div>
-					<p class="error">잘못 입력했습니다</p>
-				</div>
-                <div class="btn_wrap length2">
-                    <a href="javascript:void(0);" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorW btnTypeR"><span>취소</span></a>
-                    <a href="javascript:void(0);" onclick="insertReco();" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- 추천상품 순서변경 -->
-<div id="optChange" class="lyPopArea">
-    <div class="lyPop">
-        <div class="lyWrap">
-            <button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
-            <div class="lyTit">순서 추가</div>
-            <div class="lyBody">
-                <div class="inp_wrap">
-					<div class="inp_text">
-						<input type="text" name="recoRank" id="recoRank" placeholder="순서를 입력해주세요">
-						<button class="btn_clear"><span>clear</span></button>
-					</div>
-					<p class="error">잘못 입력했습니다</p>
-				</div>
-                <div class="btn_wrap length2">
-                    <a href="javascript:void(0);" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorW btnTypeR"><span>취소</span></a>
-                    <a href="javascript:void(0);" onclick="modifyReco();" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- 추천상품 삭제 -->
-<div id="recoDel" class="lyPopArea">
-    <div class="lyPop">
-        <div class="lyWrap">
-            <button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
-            <div class="lyTit">추천 상품 삭제</div>
-            <div class="lyBody basic">
-                <p>선택하신 상품을 정말 삭제하시겠습니까?</p>
-                <div class="btn_wrap length2">
-                    <a href="javascript:void(0);" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorW btnTypeR"><span>취소</span></a>
-                    <a href="javascript:void(0);" onclick="deleteReco();" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<script>
-$(document).on('click', '.inp_check label', function (){
-	if ($(this).parent().hasClass('readOnly')){return false;}
-	if ($(this).parent().hasClass('disabled')){return false;}
+	$(document).on('click', '.inp_check label', function (){
+		if ($(this).parent().hasClass('readOnly')){return false;}
+		if ($(this).parent().hasClass('disabled')){return false;}
+		
+		var tar = $(this).parent().find('input');
+		var chk = tar.prop('checked');
+		var grpNm = tar.attr('name');
 	
-	var tar = $(this).parent().find('input');
-	var chk = tar.prop('checked');
-	var grpNm = tar.attr('name');
-
-
-	if ($(this).parent('.inp_check').hasClass('allChk')){
-		var chkStatus = tar.prop('checked');
-		$("input:checkbox[name=" + grpNm + "]").each(function() {
-			if (chkStatus) {
-				$(this).closest(".inp_check").removeClass("checked");
-				$(this).prop("checked",false);
-			} else {
-				$(this).closest(".inp_check").addClass("checked");
-				$(this).prop("checked",true);
-			}
-		});
-	} else {
-		if ($(this).parent().hasClass('checked')) {
+	
+		if ($(this).parent('.inp_check').hasClass('allChk')){
+			var chkStatus = tar.prop('checked');
 			$("input:checkbox[name=" + grpNm + "]").each(function() {
-				$(this).closest('.inp_check.allChk').removeClass('checked');;
-				$(this).closest('.inp_check.allChk input').prop("checked",false);
+				if (chkStatus) {
+					$(this).closest(".inp_check").removeClass("checked");
+					$(this).prop("checked",false);
+				} else {
+					$(this).closest(".inp_check").addClass("checked");
+					$(this).prop("checked",true);
+				}
 			});
-			$(this).parent().removeClass('checked');				
-			if($(this).attr('for') == 'remember'){
-				deleteCookie("rememberId");
-			}
-			tar.prop("checked",false);
 		} else {
-			$(this).parent().addClass('checked');				
-			if($(this).attr('for') == 'remember'){
-				setCookie("rememberId", userId.value, 7);
+			if ($(this).parent().hasClass('checked')) {
+				$("input:checkbox[name=" + grpNm + "]").each(function() {
+					$(this).closest('.inp_check.allChk').removeClass('checked');;
+					$(this).closest('.inp_check.allChk input').prop("checked",false);
+				});
+				$(this).parent().removeClass('checked');				
+				if($(this).attr('for') == 'remember'){
+					deleteCookie("rememberId");
+				}
+				tar.prop("checked",false);
+			} else {
+				$(this).parent().addClass('checked');				
+				if($(this).attr('for') == 'remember'){
+					setCookie("rememberId", userId.value, 7);
+				}
+				tar.prop("checked",true);
 			}
-			tar.prop("checked",true);
 		}
-	}
-	console.log(tar.prop('checked'));
-	return false;
-});
+		console.log(tar.prop('checked'));
+		return false;
+	});
 </script>
 </body>
 </html>

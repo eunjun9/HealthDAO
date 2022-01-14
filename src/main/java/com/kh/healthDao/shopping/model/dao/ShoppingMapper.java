@@ -19,6 +19,10 @@ public interface ShoppingMapper {
 	Product selectReco(int productNo);
 	int modifyReco(int productNo, int productRank);
 	int deleteReco(int productNo);
+	int recoListCount();
+	Product recentList(int productNo);
+	int wishListCount(int userNo);
+	List<Product> wishList(int userNo);
 
 	List<Product> ShoppingList();
 	

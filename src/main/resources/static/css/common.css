@@ -174,6 +174,7 @@ BUTTON
 .btn_wrap .btn:first-child{margin:0 !important;}
 .contentsForm .length2 .btn{width:254px;}
 
+
 .btn_txt{position:relative;}
 .btn_txt:after{content:'';position:absolute;left:0;bottom:1px;width:100%;height:1px;background:#222;}
 .btn_txt:before{content:'';position:absolute;left:0;bottom:0;width:100%;height:1px;background:#222;opacity:0;
@@ -188,6 +189,30 @@ BUTTON
 	-webkit-transform:scale(0,1);-ms-transform:scale(0,1);transform:scale(0,1);
 	-webkit-transition:Transform 0.5s ease;-o-transition:Transform 0.5s ease;transition:Transform 0.5s ease;}
 .btn span{position:relative;z-index:2;}
+
+/**
+BUTTON yelim button 
+**/
+.btn_wrap{text-align:center;font-size:0;}
+.btn_wrap .btnn{margin-left:180px !important;}
+.btn_wrap .btnn:first-child{margin:180 !important;}
+.contentsForm .length2 .btnn{width:254px;}
+
+
+.btn_txt{position:relative;}
+.btn_txt:after{content:'';position:absolute;left:0;bottom:1px;width:100%;height:1px;background:#222;}
+.btn_txt:before{content:'';position:absolute;left:0;bottom:0;width:100%;height:1px;background:#222;opacity:0;
+	-webkit-transition:all 0.3s ease;-o-transition:all 0.3s ease;transition:all 0.3s ease;}
+.btn_txt:hover:before{opacity:1;}
+
+.btnn{display:inline-block;overflow:hidden;position:relative;text-align:center;vertical-align:top;
+	-webkit-box-sizing:border-box;box-sizing:border-box;
+	-webkit-transition:all 0.5s ease;-o-transition:all 0.5s ease;transition:all 0.5s ease;}
+.btnn:after{content:'';position:absolute;left:0;top:0;width:100%;height:100%;
+	-webkit-transform-origin:right center;transform-origin:right center;
+	-webkit-transform:scale(0,1);-ms-transform:scale(0,1);transform:scale(0,1);
+	-webkit-transition:Transform 0.5s ease;-o-transition:Transform 0.5s ease;transition:Transform 0.5s ease;}
+.btnn span{position:relative;z-index:2;}
 
 /* SIZE */
 .btnSizeL{height:50px;line-height:48px;font-size:16px;}
@@ -1541,7 +1566,7 @@ SLIDE
 .order_list .list_box .pdtCount{position:relative;display:table-cell;width:50px;vertical-align:middle;text-align:right;font-size:16px;}
 .order_list .list_box .pdtCount .error{display:none;position:absolute;left:-55px;top:50%;margin-top:15px;font-size:13px;line-height:1;color:#ff5b5d;white-space:nowrap;}
 .order_list .list_box .pdtCount.error .error{display:block;}
-.order_list .list_box .count_box{position:relative;font-size:0;}
+.order_list .list_box .count_box{position:relative;font-size:0; display: flex;}
 .order_list .list_box .count_box button{position:relative;display:inline-block;width:20px;height:20px;vertical-align:middle;border:1px solid #e8e8e8;border-radius:50%;
 	-webkit-box-sizing:border-box;box-sizing:border-box;}
 .order_list .list_box .count_box button:hover{border-color:#222;}

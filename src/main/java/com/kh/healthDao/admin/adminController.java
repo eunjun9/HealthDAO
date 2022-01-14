@@ -23,6 +23,7 @@ import com.kh.healthDao.admin.model.vo.Coupon;
 import com.kh.healthDao.admin.model.vo.Notice;
 import com.kh.healthDao.admin.model.vo.Product;
 import com.kh.healthDao.member.model.vo.UserImpl;
+import com.kh.healthDao.mypage.model.vo.MemberSound;
 
 
 
@@ -71,25 +72,10 @@ public class adminController {
 			return mv;
 		}
 	}
-	
-	/*@ResponseBody
-	@RequestMapping(value = "/productRegist", method = RequestMethod.POST)
-	public ModelAndView registProduct(Product product, ModelAndView mv) {
-		
-		List<Product> ProductList = adminService.listProduct(product);
-		
-		mv.addObject("ProductList", ProductList);
-		mv.setViewName("redirect:/admin/productRegist");
-		
-		return mv;
-		
-	}
-	*/
-	
+
 	
 
 	// 페이징 된 리스트
-
 	@GetMapping("inventoryList")
 	public ModelAndView managerInventoryList(ModelAndView mv, @RequestParam int page) {
 
@@ -106,13 +92,15 @@ public class adminController {
 	// 팝업 수량 입력
 	@PostMapping("/pLPopupSu")
 	@ResponseBody
-	public ModelAndView pLPopupSu(Product product, ModelAndView mv) {
-		System.out.println(product.getProductStock());
-		System.out.println(product.getProductNo());
+	public ModelAndView pLPopupSu(Product product, ModelAndView mv, RedirectAttributes rttr) {
+		// System.out.println(product.getProductStock());
+		// System.out.println(product.getProductNo());
 		
-		int result = adminService.stockPlus(product);
+		String msg = adminService.stockPlus(product) > 0 ? "답변 등록 성공" : "답변 등록 실패";
 		
-		mv.setViewName("redirect:/");
+		rttr.addFlashAttribute("msg", msg);
+			
+		mv.setViewName("redirect:/admin/inventoryList?page=1");
 		return mv;
 	}
 	
@@ -208,4 +196,47 @@ public class adminController {
 		
 		return mv;
 	}
+	
+	@PostMapping("memberSoundDetail")
+	@ResponseBody
+	public MemberSound memberSoundDetail(int cNo) {
+		MemberSound memberSound  = memberSoundService.memberSoundDetail(cNo);
+		
+		return memberSound;
+	}
+	
+	@PostMapping("memberSoundModify")
+	public String memberSoundModify(MemberSound ms, RedirectAttributes rttr) {
+		String msg = memberSoundService.memberSoundModify(ms) > 0 ? "진행상황 적용 완료" : "진행상황 적용 실패";
+		
+		rttr.addFlashAttribute("msg", msg);
+		
+		return "redirect:/admin/memberSoundList?page=1";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

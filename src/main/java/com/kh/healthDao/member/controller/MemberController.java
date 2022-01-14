@@ -39,11 +39,14 @@ public class MemberController {
 	public void findIdPwd() {}
 	
 	@PostMapping("/signUp")
-	public String signUp(HttpServletRequest hsr, Member member) {
+	public String signUp(Member member, @RequestParam int userBirth, @RequestParam int userBirth2, @RequestParam int userBirth3) {
 		
-		String b1 = hsr.getParameter("userBirth");
-		String b2 = hsr.getParameter("userBirth2");
-		String b3 = hsr.getParameter("userBirth2");
+//		String b1 = hsr.getParameter("userBirth");
+//		String b2 = hsr.getParameter("userBirth2");
+//		String b3 = hsr.getParameter("userBirth2");
+		String b1 = Integer.valueOf(userBirth).toString();
+		String b2 = Integer.valueOf(userBirth2).toString();
+		String b3 = Integer.valueOf(userBirth3).toString();
 		
 		String birth = b1 + b2 + b3;
 		member.setUserBirth(birth);
@@ -69,7 +72,7 @@ public class MemberController {
 	
 	@ResponseBody
 	@PostMapping("/idChk")
-	public int idChk(Member member) throws Exception {
+	public int idChk(Member member) {
 		int result = memberService.idChk(member);
 		return result;
 	}

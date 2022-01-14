@@ -33,7 +33,6 @@ public class ShoppingController {
 		this.shoppingService = shoppingService;
 	}
 	
-	
 	// 쇼핑 랭킹페이지
 	@GetMapping("/ranking")
 	public ModelAndView shoppingRanking(ModelAndView mv) {
