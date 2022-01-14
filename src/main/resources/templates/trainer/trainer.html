@@ -24,7 +24,6 @@
 						<div class="inp_wrap">
 							<div class="inp_text searchType">
 								<input type="text" id="searchTrainer" name="searchTrainer" placeholder="지하철역 검색" style="width: 500px; border: 3px solid #CCCCCC;">
-								<button class="btn_clear"><span>clear</span></button>
 							</div>
 						</div>
 					</div>
@@ -70,7 +69,7 @@
 			<div class="lyTit">트레이너 등록</div>
 			<div class="lyBody">
 				<div class="form_area">
-				<form class="trainerInsertForm" name="trainerInsertForm" action="/trainer/insert" method="post">
+				<form class="trainerInsertForm" name="trainerInsertForm" action="/trainer/insert" method="post" enctype="multipart/form-data">
 					<dl>
 						<dt><label for="deliRegId"><span class="fcRed">*</span>센터 이름</label></dt>
 						<dd>
@@ -184,11 +183,18 @@
 							</div>
 					</dl>
 					<dl>
-						<dt><label for="deliRegName"><span class="fcRed">*</span>센터 사진(최대 2장)</label></dt>
+						<dt><label for="deliRegName"><span class="fcRed">*</span>트레이너 사진</label></dt>
 						<dd style="margin-left: 0px">
 							<div class="inp_text sizeS">
-								<input type="file" name="fitPhoto1" style="border: none;">
-								<input type="file" name="fitPhoto2" style="border: none;">
+								<input type="file" name="trainerFile" style="border: none;">
+							</div>
+						</dd>
+					</dl>
+					<dl>
+						<dt><label for="deliRegName"><span class="fcRed">*</span>센터 사진</label></dt>
+						<dd style="margin-left: 0px">
+							<div class="inp_text sizeS">
+								<input type="file" name="centerFile" style="border: none;">
 							</div>
 						</dd>
 					</dl>
