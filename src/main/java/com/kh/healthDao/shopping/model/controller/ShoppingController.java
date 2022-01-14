@@ -126,7 +126,6 @@ public class ShoppingController {
 		return mv;
 	}
 
-	
 	@PostMapping("/payment") 
 	public String shoppingPaymentInfo(@RequestParam("select1") String select1, @RequestParam("amount") int amount, @RequestParam("sum") int sum, Model model, @RequestParam int productNo ) { 
 		
@@ -140,6 +139,7 @@ public class ShoppingController {
 		
 		return "/shopping/shoppingPayment"; 
 	}
+	
 
 	
 	
