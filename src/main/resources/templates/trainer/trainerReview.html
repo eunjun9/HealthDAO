@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+				xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <title></title>
 <!-- 메타태그, 스타일 -->
@@ -109,7 +110,7 @@
 							<h5>회원권을 등록하지 않아도 가능해요</h5>
 						</div>
 						<div class="trainerDetailOrderAndQue">
-							<button class="trainerDetailOrder" onclick="location.href='#'">1회 체험 신청하기</button>
+							<button class="trainerDetailOrder"><a href="/trainer/order?tNo=" th:attrappend="href=${trainer.tNo}">1회 체험 신청하기</a></button>
 							<button class="trainerDetailQue">문의</button>
 						</div>
                     </div>
@@ -128,7 +129,7 @@
 			</div>
 			<div style="display: block;">
 				<!-- 트레이너 이름 넣는 곳 -->
-				<p class="tD2">이애림</p>
+				<p class="tD2" th:text="${trainer.member.userName}"/>
 				<!-- 헬스장 이름 넣는 곳 -->
 				<p class="tD3" th:text="${trainer.tGymName}"/>
 			</div>

@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+				xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <title></title>
 <!-- 메타태그, 스타일 -->
@@ -11,12 +12,12 @@
 <th:block th:replace="common/header.html"></th:block>
 <!--// HEADER + GNB -->
 	<!-- container -->
+
 <div id="container" class="pdt0">
     <div class="guideTab" id="guideTab1">
         <div style="display: flex;">
             <!-- 헬스장 사진 넣는 곳 -->
-            <img class="imgCutting" style="width:50%; height:350px;" src="/images/yonghan/aa1.jpg">
-            <img class="imgCutting" style="width:50%; height:350px;" src="/images/yonghan/aa2.jpg">
+            <img class="imgCutting" style="width:100%; height:350px;" th:src="${trainer.file_path}+${trainer.change_file2}">
         </div>
     </div>
 	<div class="contents">
@@ -50,7 +51,7 @@
                         <div style="width: 100%; height: 100px; display: flex; justify-content: center; margin-top: 10px; padding-bottom: 30px;">
                             <div style="width: 90px; height: 100px;">
                                 <!-- 트레이너 사진 넣는 곳 -->
-                                <img src="/images/yonghan/trainer.png" style="width: 100%; height: 100%;">
+                                <img th:src="${trainer.file_path}+${trainer.change_file1}" style="width: 100%; height: 100%;">
                             </div>
                         </div>
                         <div style="text-align: center;">
@@ -80,7 +81,7 @@
 							<h5>회원권을 등록하지 않아도 가능해요</h5>
 						</div>
 						<div class="trainerDetailOrderAndQue">
-							<button class="trainerDetailOrder" onclick="location.href='#'">1회 체험 신청하기</button>
+							<button class="trainerDetailOrder"><a href="/trainer/order?tNo=" th:attrappend="href=${trainer.tNo}">1회 체험 신청하기</a></button>
 							<button class="trainerDetailQue">문의</button>
 						</div>
                     </div>
@@ -96,7 +97,7 @@
 			<div class="lyTit">트레이너 수정</div>
 			<div class="lyBody">
 				<div class="form_area">
-				<form class="trainerModifyForm" name="trainerModifyForm" action="/trainer/modify" method="post">
+				<form class="trainerModifyForm" name="trainerModifyForm" action="/trainer/modify" method="post" enctype="multipart/form-data">
 					<dl>
 						<dt><label for="deliRegId"><span class="fcRed"></span>센터 이름</label></dt>
 						<dd>
@@ -210,13 +211,24 @@
 							</div>
 					</dl>
 					<dl>
-						<dt><label for="deliRegName"><span class="fcRed">*</span>센터 사진(최대 2장)</label></dt>
+						<dt><label for="deliRegName"><span class="fcRed">*</span>트레이너 사진</label></dt>
 						<dd style="margin-left: 0px">
 							<div class="inp_text sizeS">
-								<input type="file" name="fitPhoto1" style="border: none;">
-								<input type="file" name="fitPhoto2" style="border: none;">
+								<input type="file" name="trainerFile" style="border: none;">
+							</div>
+						</dd>
+					</dl>
+					<dl>
+						<dt><label for="deliRegName"><span class="fcRed">*</span>센터 사진</label></dt>
+						<dd style="margin-left: 0px">
+							<div class="inp_text sizeS">
+								<input type="file" name="centerFile" style="border: none;">
 							</div>
 							<input type="hidden" name="tNo" th:value="${trainer.tNo}">
+							<input type="hidden" name="f_tno" th:value="${trainer.f_tno}">
+							<input type="hidden" name="f_cno" th:value="${trainer.f_cno}">
+							<input type="hidden" name="change_file1" th:value="${trainer.change_file1}">
+							<input type="hidden" name="change_file2" th:value="${trainer.change_file2}">
 						</dd>
 					</dl>
 					
@@ -230,18 +242,17 @@
 		</div>
 	</div>
 </div>
-
 <div id="modal2">
 	<div class="popup2">
 		<button id="xBtn">X</button>
 		<div style="display: flex;">
 			<div class="tD1">
 				<!-- 트레이너 사진 넣는 곳 -->
-				<img src="/images/yonghan/trainer.png" style="width: 100%; height: 100%; border-radius: 5px;">
+				<img th:src="${trainer.file_path}+${trainer.change_file1}" style="width: 100%; height: 100%; border-radius: 5px;">
 			</div>
 			<div style="display: block;">
 				<!-- 트레이너 이름 넣는 곳 -->
-				<p class="tD2" th:text="${trainer.member.userName}"></p>
+				<p class="tD2" th:text="${trainer.member.userName}"/>
 				<!-- 헬스장 이름 넣는 곳 -->
 				<p class="tD3" th:text="${trainer.tGymName}"/>
 			</div>
@@ -288,7 +299,6 @@
 	<style>
 		#quick{display:none;}
 	</style>
-	
 
 </body>
 </html>
