@@ -27,6 +27,7 @@ public class Product {
 	
 	private List<Option> option;	// 옵션 테이블
 	private Category category;		// 카테고리 테이블
+	private PayDetail payDetail;	// 상품 디테일(수량) 테이블
 	
 	/* + 추가할 것
 	 * MEMBER 조인 -> 트레이너 이름, 트레이너 전화번호

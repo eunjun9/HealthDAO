@@ -14,6 +14,14 @@
 		<result property="categoryId" column="CATEGORY_ID" />
 		<result property="pMembership" column="P_MEMBERSHIP"/>
 		<result property="productRank" column="PRODUCT_RANK"/>
+		<result property="productOption" column="PRODUCT_OPTION"/>
+		<result property="quantity" column="QUANTITY"/>
+	</resultMap>
+	
+	<resultMap id="productOptionResultMap" type="com.kh.healthDao.admin.model.vo.Option">
+		<id property="optionNo" column="OPTION_NO" />
+		<result property="productOption" column="PRODUCT_OPTION" />
+		<result property="productNo" column="PRODUCT_NO" />
 	</resultMap>
 	
 	<select id="recoRankList" resultMap="productResultMap" parameterType="_int">
@@ -281,8 +289,23 @@
 			  , PRODUCT_PRICE
 			  , PRODUCT_NOTICE
 			  , PRODUCT_BENEFIT
+			  , PRODUCT_OPTION
 		   FROM PRODUCT
+		   JOIN PRODUCT_OPTION USING(PRODUCT_NO)
 		  WHERE PRODUCT_NO = #{productNo}
+	</select>
+	
+	<select id="shoppingQuantity" parameterType="com.kh.healthDao.admin.model.vo.Product">
+		INSERT 
+		INTO PRODUCT
+		(
+			PAY_NO
+		  , QUANTITY
+		  , PRODUCT_NO
+		)VALUES(
+		    SEQ_PRODUCT_NO.NEXTVAL
+		  , 
+		)
 	</select>
 	
 	<select id="shoppingPayment" resultMap="productResultMap" parameterType="_int">
@@ -293,7 +316,9 @@
 			  , PRODUCT_PRICE
 			  , PRODUCT_NOTICE
 			  , PRODUCT_BENEFIT
+			  , PRODUCT_OPTION
 		   FROM PRODUCT
+		   JOIN PRODUCT_OPTION USING(PRODUCT_NO)
 		  WHERE PRODUCT_NO = #{productNo}
 	</select>
 	
