@@ -5,11 +5,15 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.healthDao.admin.model.vo.Coupon;
 import com.kh.healthDao.common.model.vo.Paging;
+import com.kh.healthDao.member.model.vo.Member;
 import com.kh.healthDao.mypage.model.dao.MypageMapper;
+import com.kh.healthDao.mypage.model.vo.Address;
 import com.kh.healthDao.mypage.model.vo.AttCheck;
 import com.kh.healthDao.mypage.model.vo.Cart;
 import com.kh.healthDao.mypage.model.vo.Point;
@@ -18,7 +22,7 @@ import com.kh.healthDao.review.model.vo.Review;
 
 
 @Service("mypageService")
-public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewService, CartService{
+public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewService, MyInfoService, CartService{
 	
 	private final MypageMapper mypageMapper; 
 	
@@ -152,12 +156,42 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 		return mypageMapper.reviewModify(review);
 
 	}
-
 	
 	// 출석체크
 	@Override
 	public int attendCheck(AttCheck attcheck) {
 		return mypageMapper.attendCheck(attcheck);
+	}
+
+	/* 내 정보 수정 */
+	@Override
+	public Member myInfoView(int userNo) {
+		return mypageMapper.myInfoView(userNo);
+	}
+	
+	@Transactional
+	@Override
+	public int myInfoModify(Member member) {
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		member.setUserPwd(passwordEncoder.encode(member.getUserPwd()));
+		
+		return mypageMapper.myInfoModify(member);
+	}
+
+	/* 배송지 등록 */
+	@Override
+	public List<Address> deliView(int userNo) {
+		return mypageMapper.deliView(userNo);
+	}
+	
+	@Override
+	public int insertDeli(Address address) {
+		return mypageMapper.insertDeli(address);
+	}
+
+	@Override
+	public Address selectDeli(int addressNo) {
+		return mypageMapper.selectDeil(addressNo);
 	}
 
 	@Override

@@ -1,13 +1,18 @@
 package com.kh.healthDao.trainer.model.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.healthDao.review.model.vo.Review;
@@ -67,15 +72,81 @@ public class TrainerController {
 
 	
 	@PostMapping("modify")
-	public ModelAndView trainerModify(ModelAndView mv, Trainer trainer) {
+	public ModelAndView trainerModify(ModelAndView mv, Trainer trainer, @RequestParam("trainerFile") MultipartFile trainerFile, @RequestParam("centerFile") MultipartFile centerFile, @Value("${custom.path.upload-images}") String uploadImagesPath) {
+		String originFile1 = null;
+		String originFile2 = null;
+		String ext1 = null;
+		String ext2 = null;
+		String changeFile1 = null;
+		String changeFile2 = null;
+		String path = uploadImagesPath + "trainer/";
+		int result = 0;
 		
-		int result = trainerService.trainerModify(trainer);
+		try {
+			
+			if(!trainerFile.isEmpty() && !centerFile.isEmpty()) {
+				
+				originFile1 = trainerFile.getOriginalFilename();
+				ext1 = originFile1.substring(originFile1.lastIndexOf("."));
+				changeFile1 = UUID.randomUUID().toString().replace("-", "") + ext1;
+				trainerFile.transferTo(new File(path + "\\" + changeFile1));
+				
+				originFile2 = centerFile.getOriginalFilename();
+				ext2 = originFile2.substring(originFile2.lastIndexOf("."));
+				changeFile2 = UUID.randomUUID().toString().replace("-", "") + ext2;
+				centerFile.transferTo(new File(path + "\\" + changeFile2));
+				
+				File file1 = new File(path+"\\"+trainer.getChange_file1());
+				File file2 = new File(path+"\\"+trainer.getChange_file2());
+				
+				if(file1.exists() || file2.exists()) {
+					file1.delete();
+					file2.delete();
+				}
+				
+				result = trainerService.trainerModify(trainer, originFile1, originFile2, changeFile1, changeFile2);
+
+				
+			} else if(!trainerFile.isEmpty()) {
+				
+				originFile1 = trainerFile.getOriginalFilename();
+				ext1 = originFile1.substring(originFile1.lastIndexOf("."));
+				changeFile1 = UUID.randomUUID().toString().replace("-", "") + ext1;
+				trainerFile.transferTo(new File(path + "\\" + changeFile1));
+				
+				
+				File file1 = new File(path+"\\"+trainer.getChange_file1());
+				if(file1.exists()) {
+					file1.delete();
+				}
+				
+				result = trainerService.trainerModify2(trainer, originFile1, changeFile1);
+				
+				
+			} else if(!centerFile.isEmpty()) {
+				
+				originFile2 = centerFile.getOriginalFilename();
+				ext2 = originFile2.substring(originFile2.lastIndexOf("."));
+				changeFile2 = UUID.randomUUID().toString().replace("-", "") + ext2;
+				centerFile.transferTo(new File(path + "\\" + changeFile2));
+				
+				File file2 = new File(path+"\\"+trainer.getChange_file2());
+				if(file2.exists()) {
+					file2.delete();
+				}
+				
+				result = trainerService.trainerModify3(trainer, originFile2, changeFile2);
+				
+			}
+			
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+		
 		if(result > 0) {
-			mv.addObject("msg", "수정 성공");
 			mv.setViewName("redirect:detail?tNo="+trainer.getTNo());
 			return mv;
 		} else {
-			mv.addObject("msg", "수정 실패");
 			mv.setViewName("redirect:detail?tNo="+trainer.getTNo());
 			return mv;
 		}
@@ -107,17 +178,53 @@ public class TrainerController {
 	}
 
 	@PostMapping("insert")
-	public ModelAndView trainerInsert(ModelAndView mv, Trainer trainer) {
-		int result = trainerService.trainerInsert(trainer);
+	public ModelAndView trainerInsert(ModelAndView mv, Trainer trainer, @RequestParam("trainerFile") MultipartFile trainerFile, @RequestParam("centerFile") MultipartFile centerFile, @Value("${custom.path.upload-images}") String uploadImagesPath) {
+		
+		String originFile1 = trainerFile.getOriginalFilename();
+		String ext1 = originFile1.substring(originFile1.lastIndexOf("."));
+		
+		String originFile2 = centerFile.getOriginalFilename();
+		String ext2 = originFile2.substring(originFile2.lastIndexOf("."));
+		
+		String changeFile1 = UUID.randomUUID().toString().replace("-", "") + ext1;
+		
+		String changeFile2 = UUID.randomUUID().toString().replace("-", "") + ext2;
+		
+		String path = uploadImagesPath + "trainer/";
+		
+		try {
+			trainerFile.transferTo(new File(path + "\\" + changeFile1));
+			centerFile.transferTo(new File(path + "\\" + changeFile2));
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println(originFile1);
+		System.out.println(ext1);
+		System.out.println(changeFile1);
+		System.out.println(path);
+		System.out.println(trainerFile);
+		System.out.println(centerFile);
+		
+		int result = trainerService.trainerInsert(trainer, originFile1, originFile2, changeFile1, changeFile2);
+		
 		if(result > 0) {
-			mv.addObject("msg", "수정 성공");
+			mv.addObject("msg", "등록 성공");
 			mv.setViewName("redirect:");
 			return mv;
 		} else {
-			mv.addObject("msg", "수정 실패");
+			mv.addObject("msg", "등록 실패");
 			mv.setViewName("redirect:");
 			return mv;
 		}
 	}
+	
+	@GetMapping("/order")
+	public ModelAndView trainerOrder(ModelAndView mv, @RequestParam int tNo) {
+		
+		System.out.println(tNo);
+		mv.setViewName("trainer/trainerOrder");
+		return mv;
+	}
+	
 
 }

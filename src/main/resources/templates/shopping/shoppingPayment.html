@@ -162,101 +162,22 @@
 							<li>
 								<div class="tbl_wrap">
 									<div class="pdtImg"><a href="#"><img src="./resources/web/images/temp/pdt_img3.png" alt="아이크러쉬 디테일 아이라이너"></a></div>
-									<div class="pdtTxt">
-										<p class="pdtHead" style="color:#4f8ffa;">[이벤트] 아이라이너 전 제품 3개 구매 시 1개 무료</p>
-										<p class="pdtBrand">바닐라코</p><!-- 20200317 수정 -->
-										<p class="pdtName">아이크러쉬 디테일 아이라이너</p>
-										<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
-										<p class="pdtOpt">옵션 : BE01 밀크티 필터</p>
+									<div class="pdtTxt" th:each="slist:${shoppingPayment}">
+										<p class="pdtHead" style="color:#4f8ffa;">[이벤트] </p>
+										<p class="pdtBrand" th:text="${shoppingPayment.productBrand}"></p><!-- 20200317 수정 -->
+										<p class="pdtName" th:text="${shoppingPayment.productTitle}"></p>
+										<p class="pdtPrice"><span class="sale">10%</span><span class="sale" th:text="${#numbers.formatInteger(sum, 0, 'COMMA')+'원'}"></span></p>
+										<p class="pdtOpt">옵션 : <span class="pdtOpt" th:text="${select1}"></span></p>
 									</div>
-									<div class="pdtCount">
-										<p>1개</p>
+									<div></div>
+									<div class="pdtCount" style="width:130px; letter-spacing:3px;">
+										<span>수량 : </span><span th:text="${amount}"> </span>
+										
 									</div>
-									<div class="totalPrice">
-										<div class="state">
-											<p>일시품절</p>
-										</div>
-									</div>
-								</div>
-								<div class="pdtSet">
-									<p class="tit">SET 상품</p>
-									<ul>
-										<li>
-											<div class="setImg">
-												<img src="./resources/web/images/temp/pdt_img3.png" alt="아이크러쉬 디테일 아이라이너">
-											</div>
-											<div class="pdtTxt">
-												<p class="pdtBrand">바닐라코</p><!-- 20200317 수정 -->
-												<p class="pdtName">아이크러쉬 디테일 아이라이너</p>
-												<p class="pdtOpt">옵션 : BE01 밀크티 필터</p>
-												<p class="soldOut">일시품절</p>
-											</div>
-											<p class="setPrice">15,000<em>원</em></p>
-										</li>
-										<li>
-											<div class="setImg">
-												<img src="./resources/web/images/temp/pdt_img3.png" alt="아이크러쉬 디테일 아이라이너">
-											</div>
-											<div class="pdtTxt">
-												<p class="pdtBrand">바닐라코</p><!-- 20200317 수정 -->
-												<p class="pdtName">아이크러쉬 디테일 아이라이너</p>
-												<p class="pdtOpt">옵션 : BE01 밀크티 필터</p>
-											</div>
-											<p class="setPrice">15,000<em>원</em></p>
-										</li>
-									</ul>
+									
 								</div>
 							</li>
 							<li>
-								<div class="tbl_wrap">
-									<div class="pdtImg"><a href="#"><img src="./resources/web/images/temp/pdt_img3.png" alt="아이크러쉬 디테일 아이라이너"></a></div>
-									<div class="pdtTxt">
-										<p class="pdtHead" style="color:#4f8ffa;">[이벤트] 아이라이너 전 제품 3개 구매 시 1개 무료</p>
-										<p class="pdtBrand">바닐라코</p><!-- 20200317 수정 -->
-										<p class="pdtName">아이크러쉬 디테일 아이라이너</p>
-										<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
-										<p class="pdtOpt">옵션 : BE01 밀크티 필터</p>
-									</div>
-									<div class="pdtCount error"><!-- 에러문구 노출시 error 클래스 추가 -->
-										<p>1개</p>
-										<p class="error">재고가 부족하여 수량만큼 주문하실 수 없습니다.</p><!-- 20200507 수정 -->
-									</div>
-									<div class="totalPrice">
-										<p class="price">15,000<em>원</em></p>
-										<!-- 20200317 수정
-										<p class="free">무료</p>
-										<p class="free">증정</p>
-										-->
-									</div>
-								</div>
-								<div class="pdtSet">
-									<p class="tit">SET 상품</p>
-									<ul>
-										<li>
-											<div class="setImg">
-												<img src="./resources/web/images/temp/pdt_img3.png" alt="아이크러쉬 디테일 아이라이너">
-											</div>
-											<div class="pdtTxt">
-												<p class="pdtBrand">바닐라코</p><!-- 20200317 수정 -->
-												<p class="pdtName">아이크러쉬 디테일 아이라이너</p>
-												<p class="pdtOpt">옵션 : BE01 밀크티 필터</p>
-												<p class="soldOut">일시품절</p>
-											</div>
-											<p class="setPrice">15,000<em>원</em></p>
-										</li>
-										<li>
-											<div class="setImg">
-												<img src="./resources/web/images/temp/pdt_img3.png" alt="아이크러쉬 디테일 아이라이너">
-											</div>
-											<div class="pdtTxt">
-												<p class="pdtBrand">바닐라코</p><!-- 20200317 수정 -->
-												<p class="pdtName">아이크러쉬 디테일 아이라이너</p>
-												<p class="pdtOpt">옵션 : BE01 밀크티 필터</p>
-											</div>
-											<p class="setPrice">15,000<em>원</em></p>
-										</li>
-									</ul>
-								</div>
 								<div class="freeGift">
 									<p class="tit">추가 사은품</p>
 									<ul>
@@ -265,19 +186,9 @@
 												<img src="./resources/web/images/temp/freeGift.jpg" alt="디어 하이드레이션 토너 샘플">
 												<p>사은품</p>
 											</div>
-											<p class="giftName">
+											<p class="giftName" th:text="${shoppingPayment.productBenefit}">
 												디어 하이드레이션 토너 샘플
 												<span class="fcRed">일시품절</span>
-											</p>
-										</li>
-										<li>
-											<div class="giftImg">
-												<img src="./resources/web/images/temp/freeGift.jpg" alt="디어 하이드레이션 토너 샘플">
-												<p>사은품</p>
-											</div>
-											<p class="giftName">
-												디어 하이드레이션 토너 샘플
-												<span>1개</span>
 											</p>
 										</li>
 									</ul>
@@ -672,7 +583,7 @@
 							<div class="order_price bd_no">
 								<dl>
 									<dt>총 주문금액</dt>
-									<dd>80,000<em>원</em></dd>
+									<dd th:text="${#numbers.formatInteger(sum, 0, 'COMMA')+'원'}"><em>원</em></dd>
 								</dl>
 								<!-- 20200317 수정 하단 쇼핑백 삭제되고 이곳에 추가 -->
 								<div class="detail_price">
@@ -706,14 +617,14 @@
 							<div class="order_price">
 								<dl>
 									<dt>배송비</dt>
-									<dd>0<em>원</em></dd>
+									<dd><em>무료</em></dd>
 								</dl>
 							</div>
 							<div class="floating_bottom">
 								<div class="total_price">
 									<dl>
 										<dt>최종 결제금액</dt>
-										<dd>55,200<em>원</em></dd>
+										<dd th:text="${#numbers.formatInteger(sum, 0, 'COMMA')+'원'}">55,200<em>원</em></dd>
 									</dl>
 									<p>회원님은 총 <span>13,800</span>원 할인 받으실 예정입니다.</p>
 								</div>

@@ -1,6 +1,7 @@
 package com.kh.healthDao.trainer.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -29,5 +30,17 @@ public interface TrainerMapper {
 	int sumTrainer();
 
 	int sumReview();
-	
+
+	int trainerFileInsert(Map<String, Object> map);
+
+	int trainerFileInsertDB(Trainer trainer);
+
+	int centerFileInsert(Map<String, Object> map);
+
+	int centerFileInsertDB(Trainer trainer);
+
+	int trainerFileModify(Map<String, Object> map);
+
+	int centerFileModify(Map<String, Object> map);
+
 }
