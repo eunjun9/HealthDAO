@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title></title>
+<!-- 메타태그, 스타일 -->
+<th:block th:replace="common/head.html"></th:block>
+<!--// 메타태그, 스타일 -->
+<body>
+	<div id="wrap" class="main">
+		<!-- HEADER + GNB -->
+		<th:block th:replace="common/header.html"></th:block>
+		<!--// HEADER + GNB -->
+
+	<!-- container -->
+	<div id="container" class="pdt0">
+		<div class="login">
+			<div class="findMain">
+				<div class="contents">
+					<div class="pageTitArea">
+						<h1>회원 탈퇴</h1>
+						<p>회원 탈퇴를 위해 비밀번호를 다시 확인해주세요.</p>
+					</div>
+					<div class="loginTabH">
+						<form action="/unregister/proc" id="unregForm" name="unregForm" method="post">
+							<input type="hidden" name="userId" th:value="${#authentication.principal.userId}">
+							<div class="inp_wrap mgt10 pwdWrap">
+								<div class="inp_text sizeS">
+									<input type="password" id="userPwd" name="userPwd" title="비밀번호" placeholder="비밀번호">
+								</div>
+								<p class="error">비밀번호를 입력해주세요.</p>
+							</div>
+							<div class="inp_wrap mgt10">
+								<div class="inp_text sizeS pwdWrap2">
+									<input type="password" id="userPwd2" name="userPwd2" title="비밀번호" placeholder="비밀번호 확인">
+								</div>
+								<p class="error">비밀번호를 확인해주세요.</p>
+							</div>
+							<button id="subbtn" class="btn btnSizeM btnColorP btnTypeR w100 mgt20"><span>회원 탈퇴</span></button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //container -->
+
+		<!-- 스크립트 -->
+		<th:block th:replace="common/script.html"></th:block>
+		<!--// 스크립트 -->
+		<!-- FOOTER -->
+		<th:block th:replace="common/footer.html"></th:block>
+		<!--// FOOTER -->
+	</div>
+	
+	<!-- 퀵메뉴 + 톡톡 -->
+	<!-- <th:block th:replace="common/quickNtalk.html"></th:block> -->
+	<!--// 퀵메뉴 + 톡톡 -->
+	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+	<link rel="stylesheet" type="text/css" href="../../css/main.css">
+	<script type="text/javascript" src="../../js/main.js"></script>
+	<script type="text/javascript" src="../../js/eunjung.js"></script>
+	<script>
+		$(function(){
+			$('#subbtn').click(function(){
+				
+				// 패스워드 입력 확인
+				if($('#userPwd').val() == ''){
+					alert("비밀번호를 입력해 주세요.");
+					$('#userPwd').focus();
+					return;
+				}else if($('#userPwd2').val() == ''){
+					alert("비밀번호를 확인해 주세요.");
+					$('#userPwd2').focus();
+					return;
+				}
+				
+				// 입력한 패스워드가 같은지 체크
+				if($('#userPwd2').val() != $('#userPwd').val()){
+					alert("비밀번호가 일치하지 않습니다.");
+					$('#userPwd2').focus();
+					return;
+				}
+				
+				let param = {};
+				param.userId = $("#unregForm [name=userId]").val();
+				param.userPwd = $("#unregForm [name=userPwd]").val();
+				
+				// 패스워드 맞는지 확인
+				$.ajax({
+					url: "/mypage/unregister/passCheck",
+					data: JSON.stringify(encodeURI(param)),
+					dataType : "json",
+					contentType : "application/json; charset=utf-8",
+					type : "get",
+					success: function(data){
+						if(data == 0){
+							alert("비밀번호가 틀립니다.");
+							return;
+						} else {
+							// 탈퇴
+							let result = confirm('정말 탈퇴하시겠습니까?');
+							if(result){
+								$('#subbtn').submit();
+							}
+						}
+					},
+					error: function(e){
+						alert('서버 에러');
+					}
+				});
+			});
+		});
+	</script>
+	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+</body>
+</html>

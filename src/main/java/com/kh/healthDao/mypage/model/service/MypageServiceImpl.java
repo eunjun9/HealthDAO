@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,11 +23,10 @@ import com.kh.healthDao.mypage.model.vo.Point;
 import com.kh.healthDao.mypage.model.vo.Qna;
 import com.kh.healthDao.review.model.vo.Review;
 
-
 @Service("mypageService")
 public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewService, MyInfoService, CartService{
 	
-	private final MypageMapper mypageMapper; 
+	private final MypageMapper mypageMapper;
 	
 	@Autowired
 	public MypageServiceImpl(MypageMapper mypageMapper) {
@@ -188,7 +189,14 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 		
 		return mypageMapper.myInfoModify(member);
 	}
-
+	
+	@Override
+	public int myInfoDelete(int userNo, HttpSession session) {
+		int result = mypageMapper.myInfoDelete(userNo);
+		if(result == 1) session.invalidate();
+		return result;
+	}
+	
 	/* 배송지 등록 */
 	@Override
 	public List<Address> deliView(int userNo) {
@@ -204,7 +212,43 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 	public Address selectDeli(int addressNo) {
 		return mypageMapper.selectDeil(addressNo);
 	}
+	
+	@Override
+	public int updateDeil(int addressNo) {
+		return mypageMapper.updateDeil(addressNo);
+	}
+	
+	@Override
+	public int deleteDeil(int addressNo) {
+		return mypageMapper.deleteDeli(addressNo);
+	}
+	
+	@Override
+	public void defAddRemove(int userNo) {
+		mypageMapper.defAddRemove(userNo);
+	}
+	
+	@Override
+	public int defAddDeli(int addressNo) {
+		return mypageMapper.defAddDeli(addressNo);
+	}
+	
+	/* 회원 탈퇴 */
+	@Override
+	public void unregister(Member member, HttpSession session) {
+		mypageMapper.unregister(member);
+		session.invalidate();
+	}
 
+	@Override
+	public int passCheck(Member member) {
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		member.setUserPwd(passwordEncoder.encode(member.getUserPwd()));
+		
+		return mypageMapper.passCheck(member);
+	}
+	
+	/* 장바구니 */
 	@Override
 	public int cartInsert(Cart cartinfo) {
 		Cart cartProductChk = mypageMapper.cartProductChk(cartinfo);

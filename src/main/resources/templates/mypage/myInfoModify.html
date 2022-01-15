@@ -31,7 +31,7 @@
 						</p>
 						<!-- //myPageMIMf tab -->
 						<div class="myPageForm">
-							<form name="modifyForm" action="/mypage/myInfo/modify" method="post">
+							<form id="infoModifyForm">
 								<input type="hidden" name="userNo" th:value="${member.userNo}">
 								<div class="inp_wrap inp_id">
 									<label class="inp_lab" for="ipt_label">아이디 <b>*</b></label>
@@ -103,8 +103,8 @@
 												<button class="title" type="button" th:text="${member.userBirth.substring(4, 6)}"></button>
 												<ul class="selList">
 													<li th:each="m : ${#numbers.sequence(1,12)}">
-														<input type="radio" th:value="${m} <= 9 ? '0'+${m} : ${m}" class="option" id="select1_1" name="userBirth2">
-														<label for="select1_1" th:text="${m} <= 9 ? '0'+${m} : ${m}"></label>
+														<input type="radio" th:value="${m} <= 9 ? '0'+${m} : ${m}" class="option" id="select1_2" name="userBirth2">
+														<label for="select1_2" th:text="${m} <= 9 ? '0'+${m} : ${m}"></label>
 													</li>
 												</ul>
 											</div>
@@ -114,8 +114,8 @@
 												<button class="title" type="button" th:text="${member.userBirth.substring(6)}"></button>
 												<ul class="selList">
 													<li th:each="m : ${#numbers.sequence(1,31)}">
-														<input type="radio" th:value="${m} <= 9 ? '0'+${m} : ${m}" class="option" id="select1_1" name="userBirth3">
-														<label for="select1_1" th:text="${m} <= 9 ? '0'+${m} : ${m}"></label>
+														<input type="radio" th:value="${m} <= 9 ? '0'+${m} : ${m}" class="option" id="select1_3" name="userBirth3">
+														<label for="select1_3" th:text="${m} <= 9 ? '0'+${m} : ${m}"></label>
 													</li>
 												</ul>
 											</div>
@@ -164,7 +164,7 @@
 								<div class="btn_wrap">
 									<button id="btnDelete" class="btn btnArr btnSizeL btnColorW btnTypeB" style="width:150px;"><span>회원탈퇴</span></button>
 									<a href="/mypage/" id="btnCancel" class="btn btnArr btnSizeL btnColorB btnTypeB" style="width:150px;"><span>취소</span></a>
-									<button type="submit" id="btnUpdate" class="btn btnArr btnSizeL btnColorG btnTypeB" style="width:150px;"><span>확인</span></button>
+									<button id="btnUpdate" class="btn btnArr btnSizeL btnColorG btnTypeB" style="width:150px;"><span>확인</span></button>
 								</div>
 							</form>
 							</div>
@@ -195,25 +195,61 @@
 		$('#quick .quickArea').css({'position':'absolute', 'top':290});
 		mainStart();
 		mainVisual();
-		
-		$(document).ready(function(){
-	        $("#btnUpdate").click(function(){
-	            // 확인 대화상자    
-	            if(confirm("수정하시겠습니까?")){
-	                document.modifyForm.action = "/mypage/myInfo/modify";
-	                document.modifyForm.submit();
-	            }
-	        });
-	    });
-	    $(document).ready(function(){
-	        $("#btnDelete").click(function(){
-	            // 확인 대화상자 
-	            if(confirm("회원 탈퇴하시겠습니까?")){
-	                document.modifyForm.action = "/mypage/deleteAccount";
-	                document.modifyForm.submit();
-	            }
-	        });
-	    });
+	</script>
+	<script>
+		$(function(){
+			$("#infoModifyForm #btnUpdate").on('click', function(){
+				let param = {};
+				param.userNo = $("#infoModifyForm [name=userNo]").val();
+				param.userPwd = $("#infoModifyForm [name=userPwd]").val();
+				param.userNickName = $("#infoModifyForm [name=userNickName]").val();
+				param.userPhone = $("#infoModifyForm [name=userPhone]").val();
+				param.userBirth = $("#infoModifyForm [name=userBirth]:checked").val();
+				param.userBirth += $("#infoModifyForm [name=userBirth2]:checked").val();
+				param.userBirth += $("#infoModifyForm [name=userBirth3]:checked").val();
+				param.userGender = $("#infoModifyForm [name=userGender]:checked").val();
+				param.emailReceive = $("#infoModifyForm [name=emailReceive]:checked").val();
+				param.smsReceive = $("#infoModifyForm [name=smsReceive]:checked").val();
+				
+				$.ajax({
+					url : "/mypage/myInfo/modify",
+					data : JSON.stringify(param),
+					dataType : "json",
+					contentType : "application/json; charset=utf-8",
+					type : "put",
+					success : function(data) {
+						alert(data.msg);
+						
+					},
+					error : function(e) {
+						console.log(e);
+					}
+				});
+			});
+			
+			$("#infoModifyForm #btnDelete").on('click', function(){
+				if(!confirm("정말 탈퇴하시겠습니까?")) return;
+				
+				let param = {};
+				param.userNo = $("#infoModifyForm [name=userNo]").val();
+				
+				$.ajax({
+					url : "/mypage/myInfo/delete",
+					data : JSON.stringify(param),
+					dataType : "json",
+					contentType : "application/json; charset=utf-8",
+					type : "patch",
+					success : function(data) {
+						alert(data.msg);
+						
+						window.location.replace("/main");
+					},
+					error : function(e) {
+						console.log(e);
+					}
+				});
+			});
+		});
 	</script>
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 </body>

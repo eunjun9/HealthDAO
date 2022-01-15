@@ -2,6 +2,9 @@ package com.kh.healthDao.mypage.model.dao;
 
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.kh.healthDao.mypage.model.vo.Address;
@@ -39,7 +42,6 @@ public interface MypageMapper {
 
 	List<Qna> userReviewList(Map<String, Object> pageRow);
 
-
 	// 포인트 페이징
 	int pointListCount();
 	List<Point> listPoint(Map<String, Object> pageRow);
@@ -57,15 +59,30 @@ public interface MypageMapper {
 	Member myInfoView(int userNo);
 	
 	int myInfoModify(Member member);
+	
+	int myInfoDelete(int userNo);
 
 	/* 배송지 등록 */
 	List<Address> deliView(int userNo);
 	
 	int insertDeli(Address address);
   
-  Address selectDeil(int addressNo);
+	Address selectDeil(int addressNo);
+	
+	int updateDeil(int addressNo);
+  
+	int deleteDeli(int addressNo);
+	
+	int defAddRemove(int userNo);
+	
+	int defAddDeli(int addressNo);
+	
+	/* 회원 탈퇴 */
+	void unregister(Member member);
+	
+	int passCheck(Member member);
 
-  /* 장바구니 */
+	/* 장바구니 */
 	int cartInsert(Cart cartinfo);
 
 	List<Cart> cartList(int userNo);

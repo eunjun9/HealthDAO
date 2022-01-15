@@ -357,7 +357,8 @@
 	<!-- 내 정보 수정 -->
 	<select id="myInfoView" resultMap="memberResultMap" parameterType="_int">
 		SELECT
-		       USER_ID
+		       USER_NO
+		     , USER_ID
 		     , USER_PWD
 		     , USER_NAME
 			 , USER_NICKNAME
@@ -398,6 +399,13 @@
 			  </otherwise>
 			  </choose>
 		  WHERE USER_NO = #{userNo}
+	</update>
+	
+	<update id="myInfoDelete" parameterType="com.kh.healthDao.member.model.vo.Member">
+		UPDATE MEMBER
+		   SET USER_STATUS = 'N'
+		     , BAN_DATE = SYSDATE
+		 WHERE USER_NO = #{userNo}
 	</update>
 	
 	<!-- 배송지 관리 -->
@@ -451,6 +459,50 @@
 		 WHERE ADDRESS_NO = #{addressNo}
 	</select>
 	
+	<update id="updateDeil" parameterType="_int">
+		UPDATE ADDRESS
+		   SET RECEIVER = #{receiver}
+		     , ADDRESS = #{address}
+		     , RECEIVER_PHONE = #{recPhone}
+		     , DEFAULT_ADDRESS = #{defAddress}
+		 WHERE ADDRESS_NO = #{addressNo}
+	</update>
+	
+	<delete id="deleteDeli" parameterType="_int">
+		DELETE
+		  FROM ADDRESS
+		 WHERE ADDRESS_NO = #{addressNo}
+	</delete>
+	
+	<update id="defAddRemove" parameterType="_int">
+		UPDATE ADDRESS
+		   SET DEFAULT_ADDRESS = 'N'
+		 WHERE USER_NO = #{userNo}
+		   AND DEFAULT_ADDRESS = 'Y'
+	</update>
+	
+	<update id="defAddDeli" parameterType="_int">
+		UPDATE ADDRESS
+		   SET DEFAULT_ADDRESS = 'Y'
+		 WHERE ADDRESS_NO = #{addressNo}
+	</update>
+	
+	<!-- 회원 탈퇴 -->
+	<update id="unregister" parameterType="com.kh.healthDao.member.model.vo.Member">
+		UPDATE MEMBER
+		   SET USER_STATUS = 'N'
+		 WHERE USER_ID = #{userId}
+		   AND USER_PWD = #{userPwd}
+	</update>
+	
+	<select id="passCheck" parameterType="com.kh.healthDao.member.model.vo.Member">
+		SELECT COUNT(*)
+		  FROM MEMBER
+		 WHERE USER_ID = #{userId}
+		   AND USER_PWD = #{userPwd}
+	</select>
+	
+	<!-- 장바구니 -->
 	<select id="cartProductChk" parameterType="com.kh.healthDao.mypage.model.vo.Cart" resultMap="cartResultMap">
 		SELECT
 		    CART_NO

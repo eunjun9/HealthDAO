@@ -12,6 +12,7 @@ import com.kh.healthDao.admin.model.vo.Coupon;
 import com.kh.healthDao.admin.model.vo.Notice;
 import com.kh.healthDao.admin.model.vo.Product;
 import com.kh.healthDao.common.model.vo.Paging;
+import com.kh.healthDao.member.model.vo.Member;
 import com.kh.healthDao.mypage.model.vo.MemberSound;
 
 
@@ -197,6 +198,16 @@ public class AdminServiceImpl implements AdminService, CouponService, NoticeServ
 	@Override
 	public int memberSoundModify(MemberSound ms) {
 		return adminMapper.memberSoundModify(ms);
+	}
+
+	@Override
+	public List<Member> memberInfoView() {
+		return adminMapper.memberInfoView();
+	}
+
+	@Override
+	public List<Member> trainerInfoView() {
+		return adminMapper.trainerInfoView();
 	}
 
 
