@@ -231,6 +231,38 @@
         WHERE USER_NO = #{userNo})
 	</select>
 	
+	<select id="wishChk" parameterType="com.kh.healthDao.admin.model.vo.Product" resultMap="productResultMap">
+		SELECT
+				LIKE_NO
+			  , PRODUCT_NO
+			  , USER_NO
+		  FROM PRODUCT_LIKE
+		 WHERE USER_NO = #{userNo}
+		   AND PRODUCT_NO = #{productNo}
+	</select>
+	
+	<insert id="insertWish" parameterType="com.kh.healthDao.admin.model.vo.Product">
+		INSERT 
+		INTO PRODUCT_LIKE
+		(
+			LIKE_NO
+		  , PRODUCT_NO
+		  , USER_NO
+		)VALUES(
+			SEQ_LIKE_NO.NEXTVAL
+		  , #{productNo}
+		  , #{userNo}
+		)
+	</insert>
+	
+	<delete id="deleteWish" parameterType="com.kh.healthDao.admin.model.vo.Product">
+		DELETE
+			   PRODUCT_LIKE
+		 WHERE USER_NO = #{userNo}
+		   AND PRODUCT_NO = #{productNo}
+	</delete>
+	
+	
 	<select id="shoppingList" resultMap="productResultMap" parameterType="hashmap">
 		SELECT *
 				FROM

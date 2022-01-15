@@ -80,18 +80,6 @@ public class MainController {
 		
 		return mv;
 	}
-	
-	@ResponseBody
-	@PostMapping("/banner/delete")
-	public int deleteBanner(int[] addList, int[] addList2) {
-		int result = 0;
-		for(int i = 0; i < addList.length; i++) {
-			result += bannerService.deleteBanner(addList[i], addList2[i]);			
-		}
-		System.out.println(result);
-		
-		return result;
-	}
 
 	@PostMapping("/banner/select")
 	@ResponseBody
@@ -100,22 +88,6 @@ public class MainController {
 		return banner;
 	}
 
-	@PostMapping("/banner/update")
-	@ResponseBody
-	public int updateBanner(int main_no, String main_name, String main_url, String imgUpload, String main_status, int main_rank) {
-		System.out.println(imgUpload);
-		
-		Map<String, Object> map = new HashMap<>();
-		map.put("main_no", main_no);
-		map.put("main_name", main_name);
-		map.put("main_url", main_url);
-		map.put("imgUpload", imgUpload);
-		map.put("main_status", main_status);
-		map.put("main_rank", main_rank);
-		
-		int result = bannerService.bannerUpdate(map);
-		return result;
-	}
 
 	// 추천상품 검색
 	@GetMapping("/reco")
@@ -174,7 +146,26 @@ public class MainController {
 		
 		return result;
 	}
-	
+
+	// 찜한 상품 추가
+	@ResponseBody
+	@PostMapping("insertWish")
+	public int insertWishPdt(int productNo, @AuthenticationPrincipal UserImpl userImpl) {
+		if(userImpl == null) {
+			return 0;
+		}else {
+			int userNo = userImpl.getUserNo();
+			int result = 1;
+			Product wishChk = shoppingService.wishChk(productNo, userNo);
+			if(wishChk == null) {
+				result = shoppingService.insertWish(productNo, userNo);
+			}else {
+				result = shoppingService.deleteWish(productNo, userNo)+1;
+			}
+			return result;
+		}
+	}
+
 	
 	// 최근 본 상품
 	@ResponseBody
@@ -194,10 +185,8 @@ public class MainController {
 		
 		Map<String, Object> map = shoppingService.wishList(userNo);
 		
-		mv.addObject("pdtList", map.get("pdtList"));
-		mv.addObject("listCount", map.get("listCount"));
-		mv.addObject("recoList", map.get("recoList"));
-		mv.addObject("recoCount", map.get("recoCount"));
+		mv.addObject("wishList", map.get("wishList"));
+		mv.addObject("wishListCount", map.get("wishListCount"));
 		mv.setViewName("mypage/mywish");
 		return mv;
 	}
@@ -219,5 +208,4 @@ public class MainController {
 			return count;
 		}
 	}
-	
 }
