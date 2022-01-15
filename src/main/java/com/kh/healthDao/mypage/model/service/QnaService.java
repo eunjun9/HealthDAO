@@ -1,5 +1,6 @@
 package com.kh.healthDao.mypage.model.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -22,5 +23,6 @@ public interface QnaService {
 	
 	// 출석체크
 	int attendCheck(AttCheck attcheck);
+	List<AttCheck> attendUserList(int userNo);
 	
 }

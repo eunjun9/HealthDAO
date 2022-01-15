@@ -1,5 +1,6 @@
 package com.kh.healthDao.mypage;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -359,9 +360,22 @@ public class MypageController {
 	}
 	
 	/* 출석체크 화면이동 */
-	@GetMapping("/attendanceCheck")
-	public String attendanceCheck() {
-		return "mypage/attendanceCheck";
+	@PostMapping("/attendanceCheck")
+	public ModelAndView attendUser(@RequestParam int userNo, ModelAndView mv) {
+		
+		
+		List<AttCheck> attendUserList = qnaService.attendUserList(userNo);
+		
+		List dateArr = new ArrayList();
+		for(int i = 0; i < attendUserList.size(); i++) {
+			dateArr.add(attendUserList.get(i).getStringAttendanceDate());
+		}
+
+		mv.addObject("attendUserList", attendUserList);
+		mv.addObject("dateArr", dateArr);
+		mv.setViewName("mypage/attendanceCheck");
+
+		return mv;
 	}
 	
 	/* 출석 체크 */
@@ -369,18 +383,15 @@ public class MypageController {
 	@ResponseBody
 	public String attendanceCheck(Date attendanceDate, int userNo) {
 		
-		System.out.println(attendanceDate);
-		System.out.println(userNo);
 		AttCheck attcheck = new AttCheck();
 		attcheck.setAttendanceDate(attendanceDate);
 		attcheck.setUserNo(userNo);
-		System.out.println(attcheck.getAttendanceDate());
-		int result = qnaService.attendCheck(attcheck);
-
+		int result = qnaService.attendCheck(attcheck);		
+		
 		if(result > 0) {
-			return "성공";
+			return "출석체크 성공";
 		}else {
-			return "실패";
+			return "출석체크 실패";
 		}
 		
 	}
@@ -445,3 +456,4 @@ public class MypageController {
 		return msg;
 	}
 }
+

@@ -89,6 +89,12 @@ public class ManagerServiceImpl implements ManagerService{
 		
 		return calculate;
 	}
+	
+	// 정산내역 엑셀 다운받기
+	@Override
+	public List<Payment> excelList() {
+		return managerMapper.excelList();
+	}
 
 
 	
@@ -125,6 +131,8 @@ public class ManagerServiceImpl implements ManagerService{
 		
 		return managerMapper.managerRefundOk(refund);
 	}
+
+
 
 
 

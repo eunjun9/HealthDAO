@@ -47,7 +47,7 @@
 
 	<resultMap id="AttMap" type="com.kh.healthDao.mypage.model.vo.AttCheck">
 		<id property="attendanceId" column="ATTENDANCE_ID"/>
-		<result property="attendanceDate" column="ATTENDANCE_DATE" />
+		<result property="stringAttendanceDate" column="ATTENDANCE_DATE" />
 		<result property="userNo" column="USER_NO" />
 	</resultMap>
 	
@@ -268,6 +268,12 @@
 	      , #{userNo}
 		)
 	</insert>
+	
+	<select id="attendUserList" parameterType="_int" resultMap="AttMap">
+		SELECT TO_CHAR(ATTENDANCE_DATE, 'FMDD') ATTENDANCE_DATE
+		  FROM ATT_CHECK
+		 WHERE USER_NO = #{userNo}
+	</select>
 
 	
 	<select id="myCouponList" parameterType="_int" resultMap="couponResultMap">
