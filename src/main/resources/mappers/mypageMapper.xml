@@ -369,4 +369,24 @@
 		JOIN PRODUCT_OPTION O USING(PRODUCT_NO)
 		WHERE USER_NO = #{userNo}
 	</select>
+	
+	<update id="cartStock" parameterType="hashmap">
+		UPDATE CART
+		<if test="upDown.equals('plus')">
+		SET CART_STOCK = CART_STOCK + 1
+		</if>
+		<if test="upDown.equals('minus')">
+		SET CART_STOCK = CART_STOCK - 1
+		</if>
+		WHERE CART_NO = #{cartNo}
+	</update>
+	
+	<delete id="cartDelete" parameterType="_int">
+		DELETE FROM CART
+		WHERE CART_NO = #{cartNo}
+	</delete>
+	<delete id="cartAllDelete" parameterType="_int">
+		DELETE FROM CART
+		WHERE USER_NO = #{userNo}
+	</delete>
 </mapper>

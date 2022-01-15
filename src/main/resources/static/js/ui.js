@@ -702,12 +702,22 @@ function productCountMinus(e,_callback){
 			_callback();
 		}
 	}
+	
+	if($(e).hasClass('cartCountBtn')){
+		let count = $(e).siblings('input[type="text"]').val();
+		let price = $(e).siblings('input[name="productPrice"]').val();
+		
+		let totalPrice = count * price;
+		
+		$(e).parent().parent().next().find("#total").text(totalPrice);
+	}
 }
+
 function productCountPlus(e,_callback){
 	var buyInput = $(e).siblings('input[type="text"]'),
 		buyCount = buyInput.attr('value'),
 		buyDataMax = buyInput.attr('data-max');
-
+		
 	if (!buyDataMax){
 		buyCount++;
 		buyInput.attr('value', buyCount);
@@ -727,6 +737,15 @@ function productCountPlus(e,_callback){
 	}
 	if (buyCount >= 2){
 		$(e).siblings('.js_pdtCountMinus').prop('disabled', false);
+	}
+	
+	if($(e).hasClass('cartCountBtn')){
+		let count = $(e).siblings('input[type="text"]').val();
+		let price = $(e).siblings('input[name="productPrice"]').val();
+		
+		let totalPrice = count * price;
+		
+		$(e).parent().parent().next().find("#total").text(totalPrice);
 	}
 }
 $(window).on('load', function(){
