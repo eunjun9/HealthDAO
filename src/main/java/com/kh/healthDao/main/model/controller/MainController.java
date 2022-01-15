@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.healthDao.admin.model.vo.Product;
 import com.kh.healthDao.main.model.service.BannerService;
 import com.kh.healthDao.main.model.vo.Banner;
+import com.kh.healthDao.member.model.vo.UserImpl;
+import com.kh.healthDao.mypage.model.service.CartService;
+import com.kh.healthDao.mypage.model.vo.Cart;
 import com.kh.healthDao.shopping.model.service.ShoppingService;
 import com.kh.healthDao.shopping.model.vo.Shopping;
 
@@ -54,11 +58,13 @@ public class MainController {
 
 	private BannerService bannerService;
 	private ShoppingService shoppingService;
+	private CartService cartService;
 	
 	@Autowired
-	public MainController(BannerService bannerService, ShoppingService shoppingService) {
+	public MainController(BannerService bannerService, ShoppingService shoppingService, CartService cartService) {
 		this.bannerService = bannerService;
 		this.shoppingService = shoppingService;
+		this.cartService = cartService;
 	}
 	
 	
@@ -74,18 +80,6 @@ public class MainController {
 		
 		return mv;
 	}
-	
-	@ResponseBody
-	@PostMapping("/banner/delete")
-	public int deleteBanner(int[] addList, int[] addList2) {
-		int result = 0;
-		for(int i = 0; i < addList.length; i++) {
-			result += bannerService.deleteBanner(addList[i], addList2[i]);			
-		}
-		System.out.println(result);
-		
-		return result;
-	}
 
 	@PostMapping("/banner/select")
 	@ResponseBody
@@ -94,22 +88,6 @@ public class MainController {
 		return banner;
 	}
 
-	@PostMapping("/banner/update")
-	@ResponseBody
-	public int updateBanner(int main_no, String main_name, String main_url, String imgUpload, String main_status, int main_rank) {
-		System.out.println(imgUpload);
-		
-		Map<String, Object> map = new HashMap<>();
-		map.put("main_no", main_no);
-		map.put("main_name", main_name);
-		map.put("main_url", main_url);
-		map.put("imgUpload", imgUpload);
-		map.put("main_status", main_status);
-		map.put("main_rank", main_rank);
-		
-		int result = bannerService.bannerUpdate(map);
-		return result;
-	}
 
 	// 추천상품 검색
 	@GetMapping("/reco")
@@ -168,7 +146,26 @@ public class MainController {
 		
 		return result;
 	}
-	
+
+	// 찜한 상품 추가
+	@ResponseBody
+	@PostMapping("insertWish")
+	public int insertWishPdt(int productNo, @AuthenticationPrincipal UserImpl userImpl) {
+		if(userImpl == null) {
+			return 0;
+		}else {
+			int userNo = userImpl.getUserNo();
+			int result = 1;
+			Product wishChk = shoppingService.wishChk(productNo, userNo);
+			if(wishChk == null) {
+				result = shoppingService.insertWish(productNo, userNo);
+			}else {
+				result = shoppingService.deleteWish(productNo, userNo)+1;
+			}
+			return result;
+		}
+	}
+
 	
 	// 최근 본 상품
 	@ResponseBody
@@ -176,5 +173,39 @@ public class MainController {
 	public List<Product> recentPdt(int[] addList) {
 		List<Product> recentList = shoppingService.recentList(addList);
 		return recentList;
+	}
+	
+	// 찜한 상품
+	@ResponseBody
+	@GetMapping("/mypage/wish")
+	public ModelAndView wishProduct(ModelAndView mv, @AuthenticationPrincipal UserImpl userImpl) {
+		int userNo = userImpl.getUserNo();
+		
+		System.out.println(userNo);
+		
+		Map<String, Object> map = shoppingService.wishList(userNo);
+		
+		mv.addObject("wishList", map.get("wishList"));
+		mv.addObject("wishListCount", map.get("wishListCount"));
+		mv.setViewName("mypage/mywish");
+		return mv;
+	}
+	
+	//헤더 장바구니 카운트
+	@PostMapping("/main/cartCount")
+	@ResponseBody
+	public int cartCount(@AuthenticationPrincipal UserImpl userImpl) {
+		if(userImpl == null) {
+			return -1;
+		}else {
+			int userNo = userImpl.getUserNo();
+			
+			List<Cart> cartList = cartService.cartList(userNo);
+			
+			int count = cartList.size() + 1;
+			System.out.print(count);
+			
+			return count;
+		}
 	}
 }

@@ -31,9 +31,8 @@ public class ShoppingServiceImpl implements ShoppingService{
 	@Override
 	public List<Product> recentList(int[] addList) {
 		List<Product> pdtList = new ArrayList<>();
-		Product pdt = new Product();
-		
-		// System.out.println("length : "+addList.length);
+		Product pdt = new Product();		
+		//System.out.println("length : "+addList.length);
 
 		for(int i=0; i<addList.length; i++) {
 			pdt = shoppingMapper.recentList(addList[i]);
@@ -58,12 +57,26 @@ public class ShoppingServiceImpl implements ShoppingService{
 		
 		return pdtMap;
 	}
+	
+	// 찜한 상품
+	public Map<String, Object> wishList(int userNo) {
+		int listCount = shoppingMapper.wishListCount(userNo);
+		List<Product> wishList = shoppingMapper.wishList(userNo);
+		
+		Map<String, Object> wishMap = new HashMap<>();
+		wishMap.put("wishListCount", listCount);
+		wishMap.put("wishList", wishList);
+		
+		return wishMap;
+	}
 
 	@Override
 	public Product detailPdt(int productNo) {
 		return shoppingMapper.detailPdt(productNo);
 	}
 
+	
+	/* 추천 상품 */
 	@Override
 	public int insertReco(int productNo, int productRank) {
 		return shoppingMapper.insertReco(productNo, productRank);
@@ -84,16 +97,33 @@ public class ShoppingServiceImpl implements ShoppingService{
 		return shoppingMapper.deleteReco(productNo);
 	}
 	
+	/* 찜한 상품 */
+	@Override
+	public Product wishChk(int productNo, int userNo) {
+		return shoppingMapper.wishChk(productNo, userNo);
+	}
+	@Override
+	public int insertWish(int productNo, int userNo) {
+		return shoppingMapper.insertWish(productNo, userNo);
+	}
+	@Override
+	public int deleteWish(int productNo, int userNo) {
+		return shoppingMapper.deleteWish(productNo, userNo);
+	}
+  
+	/* 상품 음료 */
 	@Override
 	public List<Product> beverageShoppingList() {
 		return shoppingMapper.beverageShoppingList();
 	}
 
+	/* 상품 운동기구 */
 	@Override
 	public List<Product> goodsShoppingList() {
 		return shoppingMapper.goodsShoppingList();
 	}
 
+	/* 상품 상세페이지 */
 	@Override
 	public Product shoppingDetail(int productNo) {
 		return shoppingMapper.shoppingDetail(productNo);
@@ -149,7 +179,7 @@ public class ShoppingServiceImpl implements ShoppingService{
 		return foodProductMap;
 	}
 
-
+	/* 상품 음료 페이지 */
 	@Override
 	public Map<String, Object> beverageShoppingList(int page) {
 		int listCount = shoppingMapper.beverageShoppingListCount();
@@ -175,6 +205,7 @@ public class ShoppingServiceImpl implements ShoppingService{
 		
 	}
 
+	/* 상품 운동기구 */
 	@Override
 	public Map<String, Object> goodsShoppingList(int page) {
 		int listCount = shoppingMapper.goodsShoppingListCount();
@@ -204,6 +235,8 @@ public class ShoppingServiceImpl implements ShoppingService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	/* 상품 주문 */
 	@Override
 	public Product shoppingPayment(int productNo) {
 		return shoppingMapper.shoppingPayment(productNo);

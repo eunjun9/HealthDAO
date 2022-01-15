@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title></title>
+<!-- 메타태그, 스타일 -->
+<th:block th:replace="common/head.html"></th:block>
+<!--// 메타태그, 스타일 -->
+<body>
+<div id="wrap" class="main">
+<!-- HEADER + GNB -->
+<th:block th:replace="common/header.html"></th:block>
+<!--// HEADER + GNB -->
+
+	<!-- container -->
+	<div id="container" class="pd0">
+		<div class="order_wrap">
+			<div class="contents cart">
+				<p class="mgb10 fs18 lh1 notoM">장바구니</p>
+				<div class="order_box js_orderFloating">
+					<div class="order_list">
+						<!-- 장바구니 있을떄 -->
+						<div th:if="${cartList.size > 0}">
+						<ul class="list_box">
+							<li th:each="cart : ${cartList}">
+								<div class="tbl_wrap">
+									<div class="pdtImg"><a href="#"><img src="./resources/web/images/temp/pdt_img3.png" alt="아이크러쉬 디테일 아이라이너"></a></div>
+									<div class="pdtTxt">
+										<p class="pdtBrand" th:text="${cart.product.productName}">상품명</p>
+										<p class="pdtName" th:text="${cart.product.productTitle}">상품제목</p>
+										<p class="pdtPrice"><span th:text="${cart.product.productPrice}"></span><em>원</em></p>
+										<p class="pdtOpt">옵션 : <span th:text="${cart.product.productOption}">옵션1</span></p>
+									</div>
+									<div class="pdtCount">
+										<div class="js_pdtCount count_box">
+											<button class="js_pdtCountMinus cartCountBtn" type="button" th:onclick="|productCountMinus(this); javascript:productCount('${cart.cartNo}', 'minus')|" >
+												<span class="hide">제품 수량 감소</span>
+											</button>
+											<!-- 구매수량이 정해져 있을 경우 data-max 추가 -->
+											<input type="text" title="선택품목갯수" id="cartStock" th:value="${cart.cartStock}" name="cartStock" readonly />
+											<input type="hidden" name="productPrice" th:value="${cart.product.productPrice}" />
+											<button class="js_pdtCountPlus cartCountBtn" type="button" th:onclick="|productCountPlus(this); javascript:productCount('${cart.cartNo}', 'plus')|">
+												<span class="hide">제품 수량 증가</span>
+											</button>
+											<p class="error">재고가 부족하여 수량만큼 주문하실 수 없습니다.</p>
+										</div>
+									</div>
+									<div class="totalPrice" th:with="total=${cart.product.productPrice} * ${cart.cartStock}">
+										<p class="price"><span id="total" th:text="${total}">0</span><em>원</em></p>
+									</div>
+								</div>
+								<button type="button" th:onclick="|javascript:cartDelete('${cart.cartNo}')|" class="del"><span class="hide">삭제</span></button>
+							</li>							
+						</ul>
+						<p class="ta_r"><button type="button" onclick="cartAllDelete()" class="cart_del">장바구니 비우기</button></p>
+						</div>
+						<!-- //장바구니 있을떄 -->
+						<!-- 장바구니 없을때 -->
+						<div class="no_cart" th:unless="${cartList.size > 0}">
+							<p class="tit mgb40">장바구니에 담긴 상품이 없습니다.</p>
+						</div>
+						<!-- //장바구니 없을때 -->
+					</div>
+					<div class="order_floating">
+						<div class="shadow_box">
+							<div class="order_price bd_no">
+								<dl>
+									<dt>총 주문금액</dt><!-- 20200317 수정 -->
+									<dd><span th:text="${allTotalPrice}">0</span><em>원</em></dd>
+								</dl>
+							</div>	
+							<div class="order_price">
+								<dl>
+									<dt>배송비</dt>
+									<dd>0<em>원</em></dd>
+								</dl>
+								<div class="detail_price">
+									<p>[오픈이벤트] 상품 1개 이상 구매 시 무료배송!</p>
+								</div>
+							</div>
+							<div class="floating_bottom">
+								<div class="total_price">
+									<dl>
+										<dt>예상결제금액</dt>
+										<dd><span th:text="${allTotalPrice}">0</span><em>원</em></dd>
+									</dl>
+								</div>
+								<a href="#" class="btn btnSizeL btnColorP btnTypeB w100 mgt35">주문하기 (<span th:text="${cartList.size}">0</span>개)</a>
+								<!-- 주문 내역 없음 : showLayer('noCartList'); -->
+								<!-- N+N 행사 혜택 안내 : showLayer('addPdtEvent'); -->
+								<!-- N+증정품 행사 혜택 안내 : showLayer('addGiftEvent'); -->
+								<!-- N+할인 행사 혜택 안내 : showLayer('addSaleEvent'); -->
+								<ul class="starInfo mgt15">
+									<!-- 20200603 수정 -->
+									<!-- 회원 -->
+									<li>실 결제금액은 쿠폰/할인적용에 따라 달라질 수<br> 있습니다.</li>
+									<li>장바구니는 접속 종료 후 60일 동안만 보관<br> 됩니다.</li>
+									<!-- 비회원 -->
+									<li class="fcRed">비회원으로 구매하시면 회원/이벤트/쿠폰<br> 혜택을 받으실 수 없습니다.</li>
+									<!-- 임직원 -->
+									<li>장바구니는 접속 종료 후 60일 동안만 보관<br> 됩니다.</li>
+									<!-- //20200603 수정 -->
+								</ul>
+							</div>
+						</div>						
+						<div class="shadow_box">
+							<div class="pdtPoint floating js_acoBox">
+								<div class="js_acoList noScrolling">
+									<a href="javascript:void(0)" class="pdtPointTtl js_acoLink">
+										<div class="tit">포인트 혜택 :  <span class="color">최대 500포인트</span></div>
+										<span class="arrow"><span class="hide">닫기</span></span>
+									</a>
+									<div class="pdtReview_wrap js_acoCon" style="display:none;">
+										<div class="pdtReviewTit">리뷰 적립</div>
+										<dl>
+											<dt>텍스트 리뷰 작성 시</dt>
+											<dd>
+												<span class="num">200</span>포인트
+											</dd>
+										</dl>
+										<dl>
+											<dt>포토 리뷰 작성 시</dt>
+											<dd>
+												<span class="num">500</span>포인트
+											</dd>
+										</dl>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //container -->
+<!-- 스크립트 -->
+		<th:block th:replace="common/script.html"></th:block>
+		<!--// 스크립트 -->
+		<!-- FOOTER -->
+		<th:block th:replace="common/footer.html"></th:block>
+		<!--// FOOTER -->
+	</div>
+	
+	<!-- 퀵메뉴 + 톡톡 -->
+	<th:block th:replace="common/quickNtalk.html"></th:block>
+	<!--// 퀵메뉴 + 톡톡 -->	
+	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+	<script type="text/javascript">
+		$('#quick .quickArea').css({'position':'absolute', 'top':290});
+	</script>
+	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+</body>
+</html>
+<script>
+	function productCount(cNo, gubun){
+		var cartNo = cNo;
+		var upDown = gubun;
+		var sendData = {"cartNo":cartNo, "upDown" : upDown};
+		
+		$.ajax({
+			url : "/mypage/cartStock",
+			data : sendData,
+			type : "post",
+			success : function(data){
+				location.reload();
+			},
+			error : function(e){
+				console.log(e)
+			}
+		});
+	}
+	
+	function cartDelete(cNo){
+		var cartNo = cNo;
+		var sendData = {"cartNo":cartNo};
+		
+		$.ajax({
+			url : "/mypage/cartDelete",
+			data : sendData,
+			type : "post",
+			success : function(data){
+				location.reload();
+			},
+			error : function(e){
+				console.log(e)
+			}
+		});
+	}
+	
+	function cartAllDelete(){
+		$.ajax({
+			url : "/mypage/cartAllDelete",
+			type : "post",
+			success : function(data){
+				location.reload();
+			},
+			error : function(e){
+				console.log(e)
+			}
+		});
+	}
+</script>

@@ -3,9 +3,13 @@ package com.kh.healthDao.shopping.model.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -13,9 +17,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.healthDao.admin.model.vo.Product;
 import com.kh.healthDao.shopping.model.service.ShoppingService;
 
+import lombok.extern.slf4j.Slf4j;
 
 
 
+@Slf4j
 @Controller
 @RequestMapping("/shopping/*")
 public class ShoppingController {
@@ -26,7 +32,6 @@ public class ShoppingController {
 	public ShoppingController(ShoppingService shoppingService) {
 		this.shoppingService = shoppingService;
 	}
-	
 	
 	// 쇼핑 랭킹페이지
 	@GetMapping("/ranking")
@@ -119,6 +124,21 @@ public class ShoppingController {
 		
 		return mv;
 	}
+
+	@PostMapping("/payment") 
+	public String shoppingPaymentInfo(@RequestParam("select1") String select1, @RequestParam("amount") int amount, @RequestParam("sum") int sum, Model model, @RequestParam int productNo ) { 
+		
+		log.info(select1 + "select1" + amount + "amount" + sum + "sum");
+		Product shoppingPayment = shoppingService.shoppingPayment(productNo);
+		
+		model.addAttribute("shoppingPayment", shoppingPayment);
+		model.addAttribute("select1", select1);
+		model.addAttribute("amount", amount);
+		model.addAttribute("sum", sum);
+		
+		return "/shopping/shoppingPayment"; 
+	}
+	
 
 	
 	

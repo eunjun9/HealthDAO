@@ -37,7 +37,6 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter{
    public void configure(WebSecurity web) {
 
       web.ignoring().antMatchers("/css/**", "/js/**", "/images/**", "/banner/**");
-
    }
    
    /* HTTP 요청에 대한 설정 */
@@ -55,13 +54,8 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter{
          /* 요청에 대한 권한 체크 */
          .authorizeRequests()
             /* 요청 보안 수준의 세부적인 설정
-             * "/mypage/**"요청은 인증이 되어야 함을 명시 */         
-            //.antMatchers("/mypage/**").authenticated()
             /* hasRole 안의 값 앞에는 자동으로 ROLE_ 가 붙음 */
             .antMatchers("/mypage/**", "/trainer/**").hasRole("MEMBER")
-            /* "/trainer/**"의 요청은 ROLE_TRAINER 권한을 가진 사람에게만 허용 */
-            // .antMatchers("/trainer/**").hasRole("TRAINER")
-            /* "/admin/**"의 요청은 ROLE_ADMIN 권한을 가진 사람에게만 허용 */
             .antMatchers("/admin/**").hasRole("ADMIN")
             .antMatchers("/manager/**").hasRole("ADMIN")
             /* 그 외의 요청은 모두 허가함 - 게스트 사용자도 접근 가능 */
@@ -95,7 +89,6 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter{
       /* 로그인, 로그아웃은 MemberController에 작성하지 않고 스프링 시큐리티 모듈을 통해 처리 */
       /* 유저 인증을 위해 사용할 MemberService 등록, 사용하는 패스워드 인코딩 방식 설정 */
       auth.userDetailsService(memberService).passwordEncoder(passwordEncoder());
-	  // userDetailsService : 로그인, 로그아웃을 컨트롤러 없이 service로 보낸다
    }
    
    

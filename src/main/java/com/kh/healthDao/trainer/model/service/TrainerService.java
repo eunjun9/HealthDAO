@@ -12,18 +12,23 @@ public interface TrainerService {
 
 	Trainer trainerSelect(int tNo);
 
-	int trainerModify(Trainer trainer);
+	int trainerModify(Trainer trainer, String originFile1, String originFile2, String changeFile1, String changeFile2);
 
 	List<PtOrder> trainerOrderList(int userNo);
 
 	List<Review> trainerReviewList(int tNo);
 
-	int trainerInsert(Trainer trainer);
+	int trainerInsert(Trainer trainer, String originFile1, String originFile2, String changeFile1, String changeFile2);
 
 	int sumPtOrder();
 
 	int sumTrainer();
 
 	int sumReview();
+
+	int trainerModify2(Trainer trainer, String originFile1, String changeFile1);
+
+	int trainerModify3(Trainer trainer, String originFile2, String changeFile2);
+
 
 }

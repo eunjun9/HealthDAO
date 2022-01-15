@@ -128,7 +128,7 @@
 							
 						$('#resultId').html(data.userId.substr(0, 4) + "***");
 						$('#resultDate').html(resultDate);
-						} else {
+						} else if(!data) {
 							alert('오류');
 						this.attr("onclick", "showLayer('findIdFail');");
 						}
