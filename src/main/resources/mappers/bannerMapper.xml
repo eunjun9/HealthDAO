@@ -157,7 +157,15 @@
 		 WHERE MAIN_NO=#{main_no}
 	</select>
 	
-	<!-- <update id="bannerUpdate" parameterType="hashmap">
+	<select id="findFileName" parameterType="_int" resultType="String">
+		SELECT 
+	           CHANGE_FILE
+	    FROM AT_FILE
+	    JOIN BANNER_FILE USING (F_NO)
+	   WHERE MAIN_NO =#{main_no}
+	</select>
+	
+	<update id="updateOnlyBanner" parameterType="com.kh.healthDao.main.model.vo.Banner">
 		UPDATE BANNER
 			SET 
 			    MAIN_NAME = #{main_name}
@@ -165,14 +173,13 @@
 			  , MAIN_URL = #{main_url}
 			  , MAIN_STATUS = #{main_status}
 		WHERE MAIN_NO = #{main_no}
-	</update> -->
+	</update>
 	
-	
-	<!-- <select id="bannerUpdate" resultType="String">
-		SELECT 
-	           CHANGE_FILE
-	    FROM AT_FILE
-	    JOIN BANNER_FILE USING (F_NO)
-	   WHERE MAIN_NO =#{banner.main_no}
-	</select> -->
+	<update id="updateFileBanner" parameterType="hashmap">
+		UPDATE AT_FILE
+		   SET
+		        ORIGIN_FILE = #{originFileName}
+		      , CHANGE_FILE = #{savedName}
+		 WHERE F_NO = #{banner.f_no}
+	</update>
 </mapper>

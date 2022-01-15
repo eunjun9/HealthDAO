@@ -16,4 +16,10 @@ public interface BannerService {
 	Banner bannerSelect(int main_no);
 
 	int deleteBanner(int main_no, int f_no);
+
+	int updateOnlyBanner(Banner banner);
+
+	String findFileName(int main_no);
+
+	int updateBanner(Banner banner, String originFileName, String savedName);
 }

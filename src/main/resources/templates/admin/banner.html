@@ -118,19 +118,19 @@
 		$('#quick .quickArea').css({'position':'absolute', 'top':290});
 
 	    function submit(){
-	    	if($('input[name="main_name"]').val() == ''){
+	    	if($('#enrollMain input[name="main_name"]').val() == ''){
 	       		alert('배너명을 넣어주세요');
 	       		return false;	    		
 	    	}
-	    	if($('input[name="main_url"]').val() == ''){
+	    	if($('#enrollMain input[name="main_url"]').val() == ''){
 	       		alert('url을 넣어주세요');
 	       		return false;	    		
 	    	}
-	    	if($('input[name="imgUpload"]').val() == ''){
+	    	if($('#enrollMain input[name="imgUpload1"]').val() == ''){
 	       		alert('이미지는 꼭 넣어야 됩니다😵');
 	       		return false;
 	    	}
-	    	if($('input[name="main_rank"]').val() == ''){
+	    	if($('#enrollMain input[name="main_rank"]').val() == ''){
 	       		alert('순위를 넣어야 됩니다');
 	       		return false;
 	    	}
@@ -138,7 +138,7 @@
 	    }
 	    
 	    function update(){
-	    	/* if($('#modifyMain input[name="name"]').val() == ''){
+	    	if($('#modifyMain input[name="name"]').val() == ''){
 	       		alert('배너명을 넣어주세요');
 	       		return false;	    		
 	    	}
@@ -146,36 +146,46 @@
 	       		alert('url을 넣어주세요');
 	       		return false;	    		
 	    	}
-	    	if($('#modifyMain input[name="imgUpload"]').val() == ''){
-	       		alert('이미지는 꼭 넣어야 됩니다😵');
-	       		return false;
-	    	}
 	    	if($('#modifyMain input[name="rank"]').val() == ''){
 	       		alert('순위를 넣어야 됩니다');
 	       		return false;
-	    	} */
+	    	}
 	       	document.updated.submit();
 	    }
-
-	    var loadFile = function(event) {
-	        var reader = new FileReader();
-	        $(".imgCutting").remove();	// 클릭하면 일단 삭제
-	        $(".imgUpload").val('');	// 클릭하면 일단 삭제
-			var html = '';
-	        reader.onload = function(e){
-				html+= '<li class="imgCutting">';
-				html+= '<div class="imgBox">';
-				html+= '	<img id="img" src="'+e.target.result+'" alt="">';
-				html+= '</div>';
-				html+= '</li>';
-				$('.fileUploadArea').append(html);
-				//이미지 맞추기
-				imgCrop();
-				html = "";
-	        };
-	        
-	        reader.readAsDataURL(event.target.files[0]);
-	      };
+	    $(function(){
+			// 이미지 추가
+			$('.imgUpload').on('change', function(){
+		       const target = $(this);
+		       var uploadFiles = target[0].files;
+		       if(uploadFiles.length > 1){
+					alert('이미지는 최대 1개까지 첨부 가능합니다.');
+					return;
+		       	}
+		       
+		       var htmlList = '';
+		       $.each(uploadFiles, function(index, file){
+		       	var reader = new FileReader();
+				reader.onload = function(e) {
+					htmlList += '<li class="imgCutting">';
+					htmlList += '	<div class="imgBox">';
+					htmlList += '		<img src="'+e.target.result+'" alt="">';
+					htmlList += '	</div>';
+					htmlList += '	<a href="javascript:void(0)" onclick="removeImg(this);" class="closeLink"><span class="hide">close</span></a>';
+					htmlList += '</li>';
+			        $('.fileUploadArea').append(htmlList);
+			        htmlList = '';
+					imgCrop();
+				}
+				reader.readAsDataURL(file);
+		       });
+			});
+		});
+		// 이미지 삭제
+		function removeImg(e){
+			var idx = $('.fileUploadArea li.imgCutting').index($(e).closest('li.imgCutting'));
+			$(e).closest('li.imgCutting').remove();
+			$(e).closest('.imgUpload').val('');
+		}
 	</script>
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 	<!-- 메인롤링 등록 -->
@@ -215,8 +225,8 @@
 									<dd>
 										<ul class="fileUploadArea">
 											<li>
-												<label for="imgUpload"><span class="hide">업로드</span>
-												</label><input type="file" class="hide" name="imgUpload" id="imgUpload" multiple accept="image/*" onchange="loadFile(event)">												
+												<label for="imgUpload1"><span class="hide">업로드</span>
+												</label><input type="file" class="hide imgUpload" name="imgUpload1" id="imgUpload1" accept="image/*">												
 											</li>
 										</ul>
 										<p class="mgt5 fs14">파일첨부 (1개) <span class="fc88">5MB미만 jpg,gif,png 파일 가능</span></p>
@@ -280,6 +290,7 @@
 												<input type="hidden" name="main_no" id="no" value="">
 												<input type="text" name="main_name" id="name" value="메인 롤링 배너 뇽뇽🎄🎄">
 												<button class="btn_clear" type="button"><span>clear</span></button>
+												<input type="hidden" name="f_no" id="f_no" value="">
 											</div>
 										</div>
 									</dd>
@@ -299,11 +310,15 @@
 									<dt>사진 추가</dt>
 									<dd>
 										<ul class="fileUploadArea">
-											<li><label for="imgUpload"><span class="hide">업로드</span></label><input type="file" class="hide" name="imgUpload" id="imgUpload"></li>
+											<li>
+												<label for="imgUpload"><span class="hide">업로드</span></label>
+												<input type="file" class="hide imgUpload" name="imgUpload" id="imgUpload">
+											</li>
 											<li class="imgCutting">
 												<div class="imgBox">
 													<img id="img" src="./resources/web/images/temp/main01.jpg" alt="">
 												</div>
+												<a href="javascript:void(0)" onclick="removeImg(this);" class="closeLink"><span class="hide">close</span></a>
 											</li>
 										</ul>
 										<p class="mgt5 fs14">파일첨부 (1개) <span class="fc88">5MB미만 jpg,gif,png 파일 가능</span></p>
@@ -378,6 +393,7 @@
 					console.log(data);
 					$("#modifyMain #no").val(data.main_no);
 					$("#modifyMain #name").val(data.main_name);
+					$("#modifyMain #f_no").val(data.f_no);
 					$("#modifyMain #url").val(data.main_url);
 					$("#modifyMain #img").attr('src', data.file_path + data.change_file);
 					$("#modifyMain #rank").val(data.main_rank);				
@@ -402,32 +418,6 @@
 				}
 			});
 		}
-		
-		/* function bannerUpdate(){
-			$.ajax({
-				url : "/banner/update",
-				method: 'POST',
-				data : {
-					"main_no" : $("#modifyMain #no").val(),
-					"main_name" : $("#modifyMain #name").val(),
-					"main_url" : $("#modifyMain #url").val(),
-					"imgUpload" : $("#modifyMain #img").attr('src'),
-					"main_rank" : $("#modifyMain #rank").val(),
-					"main_status" : $("#modifyMain input[name='modify_status']:checked").val()
-				},
-				success : function(result){	
-					if(result == "1"){
-						alert("성공적으로 적용되었습니다.");
-						location.reload();
-					}else{
-						alert("업데이트가 되지 않았습니다");
-					}
-				},
-				error : function(e){
-					console.log(e);
-				}
-			});
-		} */
 		
 		function deleteBanner(){
 			let addList = [], addList2 = [], data = {};

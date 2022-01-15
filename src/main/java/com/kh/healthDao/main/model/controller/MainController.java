@@ -76,18 +76,6 @@ public class MainController {
 		
 		return mv;
 	}
-	
-	@ResponseBody
-	@PostMapping("/banner/delete")
-	public int deleteBanner(int[] addList, int[] addList2) {
-		int result = 0;
-		for(int i = 0; i < addList.length; i++) {
-			result += bannerService.deleteBanner(addList[i], addList2[i]);			
-		}
-		System.out.println(result);
-		
-		return result;
-	}
 
 	@PostMapping("/banner/select")
 	@ResponseBody

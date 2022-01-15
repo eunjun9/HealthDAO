@@ -31,7 +31,7 @@ public class BannerServiceImpl implements BannerService{
 		
 		map.put("banner", banner);
 		map.put("originFileName", originFileName);
-		System.out.println(banner);
+		System.out.println("배너는 : " + banner);
 		
 		int result1 = bannerMapper.insertBanner(map);
 		int result2 = bannerMapper.insertFile(map);
@@ -89,12 +89,32 @@ public class BannerServiceImpl implements BannerService{
 		int result3 = bannerMapper.deleteBanner3(main_no);
 
 		int result = 0;
-		System.out.println("r1" + result1);
-		System.out.println("r2" + result2);
-		System.out.println("r3" + result3);
 		if(result1 > 0 && result2 > 0 && result3 > 0) {
 			result = 1;
 		}
+		System.out.println("r" + result);
+		return result;
+	}
+
+	@Override
+	public int updateOnlyBanner(Banner banner) {
+		return bannerMapper.updateOnlyBanner(banner);
+	}
+
+	@Override
+	public String findFileName(int main_no) {
+		return bannerMapper.findFileName(main_no);
+	}
+
+	@Override
+	public int updateBanner(Banner banner, String originFileName, String savedName) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("banner", banner);
+		map.put("originFileName", originFileName);
+		map.put("savedName", savedName);
+		
+		int result = bannerMapper.updateFileBanner(map);
+		
 		System.out.println("r" + result);
 		return result;
 	}
