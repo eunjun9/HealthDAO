@@ -6,15 +6,21 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.healthDao.admin.model.vo.Product;
+import com.kh.healthDao.member.model.vo.Member;
+import com.kh.healthDao.member.model.vo.UserImpl;
+import com.kh.healthDao.mypage.model.service.MyInfoService;
+import com.kh.healthDao.mypage.model.vo.Address;
 import com.kh.healthDao.shopping.model.service.ShoppingService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -27,10 +33,12 @@ import lombok.extern.slf4j.Slf4j;
 public class ShoppingController {
 
 	private ShoppingService shoppingService;
+	private MyInfoService myInfoService;
 	
 	@Autowired
-	public ShoppingController(ShoppingService shoppingService) {
+	public ShoppingController(ShoppingService shoppingService, MyInfoService myInfoService) {
 		this.shoppingService = shoppingService;
+		this.myInfoService = myInfoService;
 	}
 	
 	// 쇼핑 랭킹페이지
@@ -125,21 +133,31 @@ public class ShoppingController {
 		return mv;
 	}
 
+	// 쇼핑 주문
 	@PostMapping("/payment") 
-	public String shoppingPaymentInfo(@RequestParam("select1") String select1, @RequestParam("amount") int amount, @RequestParam("sum") int sum, Model model, @RequestParam int productNo ) { 
+	public ModelAndView shoppingPaymentInfo(@RequestParam("select1") String select1, @RequestParam("amount") int amount, @RequestParam("sum") int sum, 
+											ModelAndView mv, @RequestParam int productNo, @RequestParam int userNo) { 
 		
 		log.info(select1 + "select1" + amount + "amount" + sum + "sum");
+		
+		
 		Product shoppingPayment = shoppingService.shoppingPayment(productNo);
+		List<Address> addressList = myInfoService.deliView(userNo);
+		Member member = myInfoService.myInfoView(userNo);
 		
-		model.addAttribute("shoppingPayment", shoppingPayment);
-		model.addAttribute("select1", select1);
-		model.addAttribute("amount", amount);
-		model.addAttribute("sum", sum);
+		mv.addObject("shoppingPayment", shoppingPayment);
+		mv.addObject("select1", select1);
+		mv.addObject("amount", amount);
+		mv.addObject("sum", sum);
+		mv.addObject("addressList", addressList);
+		mv.addObject("member", member);
 		
-		return "/shopping/shoppingPayment"; 
+		mv.setViewName("shopping/shoppingPayment");
+		
+		return mv; 
 	}
 	
-
+	
 	
 	
 	
