@@ -1,5 +1,6 @@
 package com.kh.healthDao.mypage.model.service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -162,6 +163,16 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 	public int attendCheck(AttCheck attcheck) {
 		return mypageMapper.attendCheck(attcheck);
 	}
+	
+	// 출석체크 여부 확인
+	@Override
+	public List<AttCheck> attendUserList(int userNo) {
+		return mypageMapper.attendUserList(userNo);
+	}
+
+	
+
+	
 
 	/* 내 정보 수정 */
 	@Override
@@ -209,6 +220,25 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 	@Override
 	public List<Cart> cartList(int userNo) {
 		return mypageMapper.cartList(userNo);
+	}
+
+	@Override
+	public int cartStock(int cartNo, String upDown) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("cartNo", cartNo);
+		map.put("upDown", upDown);
+		
+		return mypageMapper.cartStock(map);
+	}
+
+	@Override
+	public int cartDelete(int cartNo) {
+		return mypageMapper.cartDelete(cartNo);
+	}
+
+	@Override
+	public int cartAllDelete(int userNo) {
+		return mypageMapper.cartAllDelete(userNo);
 	}
 
 }

@@ -46,7 +46,8 @@
                                 4.5 <span class="count">(리뷰 18)</span>
                             </div>
                         </div>
-                        <a href="javascript:void(0);" th:onclick="|javascript:addWish('${newProduct.productNo}')|" class="btn_like likeM on"><span class="hide">찜하기</span></a>
+                        <span th:text="${wishList}"></span>
+                        <a href="javascript:void(0);" th:onclick="|javascript:addWish('${newProduct.productNo}')|" th:id="pdtNo_+${newProduct.productNo}" class="btn_like likeM"><span class="hide">찜하기</span></a>
                         <a href="javascript:void(0);" th:onclick="|javascript:cartInsert('${newProduct.productNo}')|" class="btn_cart cartM"><span>장바구니</span></a>
                     </li>
                 </ul>
@@ -75,11 +76,8 @@
 	<!--// 퀵메뉴 + 톡톡 -->	
 	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 	<link rel="stylesheet" type="text/css" href="../../css/main.css">
-	<script type="text/javascript" src="../../js/cart.js"></script>
 	<script type="text/javascript">
-		$('#quick .quickArea').css({'position':'absolute', 'top':936});
-		mainStart();
-		mainVisual();
+		$('#quick .quickArea').css({'position':'absolute', 'top':290});
 	</script>
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 </body>

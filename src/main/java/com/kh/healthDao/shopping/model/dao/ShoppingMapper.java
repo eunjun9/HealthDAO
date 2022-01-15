@@ -24,6 +24,9 @@ public interface ShoppingMapper {
 	Product recentList(int productNo);
 	int wishListCount(int userNo);
 	List<Product> wishList(int userNo);
+	Product wishChk(int productNo, int userNo);
+	int insertWish(int productNo, int userNo);
+	int deleteWish(int productNo, int userNo);
 
 	List<Product> ShoppingList();
 	

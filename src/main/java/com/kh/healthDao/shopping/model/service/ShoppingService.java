@@ -54,4 +54,12 @@ public interface ShoppingService {
 	Map<String, Object> wishList(int userNo);
 
 	List<Address> deliView(int userNo);
+
+	Product wishChk(int productNo, int userNo);
+	
+	int insertWish(int productNo, int userNo);
+
+	int deleteWish(int productNo, int userNo);
+
+
 }
