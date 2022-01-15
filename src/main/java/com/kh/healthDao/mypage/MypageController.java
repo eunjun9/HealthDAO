@@ -392,7 +392,13 @@ public class MypageController {
 		
 		List<Cart> cartList = cartService.cartList(userNo);
 		
+		int allTotalPrice = 0;
+		for(int i = 0; i < cartList.size(); i++) {
+			allTotalPrice += (Integer.parseInt(cartList.get(i).getProduct().getProductPrice()) * cartList.get(i).getCartStock());
+		}
+		
 		mv.addObject("cartList", cartList);
+		mv.addObject("allTotalPrice", allTotalPrice);
 		mv.setViewName("mypage/cart"); 
 		
 		return mv;
@@ -411,5 +417,31 @@ public class MypageController {
 		return msg;
 	}
 	
+	@PostMapping("cartStock")
+	@ResponseBody
+	public String cartStock(int cartNo, String upDown) {
+		
+		String msg = cartService.cartStock(cartNo, upDown) > 0 ? "success" : "fail";
+		
+		return msg;
+	}
 	
+	@PostMapping("cartDelete")
+	@ResponseBody
+	public String cartDelete(int cartNo) {
+		
+		String msg = cartService.cartDelete(cartNo) > 0 ? "success" : "fail";
+		
+		return msg;
+	}
+	
+	@PostMapping("cartAllDelete")
+	@ResponseBody
+	public String cartAllDelete(@AuthenticationPrincipal UserImpl userImpl) {
+		int userNo = userImpl.getUserNo();
+		
+		String msg = cartService.cartAllDelete(userNo) > 0 ? "success" : "fail";
+		
+		return msg;
+	}
 }

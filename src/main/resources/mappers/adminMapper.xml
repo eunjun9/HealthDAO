@@ -57,6 +57,8 @@
 		<result property="userId" column="USER_ID" />
 	</resultMap>
 	
+	
+	
  	<!-- 상품 등록 -->
 	<insert id="registProduct" parameterType="com.kh.healthDao.admin.model.vo.Product">
 		INSERT 

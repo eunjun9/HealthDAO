@@ -70,5 +70,11 @@ public interface MypageMapper {
 
 	Cart cartProductChk(Cart cartinfo);
 
+	int cartStock(Map<String, Object> map);
+
+	int cartDelete(int cartNo);
+
+	int cartAllDelete(int userNo);
+
 
 }
