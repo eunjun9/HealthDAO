@@ -20,7 +20,7 @@ public class WebConfig implements WebMvcConfigurer {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		
-		List<String> imageFolders = Arrays.asList("main", "etc");	// 폴더 추가
+		List<String> imageFolders = Arrays.asList("main", "etc", "trainer");	// 폴더 추가
 		
 		for(String imageFolder : imageFolders) {
 			registry.addResourceHandler("/images/upload/" + imageFolder + "/**")			// 이걸로 보여짐

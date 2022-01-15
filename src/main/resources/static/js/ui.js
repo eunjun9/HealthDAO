@@ -702,12 +702,22 @@ function productCountMinus(e,_callback){
 			_callback();
 		}
 	}
+	
+	if($(e).hasClass('cartCountBtn')){
+		let count = $(e).siblings('input[type="text"]').val();
+		let price = $(e).siblings('input[name="productPrice"]').val();
+		
+		let totalPrice = count * price;
+		
+		$(e).parent().parent().next().find("#total").text(totalPrice);
+	}
 }
+
 function productCountPlus(e,_callback){
 	var buyInput = $(e).siblings('input[type="text"]'),
 		buyCount = buyInput.attr('value'),
 		buyDataMax = buyInput.attr('data-max');
-
+		
 	if (!buyDataMax){
 		buyCount++;
 		buyInput.attr('value', buyCount);
@@ -727,6 +737,15 @@ function productCountPlus(e,_callback){
 	}
 	if (buyCount >= 2){
 		$(e).siblings('.js_pdtCountMinus').prop('disabled', false);
+	}
+	
+	if($(e).hasClass('cartCountBtn')){
+		let count = $(e).siblings('input[type="text"]').val();
+		let price = $(e).siblings('input[name="productPrice"]').val();
+		
+		let totalPrice = count * price;
+		
+		$(e).parent().parent().next().find("#total").text(totalPrice);
 	}
 }
 $(window).on('load', function(){
@@ -1153,4 +1172,58 @@ function addCookie(id) {
 	} else { // 신규 id값 저장하기
 		setCookie('productItems', id, expire);
 	}
+}
+
+/**
+ * 장바구니 추가 ajax
+ */
+function cartInsert(pNo){
+	let productNo = pNo;
+	
+	var sendData = {"productNo":productNo, "cartStock":1};
+	$.ajax({
+		url : "/mypage/cartInsert",
+		data : sendData,
+		type : "post",
+		success : function(data){
+			if(data == "success"){
+				alert("장바구니에 추가되었습니다.");							
+			}else{
+				alert("장바구니에 추가 실패");
+			}
+		},
+		error : function(e){
+			console.log(e)
+		}
+	});
+}
+
+/**
+ * 찜한 상품 추가 ajax
+ */
+function addWish(pNo){
+	let productNo = pNo;
+	var sendData = {"productNo":productNo};
+	console.log($("#pdtNo_"+pNo).hasClass('on'));
+	$.ajax({
+		url : "/insertWish",
+		data : sendData,
+		type : "post",
+		success : function(data){
+			console.log(data);
+			if(data == '1'){
+				alert("찜한 상품에 추가 되었습니다.");
+				$("#pdtNo_"+pNo).addClass('on');				
+			}else if(data == '2'){
+				alert("찜한 상품에 삭제 되었습니다.");
+				$("#pdtNo_"+pNo).removeClass('on');		
+			}else{
+				alert("먼저 로그인을 해주세요!");
+				location.replace('/member/login');
+			}
+		},
+		error : function(e){
+			console.log(e)
+		}
+	});
 }

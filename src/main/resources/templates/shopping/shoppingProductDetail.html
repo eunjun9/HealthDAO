@@ -5,7 +5,7 @@
 <!-- 메타태그, 스타일 -->
 <th:block th:replace="common/head.html"></th:block>
 <!--// 메타태그, 스타일 -->
-<body>
+<body onload="init();">
 	<div id="wrap" class="main">
 		<!-- HEADER + GNB -->
 		<th:block th:replace="common/header.html"></th:block>
@@ -27,14 +27,7 @@
 					</div>
 					
 					<div class="pdtInfoBox">
-						<div class="hotdeal">
-							<div class="bg"><span></span></div>
-							<dl class="dDay">
-								<dt>남은시간</dt>
-								<dd><span class="day">D-3</span><span class="time">16:10:12</span></dd>
-							</dl>
-							<p class="hotdealPdt"><span class="notoM">타임 세일</span> 한정수량 211개 남음</p>
-						</div>
+						
 						<div class="pdtInfo">							
 							<a href="javascript:void(0)" onclick="jsShopFloating('like_floating');" class="btn_like likeL_type2"><span class="hide">찜하기</span></a>
 							<div class="pdtBrand" th:text="${shoppingDetail.productBrand}"></div>
@@ -52,21 +45,15 @@
 									판매가
 									<!-- none 클래스 추가시 취소선 처리  -->
 									<span class="num none">
-										<span class="txt" th:text="${shoppingDetail.productPrice}"></span>원
+										<span class="txt" th:text="${#numbers.formatInteger(shoppingDetail.productPrice, 0, 'COMMA')+'원'}"></span>
 									</span>
 								</div>
+								
 								<div class="price">
 									할인가
-									<span class="num">
-										<span class="percent">10<span>%</span></span>
-										<span class="txt">16,200</span>원
-									</span>
-								</div>
-								<div class="price">
-									타임세일
 									<span class="num sale">
 										<span class="percent">10<span>%</span></span>
-										<span class="txt">16,200</span>원
+										<span class="txt" th:text="${#numbers.formatInteger(shoppingDetail.productPrice, 0, 'COMMA')+'원'}">16,200</span>
 									</span>
 								</div>
 							</div>
@@ -106,70 +93,13 @@
 								</div>
 							</div>
 							<div class="prmtInfo">
-								<div class="infoTit">배송안내</div>
-								<div class="InfoDetail" th:text="${shoppingDetail.productNotice}">해당 상품은 동일한 상품만 1+1으로 구매 가능한 상품입니다.<br>수량을 2개로 선택해주세요.<br>2개 선택 시, 주문/결제 단에서 1개 가격으로 구매 가능합니다. </div>
+								<div class="infoTit">배송안내
+								</div>
+								<div class="InfoDetail" th:text="${shoppingDetail.productNotice}"><br>
+								</div>
 							</div>
 
 
-							<div class="pdtCmt">본품 1개 구매시 사은품 2개 증정!</div>
-							<div class="pdtOptionSelect">
-								<div class="inp_wrap">
-									<div class="inp_select pdtSelect">
-										<div class="selectBox">
-											<button class="title" type="button" title="">옵션을 선택해주세요</button>
-											<ul class="selList">
-												<li>
-													<input type="radio" value="" class="option" id="productDetail_radio1_1" name="productDetail_radio1">
-													<label for="productDetail_radio1_1">
-														<span class="selectColor colorShipM" th:text="${shoppingDetail.productTitle}"><img src="./resources/web/images/temp/colorChip03.jpg"></span>
-													</label>
-												</li>
-												<li class="soldOut"><!-- 일시 품절일 경우 soldOut 클래스 추가 -->
-													<input type="radio" value="" class="option" id="productDetail_radio1_2" name="productDetail_radio1" disabled><!-- 일시 품절일 경우 disabled 추가 -->
-													<label for="productDetail_radio1_2">
-														<span class="selectColor colorShipM" th:text="${shoppingDetail.productTitle}"><img src="./resources/web/images/temp/colorChip04.jpg"></span>
-													</label>
-													<span class="soldOutTxt">[일시품절]</span><!-- 일시 품절일 경우 항목 추가 -->
-													<button class="soldOutBtn btn_txt" onclick="showLayer('stockAlt');" type="button">입고알림신청</button><!-- 일시 품절일 경우 항목 추가 -->
-												</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="pdtSelectedOption"> 
-								<div class="optionName" th:text="${shoppingDetail.productTitle}">벨벳 블러드 립-BE01 밀크티 필터</div>
-								<div class="optionDetail">
-									<div class="js_pdtCount pdtUiSpinner">
-										<button class="js_pdtCountMinus spinnerDecrease" type="button" onclick="productCountMinus(this)" disabled>
-											<span class="hide">제품 수량 감소</span>
-										</button>
-										<!-- 구매수량이 정해져 있을 경우 data-max 를 넣어주세요 -->
-										<input class="spinnerInput" type="text" title="선택품목갯수" id="" value="1" readonly>
-										<button class="js_pdtCountPlus spinnerIncrease" type="button" onclick="productCountPlus(this)">
-											<span class="hide">제품 수량 증가</span>
-										</button>
-									</div>
-								</div>
-							</div>
-							<div class="pdtSelectedOption"> 
-								<div class="optionName" th:text="${shoppingDetail.productTitle}">벨벳 블러드 립-BE01 밀크티 필터</div>
-								<div class="optionDetail">
-									<!-- 일시 품절일 경우 항목 추가 -->
-									<span class="soldOutTxt">[일시품절]</span>
-									<div class="js_pdtCount pdtUiSpinner">
-										<button class="js_pdtCountMinus spinnerDecrease" type="button" onclick="productCountMinus(this)" disabled>
-											<span class="hide">제품 수량 감소</span>
-										</button>
-										<!-- 구매수량이 정해져 있을 경우 data-max 를 넣어주세요 -->
-										<input class="spinnerInput" type="text" title="선택품목갯수" value="0" disabled>
-										<button class="js_pdtCountPlus spinnerIncrease" type="button" onclick="productCountPlus(this)" disabled>
-											<span class="hide">제품 수량 증가</span>
-										</button>
-									</div>
-								</div>
-							</div>
-							
 							
 							
 							<!-- 200424 삭제 
@@ -179,18 +109,45 @@
 							
 							<!-- 200424 error text 위치 이동 -->
 							<div class="pdtStockOff">
-								<p>error text</p>
+								
+								
 							</div>
 							<!-- //200424 error text 위치 이동 -->
-							<div class="pdtMoney">
-								<span class="totalText">총 합계 금액</span>
-								총 1개 <span class="total_price" style="margin-left: 345px;"><span>64,000</span>원</span>
-							</div>
-							<div class="pdtbuyBtnArea">
-								<div class="btn_wrap">
-									<a href="javascript:void(0)" class="btn btnArr btnSizeL btnColorW btnTypeR"><span>장바구니</span></a>
-									<a href="/shopping/payment?productNo=" th:attrappend="href=${shoppingDetail.productNo}" class="btn btnSizeL btnColorB btnTypeR"><span>바로구매</span></a>
-								</div>
+							<div class="pdtMoney" style="width:500px; margin-left:0px; margin-top:5px;">
+								<form name="form" th:action="@{/shopping/payment}" method="post">
+								<input type="hidden" th:value="${shoppingDetail.productNo}" name="productNo">
+									<div class="pdtCmt">본품 1개 구매시 사은품 증정!</div>
+									<div class="pdtOptionSelect">
+										<div class="inp_wrap">
+											<div class="inp_select pdtSelect" style="margin-bottom:10px;">
+												<div class="selectBox">
+													<button class="title" type="button" title="">옵션을 선택해주세요</button>
+													<ul class="selList">
+														<li>
+															<input type="radio" th:value="${shoppingDetail.productOption}" class="option" id="select1_1" name="select1">
+															<label for="select1_1" name="select1" th:text="${shoppingDetail.productOption}" style="text-align:left;"></label>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div style="margin-top:5px; text-align:left; margin-left:365px; ">
+										<input type="button" value=" - " onclick="del();" style="margin-top:-4px;"><input type="button" value=" + " onclick="add();" style="margin-top:-4px;"><span style="font-size:20px;">총</span>  <input type=hidden name="sell_price" th:value="${shoppingDetail.productPrice}" > <input type="text" name="amount" value="1" size="3" onchange="change();" style="width:30px; margin-top:-9px; text-align:center; font-size:20px;"><span style="font-size:20px;">개</span><br>
+									</div>
+									<div style="margin-top:5px; text-align:left; margin-left:220px;">
+										<span style="font-size:22px;">총 합계 금액  : </span><input class="total_price" type="text" name="sum" size="11" style="width:95px; margin-right:5px; margin-top:-11px; font-size:22px; text-align:right;" readonly><span style="font-size:22px;">원</span>
+									</div>
+									<input type="hidden" name="userNo" th:value="${#authentication.principal.userNo}">
+									<div class="pdtbuyBtnArea">
+										<div class="btn_wrap" style="display:flex;">
+											<a href="javascript:void(0)" class="btn btnArr btnSizeL btnColorW btnTypeR"><span>장바구니</span></a>
+											<!-- <a href="/shopping/payment?productNo=" th:attrappend="href=${shoppingDetail.productNo}" onclick="document.forrm.submit();" class="btn btnSizeL btnColorB btnTypeR"><span>바로구매</span></a>
+									 --><button class="btn btnSizeL btnColorB btnTypeR" style="width:221px; color:white;">바로결제</button> 
+									 	</div>
+									</div>
+								</form>
+								
 							</div>
 							
 							<div class="pdtGift js_acoBox">
@@ -200,7 +157,7 @@
 										<li>
 											<a href="javascript:void(0)">
 												<div><img src="./resources/web/images/temp/thumbImg01.jpg" alt=""></div>
-												<p th:text="${shoppingDetail.productBenefit}">바닐라코 제로 스페츌러 세트</p>
+												<p th:text="${shoppingDetail.productBenefit}"></p>
 											</a>
 										</li>
 										
@@ -1006,6 +963,47 @@
 			addCookie(val);		// 쿠키 값 추가
 		/*]]>*/
 	</script>
+	<script language="JavaScript">
+		
+		var sell_price;
+		var amount;
+		
+		function init () {
+			sell_price = document.form.sell_price.value;
+			amount = document.form.amount.value;
+			document.form.sum.value = sell_price;
+			change();
+		}
+		
+		function add () {
+			hm = document.form.amount;
+			sum = document.form.sum;
+			hm.value ++ ;
+		
+			sum.value = parseInt(hm.value) * sell_price;
+		}
+		
+		function del () {
+			hm = document.form.amount;
+			sum = document.form.sum;
+				if (hm.value > 1) {
+					hm.value -- ;
+					sum.value = parseInt(hm.value) * sell_price;
+				}
+		}
+		
+		function change () {
+			hm = document.form.amount;
+			sum = document.form.sum;
+		
+				if (hm.value < 0) {
+					hm.value = 0;
+				}
+			sum.value = parseInt(hm.value) * sell_price;
+		}  
+		
+	</script>
+
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 </body>
 </html>

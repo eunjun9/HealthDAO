@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+				xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <title></title>
 <!-- 메타태그, 스타일 -->
@@ -26,7 +27,7 @@
 							<dd>
 								<div class="inp_wrap">
 									<div class="inp_text sizeS">
-										<input type="text" name="" id="order_name" value="지유">
+										<input type="text" name="userName" id="order_name" th:value="${member.userName}">
 									</div>
 									<p class="error">주문고객 이름을 입력해주세요.</p>
 								</div>
@@ -37,7 +38,7 @@
 							<dd>
 								<div class="inp_wrap">
 									<div class="inp_text sizeS">
-										<input type="text" name="" id="order_phone" value="01012345678">
+										<input type="text" name="userPhone" id="order_phone" th:value="${member.userPhone}">
 									</div>
 									<p class="error">휴대폰번호를 입력해주세요.</p>
 								</div>
@@ -48,7 +49,7 @@
 							<dd>
 								<div class="inp_wrap inp_email2">
 									<div class="inp_text sizeS">
-										<input type="text" id="order_email" value="asdf">
+										<input type="text" name="userEmail" id="order_email" th:value="${#strings.substring(member.userEmail,0,6)}">
 									</div>
 									<span class="hyphen">@</span>
 									<div class="inp_text email_input sizeS">
@@ -82,15 +83,16 @@
 					<div class="order_delivery order_con">
 						<p class="orderTit">배송지 정보</p>
 						<div class="delivery_list">
-							<a href="#" class="btn btnSizeS btnColorB btnTypeB"><span>배송지관리</span></a>
+							<a href="/mypage/deli" class="btn btnSizeS btnColorB btnTypeB"><span>배송지관리</span></a>
 							<!-- 총 리스트를 불러와도 css에서 처리하도록 작업 -->
 							<ul>
-								<li>
+								<li th:each="address:${addressList}">
 									<input type="radio" name="deliveryList" id="deliveryList1" checked>
 									<label for="deliveryList1">
-										<p class="deliName">[기본배송지] 지유 집</p>
-										<p class="deliUser">박지유  010-1234-5678 / 02-3254-8976</p>
-										<p class="deliAddr">
+										<p class="deliName">[기본배송지]</p>
+										<span class="deliUser" name="receiver" th:text="${address.receiver}">박지유 </span><br>
+										<span class="delPhone" name="recPhone" th:text="${address.recPhone}">010-1234-5678</span>
+										<p class="deliAddr" name="address" th:text="${address.Address}">
 											서울특별시 금천구 가산디지털 1로<br>
 											에이스 하이엔드 3차 705호<br>
 											(우)123-456
@@ -106,7 +108,7 @@
 									</ul>
 								</li>
 								<li>
-									<a href="javascript:void();" onclick="showLayer('deliRegister');" class="new_addr">
+									<a href="/mypage/deli" onclick="showLayer('deliRegister');" class="new_addr">
 										신규 배송지를 등록해주세요
 									</a>
 								</li>
@@ -162,101 +164,22 @@
 							<li>
 								<div class="tbl_wrap">
 									<div class="pdtImg"><a href="#"><img src="./resources/web/images/temp/pdt_img3.png" alt="아이크러쉬 디테일 아이라이너"></a></div>
-									<div class="pdtTxt">
-										<p class="pdtHead" style="color:#4f8ffa;">[이벤트] 아이라이너 전 제품 3개 구매 시 1개 무료</p>
-										<p class="pdtBrand">바닐라코</p><!-- 20200317 수정 -->
-										<p class="pdtName">아이크러쉬 디테일 아이라이너</p>
-										<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
-										<p class="pdtOpt">옵션 : BE01 밀크티 필터</p>
+									<div class="pdtTxt" th:each="slist:${shoppingPayment}">
+										<p class="pdtHead" style="color:#4f8ffa;">[이벤트] </p>
+										<p class="pdtBrand" th:text="${shoppingPayment.productBrand}"></p><!-- 20200317 수정 -->
+										<p class="pdtName" th:text="${shoppingPayment.productTitle}"></p>
+										<p class="pdtPrice"><span class="sale">10%</span><span class="sale" th:text="${#numbers.formatInteger(sum, 0, 'COMMA')+'원'}"></span></p>
+										<p class="pdtOpt">옵션 : <span class="pdtOpt" th:text="${select1}"></span></p>
 									</div>
-									<div class="pdtCount">
-										<p>1개</p>
+									<div></div>
+									<div class="pdtCount" style="width:130px; letter-spacing:3px;">
+										<span>수량 : </span><span th:text="${amount}"> </span>
+										
 									</div>
-									<div class="totalPrice">
-										<div class="state">
-											<p>일시품절</p>
-										</div>
-									</div>
-								</div>
-								<div class="pdtSet">
-									<p class="tit">SET 상품</p>
-									<ul>
-										<li>
-											<div class="setImg">
-												<img src="./resources/web/images/temp/pdt_img3.png" alt="아이크러쉬 디테일 아이라이너">
-											</div>
-											<div class="pdtTxt">
-												<p class="pdtBrand">바닐라코</p><!-- 20200317 수정 -->
-												<p class="pdtName">아이크러쉬 디테일 아이라이너</p>
-												<p class="pdtOpt">옵션 : BE01 밀크티 필터</p>
-												<p class="soldOut">일시품절</p>
-											</div>
-											<p class="setPrice">15,000<em>원</em></p>
-										</li>
-										<li>
-											<div class="setImg">
-												<img src="./resources/web/images/temp/pdt_img3.png" alt="아이크러쉬 디테일 아이라이너">
-											</div>
-											<div class="pdtTxt">
-												<p class="pdtBrand">바닐라코</p><!-- 20200317 수정 -->
-												<p class="pdtName">아이크러쉬 디테일 아이라이너</p>
-												<p class="pdtOpt">옵션 : BE01 밀크티 필터</p>
-											</div>
-											<p class="setPrice">15,000<em>원</em></p>
-										</li>
-									</ul>
+									
 								</div>
 							</li>
 							<li>
-								<div class="tbl_wrap">
-									<div class="pdtImg"><a href="#"><img src="./resources/web/images/temp/pdt_img3.png" alt="아이크러쉬 디테일 아이라이너"></a></div>
-									<div class="pdtTxt">
-										<p class="pdtHead" style="color:#4f8ffa;">[이벤트] 아이라이너 전 제품 3개 구매 시 1개 무료</p>
-										<p class="pdtBrand">바닐라코</p><!-- 20200317 수정 -->
-										<p class="pdtName">아이크러쉬 디테일 아이라이너</p>
-										<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
-										<p class="pdtOpt">옵션 : BE01 밀크티 필터</p>
-									</div>
-									<div class="pdtCount error"><!-- 에러문구 노출시 error 클래스 추가 -->
-										<p>1개</p>
-										<p class="error">재고가 부족하여 수량만큼 주문하실 수 없습니다.</p><!-- 20200507 수정 -->
-									</div>
-									<div class="totalPrice">
-										<p class="price">15,000<em>원</em></p>
-										<!-- 20200317 수정
-										<p class="free">무료</p>
-										<p class="free">증정</p>
-										-->
-									</div>
-								</div>
-								<div class="pdtSet">
-									<p class="tit">SET 상품</p>
-									<ul>
-										<li>
-											<div class="setImg">
-												<img src="./resources/web/images/temp/pdt_img3.png" alt="아이크러쉬 디테일 아이라이너">
-											</div>
-											<div class="pdtTxt">
-												<p class="pdtBrand">바닐라코</p><!-- 20200317 수정 -->
-												<p class="pdtName">아이크러쉬 디테일 아이라이너</p>
-												<p class="pdtOpt">옵션 : BE01 밀크티 필터</p>
-												<p class="soldOut">일시품절</p>
-											</div>
-											<p class="setPrice">15,000<em>원</em></p>
-										</li>
-										<li>
-											<div class="setImg">
-												<img src="./resources/web/images/temp/pdt_img3.png" alt="아이크러쉬 디테일 아이라이너">
-											</div>
-											<div class="pdtTxt">
-												<p class="pdtBrand">바닐라코</p><!-- 20200317 수정 -->
-												<p class="pdtName">아이크러쉬 디테일 아이라이너</p>
-												<p class="pdtOpt">옵션 : BE01 밀크티 필터</p>
-											</div>
-											<p class="setPrice">15,000<em>원</em></p>
-										</li>
-									</ul>
-								</div>
 								<div class="freeGift">
 									<p class="tit">추가 사은품</p>
 									<ul>
@@ -265,19 +188,9 @@
 												<img src="./resources/web/images/temp/freeGift.jpg" alt="디어 하이드레이션 토너 샘플">
 												<p>사은품</p>
 											</div>
-											<p class="giftName">
+											<p class="giftName" th:text="${shoppingPayment.productBenefit}">
 												디어 하이드레이션 토너 샘플
 												<span class="fcRed">일시품절</span>
-											</p>
-										</li>
-										<li>
-											<div class="giftImg">
-												<img src="./resources/web/images/temp/freeGift.jpg" alt="디어 하이드레이션 토너 샘플">
-												<p>사은품</p>
-											</div>
-											<p class="giftName">
-												디어 하이드레이션 토너 샘플
-												<span>1개</span>
 											</p>
 										</li>
 									</ul>
@@ -474,8 +387,10 @@
 									<label for="payment_list1">네이버페이</label>
 								</li>
 								<li class="payment_list2">
-									<input type="radio" name="sttlmethod" id="payment_list2">
+								<form action="/kakaoPay" method="post">
+									<input type="" name="sttlmethod" id="payment_list2">
 									<label for="payment_list2">카카오 페이</label>
+								</form>
 								</li>
 								<li class="payment_list3">
 									<input type="radio" name="sttlmethod" id="payment_list3">
@@ -672,7 +587,7 @@
 							<div class="order_price bd_no">
 								<dl>
 									<dt>총 주문금액</dt>
-									<dd>80,000<em>원</em></dd>
+									<dd th:text="${#numbers.formatInteger(sum, 0, 'COMMA')+'원'}"><em>원</em></dd>
 								</dl>
 								<!-- 20200317 수정 하단 쇼핑백 삭제되고 이곳에 추가 -->
 								<div class="detail_price">
@@ -706,14 +621,14 @@
 							<div class="order_price">
 								<dl>
 									<dt>배송비</dt>
-									<dd>0<em>원</em></dd>
+									<dd><em>무료</em></dd>
 								</dl>
 							</div>
 							<div class="floating_bottom">
 								<div class="total_price">
 									<dl>
 										<dt>최종 결제금액</dt>
-										<dd>55,200<em>원</em></dd>
+										<dd th:text="${#numbers.formatInteger(sum, 0, 'COMMA')+'원'}">55,200<em>원</em></dd>
 									</dl>
 									<p>회원님은 총 <span>13,800</span>원 할인 받으실 예정입니다.</p>
 								</div>
@@ -754,7 +669,7 @@
 								<p class="fcRed">상품정보 및 결제대행 서비스 이용약관에 동의하셔야<br> 결제가 진행됩니다.</p>
 							</div>
 						</div>
-						<a href="#" class="btn btnSizeL btnColorP btnTypeB w100 mgt10"><span>결제하기 (4개)</span></a>
+						<a href="#" id="check_module" class="btn btnSizeL btnColorP btnTypeB w100 mgt10"><span>결제하기</span></a>
 						<!-- 비회원일경우 -->
 						<ul class="starInfo mgt20">
 							<li class="fcRed">비회원으로 구매하시면 회원/이벤트/쿠폰혜택을 받으실<br> 수 없습니다.</li>
@@ -786,6 +701,53 @@
 		mainStart();
 		mainVisual();
 	</script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+	<script>
+	$("#check_module").click(function () {
+		var IMP = window.IMP; // 생략가능
+		IMP.init('imp97624274'); 
+		// i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
+		// ''안에 띄어쓰기 없이 가맹점 식별코드를 붙여넣어주세요. 안그러면 결제창이 안뜹니다.
+		IMP.request_pay({
+			pg: 'kakao',
+			pay_method: 'card',
+			merchant_uid: 'merchant_' + new Date().getTime(),
+			/* 
+			 *  merchant_uid에 경우 
+			 *  https://docs.iamport.kr/implementation/payment
+			 *  위에 url에 따라가시면 넣을 수 있는 방법이 있습니다.
+			 */
+			name: '주문명 : 아메리카노',
+			// 결제창에서 보여질 이름
+			// name: '주문명 : ${auction.a_title}',
+			// 위와같이 model에 담은 정보를 넣어 쓸수도 있습니다.
+			amount: 2000,
+			// amount: ${bid.b_bid},
+			// 가격 
+			buyer_name: '이름',
+			// 구매자 이름, 구매자 정보도 model값으로 바꿀 수 있습니다.
+			// 구매자 정보에 여러가지도 있으므로, 자세한 내용은 맨 위 링크를 참고해주세요.
+			buyer_postcode: '123-456',
+			}, function (rsp) {
+				console.log(rsp);
+			if (rsp.success) {
+				var msg = '결제가 완료되었습니다.';
+				msg += '결제 금액 : ' + rsp.paid_amount + ' 원';
+				
+				alert(msg);
+				location.href='${contextPath}/mypage/';
+				// success.submit();
+				// 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드를 사용하는 방법이 있습니다.
+				// 자세한 설명은 구글링으로 보시는게 좋습니다.
+			} else {
+				var msg = '결제에 실패하였습니다.';
+				msg += '에러내용 : ' + rsp.error_msg;
+			}
+			alert(msg);
+		});
+	});
+</script>
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 </body>
 </html>

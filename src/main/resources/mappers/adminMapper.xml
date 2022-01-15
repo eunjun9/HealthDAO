@@ -110,7 +110,7 @@
 		  , #{productPrice}
 		  , #{productBenefit}
 		  , #{productNotice}
-		  , '식품'
+		  , '사진'
 		  , 0
 		  , 0
 		  , #{categoryId}

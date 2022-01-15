@@ -14,10 +14,31 @@
 		<result property="categoryId" column="CATEGORY_ID" />
 		<result property="pMembership" column="P_MEMBERSHIP"/>
 		<result property="productRank" column="PRODUCT_RANK"/>
+
+		<result property="productOption" column="PRODUCT_OPTION"/>
+		<result property="quantity" column="QUANTITY"/>
+	</resultMap>
+	
+	<resultMap id="productOptionResultMap" type="com.kh.healthDao.admin.model.vo.Option">
+		<id property="optionNo" column="OPTION_NO" />
+		<result property="productOption" column="PRODUCT_OPTION" />
+		<result property="productNo" column="PRODUCT_NO" />
+
 		<association javaType="com.kh.healthDao.member.model.vo.Member" property="member">
 			<id column="USER_NO" property="userNo"/>
 		</association>
+
 	</resultMap>
+	
+	<resultMap id="addressResultMap" type="com.kh.healthDao.mypage.model.vo.Address">
+		<id property="addressNo" column="ADDRESS_NO"/>
+		<result property="receiver" column="RECEIVER"/>
+		<result property="address" column="ADDRESS"/>
+		<result property="recPhone" column="RECEIVER_PHONE"/>
+		<result property="defAddress" column="DEFAULT_ADDRESS"/>
+		<result property="userNo" column="USER_NO"/>
+  	</resultMap>
+	
 	
 	<select id="recentList" resultMap="productResultMap">
 		SELECT
@@ -220,6 +241,38 @@
         WHERE USER_NO = #{userNo})
 	</select>
 	
+	<select id="wishChk" parameterType="com.kh.healthDao.admin.model.vo.Product" resultMap="productResultMap">
+		SELECT
+				LIKE_NO
+			  , PRODUCT_NO
+			  , USER_NO
+		  FROM PRODUCT_LIKE
+		 WHERE USER_NO = #{userNo}
+		   AND PRODUCT_NO = #{productNo}
+	</select>
+	
+	<insert id="insertWish" parameterType="com.kh.healthDao.admin.model.vo.Product">
+		INSERT 
+		INTO PRODUCT_LIKE
+		(
+			LIKE_NO
+		  , PRODUCT_NO
+		  , USER_NO
+		)VALUES(
+			SEQ_LIKE_NO.NEXTVAL
+		  , #{productNo}
+		  , #{userNo}
+		)
+	</insert>
+	
+	<delete id="deleteWish" parameterType="com.kh.healthDao.admin.model.vo.Product">
+		DELETE
+			   PRODUCT_LIKE
+		 WHERE USER_NO = #{userNo}
+		   AND PRODUCT_NO = #{productNo}
+	</delete>
+	
+	
 	<select id="shoppingList" resultMap="productResultMap" parameterType="hashmap">
 		SELECT *
 				FROM
@@ -363,8 +416,23 @@
 			  , PRODUCT_PRICE
 			  , PRODUCT_NOTICE
 			  , PRODUCT_BENEFIT
+			  , PRODUCT_OPTION
 		   FROM PRODUCT
+		   JOIN PRODUCT_OPTION USING(PRODUCT_NO)
 		  WHERE PRODUCT_NO = #{productNo}
+	</select>
+	
+	<select id="shoppingQuantity" parameterType="com.kh.healthDao.admin.model.vo.Product">
+		INSERT 
+		INTO PRODUCT
+		(
+			PAY_NO
+		  , QUANTITY
+		  , PRODUCT_NO
+		)VALUES(
+		    SEQ_PRODUCT_NO.NEXTVAL
+		  , 
+		)
 	</select>
 	
 	<select id="shoppingPayment" resultMap="productResultMap" parameterType="_int">
@@ -375,12 +443,26 @@
 			  , PRODUCT_PRICE
 			  , PRODUCT_NOTICE
 			  , PRODUCT_BENEFIT
+			  , PRODUCT_OPTION
 		   FROM PRODUCT
+		   JOIN PRODUCT_OPTION USING(PRODUCT_NO)
 		  WHERE PRODUCT_NO = #{productNo}
 	</select>
 	
 	
-	
+	<!-- 배송지 관리 -->
+	<select id="deliView" resultMap="addressResultMap" parameterType="_int" >
+		SELECT
+			   ADDRESS_NO
+			 , RECEIVER
+			 , ADDRESS
+			 , RECEIVER_PHONE
+			 , DEFAULT_ADDRESS
+			 , USER_NO
+		  FROM ADDRESS
+		  JOIN MEMBER USING(USER_NO)
+		 WHERE USER_NO = #{userNo}
+	</select>
 	
 	
 	

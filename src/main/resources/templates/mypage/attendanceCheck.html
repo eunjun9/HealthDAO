@@ -96,20 +96,17 @@
 												class="do">DAY</em>
 										</div>
 									</li>
-									<li class="todayOutline"
-										th:each="date : ${#numbers.sequence(1,31)}">
+									<li class="todayOutline" th:each="date : ${#numbers.sequence(1,31)}" >
+										<div class="yhheart" th:if="${#lists.contains(dateArr, date)}">
+											<img class="heart1" src="/images/point/heart.png">
+										</div> 
 										<div class="today">
-											<em class="n" th:text="${date}"></em><br> <em class="d">DAY</em>
-
+											<em class="n" th:text="${date}" th:id="'n' + ${date}"></em><br> <em class="d">DAY</em>
 										</div>
-
-										<div>
-											<button class="btnClass" th:id="'attBtn' + ${date}"
+										<button class="btnClass" th:id="'attBtn' + ${date}"
 												th:value="${date}">
 												<img class="heart" src="/images/point/heart.png">
-											</button>
-										</div>
-
+										</button>
 									</li>
 								</ul>
 							</div>
@@ -154,20 +151,18 @@
    				
    				let param = {};
    				param.btnValue = $(this).val();
-   				console.log(param);
+   				// console.log(param);
    				var attendanceDate = new Date();
    				attendanceDate.setDate(param.btnValue);
-   				console.log(attendanceDate);
+   				// console.log(attendanceDate);
    				var userNo = document.getElementById("inputuId").value;
-   				console.log(userNo);
+   				// console.log(userNo);
    				var result = {"attendanceDate" : attendanceDate, "userNo" : userNo};
-   				
    				$.ajax({
    					url : "/mypage/attCheck",
    					data : result,
    					type : "post",
    					success : function(data){
-   						console.log(data);
    						alert(data);
    						
    					},
@@ -177,9 +172,25 @@
    				
    				});    	
    			});
-   		});
-   		
+
+   		})
    </script>
+   <script type="text/javascript">
+	   var now = new Date();	
+	   var date = now.getDate();
+	   
+	   for(var i = 0; i < 32; i++){
+		   var rate = $(".btnClass").val([i]);
+		   console.log(rate);
+		   
+		   if(date==15){
+			   $('.today').css('bakcground','red');
+		   }
+	   }
+
+   </script>
+   
+
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 </body>
 </html>

@@ -33,7 +33,9 @@ public interface BannerMapper {
 
 	Banner bannerSelect(int main_no);
 
-	int bannerUpdate(Map<String, Object> map);
+	String findFileName(int main_no);
 
-	int bannerImgUpdate(Map<String, Object> map);
+	int updateOnlyBanner(Banner banner);
+
+	int updateFileBanner(Map<String, Object> map);
 }

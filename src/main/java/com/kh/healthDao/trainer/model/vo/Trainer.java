@@ -28,11 +28,11 @@ public class Trainer {
 	private Member member;			// Member 테이블
 	private float avgStar;
 	private int sumReview;
-	/* + 추가할 것
-	 * MEMBER 조인 -> 트레이너 이름, 트레이너 전화번호
-	 * REVIEW 조인 -> 별점, 리뷰 수
-	 * TRAINER_FILE 조인 -> AT_FILE 조인 -> 트레이너 사진 1장, 헬스장 사진 2장
-	 * 
-	 * */
+	
+	private String file_path;		// 파일경로
+	private String change_file1;	// 트레이너 파일명
+	private String change_file2;	// 센터 파일명
+	private int f_tno;				// 트레이너 파일 번호
+	private int f_cno;				// 센터 파일 번호
 	
 }

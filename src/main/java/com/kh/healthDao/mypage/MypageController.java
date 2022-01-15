@@ -1,5 +1,6 @@
 package com.kh.healthDao.mypage;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -412,9 +413,22 @@ public class MypageController {
 	}
 	
 	/* 출석체크 화면이동 */
-	@GetMapping("/attendanceCheck")
-	public String attendanceCheck() {
-		return "mypage/attendanceCheck";
+	@PostMapping("/attendanceCheck")
+	public ModelAndView attendUser(@RequestParam int userNo, ModelAndView mv) {
+		
+		
+		List<AttCheck> attendUserList = qnaService.attendUserList(userNo);
+		
+		List dateArr = new ArrayList();
+		for(int i = 0; i < attendUserList.size(); i++) {
+			dateArr.add(attendUserList.get(i).getStringAttendanceDate());
+		}
+
+		mv.addObject("attendUserList", attendUserList);
+		mv.addObject("dateArr", dateArr);
+		mv.setViewName("mypage/attendanceCheck");
+
+		return mv;
 	}
 	
 	/* 출석 체크 */
@@ -422,18 +436,15 @@ public class MypageController {
 	@ResponseBody
 	public String attendanceCheck(Date attendanceDate, int userNo) {
 		
-		System.out.println(attendanceDate);
-		System.out.println(userNo);
 		AttCheck attcheck = new AttCheck();
 		attcheck.setAttendanceDate(attendanceDate);
 		attcheck.setUserNo(userNo);
-		System.out.println(attcheck.getAttendanceDate());
-		int result = qnaService.attendCheck(attcheck);
-
+		int result = qnaService.attendCheck(attcheck);		
+		
 		if(result > 0) {
-			return "성공";
+			return "출석체크 성공";
 		}else {
-			return "실패";
+			return "출석체크 실패";
 		}
 		
 	}
@@ -445,7 +456,13 @@ public class MypageController {
 		
 		List<Cart> cartList = cartService.cartList(userNo);
 		
+		int allTotalPrice = 0;
+		for(int i = 0; i < cartList.size(); i++) {
+			allTotalPrice += (Integer.parseInt(cartList.get(i).getProduct().getProductPrice()) * cartList.get(i).getCartStock());
+		}
+		
 		mv.addObject("cartList", cartList);
+		mv.addObject("allTotalPrice", allTotalPrice);
 		mv.setViewName("mypage/cart"); 
 		
 		return mv;
@@ -464,5 +481,32 @@ public class MypageController {
 		return msg;
 	}
 	
+	@PostMapping("cartStock")
+	@ResponseBody
+	public String cartStock(int cartNo, String upDown) {
+		
+		String msg = cartService.cartStock(cartNo, upDown) > 0 ? "success" : "fail";
+		
+		return msg;
+	}
 	
+	@PostMapping("cartDelete")
+	@ResponseBody
+	public String cartDelete(int cartNo) {
+		
+		String msg = cartService.cartDelete(cartNo) > 0 ? "success" : "fail";
+		
+		return msg;
+	}
+	
+	@PostMapping("cartAllDelete")
+	@ResponseBody
+	public String cartAllDelete(@AuthenticationPrincipal UserImpl userImpl) {
+		int userNo = userImpl.getUserNo();
+		
+		String msg = cartService.cartAllDelete(userNo) > 0 ? "success" : "fail";
+		
+		return msg;
+	}
 }
+
