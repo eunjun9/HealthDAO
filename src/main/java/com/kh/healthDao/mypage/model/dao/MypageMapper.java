@@ -45,7 +45,9 @@ public interface MypageMapper {
 
 	int reviewModify(Review review);
 
+	// 출석체크
 	int attendCheck(AttCheck attcheck);
+	List<AttCheck> attendUserList(int userNo);
 
 	
 

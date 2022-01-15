@@ -33,13 +33,13 @@ public class ShoppingServiceImpl implements ShoppingService{
 		List<Product> pdtList = new ArrayList<>();
 		Product pdt = new Product();
 		
-		System.out.println("length : "+addList.length);
+		// System.out.println("length : "+addList.length);
 
 		for(int i=0; i<addList.length; i++) {
 			pdt = shoppingMapper.recentList(addList[i]);
 			pdtList.add(pdt);
 		}
-		System.out.println("리스트 : " + pdtList);
+		// System.out.println("리스트 : " + pdtList);
 		return pdtList;
 	}
 	

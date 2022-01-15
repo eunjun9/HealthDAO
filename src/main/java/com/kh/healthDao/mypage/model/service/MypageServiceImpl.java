@@ -1,5 +1,6 @@
 package com.kh.healthDao.mypage.model.service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -158,5 +159,15 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 	public int attendCheck(AttCheck attcheck) {
 		return mypageMapper.attendCheck(attcheck);
 	}
+	
+	// 출석체크 여부 확인
+	@Override
+	public List<AttCheck> attendUserList(int userNo) {
+		return mypageMapper.attendUserList(userNo);
+	}
+
+	
+
+	
 
 }
