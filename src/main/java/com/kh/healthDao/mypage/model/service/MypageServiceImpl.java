@@ -211,4 +211,23 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 		return mypageMapper.cartList(userNo);
 	}
 
+	@Override
+	public int cartStock(int cartNo, String upDown) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("cartNo", cartNo);
+		map.put("upDown", upDown);
+		
+		return mypageMapper.cartStock(map);
+	}
+
+	@Override
+	public int cartDelete(int cartNo) {
+		return mypageMapper.cartDelete(cartNo);
+	}
+
+	@Override
+	public int cartAllDelete(int userNo) {
+		return mypageMapper.cartAllDelete(userNo);
+	}
+
 }

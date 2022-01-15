@@ -19,6 +19,8 @@ import com.kh.healthDao.admin.model.vo.Product;
 import com.kh.healthDao.main.model.service.BannerService;
 import com.kh.healthDao.main.model.vo.Banner;
 import com.kh.healthDao.member.model.vo.UserImpl;
+import com.kh.healthDao.mypage.model.service.CartService;
+import com.kh.healthDao.mypage.model.vo.Cart;
 import com.kh.healthDao.shopping.model.service.ShoppingService;
 import com.kh.healthDao.shopping.model.vo.Shopping;
 
@@ -56,11 +58,13 @@ public class MainController {
 
 	private BannerService bannerService;
 	private ShoppingService shoppingService;
+	private CartService cartService;
 	
 	@Autowired
-	public MainController(BannerService bannerService, ShoppingService shoppingService) {
+	public MainController(BannerService bannerService, ShoppingService shoppingService, CartService cartService) {
 		this.bannerService = bannerService;
 		this.shoppingService = shoppingService;
+		this.cartService = cartService;
 	}
 	
 	
@@ -196,6 +200,24 @@ public class MainController {
 		mv.addObject("recoCount", map.get("recoCount"));
 		mv.setViewName("mypage/mywish");
 		return mv;
+	}
+	
+	//헤더 장바구니 카운트
+	@PostMapping("/main/cartCount")
+	@ResponseBody
+	public int cartCount(@AuthenticationPrincipal UserImpl userImpl) {
+		if(userImpl == null) {
+			return -1;
+		}else {
+			int userNo = userImpl.getUserNo();
+			
+			List<Cart> cartList = cartService.cartList(userNo);
+			
+			int count = cartList.size() + 1;
+			System.out.print(count);
+			
+			return count;
+		}
 	}
 	
 }
