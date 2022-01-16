@@ -137,9 +137,23 @@ public class ManagerController {
 	        cell = row.createCell(4);
 	        cell.setCellValue("정산금액");
 
+	        
 	        // Body
-	        
-	        
+	        for(Payment p : excelList) {
+		        row = sheet.createRow(rowNum++);
+		        cell = row.createCell(0);
+		        cell.setCellValue(p.getPayNo());
+		        cell = row.createCell(1);
+		        cell.setCellValue(p.getProductTitle());
+		        System.out.println(p.getProductTitle());
+		        cell = row.createCell(2);
+		        cell.setCellValue(p.getProductBrand());
+		        cell = row.createCell(3);
+		        cell.setCellValue(p.getQuantity());
+		        cell = row.createCell(4);
+		        cell.setCellValue(p.getQuantity()*p.getProductPrice());
+	        }
+
 	        
 
 	        // 컨텐츠 타입과 파일명 지정
