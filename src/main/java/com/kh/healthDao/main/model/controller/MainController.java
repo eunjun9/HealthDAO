@@ -48,11 +48,6 @@ public class MainController {
 		if(userImpl != null) {
 			userNo = userImpl.getUserNo();
 			List like = shoppingService.likeList(userNo);
-			System.out.println(like.size());
-			for(int i = 0; i<like.size(); i++) {
-				System.out.println(like.get(i));
-				// 왜 두번 실행?
-			}
 			likeList.put("like", like);
 			mv.addObject("likeList", like);
 		}

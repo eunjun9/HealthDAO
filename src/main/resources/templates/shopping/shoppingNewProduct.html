@@ -77,10 +77,11 @@
 	<link rel="stylesheet" type="text/css" href="../../css/main.css">
 	<script  th:inline="javascript">
 		$('#quick .quickArea').css({'position':'absolute', 'top':290});
+		
+		// 상품 있는 곳 어디서나 넣어야 됨
 		/*<![CDATA[*/
 		var likeValue = [[${likeList}]];
 		var likeSize = [[${likeList}]].length;
-	    console.log(likeValue, likeSize);
 
 		$(function(){
 			$.ajax({
