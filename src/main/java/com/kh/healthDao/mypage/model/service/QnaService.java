@@ -24,5 +24,7 @@ public interface QnaService {
 	// 출석체크
 	int attendCheck(AttCheck attcheck);
 	List<AttCheck> attendUserList(int userNo);
+	int attendCount();
+
 	
 }

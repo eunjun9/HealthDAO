@@ -256,6 +256,12 @@
 		  FROM POINT
 		 WHERE POINT_ENDDATE > SYSDATE
 	</select>
+	
+	<select id="attendCount" resultType="_int" parameterType="hashmap">
+		SELECT 
+			COUNT (DISTINCT ATTENDANCE_DATE) 
+		FROM ATT_CHECK
+	</select>
 
 	<insert id="attendCheck" parameterType="com.kh.healthDao.mypage.model.vo.AttCheck">
 		INSERT INTO ATT_CHECK(
@@ -269,11 +275,31 @@
 		)
 	</insert>
 	
+	<insert id="pointCheck" parameterType="_int">
+		INSERT 
+        INTO POINT
+            (POINT_NO
+           , POINT_AMOUNT
+           , POINT_ISSUEDATE
+           , POINT_ENDDATE
+           , USER_NO
+           , P_CATEGORY_NO) 
+        VALUES 
+            (SEQ_POINT_NO.NEXTVAL
+           , '1000'
+           , TO_CHAR(SYSDATE, 'YY-MM-DD')
+           , TO_CHAR(SYSDATE+12, 'YY-MM-DD')
+           , #{userNo}
+           , '2')
+	</insert>
+	
 	<select id="attendUserList" parameterType="_int" resultMap="AttMap">
 		SELECT TO_CHAR(ATTENDANCE_DATE, 'FMDD') ATTENDANCE_DATE
 		  FROM ATT_CHECK
 		 WHERE USER_NO = #{userNo}
 	</select>
+	
+
 
 	
 	<select id="myCouponList" parameterType="_int" resultMap="couponResultMap">

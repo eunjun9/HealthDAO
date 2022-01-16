@@ -423,8 +423,11 @@ public class MypageController {
 		for(int i = 0; i < attendUserList.size(); i++) {
 			dateArr.add(attendUserList.get(i).getStringAttendanceDate());
 		}
-
+		
+		int attendCount = qnaService.attendCount();
+		
 		mv.addObject("attendUserList", attendUserList);
+		mv.addObject("attendCount", attendCount);
 		mv.addObject("dateArr", dateArr);
 		mv.setViewName("mypage/attendanceCheck");
 
@@ -439,7 +442,9 @@ public class MypageController {
 		AttCheck attcheck = new AttCheck();
 		attcheck.setAttendanceDate(attendanceDate);
 		attcheck.setUserNo(userNo);
-		int result = qnaService.attendCheck(attcheck);		
+		int result = qnaService.attendCheck(attcheck);	
+		
+		
 		
 		if(result > 0) {
 			return "출석체크 성공";
