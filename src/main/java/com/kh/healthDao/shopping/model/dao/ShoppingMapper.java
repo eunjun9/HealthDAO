@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.kh.healthDao.admin.model.vo.Product;
+import com.kh.healthDao.mypage.model.vo.Address;
 
 
 @Mapper
@@ -53,4 +54,6 @@ public interface ShoppingMapper {
 	int goodsShoppingListCount();
 
 	Product shoppingPayment(int productNo);
+	
+	List<Address> deliView(int userNo);
 }

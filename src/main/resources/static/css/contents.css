@@ -3215,8 +3215,8 @@ filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#555555', endC
 .profileOutline .nicetomeetyou {font-family:'noto','맑은고딕',sans-serif;font-weight:400;color:#222;font-size: 25px; margin-top: -120px; margin-left: 200px;}
 .profileOutline .grade {font-family:'noto','맑은고딕',sans-serif;font-weight:400;color:#666666;margin-top: 10px; margin-left: 200px;}
 .profileOutline .gradeCondition {font-family:'noto','맑은고딕',sans-serif;font-weight:400;color:#FF5B5D; margin-left: 200px;}
-.profileOutline .coupon1 {border : 1px solid #CCCCCC; height: 140px; width: 140px;margin-top: -116px; margin-left: 656px;  
-	text-align:center;line-height: 100px; border-top: hidden;border-bottom: hidden;}
+.profileOutline .coupon1 {height: 140px; width: 140px;margin-top: -116px; margin-left: 656px;  
+	text-align:center;line-height: 100px;}
 .profileOutline .coupon1 p {font-family:'noto','맑은고딕',sans-serif;font-weight:300;color:#666666; font-size: 15px;}
 .profileOutline .coupon2 {height: 140px; width: 140px;margin-top: -119px; margin-left: 656px;  text-align:center;line-height: 120px;}
 .profileOutline .coupon2 p {font-family:'noto','맑은고딕',sans-serif;font-weight:400;color:#222222; font-size: 25px;}
@@ -3230,7 +3230,7 @@ filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#555555', endC
 .pointOutline .pointInline .pointTitle{font-weight:500; font-size: 20px; margin-left: 25px;margin-top: 25px;width: 100px;}
 .pointOutline .pointInline .pointPrice{font-weight:400; font-size: 15px; margin-top: 60px;}
 .pointOutline .pointInline .pointDay{font-weight:400; font-size: 15px; margin-left: 130px; margin-top: 60px;}
-.yelimListCount {margin-left:75%;}
+
 
 
 /**
@@ -3246,7 +3246,8 @@ filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#555555', endC
 .attenCheckOutline .atten2_check_list .today .do {font-family:'noto','맑은고딕',sans-serif;font-weight:500;color:#BFBFBF;font-size: 20px;}
 .attenCheckOutline .atten2_check_list .today {border : 2px dashed #888888 ;width: 100px; height: 100px;
 	 border-radius : 50%;text-align: center; display:table-cell; vertical-align:middle; }
-.attenCheckOutline .atten2_check_list .heart {width: 80px; height: 80px; position: absolute; margin-top: -90px; margin-left: 12px;opacity:0;}
+.attenCheckOutline .atten2_check_list .heart {width: 80px; height: 80px; position: absolute; margin-top: -102.5px; margin-left: 12px;opacity:0;}
+.attenCheckOutline .atten2_check_list .heart1 {width: 80px; height: 80px; position: absolute; margin-top: 15.5px; margin-left: 12px;}
 .todayOutline {position: relative;}
 .todayOutline:hover .heart{
 	opacity:1;

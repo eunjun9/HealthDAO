@@ -124,14 +124,26 @@
 	</select>
 	
 	<select id="calculateListCount" resultType="_int">
-		SELECT
-		    COUNT(*)
-				FROM
-				(	SELECT
-				  PAY_NO
-				, PAY_DATE
-				FROM PAYMENT
-		ORDER BY PAY_NO DESC)
+	SELECT
+	    COUNT(*)
+			FROM
+			(SELECT
+			  P.PAY_NO
+	        , P.PAY_DATE
+			, P.PAY_METHOD
+			, P.ORDERER_PHONE
+			, P.ORDERER_EMAIL
+			, P.ORDER_STATUS
+			, P.USER_NO
+			, D.PRODUCT_NO
+			, D.QUANTITY
+			, T.PRODUCT_BRAND
+			, T.PRODUCT_TITLE
+			, T.PRODUCT_PRICE
+		 FROM PAYMENT P
+	     JOIN PAY_DETAIL D ON(P.PAY_NO=D.PAY_NO)
+	     JOIN PRODUCT T ON(D.PRODUCT_NO=T.PRODUCT_NO)
+	       ORDER BY P.PAY_NO DESC)
 	</select>
 	
 	<select id="calculateList" resultMap="PaymentResultMap" parameterType="hashmap">
@@ -159,6 +171,21 @@
 		    )
 		WHERE RNUM BETWEEN #{startRow} AND #{endRow}
 	</select>
+	
+	<select id="excelList" resultMap="PaymentResultMap" parameterType="hashmap">
+		SELECT
+	      P.PAY_NO
+	    , D.QUANTITY
+	    , T.PRODUCT_BRAND
+	    , T.PRODUCT_PRICE
+	    , T.PRODUCT_TITLE
+	 FROM PAYMENT P
+	 JOIN PAY_DETAIL D ON(P.PAY_NO=D.PAY_NO)
+	 JOIN PRODUCT T ON(D.PRODUCT_NO=T.PRODUCT_NO)
+	ORDER BY P.PAY_NO
+	</select>
+	
+	
 	
 	<select id="refundListCount" resultType="_int">
 	SELECT

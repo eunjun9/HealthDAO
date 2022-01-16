@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title></title>
+<!-- 메타태그, 스타일 -->
+<th:block th:replace="common/head.html"></th:block>
+<!--// 메타태그, 스타일 -->
+<body>
+	<div id="wrap" class="main">
+		<!-- HEADER + GNB -->
+		<th:block th:replace="common/header.html"></th:block>
+		<!--// HEADER + GNB -->
+
+	<!-- container -->
+	<div id="container" class="pdt0">
+		<div class="site_location">
+			<span><a href="/">HOME</a></span>
+			<em>관리자페이지</em>
+		</div>
+		<div class="mypage adminMemMf">
+			<div class="myMain myCon">
+				<div class="contents">
+					<!-- mypage lnb -->
+					<div th:replace="common/adminGnb.html"></div>
+					<!-- //mypage lnb -->
+
+					<!-- myPageCon -->
+					<div class="myPageCon">
+						<p class="tit mgb80">
+							회원정보 관리
+						</p>
+						<div class="js_tblList">
+							<table class="tblType1" summary="">
+								<caption></caption>
+								<colgroup>
+									<col width="100px"></col>
+									<col width="50px"></col>
+									<col width="100px"></col>
+									<col width="50px"></col>
+									<col width="80px"></col>
+									<col width="70px"></col>
+									<col width="70px"></col>
+								</colgroup>
+								<thead>
+									<tr>
+										<th>아이디</th>
+										<th>이름</th>
+										<th>휴대폰번호</th>
+										<th>회원구분</th>
+										<th>가입일</th>
+										<th>활동여부</th>
+										<th>관리</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="member: ${memberList}">
+										<td class="fc22" id="userId" th:text="${member.userId}"></td>
+										<td class="fc22" id="userName" th:text="${member.userName}"></td>
+										<td class="fc22" id="userPhone" th:text="${member.userPhone}"></td>
+										<!-- <td class="fc22" id="desc" th:text="${member.memberRoleList.get(memberStat.index).authority.desc}">일반회원</td> -->
+										<td class="fc22" id="desc">일반회원</td>
+										<td class="fc22" id="joinDate" th:text="${#dates.format(member.joinDate, 'yyyy-MM-dd')}"></td>
+										<td class="fc22" id="userStatus" th:if="${member.userStatus == 'Y'}">활동가능</td>
+										<td class="fc22" id="userStatus" th:if="${member.userStatus == 'N'}">활동중지</td>
+										<td onclick="showLayer('stockAlt');"><a href="javascript:void(0)" class="btn btnSizeS btnColorG btnTypeB" style="width:70px;"><span>수정</span></a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<!-- //myPageCon -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //container -->
+
+		<!-- 스크립트 -->
+		<th:block th:replace="common/script.html"></th:block>
+		<!--// 스크립트 -->
+		<!-- FOOTER -->
+		<th:block th:replace="common/footer.html"></th:block>
+		<!--// FOOTER -->
+	</div>
+	
+	<!-- 퀵메뉴 + 톡톡 -->
+	<th:block th:replace="common/quickNtalk.html"></th:block>
+	<!--// 퀵메뉴 + 톡톡 -->	
+	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+	<link rel="stylesheet" type="text/css" href="../../css/main.css">
+	<script type="text/javascript" src="../../js/main.js"></script>
+	<script type="text/javascript">
+		$('#quick .quickArea').css({'position':'absolute', 'top':290});
+		mainStart();
+		mainVisual();
+	</script>
+	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+	<!-- 회원정보 수정 팝업 -->
+	<div id="stockAlt" class="lyPopArea" th:each="member: ${memberList}">
+		<div class="lyPop adminMemMfPop">
+			<div class="lyWrap">
+				<button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
+				<div class="lyTit">회원정보 관리</div>
+				<div class="lyBody">
+					<div class="stockApply">
+						<dl>
+							<dt class="ml25 fs16">아이디</dt>
+							<dd class="fs16 userId" th:text="${member.userId}"></dd>
+						</dl>
+						<!-- 옵션 선택일 경우 -->
+						<dl>
+							<dt class="ml25 fs16">회원구분</dt>
+							<dd>
+								<div class="inp_wrap">
+									<div class="inp_select pdtSelect">
+										<div class="selectBox">
+											<button class="title" type="button" title="">옵션</button>
+											<ul class="selList">
+												<li>
+													<input type="radio" value="1" class="option" id="optStock1" name="code">
+													<label for="optStock1">
+														<span class="selectColor colorShipM"></span>일반회원
+													</label>
+												</li>
+												<li>
+													<input type="radio" value="2" class="option" id="optStock2" name="code">
+													<label for="optStock2">
+														<span class="selectColor colorShipM"></span>트레이너
+													</label>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</dd>
+						</dl>
+						<dl>
+							<dt class="ml25 fs16">활동여부</dt>
+							<dd>
+								<div class="inp_wrap">
+									<div class="inp_select pdtSelect">
+										<div class="selectBox">
+											<button class="title" type="button" title="">옵션</button>
+											<ul class="selList">
+												<li>
+													<input type="radio" value="Y" class="option" id="optStock1" name="userStatus">
+													<label for="optStock1">
+														<span class="selectColor colorShipM"></span>활동가능
+													</label>
+												</li>
+												<li>
+													<input type="radio" value="N" class="option" id="optStock2" name="userStatus">
+													<label for="optStock2">
+														<span class="selectColor colorShipM"></span>활동중지
+													</label>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</dd>
+						</dl>
+						<div class="btn_wrap">
+							<button onclick="layerPopClose();showLayer('stockAltSuccess');" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>수정하기</span></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

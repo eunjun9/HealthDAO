@@ -138,6 +138,7 @@
 									<div style="margin-top:5px; text-align:left; margin-left:220px;">
 										<span style="font-size:22px;">총 합계 금액  : </span><input class="total_price" type="text" name="sum" size="11" style="width:95px; margin-right:5px; margin-top:-11px; font-size:22px; text-align:right;" readonly><span style="font-size:22px;">원</span>
 									</div>
+									<input type="hidden" name="userNo" th:value="${#authentication.principal.userNo}">
 									<div class="pdtbuyBtnArea">
 										<div class="btn_wrap" style="display:flex;">
 											<a href="javascript:void(0)" class="btn btnArr btnSizeL btnColorW btnTypeR"><span>장바구니</span></a>

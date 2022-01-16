@@ -30,6 +30,16 @@
 
 	</resultMap>
 	
+	<resultMap id="addressResultMap" type="com.kh.healthDao.mypage.model.vo.Address">
+		<id property="addressNo" column="ADDRESS_NO"/>
+		<result property="receiver" column="RECEIVER"/>
+		<result property="address" column="ADDRESS"/>
+		<result property="recPhone" column="RECEIVER_PHONE"/>
+		<result property="defAddress" column="DEFAULT_ADDRESS"/>
+		<result property="userNo" column="USER_NO"/>
+  	</resultMap>
+	
+	
 	<select id="recentList" resultMap="productResultMap">
 		SELECT
 				PRODUCT_NO
@@ -449,7 +459,19 @@
 	</select>
 	
 	
-	
+	<!-- 배송지 관리 -->
+	<select id="deliView" resultMap="addressResultMap" parameterType="_int" >
+		SELECT
+			   ADDRESS_NO
+			 , RECEIVER
+			 , ADDRESS
+			 , RECEIVER_PHONE
+			 , DEFAULT_ADDRESS
+			 , USER_NO
+		  FROM ADDRESS
+		  JOIN MEMBER USING(USER_NO)
+		 WHERE USER_NO = #{userNo}
+	</select>
 	
 	
 	

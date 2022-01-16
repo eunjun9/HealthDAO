@@ -1,7 +1,6 @@
 package com.kh.healthDao.admin;
 
-
-
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +21,9 @@ import com.kh.healthDao.admin.model.service.NoticeService;
 import com.kh.healthDao.admin.model.vo.Coupon;
 import com.kh.healthDao.admin.model.vo.Notice;
 import com.kh.healthDao.admin.model.vo.Product;
+import com.kh.healthDao.member.model.vo.Member;
 import com.kh.healthDao.member.model.vo.UserImpl;
 import com.kh.healthDao.mypage.model.vo.MemberSound;
-
-
 
 @Controller
 @RequestMapping("/admin/*")
@@ -42,6 +40,11 @@ public class adminController {
 		this.couponService = couponService;
 		this.noticeService = noticeService;
 		this.memberSoundService = memberSoundService;
+	}
+	
+	@GetMapping(value= {"/", "/myOrder"})
+	public String mypage() {
+		return "redirect:/admin/memberInfo";
 	}
 	
 	@GetMapping("/productRegist")
@@ -214,29 +217,25 @@ public class adminController {
 		return "redirect:/admin/memberSoundList?page=1";
 	}
 	
+	/* 회원정보 관리 */
+	@GetMapping("memberInfo")
+	public ModelAndView memberInfoView(ModelAndView mv) {
+		List<Member> memberList = adminService.memberInfoView();
+		
+		mv.addObject("memberList", memberList);
+		mv.setViewName("admin/memberInfo");
+		
+		return mv;
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@GetMapping("trainerInfo")
+	public ModelAndView trainerInfoView(ModelAndView mv) {
+		List<Member> trainerList = adminService.trainerInfoView();
+		
+		mv.addObject("trainerList", trainerList);
+		mv.setViewName("admin/trainerInfo");
+		
+		return mv;
+	}
 	
 }

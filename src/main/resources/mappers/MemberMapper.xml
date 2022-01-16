@@ -152,10 +152,22 @@
 		)
 	</insert>
 	
-	<!-- id 중복체크 -->
+	<!-- 로그인 체크 -->
+	<select id="loginChk" resultType="_int">
+		<![CDATA[
+			SELECT COUNT(*) FROM MEMBER
+			 WHERE USER_ID = #{userId}
+			   AND USER_PWD = #{userPwd}
+			   AND USER_STATUS = 'Y'
+		]]>
+	</select>
+	
+	<!-- 아이디 중복체크 -->
 	<select id="idChk" resultType="_int">
-		SELECT COUNT(*) FROM MEMBER
-		WHERE USER_ID = #{ userId }
+		<![CDATA[
+			SELECT COUNT(*) FROM MEMBER
+			 WHERE USER_ID = #{userId}
+		]]>
 	</select>
 	
 	<!-- 아이디 찾기 -->
