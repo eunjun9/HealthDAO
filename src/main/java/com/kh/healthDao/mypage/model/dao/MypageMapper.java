@@ -54,6 +54,8 @@ public interface MypageMapper {
 	// 출석체크
 	int attendCheck(AttCheck attcheck);
 	List<AttCheck> attendUserList(int userNo);
+	int pointCheck(int userNo);
+	int attendCount();
 
 	/* 내 정보 수정 */
 	Member myInfoView(int userNo);
@@ -94,6 +96,12 @@ public interface MypageMapper {
 	int cartDelete(int cartNo);
 
 	int cartAllDelete(int userNo);
+
+	
+
+	
+
+	
 
 
 }

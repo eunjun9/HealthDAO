@@ -77,7 +77,7 @@
 										<form action="/manager/refundOk" method="post">
 											<td>
 												<button th:if="${rlist.getRefundStatus.toString().equals('환불중')}" type="submit" id="subbtn" class="btn btnSizeS btnColorW btnTypeB" style="width:80px;" th:text="${rlist.refundStatus}"><span></span></button>
-												<button th:if="${rlist.getRefundStatus.toString().equals('환불완료')}" type="submit" id="subbtn" class="btn btnSizeS" style="width:80px;" th:text="${rlist.refundStatus}" disabled ><span></span></button>				
+												<button th:if="${rlist.getRefundStatus.toString().equals('환불완료')}" type="submit" id="subbtn" class="btn btnSizeS" style="width:80px; cursor:default" th:text="${rlist.refundStatus}" disabled ><span></span></button>				
 											</td>
 											<input type="hidden" name="refundNo" th:value="${rlist.refundNo}">
 										</form>

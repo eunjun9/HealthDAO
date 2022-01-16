@@ -30,13 +30,12 @@
 								<img class="a_check" src="/images/point/A_check.png">
 							</p>
 							<div class="attCheckContArea">
-								<p>
-									이준우님 반가워요,<br>이번달 출석체크 현황입니다 :)
-								</p>
+								<b><h1><span sec:authentication="principal.userName"></span>님 반가워요,
+								<br><br>&nbsp;&nbsp;&nbsp; 이번달 출석체크 현황입니다 :)</b></h1>
 								<dl class="dayCount">
 									<dt>나의 출석 일수</dt>
 									<dd>
-										<em>10</em>회
+										<em th:text="${attendCount}"></em>회
 									</dd>
 								</dl>
 								<dl class="couponCount">
@@ -104,8 +103,8 @@
 											<em class="n" th:text="${date}" th:id="'n' + ${date}"></em><br> <em class="d">DAY</em>
 										</div>
 										<button class="btnClass" th:id="'attBtn' + ${date}"
-												th:value="${date}">
-												<img class="heart" src="/images/point/heart.png">
+												th:value="${date}" disabled>
+												<img class="heart" src="/images/point/heart.png" style="display:none">
 										</button>
 									</li>
 								</ul>
@@ -163,19 +162,30 @@
    					data : result,
    					type : "post",
    					success : function(data){
-   						alert(data);
-   				
+   						location.reload();
    					},
    					error : function(e){
    						console.log(e)
-   	
    					}
-   				
    				});    	
    			});
-
    		})
+   		
+   		var now = new Date();	// 현재 날짜 및 시간
+		var date = now.getDate();	// 일
+		console.log("일 : ", date);
+		var today = "attBtn"+date;
+
+		var name = "attBtn"+date;
+		console.log(name);
+		
+   		if(today == name){
+   			$("#"+name).attr("disabled", false);
+   			$("#"+name).find("img").css("display", "block");
+   		}
+   		
    </script>
+
  
    
 

@@ -162,7 +162,11 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 	// 출석체크
 	@Override
 	public int attendCheck(AttCheck attcheck) {
-		return mypageMapper.attendCheck(attcheck);
+		int pointResult = mypageMapper.pointCheck(attcheck.getUserNo());
+		int attendResult = mypageMapper.attendCheck(attcheck);
+		int result = 0;
+		if(pointResult > 0 && attendResult > 0) result = 1;
+		return result;
 	}
 	
 	// 출석체크 여부 확인
@@ -171,7 +175,6 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 		return mypageMapper.attendUserList(userNo);
 	}
 
-	
 
 	
 
@@ -284,5 +287,12 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 	public int cartAllDelete(int userNo) {
 		return mypageMapper.cartAllDelete(userNo);
 	}
+
+	@Override
+	public int attendCount() {
+		return mypageMapper.attendCount();
+	}
+
+
 
 }
