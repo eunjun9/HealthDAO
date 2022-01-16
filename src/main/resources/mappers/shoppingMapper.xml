@@ -273,6 +273,15 @@
 	</delete>
 	
 	
+	<select id="findLikeList" resultType="_int">
+		SELECT
+				PRODUCT_NO
+		  FROM PRODUCT
+          JOIN PRODUCT_LIKE USING (PRODUCT_NO)
+         WHERE USER_NO = #{userNo}
+	</select>
+	
+	
 	<select id="shoppingList" resultMap="productResultMap" parameterType="hashmap">
 		SELECT *
 				FROM

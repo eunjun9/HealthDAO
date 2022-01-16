@@ -46,9 +46,8 @@
                                 4.5 <span class="count">(리뷰 18)</span>
                             </div>
                         </div>
-                        <span th:text="${wishList}"></span>
-                        <a href="javascript:void(0);" th:onclick="|javascript:addWish('${newProduct.productNo}')|" th:id="pdtNo_+${newProduct.productNo}" class="btn_like likeM"><span class="hide">찜하기</span></a>
-                        <a href="javascript:void(0);" th:onclick="|javascript:cartInsert('${newProduct.productNo}')|" class="btn_cart cartM"><span>장바구니</span></a>
+	                    <a href="javascript:void(0);" th:onclick="|javascript:addWish('${newProduct.productNo}')|" th:id="pdtNo_+${newProduct.productNo}" class="btn_like likeM"><span class="hide">찜하기</span></a>
+	                    <a href="javascript:void(0);" th:onclick="|javascript:cartInsert('${newProduct.productNo}')|" class="btn_cart cartM"><span>장바구니</span></a>
                     </li>
                 </ul>
             </div>
@@ -76,8 +75,28 @@
 	<!--// 퀵메뉴 + 톡톡 -->	
 	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 	<link rel="stylesheet" type="text/css" href="../../css/main.css">
-	<script type="text/javascript">
+	<script  th:inline="javascript">
 		$('#quick .quickArea').css({'position':'absolute', 'top':290});
+		/*<![CDATA[*/
+		var likeValue = [[${likeList}]];
+		var likeSize = [[${likeList}]].length;
+	    console.log(likeValue, likeSize);
+
+		$(function(){
+			$.ajax({
+				url : "/",
+				method : 'GET',
+				success : function(data){
+					for(let i = 0; i < likeSize; i++){
+						$("#pdtNo_"+likeValue[i]).addClass('on');	// 값이 있으면 class on 추가
+					}
+				},
+				error : function(e){
+					console.log(e);
+				}
+			});
+		});
+		/*]]>*/
 	</script>
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 </body>

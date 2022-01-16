@@ -1,5 +1,6 @@
 package com.kh.healthDao.shopping.model.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -55,15 +56,23 @@ public class ShoppingController {
 	
 	// 쇼핑 신상품
 	@GetMapping("/newProduct")
-	public ModelAndView shoppingNewProduct(ModelAndView mv, @RequestParam int page) {
+	public ModelAndView shoppingNewProduct(ModelAndView mv, @RequestParam int page, @AuthenticationPrincipal UserImpl userImpl) {
 		Map<String, Object> map = shoppingService.ShoppingList(page);
-		
+
 		mv.addObject("shoppingList", map.get("shoppingList"));
 		mv.addObject("listCount", map.get("listCount"));
 		mv.addObject("pi", map.get("pi"));
 		
 		mv.setViewName("shopping/shoppingNewProduct");
-		
+
+		// 찜한 상품 확인
+		int userNo = 0;		
+		if(userImpl != null) {
+			userNo = userImpl.getUserNo();
+			List like = shoppingService.likeList(userNo);
+			mv.addObject("likeList", like);
+		}
+
 		return mv;
 	}
 	

@@ -33,7 +33,7 @@ public class MainController {
 	 */
 
 	@GetMapping(value= {"/", "/main"})
-	public ModelAndView findBannerRankList(ModelAndView mv) {
+	public ModelAndView findBannerRankList(ModelAndView mv, @AuthenticationPrincipal UserImpl userImpl) {
 		
 		List<Banner> bannerList = bannerService.bannerRankList();
 		Map<String, Object> map = shoppingService.pdtList();
@@ -41,8 +41,23 @@ public class MainController {
 		mv.addObject("bannerList", bannerList);
 		mv.addObject("recoList", map.get("recoList"));
 		mv.addObject("recoCount", map.get("recoCount"));
+
+		// 찜한 상품 확인
+		Map<String, Object> likeList = new HashMap<>();
+		int userNo = 0;		
+		if(userImpl != null) {
+			userNo = userImpl.getUserNo();
+			List like = shoppingService.likeList(userNo);
+			System.out.println(like.size());
+			for(int i = 0; i<like.size(); i++) {
+				System.out.println(like.get(i));
+				// 왜 두번 실행?
+			}
+			likeList.put("like", like);
+			mv.addObject("likeList", like);
+		}
+
 		mv.setViewName("main/main");
-		
 		return mv;
 	}
 	
