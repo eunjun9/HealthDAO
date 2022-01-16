@@ -76,7 +76,8 @@
 										<td th:text="${#numbers.formatInteger(rlist.quantity * rlist.productPrice, 0, 'COMMA')+'원'}"></td>
 										<form action="/manager/refundOk" method="post">
 											<td>
-												<button type="submit" id="subbtn" class="btn btnSizeS btnColorW btnTypeB" style="width:80px;" th:text="${rlist.refundStatus}"><span></span></button>		
+												<button th:if="${rlist.getRefundStatus.toString().equals('환불중')}" type="submit" id="subbtn" class="btn btnSizeS btnColorW btnTypeB" style="width:80px;" th:text="${rlist.refundStatus}"><span></span></button>
+												<button th:if="${rlist.getRefundStatus.toString().equals('환불완료')}" type="submit" id="subbtn" class="btn btnSizeS" style="width:80px;" th:text="${rlist.refundStatus}" disabled ><span></span></button>				
 											</td>
 											<input type="hidden" name="refundNo" th:value="${rlist.refundNo}">
 										</form>
@@ -134,15 +135,7 @@
 			'top' : 290
 		});
 	</script>
-	
-	<script>
-	$(function(){
 
-	    $("button").click(function(){
-	    	$(this).css("color","coral")})
-
-	})
-	</script>
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 </body>
 </html>
