@@ -26,6 +26,7 @@ public interface ShoppingMapper {
 	Product wishChk(int productNo, int userNo);
 	int insertWish(int productNo, int userNo);
 	int deleteWish(int productNo, int userNo);
+	List findLikeList(int userNo);
 
 	List<Product> ShoppingList();
 	

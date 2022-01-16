@@ -110,6 +110,11 @@ public class ShoppingServiceImpl implements ShoppingService{
 	public int deleteWish(int productNo, int userNo) {
 		return shoppingMapper.deleteWish(productNo, userNo);
 	}
+	// 상품 리스트에서 찜한 상품들 확인
+	@Override
+	public List likeList(int userNo) {
+		return shoppingMapper.findLikeList(userNo);
+	}
   
 	/* 상품 음료 */
 	@Override

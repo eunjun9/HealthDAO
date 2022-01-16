@@ -58,4 +58,6 @@ public interface ShoppingService {
 
 	int deleteWish(int productNo, int userNo);
 
+	List likeList(int userNo);
+
 }
