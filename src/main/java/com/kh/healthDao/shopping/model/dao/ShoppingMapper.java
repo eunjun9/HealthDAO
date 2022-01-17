@@ -56,4 +56,6 @@ public interface ShoppingMapper {
 	Product shoppingPayment(int productNo);
 	
 	List<Address> deliView(int userNo);
+	
+	List<Product> searchList(String searchPdt);
 }

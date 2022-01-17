@@ -63,4 +63,6 @@ public interface ShoppingService {
 
 	List likeList(int userNo);
 
+	List<Product> searchList(String searchPdt);
+
 }

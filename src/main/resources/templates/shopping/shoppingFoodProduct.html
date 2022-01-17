@@ -34,7 +34,7 @@
                                 <li class="bg_r">FREE</li>
                                 <li class="bg_r">GIFT</li>
                             </ul>
-                            <a href="/shopping/detail?productNo=" th:attrappend="href=${foodProduct.productNo}" class="imgLink"><img src="/resources/web/images/temp/pdt_img1.png" alt="바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널"></a>
+                            <a href="/shopping/detail?productNo=" th:attrappend="href=${foodProduct.productNo}" class="imgLink"><img src="/resources/web/images/temp/pdt_img1.png" alt=""></a>
                         </div>
                         <div class="pdtTxt">
                             <p class="pdtHead" style="color:#4f8ffa;">2019 누적판매 15,591건!</p><!-- 문구가 없어도 태그삭제 X -->
@@ -46,8 +46,8 @@
                                 4.5 <span class="count">(리뷰 18)</span>
                             </div>
                         </div>
-                        <a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM on"><span class="hide">찜하기</span></a>
-                        <a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
+	                    <a href="javascript:void(0);" th:onclick="|javascript:addWish('${foodProduct.productNo}')|" th:id="pdtNo_+${foodProduct.productNo}" class="btn_like likeM"><span class="hide">찜하기</span></a>
+	                    <a href="javascript:void(0);" th:onclick="|javascript:cartInsert('${foodProduct.productNo}')|" class="btn_cart cartM"><span>장바구니</span></a>
                     </li>
                 </ul>
             </div>

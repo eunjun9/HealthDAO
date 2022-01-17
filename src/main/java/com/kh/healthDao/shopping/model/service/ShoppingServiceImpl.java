@@ -272,4 +272,9 @@ public class ShoppingServiceImpl implements ShoppingService{
 	public List<Address> deliView(int userNo) {
 		return shoppingMapper.deliView(userNo);
 	}
+
+	@Override
+	public List<Product> searchList(String searchPdt) {
+		return shoppingMapper.searchList(searchPdt);
+	}
 }
