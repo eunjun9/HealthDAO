@@ -231,7 +231,8 @@
 		    , P_CATEGORY_NAME
 		  FROM POINT
 		  JOIN POINT_CATEGORY USING(P_CATEGORY_NO)
-		 WHERE POINT_ENDDATE > SYSDATE
+		 WHERE USER_NO = #{userNo}
+		   AND POINT_ENDDATE > SYSDATE
 		 ORDER BY POINT_ISSUEDATE DESC
 		  ) A
 		    )
@@ -248,7 +249,8 @@
 				      POINT_NO
 				     , POINT_ENDDATE
 				  FROM POINT
-				   WHERE POINT_ENDDATE > SYSDATE
+				 WHERE USER_NO = #{userNo}
+				   AND POINT_ENDDATE > SYSDATE
 				   ) A
 				ORDER BY POINT_NO DESC)
 	</select>
@@ -257,13 +259,15 @@
 		SELECT
 		   SUM(POINT_AMOUNT)
 		  FROM POINT
-		 WHERE POINT_ENDDATE > SYSDATE
+		 WHERE USER_NO = #{userNo}
+		   AND POINT_ENDDATE > SYSDATE
 	</select>
 	
 	<select id="attendCount" resultType="_int" parameterType="hashmap">
 		SELECT 
 			COUNT (DISTINCT ATTENDANCE_DATE) 
 		FROM ATT_CHECK
+	   WHERE USER_NO = #{userNo}
 	</select>
 
 	<insert id="attendCheck" parameterType="com.kh.healthDao.mypage.model.vo.AttCheck">
@@ -301,9 +305,6 @@
 		  FROM ATT_CHECK
 		 WHERE USER_NO = #{userNo}
 	</select>
-	
-
-
 	
 	<select id="myCouponList" parameterType="_int" resultMap="couponResultMap">
 		SELECT

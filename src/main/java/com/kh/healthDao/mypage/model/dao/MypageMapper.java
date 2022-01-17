@@ -42,9 +42,9 @@ public interface MypageMapper {
 	List<Qna> userReviewList(Map<String, Object> pageRow);
 
 	// 포인트 페이징
-	int pointListCount();
+	int pointListCount(int userNo);
 	List<Point> listPoint(Map<String, Object> pageRow);
-	int pointCount();
+	int pointCount(int userNo);
 
 	Review reviewDetail(int reviewNo);
 
@@ -54,7 +54,7 @@ public interface MypageMapper {
 	int attendCheck(AttCheck attcheck);
 	List<AttCheck> attendUserList(int userNo);
 	int pointCheck(int userNo);
-	int attendCount();
+	int attendCount(int userNo);
 
 	/* 내 정보 수정 */
 	Member myInfoView(int userNo);

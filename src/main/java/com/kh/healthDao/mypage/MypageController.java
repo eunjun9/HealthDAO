@@ -399,9 +399,10 @@ public class MypageController {
 		
 	/* 보유 포인트 내역 */
 	@GetMapping("/point")
-	public ModelAndView point(ModelAndView mv,  @RequestParam int page) {
+	public ModelAndView point(ModelAndView mv,  @RequestParam int page, @AuthenticationPrincipal UserImpl userImpl) {
 		
-		Map<String, Object> map = qnaService.pointList(page);
+		int userNo = userImpl.getUserNo();
+		Map<String, Object> map = qnaService.pointList(page, userNo);
 		
 		mv.addObject("PointList", map.get("PointList"));
 		mv.addObject("listCount", map.get("listCount"));
@@ -424,7 +425,7 @@ public class MypageController {
 			dateArr.add(attendUserList.get(i).getStringAttendanceDate());
 		}
 		
-		int attendCount = qnaService.attendCount();
+		int attendCount = qnaService.attendCount(userNo);
 		
 		mv.addObject("attendUserList", attendUserList);
 		mv.addObject("attendCount", attendCount);
