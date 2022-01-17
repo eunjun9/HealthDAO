@@ -122,11 +122,11 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 
 	// 페이징 된 포인트 내역
 	@Override
-	public Map<String, Object> pointList(int page) {
-		int listCount = mypageMapper.pointListCount();
+	public Map<String, Object> pointList(int page, int userNo) {
+		int listCount = mypageMapper.pointListCount(userNo);
 		Paging pi = new Paging(page, listCount, 5, 6);
 		
-		int pointCount = mypageMapper.pointCount();
+		int pointCount = mypageMapper.pointCount(userNo);
 		
 		int startRow = (pi.getPage() - 1) * pi.getBoardLimit() + 1;
 		int endRow = startRow + pi.getBoardLimit() - 1;
@@ -135,6 +135,7 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 		pageRow.put("page", page);
 		pageRow.put("startRow", startRow);
 		pageRow.put("endRow", endRow);
+		pageRow.put("userNo", userNo);
 		
 		List<Point> PointList = mypageMapper.listPoint(pageRow);
 		
@@ -289,8 +290,8 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 	}
 
 	@Override
-	public int attendCount() {
-		return mypageMapper.attendCount();
+	public int attendCount(int userNo) {
+		return mypageMapper.attendCount(userNo);
 	}
 
 	// 룰렛
@@ -298,6 +299,14 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 	public int rouletteInsert(int userNo, int pointamount) {
 		return mypageMapper.rouletteInsert(userNo, pointamount);
 	}
+
+	
+
+
+
+
+
+
 
 
 
