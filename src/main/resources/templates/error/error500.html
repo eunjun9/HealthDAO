@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<title></title>
+<body>
+	<div id="wrap">
+		<div class="error_page">
+			<h1 class="error_page_logo"><span class="logo"></span></h1>
+			<p class="error_page_p1">요청하신 페이지에 에러가 발생하였습니다. <span>서비스 이용에 불편을 드려 죄송합니다.</span></p>
+			<p class="error_page_p2">[ERR_CODE:500]</p>			
+			<p class="error_page_p3">일시적인 시스템 오류로 인해 페이지를 불러올 수 없습니다.<br>잠시 후 다시 시도해주세요.<br><br>관련하여 문의가 있으시면 언제든지, 고객센터로 문의하여 주십시오.</p>
+			<div class="btn_wrap">
+				<a href="javascript:void(0);history.back();" class="btn btnColorW">이전 페이지</a>
+				<a href="/" class="btn btnColorB">홈으로 이동</a>
+			</div>
+		</div>
+	</div>
+</body>
+<style>
+	/**
+	태그 초기화
+	**/
+	html, body{width:100%;height:100%;}
+	body{margin:0;font-family:'noto','맑은고딕',sans-serif;font-weight:400;font-size:14px;line-height:26px;color:#222;}
+	div, iframe, h1, h2, h3, h4, h5, h6, p, button, abbr, address, blockquote, q, sub, sup, dl, dt, dd, ol, ul, li, fieldset, form, legend, table, caption, tbody, tfoot, thead, tr, th, td, hr{padding:0;margin:0;}
+	header, footer, section, article, aside, nav, hgroup, details, menu, figure, figcaption{display:block;padding:0;margin:0;}
+	h1, h2, h3, h4, h5, h6{font-weight:400;line-height:1;}
+	ol, ul, li{list-style:none;}
+	table{table-layout:fixed;width:100%;border-collapse:collapse;border-spacing:0;}
+	th{font-weight:400;}
+	form, fieldset, iframe{border:0;}
+	img{border:0;vertical-align:top;font-size:0;line-height:0;}
+	button{border:0;}
+	hr{border:0;}
+	i, em, address{font-style:normal;}
+	strong, b{font-weight:500;}
+	label, button{cursor:pointer;}
+	blockquote, q{quotes:none;}
+	caption, legend{overflow:hidden;width:0;height:0;font-size:0;line-height:0;text-indent:-50000px;}
+	input, textarea, select, button{padding:0;font-family:'noto','맑은고딕',sans-serif;font-weight:400;font-size:14px;color:#222;vertical-align:middle;background:none;border:0;outline:none;}
+	input::-ms-clear, input::-ms-reveal{display:none;}
+	a{color:#222;text-decoration:none;outline:none;}
+	a:hover{text-decoration:none;}
+	
+	.error_page{position:absolute;top:50%;left: 0;width: 100%;text-align:center;transform:translateY(-50%);}
+	.error_page .error_page_logo{position:relative;}
+	.error_page .error_page_logo .logo{position:relative;display:block;z-index:1;width:200px;height:65px;margin:0 auto;background:#fff url('../../images/common/logo.png') no-repeat center;}
+	.error_page .error_page_logo:after{content:'';position:absolute;top:35px;left:0;width:100%;height:1px;background:#222;}
+	.error_page .error_page_p1{margin-top: 42px;font-size: 26px;color:#222;font-weight: 500;line-height: 38px;}
+	.error_page .error_page_p1 span{display:block;color:#ee304c;}
+	.error_page .error_page_p2{margin-top: 2px;font-size: 16px;color:#222;font-weight: 500;line-height: 40px;}
+	.error_page .error_page_p3{margin-top: 22px;font-size: 14px;color: #222;line-height: 26px;}
+	.error_page .btn_wrap{margin: 54px 0 0;font-size: 0;}
+	.error_page .btn_wrap .btn{display:inline-block;vertical-align:middle;width: 180px;height: 50px;line-height: 48px;margin:0 2px;font-size: 16px;border-radius:50px;border:1px solid #222;box-sizing: border-box;}
+	.error_page .btn_wrap .btn.btnColorW{background:#fff;color:#222;}
+	.error_page .btn_wrap .btn.btnColorB{background:#222;color:#fff;}
+</style>
+</html>

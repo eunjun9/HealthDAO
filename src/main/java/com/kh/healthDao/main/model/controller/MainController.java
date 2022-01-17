@@ -22,8 +22,6 @@ import com.kh.healthDao.member.model.vo.UserImpl;
 import com.kh.healthDao.mypage.model.service.CartService;
 import com.kh.healthDao.mypage.model.vo.Cart;
 import com.kh.healthDao.shopping.model.service.ShoppingService;
-import com.kh.healthDao.shopping.model.vo.Shopping;
-
 
 @Controller
 public class MainController {
@@ -43,12 +41,10 @@ public class MainController {
 		mv.addObject("recoCount", map.get("recoCount"));
 
 		// 찜한 상품 확인
-		Map<String, Object> likeList = new HashMap<>();
 		int userNo = 0;		
 		if(userImpl != null) {
 			userNo = userImpl.getUserNo();
 			List like = shoppingService.likeList(userNo);
-			likeList.put("like", like);
 			mv.addObject("likeList", like);
 		}
 
@@ -66,6 +62,11 @@ public class MainController {
 		return "admin/time";
 	}
 
+	@GetMapping("/error2")
+	public String error2() {
+		return "error/error2";
+	}
+
 	private BannerService bannerService;
 	private ShoppingService shoppingService;
 	private CartService cartService;
@@ -76,7 +77,6 @@ public class MainController {
 		this.shoppingService = shoppingService;
 		this.cartService = cartService;
 	}
-	
 	
 	@GetMapping("/banner")
 	public ModelAndView findBannerList(ModelAndView mv, @RequestParam int page) {

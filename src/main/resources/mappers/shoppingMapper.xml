@@ -369,6 +369,16 @@
 		ORDER BY PRODUCT_NO DESC)
 	</select>
 	
+	<select id="searchList" resultMap="productResultMap" parameterType="String">
+		SELECT
+				PRODUCT_NO
+			  , PRODUCT_BRAND
+			  , PRODUCT_TITLE
+			  , PRODUCT_PRICE
+		 FROM PRODUCT
+         WHERE PRODUCT_BRAND LIKE '%'|| #{searchPdt} ||'%'
+            OR PRODUCT_TITLE LIKE '%'|| #{searchPdt} ||'%'
+	</select>
 	
 	<select id="NewProductSelect" resultMap="productResultMap" parameterType="_int">
 		SELECT
@@ -376,7 +386,6 @@
 			  , PRODUCT_BRAND
 			  , PRODUCT_TITLE
 			  , PRODUCT_PRICE
-			  
 		 FROM PRODUCT
 		 ORDER BY PRODUCT_NO DESC
 	</select>
