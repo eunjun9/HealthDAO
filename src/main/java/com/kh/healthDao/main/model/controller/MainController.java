@@ -62,9 +62,9 @@ public class MainController {
 		return "admin/time";
 	}
 
-	@GetMapping("/error2")
-	public String error2() {
-		return "error/error2";
+	@GetMapping("/error500")
+	public String error500() {
+		return "error/error500";
 	}
 
 	private BannerService bannerService;
