@@ -86,6 +86,8 @@
 		</association>
 	</resultMap>
 	
+
+	
 	<select id="findQnaList" resultMap="qnaResultMap" parameterType="hashmap">
 		SELECT *
 		FROM
@@ -230,6 +232,7 @@
 		  FROM POINT
 		  JOIN POINT_CATEGORY USING(P_CATEGORY_NO)
 		 WHERE POINT_ENDDATE > SYSDATE
+		 ORDER BY POINT_ISSUEDATE DESC
 		  ) A
 		    )
 			WHERE RNUM BETWEEN #{startRow} AND #{endRow}
@@ -594,5 +597,23 @@
 		DELETE FROM CART
 		WHERE USER_NO = #{userNo}
 	</delete>
+	
+	<insert id="rouletteInsert">
+		INSERT INTO POINT(
+		    POINT_NO
+		  , POINT_AMOUNT
+		  , POINT_ISSUEDATE
+		  , POINT_ENDDATE
+		  , USER_NO
+		  , P_CATEGORY_NO
+		) VALUES (
+		    SEQ_POINT_NO.NEXTVAL
+		  , #{pointAmount}
+		  , TO_CHAR(SYSDATE, 'YY-MM-DD')
+		  , TO_CHAR(SYSDATE+14, 'YY-MM-DD')
+		  , #{userNo}
+		  , '3'
+		)	
+	</insert>
 
 </mapper>

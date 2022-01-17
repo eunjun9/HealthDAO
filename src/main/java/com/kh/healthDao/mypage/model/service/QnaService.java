@@ -25,6 +25,11 @@ public interface QnaService {
 	int attendCheck(AttCheck attcheck);
 	List<AttCheck> attendUserList(int userNo);
 	int attendCount();
+	
+	// 룰렛
+	int rouletteInsert(int userNo, int pointAmount);
+	
+	
 
 	
 }
