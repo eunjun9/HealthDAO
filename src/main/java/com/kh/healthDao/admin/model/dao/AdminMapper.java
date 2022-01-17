@@ -92,6 +92,10 @@ public interface AdminMapper {
 
 	public List<Member> trainerInfoView();
 
+	public int memberInfoMf(Member member);
+
+	public int memberInfoCodeMf(Member member);
+
 
 	
 

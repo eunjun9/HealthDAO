@@ -210,6 +210,16 @@ public class AdminServiceImpl implements AdminService, CouponService, NoticeServ
 		return adminMapper.trainerInfoView();
 	}
 
+	@Override
+	public int memberInfoMf(Member member) {
+		return adminMapper.memberInfoMf(member);
+	}
+
+	@Override
+	public int memberInfoCodeMf(Member member) {
+		return adminMapper.memberInfoCodeMf(member);
+	}
+
 
 	/* @Override
 	public List<Product> listProduct(Product product) {

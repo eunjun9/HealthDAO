@@ -28,6 +28,10 @@ public interface AdminService {
 
 	List<Member> trainerInfoView();
 
+	int memberInfoMf(Member member);
+
+	int memberInfoCodeMf(Member member);
+
 	
 
 }

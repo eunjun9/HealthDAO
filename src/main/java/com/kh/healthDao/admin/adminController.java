@@ -1,5 +1,6 @@
 package com.kh.healthDao.admin;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +23,7 @@ import com.kh.healthDao.admin.model.vo.Coupon;
 import com.kh.healthDao.admin.model.vo.Notice;
 import com.kh.healthDao.admin.model.vo.Product;
 import com.kh.healthDao.member.model.vo.Member;
+import com.kh.healthDao.member.model.vo.MemberRole;
 import com.kh.healthDao.member.model.vo.UserImpl;
 import com.kh.healthDao.mypage.model.vo.MemberSound;
 
@@ -226,6 +228,28 @@ public class adminController {
 		mv.setViewName("admin/memberInfo");
 		
 		return mv;
+	}
+	
+	@PostMapping("memberInfoMf")
+	public String memberInfoMf(@RequestParam int userNo, @RequestParam int authorityCode, @RequestParam String userStatus, RedirectAttributes rttr) {
+		Member member = new Member();
+		member.setUserNo(userNo);
+		member.setUserStatus(userStatus);
+		
+		String msg = "";
+		if(authorityCode == 1) {
+			msg = adminService.memberInfoMf(member) > 0 ? "회원정보 수정 완료" : "회원정보 수정 실패";
+		} else if(authorityCode == 2) {
+			member.setAuthorityCode(authorityCode);
+			int result = 0;
+			result = adminService.memberInfoMf(member);
+			result += adminService.memberInfoCodeMf(member);
+			msg = result > 1 ? "회원정보 수정 완료" : "회원정보 수정 실패";
+		}
+		
+		rttr.addFlashAttribute("msg", msg);
+		
+		return "redirect:/admin/memberInfo";
 	}
 	
 	@GetMapping("trainerInfo")
