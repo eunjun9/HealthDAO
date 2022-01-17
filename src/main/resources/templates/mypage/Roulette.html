@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+				xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <title></title>
 <!-- 메타태그, 스타일 -->
@@ -75,6 +76,7 @@
 			</div>
 		</div>
 	</div>
+	<input type="hidden" id="rouletteNo" th:value="${#authentication.principal.userNo}">
 	<!-- //container -->
 	
 	<!-- 스크립트 -->
@@ -95,7 +97,7 @@
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 	<!-- 룰렛-->
 	<script>
-		const ROUTLETTE_DATA = ["500P", 0, "1000P", "무료배송", 0, "300P", "50P", 0];
+		const ROUTLETTE_DATA = ["500P", 0, "1000P", "50000P", 0, "300P", "50P", 0];
 		const DEFAULT_TEXT_ZERO = "꽝";
 		const BASE_ROTATE_DEG = 7200;
 		const loopAnimationOptions = {
@@ -123,22 +125,56 @@
 		];
 		roulette.animate(loopAnimation, loopAnimationOptions);
 		var result = totalDeg / 360 % 1 * 360;
+		var pointAmount = 0;
 	      setTimeout(function(){
+	    	  
 	         if(result == 67.5){
 	            alert("500P");
+	            pointAmount = 500;
 	         } else if(result == 157.5){
 	            alert("50P");
+	            pointAmount = 50;
 	         } else if(result == 202.5){
 	            alert("300P");
+	            pointAmount = 300;
 	         } else if(result == 292.5){
-	            alert("무료배송");
+	            alert("50000P");
+	            pointAmount = 50000;
 	         } else if(result == 337.5){
 	            alert("1000P");
-	         } else alert("꽝");
+	            pointAmount = 1000;
+	         } else {
+	        	 alert("꽝");
+	        	 pointAmount = 0;
+	         };
+	         
+	         rouletteInsert(pointAmount);
+	       	
 	      }, 7000);
 		}
 		
+		function rouletteInsert(pointAmount){
+			 $.ajax({
+	     			url : "/mypage/rouletteInsert",
+	     			data : {
+	     				pointAmount : pointAmount
+	     			},
+	     			type : "post",
+	     			success : function(data){
+	     				console.log(data)
+	     			},
+	     			error : function(e){
+	     				console.log(e)
+	     			}
+	     		});   
+			}
 		
+		trigger.one("onclick", function(){
+			 console.log("클릭");
+		});
+
+
+   		
 		</script>
 </body>
 </html>

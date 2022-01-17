@@ -56,7 +56,7 @@ public class MypageController {
 	private MyReviewService myReviewService;
 	private MemberSoundService memberSoundService;
 	private MyInfoService myInfoService;
-  private CartService cartService;
+    private CartService cartService;
 	
 	@Autowired
 	public MypageController(QnaService qnaService, MyCouponService couponService, MessageSource messageSource, NoticeService noticeService, 
@@ -444,8 +444,6 @@ public class MypageController {
 		attcheck.setUserNo(userNo);
 		int result = qnaService.attendCheck(attcheck);	
 		
-		
-		
 		if(result > 0) {
 			return "출석체크 성공";
 		}else {
@@ -512,6 +510,17 @@ public class MypageController {
 		String msg = cartService.cartAllDelete(userNo) > 0 ? "success" : "fail";
 		
 		return msg;
+	}
+	
+	@PostMapping("rouletteInsert")
+	@ResponseBody
+	public Map<String, String> rouletteInsert(@AuthenticationPrincipal UserImpl user, int pointAmount) {
+		int result = qnaService.rouletteInsert(user.getUserNo(), pointAmount);
+		
+		Map<String, String> map = new HashMap<>();
+	    map.put("msg", result > 0 ? "등록 완료" : "등록 실패");
+	    
+	    return map;
 	}
 }
 

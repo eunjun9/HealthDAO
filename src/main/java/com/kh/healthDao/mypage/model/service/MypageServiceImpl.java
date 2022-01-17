@@ -293,6 +293,14 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 		return mypageMapper.attendCount();
 	}
 
+	// 룰렛
+	@Override
+	public int rouletteInsert(int userNo, int pointamount) {
+		return mypageMapper.rouletteInsert(userNo, pointamount);
+	}
+
+
+
 
 
 }
