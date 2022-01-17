@@ -454,4 +454,16 @@
 		  WHERE B.AUTHORITY_CODE = 2
             AND NOT EXISTS(SELECT USER_NO, AUTHORITY_CODE FROM MEMBER_ROLE R WHERE AUTHORITY_CODE IN(3) AND B.USER_NO = R.USER_NO)
 	</select>
+	
+	<update id="memberInfoMf" parameterType="com.kh.healthDao.member.model.vo.Member">
+		UPDATE MEMBER
+		   SET USER_STATUS = #{userStatus}
+		 WHERE USER_NO = #{userNo}
+	</update>
+	
+	<update id="memberInfoCodeMf" parameterType="com.kh.healthDao.member.model.vo.MemberRole">
+		UPDATE MEMBER_ROLE
+		   SET AUTHORITY_CODE = #{authorityCode}
+		 WHERE USER_NO = #{userNo}
+	</update>
 </mapper>

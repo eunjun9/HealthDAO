@@ -44,7 +44,7 @@
 							<p class="error">잘못 입력했습니다</p>
 						</div>
 						<div class="btn_wrap">
-							<a onclick="showLayer('findIdSuccess');" class="btn btnArr btnSizeL btnColorG btnTypeB findIdBtn" style="width:180px;"><span><b>확인</b></span></a>
+							<a onclick="" class="btn btnArr btnSizeL btnColorG btnTypeB findIdBtn" style="width:180px;"><span><b>확인</b></span></a>
 						</div>
 						</form>
 					</div>
@@ -118,38 +118,37 @@
 				
 				$.ajax({
 					url : "/member/findId/" + userName + "/" + userEmail,
-					type : "get",
 					dataType : "json",
+					contentType : "application/json; charset=utf-8",
+					type : "get",
 					success : function(data) {
-						if(data) {
-						this.attr("onclick", "showLayer('findIdSuccess');");
+						$("#findIdForm .findIdBtn").attr("onclick", "showLayer('findIdSuccess');");
 								
 						let resultDate = moment(data.joinDate).format("YYYY.MM.DD");
 							
 						$('#resultId').html(data.userId.substr(0, 4) + "***");
 						$('#resultDate').html(resultDate);
-						} else if(!data) {
-							alert('오류');
-						this.attr("onclick", "showLayer('findIdFail');");
-						}
 					},
 					error : function(e) {
-						//console.log(e);
-						//this.attr("onclick", "showLayer('findIdFail');");
+						console.log(e);
+						$("#findIdForm .findIdBtn").attr("onclick", "showLayer('findIdFail');");
 					}
 				});
 			});
 			
 			$("#findPwdForm .findPwdBtn").on('click', function(){
 				
-				let userId = $("#findPwdForm [name=userId]").val();
-				let userName = $("#findPwdForm [name=userName]").val();
-				let userEmail = $("#findPwdForm [name=userEmail]").val();
+				let param = {}
+				param.userId = $("#findPwdForm [name=userId]").val();
+				param.userName = $("#findPwdForm [name=userName]").val();
+				param.userEmail = $("#findPwdForm [name=userEmail]").val();
 				
 				$.ajax({
-					url : "/member/findPwd/" + userId + "/" + userName + "/" + userEmail,
-					type : "get",
+					url : "/member/findPwd",
+					data : JSON.stringify(param),
 					dataType : "json",
+					contentType : "application/json; charset=utf-8",
+					type : "get",
 					success : function(data) {
 						
 					},
