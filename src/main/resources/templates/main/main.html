@@ -55,128 +55,24 @@
 						</p>
 						<div class="pdt_list1">
 							<div class="list_box">
-								<div class="pdtCon">
+								<div class="pdtCon" th:each="train : ${trainList}">
 									<div class="pdtImg">
 										<ul class="pdt_type">
 											<li class="bg_p">NEW</li>
 											<li class="bg_p">BEST</li>
-											<li class="bg_r">SALE</li>
 										</ul>
-										<a href="#" class="imgLink"><img src="/images/temp/pt01.jpg" alt=""></a>
+										<a th:href="|/trainer/detail?tNo=${train.tNo}|" class="imgLink"><img th:src="${train.file_path}+${train.change_file2}" alt=""></a>
 									</div>
 									<div class="pdtTxt">
-										<p class="pdtHead" style="color:#4f8ffa;">한줄소개 나오는 곳</p>
-										<p class="pdtBrand">PT쌤 이름</p>
-										<p class="pdtName"><a href="#">선생님 소개 나오는 곳</a></p>
-										<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
+										<p class="pdtHead" style="color:#4f8ffa;" th:text="${train.tOneIntro}">한줄소개 나오는 곳</p>
+										<p class="pdtBrand" th:text="${train.member.userName}">PT쌤 이름</p>
+										<p class="pdtName" th:text="${train.tIntro}">선생님 소개 나오는 곳</p>
+										<p class="pdtPrice" th:text="${#numbers.formatInteger(train.tPrice, 0, 'COMMA')+'원'}"></p>
 										<div class="pdtReview">
-											<div class="js_rating ratingS"><span>4.5</span></div>
-											4.5 <span class="count">(리뷰 18)</span>
+											<div class="js_rating ratingS"><span><th:block data-th-text="${train.avgStar}"></th:block></span></div>
+											<th:block data-th-text="${train.avgStar}"></th:block> <span class="count">(리뷰 <th:block data-th-text="${train.sumReview}"></th:block>)</span>
 										</div>
 									</div>
-									<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM on"><span class="hide">찜하기</span></a><!-- 좋아요 선택시 class on 추가 -->
-									<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
-								</div>
-								<div class="pdtCon">
-									<div class="pdtImg">
-										<ul class="pdt_type">
-											<li class="bg_p">NEW</li>
-											<li class="bg_p">BEST</li>
-											<li class="bg_r">SALE</li>
-										</ul>
-										<a href="#" class="imgLink"><img src="/images/temp/pt02.jpg" alt=""></a>
-									</div>
-									<div class="pdtTxt">
-										<p class="pdtHead" style="color:#4f8ffa;">한줄소개 나오는 곳</p>
-										<p class="pdtBrand">PT쌤 이름</p>
-										<p class="pdtName"><a href="#">선생님 소개 나오는 곳</a></p>
-										<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
-										<div class="pdtReview">
-											<div class="js_rating ratingS"><span>4.5</span></div>
-											4.5 <span class="count">(리뷰 18)</span>
-										</div>
-									</div>
-									<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM on"><span class="hide">찜하기</span></a><!-- 좋아요 선택시 class on 추가 -->
-									<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
-								</div>
-								<div class="pdtCon">
-									<div class="pdtImg">
-										<ul class="pdt_type">
-											<li class="bg_p">NEW</li>
-											<li class="bg_p">BEST</li>
-											<li class="bg_r">SALE</li>
-										</ul>
-										<a href="#" class="imgLink"><img src="/images/temp/pt03.jpg" alt=""></a>
-									</div>
-									<div class="pdtTxt">
-										<p class="pdtHead" style="color:#4f8ffa;">한줄소개 나오는 곳</p>
-										<p class="pdtBrand">PT쌤 이름</p>
-										<p class="pdtName"><a href="#">선생님 소개 나오는 곳</a></p>
-										<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
-										<div class="pdtReview">
-											<div class="js_rating ratingS"><span>4.5</span></div>
-											4.5 <span class="count">(리뷰 18)</span>
-										</div>
-									</div>
-									<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM on"><span class="hide">찜하기</span></a><!-- 좋아요 선택시 class on 추가 -->
-									<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
-								</div>
-								<div class="pdtCon">
-									<div class="pdtImg">
-										<ul class="pdt_type">
-											<li class="bg_p">NEW</li>
-											<li class="bg_p">BEST</li>
-											<li class="bg_r">SALE</li>
-										</ul>
-										<a href="#" class="imgLink"><img src="/images/temp/pt04.jpg" alt=""></a>
-									</div>
-									<div class="pdtTxt">
-										<p class="pdtHead" style="color:#4f8ffa;">한줄소개 나오는 곳</p>
-										<p class="pdtBrand">PT쌤 이름</p>
-										<p class="pdtName"><a href="#">선생님 소개 나오는 곳</a></p>
-										<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
-										<div class="pdtReview">
-											<div class="js_rating ratingS"><span>4.5</span></div>
-											4.5 <span class="count">(리뷰 18)</span>
-										</div>
-									</div>
-									<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM on"><span class="hide">찜하기</span></a><!-- 좋아요 선택시 class on 추가 -->
-									<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-	
-				<!-- 타임 세일 -->
-				<div class="mainHotDeal">
-					<div class="contents">
-						<div class="hotDealCon">
-							<div class="pdtImg">
-								<img src="/images/temp/pdt02.png" alt="">
-								<a href="#"><span class="hide">디어 하이드레이션인텐스 에센스</span></a>
-							</div>
-							<div class="conBox conL">
-								<p class="tit">⏰ TIME SALE ⏰</p>
-								<p class="dDay">남은시간 <span>D-3</span></p>
-								<p class="time">09<span>:</span>51<span>:</span>47</p>
-							</div>
-							<div class="conBox conR">
-								<p class="pdtName">맛있닭 소스 닭가슴살 스테이크 혼합 150g</p>
-								<div class="pdtPrice">
-									<div class="sale">20%</div>
-									<div>
-										25,200<em>원</em>
-										<span class="cost">15,000원</span>
-									</div>
-								</div>
-								<div class="pdtReview">
-									<div class="js_rating ratingS"><span>4.5</span></div>
-									4.5 <span class="count">(리뷰 18)</span>
-								</div>
-								<div class="btn_wrap">
-									<a href="#" class="btn btnSizeM btnColorW btnArr btnTypeR"><span>장바구니</span></a>
-									<a href="#" class="btn btnSizeM btnColorB btnArr btnTypeR"><span>바로구매</span></a>
 								</div>
 							</div>
 						</div>
@@ -211,8 +107,8 @@
 											4.5 <span class="count">(리뷰 18)</span>
 										</div>
 									</div>
-									<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM on"><span class="hide">찜하기</span></a><!-- 좋아요 선택시 class on 추가 -->
-									<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
+				                    <a href="javascript:void(0);" th:onclick="|javascript:addWish('${reco.productNo}')|" th:id="pdtNo_+${reco.productNo}" class="btn_like likeM"><span class="hide">찜하기</span></a>
+				                    <a href="javascript:void(0);" th:onclick="|javascript:cartInsert('${reco.productNo}')|" class="btn_cart cartM"><span>장바구니</span></a>
 								</div>
 							</div>
 							<button class="set-arrow set-next" type="button">Next</button>
@@ -269,6 +165,28 @@
 		$('#quick .quickArea').css({'position':'absolute', 'top':936});
 		mainStart();
 		mainVisual();
+	</script>
+	<script  th:inline="javascript">
+		// 상품 있는 곳 어디서나 넣어야 됨
+		/*<![CDATA[*/
+		var likeValue = [[${likeList}]];
+		var likeSize = [[${likeList}]].length;
+
+		$(function(){
+			$.ajax({
+				url : "/",
+				method : 'GET',
+				success : function(data){
+					for(let i = 0; i < likeSize; i++){
+						$("#pdtNo_"+likeValue[i]).addClass('on');	// 값이 있으면 class on 추가
+					}
+				},
+				error : function(e){
+					console.log(e);
+				}
+			});
+		});
+		/*]]>*/
 	</script>
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 </body>

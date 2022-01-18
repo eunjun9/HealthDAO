@@ -22,27 +22,47 @@ import com.kh.healthDao.member.model.vo.UserImpl;
 import com.kh.healthDao.mypage.model.service.CartService;
 import com.kh.healthDao.mypage.model.vo.Cart;
 import com.kh.healthDao.shopping.model.service.ShoppingService;
-import com.kh.healthDao.shopping.model.vo.Shopping;
-
+import com.kh.healthDao.trainer.model.service.TrainerService;
+import com.kh.healthDao.trainer.model.vo.Trainer;
 
 @Controller
 public class MainController {
-	/*
-	 * @GetMapping(value= {"/", "/main"}) public String main() { return "main/main";
-	 * }
-	 */
 
+	private BannerService bannerService;
+	private ShoppingService shoppingService;
+	private CartService cartService;
+	private TrainerService trainerService;
+	
+	@Autowired
+	public MainController(BannerService bannerService, ShoppingService shoppingService, CartService cartService, TrainerService trainerService) {
+		this.bannerService = bannerService;
+		this.shoppingService = shoppingService;
+		this.cartService = cartService;
+		this.trainerService = trainerService;
+	}
+	
+	
 	@GetMapping(value= {"/", "/main"})
-	public ModelAndView findBannerRankList(ModelAndView mv) {
+	public ModelAndView findBannerRankList(ModelAndView mv, @AuthenticationPrincipal UserImpl userImpl) {
 		
 		List<Banner> bannerList = bannerService.bannerRankList();
+		List<Trainer> trainList = trainerService.trainerRankList();
 		Map<String, Object> map = shoppingService.pdtList();
 
 		mv.addObject("bannerList", bannerList);
+		mv.addObject("trainList", trainList);
 		mv.addObject("recoList", map.get("recoList"));
 		mv.addObject("recoCount", map.get("recoCount"));
+
+		// 찜한 상품 확인
+		int userNo = 0;		
+		if(userImpl != null) {
+			userNo = userImpl.getUserNo();
+			List like = shoppingService.likeList(userNo);
+			mv.addObject("likeList", like);
+		}
+
 		mv.setViewName("main/main");
-		
 		return mv;
 	}
 	
@@ -56,17 +76,10 @@ public class MainController {
 		return "admin/time";
 	}
 
-	private BannerService bannerService;
-	private ShoppingService shoppingService;
-	private CartService cartService;
-	
-	@Autowired
-	public MainController(BannerService bannerService, ShoppingService shoppingService, CartService cartService) {
-		this.bannerService = bannerService;
-		this.shoppingService = shoppingService;
-		this.cartService = cartService;
+	@GetMapping("/error500")
+	public String error500() {
+		return "error/error500";
 	}
-	
 	
 	@GetMapping("/banner")
 	public ModelAndView findBannerList(ModelAndView mv, @RequestParam int page) {
@@ -166,6 +179,20 @@ public class MainController {
 		}
 	}
 
+	// 찜한 상품 삭제
+	@ResponseBody
+	@PostMapping("deleteWish")
+	public int deleteWishPdt(int[] addList, @AuthenticationPrincipal UserImpl userImpl) {
+		int result = 0;
+
+		int userNo = userImpl.getUserNo();
+		for(int i = 0; i < addList.length; i++) {
+			result += shoppingService.deleteWishPdt(addList[i], userNo);			
+		}
+		System.out.println(result);
+		
+		return result;
+	}
 	
 	// 최근 본 상품
 	@ResponseBody
@@ -188,6 +215,14 @@ public class MainController {
 		mv.addObject("wishList", map.get("wishList"));
 		mv.addObject("wishListCount", map.get("wishListCount"));
 		mv.setViewName("mypage/mywish");
+
+		// 찜한 상품 확인
+		// int userNo = 0;		
+		if(userImpl != null) {
+			//userNo = userImpl.getUserNo();
+			List like = shoppingService.likeList(userNo);
+			mv.addObject("likeList", like);
+		}
 		return mv;
 	}
 	

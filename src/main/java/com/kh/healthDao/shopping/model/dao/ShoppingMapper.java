@@ -27,6 +27,7 @@ public interface ShoppingMapper {
 	Product wishChk(int productNo, int userNo);
 	int insertWish(int productNo, int userNo);
 	int deleteWish(int productNo, int userNo);
+	List findLikeList(int userNo);
 
 	List<Product> ShoppingList();
 	
@@ -55,4 +56,6 @@ public interface ShoppingMapper {
 	Product shoppingPayment(int productNo);
 	
 	List<Address> deliView(int userNo);
+	
+	List<Product> searchList(String searchPdt);
 }

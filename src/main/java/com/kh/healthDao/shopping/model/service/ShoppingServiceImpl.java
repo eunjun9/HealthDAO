@@ -118,6 +118,16 @@ public class ShoppingServiceImpl implements ShoppingService{
 	public int deleteWish(int productNo, int userNo) {
 		return shoppingMapper.deleteWish(productNo, userNo);
 	}
+	@Override
+	public int deleteWishPdt(int productNo, int userNo) {
+		return shoppingMapper.deleteWish(productNo, userNo);
+	}
+	
+	// 상품 리스트에서 찜한 상품들 확인
+	@Override
+	public List likeList(int userNo) {
+		return shoppingMapper.findLikeList(userNo);
+	}
   
 	/* 상품 음료 */
 	@Override
@@ -266,5 +276,10 @@ public class ShoppingServiceImpl implements ShoppingService{
 	@Override
 	public List<Address> deliView(int userNo) {
 		return shoppingMapper.deliView(userNo);
+	}
+
+	@Override
+	public List<Product> searchList(String searchPdt) {
+		return shoppingMapper.searchList(searchPdt);
 	}
 }

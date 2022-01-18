@@ -21,17 +21,19 @@
 
 		<!-- HEADER -->
 		<div class="daoHeader">
-			<h1><a href="/"><img class="logoClass" src="../../images/common/logo.png" alt="BANILA.COM"></a></h1>
+			<h1><a href="/"><img class="logoClass" src="../../images/common/logo.png" alt=""></a></h1>
 			<div class="searchH">
-				<div class="searchWrap">
-					<div class="inp_wrap">
-						<div class="inp_text">
-							<input type="text" id="headerSearch">
-							<button class="btn_clear"><span>clear</span></button>
-							<button class="btn_search" type="button"><span class="hide">검색</span></button>
+				<form action="/shopping/search" method="post" name="searchPdt">
+					<div class="searchWrap">
+						<div class="inp_wrap">
+							<div class="inp_text">
+								<input type="text" id="headerSearch" name="searchPdt">
+								<button class="btn_search" type="submit"><span class="hide">검색</span></button>
+								<button class="btn_clear"><span>clear</span></button>
+							</div>
 						</div>
 					</div>
-				</div>
+				</form>
 				<div class="jsSearchTxt">
 					<div class="rollCon">
 						<div class="txt">헬스Dao X 춘식이 컬래버레이션🥰😘</div>
@@ -46,6 +48,9 @@
 				<ul>
 					<li><a href="/mypage/">마이페이지</a></li>
 					<li><a href="/mypage/cart">장바구니<span id="mainCartCount">0</span></a></li>
+					<th:block sec:authorize="hasRole('ADMIN')">
+					<li><a href="/admin/">관리자페이지</a></li> <!-- 임시 -->
+					</th:block>
 				</ul>
 			</div>
 		</div>

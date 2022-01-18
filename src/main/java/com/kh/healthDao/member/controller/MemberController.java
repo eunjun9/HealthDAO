@@ -39,16 +39,9 @@ public class MemberController {
 	public void findIdPwd() {}
 	
 	@PostMapping("/signUp")
-	public String signUp(Member member, @RequestParam int userBirth, @RequestParam int userBirth2, @RequestParam int userBirth3) {
+	public String signUp(Member member, @RequestParam String userBirth, @RequestParam String userBirth2, @RequestParam String userBirth3) {
 		
-//		String b1 = hsr.getParameter("userBirth");
-//		String b2 = hsr.getParameter("userBirth2");
-//		String b3 = hsr.getParameter("userBirth2");
-		String b1 = Integer.valueOf(userBirth).toString();
-		String b2 = Integer.valueOf(userBirth2).toString();
-		String b3 = Integer.valueOf(userBirth3).toString();
-		
-		String birth = b1 + b2 + b3;
+		String birth = userBirth + userBirth2 + userBirth3;
 		member.setUserBirth(birth);
 		
 		memberService.signUp(member);
@@ -70,15 +63,15 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	@ResponseBody
 	@PostMapping("/idChk")
+	@ResponseBody
 	public int idChk(Member member) {
 		int result = memberService.idChk(member);
 		return result;
 	}
 	
-	@ResponseBody
 	@GetMapping("/findId/{userName}/{userEmail}")
+	@ResponseBody
 	public Member findId(@PathVariable String userName, @PathVariable String userEmail) {
 		
 		log.info("조회 요청 이름 : {}", userName);

@@ -86,6 +86,26 @@
 		</association>
 	</resultMap>
 	
+	<resultMap id="PaymentResultMap" type="com.kh.healthDao.manager.model.vo.Payment">
+		<id property="payNo" column="PAY_NO"/>
+		<result property="payDate" column="PAY_DATE"/>
+		<result property="payMethod" column="PAY_METHOD"/>
+		<result property="ordererPhone" column="ORDERER_PHONE"/>
+		<result property="ordererEmail" column="ORDERER_EMAIL"/>
+		<result property="orderStatus" column="ORDER_STATUS"/>
+		<collection property="productList" resultMap="productResultMap"/>
+	</resultMap>
+	
+	<resultMap id="productResultMap" type="com.kh.healthDao.shopping.model.vo.Shopping">
+		<id property="productNo" column="PRODUCT_NO" />
+		<result property="productName" column="PRODUCT_BRAND"/>
+		<result property="productTitle" column="PRODUCT_TITLE"/>
+		<result property="productPrice" column="PRODUCT_PRICE"/>
+		<result property="productOption" column="PRODUCT_OPTION"/>
+		<result property="quantity" column="QUANTITY"/>
+	</resultMap>
+
+	
 	<select id="findQnaList" resultMap="qnaResultMap" parameterType="hashmap">
 		SELECT *
 		FROM
@@ -229,7 +249,9 @@
 		    , P_CATEGORY_NAME
 		  FROM POINT
 		  JOIN POINT_CATEGORY USING(P_CATEGORY_NO)
-		 WHERE POINT_ENDDATE > SYSDATE
+		 WHERE USER_NO = #{userNo}
+		   AND POINT_ENDDATE > SYSDATE
+		 ORDER BY POINT_ISSUEDATE DESC
 		  ) A
 		    )
 			WHERE RNUM BETWEEN #{startRow} AND #{endRow}
@@ -245,7 +267,8 @@
 				      POINT_NO
 				     , POINT_ENDDATE
 				  FROM POINT
-				   WHERE POINT_ENDDATE > SYSDATE
+				 WHERE USER_NO = #{userNo}
+				   AND POINT_ENDDATE > SYSDATE
 				   ) A
 				ORDER BY POINT_NO DESC)
 	</select>
@@ -254,7 +277,15 @@
 		SELECT
 		   SUM(POINT_AMOUNT)
 		  FROM POINT
-		 WHERE POINT_ENDDATE > SYSDATE
+		 WHERE USER_NO = #{userNo}
+		   AND POINT_ENDDATE > SYSDATE
+	</select>
+	
+	<select id="attendCount" resultType="_int" parameterType="hashmap">
+		SELECT 
+			COUNT (DISTINCT ATTENDANCE_DATE) 
+		FROM ATT_CHECK
+	   WHERE USER_NO = #{userNo}
 	</select>
 
 	<insert id="attendCheck" parameterType="com.kh.healthDao.mypage.model.vo.AttCheck">
@@ -269,12 +300,29 @@
 		)
 	</insert>
 	
+	<insert id="pointCheck" parameterType="_int">
+		INSERT 
+        INTO POINT
+            (POINT_NO
+           , POINT_AMOUNT
+           , POINT_ISSUEDATE
+           , POINT_ENDDATE
+           , USER_NO
+           , P_CATEGORY_NO) 
+        VALUES 
+            (SEQ_POINT_NO.NEXTVAL
+           , '1000'
+           , TO_CHAR(SYSDATE, 'YY-MM-DD')
+           , TO_CHAR(SYSDATE+12, 'YY-MM-DD')
+           , #{userNo}
+           , '2')
+	</insert>
+	
 	<select id="attendUserList" parameterType="_int" resultMap="AttMap">
 		SELECT TO_CHAR(ATTENDANCE_DATE, 'FMDD') ATTENDANCE_DATE
 		  FROM ATT_CHECK
 		 WHERE USER_NO = #{userNo}
 	</select>
-
 	
 	<select id="myCouponList" parameterType="_int" resultMap="couponResultMap">
 		SELECT
@@ -357,7 +405,8 @@
 	<!-- 내 정보 수정 -->
 	<select id="myInfoView" resultMap="memberResultMap" parameterType="_int">
 		SELECT
-		       USER_ID
+		       USER_NO
+		     , USER_ID
 		     , USER_PWD
 		     , USER_NAME
 			 , USER_NICKNAME
@@ -398,6 +447,13 @@
 			  </otherwise>
 			  </choose>
 		  WHERE USER_NO = #{userNo}
+	</update>
+	
+	<update id="myInfoDelete" parameterType="com.kh.healthDao.member.model.vo.Member">
+		UPDATE MEMBER
+		   SET USER_STATUS = 'N'
+		     , BAN_DATE = SYSDATE
+		 WHERE USER_NO = #{userNo}
 	</update>
 	
 	<!-- 배송지 관리 -->
@@ -451,6 +507,50 @@
 		 WHERE ADDRESS_NO = #{addressNo}
 	</select>
 	
+	<update id="updateDeil" parameterType="_int">
+		UPDATE ADDRESS
+		   SET RECEIVER = #{receiver}
+		     , ADDRESS = #{address}
+		     , RECEIVER_PHONE = #{recPhone}
+		     , DEFAULT_ADDRESS = #{defAddress}
+		 WHERE ADDRESS_NO = #{addressNo}
+	</update>
+	
+	<delete id="deleteDeli" parameterType="_int">
+		DELETE
+		  FROM ADDRESS
+		 WHERE ADDRESS_NO = #{addressNo}
+	</delete>
+	
+	<update id="defAddRemove" parameterType="_int">
+		UPDATE ADDRESS
+		   SET DEFAULT_ADDRESS = 'N'
+		 WHERE USER_NO = #{userNo}
+		   AND DEFAULT_ADDRESS = 'Y'
+	</update>
+	
+	<update id="defAddDeli" parameterType="_int">
+		UPDATE ADDRESS
+		   SET DEFAULT_ADDRESS = 'Y'
+		 WHERE ADDRESS_NO = #{addressNo}
+	</update>
+	
+	<!-- 회원 탈퇴 -->
+	<update id="unregister" parameterType="com.kh.healthDao.member.model.vo.Member">
+		UPDATE MEMBER
+		   SET USER_STATUS = 'N'
+		 WHERE USER_ID = #{userId}
+		   AND USER_PWD = #{userPwd}
+	</update>
+	
+	<select id="passCheck" parameterType="com.kh.healthDao.member.model.vo.Member">
+		SELECT COUNT(*)
+		  FROM MEMBER
+		 WHERE USER_ID = #{userId}
+		   AND USER_PWD = #{userPwd}
+	</select>
+	
+	<!-- 장바구니 -->
 	<select id="cartProductChk" parameterType="com.kh.healthDao.mypage.model.vo.Cart" resultMap="cartResultMap">
 		SELECT
 		    CART_NO
@@ -516,5 +616,88 @@
 		DELETE FROM CART
 		WHERE USER_NO = #{userNo}
 	</delete>
+
+	<select id="mypaymentList" parameterType="_int" resultMap="PaymentResultMap">
+		SELECT
+		      PAY_NO
+		    , PAY_DATE
+		    , PAY_METHOD
+		    , ORDERER_PHONE
+		    , ORDERER_EMAIL
+		    , ORDER_STATUS
+		    , QUANTITY
+		    , PRODUCT_NO
+		    , PRODUCT_BRAND
+		    , PRODUCT_TITLE
+		    , PRODUCT_PRICE
+		    , PRODUCT_OPTION
+		FROM PAYMENT
+		JOIN PAY_DETAIL USING(PAY_NO)
+		JOIN PRODUCT USING(PRODUCT_NO)
+		JOIN PRODUCT_OPTION USING(PRODUCT_NO)
+		WHERE USER_NO = #{userNo}
+	</select>
+	<insert id="reviewInsert" parameterType="com.kh.healthDao.review.model.vo.Review">
+		INSERT INTO REVIEW(
+		      REVIEW_NO
+		    , CATEGORY
+		    , STAR
+		    , R_CONTENT
+		    , R_DATE
+		    , MODIFY_DATE
+		    , PAY_NO
+		    , USER_NO
+		)VALUES(
+		    SEQ_REVIEW_NO.NEXTVAL
+		    , '상품'
+		    , #{star}
+		    , #{rContent}
+		    , SYSDATE
+		    , NULL
+		    , #{payNo}
+		    , #{userNo}
+		)
+	</insert>
+	<update id="statusModify" parameterType="com.kh.healthDao.review.model.vo.Review">
+		UPDATE PAYMENT
+		SET ORDER_STATUS = 'R'
+		WHERE PAY_NO = #{payNo}
+	</update>
+	<insert id="refundInsert" parameterType="_int">
+		INSERT INTO REFUND(
+		    REFUND_NO
+		    , REFUND_DATE
+		    , REFUND_STATUS
+		    , PAY_NO
+		)VALUES(
+		    SEQ_REFUND_NO.NEXTVAL
+		    , SYSDATE
+		    , DEFAULT
+		    , #{payNo}
+		)
+	</insert>
+	<update id="refundStatusModify" parameterType="_int">
+		UPDATE PAYMENT
+		SET ORDER_STATUS = 'H'
+		WHERE PAY_NO = #{payNo}
+	</update>
+
+	<insert id="rouletteInsert">
+		INSERT INTO POINT(
+		    POINT_NO
+		  , POINT_AMOUNT
+		  , POINT_ISSUEDATE
+		  , POINT_ENDDATE
+		  , USER_NO
+		  , P_CATEGORY_NO
+		) VALUES (
+		    SEQ_POINT_NO.NEXTVAL
+		  , #{pointAmount}
+		  , TO_CHAR(SYSDATE, 'YY-MM-DD')
+		  , TO_CHAR(SYSDATE+14, 'YY-MM-DD')
+		  , #{userNo}
+		  , '3'
+		)	
+	</insert>
 
 </mapper>

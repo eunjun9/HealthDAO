@@ -36,7 +36,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter{
    @Override
    public void configure(WebSecurity web) {
 
-      web.ignoring().antMatchers("/css/**", "/js/**", "/images/**", "/banner/**");
+      web.ignoring().antMatchers("/css/**", "/js/**", "/images/**");
    }
    
    /* HTTP 요청에 대한 설정 */
@@ -58,6 +58,8 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter{
             .antMatchers("/mypage/**", "/trainer/**").hasRole("MEMBER")
             .antMatchers("/admin/**").hasRole("ADMIN")
             .antMatchers("/manager/**").hasRole("ADMIN")
+            .antMatchers("/banner/**").hasRole("ADMIN")
+            .antMatchers("/reco/**").hasRole("ADMIN")
             /* 그 외의 요청은 모두 허가함 - 게스트 사용자도 접근 가능 */
             .anyRequest().permitAll()
          .and()
