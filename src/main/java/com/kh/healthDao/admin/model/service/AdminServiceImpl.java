@@ -157,8 +157,29 @@ public class AdminServiceImpl implements AdminService, CouponService, NoticeServ
 	}
 
 	@Override
-	public int registProduct(Product product) {
-		return adminMapper.registProduct(product);
+	public int registProduct(Product product,String originFile1, String originFile2, String changeFile1, String changeFile2 ) {
+		Map<String, Object> map = new HashMap<>();
+		
+		product.setFile_path("/images/upload/product/");
+		product.setChange_file1(changeFile1);
+		product.setChange_file2(changeFile2);
+		
+		map.put("product", product);
+		map.put("originFile1", originFile1);
+		map.put("originFile2", originFile2);
+		
+		int result1 = adminMapper.registProduct(product);
+		int result2 = adminMapper.productFileInsert(map);
+		int result3 = adminMapper.productFileInsertDB(product);
+		int result4 = adminMapper.productInfoFileInsert(map);
+		int result5 = adminMapper.productInfoFileInsertDB(product);
+		int result = 0;
+		
+		if(result1 > 0 && result2 > 0 && result3 > 0 && result4 > 0 && result5 > 0) {
+			result = 1;
+		}
+		
+		return result;
 	}
 
 	@Override
@@ -208,6 +229,16 @@ public class AdminServiceImpl implements AdminService, CouponService, NoticeServ
 	@Override
 	public List<Member> trainerInfoView() {
 		return adminMapper.trainerInfoView();
+	}
+
+	@Override
+	public int memberInfoMf(Member member) {
+		return adminMapper.memberInfoMf(member);
+	}
+
+	@Override
+	public int memberInfoCodeMf(Member member) {
+		return adminMapper.memberInfoCodeMf(member);
 	}
 
 

@@ -374,214 +374,6 @@
 						</ul>
 					</div>
 
-					<div class="order_payment order_con">
-						<p class="orderTit">결제방법</p>
-						<span class="inp_check payment_save">
-							<input type="checkbox" name="payment_save" id="payment_save">
-							<label for="payment_save" class="fc88">선택한 결제수단을 다음에도 사용</label>
-						</span>
-						<div class="payment_list">
-							<ul>
-								<li class="payment_list1">
-									<input type="radio" name="sttlmethod" id="payment_list1">
-									<label for="payment_list1">네이버페이</label>
-								</li>
-								<li class="payment_list2">
-								<form action="/kakaoPay" method="post">
-									<input type="" name="sttlmethod" id="payment_list2">
-									<label for="payment_list2">카카오 페이</label>
-								</form>
-								</li>
-								<li class="payment_list3">
-									<input type="radio" name="sttlmethod" id="payment_list3">
-									<label for="payment_list3">페이코</label>
-								</li>
-								<li class="payment_list4">
-									<input type="radio" name="sttlmethod" id="payment_list4">
-									<label for="payment_list4">스마일 페이</label>
-								</li>
-								<li class="payment_list5">
-									<input type="radio" name="sttlmethod" id="payment_list5">
-									<label for="payment_list5">신용카드</label>
-								</li>
-								<li class="payment_list6">
-									<input type="radio" name="sttlmethod" id="payment_list6">
-									<label for="payment_list6">실시간 계좌이체</label>
-								</li>
-								<li class="payment_list7">
-									<input type="radio" name="sttlmethod" id="payment_list7">
-									<label for="payment_list7">가상계좌 (무통장)</label>
-								</li>
-								<li class="payment_list8">
-									<input type="radio" name="sttlmethod" id="payment_list8">
-									<label for="payment_list8">휴대폰결제</label>
-								</li>
-								<!-- 결제금액이 없을때 -->
-								<li class="noData"><span>실제 결제를 진행 할 금액이 없습니다.<br> 약관동의 후 결제 하기 버튼 클릭 시 바로 결제가 완료 됩니다.</span></li>
-							</ul>
-						</div>
-						<div class="payment_info">
-							<div class="payment_info1 info_wrap">
-								<ul class="dotInfo">
-									<li>주문 변경 시 카드사 혜택 및 할부 적용 여부는 해당 카드사 정책에 따라 변경될 수 있습니다.</li>
-									<li>네이버페이는 네이버ID로 별도 앱 설치 없이 신용카드 또는 은행계좌 정보를 등록하여 네이버페이<br> 비밀번호로 결제할 수 있는 간편결제 서비스입니다.</li>
-									<li>결제 가능한 신용카드 : 신한, 삼성, 현대, BC, 국민, 하나, 롯데, NH농협, 씨티, 카카오뱅크</li>
-									<li>결제 가능한 은행 : NH농협, 국민, 신한, 우리, 기업, SC제일, 부산, 경남, 수협, 우체국, 미래에셋대우, 광주, 대구, 전북, 새마을금고, 제주은행, 신협, 하나은행, 케이뱅크, 카카오뱅크, 삼성증권, KDB산업은행, SBI저축은행, 유안타증권, 씨티, 유진투자증권</li>
-									<li>네이버페이 카드 간편결제는 네이버페이에서 제공하는 카드사 별 무이자, 청구할인 혜택을 받을 수 있습니다.</li>
-								</ul>
-							</div>
-							<div class="payment_info2 info_wrap">
-								<ul class="dotInfo">
-									<li>결제메시지 요청 시 입력하신 휴대폰 번호로 카카오페이 플친으로부터 메시지가 발송됩니다.</li>
-									<li>메시지안의 링크를 열어 결제를 진행해주세요.</li>
-								</ul>
-							</div>
-							<div class="payment_info3 info_wrap">
-								<ul class="dotInfo">
-									<li>PAYCO는 NHN엔터테인먼트가 만든 안전한 간편결제 서비스입니다.</li>
-									<li>휴대폰과 카드 명의자가 동일해야 결제가 가능합니다.<br>- 지원카드 - 모든 신용/체크카드</li>
-								</ul>
-							</div>
-							<div class="payment_info4 info_wrap">
-								<ul class="dotInfo">
-									<li>스마일페이는 본인명의 신용카드/체크카드 등록 후 비밀번호만으로 결제 할 수 있는 간편 결제 서비스 입니다.</li>
-									<li>휴대폰과 카드 명의자가 동일해야 결제가 가능합니다.<br> - 지원카드 - 모든 신용카드/체크카드 (단, 온라인 업종 결제 제한 적용카드 결제 불가)</li>
-									<li>스마일페이로 결제할 경우 무이자 할부는 스마일페이에서 제공하는 카드사별 무이자 혜택만 제공합니다.</li>
-								</ul>
-							</div>
-							<div class="payment_info5 info_wrap">
-								<!-- <div class="select_wrap">
-									<dl>
-										<dt>카드종류</dt>
-										<dd>
-											<div class="inp_wrap">
-												<div class="inp_select sizeS">
-													<div class="selectBox">
-														<button class="title" type="button">카드를 선택해주세요.</button>
-														<ul class="selList">
-															<li>
-																<input type="radio" value="" class="option" id="orderCard1" name="orderCard">
-																<label for="orderCard1">현대카드</label>
-															</li>
-															<li>
-																<input type="radio" value="" class="option" id="orderCard2" name="orderCard">
-																<label for="orderCard2">삼성카드</label>
-															</li>
-															<li>
-																<input type="radio" value="" class="option" id="orderCard3" name="orderCard">
-																<label for="orderCard3">롯데카드</label>
-															</li>
-															<li>
-																<input type="radio" value="" class="option" id="orderCard4" name="orderCard">
-																<label for="orderCard4">신한카드</label>
-															</li>
-															<li>
-																<input type="radio" value="" class="option" id="orderCard5" name="orderCard">
-																<label for="orderCard5">KB카드</label>
-															</li>
-														</ul>
-													</div>
-												</div>
-											</div>
-										</dd>
-									</dl>
-								</div> -->
-								<ul class="dotInfo">
-									<li>신용카드 결제 창을 통해 전송된 고객님의 정보는 암호화하여 전송되며 승인 성공/ 실패 여부에 상관없이 자동으로 폐기되므로, 안전합니다.</li>
-									<li>실시간 이체 결제 신청 시 승인 진행에 다소 시간이 소요될 수 있으므로 '중지', '새로고침'을 누르지 마시고 결과 화면이 나타날 때까지 기다려 주십시오.</li>
-								</ul>
-								<ul class="card_info">
-									<li><a href="javascript:void(0);" onclick="showLayer('orderCardInfo','tab1');" class="btn_txt"><span>공인인증서 안내</span></a></li>
-									<li><a href="javascript:void(0);" onclick="showLayer('orderCardInfo','tab2');" class="btn_txt"><span>안심클릭 안내</span></a></li>
-									<li><a href="javascript:void(0);" onclick="showLayer('orderCardInfo','tab3');" class="btn_txt"><span>안전결제 (ISP)안내</span></a></li>
-								</ul>
-							</div>
-							<div class="payment_info6 info_wrap">
-								<ul class="dotInfo">
-									<li>실시간 계좌이체 창을 통해 전송된 고객님의 정보는 암호화하여 전송되며 승인 성공/ 실패 여부에 상관없이 자동으로 폐기되므로, 안전합니다.</li>
-									<li>실시간 이체 결제 신청 시 승인 진행에 다소 시간이 소요될 수 있으므로 '중지', '새로고침'을 누르지 마시고 결과 화면이 나타날 때까지 기다려 주십시오.</li>
-									<li>실시간 계좌이체 결제시 공인인증서가 반드시 필요합니다.</li>
-									<li>결제 후 1시간 이내 입금 확인 후 배송이 이루어 집니다.</li>
-									<li>은행 이용가능 서비스 시간은 은행사정에 따라 다소 변동될 수 있습니다.</li>
-									<li>현금영수증 신청은 사업자, 현금영수증카드, 휴대폰번호가 유효하지 않으면 발급되지 않습니다.</li>
-									<li class="fcRed">세금계산서는 고객상담실과 상담 후 발급이 가능합니다.</li>
-								</ul>
-							</div>
-							<div class="payment_info7 info_wrap">
-								<!-- <div class="select_wrap">
-									<dl>
-										<dt>은행</dt>
-										<dd>
-											<div class="inp_wrap">
-												<div class="inp_select sizeS">
-													<div class="selectBox">
-														<button class="title" type="button">입금은행 선택</button>
-														<ul class="selList">
-															<li>
-																<input type="radio" value="" class="option" id="orderBank1" name="orderBank">
-																<label for="orderBank1">신한</label>
-															</li>
-															<li>
-																<input type="radio" value="" class="option" id="orderBank2" name="orderBank">
-																<label for="orderBank2">KB</label>
-															</li>
-															<li>
-																<input type="radio" value="" class="option" id="orderBank3" name="orderBank">
-																<label for="orderBank3">농협</label>
-															</li>
-															<li>
-																<input type="radio" value="" class="option" id="orderBank4" name="orderBank">
-																<label for="orderBank4">기업</label>
-															</li>
-															<li>
-																<input type="radio" value="" class="option" id="orderBank5" name="orderBank">
-																<label for="orderBank5">우리</label>
-															</li>
-														</ul>
-													</div>
-												</div>
-											</div>
-										</dd>
-									</dl>
-									<dl>
-										<dt>현금영수증</dt>
-										<dd>
-											<div class="inp_wrap">
-												<div class="inp_select sizeS">
-													<div class="selectBox">
-														<button class="title" type="button">사용 안함</button>
-														<ul class="selList">
-															<li>
-																<input type="radio" value="" class="option" id="receiptsY" name="receipts">
-																<label for="receiptsY">사용</label>
-															</li>
-															<li>
-																<input type="radio" value="" class="option" id="receiptsN" name="receipts" checked>
-																<label for="receiptsN">사용 안함</label>
-															</li>
-														</ul>
-													</div>
-												</div>
-											</div>
-										</dd>
-									</dl>
-								</div> -->
-								<ul class="dotInfo">
-									<li>무통장 입금의 경우 주문접수 후 입금이 되지 않고 3일이 지나면 자동 취소됩니다.</li>
-									<li>입금하실 은행만 선택하시면 해당주문에 대한 전용 계좌번호는 다음단계인 [주문 완료] 페이지에서 확인하실 수 있으며 알림톡으로도 안내해 드립니다.</li>
-									<li>현금영수증 신청은 사업자, 현금영수증카드, 휴대폰번호가 유효하지 않으면 발급되지 않습니다.</li>
-									<li class="fcRed">세금계산서는 고객상담실과 상담 후 발급이 가능합니다.</li>
-								</ul>
-							</div>
-							<div class="payment_info8 info_wrap">
-								<ul class="dotInfo">
-									<li>결제월이 지난 휴대폰결제의 취소건은 별도의 반품계좌로 환불됩니다.</li>
-									<li>주문건의 반품 시 반품금액은 별도의 반품계좌로 환불됩니다.</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-
 					<div class="order_floating">
 						<div class="shadow_box">
 							<div class="order_price bd_no">
@@ -669,7 +461,11 @@
 								<p class="fcRed">상품정보 및 결제대행 서비스 이용약관에 동의하셔야<br> 결제가 진행됩니다.</p>
 							</div>
 						</div>
-						<a href="#" id="check_module" class="btn btnSizeL btnColorP btnTypeB w100 mgt10"><span>결제하기</span></a>
+						<div>
+							
+							<button type="button" id="check_module" class="btn btnSizeL btnColorP btnTypeB w100 mgt10"><span>결제하기</span></button>
+						</div>
+						
 						<!-- 비회원일경우 -->
 						<ul class="starInfo mgt20">
 							<li class="fcRed">비회원으로 구매하시면 회원/이벤트/쿠폰혜택을 받으실<br> 수 없습니다.</li>
@@ -703,8 +499,19 @@
 	</script>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-	<script>
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+	
+	<script type="text/javascript">
 	$("#check_module").click(function () {
+		/*<![CDATA[*/
+		 
+		let userName = "[[${member.userName}]]";
+		let productTitle = "[[${shoppingPayment.productTitle}]]";
+		let sum = "[[${sum}]]";
+		let amount ="[[${amount}]]";
+		
+		
+		/*]]>*/
 		var IMP = window.IMP; // 생략가능
 		IMP.init('imp97624274'); 
 		// i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
@@ -718,14 +525,14 @@
 			 *  https://docs.iamport.kr/implementation/payment
 			 *  위에 url에 따라가시면 넣을 수 있는 방법이 있습니다.
 			 */
-			name: '주문명 : 아메리카노',
+			name: productTitle + ' ' + amount + '개',
 			// 결제창에서 보여질 이름
 			// name: '주문명 : ${auction.a_title}',
 			// 위와같이 model에 담은 정보를 넣어 쓸수도 있습니다.
-			amount: 2000,
+			amount: sum,
 			// amount: ${bid.b_bid},
 			// 가격 
-			buyer_name: '이름',
+			buyer_name: userName,
 			// 구매자 이름, 구매자 정보도 model값으로 바꿀 수 있습니다.
 			// 구매자 정보에 여러가지도 있으므로, 자세한 내용은 맨 위 링크를 참고해주세요.
 			buyer_postcode: '123-456',
@@ -733,13 +540,38 @@
 				console.log(rsp);
 			if (rsp.success) {
 				var msg = '결제가 완료되었습니다.';
-				msg += '결제 금액 : ' + rsp.paid_amount + ' 원';
-				
-				alert(msg);
-				location.href='${contextPath}/mypage/';
+				msg += '결제 금액 : ' + rsp.paid_amount;
+				let data = {
+						"imp_uid" : imp_uid,
+						"merchant_uid" : merchant_uid,
+						"userName": userName,
+						"productTitle" : productTitle,
+						"sum" : sum,
+						"amount" : amount,
+						"pay_date" : pay_date
+						}
 				// success.submit();
 				// 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드를 사용하는 방법이 있습니다.
 				// 자세한 설명은 구글링으로 보시는게 좋습니다.
+				$.ajax({
+						url : '/mypage/myOrder', 
+				        type :'POST',
+				        data : data,
+				        contentType:'application/json;charset=utf-8',
+				        dataType: 'json', //서버에서 보내줄 데이터 타입
+				        success: function(data){
+				        			        	
+				          if(res == 1){
+							 console.log("추가성공");	
+							location.href="/mypage/myOrder";           
+				          }else{
+				             console.log("Insert Fail!!!");
+				          }
+				        },
+				        error:function(){
+				          console.log("Insert ajax 통신 실패!!!");
+				        }
+					}) //ajax
 			} else {
 				var msg = '결제에 실패하였습니다.';
 				msg += '에러내용 : ' + rsp.error_msg;
@@ -748,6 +580,8 @@
 		});
 	});
 </script>
+
+
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 </body>
 </html>

@@ -27,7 +27,7 @@ public class Shopping {
 	 * 
 	 * */
 	
-	
+	private int quantity;			// 구매수량ㅠㅠ
 	
 	
 	private int productRank;		// 순번

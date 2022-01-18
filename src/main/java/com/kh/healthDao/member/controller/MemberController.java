@@ -63,15 +63,15 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	@ResponseBody
 	@PostMapping("/idChk")
+	@ResponseBody
 	public int idChk(Member member) {
 		int result = memberService.idChk(member);
 		return result;
 	}
 	
-	@ResponseBody
 	@GetMapping("/findId/{userName}/{userEmail}")
+	@ResponseBody
 	public Member findId(@PathVariable String userName, @PathVariable String userEmail) {
 		
 		log.info("조회 요청 이름 : {}", userName);

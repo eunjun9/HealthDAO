@@ -38,35 +38,29 @@
 							</div>
 						</div>
 						<div class="pdt_list1 type02 mgt60" th:if="${wishListCount != 0}">
-							<span th:text="${wishListCount}"></span>
-							<span th:text="${wishList}"></span>
-							
 							<ul class="list_box">
 								<li th:each="list : ${wishList}">
 									<div class="pdtImg">
-										<a href="javascript:void(0)" class="imgLink"><img src="./resources/web/images/temp/pdt_img3.png" alt="바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널"></a>
+										<a th:href="|/shopping/detail?productNo=${list.productNo}|" class="imgLink"><img src="/images/temp/pdt01.png" alt=""></a>
 									</div>
 									<div class="pdtTxt">
-										<p class="pdtHead" style="color:#4f8ffa;">2019 누적판매 15,591건!</p><!-- 문구가 없어도 태그삭제 X -->
-										<p class="pdtBrand">바닐라코</p>
-										<p class="pdtName"><a href="#">바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널</a></p>
-										<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
+										<p class="pdtHead" style="color:#4f8ffa;" th:text="${list.productBenefit}"></p>
+										<p class="pdtBrand" th:text="${list.productBrand}"></p>
+										<p class="pdtName" th:text="${list.productTitle}"></p>
+										<p class="pdtPrice" th:text="${#numbers.formatInteger(list.productPrice, 0, 'COMMA')+'원'}"></p>
 										<div class="pdtReview">
 											<div class="js_rating ratingS"><span>4.5</span></div>
 											4.5 <span class="count">(리뷰 18)</span>
 										</div>
 									</div>
 									<span class="inp_check OtPdtCheckBox">
-										<input type="checkbox" name="myWishChk" id="myWishChk1" class="js_checkbox">
-										<label for="myWishChk1"><span class="hide">바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널</span></label>
+										<input type="checkbox" name="inp_check1" class="js_checkbox" th:id="@{inp_check1_}+${list.productNo}" th:value="${list.productNo}">
+										<label th:for="@{inp_check1_}+${list.productNo}"></label>
 									</span>
-									<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM on"><span class="hide">찜하기</span></a>
-									<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
+				                    <a href="javascript:void(0);" th:onclick="|javascript:addWish('${list.productNo}')|" th:id="pdtNo_+${list.productNo}" class="btn_like likeM"><span class="hide">찜하기</span></a>
+				                    <a href="javascript:void(0);" th:onclick="|javascript:cartInsert('${list.productNo}')|" class="btn_cart cartM"><span>장바구니</span></a>
 								</li>
 							</ul>
-							<div class="btn_wrap mgt60">
-								<a class="btnMore btnSpin"><span>더보기<br><em>1 <u>/</u> <i>3</i></em></span></a>
-							</div>
 						</div>
 						<div class="noWish" th:unless="${wishListCount != 0}">
 							<p>위시리스트를 채워주세요!</p>
@@ -91,8 +85,28 @@
 	<th:block th:replace="common/quickNtalk.html"></th:block>
 	<!--// 퀵메뉴 + 톡톡 -->	
 	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
-	<script type="text/javascript">
+	<script  th:inline="javascript">
 		$('#quick .quickArea').css({'position':'absolute', 'top':290});
+		// 상품 있는 곳 어디서나 넣어야 됨
+		/*<![CDATA[*/
+		var likeValue = [[${likeList}]];
+		var likeSize = [[${likeList}]].length;
+
+		$(function(){
+			$.ajax({
+				url : "/",
+				method : 'GET',
+				success : function(data){
+					for(let i = 0; i < likeSize; i++){
+						$("#pdtNo_"+likeValue[i]).addClass('on');	// 값이 있으면 class on 추가
+					}
+				},
+				error : function(e){
+					console.log(e);
+				}
+			});
+		});
+		/*]]>*/
 	</script>
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 
@@ -125,7 +139,7 @@
 			}
 			console.log(data);			// 배열에 담긴 값
 			$.ajax({
-				url : "/mypage/wish/delete",
+				url : "/deleteWish",
 				dataType : "JSON",
 				data : data,
 				type : "POST",
@@ -146,6 +160,49 @@
 			alert('선택된 값이 없습니다.');
 		}
 	}
+
+	$(document).on('click', '.inp_check label', function (){
+		if ($(this).parent().hasClass('readOnly')){return false;}
+		if ($(this).parent().hasClass('disabled')){return false;}
+		
+		var tar = $(this).parent().find('input');
+		var chk = tar.prop('checked');
+		var grpNm = tar.attr('name');
+	
+	
+		if ($(this).parent('.inp_check').hasClass('allChk')){
+			var chkStatus = tar.prop('checked');
+			$("input:checkbox[name=" + grpNm + "]").each(function() {
+				if (chkStatus) {
+					$(this).closest(".inp_check").removeClass("checked");
+					$(this).prop("checked",false);
+				} else {
+					$(this).closest(".inp_check").addClass("checked");
+					$(this).prop("checked",true);
+				}
+			});
+		} else {
+			if ($(this).parent().hasClass('checked')) {
+				$("input:checkbox[name=" + grpNm + "]").each(function() {
+					$(this).closest('.inp_check.allChk').removeClass('checked');;
+					$(this).closest('.inp_check.allChk input').prop("checked",false);
+				});
+				$(this).parent().removeClass('checked');				
+				if($(this).attr('for') == 'remember'){
+					deleteCookie("rememberId");
+				}
+				tar.prop("checked",false);
+			} else {
+				$(this).parent().addClass('checked');				
+				if($(this).attr('for') == 'remember'){
+					setCookie("rememberId", userId.value, 7);
+				}
+				tar.prop("checked",true);
+			}
+		}
+		console.log(tar.prop('checked'));
+		return false;
+	});
 </script>
 </body>
 </html>

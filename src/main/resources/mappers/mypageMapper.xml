@@ -86,12 +86,33 @@
 		</association>
 	</resultMap>
 	
+
 	<resultMap id="rouletteMap" type="com.kh.healthDao.mypage.model.vo.Roulette">
 		<id property="roulNo" column="ROUL_NO"/>
 		<result property="roulDate" column="ROUL_DATE"/>
 		<result property="userNo" column="USER_NO"/>
   	</resultMap>
 	
+
+	<resultMap id="PaymentResultMap" type="com.kh.healthDao.manager.model.vo.Payment">
+		<id property="payNo" column="PAY_NO"/>
+		<result property="payDate" column="PAY_DATE"/>
+		<result property="payMethod" column="PAY_METHOD"/>
+		<result property="ordererPhone" column="ORDERER_PHONE"/>
+		<result property="ordererEmail" column="ORDERER_EMAIL"/>
+		<result property="orderStatus" column="ORDER_STATUS"/>
+		<collection property="productList" resultMap="productResultMap"/>
+	</resultMap>
+	
+	<resultMap id="productResultMap" type="com.kh.healthDao.shopping.model.vo.Shopping">
+		<id property="productNo" column="PRODUCT_NO" />
+		<result property="productName" column="PRODUCT_BRAND"/>
+		<result property="productTitle" column="PRODUCT_TITLE"/>
+		<result property="productPrice" column="PRODUCT_PRICE"/>
+		<result property="productOption" column="PRODUCT_OPTION"/>
+		<result property="quantity" column="QUANTITY"/>
+	</resultMap>
+
 
 	
 	<select id="findQnaList" resultMap="qnaResultMap" parameterType="hashmap">
@@ -604,7 +625,72 @@
 		DELETE FROM CART
 		WHERE USER_NO = #{userNo}
 	</delete>
-	
+
+	<select id="mypaymentList" parameterType="_int" resultMap="PaymentResultMap">
+		SELECT
+		      PAY_NO
+		    , PAY_DATE
+		    , PAY_METHOD
+		    , ORDERER_PHONE
+		    , ORDERER_EMAIL
+		    , ORDER_STATUS
+		    , QUANTITY
+		    , PRODUCT_NO
+		    , PRODUCT_BRAND
+		    , PRODUCT_TITLE
+		    , PRODUCT_PRICE
+		    , PRODUCT_OPTION
+		FROM PAYMENT
+		JOIN PAY_DETAIL USING(PAY_NO)
+		JOIN PRODUCT USING(PRODUCT_NO)
+		JOIN PRODUCT_OPTION USING(PRODUCT_NO)
+		WHERE USER_NO = #{userNo}
+	</select>
+	<insert id="reviewInsert" parameterType="com.kh.healthDao.review.model.vo.Review">
+		INSERT INTO REVIEW(
+		      REVIEW_NO
+		    , CATEGORY
+		    , STAR
+		    , R_CONTENT
+		    , R_DATE
+		    , MODIFY_DATE
+		    , PAY_NO
+		    , USER_NO
+		)VALUES(
+		    SEQ_REVIEW_NO.NEXTVAL
+		    , '상품'
+		    , #{star}
+		    , #{rContent}
+		    , SYSDATE
+		    , NULL
+		    , #{payNo}
+		    , #{userNo}
+		)
+	</insert>
+	<update id="statusModify" parameterType="com.kh.healthDao.review.model.vo.Review">
+		UPDATE PAYMENT
+		SET ORDER_STATUS = 'R'
+		WHERE PAY_NO = #{payNo}
+	</update>
+	<insert id="refundInsert" parameterType="_int">
+		INSERT INTO REFUND(
+		    REFUND_NO
+		    , REFUND_DATE
+		    , REFUND_STATUS
+		    , PAY_NO
+		)VALUES(
+		    SEQ_REFUND_NO.NEXTVAL
+		    , SYSDATE
+		    , DEFAULT
+		    , #{payNo}
+		)
+	</insert>
+	<update id="refundStatusModify" parameterType="_int">
+		UPDATE PAYMENT
+		SET ORDER_STATUS = 'H'
+		WHERE PAY_NO = #{payNo}
+	</update>
+
 	<insert id="rouletteInsert">
 		INSERT INTO POINT(
 		    POINT_NO

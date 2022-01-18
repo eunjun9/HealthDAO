@@ -43,4 +43,6 @@ public interface TrainerMapper {
 
 	int centerFileModify(Map<String, Object> map);
 
+	List<Trainer> trainerRankList();
+
 }

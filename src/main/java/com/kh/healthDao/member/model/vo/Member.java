@@ -27,6 +27,7 @@ public class Member {
 	private String emailReceive;	// 이메일수신여부
 	private String smsReceive;		// SMS수신여부
 	private int point;				// 포인트
+	private int authorityCode;
 	
 	/* 한 멤버는 여러 권한을 가질 수 있음 - MEMBER_ROLE과 조인한 결과 값 */
 	private List<MemberRole> memberRoleList;	// 보유권한목록

@@ -30,5 +30,8 @@ public interface TrainerService {
 
 	int trainerModify3(Trainer trainer, String originFile2, String changeFile2);
 
+	// 메인 화면에 가져오는 트레이너 4명
+	List<Trainer> trainerRankList();
+
 
 }

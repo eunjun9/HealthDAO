@@ -134,6 +134,66 @@
 		)
 	</insert>
 	
+	<insert id="productFileInsert" parameterType="hashmap">
+		INSERT 
+		INTO AT_FILE
+		(
+		    F_NO
+		  , ORIGIN_FILE
+		  , CHANGE_FILE
+		  , FILE_PATH
+		  , STATUS
+		)VALUES(
+		    SEQ_F_NO.NEXTVAL
+		  , #{originFile1}
+		  , #{product.change_file1}
+		  , #{product.file_path}
+		  , 'N'
+		)
+	</insert>
+	
+	<insert id="productFileInsertDB" parameterType="com.kh.healthDao.admin.model.vo.Product">
+		INSERT 
+		INTO PRODUCT_FILE
+		(
+		    F_NO
+		  , PRODUCT_NO
+		)VALUES(
+		    SEQ_F_NO.CURRVAL
+		  , SEQ_PRODUCT_NO.CURRVAL
+		)
+	</insert>
+	
+	<insert id="productInfoFileInsert" parameterType="hashmap">
+		INSERT 
+		INTO AT_FILE
+		(
+		    F_NO
+		  , ORIGIN_FILE
+		  , CHANGE_FILE
+		  , FILE_PATH
+		  , STATUS
+		)VALUES(
+		    SEQ_F_NO.NEXTVAL
+		  , #{originFile2}
+		  , #{product.change_file2}
+		  , #{product.file_path}
+		  , 'Y'
+		)
+	</insert>
+	
+	<insert id="productInfoFileInsertDB" parameterType="com.kh.healthDao.admin.model.vo.Product">
+		INSERT 
+		INTO PRODUCT_FILE
+		(
+		    F_NO
+		  , PRODUCT_NO
+		)VALUES(
+		    SEQ_F_NO.CURRVAL
+		  , #{productNo}
+		)
+	</insert>
+	
 	 <!-- <insert id="registCategory" parameterType="com.kh.healthDao.admin.model.vo.Product">
 		INSERT
 		  INTO PRODUCT_CATEGORY
@@ -454,4 +514,16 @@
 		  WHERE B.AUTHORITY_CODE = 2
             AND NOT EXISTS(SELECT USER_NO, AUTHORITY_CODE FROM MEMBER_ROLE R WHERE AUTHORITY_CODE IN(3) AND B.USER_NO = R.USER_NO)
 	</select>
+	
+	<update id="memberInfoMf" parameterType="com.kh.healthDao.member.model.vo.Member">
+		UPDATE MEMBER
+		   SET USER_STATUS = #{userStatus}
+		 WHERE USER_NO = #{userNo}
+	</update>
+	
+	<update id="memberInfoCodeMf" parameterType="com.kh.healthDao.member.model.vo.MemberRole">
+		UPDATE MEMBER_ROLE
+		   SET AUTHORITY_CODE = #{authorityCode}
+		 WHERE USER_NO = #{userNo}
+	</update>
 </mapper>
