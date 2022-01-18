@@ -65,4 +65,6 @@ public interface ShoppingService {
 
 	List<Product> searchList(String searchPdt);
 
+	int deleteWishPdt(int productNo, int userNo);
+
 }
