@@ -8,6 +8,7 @@ import com.kh.healthDao.mypage.model.vo.Address;
 import com.kh.healthDao.mypage.model.vo.AttCheck;
 import com.kh.healthDao.mypage.model.vo.Cart;
 import com.kh.healthDao.admin.model.vo.Coupon;
+import com.kh.healthDao.manager.model.vo.Payment;
 import com.kh.healthDao.member.model.vo.Member;
 import com.kh.healthDao.mypage.model.vo.Point;
 import com.kh.healthDao.mypage.model.vo.Qna;
@@ -75,6 +76,16 @@ public interface MypageMapper {
 	int cartDelete(int cartNo);
 
 	int cartAllDelete(int userNo);
+
+	List<Payment> mypaymentList(int userNo);
+
+	int reviewInsert(Review review);
+
+	int statusModify(Review review);
+
+	int refundInsert(int payNo);
+
+	int refundStatusModify(int payNo);
 
 
 }

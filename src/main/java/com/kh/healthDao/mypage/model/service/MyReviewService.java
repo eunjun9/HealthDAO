@@ -12,4 +12,6 @@ public interface MyReviewService {
 
 	int reviewModify(Review review);
 
+	int reviewInsert(Review review);
+
 }

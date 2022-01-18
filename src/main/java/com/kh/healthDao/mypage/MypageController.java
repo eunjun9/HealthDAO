@@ -9,11 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,12 +23,14 @@ import com.kh.healthDao.admin.model.service.MemberSoundService;
 import com.kh.healthDao.admin.model.service.NoticeService;
 import com.kh.healthDao.admin.model.vo.Coupon;
 import com.kh.healthDao.admin.model.vo.Notice;
+import com.kh.healthDao.manager.model.vo.Payment;
 import com.kh.healthDao.member.model.vo.Member;
 import com.kh.healthDao.member.model.vo.UserImpl;
 import com.kh.healthDao.mypage.model.service.CartService;
 import com.kh.healthDao.mypage.model.service.MyCouponService;
 import com.kh.healthDao.mypage.model.service.MyInfoService;
 import com.kh.healthDao.mypage.model.service.MyReviewService;
+import com.kh.healthDao.mypage.model.service.PaymentService;
 import com.kh.healthDao.mypage.model.service.QnaService;
 import com.kh.healthDao.mypage.model.vo.Address;
 import com.kh.healthDao.mypage.model.vo.AttCheck;
@@ -53,11 +53,13 @@ public class MypageController {
 	private MyReviewService myReviewService;
 	private MemberSoundService memberSoundService;
 	private MyInfoService myInfoService;
-  private CartService cartService;
+	private CartService cartService;
+	private PaymentService paymentService;
 	
 	@Autowired
 	public MypageController(QnaService qnaService, MyCouponService couponService, MessageSource messageSource, NoticeService noticeService, 
-			MyReviewService myReviewService, MemberSoundService memberSoundService, MyInfoService myInfoService, CartService cartService) {
+			MyReviewService myReviewService, MemberSoundService memberSoundService, MyInfoService myInfoService, CartService cartService,
+			PaymentService paymentService) {
 		this.qnaService = qnaService;
 		this.couponService = couponService;
 		this.messageSource = messageSource;
@@ -66,11 +68,50 @@ public class MypageController {
 		this.memberSoundService = memberSoundService;
 		this.myInfoService = myInfoService;
 		this.cartService = cartService;
+		this.paymentService = paymentService;
 	}
 	
 	@GetMapping(value= {"/", "/myOrder"})
-	public String mypage() {
-		return "mypage/myOrder";
+	public ModelAndView order(ModelAndView mv, @AuthenticationPrincipal UserImpl userImpl) {
+		int userNo = userImpl.getUserNo();
+		
+		List<Payment> paymentList = paymentService.mypaymentList(userNo);
+		System.out.println(paymentList);
+		
+		mv.addObject("paymentList", paymentList);
+		mv.setViewName("mypage/myOrder");
+		
+		return mv;
+	}
+	
+	@PostMapping("/reviewInsert")
+	public String reviewInsert(Review review, @AuthenticationPrincipal UserImpl userImpl, RedirectAttributes rttr) {
+		
+	
+		String msg = myReviewService.reviewInsert(review) > 0 ? "리뷰 등록 성공" : "리뷰 등록 실패";	
+		
+		if(msg.equals("리뷰 등록 성공")) {
+			int result = paymentService.statusModify(review);
+			
+			if(result > 0 ) {
+				msg = "리뷰 등록 성공";
+			}else {
+				msg = "리뷰 등록 실패";
+			}
+		}
+		
+		rttr.addFlashAttribute("msg", msg);
+		
+		return "redirect:/mypage/myOrder";
+	}
+	
+	@PostMapping("/refundInsert")
+	@ResponseBody
+	public String refundInsert(int payNo) {
+		
+		String msg = paymentService.refundInsert(payNo) > 0 ? "success" : "fail";	
+		
+		return msg;
 	}
 	
 	/* 1:1 문의 */

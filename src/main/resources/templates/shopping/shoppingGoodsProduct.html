@@ -47,7 +47,7 @@
                             </div>
                         </div>
                         <a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM on"><span class="hide">찜하기</span></a>
-                        <a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
+                        <a href="javascript:void(0);" th:onclick="|javascript:cartInsert('${goodsProduct.productNo}')|" class="btn_cart cartM"><span>장바구니</span></a>
                     </li>
                 </ul>
             </div>

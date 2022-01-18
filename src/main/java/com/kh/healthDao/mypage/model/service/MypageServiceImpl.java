@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.healthDao.admin.model.vo.Coupon;
 import com.kh.healthDao.common.model.vo.Paging;
+import com.kh.healthDao.manager.model.vo.Payment;
 import com.kh.healthDao.member.model.vo.Member;
 import com.kh.healthDao.mypage.model.dao.MypageMapper;
 import com.kh.healthDao.mypage.model.vo.Address;
@@ -22,7 +23,7 @@ import com.kh.healthDao.review.model.vo.Review;
 
 
 @Service("mypageService")
-public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewService, MyInfoService, CartService{
+public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewService, MyInfoService, CartService, PaymentService{
 	
 	private final MypageMapper mypageMapper; 
 	
@@ -228,6 +229,37 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 	@Override
 	public int cartAllDelete(int userNo) {
 		return mypageMapper.cartAllDelete(userNo);
+	}
+
+	@Override
+	public List<Payment> mypaymentList(int userNo) {
+		return mypageMapper.mypaymentList(userNo);
+	}
+
+	@Override
+	public int reviewInsert(Review review) {
+		return mypageMapper.reviewInsert(review);
+	}
+
+	@Override
+	public int statusModify(Review review) {
+		return mypageMapper.statusModify(review);
+	}
+
+	@Override
+	public int refundInsert(int payNo) {
+		// 환불 리스트에 추가
+		int result1 = mypageMapper.refundInsert(payNo);
+		// 결제 상태 변경
+		int result2 = mypageMapper.refundStatusModify(payNo);
+		
+		int totalResult = 0;
+		
+		if(result1 > 0 && result2 > 0) {
+			totalResult = 1;
+		}
+		
+		return totalResult;
 	}
 
 }
