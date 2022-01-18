@@ -4,3 +4,43 @@
 <script type="text/javascript" src="../../js/jquery.mCustomScrollbar.js"></script>
 <script type="text/javascript" src="../../js/circle-progress.min.js"></script>
 <script type="text/javascript" src="../../js/ui.js"></script>
+<script th:inline="javascript">
+	// 상품 있는 곳 어디서나 넣어야 됨
+	/*<![CDATA[*/
+	var likeValue = [[${likeList}]];
+	var likeSize = [[${likeList}]].length;
+	$(function(){
+		$.ajax({
+			url : "/",
+			method : 'GET',
+			success : function(data){
+				for(let i = 0; i < likeSize; i++){
+					$("#pdtNo_"+likeValue[i]).addClass('on');	// 값이 있으면 class on 추가
+				}
+			},
+			error : function(e){
+				console.log(e);
+			}
+		});
+	});
+	/*]]>*/
+	// 장바구니
+	/*<![CDATA[*/
+	var cartCount = [[${cartCount}]];
+	console.log(cartCount);
+	$("#mainCartCount").text(cartCount);
+	$(function(){
+		$.ajax({
+			url : "/mypage/cartInsert",
+			method : 'GET',
+			success : function(data){
+				$("#mainCartCount").text(cartCount);	// 장바구니 카운트
+			},
+			error : function(e){
+				console.log(e);
+			}
+		});
+	});
+	/*]]>*/
+	
+</script>

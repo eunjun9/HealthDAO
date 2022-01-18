@@ -1204,7 +1204,6 @@ function cartInsert(pNo){
 function addWish(pNo){
 	let productNo = pNo;
 	var sendData = {"productNo":productNo};
-	console.log($("#pdtNo_"+pNo).hasClass('on'));
 	$.ajax({
 		url : "/insertWish",
 		data : sendData,

@@ -87,26 +87,6 @@
 	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 	<script  th:inline="javascript">
 		$('#quick .quickArea').css({'position':'absolute', 'top':290});
-		// 상품 있는 곳 어디서나 넣어야 됨
-		/*<![CDATA[*/
-		var likeValue = [[${likeList}]];
-		var likeSize = [[${likeList}]].length;
-
-		$(function(){
-			$.ajax({
-				url : "/",
-				method : 'GET',
-				success : function(data){
-					for(let i = 0; i < likeSize; i++){
-						$("#pdtNo_"+likeValue[i]).addClass('on');	// 값이 있으면 class on 추가
-					}
-				},
-				error : function(e){
-					console.log(e);
-				}
-			});
-		});
-		/*]]>*/
 	</script>
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 

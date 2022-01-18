@@ -943,27 +943,6 @@
 		
 		$('#quick .quickArea').css({'position':'absolute', 'top':290});
 		
-		// 상품 있는 곳 어디서나 넣어야 됨
-		/*<![CDATA[*/
-		var likeValue = [[${likeList}]];
-		var likeSize = [[${likeList}]].length;
-
-		$(function(){
-			$.ajax({
-				url : "/",
-				method : 'GET',
-				success : function(data){
-					for(let i = 0; i < likeSize; i++){
-						$("#pdtNo_"+likeValue[i]).addClass('on');	// 값이 있으면 class on 추가
-					}
-				},
-				error : function(e){
-					console.log(e);
-				}
-			});
-		});
-		/*]]>*/
-		
 		var sell_price;
 		var amount;
 		
