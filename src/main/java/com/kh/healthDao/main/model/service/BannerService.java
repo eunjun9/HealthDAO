@@ -7,7 +7,7 @@ import com.kh.healthDao.main.model.vo.Banner;
 
 public interface BannerService {
 
-	int insertBanner(Banner banner, String originFileName, String path, String savedName);
+	int insertBanner(Banner banner, String originFileName, String savedName);
 
 	List<Banner> bannerRankList();
 
@@ -15,7 +15,11 @@ public interface BannerService {
 
 	Banner bannerSelect(int main_no);
 
-	int bannerUpdate(Map<String, Object> map);
-
 	int deleteBanner(int main_no, int f_no);
+
+	int updateOnlyBanner(Banner banner);
+
+	String findFileName(int main_no);
+
+	int updateBanner(Banner banner, String originFileName, String savedName);
 }

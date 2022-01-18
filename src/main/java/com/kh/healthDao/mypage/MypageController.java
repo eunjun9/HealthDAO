@@ -1,16 +1,19 @@
 package com.kh.healthDao.mypage;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,6 +58,7 @@ public class MypageController {
 	private MyInfoService myInfoService;
 	private CartService cartService;
 	private PaymentService paymentService;
+
 	
 	@Autowired
 	public MypageController(QnaService qnaService, MyCouponService couponService, MessageSource messageSource, NoticeService noticeService, 
@@ -306,6 +310,7 @@ public class MypageController {
 	}
 	
 	@PostMapping("deli/insert")
+	@ResponseBody
 	public Map<String, String> insertDeli(@RequestBody Address address, @AuthenticationPrincipal UserImpl userImpl) {
 		int userNo = userImpl.getUserNo();
 		address.setUserNo(userNo);
@@ -320,37 +325,56 @@ public class MypageController {
 		return map;
 	}
 	
-	@GetMapping("deli/{addressNo}")
-	public Address selectDeli(@PathVariable int addressNo) {
-		Address address = myInfoService.selectDeli(addressNo);
+	@GetMapping("deli/detail")
+	@ResponseBody
+	public Address selectDeli(@RequestBody Address address) {
+		address = myInfoService.selectDeli(address.getAddressNo());
 		
 		return address;
 	}
 	
-	/*@PutMapping("deli/update/{addressNo}")
-	public Map<String, String> updateDeli(@PathVariable int addressNo, @RequestBody Address address) {
-		address.setAddressNo(addressNo);
+	@PutMapping("deli/update")
+	@ResponseBody
+	public Map<String, String> updateDeli(@RequestBody Address address) {
 		
-		String msg = myInfoService.updateDeil(address) > 0 ? "주소 수정 성공" : "주소 수정 실패";
+		String msg = myInfoService.updateDeil(address.getAddressNo()) > 0 ? "주소 수정 성공" : "주소 수정 실패";
 		
 		Map<String, String> map = new HashMap<>();
 	    map.put("msg", msg);
 	    
 	    return map;
-	}*/
+	}
 	
-	/*@DeleteMapping("deli/delete/{addressNo}")
-	public Map<String, String> deleteDeli(@PathVariable int addressNo) {
-		String msg = myInfoService.deleteDeil(addressNo) > 0 ? "주소 삭제 성공" : "주소 삭제 실패";
+	@DeleteMapping("deli/delete")
+	@ResponseBody
+	public Map<String, String> deleteDeli(@RequestBody Address address) {
+		
+		String msg = myInfoService.deleteDeil(address.getAddressNo()) > 0 ? "배송지가 삭제되었습니다." : "배송지 삭제에 실패했습니다.";
 		
 		Map<String, String> map = new HashMap<>();
 	    map.put("msg", msg);
 	    
 	    return map;
-	}*/
+	}
+	
+	@PatchMapping("deli/defAddress")
+	@ResponseBody
+	public Map<String, String> defAddDeli(@RequestBody Address address, @AuthenticationPrincipal UserImpl userImpl) {
+		int userNo = userImpl.getUserNo();
+		
+		/* 기존 기본배송지가 있다면 status N으로 변경 */
+		myInfoService.defAddRemove(userNo);
+		/* 선택 주소 기본배송지로 설정 */
+		String msg = myInfoService.defAddDeli(address.getAddressNo()) > 0 ? "기본배송지로 설정되었습니다." : "기본배송지 설정에 실패했습니다.";
+		
+		Map<String, String> map = new HashMap<>();
+	    map.put("msg", msg);
+	    
+	    return map;
+	}
 	
 	/* 내 정보 수정 */
-	@GetMapping("/myInfo")
+	@GetMapping("myInfo")
 	public ModelAndView myInfo(ModelAndView mv, @AuthenticationPrincipal UserImpl userImpl) {
 		int userNo = userImpl.getUserNo();
 		
@@ -362,20 +386,51 @@ public class MypageController {
 		return mv;
 	}
 	
-	@PostMapping("/myInfo/modify")
-	public String myInfoModify(Member member, @RequestParam int userBirth, @RequestParam int userBirth2, @RequestParam int userBirth3, RedirectAttributes rttr) {
-		String b1 = Integer.valueOf(userBirth).toString();
-		String b2 = Integer.valueOf(userBirth2).toString();
-		String b3 = Integer.valueOf(userBirth3).toString();
+	@PutMapping("myInfo/modify")
+	@ResponseBody
+	public Map<String, String> myInfoModify(@RequestBody Member member) {
 		
-		String birth = b1 + b2 + b3;
-		member.setUserBirth(birth);
+		String msg = myInfoService.myInfoModify(member) > 0 ? "정보 수정에 성공했습니다." : "정보 수정에 실패했습니다.";
 		
-//		myInfoService.myInfoModify(member);
-		String msg = myInfoService.myInfoModify(member) > 0 ? "정보 수정에 성공했습니다." : "정보 수정에 실패했습니다.";		
-		rttr.addFlashAttribute("msg", msg);
+		Map<String, String> map = new HashMap<>();
+	    map.put("msg", msg);
+	    
+	    return map;
+	}
+	
+	@PatchMapping("myInfo/delete")
+	@ResponseBody
+	public Map<String, String> myInfoDelete(@RequestBody Member member, HttpSession session) {
 		
-		return "redirect:/mypage/";
+		String msg = myInfoService.myInfoDelete(member.getUserNo(), session) > 0 ? "탈퇴 처리되었습니다." : "탈퇴 처리에 실패했습니다.";
+		
+		Map<String, String> map = new HashMap<>();
+	    map.put("msg", msg);
+	    
+	    return map;
+	}
+	
+	/* 회원 탈퇴 */
+	@GetMapping("unregister")
+	public String unregister() {
+		return "member/unregister";
+	}
+	
+	@PostMapping("unregister/proc")
+	public String unregisterProc(Member member, HttpSession session) {
+		
+		myInfoService.unregister(member, session);
+		
+		return "main/main";
+	}
+	
+	@GetMapping("unregister/passCheck")
+	@ResponseBody
+	public String passCheck(@RequestBody Member member) {
+		
+		int result = myInfoService.passCheck(member);
+		
+		return Integer.toString(result);
 	}
 	
 	/* 룰렛 */
@@ -386,9 +441,10 @@ public class MypageController {
 		
 	/* 보유 포인트 내역 */
 	@GetMapping("/point")
-	public ModelAndView point(ModelAndView mv,  @RequestParam int page) {
+	public ModelAndView point(ModelAndView mv,  @RequestParam int page, @AuthenticationPrincipal UserImpl userImpl) {
 		
-		Map<String, Object> map = qnaService.pointList(page);
+		int userNo = userImpl.getUserNo();
+		Map<String, Object> map = qnaService.pointList(page, userNo);
 		
 		mv.addObject("PointList", map.get("PointList"));
 		mv.addObject("listCount", map.get("listCount"));
@@ -400,9 +456,25 @@ public class MypageController {
 	}
 	
 	/* 출석체크 화면이동 */
-	@GetMapping("/attendanceCheck")
-	public String attendanceCheck() {
-		return "mypage/attendanceCheck";
+	@PostMapping("/attendanceCheck")
+	public ModelAndView attendUser(@RequestParam int userNo, ModelAndView mv) {
+		
+		
+		List<AttCheck> attendUserList = qnaService.attendUserList(userNo);
+		
+		List dateArr = new ArrayList();
+		for(int i = 0; i < attendUserList.size(); i++) {
+			dateArr.add(attendUserList.get(i).getStringAttendanceDate());
+		}
+		
+		int attendCount = qnaService.attendCount(userNo);
+		
+		mv.addObject("attendUserList", attendUserList);
+		mv.addObject("attendCount", attendCount);
+		mv.addObject("dateArr", dateArr);
+		mv.setViewName("mypage/attendanceCheck");
+
+		return mv;
 	}
 	
 	/* 출석 체크 */
@@ -410,18 +482,15 @@ public class MypageController {
 	@ResponseBody
 	public String attendanceCheck(Date attendanceDate, int userNo) {
 		
-		System.out.println(attendanceDate);
-		System.out.println(userNo);
 		AttCheck attcheck = new AttCheck();
 		attcheck.setAttendanceDate(attendanceDate);
 		attcheck.setUserNo(userNo);
-		System.out.println(attcheck.getAttendanceDate());
-		int result = qnaService.attendCheck(attcheck);
-
+		int result = qnaService.attendCheck(attcheck);	
+		
 		if(result > 0) {
-			return "성공";
+			return "출석체크 성공";
 		}else {
-			return "실패";
+			return "출석체크 실패";
 		}
 		
 	}
@@ -485,4 +554,16 @@ public class MypageController {
 		
 		return msg;
 	}
+	
+	@PostMapping("rouletteInsert")
+	@ResponseBody
+	public Map<String, String> rouletteInsert(@AuthenticationPrincipal UserImpl user, int pointAmount) {
+		int result = qnaService.rouletteInsert(user.getUserNo(), pointAmount);
+		
+		Map<String, String> map = new HashMap<>();
+	    map.put("msg", result > 0 ? "등록 완료" : "등록 실패");
+	    
+	    return map;
+	}
 }
+

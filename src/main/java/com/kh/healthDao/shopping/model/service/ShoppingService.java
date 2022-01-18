@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.healthDao.admin.model.vo.Product;
+import com.kh.healthDao.mypage.model.vo.Address;
 import com.kh.healthDao.shopping.model.vo.Shopping;
 
 
@@ -51,4 +52,17 @@ public interface ShoppingService {
 	List<Product> recentList(int[] addList);
 
 	Map<String, Object> wishList(int userNo);
+
+	List<Address> deliView(int userNo);
+
+	Product wishChk(int productNo, int userNo);
+	
+	int insertWish(int productNo, int userNo);
+
+	int deleteWish(int productNo, int userNo);
+
+	List likeList(int userNo);
+
+	List<Product> searchList(String searchPdt);
+
 }

@@ -15,7 +15,9 @@ public class AttCheck {
 
 	private int attendanceId;		// 출석체크번호
 	private Date attendanceDate;	// 출석체크일자
+	private int stringAttendanceDate;
 	private int userNo;				// 출석유저번호
+	
 	
 
 }

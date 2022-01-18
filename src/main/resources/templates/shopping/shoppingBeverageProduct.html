@@ -29,35 +29,26 @@
                             <ul class="pdt_type">
                                 <li class="bg_p">NEW</li>
                                 <li class="bg_p">BEST</li>
-                                <li class="bg_p">한정판</li>
-                                <li class="bg_r">SALE</li>
-                                <li class="bg_r">FREE</li>
-                                <li class="bg_r">GIFT</li>
                             </ul>
-                            <a href="/shopping/detail?productNo=" th:attrappend="href=${beverageProduct.productNo}" class="imgLink"><img src="/resources/web/images/temp/pdt_img1.png" alt="바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널"></a>
+                            <a href="/shopping/detail?productNo=" th:attrappend="href=${beverageProduct.productNo}" class="imgLink"><img src="/resources/web/images/temp/pdt_img1.png" alt=""></a>
                         </div>
                         <div class="pdtTxt">
                             <p class="pdtHead" style="color:#4f8ffa;">2019 누적판매 15,591건!</p><!-- 문구가 없어도 태그삭제 X -->
                             <p class="pdtBrand" th:text="${beverageProduct.productBrand}"></p>
                             <p class="pdtName" th:text="${beverageProduct.productTitle}"><a href="#"></a></p>
-							<p class="pdtPrice"><span class="sasle" th:text="${#numbers.formatInteger(beverageProduct.productPrice, 0, 'COMMA')+'원'}"></span><span class="cost">15,000원</span></p>                            <div class="pdtReview">
+                            <p class="pdtPrice"><span class="sasle" th:text="${#numbers.formatInteger(beverageProduct.productPrice, 0, 'COMMA')+'원'}"></span><span class="cost">15,000원</span></p>
+                            <div class="pdtReview">
                                 <div class="js_rating ratingS"><span>4.5</span></div>
                                 4.5 <span class="count">(리뷰 18)</span>
                             </div>
                         </div>
-                        <a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM on"><span class="hide">찜하기</span></a>
-                        <a href="javascript:void(0);" th:onclick="|javascript:cartInsert('${beverageProduct.productNo}')|" class="btn_cart cartM"><span>장바구니</span></a>
+
+	                    <a href="javascript:void(0);" th:onclick="|javascript:addWish('${beverageProduct.productNo}')|" th:id="pdtNo_+${beverageProduct.productNo}" class="btn_like likeM"><span class="hide">찜하기</span></a>
+	                    <a href="javascript:void(0);" th:onclick="|javascript:cartInsert('${beverageProduct.productNo}')|" class="btn_cart cartM"><span>장바구니</span></a>
                     </li>
                 </ul>
             </div>
 		</div>
-		<div class="paging mgt50" th:with="prev=${pi.page - 1}, next=${pi.page + 1}">
-        	<a th:href="@{/shopping/beverageProduct(page=1)}" class="first"><span class="hide">첫페이지</span></a>
-        	<a class="prev" href="/shopping/beverageProduct?page=" th:attrappend="href=${prev}"><span class="hide">이전페이지</span></a>
-        	<a th:each="page : ${#numbers.sequence(pi.startPage, pi.endPage)}" href="/shopping/beverageProduct?page=" th:attrappend="href=${page}" th:text="${page}" th:classappend="${page} == ${#httpServletRequest.getParameter('page')} ? active"></a>	                                   
-        	<a class="next" href="/shopping/beverageProduct?page=" th:attrappend="href=${next}"><span class="hide">다음페이지</span></a>
-        	<a href="/shopping/beverageProduct?page=" th:attrappend="href=${pi.maxPage}" class="last"><span class="hide">마지막페이지</span></a>
-	    </div>
 	</div>
 	<!-- //container -->
 
@@ -73,12 +64,29 @@
 	<th:block th:replace="common/quickNtalk.html"></th:block>
 	<!--// 퀵메뉴 + 톡톡 -->	
 	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
-	<link rel="stylesheet" type="text/css" href="../../css/main.css">
-	<script type="text/javascript" src="../../js/main.js"></script>
-	<script type="text/javascript">
-		$('#quick .quickArea').css({'position':'absolute', 'top':936});
-		mainStart();
-		mainVisual();
+	<script  th:inline="javascript">
+		$('#quick .quickArea').css({'position':'absolute', 'top':290});
+		
+		// 상품 있는 곳 어디서나 넣어야 됨
+		/*<![CDATA[*/
+		var likeValue = [[${likeList}]];
+		var likeSize = [[${likeList}]].length;
+
+		$(function(){
+			$.ajax({
+				url : "/",
+				method : 'GET',
+				success : function(data){
+					for(let i = 0; i < likeSize; i++){
+						$("#pdtNo_"+likeValue[i]).addClass('on');	// 값이 있으면 class on 추가
+					}
+				},
+				error : function(e){
+					console.log(e);
+				}
+			});
+		});
+		/*]]>*/
 	</script>
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 </body>

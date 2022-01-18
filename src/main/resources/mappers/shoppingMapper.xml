@@ -30,6 +30,16 @@
 
 	</resultMap>
 	
+	<resultMap id="addressResultMap" type="com.kh.healthDao.mypage.model.vo.Address">
+		<id property="addressNo" column="ADDRESS_NO"/>
+		<result property="receiver" column="RECEIVER"/>
+		<result property="address" column="ADDRESS"/>
+		<result property="recPhone" column="RECEIVER_PHONE"/>
+		<result property="defAddress" column="DEFAULT_ADDRESS"/>
+		<result property="userNo" column="USER_NO"/>
+  	</resultMap>
+	
+	
 	<select id="recentList" resultMap="productResultMap">
 		SELECT
 				PRODUCT_NO
@@ -231,6 +241,47 @@
         WHERE USER_NO = #{userNo})
 	</select>
 	
+	<select id="wishChk" parameterType="com.kh.healthDao.admin.model.vo.Product" resultMap="productResultMap">
+		SELECT
+				LIKE_NO
+			  , PRODUCT_NO
+			  , USER_NO
+		  FROM PRODUCT_LIKE
+		 WHERE USER_NO = #{userNo}
+		   AND PRODUCT_NO = #{productNo}
+	</select>
+	
+	<insert id="insertWish" parameterType="com.kh.healthDao.admin.model.vo.Product">
+		INSERT 
+		INTO PRODUCT_LIKE
+		(
+			LIKE_NO
+		  , PRODUCT_NO
+		  , USER_NO
+		)VALUES(
+			SEQ_LIKE_NO.NEXTVAL
+		  , #{productNo}
+		  , #{userNo}
+		)
+	</insert>
+	
+	<delete id="deleteWish" parameterType="com.kh.healthDao.admin.model.vo.Product">
+		DELETE
+			   PRODUCT_LIKE
+		 WHERE USER_NO = #{userNo}
+		   AND PRODUCT_NO = #{productNo}
+	</delete>
+	
+	
+	<select id="findLikeList" resultType="_int">
+		SELECT
+				PRODUCT_NO
+		  FROM PRODUCT
+          JOIN PRODUCT_LIKE USING (PRODUCT_NO)
+         WHERE USER_NO = #{userNo}
+	</select>
+	
+	
 	<select id="shoppingList" resultMap="productResultMap" parameterType="hashmap">
 		SELECT *
 				FROM
@@ -318,6 +369,16 @@
 		ORDER BY PRODUCT_NO DESC)
 	</select>
 	
+	<select id="searchList" resultMap="productResultMap" parameterType="String">
+		SELECT
+				PRODUCT_NO
+			  , PRODUCT_BRAND
+			  , PRODUCT_TITLE
+			  , PRODUCT_PRICE
+		 FROM PRODUCT
+         WHERE PRODUCT_BRAND LIKE '%'|| #{searchPdt} ||'%'
+            OR PRODUCT_TITLE LIKE '%'|| #{searchPdt} ||'%'
+	</select>
 	
 	<select id="NewProductSelect" resultMap="productResultMap" parameterType="_int">
 		SELECT
@@ -325,7 +386,6 @@
 			  , PRODUCT_BRAND
 			  , PRODUCT_TITLE
 			  , PRODUCT_PRICE
-			  
 		 FROM PRODUCT
 		 ORDER BY PRODUCT_NO DESC
 	</select>
@@ -408,7 +468,19 @@
 	</select>
 	
 	
-	
+	<!-- 배송지 관리 -->
+	<select id="deliView" resultMap="addressResultMap" parameterType="_int" >
+		SELECT
+			   ADDRESS_NO
+			 , RECEIVER
+			 , ADDRESS
+			 , RECEIVER_PHONE
+			 , DEFAULT_ADDRESS
+			 , USER_NO
+		  FROM ADDRESS
+		  JOIN MEMBER USING(USER_NO)
+		 WHERE USER_NO = #{userNo}
+	</select>
 	
 	
 	

@@ -1197,3 +1197,33 @@ function cartInsert(pNo){
 		}
 	});
 }
+
+/**
+ * 찜한 상품 추가 ajax
+ */
+function addWish(pNo){
+	let productNo = pNo;
+	var sendData = {"productNo":productNo};
+	console.log($("#pdtNo_"+pNo).hasClass('on'));
+	$.ajax({
+		url : "/insertWish",
+		data : sendData,
+		type : "post",
+		success : function(data){
+			console.log(data);
+			if(data == '1'){
+				alert("찜한 상품에 추가 되었습니다.");
+				$("#pdtNo_"+pNo).addClass('on');				
+			}else if(data == '2'){
+				alert("찜한 상품에 삭제 되었습니다.");
+				$("#pdtNo_"+pNo).removeClass('on');		
+			}else{
+				alert("먼저 로그인을 해주세요!");
+				location.replace('/member/login');
+			}
+		},
+		error : function(e){
+			console.log(e)
+		}
+	});
+}

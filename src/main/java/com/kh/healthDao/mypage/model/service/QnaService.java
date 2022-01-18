@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.healthDao.mypage.model.vo.AttCheck;
-import com.kh.healthDao.mypage.model.vo.Point;
 import com.kh.healthDao.mypage.model.vo.Qna;
 
 public interface QnaService {
@@ -18,9 +17,17 @@ public interface QnaService {
 	Qna qnaDetail(int qNo);
 	
 	// 포인트 내역 페이징
-	Map<String, Object> pointList(int page);
+	Map<String, Object> pointList(int page, int userNo);
 	
 	// 출석체크
 	int attendCheck(AttCheck attcheck);
+	List<AttCheck> attendUserList(int userNo);
+	int attendCount(int userNo);
+	
+	// 룰렛
+	int rouletteInsert(int userNo, int pointAmount);
+	
+	
+
 	
 }

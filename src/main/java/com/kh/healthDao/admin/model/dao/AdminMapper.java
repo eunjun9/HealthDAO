@@ -10,6 +10,7 @@ import com.kh.healthDao.admin.model.vo.Coupon;
 import com.kh.healthDao.admin.model.vo.Option;
 import com.kh.healthDao.admin.model.vo.Notice;
 import com.kh.healthDao.admin.model.vo.Product;
+import com.kh.healthDao.member.model.vo.Member;
 import com.kh.healthDao.mypage.model.vo.MemberSound;
 import com.kh.healthDao.mypage.model.vo.Qna;
 
@@ -87,7 +88,14 @@ public interface AdminMapper {
 
 	public int memberSoundModify(MemberSound ms);
 
-	
+	public List<Member> memberInfoView();
+
+	public List<Member> trainerInfoView();
+
+	public int memberInfoMf(Member member);
+
+	public int memberInfoCodeMf(Member member);
+
 
 	
 

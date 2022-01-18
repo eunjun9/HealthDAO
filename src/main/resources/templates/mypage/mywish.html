@@ -38,6 +38,9 @@
 							</div>
 						</div>
 						<div class="pdt_list1 type02 mgt60" th:if="${wishListCount != 0}">
+							<span th:text="${wishListCount}"></span>
+							<span th:text="${wishList}"></span>
+							
 							<ul class="list_box">
 								<li th:each="list : ${wishList}">
 									<div class="pdtImg">

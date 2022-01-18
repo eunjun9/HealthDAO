@@ -37,6 +37,7 @@
 								</div>
 							</div>
 						</div>
+						<form id="deliListForm">
 						<div class="js_tblList">
 							<table class="tblType1" summary="">
 								<caption></caption>
@@ -58,26 +59,20 @@
 								</thead>
 								<tbody id="deliList">
 									<tr th:each="address, i : ${addressList}">
-										<td style="display:none;"><input type="hidden" name="addressNo" th:value="${address.addressNo}"></td>
 										<td class="fc22">
 											<span class="inp_radio">
-												<th:block th:if="${address.defAddress == 'Y'}">
-												<input type="radio" name="defAddress" th:id="'inp_radio1_'+${i.index+1}" checked>
+												<input type="radio" name="addressNo" th:id="'inp_radio1_'+${i.index+1}" th:value="${address.addressNo}">
 												<label th:for="'inp_radio1_'+${i.index+1}"></label>
-												</th:block>
-												<th:block th:if="${address.defAddress == 'N'}">
-												<input type="radio" name="defAddress" th:id="'inp_radio1_'+${i.index+1}">
-												<label th:for="'inp_radio1_'+${i.index+1}"></label>
-												</th:block>
 											</span>
 										</td>
-										<td class="fc22" id="deliName" th:text="${address.receiver}"></td>
+										<td th:if="${address.defAddress == 'Y'}" class="fc22" id="deliName" th:text="${address.receiver} + ' (기본배송지)'"></td>
+										<td th:if="${address.defAddress == 'N'}" class="fc22" id="deliName" th:text="${address.receiver}"></td>
 										<td class="fc22" id="deliAddress" th:text="${address.address}"></td>
 										<td class="fc22" id="deliPhone" th:text="${address.recPhone}"></td>
 										<td>
-											<a onclick="showLayer('deliRegister');" href="javascript:void(0)" class="btn btnSizeS btnColorG btnTypeB btnMf" style="width:70px;"><span>수정</span></a>
-											<div style="height: 12px;"></div>
-											<a onclick="" href="javascript:void(0)" class="btn btnSizeS btnColorG btnTypeB btnDt" style="width:70px;"><span>삭제</span></a>
+											<!-- <a onclick="showLayer('deliRegister');" href="javascript:void(0)" class="btn btnSizeS btnColorG btnTypeB btnMf" style="width:70px;"><span>수정</span></a>
+											<div style="height: 12px;"></div> -->
+											<button type="button" class="btn btnSizeS btnColorG btnTypeB btnDt" style="width:70px;"><span>삭제</span></button>
 										</td>
 									</tr>
 								</tbody>
@@ -86,10 +81,11 @@
 						<div class="mgt30 alct">
 							<div class="inp_wrap">
 								<div class="btn_wrap">
-									<a href="#" class="btn btnArr btnSizeL btnColorB btnTypeB" style="width:200px;"><span>기본배송지로 설정</span></a>
+									<button class="btn btnArr btnSizeL btnColorB btnTypeB btnDef" style="width:200px;"><span>기본배송지로 설정</span></button>
 								</div>
 							</div>
 						</div>
+						</form>
 					</div>
 					<!-- //myPageCon -->
 				</div>
@@ -107,7 +103,7 @@
 	</div>
 	
 	<!-- 퀵메뉴 + 톡톡 -->
-	<!-- <th:block th:replace="common/quickNtalk.html"></th:block> -->
+	<th:block th:replace="common/quickNtalk.html"></th:block>
 	<!--// 퀵메뉴 + 톡톡 -->
 	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 	<link rel="stylesheet" type="text/css" href="../../css/main.css">
@@ -148,15 +144,16 @@
 				});
 			});
 			
-			$("#deliList .btnMf").on('click', function(){
-				let addressNo = $("#deliList [name=addressNo]").val();
+			$("#deliListForm .btnMf").on('click', function(){
+				let param = {};
+				param.addressNo = $("#deliList [name=addressNo]:checked").val();
 				
 				$.ajax({
-					url : "/mypage/deli/" + addressNo,
+					url : "/mypage/deli/detail",
 					data : JSON.stringify(param),
 					dataType : "json",
 					contentType : "application/json; charset=utf-8",
-					type : "post",
+					type : "put",
 					success : function(data) {
 						let form = $("#deliUpdateForm");
 						
@@ -168,6 +165,13 @@
 						if(form.find("[name=defAddress]").val('Y')) {
 							form.find("[name=defAddress]").prop("checked", true);
 						}
+						/* if(data) {
+							$.each(data, function(i){
+								
+							});
+						} else {
+	 						alert('배송지 정보가 없습니다.');
+	 					} */
 					},
 					error : function(e) {
 						console.log(e);
@@ -175,15 +179,64 @@
 				});
 			});
 			
-			$("#deliList .btnDt").on('click', function(){
-				let addressNo = $("#deliList [name=addressNo]").val();
+			$("#deliUpdateForm .addUpdBtn").on('click', function(){
+				let param = {};
+				param.receiver = $("#deliUpdateForm [name=receiver]").val();
+				param.address = "(" + $("#deliUpdateForm [name=address1]").val() + ")";
+				param.address += " " + $("#deliUpdateForm [name=address2]").val();
+				param.address += " " + $("#deliUpdateForm [name=address3]").val();
+				param.recPhone = $("#deliUpdateForm [name=recPhone]").val();
+				param.defAddress = $("#deliUpdateForm [name=defAddress]").val();
 				
 				$.ajax({
-					url : "/mypage/deli/delete" + addressNo,
+					url : "/mypage/deli/insert",
 					data : JSON.stringify(param),
 					dataType : "json",
 					contentType : "application/json; charset=utf-8",
 					type : "post",
+					success : function(data) {
+						alert(data.msg);
+						
+					},
+					error : function(e) {
+						console.log(e);
+					}
+				});
+			});
+			
+			$("#deliListForm .btnDt").on('click', function(){
+				if(!confirm("배송지를 삭제하시겠습니까?")) return;
+				
+				let param = {};
+				param.addressNo = $("#deliList [name=addressNo]:checked").val();
+				
+				$.ajax({
+					url : "/mypage/deli/delete",
+					data : JSON.stringify(param),
+					dataType : "json",
+					contentType : "application/json; charset=utf-8",
+					type : "delete",
+					success : function(data) {
+						alert(data.msg);
+					},
+					error : function(e) {
+						console.log(e);
+					}
+				});
+			});
+			
+			$("#deliListForm .btnDef").on('click', function(){
+				if(!confirm("기본 배송지로 설정하시겠습니까?")) return;
+				
+				let param = {};
+				param.addressNo = $("#deliList [name=addressNo]:checked").val();
+				
+				$.ajax({
+					url : "/mypage/deli/defAddress",
+					data : JSON.stringify(param),
+					dataType : "json",
+					contentType : "application/json; charset=utf-8",
+					type : "patch",
 					success : function(data) {
 						alert(data.msg);
 					},
