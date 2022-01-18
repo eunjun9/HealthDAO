@@ -19,11 +19,13 @@
 		</div>
 		<div class="search_list">
             <div class="searchResultTtl" th:if="${shoppingList.size} > 0">
-				<p class="ttl"><span class="fcPink" th:text="${searchPdt}">'클린잇제로'</span>에 대한 <br><span th:text="${shoppingList.size}"></span>개의 검색한 결과입니다.</p>
+				<p class="ttl"><span class="fcPink" th:text="${searchPdt}">제품명</span>에 대한 <br><span th:text="${shoppingList.size}"></span>개의 검색 결과입니다.</p>
 			</div>
-            <div class="searchResultTtl">
-				<p class="ttl"><span class="fcPink">'클린잇제로'</span>에 대한 검색결과가<br>존재하지 않습니다.</p>
-				<p class="cmt">단어의 철자가 정확한지 확인해 보세요. 띄어쓰기 또는 넓은 의미의 단어를 사용해 보세요.</p>
+            <div class="searchResultTtl" th:unless="${shoppingList.size} > 0">
+				<p class="ttl"><span class="fcPink" th:text="${searchPdt}">제품명</span>에 대한 검색결과가<br>존재하지 않습니다.</p>
+				<div class="noData">
+					<span>단어의 철자가 정확한지 확인해 보세요.<br>띄어쓰기 또는 넓은 의미의 단어를 사용해 보세요.</span>
+				</div>
 			</div>
             <div class="contents mgt50">
                 <div class="pdt_list1">

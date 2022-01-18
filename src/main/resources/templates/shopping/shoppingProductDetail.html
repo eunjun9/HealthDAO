@@ -23,13 +23,11 @@
 				<div class="contents">
 					<div class="pdtVisual">
 						<div class="pdtItem"><img src="./resources/web/images/temp/pdt01.png" alt=""></div>
-						
 					</div>
 					
 					<div class="pdtInfoBox">
-						
-						<div class="pdtInfo">							
-							<a href="javascript:void(0)" onclick="jsShopFloating('like_floating');" class="btn_like likeL_type2"><span class="hide">찜하기</span></a>
+						<div class="pdtInfo">
+							<a href="javascript:void(0)" th:onclick="|javascript:addWish('${shoppingDetail.productNo}')|" th:id="pdtNo_+${shoppingDetail.productNo}" class="btn_like likeL_type2"><span class="hide">찜하기</span></a>
 							<div class="pdtBrand" th:text="${shoppingDetail.productBrand}"></div>
 							<div class="pdtName" th:text="${shoppingDetail.productTitle}"></div>
 							<div class="pdtDesc"></div>
@@ -98,21 +96,9 @@
 								<div class="InfoDetail" th:text="${shoppingDetail.productNotice}"><br>
 								</div>
 							</div>
-
-
-							
-							
-							<!-- 200424 삭제 
-							<div class="pdtStockOff">재고가 부족하여 추가 수량만큼 주문할 수 없습니다.</div>
-							<div class="pdtStockOff">일일 최대 구매수량을 초과하였습니다.</div> 
-							-->
-							
-							<!-- 200424 error text 위치 이동 -->
 							<div class="pdtStockOff">
 								
-								
 							</div>
-							<!-- //200424 error text 위치 이동 -->
 							<div class="pdtMoney" style="width:500px; margin-left:0px; margin-top:5px;">
 								<form name="form" th:action="@{/shopping/payment}" method="post">
 								<input type="hidden" th:value="${shoppingDetail.productNo}" name="productNo">
@@ -578,11 +564,9 @@
 											<a href="javascript:void(0)" class="reviewMore">더보기</a>
 										</div>
 									</li>
-									<!-- 20200115 노데이타 추가 s -->
 									<li class="noData">
 										<span>등록된 리뷰가 없습니다.</span>
 									</li>
-									<!-- 20200115 노데이타 추가 e -->
 								</ul>
 							</div>
 							<div class="paging">
@@ -951,19 +935,34 @@
 	<th:block th:replace="common/quickNtalk.html"></th:block>
 	<!--// 퀵메뉴 + 톡톡 -->	
 	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
-	<link rel="stylesheet" type="text/css" href="../../css/main.css">
-	<script type="text/javascript" src="../../js/main.js"></script>
-	<script type="text/javascript">
-		$('#quick .quickArea').css({'position':'absolute', 'top':290});
-	</script>
-		
 	<script  th:inline="javascript">
 		/*<![CDATA[*/
 		var val = "[[${shoppingDetail.productNo}]]";
 			addCookie(val);		// 쿠키 값 추가
 		/*]]>*/
-	</script>
-	<script language="JavaScript">
+		
+		$('#quick .quickArea').css({'position':'absolute', 'top':290});
+		
+		// 상품 있는 곳 어디서나 넣어야 됨
+		/*<![CDATA[*/
+		var likeValue = [[${likeList}]];
+		var likeSize = [[${likeList}]].length;
+
+		$(function(){
+			$.ajax({
+				url : "/",
+				method : 'GET',
+				success : function(data){
+					for(let i = 0; i < likeSize; i++){
+						$("#pdtNo_"+likeValue[i]).addClass('on');	// 값이 있으면 class on 추가
+					}
+				},
+				error : function(e){
+					console.log(e);
+				}
+			});
+		});
+		/*]]>*/
 		
 		var sell_price;
 		var amount;

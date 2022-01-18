@@ -70,6 +70,9 @@ public class ShoppingController {
 		}
 		List<Product> shoppingList = shoppingService.searchList(searchPdt);
 
+		if(searchPdt == "") {
+			searchPdt = "전체상품";
+		}
 		mv.addObject("searchPdt", searchPdt);
 		mv.addObject("shoppingList", shoppingList);
 		mv.setViewName("shopping/shoppingSearch");
