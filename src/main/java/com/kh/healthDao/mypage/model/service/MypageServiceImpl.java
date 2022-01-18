@@ -22,6 +22,7 @@ import com.kh.healthDao.mypage.model.vo.AttCheck;
 import com.kh.healthDao.mypage.model.vo.Cart;
 import com.kh.healthDao.mypage.model.vo.Point;
 import com.kh.healthDao.mypage.model.vo.Qna;
+import com.kh.healthDao.mypage.model.vo.Roulette;
 import com.kh.healthDao.review.model.vo.Review;
 
 @Service("mypageService")
@@ -159,6 +160,25 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 	public int reviewModify(Review review) {
 		return mypageMapper.reviewModify(review);
 
+	}
+	
+	// 룰렛
+	@Override
+	public int rouletteInsert(int userNo, int pointamount) {
+		
+		int pointInsert = mypageMapper.rouletteInsert(userNo, pointamount);
+		int rouletteTableInsert = mypageMapper.rouletteTableInsert(userNo);
+		// System.out.println(pointInsert);
+		// System.out.println(rouletteTableInsert);
+		int result = 0;
+		if(pointInsert > 0 && rouletteTableInsert > 0) result = 1;
+		
+		return result;
+	}
+
+	@Override
+	public List<Roulette> rouletteButton(int userNo) {
+		return mypageMapper.rouletteButton(userNo);
 	}
 	
 	// 출석체크
@@ -325,11 +345,8 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 		return mypageMapper.attendCount(userNo);
 	}
 
-	// 룰렛
-	@Override
-	public int rouletteInsert(int userNo, int pointamount) {
-		return mypageMapper.rouletteInsert(userNo, pointamount);
-	}
+
+
 
 	
 

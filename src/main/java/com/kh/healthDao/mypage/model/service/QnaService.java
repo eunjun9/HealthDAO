@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.kh.healthDao.mypage.model.vo.AttCheck;
 import com.kh.healthDao.mypage.model.vo.Qna;
+import com.kh.healthDao.mypage.model.vo.Roulette;
 
 public interface QnaService {
 	// 문의하기
@@ -26,6 +27,7 @@ public interface QnaService {
 	
 	// 룰렛
 	int rouletteInsert(int userNo, int pointAmount);
+	List<Roulette> rouletteButton(int userNo);
 	
 	
 

@@ -131,25 +131,31 @@
 	         if(result == 67.5){
 	            alert("500P");
 	            pointAmount = 500;
+	            location.reload();
 	         } else if(result == 157.5){
 	            alert("50P");
 	            pointAmount = 50;
+	            location.reload();
 	         } else if(result == 202.5){
 	            alert("300P");
 	            pointAmount = 300;
+	            location.reload();
 	         } else if(result == 292.5){
 	            alert("50000P");
 	            pointAmount = 50000;
+	            location.reload();
 	         } else if(result == 337.5){
 	            alert("1000P");
+	            location.reload();
 	            pointAmount = 1000;
 	         } else {
 	        	 alert("꽝");
+	        	 location.reload();
 	        	 pointAmount = 0;
 	         };
 	         
 	         rouletteInsert(pointAmount);
-	       	
+	        
 	      }, 7000);
 		}
 		
@@ -162,19 +168,30 @@
 	     			type : "post",
 	     			success : function(data){
 	     				console.log(data)
+	     				location.reload();
 	     			},
 	     			error : function(e){
 	     				console.log(e)
 	     			}
 	     		});   
 			}
+
+	</script>		
+	<script>
+		// 룰렛 버튼	
+		var st_date = new Date().toISOString().substr(2, 8);
+		console.log(st_date);
 		
-		trigger.one("onclick", function(){
-			 console.log("클릭");
-		});
+		var roulday = "[[${rouletteButtonList}]]";
+		roulday1 = roulday.slice(32, 40);
+		console.log(roulday1);
+		
+		
+		if(st_date == roulday1) {
+			$(".trigger").attr("disabled", true).css("background-color", "red");
+		}
+	
+	</script>
 
-
-   		
-		</script>
 </body>
 </html>
