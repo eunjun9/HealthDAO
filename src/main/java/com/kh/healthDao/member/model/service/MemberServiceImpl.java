@@ -3,9 +3,18 @@ package com.kh.healthDao.member.model.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMessage.RecipientType;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.healthDao.member.model.dao.MemberMapper;
 import com.kh.healthDao.member.model.vo.Authority;
+import com.kh.healthDao.member.model.vo.MailTO;
 import com.kh.healthDao.member.model.vo.Member;
 import com.kh.healthDao.member.model.vo.MemberGrade;
 import com.kh.healthDao.member.model.vo.MemberRole;
@@ -23,10 +33,13 @@ import com.kh.healthDao.member.model.vo.UserImpl;
 public class MemberServiceImpl implements MemberService{
 	
 	private MemberMapper memberMapper;
+    private JavaMailSender mailSender;
+    private static final String FROM_ADDRESS = "khhealthDao@gmail.com";
 	
 	@Autowired
-	public MemberServiceImpl(MemberMapper memberMapper) {
+	public MemberServiceImpl(MemberMapper memberMapper, JavaMailSender mailSender) {
 		this.memberMapper = memberMapper;
+		this.mailSender = mailSender;
 	}
 
 	@Override
@@ -95,6 +108,16 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public Member findId(String userName, String userEmail) {
 		return memberMapper.selectId(userName, userEmail);
+	}
+
+	@Override
+	public Member selectMember(String userEmail) {
+		return memberMapper.selectMember(userEmail);
+	}
+
+	@Override
+	public int pwdUpdate(Member member) {
+		return memberMapper.pwdUpdate(member);
 	}
 	
 }

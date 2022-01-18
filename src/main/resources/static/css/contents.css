@@ -2858,13 +2858,11 @@ filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#555555', endC
     margin-top: 4px !important;
 }
 .memberJoin #inp_id,
-.memberJoin #inp_nic,
-.memberJoin #inp_eml {
+.memberJoin #inp_nic {
     width: 390px;
 }
 .memberJoin .inp_id .btn,
-.memberJoin .inp_nic .btn,
-.memberJoin .inp_eml .btn {
+.memberJoin .inp_nic .btn {
     width: 148px;
     margin-left: 8px;
 }
