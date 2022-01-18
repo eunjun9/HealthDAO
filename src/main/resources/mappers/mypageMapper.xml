@@ -86,6 +86,12 @@
 		</association>
 	</resultMap>
 	
+	<resultMap id="rouletteMap" type="com.kh.healthDao.mypage.model.vo.Roulette">
+		<id property="roulNo" column="ROUL_NO"/>
+		<result property="roulDate" column="ROUL_DATE"/>
+		<result property="userNo" column="USER_NO"/>
+  	</resultMap>
+	
 
 	
 	<select id="findQnaList" resultMap="qnaResultMap" parameterType="hashmap">
@@ -616,5 +622,26 @@
 		  , '3'
 		)	
 	</insert>
+	
+	<insert id="rouletteTableInsert" parameterType="com.kh.healthDao.mypage.model.vo.Roulette">
+	INSERT 
+	    INTO ROULETTE
+	            (ROUL_NO
+	           , ROUL_DATE
+	           , USER_NO)
+	        VALUES 
+	            (SEQ_ROUL_NO.NEXTVAL
+	           , TO_CHAR(SYSDATE, 'YY-MM-DD')
+	           , #{userNo})
+	</insert>
+	
+	<select id="rouletteButton" resultMap="rouletteMap" parameterType="_int">
+	SELECT 
+	       ROUL_NO
+	     , ROUL_DATE
+	     , USER_NO
+	  FROM ROULETTE
+	 WHERE USER_NO = #{userNo}
+	</select>
 
 </mapper>

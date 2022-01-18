@@ -13,6 +13,7 @@ import com.kh.healthDao.mypage.model.vo.AttCheck;
 import com.kh.healthDao.mypage.model.vo.Cart;
 import com.kh.healthDao.mypage.model.vo.Point;
 import com.kh.healthDao.mypage.model.vo.Qna;
+import com.kh.healthDao.mypage.model.vo.Roulette;
 import com.kh.healthDao.review.model.vo.Review;
 
 
@@ -98,6 +99,9 @@ public interface MypageMapper {
 
 	/* 룰렛 값 insert */
 	int rouletteInsert(@Param("userNo") int userNo, @Param("pointAmount") int pointAmount);
+	int rouletteTableInsert(int userNo);
+	// 룰렛 select
+	List<Roulette> rouletteButton(int userNo);
 
 	
 

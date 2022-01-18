@@ -40,6 +40,7 @@ import com.kh.healthDao.mypage.model.vo.AttCheck;
 import com.kh.healthDao.mypage.model.vo.Cart;
 import com.kh.healthDao.mypage.model.vo.MemberSound;
 import com.kh.healthDao.mypage.model.vo.Qna;
+import com.kh.healthDao.mypage.model.vo.Roulette;
 import com.kh.healthDao.review.model.vo.Review;
 
 import lombok.extern.slf4j.Slf4j;
@@ -393,8 +394,26 @@ public class MypageController {
 	
 	/* 룰렛 */
 	@GetMapping("/roulette")
-	public String roulette() {
-		return "mypage/roulette";
+	public ModelAndView roulette(@AuthenticationPrincipal UserImpl user, ModelAndView mv) {
+		int userNo = user.getUserNo();
+	
+		List<Roulette> rouletteButtonList = qnaService.rouletteButton(userNo);
+		
+		mv.setViewName("mypage/roulette");
+		mv.addObject("rouletteButtonList", rouletteButtonList);
+		return mv;
+	}
+	
+	/* 룰렛 값 입력 */
+	@PostMapping("rouletteInsert")
+	@ResponseBody
+	public Map<String, String> rouletteInsert(@AuthenticationPrincipal UserImpl user, int pointAmount) {
+		int result = qnaService.rouletteInsert(user.getUserNo(), pointAmount);
+		
+		Map<String, String> map = new HashMap<>();
+	    map.put("msg", result > 0 ? "등록 완료" : "등록 실패");
+	    
+	    return map;
 	}
 		
 	/* 보유 포인트 내역 */
@@ -513,15 +532,6 @@ public class MypageController {
 		return msg;
 	}
 	
-	@PostMapping("rouletteInsert")
-	@ResponseBody
-	public Map<String, String> rouletteInsert(@AuthenticationPrincipal UserImpl user, int pointAmount) {
-		int result = qnaService.rouletteInsert(user.getUserNo(), pointAmount);
-		
-		Map<String, String> map = new HashMap<>();
-	    map.put("msg", result > 0 ? "등록 완료" : "등록 실패");
-	    
-	    return map;
-	}
+
 }
 
