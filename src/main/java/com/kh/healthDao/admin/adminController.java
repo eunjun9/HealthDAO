@@ -2,9 +2,13 @@ package com.kh.healthDao.admin;
 
 
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -52,7 +57,33 @@ public class adminController {
 	/* 상품 등록 */
 	@PostMapping("productRegist")
 	@ResponseBody
-	public ModelAndView registProduct(Product product, ModelAndView mv) {
+	public ModelAndView registProduct(Product product, ModelAndView mv, @RequestParam("productFile") MultipartFile productFile, @RequestParam("productInfoFile") MultipartFile productInfoFile, @Value("${custom.path.upload-images}") String uploadImagesPath) {
+		
+		String originFile1 = productFile.getOriginalFilename();
+		String ext1 = originFile1.substring(originFile1.lastIndexOf("."));
+		
+		String originFile2 = productInfoFile.getOriginalFilename();
+		String ext2 = originFile2.substring(originFile2.lastIndexOf("."));
+		
+		String changeFile1 = UUID.randomUUID().toString().replace("-", "") + ext1;
+		
+		String changeFile2 = UUID.randomUUID().toString().replace("-", "") + ext2;
+		
+		String path = uploadImagesPath + "product/";
+		
+		try {
+			productFile.transferTo(new File(path + "\\" + changeFile1));
+			productInfoFile.transferTo(new File(path + "\\" + changeFile2));
+		}  catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println(originFile1);
+		System.out.println(ext1);
+		System.out.println(changeFile1);
+		System.out.println(path);
+		System.out.println(productFile);
+		System.out.println(productInfoFile);
+		
 		/* List<Option> options = new ArrayList<>();
 		options.add(option);
 		
@@ -60,15 +91,18 @@ public class adminController {
 		product.setCategory(category); */
 		
 		System.out.println(product);
-		int result = adminService.registProduct(product);
+		int result = adminService.registProduct(product, originFile1, originFile2, changeFile1, changeFile2);
 		//int result2 = adminService.registCategory(product);
 		int result3 = adminService.registOption(product);
+		
 		if(result > 0) {
+			mv.addObject("msg", "등록 성공");
 			mv.setViewName("redirect:/admin/productRegist");
 			return mv;
 			
 		}else {
 			mv.setViewName("redirect:/ProductRegist");
+			mv.addObject("msg", "등록 실패");
 			return mv;
 		}
 	}

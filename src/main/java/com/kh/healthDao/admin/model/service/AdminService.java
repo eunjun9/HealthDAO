@@ -19,9 +19,11 @@ public interface AdminService {
 
 	public int insertproductStock(Product product);
 
-	public int registProduct(Product product);
+	public int registProduct(Product product, String originFile1, String originFile2, String changeFile1, String changeFile2);
 
 	public int registOption(Product product);
+
+	
 
 
 	

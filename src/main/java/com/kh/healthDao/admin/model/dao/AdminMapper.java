@@ -12,6 +12,7 @@ import com.kh.healthDao.admin.model.vo.Notice;
 import com.kh.healthDao.admin.model.vo.Product;
 import com.kh.healthDao.mypage.model.vo.MemberSound;
 import com.kh.healthDao.mypage.model.vo.Qna;
+import com.kh.healthDao.trainer.model.vo.Trainer;
 
 
 
@@ -87,7 +88,14 @@ public interface AdminMapper {
 
 	public int memberSoundModify(MemberSound ms);
 
-	
+
+	int productFileInsert(Map<String, Object> map);
+
+	int productFileInsertDB(Product product);
+
+	int productInfoFileInsert(Map<String, Object> map);
+
+	int productInfoFileInsertDB(Product product);
 
 	
 
