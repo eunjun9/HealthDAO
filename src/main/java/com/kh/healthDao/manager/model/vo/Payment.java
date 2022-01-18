@@ -1,7 +1,9 @@
 package com.kh.healthDao.manager.model.vo;
 
 import java.sql.Date;
+import java.util.List;
 
+import com.kh.healthDao.shopping.model.vo.Shopping;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,9 +27,10 @@ public class Payment {
 	private String productTitle;		// 상품명
 	private int productPrice;		// 상품가격
 
+	private String productOption;		// 상품 옵션
+	
+	private List<Shopping> productList;	// 상품리스트
 
-	
-	
 
 }
 

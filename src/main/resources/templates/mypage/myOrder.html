@@ -11,7 +11,13 @@
 <th:block th:replace="common/header.html"></th:block>
 <!--// HEADER + GNB -->
 <!-- container -->
-	
+	<script>
+		const msg = '[[${msg}]]';
+		
+		if(msg){
+			alert(msg);			
+		}
+	</script>
 	<div id="container" class="pdt0">
 		<div class="site_location">
 			<span><a href="/">HOME</a></span>
@@ -30,94 +36,53 @@
 						
 						<div class="myOrderList mgt40">
 							<ul class="list_box">
-								<li>
+								<li th:if="${paymentList.size > 0}" th:each="payment : ${paymentList}">
 									<div class="listT">
 										<dl>
 											<dt>주문일자</dt>
-											<dd>2021.12.14</dd>
+											<dd th:text="${payment.payDate}"></dd>
 										</dl>
 										<dl>
 											<dt>주문번호</dt>
-											<dd>1561594234165</dd>
+											<dd th:text="${payment.payNo}">1561594234165</dd>
 										</dl>
-										<a href="#">주문상세 확인하기</a>
 									</div>
 									<div class="listB">
 										<ul class="list">
-											<li>
+											<li th:each="product : ${payment.productList}">
 												<div class="pdtImg"><a href="#"><img src="./resources/web/images/temp/pdt_img4.jpg" alt="pdt"></a></div>
 												<div class="pdtTxt">
-													<p class="pdtHead" style="color:#4f8ffa;">[이벤트] 아이라이너 전 제품 3개 구매 시 1개 무료 </p>
-													<p class="pdtBrand">바닐라코</p>
-													<p class="pdtName"><a href="#">아이크러쉬 디테일 아이라이너</a></p>
-													<p class="pdtPrice">25,200<em>원 /</em> <em>수량 1개</em></p>
-													<p class="pdtOpt">옵션 : BE01 밀크티 필터</p>
+													<p class="pdtBrand" th:text="${product.productName}">바닐라코</p>
+													<p class="pdtName"><a href="#" th:text="${product.productTitle}">아이크러쉬 디테일 아이라이너</a></p>
+													<p class="pdtPrice" th:with="total=${product.productPrice} * ${product.quantity}"><span th:text="${total}"></span><em>원 /</em> <em>수량 <span th:text="${product.quantity}">1</span>개</em></p>
+													<p class="pdtOpt">옵션 : <span th:text="${product.productOption}"></span></p>
 												</div>
 											</li>
-											<li>
-												<div class="pdtImg"><a href="#"><img src="./resources/web/images/temp/pdt_img4.jpg" alt="pdt"></a></div>
-												<div class="pdtTxt">
-													<p class="pdtHead" style="color:#4f8ffa;">[이벤트] 아이라이너 전 제품 3개 구매 시 1개 무료 </p>
-													<p class="pdtBrand">바닐라코</p>
-													<p class="pdtName"><a href="#">아이크러쉬 디테일 아이라이너</a></p>
-													<p class="pdtPrice">0<em>원 /</em> <em>수량 1개</em></p>
-													<p class="pdtPrice"><span class="free">무료</span></p>
-												</div>
-											</li>
-											
 										</ul>
-										<p class="state">배송완료</p>
-										<div class="btnWrap">
-											<a href="#" class="btn btnSizeS btnColorW btnTypeB"><span>반품신청</span></a>
-											<a href="javascript:void(0)" onclick="showLayer('reViewWritePop');" class="btn btnSizeS btnColorB btnTypeB"><span>리뷰쓰기</span></a>
+										<p class="state">
+											<span th:if="${payment.orderStatus.equals('N')}">배송중</span>
+											<span th:if="${payment.orderStatus.equals('Y')}">배송완료</span>
+											<span th:if="${payment.orderStatus.equals('R')}">배송완료</span>
+											<span th:if="${payment.orderStatus.equals('H')}">환불완료</span>
+										</p>
+										<div class="btnWrap" th:if="${payment.orderStatus.equals('N')}">
+											<button type="button" th:onclick="|javascript:refundInsert('${payment.payNo}')|" class="btn btnSizeS btnColorW btnTypeB"><span>환불신청</span></a>
 										</div>
-									</div>
-								</li>
-								<li>
-									<div class="listT">
-										<dl>
-											<dt>주문일자</dt>
-											<dd>2021.12.05</dd>
-										</dl>
-										<dl>
-											<dt>주문번호</dt>
-											<dd>1561594234165</dd>
-										</dl>
-										<a href="#">주문상세 확인하기</a>
-									</div>
-									<div class="listB">
-										<ul class="list">
-											<li>
-												<div class="pdtImg"><a href="#"><img src="./resources/web/images/temp/pdt_img4.jpg" alt="pdt"></a></div>
-												<div class="pdtTxt">
-													<p class="pdtHead" style="color:#4f8ffa;">[이벤트] 아이라이너 전 제품 3개 구매 시 1개 무료 </p>
-													<p class="pdtBrand">바닐라코</p>
-													<p class="pdtName"><a href="#">아이크러쉬 디테일 아이라이너</a></p>
-													<p class="pdtPrice">25,200<em>원 /</em> <em>수량 1개</em></p>
-													<p class="pdtOpt">옵션 : BE01 밀크티 필터</p>
-												</div>
-											</li>
-										</ul>
-										<p class="state">결제완료</p>
-										<div class="btnWrap">
-											<a href="#" class="btn btnSizeS btnColorW btnTypeB"><span>주문취소</span></a>
+										<div class="btnWrap" th:if="${payment.orderStatus.equals('Y')}">
+											<button type="button" th:onclick="|javascript:refundInsert('${payment.payNo}')|" class="btn btnSizeS btnColorW btnTypeB"><span>환불신청</span></a>
+											<a href="javascript:void(0)" th:onclick="|showLayer('reViewWritePop'); javascript:payNoinsert('${payment.payNo}')|" class="btn btnSizeS btnColorB btnTypeB"><span>리뷰쓰기</span></a>
+										</div>
+										<div class="btnWrap" th:if="${payment.orderStatus.equals('R')}">
+											<button type="button" th:onclick="|javascript:refundInsert('${payment.payNo}')|" class="btn btnSizeS btnColorW btnTypeB"><span>환불신청</span></a>
 										</div>
 									</div>
 								</li>
 								
-								
-								
-								
-								<li class="noData">
+								<li class="noData" th:unless="${paymentList.size > 0}">
 									<span>주문배송 조회 내역이 없습니다.</span>
 								</li>
 							</ul>
 						</div>
-
-						<div class="btn_wrap mgt40">
-							<a class="btnMore btnSpin"><span>더보기<br><em>1 <u>/</u> <i>3</i></em></span></a>
-						</div>
-
 						<div class="myOrderStep orderType">
 							<p class="tit">주문/배송 진행단계 안내</p>
 							<div class="stepArea">
@@ -198,5 +163,98 @@
 		$('#quick .quickArea').css({'position':'absolute', 'top':290});
 	</script>
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+	<!-- 리뷰 작성 -->
+<div id="reViewWritePop" class="lyPopArea">
+    <div class="lyPop">
+        <div class="lyWrap">
+        	<form action="/mypage/reviewInsert" method="post">
+        	<input type="hidden" name="payNo" id="payNo" />
+        	<input type="hidden" th:value="${#authentication.principal.userNo}" name="userNo" />
+        	<input type="hidden" value="5" name="star" id="star" class="starScore" />
+            <button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
+            <div class="lyTit">리뷰 작성</div>
+            <div class="lyBody">
+                <div class="WrtAreaRating">
+                    <div class="ratingBox">
+                        <p class="ratingTtl">상품은 만족하셨나요?</p>
+                        <div class="js_rating js_userRating ratingXL">
+                            <span>5</span>
+                            <div class="userRatingBox">
+                                <button type="button" class="rating_1" onclick="starChange(1)">1</button>
+                                <button type="button" class="rating_2" onclick="starChange(2)">2</button>
+                                <button type="button" class="rating_3" onclick="starChange(3)">3</button>
+                                <button type="button" class="rating_4" onclick="starChange(4)">4</button>
+                                <button type="button" class="rating_5" onclick="starChange(5)">5</button>
+                            </div>
+                        </div>							
+                    </div>
+                </div>
+                <div class="WrtAreaCtt">
+                    <p class="cmt ncsry"><label for="reViewWritePop_text1">사용후기를 적어주세요(필수)</label></p>
+                    <div class="reviewPoint mgt23"><span class="point01">좋았던 점</span><span class="point02">사용팁</span><span class="point03">개선점을 솔직하게 적어주세요</span></div>
+                    <div class="coachMarkArea">
+                        <div class="inp_wrap mgt10">
+                            <div class="inp_textArea lengthCheck">
+                                <textarea name="rContent"></textarea>
+                                <div class="textarea-clone"></div>
+                            </div>
+                            <span class="charCnt">
+                                <span class="charCommen">최소 20자 이상 250자 이내로 작성해 주세요.</span>
+                            </span>								
+                            <p class="error">error message</p>
+                        </div>
+                        <div class="coachMarkBox">
+                            <a href="javascript:void(0)" class="coachMarkClose" onclick="coachMarkClose(this)"><span class="hide">닫기</span></a>
+                            <div class="coachMarkCtt">
+                                <p class="ttl">리뷰는 이렇게 써주시면 좋아요</p>
+                                <ul>
+                                    <li><span class="coachmark01"></span><p>제품을 사용하시면서 좋았던 점</p></li>
+                                    <li><span class="coachmark02"></span><p>나만의 유용한 제품 사용 방법</p></li>
+                                    <li><span class="coachmark03"></span><p>보완해주세요! 개선이 필요한 점</p></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn_wrap length2">
+                    <a href="javascript:void(0);" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorW btnTypeR"><span>취소</span></a>
+                    <button type="submit" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>
+<script>
+	function starChange(score){
+		$(".starScore").val(score);
+	}
+	
+	function payNoinsert(payNo){
+		$("#payNo").val(payNo);
+	}
+	
+	function refundInsert(pNo){
+		var payNo = pNo;
+		var sendData = {"payNo":payNo};
+		
+		$.ajax({
+			url : "/mypage/refundInsert",
+			data : sendData,
+			type : "post",
+			success : function(data){
+				if(data == "success"){
+					location.reload();
+				}else{
+					alert("환불을 실패했습니다.")
+				}
+			},
+			error : function(e){
+				console.log(e)
+			}
+		});
+	}
+</script>
