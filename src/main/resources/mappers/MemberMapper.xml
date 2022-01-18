@@ -179,5 +179,17 @@
 		 WHERE USER_NAME = #{ userName }
 		   AND USER_EMAIL = #{ userEmail }
 	</select>
+	
+	<!-- 회원정보 조회 -->
+	<select id="selectMember" parameterType="String" resultMap="loginMemberResultMap">
+		SELECT * FROM MEMBER WHERE USER_EMAIL = #{userEmail}
+	</select>
+	
+	<!-- 패스워드변경 -->
+	<update id = "pwUpdate_M" parameterType="MemberVO">
+		UPDATE MEMBER
+		   SET USER_PWD = #{userPwd}
+		 WHERE USER_EMAIL = #{userEmail}
+	</update>
 
 </mapper>

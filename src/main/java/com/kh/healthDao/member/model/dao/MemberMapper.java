@@ -1,6 +1,7 @@
 package com.kh.healthDao.member.model.dao;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.security.core.userdetails.User;
 
 import com.kh.healthDao.member.model.vo.Member;
 import com.kh.healthDao.member.model.vo.MemberGrade;
@@ -25,5 +26,9 @@ public interface MemberMapper {
 
 	/* 아이디/비밀번호 찾기 */
 	Member selectId(String userName, String userEmail);
+
+	Member selectMember(String userEmail);
+
+	int pwdUpdate(Member member);
 
 }
