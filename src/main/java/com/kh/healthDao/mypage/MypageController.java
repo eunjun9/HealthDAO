@@ -120,6 +120,12 @@ public class MypageController {
 		return msg;
 	}
 	
+	@PostMapping("/myOrder")
+	public String mypagePaymentInfo() {
+		
+		return "mypage/myOrder";
+	}
+	
 	/* 1:1 문의 */
 	@GetMapping("/qna")
 	public ModelAndView qna(ModelAndView mv, @RequestParam int page, @AuthenticationPrincipal UserImpl userImpl) {
