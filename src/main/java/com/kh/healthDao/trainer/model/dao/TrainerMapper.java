@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.kh.healthDao.manager.model.vo.Payment;
+import com.kh.healthDao.member.model.vo.Member;
 import com.kh.healthDao.review.model.vo.Review;
 import com.kh.healthDao.trainer.model.vo.PtOrder;
 import com.kh.healthDao.trainer.model.vo.Trainer;
@@ -42,5 +44,17 @@ public interface TrainerMapper {
 	int trainerFileModify(Map<String, Object> map);
 
 	int centerFileModify(Map<String, Object> map);
+
+	Review rvStatus(Map<String, Object> map);
+
+	int trainerReviewInsert(Review review);
+
+	Review reviewStatus(Review review);
+
+	Member mOrderSelect(Member m);
+
+	int trainerPayInsert(Payment payment);
+
+	int trainerPtOrderInsert(Payment payment);
 
 }
