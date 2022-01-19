@@ -83,7 +83,6 @@ public class MypageController {
 		int userNo = userImpl.getUserNo();
 		
 		List<Payment> paymentList = paymentService.mypaymentList(userNo);
-		System.out.println(paymentList);
 		
 		mv.addObject("paymentList", paymentList);
 		mv.setViewName("mypage/myOrder");
@@ -94,18 +93,7 @@ public class MypageController {
 	@PostMapping("/reviewInsert")
 	public String reviewInsert(Review review, @AuthenticationPrincipal UserImpl userImpl, RedirectAttributes rttr) {
 		
-	
-		String msg = myReviewService.reviewInsert(review) > 0 ? "리뷰 등록 성공" : "리뷰 등록 실패";	
-		
-		if(msg.equals("리뷰 등록 성공")) {
-			int result = paymentService.statusModify(review);
-			
-			if(result > 0 ) {
-				msg = "리뷰 등록 성공";
-			}else {
-				msg = "리뷰 등록 실패";
-			}
-		}
+		String msg = myReviewService.reviewInsert(review) > 0 ? "리뷰 등록 완료" : "리뷰 등록 실패";					
 		
 		rttr.addFlashAttribute("msg", msg);
 		
