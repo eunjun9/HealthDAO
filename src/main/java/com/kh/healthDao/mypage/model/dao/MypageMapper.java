@@ -118,9 +118,6 @@ public interface MypageMapper {
 
 	int refundStatusModify(int payNo);
 
-	/* 룰렛 값 insert */
-	int rouletteInsert(@Param("userNo") int userNo, @Param("pointAmount") int pointAmount);
-
 
 
 }
