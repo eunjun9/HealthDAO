@@ -29,18 +29,9 @@
 					<!-- myPageCon -->
 					<div class="myPageCon roulette_section">
 						<p class="tit mgb40">
-							포인트
+							룰렛
 						</p>
-						<div class="profileOutline">
-							<div class="profile"><img class="p_profile" src="/images/point/profile.gif"></div>
-							<div class="nicetomeetyou">옐림님 반갑습니다</div>
-							<div class="grade">일반회원</div>
-							<div class="gradeCondition">100,000원 더 구매시, VIP 등급! >></div>
-							<div class="coupon1"><p>쿠폰</p></div>
-							<div class="coupon2"><p>1개</p></div>
-							<div class="point1"><p>포인트</p></div>
-							<div class="point2"><p>3000</p></div>
-						</div>	
+
 						<div class="rouletteOutline">
 							<p class="atten1">
 								<img class="b_roulette" src="/images/point/roulette3.png">
@@ -180,11 +171,11 @@
 	<script>
 		// 룰렛 버튼	
 		var st_date = new Date().toISOString().substr(2, 8);
-		console.log(st_date);
+		// console.log(st_date);
 		
 		var roulday = "[[${rouletteButtonList}]]";
 		roulday1 = roulday.slice(32, 40);
-		console.log(roulday1);
+		// console.log(roulday1);
 		
 		
 		if(st_date == roulday1) {
