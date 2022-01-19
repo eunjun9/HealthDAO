@@ -83,12 +83,12 @@
 						</p>
 						<!-- productRegist tab -->
 						<div class="productRegist">
-							<form name="registForm" action="/admin/productRegist" method="post">		
+							<form name="registForm" action="/admin/productRegist" method="post" enctype="multipart/form-data">		
 								<dl>
 									<dt>썸네일</dt>
 									<dd>
 										<ul class="fileUploadArea">
-											<li><label for="imgUpload"><span class="hide">업로드</span></label><input type="file" class="hide" id="imgUpload"></li>
+											<li><label for="productFile"><span class="hide">업로드</span></label><input type="file" class="hide" name="productFile" id="productFile"></li>
 											<li class="imgCutting">
 												<div class="imgBox">
 													<img src="/images/temp/480X480.png" alt="" class="wh" style="margin-top: 0px; margin-left: 0px;">
@@ -221,7 +221,7 @@
 									<dt>상품정보</dt>
 									<dd>
 										<ul class="fileUploadArea">
-											<li><label for="imgUpload"><span class="hide">업로드</span></label><input type="file" class="hide" id="imgUpload"></li>
+											<li><label for="productInfoFile"><span class="hide">업로드</span></label><input type="file" class="hide" name="productInfoFile" id="productInfoFile"></li>
 											<li class="imgCutting">
 												<div class="imgBox">
 													<img src="/images/temp/480X480.png" alt="" class="wh" style="margin-top: 0px; margin-left: 0px;">

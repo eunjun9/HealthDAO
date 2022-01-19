@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title></title>
+<!-- 메타태그, 스타일 -->
+<th:block th:replace="common/head.html"></th:block>
+<!--// 메타태그, 스타일 -->
+<body>
+	<div id="wrap" class="main">
+		<!-- HEADER + GNB -->
+		<th:block th:replace="common/header.html"></th:block>
+		<!--// HEADER + GNB -->
+
+	<!-- container -->
+	<div id="container">		
+		<div class="site_location">
+			<span><a href="/">HOME</a></span>
+			<em>전체상품</em>
+		</div>
+		<div class="search_list">
+            <div class="searchResultTtl" th:if="${shoppingList.size} > 0">
+				<p class="ttl"><span class="fcPink" th:text="${searchPdt}">제품명</span>에 대한 <br><span th:text="${shoppingList.size}"></span>개의 검색 결과입니다.</p>
+			</div>
+            <div class="searchResultTtl" th:unless="${shoppingList.size} > 0">
+				<p class="ttl"><span class="fcPink" th:text="${searchPdt}">제품명</span>에 대한 검색결과가<br>존재하지 않습니다.</p>
+				<div class="noData">
+					<span>단어의 철자가 정확한지 확인해 보세요.<br>띄어쓰기 또는 다른 단어를 사용해 보세요.</span>
+				</div>
+			</div>
+            <div class="contents mgt50">
+                <div class="pdt_list1">
+                    <ul class="list_box">
+	                    <li th:each="pdt:${shoppingList}">
+	                        <div class="pdtImg">
+	                            <ul class="pdt_type">
+	                                <li class="bg_p">NEW</li>
+	                                <li class="bg_p">BEST</li>
+	                            </ul>
+	                            <a href="/shopping/detail?productNo=" th:attrappend="href=${pdt.productNo}" class="imgLink"><img src="/resources/web/images/temp/pdt_img1.png" alt=""></a>
+	                        </div>
+	                        <div class="pdtTxt">
+	                            <p class="pdtHead" style="color:#4f8ffa;">2019 누적판매 15,591건!</p>
+	                            <p class="pdtBrand" th:text="${pdt.productBrand}"></p>
+	                            <p class="pdtName" th:text="${pdt.productTitle}"><a href="#"></a></p>
+	                            <p class="pdtPrice"><span class="sasle" th:text="${#numbers.formatInteger(pdt.productPrice, 0, 'COMMA')+'원'}"></span><span class="cost">15,000원</span></p>
+	                            <div class="pdtReview">
+	                                <div class="js_rating ratingS"><span>4.5</span></div>
+	                                4.5 <span class="count">(리뷰 18)</span>
+	                            </div>
+	                        </div>
+		                    <a href="javascript:void(0);" th:onclick="|javascript:addWish('${pdt.productNo}')|" th:id="pdtNo_+${pdt.productNo}" class="btn_like likeM"><span class="hide">찜하기</span></a>
+		                    <a href="javascript:void(0);" th:onclick="|javascript:cartInsert('${pdt.productNo}')|" class="btn_cart cartM"><span>장바구니</span></a>
+	                    </li>
+	                </ul>
+	            </div>
+			</div>
+		</div>
+	</div>
+	<!-- //container -->
+
+	<!-- 스크립트 -->
+		<th:block th:replace="common/script.html"></th:block>
+		<!--// 스크립트 -->
+		<!-- FOOTER -->
+		<th:block th:replace="common/footer.html"></th:block>
+		<!--// FOOTER -->
+	</div>
+	
+	<!-- 퀵메뉴 + 톡톡 -->
+	<th:block th:replace="common/quickNtalk.html"></th:block>
+	<!--// 퀵메뉴 + 톡톡 -->	
+	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+	<script  th:inline="javascript">
+		$('#quick .quickArea').css({'position':'absolute', 'top':290});
+	</script>
+	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+</body>
+</html>

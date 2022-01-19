@@ -56,10 +56,9 @@
 								<form action="/manager/qanswer" class="qAnswerForm" name="qAnswerForm" method="post">
 									<div class="inp_wrap">
 										<div class="inp_textArea lengthCheck" >
-											<textarea name="reply" rows="10">답변쓰는곳</textarea>
+											<textarea name="reply" rows="10" th:text="${QnaList.reply}" placeholder="답변을 적어주세요"></textarea>
 											<div class="textarea-clone"></div>
 										</div>
-										<span class="charCnt">(<em>0</em>/500)</span>
 									</div>
 									<input type="hidden" name="qNo" class="qNo" th:value="${QnaList.qNo}">
 									<div class="btn_wrap">	

@@ -292,12 +292,8 @@
 	<th:block th:replace="common/quickNtalk.html"></th:block>
 	<!--// 퀵메뉴 + 톡톡 -->	
 	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
-	<link rel="stylesheet" type="text/css" href="../../css/main.css">
-	<script type="text/javascript" src="../../js/main.js"></script>
-	<script type="text/javascript">
-		$('#quick .quickArea').css({'position':'absolute', 'top':936});
-		mainStart();
-		mainVisual();
+	<script  th:inline="javascript">
+		$('#quick .quickArea').css({'position':'absolute', 'top':290});
 	</script>
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 </body>

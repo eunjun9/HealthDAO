@@ -189,6 +189,10 @@ public class TrainerServiceImpl implements TrainerService{
 		}
 		
 		return result;
+  }
+	public List<Trainer> trainerRankList() {
+		return trainerMapper.trainerRankList();
+
 	}
 
 

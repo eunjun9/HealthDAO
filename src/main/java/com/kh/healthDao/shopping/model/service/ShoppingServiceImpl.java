@@ -6,10 +6,16 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.healthDao.admin.model.vo.Product;
 import com.kh.healthDao.common.model.vo.Paging;
+import com.kh.healthDao.member.model.vo.UserImpl;
+import com.kh.healthDao.mypage.model.service.MyInfoService;
+import com.kh.healthDao.mypage.model.vo.Address;
 import com.kh.healthDao.shopping.model.dao.ShoppingMapper;
 
 
@@ -17,10 +23,12 @@ import com.kh.healthDao.shopping.model.dao.ShoppingMapper;
 public class ShoppingServiceImpl implements ShoppingService{
 	
 	private final ShoppingMapper shoppingMapper;
+	private MyInfoService myInfoService;
 
 	@Autowired
-	public ShoppingServiceImpl(ShoppingMapper shoppingMapper) {
+	public ShoppingServiceImpl(ShoppingMapper shoppingMapper, MyInfoService myInfoService) {
 		this.shoppingMapper = shoppingMapper;
+		this.myInfoService = myInfoService;
 	}
 
 	@Override
@@ -75,6 +83,8 @@ public class ShoppingServiceImpl implements ShoppingService{
 		return shoppingMapper.detailPdt(productNo);
 	}
 
+	
+	/* 추천 상품 */
 	@Override
 	public int insertReco(int productNo, int productRank) {
 		return shoppingMapper.insertReco(productNo, productRank);
@@ -95,16 +105,43 @@ public class ShoppingServiceImpl implements ShoppingService{
 		return shoppingMapper.deleteReco(productNo);
 	}
 	
+	/* 찜한 상품 */
+	@Override
+	public Product wishChk(int productNo, int userNo) {
+		return shoppingMapper.wishChk(productNo, userNo);
+	}
+	@Override
+	public int insertWish(int productNo, int userNo) {
+		return shoppingMapper.insertWish(productNo, userNo);
+	}
+	@Override
+	public int deleteWish(int productNo, int userNo) {
+		return shoppingMapper.deleteWish(productNo, userNo);
+	}
+	@Override
+	public int deleteWishPdt(int productNo, int userNo) {
+		return shoppingMapper.deleteWish(productNo, userNo);
+	}
+	
+	// 상품 리스트에서 찜한 상품들 확인
+	@Override
+	public List likeList(int userNo) {
+		return shoppingMapper.findLikeList(userNo);
+	}
+  
+	/* 상품 음료 */
 	@Override
 	public List<Product> beverageShoppingList() {
 		return shoppingMapper.beverageShoppingList();
 	}
 
+	/* 상품 운동기구 */
 	@Override
 	public List<Product> goodsShoppingList() {
 		return shoppingMapper.goodsShoppingList();
 	}
 
+	/* 상품 상세페이지 */
 	@Override
 	public Product shoppingDetail(int productNo) {
 		return shoppingMapper.shoppingDetail(productNo);
@@ -160,7 +197,7 @@ public class ShoppingServiceImpl implements ShoppingService{
 		return foodProductMap;
 	}
 
-
+	/* 상품 음료 페이지 */
 	@Override
 	public Map<String, Object> beverageShoppingList(int page) {
 		int listCount = shoppingMapper.beverageShoppingListCount();
@@ -186,6 +223,7 @@ public class ShoppingServiceImpl implements ShoppingService{
 		
 	}
 
+	/* 상품 운동기구 */
 	@Override
 	public Map<String, Object> goodsShoppingList(int page) {
 		int listCount = shoppingMapper.goodsShoppingListCount();
@@ -215,8 +253,33 @@ public class ShoppingServiceImpl implements ShoppingService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	/* 상품 주문 */
 	@Override
 	public Product shoppingPayment(int productNo) {
 		return shoppingMapper.shoppingPayment(productNo);
+	}
+
+	/*배송지 관리*/
+	@GetMapping("/deli")
+	public ModelAndView deliView(ModelAndView mv, @AuthenticationPrincipal UserImpl userImpl) {
+		int userNo = userImpl.getUserNo();
+		
+		List<Address> addressList = myInfoService.deliView(userNo);
+		
+		mv.addObject("addressList", addressList);
+		mv.setViewName("mypage/deliModify");
+		
+		return mv;
+	}
+
+	@Override
+	public List<Address> deliView(int userNo) {
+		return shoppingMapper.deliView(userNo);
+	}
+
+	@Override
+	public List<Product> searchList(String searchPdt) {
+		return shoppingMapper.searchList(searchPdt);
 	}
 }

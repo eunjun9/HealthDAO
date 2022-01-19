@@ -28,7 +28,7 @@
 							찜한 상품
 						</p>
 						<!-- 위시리스트가 있을때 -->
-						<div class="pdtWishBar" th:if="${wishListCount != 0}">
+						<div class="pdtWishBar">
 							<span class="inp_check allChk">
 								<input type="checkbox" name="inp_check1" id="inp_check1">
 								<label for="inp_check1">전체선택</label>
@@ -37,98 +37,31 @@
 								<a href="javascript:void(0)" onclick="showLayer('myWishDel');" class="wishBtn btn btnSizeS btnColorW btnTypeB"><span>삭제하기</span></a>
 							</div>
 						</div>
-						<div class="pdt_list1 type02 mgt60">
+						<div class="pdt_list1 type02 mgt60" th:if="${wishListCount != 0}">
 							<ul class="list_box">
-								<li>
+								<li th:each="list : ${wishList}">
 									<div class="pdtImg">
-										<a href="javascript:void(0)" class="imgLink"><img src="./resources/web/images/temp/pdt_img3.png" alt="바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널"></a>
+										<a th:href="|/shopping/detail?productNo=${list.productNo}|" class="imgLink"><img src="/images/temp/pdt01.png" alt=""></a>
 									</div>
 									<div class="pdtTxt">
-										<p class="pdtHead" style="color:#4f8ffa;">2019 누적판매 15,591건!</p><!-- 문구가 없어도 태그삭제 X -->
-										<p class="pdtBrand">바닐라코</p>
-										<p class="pdtName"><a href="#">바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널</a></p>
-										<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
+										<p class="pdtHead" style="color:#4f8ffa;" th:text="${list.productBenefit}"></p>
+										<p class="pdtBrand" th:text="${list.productBrand}"></p>
+										<p class="pdtName" th:text="${list.productTitle}"></p>
+										<p class="pdtPrice" th:text="${#numbers.formatInteger(list.productPrice, 0, 'COMMA')+'원'}"></p>
 										<div class="pdtReview">
 											<div class="js_rating ratingS"><span>4.5</span></div>
 											4.5 <span class="count">(리뷰 18)</span>
 										</div>
 									</div>
 									<span class="inp_check OtPdtCheckBox">
-										<input type="checkbox" name="myWishChk" id="myWishChk1" class="js_checkbox">
-										<label for="myWishChk1"><span class="hide">바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널</span></label>
+										<input type="checkbox" name="inp_check1" class="js_checkbox" th:id="@{inp_check1_}+${list.productNo}" th:value="${list.productNo}">
+										<label th:for="@{inp_check1_}+${list.productNo}"></label>
 									</span>
-									<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM on"><span class="hide">찜하기</span></a>
-									<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
-								</li>
-								<li>
-									<div class="pdtImg">
-										<a href="javascript:void(0)" class="imgLink"><img src="./resources/web/images/temp/pdt_img3.png" alt="바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널"></a>
-									</div>
-									<div class="pdtTxt">
-										<p class="pdtHead" style="color:#4f8ffa;">2019 누적판매 15,591건!</p><!-- 문구가 없어도 태그삭제 X -->
-										<p class="pdtBrand">바닐라코</p>
-										<p class="pdtName"><a href="#">바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널</a></p>
-										<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
-										<div class="pdtReview">
-											<div class="js_rating ratingS"><span>4.5</span></div>
-											4.5 <span class="count">(리뷰 18)</span>
-										</div>
-									</div>
-									<span class="inp_check OtPdtCheckBox">
-										<input type="checkbox" name="myWishChk" id="myWishChk2" class="js_checkbox">
-										<label for="myWishChk2"><span class="hide">바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널</span></label>
-									</span>
-									<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM on"><span class="hide">찜하기</span></a>
-									<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
-								</li>
-								<li>
-									<div class="pdtImg">
-										<a href="javascript:void(0)" class="imgLink"><img src="./resources/web/images/temp/pdt_img3.png" alt="바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널"></a>
-									</div>
-									<div class="pdtTxt">
-										<p class="pdtHead" style="color:#4f8ffa;">2019 누적판매 15,591건!</p><!-- 문구가 없어도 태그삭제 X -->
-										<p class="pdtBrand">바닐라코</p>
-										<p class="pdtName"><a href="#">바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널</a></p>
-										<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
-										<div class="pdtReview">
-											<div class="js_rating ratingS"><span>4.5</span></div>
-											4.5 <span class="count">(리뷰 18)</span>
-										</div>
-									</div>
-									<span class="inp_check OtPdtCheckBox">
-										<input type="checkbox" name="myWishChk" id="myWishChk3" class="js_checkbox">
-										<label for="myWishChk3"><span class="hide">바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널</span></label>
-									</span>
-									<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM on"><span class="hide">찜하기</span></a>
-									<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
-								</li>
-								<li>
-									<div class="pdtImg">
-										<a href="javascript:void(0)" class="imgLink"><img src="./resources/web/images/temp/pdt_img3.png" alt="바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널"></a>
-									</div>
-									<div class="pdtTxt">
-										<p class="pdtHead" style="color:#4f8ffa;">2019 누적판매 15,591건!</p><!-- 문구가 없어도 태그삭제 X -->
-										<p class="pdtBrand">바닐라코</p>
-										<p class="pdtName"><a href="#">바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널</a></p>
-										<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
-										<div class="pdtReview">
-											<div class="js_rating ratingS"><span>4.5</span></div>
-											4.5 <span class="count">(리뷰 18)</span>
-										</div>
-									</div>
-									<span class="inp_check OtPdtCheckBox">
-										<input type="checkbox" name="myWishChk" id="myWishChk4" class="js_checkbox">
-										<label for="myWishChk4"><span class="hide">바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널</span></label>
-									</span>
-									<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM on"><span class="hide">찜하기</span></a>
-									<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
+				                    <a href="javascript:void(0);" th:onclick="|javascript:addWish('${list.productNo}')|" th:id="pdtNo_+${list.productNo}" class="btn_like likeM"><span class="hide">찜하기</span></a>
+				                    <a href="javascript:void(0);" th:onclick="|javascript:cartInsert('${list.productNo}')|" class="btn_cart cartM"><span>장바구니</span></a>
 								</li>
 							</ul>
 						</div>
-						<div class="btn_wrap mgt60">
-							<a class="btnMore btnSpin"><span>더보기<br><em>1 <u>/</u> <i>3</i></em></span></a>
-						</div>
-						<!-- 위시리스트가 없을때 -->
 						<div class="noWish" th:unless="${wishListCount != 0}">
 							<p>위시리스트를 채워주세요!</p>
 							<a href="/shopping/ranking/" class="btn_txt"><span>베스트 상품보러가기</span></a>
@@ -140,7 +73,7 @@
 		</div>
 	</div>
 	<!-- //container -->
-<!-- 스크립트 -->
+		<!-- 스크립트 -->
 		<th:block th:replace="common/script.html"></th:block>
 		<!--// 스크립트 -->
 		<!-- FOOTER -->
@@ -152,9 +85,104 @@
 	<th:block th:replace="common/quickNtalk.html"></th:block>
 	<!--// 퀵메뉴 + 톡톡 -->	
 	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
-	<script type="text/javascript">
+	<script  th:inline="javascript">
 		$('#quick .quickArea').css({'position':'absolute', 'top':290});
 	</script>
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+
+<!-- 찜한 상품 삭제 -->
+<div id="myWishDel" class="lyPopArea">
+    <div class="lyPop">
+        <div class="lyWrap">
+            <button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
+            <div class="lyTit">찜한 상품 삭제</div>
+            <div class="lyBody basic">
+                <p>선택하신 상품을 정말 삭제하시겠습니까?</p>
+                <div class="btn_wrap length2">
+                    <a href="javascript:void(0);" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorW btnTypeR"><span>취소</span></a>
+                    <a href="javascript:void(0);" onclick="deleteWish();" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+	function deleteWish(){
+		let addList = [], data = {};
+		let chk = $('.checked:not(.allChk) input[name="inp_check1"]:checked');		
+		let chkLength = chk.length;	// 체크된 갯수
+
+		if(chkLength >= 1){
+			for(var i = 0; i < chkLength; i++){
+				addList[i] = chk[i].value;
+			    data.addList = addList;		// 체크된 값 배열에 담기
+			}
+			console.log(data);			// 배열에 담긴 값
+			$.ajax({
+				url : "/deleteWish",
+				dataType : "JSON",
+				data : data,
+				type : "POST",
+				traditional : true,		// 배열로 값 넘길때 필요한 선언
+				success : function(data){
+					console.log(data);
+					if(chkLength == data){
+						location.reload();
+					}else{
+						alert('실패');
+					}
+				},
+				error : function(e){
+					console.log(e);
+				}
+			});
+		}else{
+			alert('선택된 값이 없습니다.');
+		}
+	}
+
+	$(document).on('click', '.inp_check label', function (){
+		if ($(this).parent().hasClass('readOnly')){return false;}
+		if ($(this).parent().hasClass('disabled')){return false;}
+		
+		var tar = $(this).parent().find('input');
+		var chk = tar.prop('checked');
+		var grpNm = tar.attr('name');
+	
+	
+		if ($(this).parent('.inp_check').hasClass('allChk')){
+			var chkStatus = tar.prop('checked');
+			$("input:checkbox[name=" + grpNm + "]").each(function() {
+				if (chkStatus) {
+					$(this).closest(".inp_check").removeClass("checked");
+					$(this).prop("checked",false);
+				} else {
+					$(this).closest(".inp_check").addClass("checked");
+					$(this).prop("checked",true);
+				}
+			});
+		} else {
+			if ($(this).parent().hasClass('checked')) {
+				$("input:checkbox[name=" + grpNm + "]").each(function() {
+					$(this).closest('.inp_check.allChk').removeClass('checked');;
+					$(this).closest('.inp_check.allChk input').prop("checked",false);
+				});
+				$(this).parent().removeClass('checked');				
+				if($(this).attr('for') == 'remember'){
+					deleteCookie("rememberId");
+				}
+				tar.prop("checked",false);
+			} else {
+				$(this).parent().addClass('checked');				
+				if($(this).attr('for') == 'remember'){
+					setCookie("rememberId", userId.value, 7);
+				}
+				tar.prop("checked",true);
+			}
+		}
+		console.log(tar.prop('checked'));
+		return false;
+	});
+</script>
 </body>
 </html>

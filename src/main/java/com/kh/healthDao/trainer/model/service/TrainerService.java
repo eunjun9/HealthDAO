@@ -32,6 +32,7 @@ public interface TrainerService {
 
 	int trainerModify3(Trainer trainer, String originFile2, String changeFile2);
 
+
 	Review rvStatus(Review review, int tNo);
 
 	int trainerReviewInsert(Review review);
@@ -39,6 +40,10 @@ public interface TrainerService {
 	Member mOrderSelect(Member m);
 
 	int trainerPay(Payment payment);
+
+	// 메인 화면에 가져오는 트레이너 4명
+	List<Trainer> trainerRankList();
+
 
 
 }

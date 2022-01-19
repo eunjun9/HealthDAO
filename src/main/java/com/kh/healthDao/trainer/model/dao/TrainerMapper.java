@@ -45,6 +45,7 @@ public interface TrainerMapper {
 
 	int centerFileModify(Map<String, Object> map);
 
+
 	Review rvStatus(Map<String, Object> map);
 
 	int trainerReviewInsert(Review review);
@@ -56,5 +57,8 @@ public interface TrainerMapper {
 	int trainerPayInsert(Payment payment);
 
 	int trainerPtOrderInsert(Payment payment);
+
+	List<Trainer> trainerRankList();
+
 
 }

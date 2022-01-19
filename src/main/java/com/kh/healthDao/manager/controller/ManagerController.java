@@ -1,8 +1,16 @@
 package com.kh.healthDao.manager.controller;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,8 +21,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.healthDao.manager.model.service.ManagerService;
+import com.kh.healthDao.manager.model.vo.Payment;
 import com.kh.healthDao.manager.model.vo.Qna;
 import com.kh.healthDao.manager.model.vo.Refund;
+import com.kh.healthDao.mypage.model.vo.QnaDept;
 
 
 @Controller
@@ -71,6 +81,7 @@ public class ManagerController {
 		return mv;
 	}
 	
+	
 	// 회원문의답변
 	@GetMapping("memberInquiryAnswer")
 	public ModelAndView managerMemberInquiryAnswer(ModelAndView mv, @RequestParam int qNo) {
@@ -102,6 +113,60 @@ public class ManagerController {
 		return "redirect:/manager/refundList?page=1";
 	}
 	
+	 @GetMapping("/excel/download")
+	    public void excelDownload(HttpServletResponse response) throws IOException {
+//	        Workbook wb = new HSSFWorkbook();
+	        Workbook wb = new XSSFWorkbook();
+	        Sheet sheet = wb.createSheet("시트이름");
+	        Row row = null;
+	        Cell cell = null;
+	        int rowNum = 0;
+	        
+	        List<Payment> excelList = managerService.excelList();
+
+	        // Header
+	        row = sheet.createRow(rowNum++);
+	        cell = row.createCell(0);
+	        cell.setCellValue("제품번호");
+	        cell = row.createCell(1);
+	        cell.setCellValue("제품명");
+	        cell = row.createCell(2);
+	        cell.setCellValue("회사명");
+	        cell = row.createCell(3);
+	        cell.setCellValue("총판매수량");
+	        cell = row.createCell(4);
+	        cell.setCellValue("정산금액");
+
+	        
+	        // Body
+	        for(Payment p : excelList) {
+		        row = sheet.createRow(rowNum++);
+		        cell = row.createCell(0);
+		        cell.setCellValue(p.getPayNo());
+		        cell = row.createCell(1);
+		        cell.setCellValue(p.getProductTitle());
+		        System.out.println(p.getProductTitle());
+		        cell = row.createCell(2);
+		        cell.setCellValue(p.getProductBrand());
+		        cell = row.createCell(3);
+		        cell.setCellValue(p.getQuantity());
+		        cell = row.createCell(4);
+		        cell.setCellValue(p.getQuantity()*p.getProductPrice());
+	        }
+
+	        
+
+	        // 컨텐츠 타입과 파일명 지정
+	        response.setContentType("ms-vnd/excel");
+//	        response.setHeader("Content-Disposition", "attachment;filename=example.xls");
+	        response.setHeader("Content-Disposition", "attachment;filename=example.xlsx");
+
+	        // Excel File Output
+	        wb.write(response.getOutputStream());
+	        wb.close();
+	    }
+	}
+	
 
 
 	
@@ -109,7 +174,7 @@ public class ManagerController {
 	
 	
 	
-}
+
 
 
 

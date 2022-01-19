@@ -32,25 +32,26 @@
 									</div>
 									<div class="pdtCount">
 										<div class="js_pdtCount count_box">
-											<button class="js_pdtCountMinus" type="button" onclick="productCountMinus(this)" disabled="">
+											<button class="js_pdtCountMinus cartCountBtn" type="button" th:onclick="|productCountMinus(this); javascript:productCount('${cart.cartNo}', 'minus')|" >
 												<span class="hide">제품 수량 감소</span>
 											</button>
 											<!-- 구매수량이 정해져 있을 경우 data-max 추가 -->
-											<input type="text" title="선택품목갯수" id="" th:value="${cart.cartStock}" name="" readonly="">
-											<button class="js_pdtCountPlus" type="button" onclick="productCountPlus(this)">
+											<input type="text" title="선택품목갯수" id="cartStock" th:value="${cart.cartStock}" name="cartStock" readonly />
+											<input type="hidden" name="productPrice" th:value="${cart.product.productPrice}" />
+											<button class="js_pdtCountPlus cartCountBtn" type="button" th:onclick="|productCountPlus(this); javascript:productCount('${cart.cartNo}', 'plus')|">
 												<span class="hide">제품 수량 증가</span>
 											</button>
 											<p class="error">재고가 부족하여 수량만큼 주문하실 수 없습니다.</p>
 										</div>
 									</div>
 									<div class="totalPrice" th:with="total=${cart.product.productPrice} * ${cart.cartStock}">
-										<p class="price"><span th:text="${total}">0</span><em>원</em></p>
+										<p class="price"><span id="total" th:text="${total}">0</span><em>원</em></p>
 									</div>
 								</div>
-								<a href="#" class="del"><span class="hide">삭제</span></a>
+								<button type="button" th:onclick="|javascript:cartDelete('${cart.cartNo}')|" class="del"><span class="hide">삭제</span></button>
 							</li>							
 						</ul>
-						<p class="ta_r"><a href="#" class="cart_del">장바구니 비우기</a></p>
+						<p class="ta_r"><button type="button" onclick="cartAllDelete()" class="cart_del">장바구니 비우기</button></p>
 						</div>
 						<!-- //장바구니 있을떄 -->
 						<!-- 장바구니 없을때 -->
@@ -64,7 +65,7 @@
 							<div class="order_price bd_no">
 								<dl>
 									<dt>총 주문금액</dt><!-- 20200317 수정 -->
-									<dd>80,000<em>원</em></dd>
+									<dd><span th:text="${allTotalPrice}">0</span><em>원</em></dd>
 								</dl>
 							</div>	
 							<div class="order_price">
@@ -80,7 +81,7 @@
 								<div class="total_price">
 									<dl>
 										<dt>예상결제금액</dt>
-										<dd>55,200<em>원</em></dd>
+										<dd><span th:text="${allTotalPrice}">0</span><em>원</em></dd>
 									</dl>
 								</div>
 								<a href="#" class="btn btnSizeL btnColorP btnTypeB w100 mgt35">주문하기 (<span th:text="${cartList.size}">0</span>개)</a>
@@ -150,3 +151,52 @@
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 </body>
 </html>
+<script>
+	function productCount(cNo, gubun){
+		var cartNo = cNo;
+		var upDown = gubun;
+		var sendData = {"cartNo":cartNo, "upDown" : upDown};
+		
+		$.ajax({
+			url : "/mypage/cartStock",
+			data : sendData,
+			type : "post",
+			success : function(data){
+				location.reload();
+			},
+			error : function(e){
+				console.log(e)
+			}
+		});
+	}
+	
+	function cartDelete(cNo){
+		var cartNo = cNo;
+		var sendData = {"cartNo":cartNo};
+		
+		$.ajax({
+			url : "/mypage/cartDelete",
+			data : sendData,
+			type : "post",
+			success : function(data){
+				location.reload();
+			},
+			error : function(e){
+				console.log(e)
+			}
+		});
+	}
+	
+	function cartAllDelete(){
+		$.ajax({
+			url : "/mypage/cartAllDelete",
+			type : "post",
+			success : function(data){
+				location.reload();
+			},
+			error : function(e){
+				console.log(e)
+			}
+		});
+	}
+</script>
