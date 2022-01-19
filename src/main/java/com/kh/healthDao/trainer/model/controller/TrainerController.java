@@ -254,7 +254,6 @@ public class TrainerController {
 	@PostMapping("pay")
 	@ResponseBody
 	public String trainerPay(Payment payment) {
-		System.out.println(payment);
 		int result = trainerService.trainerPay(payment);
 		
 		if(result > 0) {
