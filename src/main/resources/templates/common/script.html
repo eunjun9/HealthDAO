@@ -7,9 +7,9 @@
 <script th:inline="javascript">
 	// 상품 있는 곳 어디서나 넣어야 됨
 	/*<![CDATA[*/
-	var likeValue = [[${likeList}]];
-	var likeSize = [[${likeList}]].length;
 	$(function(){
+		var likeValue = [[${likeList}]];
+		var likeSize = [[${likeList}]].length;
 		$.ajax({
 			url : "/",
 			method : 'GET',
@@ -26,15 +26,12 @@
 	/*]]>*/
 	// 장바구니
 	/*<![CDATA[*/
-	var cartCount = [[${cartCount}]];
-	console.log(cartCount);
-	$("#mainCartCount").text(cartCount);
 	$(function(){
 		$.ajax({
-			url : "/mypage/cartInsert",
+			url : "/cartCountSelect",
 			method : 'GET',
 			success : function(data){
-				$("#mainCartCount").text(cartCount);	// 장바구니 카운트
+				$("#mainCartCount").text(data);	// 장바구니 카운트
 			},
 			error : function(e){
 				console.log(e);
