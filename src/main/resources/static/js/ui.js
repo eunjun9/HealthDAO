@@ -472,6 +472,7 @@ $(document).on('click', '.js_userRating .userRatingBox button', function(e){
 	var resultRtg = Number($(this).text()),
 		rating_W = Math.round($(this).parents('.js_rating').width()) * (resultRtg * 0.2);
 	$(this).closest('.userRatingBox').siblings('span').width(rating_W).text(resultRtg)
+	$('.starResult').val(resultRtg);
 })
 
 

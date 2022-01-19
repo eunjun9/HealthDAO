@@ -48,6 +48,7 @@
 				</association>
 		</association>
 	</resultMap>
+	
 
 	<resultMap id="trainerReviewListMap" type="com.kh.healthDao.review.model.vo.Review">
 		<id property="reviewNo" column="REVIEW_NO"/>
@@ -64,6 +65,14 @@
 			</association>
 	</resultMap>
 	
+	<resultMap id="memberOrderSelectMap" type="com.kh.healthDao.member.model.vo.Member">
+		<id property="userNo" column="USER_NO"/>
+		<result property="userId" column="USER_ID"/>
+		<result property="userName" column="USER_NAME"/>
+		<result property="userPhone" column="USER_PHONE"/>
+		<result property="userEmail" column="USER_EMAIL"/>
+	</resultMap>
+	
 	<select id="trainerList" resultMap="trainerResultMap" parameterType="String">
 		SELECT
 		       T.T_NO
@@ -78,7 +87,7 @@
 		     , T.WEEKAND_SC
 		     , T.T_INTRO
 		     , T.QUE_INTRO
-             , COUNT(R.REVIEW_NO) AS SUM_REVIEW
+             , COUNT(DISTINCT R.REVIEW_NO) AS SUM_REVIEW
              , ROUND((SUM(R.STAR)) / COUNT(R.REVIEW_NO), 1) AS AVG_STAR
 		     , M.USER_NO
 		     , M.USER_NAME
@@ -130,7 +139,7 @@
 		     , M.USER_NO
 		     , M.USER_NAME
 		     , M.USER_PHONE
-             , COUNT(R.REVIEW_NO) AS SUM_REVIEW
+             , COUNT(DISTINCT R.REVIEW_NO) AS SUM_REVIEW
              , ROUND((SUM(R.STAR)) / COUNT(R.REVIEW_NO), 1) AS AVG_STAR
              , (SELECT AF.FILE_PATH FROM AT_FILE AF JOIN TRAINER_FILE TF ON(AF.F_NO = TF.F_NO) WHERE STATUS='N' AND TF.T_NO = T.T_NO) AS FILE_PATH
              , (SELECT TF.F_NO FROM AT_FILE AF JOIN TRAINER_FILE TF ON(AF.F_NO = TF.F_NO) WHERE STATUS='N' AND TF.T_NO = T.T_NO) AS F_TNO
@@ -204,6 +213,7 @@
 		  JOIN TRAINER T ON(O.T_NO = T.T_NO)
 		  JOIN MEMBER M ON(R.USER_NO = M.USER_NO)
 		 WHERE T.T_NO = #{tNo}
+		   AND R.CATEGORY = 'PT'
 	</select>
 	
 	<insert id="trainerInsert" parameterType="com.kh.healthDao.trainer.model.vo.Trainer">
@@ -336,6 +346,102 @@
 	</update>
 
 
+	<select id="rvStatus" parameterType="hashmap" resultMap="trainerReviewListMap">
+		SELECT
+		       PAY_NO
+		  FROM PT_ORDER
+		 WHERE T_NO = #{tNo}
+		   AND USER_ID = #{review.userNo}
+	</select>
+	
+	<insert id="trainerReviewInsert" parameterType="com.kh.healthDao.review.model.vo.Review">
+		INSERT
+		  INTO REVIEW
+		  (
+		  	REVIEW_NO
+		  , CATEGORY
+		  , STAR
+		  , R_CONTENT
+		  , R_DATE
+		  , MODIFY_DATE
+		  , PAY_NO
+		  , USER_NO
+		  )VALUES
+		  (
+		  	SEQ_REVIEW_NO.NEXTVAL
+		  , 'PT'
+		  , #{star}
+		  , #{rContent}
+		  , SYSDATE
+		  , DEFAULT
+		  , #{payNo}
+		  , #{userNo}
+		  )
+	</insert>
+	
+	<select id="reviewStatus" parameterType="com.kh.healthDao.review.model.vo.Review" resultMap="trainerReviewListMap">
+		SELECT
+			   PAY_NO
+		  FROM REVIEW
+		 WHERE USER_NO = #{userNo}
+		   AND PAY_NO = #{payNo}
+	</select>
+	
+	<select id="mOrderSelect" parameterType="com.kh.healthDao.member.model.vo.Member" resultMap="memberOrderSelectMap">
+		SELECT
+			   USER_NO
+			 , USER_NAME
+			 , USER_PHONE
+			 , USER_EMAIL
+		  FROM MEMBER
+		 WHERE USER_ID = #{userId}
+	</select>
+	
+	<insert id="trainerPayInsert" parameterType="com.kh.healthDao.manager.model.vo.Payment">
+		INSERT
+		  INTO PAYMENT
+		  (
+		  	PAY_NO
+		  , PAY_DATE
+		  , PAY_METHOD
+		  , ORDERER_PHONE
+		  , ORDERER_EMAIL
+		  , ORDER_STATUS
+		  , USER_NO
+		  , PRODUCT_NO
+		  )VALUES
+		  (
+		  	SEQ_PAY_NO.NEXTVAL
+		  , SYSDATE
+		  , 'card'
+		  , #{ordererPhone}
+		  , #{ordererEmail}
+		  , 'Y'
+		  , #{userNo}
+		  , #{productNo}
+		  )
+	</insert>
+	
+	<insert id="trainerPtOrderInsert" parameterType="com.kh.healthDao.manager.model.vo.Payment">
+		INSERT
+		  INTO PT_ORDER
+		  (
+		  	PT_NO
+		  , PT_DATE
+		  , USER_ID
+		  , PAY_NO
+		  , T_NO
+		  )VALUES
+		  (
+		  	SEQ_PT_NO.NEXTVAL
+		  , SYSDATE
+		  , #{userNo}
+		  , SEQ_PAY_NO.CURRVAL
+		  , #{productNo}
+		  )
+	</insert>
+
+
 	<select id="trainerRankList" resultMap="trainerResultMap">
 		 SELECT
 		       T_NO
@@ -404,5 +510,6 @@
         ORDER BY T.T_NO DESC)    
         <![CDATA[WHERE ROWNUM <= 4]]>
 	</select> 
+
 	
 </mapper>

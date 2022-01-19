@@ -2,6 +2,7 @@ package com.kh.healthDao.trainer.model.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 import java.util.UUID;
 
@@ -12,9 +13,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.healthDao.manager.model.vo.Payment;
+import com.kh.healthDao.member.model.vo.Member;
 import com.kh.healthDao.review.model.vo.Review;
 import com.kh.healthDao.trainer.model.service.TrainerService;
 import com.kh.healthDao.trainer.model.vo.PtOrder;
@@ -160,8 +164,6 @@ public class TrainerController {
 		mv.addObject("trainerOrderList", trainerOrderList);
 		mv.setViewName("/trainer/trainerOrderList");
 		
-		//세션 userNo 받아와서 orderList 로직 등록
-		
 		return mv;
 	}
 	
@@ -170,8 +172,9 @@ public class TrainerController {
 		
 		List<Review> reviewList = trainerService.trainerReviewList(tNo);
 		Trainer trainer = trainerService.trainerSelect(tNo);
-		mv.addObject("trainer", trainer);
+		
 		mv.addObject("reviewList", reviewList);
+		mv.addObject("trainer", trainer);
 		mv.setViewName("trainer/trainerReview");
 		
 		return mv;
@@ -198,12 +201,6 @@ public class TrainerController {
 		} catch (IllegalStateException | IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println(originFile1);
-		System.out.println(ext1);
-		System.out.println(changeFile1);
-		System.out.println(path);
-		System.out.println(trainerFile);
-		System.out.println(centerFile);
 		
 		int result = trainerService.trainerInsert(trainer, originFile1, originFile2, changeFile1, changeFile2);
 		
@@ -219,12 +216,54 @@ public class TrainerController {
 	}
 	
 	@GetMapping("/order")
-	public ModelAndView trainerOrder(ModelAndView mv, @RequestParam int tNo) {
+	public ModelAndView trainerOrder(ModelAndView mv, @RequestParam int tNo, Principal principal) {
 		
-		System.out.println(tNo);
+		Member member = new Member();
+		member.setUserId(principal.getName());
+		member = trainerService.mOrderSelect(member);
+		
+		Trainer trainer = trainerService.trainerSelect(tNo);
+		
+		mv.addObject("trainer", trainer);
+		mv.addObject("member", member);
 		mv.setViewName("trainer/trainerOrder");
 		return mv;
 	}
+	
+	@PostMapping("/review/insert")
+	public String trainerReviewInsert(Review review, @RequestParam int tNo) {
+		
+		Review rvStatus = trainerService.rvStatus(review, tNo);
+		if(rvStatus != null) {
+			review.setPayNo(rvStatus.getPayNo());
+			
+			int result = trainerService.trainerReviewInsert(review);
+			
+			if(result > 0) {
+				return "redirect:?tNo="+tNo;
+			} else {
+				return "redirect:?tNo="+tNo;
+			}
+		} else {
+			return "redirect:?tNo="+tNo;
+		}
+		
+	}
+	
+	@PostMapping("pay")
+	@ResponseBody
+	public String trainerPay(Payment payment) {
+		
+		int result = trainerService.trainerPay(payment);
+		
+		if(result > 0) {
+			return "결제 성공";
+		}else {
+			return "결제 실패";
+		}
+		
+	}
+	
 	
 
 }

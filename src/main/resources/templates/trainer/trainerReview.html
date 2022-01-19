@@ -17,8 +17,7 @@
     <div class="guideTab" id="guideTab1">
         <div style="display: flex;">
             <!-- 헬스장 사진 넣는 곳 -->
-            <img class="imgCutting" style="width:50%; height:350px;" src="/images/yonghan/aa1.jpg">
-            <img class="imgCutting" style="width:50%; height:350px;" src="/images/yonghan/aa2.jpg">
+            <img class="imgCutting" style="width:100%; height:350px;" th:src="${trainer.file_path}+${trainer.change_file2}">
         </div>
     </div>
 	<div class="contents">
@@ -80,7 +79,7 @@
                         <div style="width: 100%; height: 100px; display: flex; justify-content: center; margin-top: 10px; padding-bottom: 30px;">
                             <div style="width: 90px; height: 100px;">
                                 <!-- 트레이너 사진 넣는 곳 -->
-                                <img src="/images/yonghan/trainer.png" style="width: 100%; height: 100%;">
+                                <img th:src="${trainer.file_path}+${trainer.change_file1}" style="width: 100%; height: 100%;">
                             </div>
                         </div>
                         <div style="text-align: center;">
@@ -125,7 +124,7 @@
 		<div style="display: flex;">
 			<div class="tD1">
 				<!-- 트레이너 사진 넣는 곳 -->
-				<img src="/images/yonghan/trainer.png" style="width: 100%; height: 100%; border-radius: 5px;">
+				<img th:src="${trainer.file_path}+${trainer.change_file1}" style="width: 100%; height: 100%; border-radius: 5px;">
 			</div>
 			<div style="display: block;">
 				<!-- 트레이너 이름 넣는 곳 -->
@@ -143,7 +142,60 @@
 	</div>
 </div>
 
-	
+
+<div id="reViewWritePop" class="lyPopArea">
+		<div class="lyPop">
+			<div class="lyWrap">
+				<button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
+				<div class="lyTit">리뷰 작성</div>
+				<form action="/trainer/review/insert" method="post" name="rvForm">
+				<div class="lyBody">
+					<div class="WrtAreaRating">
+						<div class="ratingBox">
+							<p class="ratingTtl">PT는 만족하셨나요?</p>
+							<div class="js_rating js_userRating ratingXL">
+								<span>5</span>
+								<div class="userRatingBox">
+									<button type="button" class="rating_1">1</button>
+									<button type="button" class="rating_2">2</button>
+									<button type="button" class="rating_3">3</button>
+									<button type="button" class="rating_4">4</button>
+									<button type="button" class="rating_5">5</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="WrtAreaCtt">
+						<div class="coachMarkArea">
+							<div class="inp_wrap error mgt10">
+								<div class="inp_textArea lengthCheck">
+									<textarea name="rContent"></textarea>
+									<div class="textarea-clone"></div>
+								</div>
+								<span class="charCnt">
+									<em>0</em>/250자
+									<span class="charCommen">250자 이내로 작성해 주세요.</span>
+								</span>							
+							</div>
+						</div>
+					</div>
+					
+					<input type="hidden" class="starResult" name="star" value="5">
+					<input type="hidden" name="userNo" th:value="${#authentication.principal.userNo}">
+					<input type="hidden" name="tNo" th:value="${trainer.tNo}">
+					
+					<div class="btn_wrap length2">
+						<a href="javascript:void(0);" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorW btnTypeR"><span>취소</span></a>
+						<a href="javascript:void(0);" onclick="document.rvForm.submit();" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></a>
+					</div>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+
 	<!-- 스크립트 -->
 		<th:block th:replace="common/script.html"></th:block>
 		<!--// 스크립트 -->
@@ -172,6 +224,7 @@
 			});
 		});
 	</script>
+	
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 	<style>
 		#quick{display:none;}
