@@ -9,35 +9,21 @@
 	/*<![CDATA[*/
 	$(function(){
 		var likeValue = [[${likeList}]];
-		var likeSize = [[${likeList}]].length;
-		$.ajax({
-			url : "/",
-			method : 'GET',
-			success : function(data){
-				for(let i = 0; i < likeSize; i++){
-					$("#pdtNo_"+likeValue[i]).addClass('on');	// 값이 있으면 class on 추가
+		if(likeValue != null){
+			var likeSize = [[${likeList}]].length;
+			$.ajax({
+				url : "/",
+				method : 'GET',
+				success : function(data){
+					for(let i = 0; i < likeSize; i++){
+						$("#pdtNo_"+likeValue[i]).addClass('on');	// 값이 있으면 class on 추가
+					}
+				},
+				error : function(e){
+					console.log(e);
 				}
-			},
-			error : function(e){
-				console.log(e);
-			}
-		});
+			});
+		}
 	});
 	/*]]>*/
-	// 장바구니
-	/*<![CDATA[*/
-	$(function(){
-		$.ajax({
-			url : "/cartCountSelect",
-			method : 'GET',
-			success : function(data){
-				$("#mainCartCount").text(data);	// 장바구니 카운트
-			},
-			error : function(e){
-				console.log(e);
-			}
-		});
-	});
-	/*]]>*/
-	
 </script>

@@ -1174,6 +1174,20 @@ function addCookie(id) {
 	}
 }
 
+// 장바구니 갯수 카운트
+$(function(){
+	$.ajax({
+		url : "/cartCountSelect",
+		method : 'GET',
+		success : function(data){
+			$("#mainCartCount").text(data);	// 장바구니 카운트
+		},
+		error : function(e){
+			console.log(e);
+		}
+	});
+});
+
 /**
  * 장바구니 추가 ajax
  */
