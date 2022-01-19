@@ -21,8 +21,10 @@ public interface MemberMapper {
 	
 	void insertMemberGrade(MemberGrade memberGrade);
 	
-	// 아이디 중복 체크
-	int idChk(Member member);
+	/* 중복 체크 */
+	int idChk(String userId);
+	
+	int nickChk(String userNickName);
 
 	/* 아이디/비밀번호 찾기 */
 	Member selectId(String userName, String userEmail);

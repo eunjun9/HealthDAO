@@ -9,7 +9,7 @@ spring:
     url: jdbc:oracle:thin:@localhost:1521:xe
     username: health_dao
     password: health_dao
-# google SMTP
+# google SMTP (메일 전송)
   mail:
        host: smtp.gmail.com
        port: 587
@@ -17,13 +17,16 @@ spring:
        password: health11!
        default-encoding: utf-8
        properties:
-            mail:
+             mail:
                 transport:
                     protocol: smtp
                 smtp:
-                    auth: true
+                    auth: false
                     starttls:
                         enable: true
+                    ssl:
+                        trust: smtp.gmail.com
+                        protocols: TLSv1.2
                 debug: true
                         
 # mybatis config

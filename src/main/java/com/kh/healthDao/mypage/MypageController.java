@@ -324,8 +324,6 @@ public class MypageController {
 		int userNo = userImpl.getUserNo();
 		address.setUserNo(userNo);
 		
-		log.info("입력 요청 주소 : {}", address);
-		
 		String msg = myInfoService.insertDeli(address) > 0 ? "배송지가 등록되었습니다." : "배송지 등록에 실패하였습니다.";
 		
 		Map<String, String> map = new HashMap<>();

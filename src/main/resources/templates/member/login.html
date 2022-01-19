@@ -12,6 +12,13 @@
 		<!--// HEADER + GNB -->
 
 	<!-- container -->
+	<script>
+		const msg = '[[${exception}]]';
+		
+		if(msg){
+			alert(msg);			
+		}
+	</script>
 	<div id="container" class="pdt0">
 		<div class="login">
 			<div class="findMain">
@@ -19,8 +26,11 @@
 					<div class="pageTitArea">
 						<h1>로그인</h1>
 					</div>
+						<!-- <div th:if="${param.error}">
+					        <p th:text="${exception}" class="alert alert-danger"></p>
+					    </div> -->
 						<div class="loginTabH">
-						<form th:action="@{/member/login}" id="loginForm" method="post">
+						<form th:action="@{/member/login}" id="loginForm" name="loginForm" method="post">
 							<!-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> -->
 							<div class="inp_wrap">
 								<div class="inp_text sizeS">
