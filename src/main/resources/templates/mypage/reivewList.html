@@ -159,8 +159,7 @@
 	                    </dl>          
 	                </div>
 	                <div class="btn_wrap length2">
-	                    <button type="submit" class="btn btnSizeL btnArr btnColorW btnTypeR"><span>수정</span></button>
-	                    <a href="#" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></a>
+	                    <button type="submit" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>수정</span></button>
 	                </div>
                 </form>
             </div>
@@ -178,7 +177,6 @@
 			data : sendData,
 			type : "post",
 			success : function(data){
-				console.log(data);
 				document.getElementById("reviewDept").textContent = data.category;
 				let starScore = document.getElementById("starScore");
 				starScore.textContent = data.star;

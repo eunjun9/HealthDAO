@@ -118,6 +118,12 @@ public interface MypageMapper {
 
 	int refundStatusModify(int payNo);
 
+	int payProductCount(int payNo);
+
+	int payReviewCount(int payNo);
+
+
+
 
 
 }

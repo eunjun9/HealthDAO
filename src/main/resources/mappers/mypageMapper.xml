@@ -656,6 +656,7 @@
 		    , MODIFY_DATE
 		    , PAY_NO
 		    , USER_NO
+		    , PRODUCT_NO
 		)VALUES(
 		    SEQ_REVIEW_NO.NEXTVAL
 		    , '상품'
@@ -665,6 +666,7 @@
 		    , NULL
 		    , #{payNo}
 		    , #{userNo}
+		    , #{productNo}
 		)
 	</insert>
 	<update id="statusModify" parameterType="com.kh.healthDao.review.model.vo.Review">
@@ -729,5 +731,18 @@
 	  FROM ROULETTE
 	 WHERE USER_NO = #{userNo}
 	</select>
-
+	
+	<select id="payProductCount" parameterType="_int" resultType="_int">
+		SELECT 
+		    COUNT(*)
+		FROM PAY_DETAIL
+		WHERE PAY_NO = #{payNo}
+	</select>
+	
+	<select id="payReviewCount" parameterType="_int" resultType="_int">
+		SELECT
+		    COUNT(*)
+		FROM REVIEW
+		WHERE PAY_NO = #{payNo}
+	</select>
 </mapper>
