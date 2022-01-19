@@ -43,6 +43,14 @@
 		<result property="rDate" column="R_DATE" />
 		<result property="modifyDate" column="MODIFY_DATE" />
 		<result property="payNo" column="PAY_NO" />
+		<association javaType="com.kh.healthDao.shopping.model.vo.Shopping" property="product">
+			<id property="productNo" column="PRODUCT_NO"/>
+			<result property="productTitle" column="PRODUCT_TITLE"/>			
+		</association>
+		<association javaType="com.kh.healthDao.member.model.vo.Member" property="member">
+			<id property="userNo" column="T_NO"/>
+			<result property="userName" column="USER_NAME"/>			
+		</association>
   </resultMap>
 
 	<resultMap id="AttMap" type="com.kh.healthDao.mypage.model.vo.AttCheck">
@@ -381,10 +389,14 @@
 					    , R_CONTENT
 					    , R_DATE
 					    , MODIFY_DATE
-					    , PAY_NO
-					    , USER_NO
-					FROM REVIEW
-					WHERE USER_NO = #{userNo}
+					    , T_NO
+					    , USER_NAME   
+					    , PRODUCT_NO
+					    , PRODUCT_TITLE
+					FROM REVIEW R
+					LEFT JOIN PRODUCT P USING(PRODUCT_NO)
+					LEFT JOIN MEMBER M ON(R.T_NO = M.USER_NO)
+					WHERE R.USER_NO = #{userNo}
 		        ORDER BY REVIEW_NO DESC) A
 		    )
 			WHERE RNUM BETWEEN #{startRow} AND #{endRow}
@@ -392,15 +404,19 @@
 	
 	<select id="reviewDetail" parameterType="_int" resultMap="reviewMap">
 		SELECT 
-		      REVIEW_NO
+		    REVIEW_NO
 		    , CATEGORY
 		    , STAR
 		    , R_CONTENT
 		    , R_DATE
 		    , MODIFY_DATE
-		    , PAY_NO
-		    , USER_NO
-		FROM REVIEW
+		    , T_NO
+		    , USER_NAME   
+		    , PRODUCT_NO
+		    , PRODUCT_TITLE
+		FROM REVIEW R
+		LEFT JOIN PRODUCT P USING(PRODUCT_NO)
+		LEFT JOIN MEMBER M ON(R.T_NO = M.USER_NO)
 		WHERE REVIEW_NO = #{reviewNo}
 	</select>
 	

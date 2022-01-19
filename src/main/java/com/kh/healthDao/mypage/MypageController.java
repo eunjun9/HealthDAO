@@ -208,6 +208,8 @@ public class MypageController {
 		
 		Map<String, Object> map = myReviewService.userReviewList(page, userNo);
 		
+		System.out.println(map.get("reviewList"));
+		
 		mv.addObject("reviewList", map.get("reviewList"));
 		mv.addObject("listCount", map.get("listCount"));
 		mv.addObject("pi", map.get("pi"));
