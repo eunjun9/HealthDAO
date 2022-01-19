@@ -366,6 +366,7 @@
 		  , MODIFY_DATE
 		  , PAY_NO
 		  , USER_NO
+		  , PRODUCT_NO
 		  )VALUES
 		  (
 		  	SEQ_REVIEW_NO.NEXTVAL
@@ -376,6 +377,7 @@
 		  , DEFAULT
 		  , #{payNo}
 		  , #{userNo}
+		  , #{productNo}
 		  )
 	</insert>
 	
@@ -408,7 +410,6 @@
 		  , ORDERER_EMAIL
 		  , ORDER_STATUS
 		  , USER_NO
-		  , PRODUCT_NO
 		  )VALUES
 		  (
 		  	SEQ_PAY_NO.NEXTVAL
@@ -418,7 +419,6 @@
 		  , #{ordererEmail}
 		  , 'Y'
 		  , #{userNo}
-		  , #{productNo}
 		  )
 	</insert>
 	

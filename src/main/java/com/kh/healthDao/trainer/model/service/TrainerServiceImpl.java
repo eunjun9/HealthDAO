@@ -189,7 +189,9 @@ public class TrainerServiceImpl implements TrainerService{
 		}
 		
 		return result;
-  }
+	}
+	
+	@Override
 	public List<Trainer> trainerRankList() {
 		return trainerMapper.trainerRankList();
 

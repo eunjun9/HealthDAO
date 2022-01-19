@@ -234,6 +234,7 @@ public class TrainerController {
 	public String trainerReviewInsert(Review review, @RequestParam int tNo) {
 		
 		Review rvStatus = trainerService.rvStatus(review, tNo);
+		review.setProductNo(tNo);
 		if(rvStatus != null) {
 			review.setPayNo(rvStatus.getPayNo());
 			
@@ -253,7 +254,6 @@ public class TrainerController {
 	@PostMapping("pay")
 	@ResponseBody
 	public String trainerPay(Payment payment) {
-		
 		int result = trainerService.trainerPay(payment);
 		
 		if(result > 0) {
