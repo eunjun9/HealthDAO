@@ -186,7 +186,7 @@
 	</select>
 	
 	<!-- 패스워드변경 -->
-	<update id = "pwUpdate_M" parameterType="MemberVO">
+	<update id = "pwdUpdate" parameterType="com.kh.healthDao.member.model.vo.Member">
 		UPDATE MEMBER
 		   SET USER_PWD = #{userPwd}
 		 WHERE USER_EMAIL = #{userEmail}
