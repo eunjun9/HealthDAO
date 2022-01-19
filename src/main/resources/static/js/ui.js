@@ -1179,7 +1179,6 @@ function addCookie(id) {
  */
 function cartInsert(pNo){
 	let productNo = pNo;
-	
 	var sendData = {"productNo":productNo, "cartStock":1};
 	$.ajax({
 		url : "/mypage/cartInsert",
@@ -1187,6 +1186,16 @@ function cartInsert(pNo){
 		type : "post",
 		success : function(data){
 			if(data == "success"){
+				$.ajax({
+					url : "/cartCountSelect",
+					method : 'GET',
+					success : function(data){
+						$("#mainCartCount").text(data);	// 장바구니 카운트
+					},
+					error : function(e){
+						console.log(e);
+					}
+				});
 				alert("장바구니에 추가되었습니다.");							
 			}else{
 				alert("장바구니에 추가 실패");
