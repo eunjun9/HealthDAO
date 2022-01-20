@@ -297,7 +297,7 @@
 				ORDER BY POINT_NO DESC)
 	</select>
 	
-	<select id="pointCount" resultType="_int" parameterType="hashmap">
+	<select id="pointCount" resultType="String" parameterType="hashmap">
 		SELECT
 		   SUM(POINT_AMOUNT)
 		  FROM POINT
