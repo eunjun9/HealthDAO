@@ -299,11 +299,23 @@ public class ShoppingServiceImpl implements ShoppingService{
 
 	@Override
 	public int sumReview(int productNo) {
-		return shoppingMapper.sumReview(productNo);
+		String result = shoppingMapper.sumReview(productNo);
+		int sumReview = 0;
+		if(result != null) {
+			sumReview = Integer.parseInt(result);
+		}
+		
+		return sumReview;
 	}
 
 	@Override
 	public int avgStar(int productNo) {
-		return shoppingMapper.avgStar(productNo);
+		String result = shoppingMapper.avgStar(productNo);
+		int avgStar = 0;
+		if(result != null) {
+			avgStar = Integer.parseInt(result);
+		}
+		
+		return avgStar;
 	}
 }

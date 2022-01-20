@@ -62,6 +62,6 @@ public interface ShoppingMapper {
 	int paymentInfoInsert(Payment payment);
 	int paymentDetailInsert(Payment payment);
 	List<Product> shoppingReview(int productNo);
-	int sumReview(int productNo);
-	int avgStar(int productNo);
+	String sumReview(int productNo);
+	String avgStar(int productNo);
 }
