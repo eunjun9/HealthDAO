@@ -34,7 +34,7 @@
 					<!-- myPageCon -->
 					<div class="myPageCon">
 						<p class="tit mgb40">
-							회원문의
+							회원문의 
 						</p>
 						<!-- myOrder tab -->
 
@@ -79,7 +79,6 @@
 														<td>
 															<div class="btn_wrap_yl">
 																<a href="/manager/memberInquiryAnswer?qNo=" th:attrappend="href=${qna.qNo}" class="btn btnSizeM btnColorW btnTypeB" style="width:100px;"><span>문의글보기</span></a> 
-																
 															</div>
 														</td>
 													</tr>
@@ -125,6 +124,14 @@
 	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 	<script type="text/javascript">
 		$('#quick .quickArea').css({'position':'absolute', 'top':290});
+	</script>
+	
+	<script>
+		var answer ="[[${QnaList}]].replyDate";
+		// roulday1 = roulday.slice(32, 40);
+		console.log(QnaList);
+		
+	
 	</script>
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 </body>

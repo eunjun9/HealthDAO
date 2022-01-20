@@ -1,9 +1,14 @@
 package com.kh.healthDao.manager.model.vo;
 
-import java.sql.Date;
+
+import java.util.Date;
+
+
+
 import java.util.List;
 
 import com.kh.healthDao.shopping.model.vo.Shopping;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,8 +26,10 @@ public class Payment {
 	private String ordererEmail;		// 주문자 이메일
 	private String orderStatus;			// 배송상태
 	private int userNo;					// 주문자번호
+
 	private int ProductNo;				// 상품번호
 	private int quantity;				// 재고량
+
 	private String productBrand;		// 브랜드
 	private String productTitle;		// 상품명
 	private int productPrice;			// 상품가격

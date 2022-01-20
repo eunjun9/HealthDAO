@@ -9,7 +9,26 @@ spring:
     url: jdbc:oracle:thin:@localhost:1521:xe
     username: health_dao
     password: health_dao
-  
+# google SMTP (메일 전송)
+  mail:
+       host: smtp.gmail.com
+       port: 587
+       username: khhealthdao@gmail.com
+       password: health11!
+       default-encoding: utf-8
+       properties:
+             mail:
+                transport:
+                    protocol: smtp
+                smtp:
+                    auth: false
+                    starttls:
+                        enable: true
+                    ssl:
+                        trust: smtp.gmail.com
+                        protocols: TLSv1.2
+                debug: true
+                        
 # mybatis config
 mybatis:
   mapper-locations: mappers/**/*.xml 

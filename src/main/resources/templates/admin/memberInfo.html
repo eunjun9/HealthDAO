@@ -12,6 +12,13 @@
 		<!--// HEADER + GNB -->
 
 	<!-- container -->
+	<script>
+		const msg = '[[${msg}]]';
+		
+		if(msg){
+			alert(msg);			
+		}
+	</script>
 	<div id="container" class="pdt0">
 		<div class="site_location">
 			<span><a href="/">HOME</a></span>
@@ -93,12 +100,6 @@
 		$('#quick .quickArea').css({'position':'absolute', 'top':290});
 		mainStart();
 		mainVisual();
-		
-	    const msg = '[[${msg}]]';
-	      
-	    if(msg){
-	    	alert(msg);         
-	    }
 		
 		function showInfo(userNo) {
 			let infoArr = document.querySelectorAll('#stockAlt .userNo');

@@ -1,6 +1,5 @@
 package com.kh.healthDao.main.model.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,10 +8,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.healthDao.admin.model.vo.Product;
@@ -44,7 +41,6 @@ public class MainController {
 	
 	@GetMapping(value= {"/", "/main"})
 	public ModelAndView findBannerRankList(ModelAndView mv, @AuthenticationPrincipal UserImpl userImpl) {
-		
 		List<Banner> bannerList = bannerService.bannerRankList();
 		List<Trainer> trainList = trainerService.trainerRankList();
 		Map<String, Object> map = shoppingService.pdtList();
@@ -54,12 +50,18 @@ public class MainController {
 		mv.addObject("recoList", map.get("recoList"));
 		mv.addObject("recoCount", map.get("recoCount"));
 
-		// 찜한 상품 확인
 		int userNo = 0;		
 		if(userImpl != null) {
+			// 찜한 상품 확인
 			userNo = userImpl.getUserNo();
 			List like = shoppingService.likeList(userNo);
 			mv.addObject("likeList", like);
+			
+			// 장바구니 확인
+			List<Cart> cartList = cartService.cartList(userNo);
+			mv.addObject("cartCount", cartList.size());
+		}else {
+			mv.addObject("cartCount", 0);
 		}
 
 		mv.setViewName("main/main");
@@ -226,21 +228,16 @@ public class MainController {
 		return mv;
 	}
 	
-	//헤더 장바구니 카운트
-	@PostMapping("/main/cartCount")
+	// 장바구니 카운트
+	@GetMapping("/cartCountSelect")
 	@ResponseBody
 	public int cartCount(@AuthenticationPrincipal UserImpl userImpl) {
-		if(userImpl == null) {
-			return -1;
-		}else {
+		if(userImpl != null) {
 			int userNo = userImpl.getUserNo();
-			
 			List<Cart> cartList = cartService.cartList(userNo);
-			
-			int count = cartList.size() + 1;
-			System.out.print(count);
-			
-			return count;
+			return cartList.size();
+		}else {
+			return 0;
 		}
 	}
 }

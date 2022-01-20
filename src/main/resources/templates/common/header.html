@@ -47,7 +47,7 @@
 			<div class="myMenuH">
 				<ul>
 					<li><a href="/mypage/">마이페이지</a></li>
-					<li><a href="/mypage/cart">장바구니<span id="mainCartCount">0</span></a></li>
+					<li><a href="/mypage/cart">장바구니<span id="mainCartCount" th:text="${cartCount}">0</span></a></li>
 					<th:block sec:authorize="hasRole('ADMIN')">
 					<li><a href="/admin/">관리자페이지</a></li> <!-- 임시 -->
 					</th:block>

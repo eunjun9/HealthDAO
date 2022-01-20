@@ -22,6 +22,7 @@ import com.kh.healthDao.mypage.model.vo.AttCheck;
 import com.kh.healthDao.mypage.model.vo.Cart;
 import com.kh.healthDao.mypage.model.vo.Point;
 import com.kh.healthDao.mypage.model.vo.Qna;
+import com.kh.healthDao.mypage.model.vo.Roulette;
 import com.kh.healthDao.review.model.vo.Review;
 
 @Service("mypageService")
@@ -161,6 +162,25 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 
 	}
 	
+	// 룰렛
+	@Override
+	public int rouletteInsert(int userNo, int pointamount) {
+		
+		int pointInsert = mypageMapper.rouletteInsert(userNo, pointamount);
+		int rouletteTableInsert = mypageMapper.rouletteTableInsert(userNo);
+		// System.out.println(pointInsert);
+		// System.out.println(rouletteTableInsert);
+		int result = 0;
+		if(pointInsert > 0 && rouletteTableInsert > 0) result = 1;
+		
+		return result;
+	}
+
+	@Override
+	public List<Roulette> rouletteButton(int userNo) {
+		return mypageMapper.rouletteButton(userNo);
+	}
+	
 	// 출석체크
 	@Override
 	public int attendCheck(AttCheck attcheck) {
@@ -297,7 +317,19 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 
 	@Override
 	public int reviewInsert(Review review) {
-		return mypageMapper.reviewInsert(review);
+		int payNo = review.getPayNo();
+		// 한 결제 당 상품 몇개인지 구하기
+		int payProductCount = mypageMapper.payProductCount(payNo);
+		// 현재 한 결제 중 리뷰 몇개 되어있는지 구하기
+		int payReviewCount = mypageMapper.payReviewCount(payNo);
+		
+		if((payProductCount - 1) == payReviewCount) {
+			mypageMapper.statusModify(review);
+		}
+		
+		int insertResult = mypageMapper.reviewInsert(review);
+		
+		return insertResult;
 	}
 
 	@Override
@@ -325,11 +357,14 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 		return mypageMapper.attendCount(userNo);
 	}
 
-	// 룰렛
+	// 회원등급
 	@Override
-	public int rouletteInsert(int userNo, int pointamount) {
-		return mypageMapper.rouletteInsert(userNo, pointamount);
+	public List<Payment> memberGrade(int userNo) {
+		return mypageMapper.memberGrade(userNo);
 	}
+
+
+
 
 	
 

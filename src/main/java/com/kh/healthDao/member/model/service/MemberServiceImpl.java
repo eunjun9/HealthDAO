@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,10 +24,13 @@ import com.kh.healthDao.member.model.vo.UserImpl;
 public class MemberServiceImpl implements MemberService{
 	
 	private MemberMapper memberMapper;
+    private JavaMailSender mailSender;
+    private static final String FROM_ADDRESS = "khhealthDao@gmail.com";
 	
 	@Autowired
-	public MemberServiceImpl(MemberMapper memberMapper) {
+	public MemberServiceImpl(MemberMapper memberMapper, JavaMailSender mailSender) {
 		this.memberMapper = memberMapper;
+		this.mailSender = mailSender;
 	}
 
 	@Override
@@ -87,14 +91,28 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public int idChk(Member member) {
-		int result = memberMapper.idChk(member);
-		return result;
+	public int idChk(String userId) {
+		return memberMapper.idChk(userId);
+	}
+	
+	@Override
+	public int nickChk(String userNickName) {
+		return memberMapper.nickChk(userNickName);
 	}
 
 	@Override
 	public Member findId(String userName, String userEmail) {
 		return memberMapper.selectId(userName, userEmail);
 	}
-	
+
+	@Override
+	public Member selectMember(String userEmail) {
+		return memberMapper.selectMember(userEmail);
+	}
+
+	@Override
+	public int pwdUpdate(Member member) {
+		return memberMapper.pwdUpdate(member);
+	}
+
 }

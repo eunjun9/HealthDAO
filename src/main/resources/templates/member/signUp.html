@@ -20,12 +20,12 @@
 						<h1>회원가입</h1>
 						<p>Welcome to HealthDao</p>
 					</div>
-					<form id="memberJoinForm" th:action="@{/member/signUp}" method="post">
+					<form id="memberJoinForm" name="join" th:action="@{/member/signUp}" method="post" onsubmit="return validate();">
 						<div class="inp_wrap inp_id">
 							<label class="inp_lab" for="ipt_label">아이디 <b>*</b></label>
 							<div class="inp_text sizeS">
-								<input type="text" name="userId" id="inp_id" placeholder="input text" required>
-								<a href="#" id="idChk" class="btn btnSizeM btnColorM btnTypeB" onclick="return fn_idChk();"><span>중복확인</span></a>
+								<input type="text" name="userId" id="inp_id" placeholder="아이디를 입력해주세요. (4~12자의 영문 대소문자와 숫자)">
+								<a id="idChk" class="btn btnSizeM btnColorM btnTypeB"><span>중복확인</span></a> <!-- onclick="return fn_idChk();" -->
 								<input type="hidden" id="idChk2" value="N">
 							</div>
 							<p class="error">잘못 입력했습니다</p>
@@ -33,46 +33,43 @@
 						<div class="inp_wrap">
 							<label class="inp_lab" for="ipt_label">비밀번호 <b>*</b></label>
 							<div class="inp_text sizeS">
-								<input type="password" name="userPwd" id="inp_pwd" placeholder="input text" required>
+								<input type="password" name="userPwd" id="inp_pwd" placeholder="비밀번호를 입력해주세요. (4~12자의 영문 대소문자와 숫자)">
 							</div>
 							<p class="error">잘못 입력했습니다</p>
 						</div>
-						<div class="inp_wrap">
+						<div class="inp_wrap inp_pwd2_wrap">
 							<label class="inp_lab" for="ipt_label">비밀번호 확인 <b>*</b></label>
 							<div class="inp_text sizeS">
-								<input type="password" name="userPwd2" id="inp_pwd2" placeholder="input text" required>
+								<input type="password" name="userPwd2" id="inp_pwd2" placeholder="비밀번호를 확인해주세요.">
 							</div>
-							<p class="error">잘못 입력했습니다</p>
+							<p class="error">비밀번호가 일치하지 않습니다.</p>
 						</div>
 						<div class="inp_wrap">
 							<label class="inp_lab" for="ipt_label">이름 <b>*</b></label>
 							<div class="inp_text sizeS">
-								<input type="text" name="userName" id="inp_name" placeholder="input text" required>
+								<input type="text" name="userName" id="inp_name" placeholder="이름을 입력해주세요.">
 							</div>
 							<p class="error">잘못 입력했습니다</p>
 						</div>
 						<div class="inp_wrap inp_nic">
 							<label class="inp_lab" for="ipt_label">닉네임 <b>*</b></label>
 							<div class="inp_text sizeS">
-								<input type="text" name="userNickName" id="inp_nic" placeholder="input text" required>
-								<a href="#" class="btn btnSizeM btnColorM btnTypeB"><span>중복확인</span></a>
+								<input type="text" name="userNickName" id="inp_nic" placeholder="닉네임을 입력해주세요.">
+								<a id="nickChk" class="btn btnSizeM btnColorM btnTypeB"><span>중복확인</span></a>
 							</div>
 							<p class="error">잘못 입력했습니다</p>
 						</div>
 						<div class="inp_wrap inp_phn">
 							<label class="inp_lab" for="ipt_label">휴대폰번호 <b>*</b></label>
 							<div class="inp_text sizeS">
-								<input type="text" name="userPhone" id="inp_phn" placeholder="input text" required>
+								<input type="text" name="userPhone" id="inp_phn" placeholder="휴대폰번호를 입력해주세요. ('-' 포함)">
 							</div>
 							<p class="error">잘못 입력했습니다</p>
 						</div>
 						<div class="inp_wrap inp_eml">
 							<label class="inp_lab" for="ipt_label">이메일 <b>*</b></label>
 							<div class="inp_text sizeS">
-								<input type="text" name="userEmail" id="inp_eml" placeholder="input text" required>
-
-								<a href="#" onclick="showLayer('phoneCert');" class="btn btnSizeM btnColorM btnTypeB"><span>인증번호</span></a>
-
+								<input type="text" name="userEmail" id="inp_eml" placeholder="이메일을 입력해주세요.">
 							</div>
 							<p class="error">잘못 입력했습니다</p>
 						</div>
@@ -196,7 +193,7 @@
 							<p class="infoMsg">※ 상품 구매정보는 수신동의 여부 관계없이 받아 보실 수 있습니다.</p>
 						</div>
 						<div class="btn_wrap">
-							<button type="submit" onclick="return chk_signUp()" class="btn btnArr btnSizeL btnColorB btnTypeB" style="width:500px;"><span>회원가입</span></button>
+							<button type="submit" class="btn btnArr btnSizeL btnColorB btnTypeB" style="width:500px;"><span>회원가입</span></button>
 						</div>
 					</form>
 				</div>
@@ -222,63 +219,135 @@
 	<script type="text/javascript" src="../../js/eunjung.js"></script>
 	<script th:inline="javascript">
 		$(document).ready(function(){
-			
-			/* $("#submit").on("click", function(){
-				if($("#inp_id").val()==""){
-					alert("아이디를 입력해주세요.");
-					$("#inp_id").focus();
-					return false;
-				}
-				if($("#inp_pwd").val()==""){
-					alert("비밀번호를 입력해주세요.");
-					$("#inp_pwd").focus();
-					return false;
-				}
-				if($("#inp_pwd2").val()==""){
-					alert("비밀번호를 확인해주세요.");
-					$("#inp_pwd2").focus();
-					return false;
-				}
-				if($("#inp_name").val()==""){
-					alert("이름을 입력해주세요.");
-					$("#inp_name").focus();
-					return false;
-				}
-				if($("#inp_nic").val()==""){
-					alert("이름을 입력해주세요.");
-					$("#inp_nic").focus();
-					return false;
-				}
-				if($("#inp_phn").val()==""){
-					alert("핸드폰번호를 입력해주세요.");
-					$("#inp_phn").focus();
-					return false;
-				}
-				var idChkVal = $("#idChk2").val();
-				if(idChkVal == "N"){
-					alert("중복확인 버튼을 눌러주세요.");
-				}else if(idChkVal == "Y"){
-					$("#memberJoinForm").submit();
-				}
-			});
-		})
 		
-		function fn_idChk(){
-			$.ajax({
-				url : "/member/idChk",
-				type : "post",
-				dataType : "json",
-				data : {"userId" : $("#userId").val()},
-				success : function(data){
-					if(data == 1){
-						alert("중복된 아이디입니다.");
-					}else if(data == 0){
-						$("#idChk2").attr("value", "Y");
-						alert("사용가능한 아이디입니다.");
-					}
-				}
-			}) */
-		})
+			$("#idChk").on('click', function(){
+				let userId = $('#inp_id').val();
+				
+		        $.ajax({
+		            url : "/member/idChk",
+		            type : "post",
+		            dataType : "json",
+					data : {"userId" : userId},
+		            success : function(data){
+		                if(data != 1) {
+		                	alert('사용 가능한 아이디입니다.');
+		                	$('#inp_id').attr("disabled", true);
+		                } else {
+		                	alert('이미 존재하는 아이디입니다.');
+		                }
+		            },
+		            error : function(e){
+		                alert("에러입니다");
+		            }
+		        });
+			});
+			
+			$("#nickChk").on('click', function(){
+				let userNickName = $('#inp_nic').val();
+				
+		        $.ajax({
+		            url : "/member/nickChk",
+		            type : "post",
+		            dataType : "json",
+					data : {"userNickName" : userNickName},
+		            success : function(data){
+		                if(data != 1) {
+		                	alert('사용 가능한 닉네임입니다.');
+		                } else {
+		                	alert('이미 존재하는 닉네임입니다.');
+		                }
+		            },
+		            error : function(e){
+		                alert("에러입니다");
+		            }
+		        });
+			});
+			
+			$('#inp_pwd2').keyup(function(){
+
+				if($('#inp_pwd').val() != $('#inp_pwd2').val()){
+			         $('.inp_pwd2_wrap').addClass("error");
+			     } else{
+			    	 $('.inp_pwd2_wrap').removeClass("error");
+			     }
+			});
+			
+		});
+		
+		function validate() {
+			   // 아이디와 패스워드가 적합한지 검사할 정규식
+		       var re = /^[a-zA-Z0-9]{4,12}+$/;
+		       // 이름이 적합한지 검사할 정규식
+		       var re2 = /^[가-힣]{2,}+$/;
+		       // 핸드폰번호가 적합한지 검사할 정규식
+		       var re3 = /01[016789]-[^0][0-9]{2,3}-[0-9]{3,4}/;
+		       // 이메일이 적합한지 검사할 정규식
+		       var re4 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		       
+
+		       var id = document.getElementById("inp_id");
+		       var pw = document.getElementById("inp_pwd");
+		       var name = document.getElementById("inp_name");
+		       var phone = document.getElementById("inp_phn");
+		       var email = document.getElementById("inp_eml");
+
+		       if(!check(re, id, "아이디는 4~12자의 영문 대소문자와 숫자로만 입력해 주세요.")) {
+		           return false;
+		       }
+
+		       if(!check(re, pw, "패스워드는 4~12자의 영문 대소문자와 숫자로만 입력해 주세요.")) {
+		           return false;
+		       }
+
+		       if(join.inp_pwd.value != join.inp_pwd2.value) {
+		           alert("비밀번호가 다릅니다. 다시 확인해 주세요.");
+		           join.inp_pwd2.value = "";
+		           join.inp_pwd2.focus();
+		           return false;
+		       }
+		       
+		       if(name.value=="") {
+		           alert("이름을 입력해 주세요");
+		           name.focus();
+		           return false;
+		       }
+		       
+		       if(!check(re2, name, "이름은 한글로 2글자 이상 입력하세요.")) {
+		           return false;
+		       }
+		       
+		       if(phone.value=="") {
+		           alert("핸드폰번호를 입력해 주세요");
+		           phone.focus();
+		           return false;
+		       }
+		       
+		       if(!check(re3, phone, "핸드폰번호를 확인해 주세요.")) {
+		           return false;
+		       }
+
+		       if(email.value=="") {
+		           alert("이메일을 입력해 주세요");
+		           email.focus();
+		           return false;
+		       }
+
+		       if(!check(re4, email, "적합하지 않은 이메일 형식입니다.")) {
+		           return false;
+		       }
+
+		       alert("회원가입이 완료되었습니다.");
+		   }
+
+		   function check(re, what, message) {
+		       if(re.test(what.value)) {
+		           return true;
+		       }
+		       alert(message);
+		       what.value = "";
+		       what.focus();
+		       //return false;
+		   }
 	</script>
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 	<div id="phoneCert" class="lyPopArea">

@@ -2,28 +2,41 @@ package com.kh.healthDao.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import com.kh.healthDao.member.controller.MemberController;
 import com.kh.healthDao.member.model.service.MemberService;
 
+import lombok.extern.slf4j.Slf4j;
+
 /* 스프링 시큐리티 설정 활성화 + bean 등록 가능 */
+@Configuration
 @EnableWebSecurity
+@Slf4j
 public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter{
    
    private MemberService memberService;
+   private AuthFailureHandler authFailureHandler;
+   private AuthenticationFailureHandler failureHandler;
    
    @Autowired
-   public SpringSecurityConfiguration(MemberService memberService) {
-      this.memberService = memberService;	
+   public SpringSecurityConfiguration(MemberService memberService, AuthFailureHandler authFailureHandler,
+		   AuthenticationFailureHandler failureHandler) {
+      this.memberService = memberService;
+      this.authFailureHandler = authFailureHandler;
+      this.failureHandler = failureHandler;
    }
-
+   
    /* 암호화에 사용될 객체 BCryptPasswordEncoder
     * - encode() : BCrypt 해싱 함수를 사용해서 비밀번호를 인코딩 해주는 메소드, salt를 지원하여 똑같은 비밀번호를 인코딩 하더라도 매번 다른 인코딩 된 문자열 반환
     * - matchers(rawPassword, encodePassword) : 사용자에 의해 제출된 비밀번호와 저장소에 저장 되어있는 비밀번호의 일치 여부를 확인해주는 메소드 */
@@ -69,6 +82,8 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter{
             .loginPage("/member/login")
             /* 로그인 성공 시 랜딩 페이지 설정 */
             .successForwardUrl("/")
+            /* 로그인 실패 시 설정 핸들러 */
+            .failureHandler(failureHandler)
          .and()
             /* 로그아웃 설정 */
             .logout()

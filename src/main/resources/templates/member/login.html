@@ -12,6 +12,13 @@
 		<!--// HEADER + GNB -->
 
 	<!-- container -->
+	<script>
+		const msg = '[[${exception}]]';
+		
+		if(msg){
+			alert(msg);			
+		}
+	</script>
 	<div id="container" class="pdt0">
 		<div class="login">
 			<div class="findMain">
@@ -19,8 +26,11 @@
 					<div class="pageTitArea">
 						<h1>로그인</h1>
 					</div>
+						<!-- <div th:if="${param.error}">
+					        <p th:text="${exception}" class="alert alert-danger"></p>
+					    </div> -->
 						<div class="loginTabH">
-						<form th:action="@{/member/login}" id="loginForm" method="post">
+						<form th:action="@{/member/login}" id="loginForm" name="loginForm" method="post">
 							<!-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> -->
 							<div class="inp_wrap">
 								<div class="inp_text sizeS">
@@ -34,10 +44,6 @@
 								</div>
 								<p class="error">비밀번호를 입력해주세요.</p>
 							</div>
-							<span class="inp_check mgt15">
-								<input type="checkbox" id="id_auto_loing_H">
-								<label for="id_auto_loing_H">아이디 저장</label>
-							</span>
 							<button type="submit" id="subbtn" class="btn btnSizeM btnColorP btnTypeR w100 mgt17"><span>로그인</span></button>
 							</form>
 						</div>

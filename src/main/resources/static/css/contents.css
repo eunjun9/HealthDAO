@@ -2567,7 +2567,7 @@ filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#555555', endC
 .myOrderList .listB .pdtPrice .free{display:inline-block;width:45px;padding:0 11px 0 2px;text-align:center;vertical-align:top;font-size:12px;line-height:25px;color:#fff;background:url('../images/order/ico_free.png') no-repeat center center;}
 .myOrderList .listB .pdtPrice i{font-size:14px;font-weight:400;line-height:25px;}
 .myOrderList .listB .pdtOpt{margin-top:20px;line-height:1;color:#888;}
-.myOrderList .listB .state{display:table-cell;width:164px;vertical-align:middle;}
+.myOrderList .listB .state{display:table-cell;width:164px;vertical-align:middle; text-align:center}
 .myOrderList .listB .btnWrap{display:table-cell;width:122px;vertical-align:middle;}
 .myOrderList .listB .btnWrap .btn{width:92px;margin-top:5px;}
 .myOrderList .listB .btnWrap .btn:first-child{margin-top:0;}
@@ -2858,13 +2858,11 @@ filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#555555', endC
     margin-top: 4px !important;
 }
 .memberJoin #inp_id,
-.memberJoin #inp_nic,
-.memberJoin #inp_eml {
+.memberJoin #inp_nic {
     width: 390px;
 }
 .memberJoin .inp_id .btn,
-.memberJoin .inp_nic .btn,
-.memberJoin .inp_eml .btn {
+.memberJoin .inp_nic .btn {
     width: 148px;
     margin-left: 8px;
 }
@@ -3220,10 +3218,10 @@ filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#555555', endC
 .profileOutline .coupon1 p {font-family:'noto','맑은고딕',sans-serif;font-weight:300;color:#666666; font-size: 15px;}
 .profileOutline .coupon2 {height: 140px; width: 140px;margin-top: -119px; margin-left: 656px;  text-align:center;line-height: 120px;}
 .profileOutline .coupon2 p {font-family:'noto','맑은고딕',sans-serif;font-weight:400;color:#222222; font-size: 25px;}
-.profileOutline .point1 {height: 140px; width: 140px;margin-top: -100px; margin-left: 799px;text-align:center;line-height: 69px;}
+.profileOutline .point1 {height: 140px; width: 140px;margin-top: -108px; margin-left: 770px;text-align:center;line-height: 69px;}
 .profileOutline .point1 p {font-family:'noto','맑은고딕',sans-serif;font-weight:300;color:#666666; font-size: 15px;}
-.profileOutline .point2 {height: 140px; width: 140px;margin-top: -144px; margin-left:799px;  text-align:center;line-height: 135px;}
-.profileOutline .point2 p {font-family:'noto','맑은고딕',sans-serif;font-weight:400;color:#222222; font-size: 25px;}
+.profileOutline .point2 {height: 140px; width: 140px;margin-top: -140px; margin-left:770px;  text-align:center;line-height: 135px;}
+.profileOutline .point2 p {font-family:'noto','맑은고딕',sans-serif;font-weight:400;color:rgb(255, 0, 128); font-size: 25px;}
 .pointOutline {border : 2px solid #CCCCCC; height: auto; margin-top: 30px; padding-bottom: 50px;}
 .pointOutline .pointInline {border : 1px solid #CCCCCC; height: 100px; width:350px; display:flex; float: left;margin-left: 78px; margin-top: 47px;
 	font-family:'noto','맑은고딕',sans-serif;color:#222;}
@@ -3889,9 +3887,9 @@ filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#555555', endC
 .memberGrade_input{display: flex;}
 .memberGrade_input_info{margin-top: 30px; font-size: 1.2rem;}
 .gradeStandard{margin-top: 30px;}
-.memberGrade_input_img{margin-left: 90px; width: 230px; height: 230px;}
+.memberGrade_input_img{margin-left: 175%;margin-top: -30%; width: 230px; height: 230px;}
 .membershipGrade{margin-top: 10px;}
-.memberGrade_benefit{margin-top: 30px; margin-left: 240px; margin-bottom: 40px;}
-.memberGrade_divide_Subline{border: 1px solid lightgray; width: 600px; margin-top: 40px; margin-bottom: 40px;}
-.memberGrade_input_img2{margin-left: 10px; width: 590px; height: 310px;}
+.memberGrade_benefit{margin-top: 30px; margin-left: 38%; margin-bottom: 40px;}
+.memberGrade_divide_Subline{border: 1px solid lightgray; width: 100%; margin-top: 40px; margin-bottom: 40px;}
+.memberGrade_input_img2{margin-left: 17.5%; width: 590px; height: 310px;}
 

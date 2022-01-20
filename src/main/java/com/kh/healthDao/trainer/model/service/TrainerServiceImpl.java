@@ -7,6 +7,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.healthDao.manager.model.vo.Payment;
+import com.kh.healthDao.member.model.vo.Member;
 import com.kh.healthDao.review.model.vo.Review;
 import com.kh.healthDao.trainer.model.dao.TrainerMapper;
 import com.kh.healthDao.trainer.model.vo.PtOrder;
@@ -148,8 +150,51 @@ public class TrainerServiceImpl implements TrainerService{
 	}
 
 	@Override
+	public Review rvStatus(Review review, int tNo) {
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("review", review);
+		map.put("tNo", tNo);
+		
+		return trainerMapper.rvStatus(map);
+	}
+
+	@Override
+	public int trainerReviewInsert(Review review) {
+		
+		Review rv = trainerMapper.reviewStatus(review);
+		int result = 0;
+		if(rv == null) {
+			result = trainerMapper.trainerReviewInsert(review);
+		}
+		
+		return result;
+	}
+
+	@Override
+	public Member mOrderSelect(Member m) {
+		return trainerMapper.mOrderSelect(m);
+	}
+
+	@Override
+	public int trainerPay(Payment payment) {
+		
+		int result = 0;
+		int result1 = trainerMapper.trainerPayInsert(payment);
+		int result2 = trainerMapper.trainerPtOrderInsert(payment);
+		
+		if(result1 > 0 && result2 > 0) {
+			result = 1;
+		}
+		
+		return result;
+	}
+	
+	@Override
 	public List<Trainer> trainerRankList() {
 		return trainerMapper.trainerRankList();
+
 	}
 
 

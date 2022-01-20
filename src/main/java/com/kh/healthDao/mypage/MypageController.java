@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiConsumer;
+import java.util.function.ToIntFunction;
 
 import javax.servlet.http.HttpSession;
 
@@ -42,6 +44,7 @@ import com.kh.healthDao.mypage.model.vo.AttCheck;
 import com.kh.healthDao.mypage.model.vo.Cart;
 import com.kh.healthDao.mypage.model.vo.MemberSound;
 import com.kh.healthDao.mypage.model.vo.Qna;
+import com.kh.healthDao.mypage.model.vo.Roulette;
 import com.kh.healthDao.review.model.vo.Review;
 
 import lombok.extern.slf4j.Slf4j;
@@ -82,7 +85,6 @@ public class MypageController {
 		int userNo = userImpl.getUserNo();
 		
 		List<Payment> paymentList = paymentService.mypaymentList(userNo);
-		System.out.println(paymentList);
 		
 		
 		mv.addObject("paymentList", paymentList);
@@ -94,18 +96,7 @@ public class MypageController {
 	@PostMapping("/reviewInsert")
 	public String reviewInsert(Review review, @AuthenticationPrincipal UserImpl userImpl, RedirectAttributes rttr) {
 		
-	
-		String msg = myReviewService.reviewInsert(review) > 0 ? "리뷰 등록 성공" : "리뷰 등록 실패";	
-		
-		if(msg.equals("리뷰 등록 성공")) {
-			int result = paymentService.statusModify(review);
-			
-			if(result > 0 ) {
-				msg = "리뷰 등록 성공";
-			}else {
-				msg = "리뷰 등록 실패";
-			}
-		}
+		String msg = myReviewService.reviewInsert(review) > 0 ? "리뷰 등록 완료" : "리뷰 등록 실패";					
 		
 		rttr.addFlashAttribute("msg", msg);
 		
@@ -215,6 +206,8 @@ public class MypageController {
 		
 		Map<String, Object> map = myReviewService.userReviewList(page, userNo);
 		
+		System.out.println(map.get("reviewList"));
+		
 		mv.addObject("reviewList", map.get("reviewList"));
 		mv.addObject("listCount", map.get("listCount"));
 		mv.addObject("pi", map.get("pi"));
@@ -318,8 +311,6 @@ public class MypageController {
 	public Map<String, String> insertDeli(@RequestBody Address address, @AuthenticationPrincipal UserImpl userImpl) {
 		int userNo = userImpl.getUserNo();
 		address.setUserNo(userNo);
-		
-		log.info("입력 요청 주소 : {}", address);
 		
 		String msg = myInfoService.insertDeli(address) > 0 ? "배송지가 등록되었습니다." : "배송지 등록에 실패하였습니다.";
 		
@@ -439,8 +430,26 @@ public class MypageController {
 	
 	/* 룰렛 */
 	@GetMapping("/roulette")
-	public String roulette() {
-		return "mypage/roulette";
+	public ModelAndView roulette(@AuthenticationPrincipal UserImpl user, ModelAndView mv) {
+		int userNo = user.getUserNo();
+	
+		List<Roulette> rouletteButtonList = qnaService.rouletteButton(userNo);
+		
+		mv.setViewName("mypage/roulette");
+		mv.addObject("rouletteButtonList", rouletteButtonList);
+		return mv;
+	}
+	
+	/* 룰렛 값 입력 */
+	@PostMapping("rouletteInsert")
+	@ResponseBody
+	public Map<String, String> rouletteInsert(@AuthenticationPrincipal UserImpl user, int pointAmount) {
+		int result = qnaService.rouletteInsert(user.getUserNo(), pointAmount);
+		
+		Map<String, String> map = new HashMap<>();
+	    map.put("msg", result > 0 ? "등록 완료" : "등록 실패");
+	    
+	    return map;
 	}
 		
 	/* 보유 포인트 내역 */
@@ -559,15 +568,31 @@ public class MypageController {
 		return msg;
 	}
 	
-	@PostMapping("rouletteInsert")
-	@ResponseBody
-	public Map<String, String> rouletteInsert(@AuthenticationPrincipal UserImpl user, int pointAmount) {
-		int result = qnaService.rouletteInsert(user.getUserNo(), pointAmount);
+	// 회원등급
+	@GetMapping("/memberGrade")
+	public ModelAndView memberGrade(@AuthenticationPrincipal UserImpl userImpl, ModelAndView mv) {		
+		int userNo = userImpl.getUserNo();
 		
-		Map<String, String> map = new HashMap<>();
-	    map.put("msg", result > 0 ? "등록 완료" : "등록 실패");
-	    
-	    return map;
+		List<Payment> memberGrade = qnaService.memberGrade(userNo);
+		//System.out.println(memberGrade);
+		
+		List payArr = new ArrayList();
+		for(int i = 0; i < memberGrade.size(); i++) {
+			payArr.add(memberGrade.get(i).getQuantity() * memberGrade.get(i).getProductPrice());
+		}
+		
+		int sum = 0;
+		for(int i = 0; i < payArr.size(); i++) {
+			sum += (int)payArr.get(i);
+		}
+		//System.out.println(sum);
+
+		mv.addObject("sum", sum);
+		mv.setViewName("mypage/memberGrade"); 
+		
+		return mv;
 	}
+	
+
 }
 

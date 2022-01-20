@@ -1,7 +1,6 @@
 package com.kh.healthDao.member.model.service;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.healthDao.member.model.vo.Member;
 
@@ -10,7 +9,14 @@ public interface MemberService extends UserDetailsService{
 
 	void signUp(Member member);
 
-	int idChk(Member member);
+	int idChk(String userId);
+	
+	int nickChk(String userNickName);
 
 	Member findId(String userName, String userEmail);
+
+	Member selectMember(String userEmail);
+
+	int pwdUpdate(Member member);
+
 }

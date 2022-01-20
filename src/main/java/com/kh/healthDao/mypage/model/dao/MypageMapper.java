@@ -16,6 +16,7 @@ import com.kh.healthDao.manager.model.vo.Payment;
 import com.kh.healthDao.member.model.vo.Member;
 import com.kh.healthDao.mypage.model.vo.Point;
 import com.kh.healthDao.mypage.model.vo.Qna;
+import com.kh.healthDao.mypage.model.vo.Roulette;
 import com.kh.healthDao.review.model.vo.Review;
 
 
@@ -100,6 +101,13 @@ public interface MypageMapper {
 	int cartAllDelete(int userNo);
 
 
+	/* 룰렛 값 insert */
+	int rouletteInsert(@Param("userNo") int userNo, @Param("pointAmount") int pointAmount);
+	int rouletteTableInsert(int userNo);
+	// 룰렛 select
+	List<Roulette> rouletteButton(int userNo);
+
+
 	List<Payment> mypaymentList(int userNo);
 
 	int reviewInsert(Review review);
@@ -110,8 +118,15 @@ public interface MypageMapper {
 
 	int refundStatusModify(int payNo);
 
-	/* 룰렛 값 insert */
-	int rouletteInsert(@Param("userNo") int userNo, @Param("pointAmount") int pointAmount);
+
+	// 회원등급
+	List<Payment> memberGrade(int userNo);
+
+	int payProductCount(int payNo);
+
+	int payReviewCount(int payNo);
+
+
 
 
 
