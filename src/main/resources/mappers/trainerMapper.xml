@@ -104,7 +104,6 @@
           LEFT OUTER JOIN TRAINER_FILE TF ON(TF.T_NO = T.T_NO)
           LEFT OUTER JOIN AT_FILE AF ON(AF.F_NO = TF.F_NO)
          WHERE T_METRO=#{searchTrainer}
-            OR T_AREA=#{searchTrainer}
          GROUP BY T.T_NO
 		     , T.T_GYM_NAME
 		     , T.T_GYM_ADDRESS
@@ -367,6 +366,7 @@
 		  , PAY_NO
 		  , USER_NO
 		  , PRODUCT_NO
+		  , T_NO
 		  )VALUES
 		  (
 		  	SEQ_REVIEW_NO.NEXTVAL
@@ -377,7 +377,8 @@
 		  , DEFAULT
 		  , #{payNo}
 		  , #{userNo}
-		  , #{productNo}
+		  , DEFAULT
+		  , #{tNo}
 		  )
 	</insert>
 	
@@ -410,6 +411,7 @@
 		  , ORDERER_EMAIL
 		  , ORDER_STATUS
 		  , USER_NO
+		  , TOTAL_PRICE
 		  )VALUES
 		  (
 		  	SEQ_PAY_NO.NEXTVAL
@@ -419,6 +421,7 @@
 		  , #{ordererEmail}
 		  , 'Y'
 		  , #{userNo}
+		  , #{totalPrice}
 		  )
 	</insert>
 	

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.healthDao.manager.model.vo.Payment;
 import com.kh.healthDao.member.model.vo.Member;
@@ -76,7 +77,7 @@ public class TrainerController {
 
 	
 	@PostMapping("modify")
-	public ModelAndView trainerModify(ModelAndView mv, Trainer trainer, @RequestParam("trainerFile") MultipartFile trainerFile, @RequestParam("centerFile") MultipartFile centerFile, @Value("${custom.path.upload-images}") String uploadImagesPath) {
+	public ModelAndView trainerModify(ModelAndView mv, Trainer trainer, @RequestParam("trainerFile") MultipartFile trainerFile, @RequestParam("centerFile") MultipartFile centerFile, @Value("${custom.path.upload-images}") String uploadImagesPath, RedirectAttributes rttr) {
 		String originFile1 = null;
 		String originFile2 = null;
 		String ext1 = null;
@@ -141,6 +142,8 @@ public class TrainerController {
 				
 				result = trainerService.trainerModify3(trainer, originFile2, changeFile2);
 				
+			} else {
+				result = trainerService.trainerModify4(trainer);
 			}
 			
 		} catch (IllegalStateException | IOException e) {
@@ -148,10 +151,12 @@ public class TrainerController {
 		}
 		
 		if(result > 0) {
-			mv.setViewName("redirect:detail?tNo="+trainer.getTNo());
+			rttr.addFlashAttribute("message", "수정 성공");
+			mv.setViewName("redirect:/trainer/detail?tNo="+trainer.getTNo());
 			return mv;
 		} else {
-			mv.setViewName("redirect:detail?tNo="+trainer.getTNo());
+			rttr.addFlashAttribute("message", "수정 실패");
+			mv.setViewName("redirect:/trainer/detail?tNo="+trainer.getTNo());
 			return mv;
 		}
 	}
@@ -181,38 +186,48 @@ public class TrainerController {
 	}
 
 	@PostMapping("insert")
-	public ModelAndView trainerInsert(ModelAndView mv, Trainer trainer, @RequestParam("trainerFile") MultipartFile trainerFile, @RequestParam("centerFile") MultipartFile centerFile, @Value("${custom.path.upload-images}") String uploadImagesPath) {
+	public ModelAndView trainerInsert(ModelAndView mv, Trainer trainer, @RequestParam("trainerFile") MultipartFile trainerFile, @RequestParam("centerFile") MultipartFile centerFile, @Value("${custom.path.upload-images}") String uploadImagesPath, RedirectAttributes rttr) {
 		
-		String originFile1 = trainerFile.getOriginalFilename();
-		String ext1 = originFile1.substring(originFile1.lastIndexOf("."));
+		int tNo = trainer.getTNo();
+		Trainer trainerStatus = trainerService.trainerSelect(tNo);
 		
-		String originFile2 = centerFile.getOriginalFilename();
-		String ext2 = originFile2.substring(originFile2.lastIndexOf("."));
-		
-		String changeFile1 = UUID.randomUUID().toString().replace("-", "") + ext1;
-		
-		String changeFile2 = UUID.randomUUID().toString().replace("-", "") + ext2;
-		
-		String path = uploadImagesPath + "trainer/";
-		
-		try {
-			trainerFile.transferTo(new File(path + "\\" + changeFile1));
-			centerFile.transferTo(new File(path + "\\" + changeFile2));
-		} catch (IllegalStateException | IOException e) {
-			e.printStackTrace();
-		}
-		
-		int result = trainerService.trainerInsert(trainer, originFile1, originFile2, changeFile1, changeFile2);
-		
-		if(result > 0) {
-			mv.addObject("msg", "등록 성공");
-			mv.setViewName("redirect:");
-			return mv;
+		if(trainerStatus == null) {
+			String originFile1 = trainerFile.getOriginalFilename();
+			String ext1 = originFile1.substring(originFile1.lastIndexOf("."));
+			
+			String originFile2 = centerFile.getOriginalFilename();
+			String ext2 = originFile2.substring(originFile2.lastIndexOf("."));
+			
+			String changeFile1 = UUID.randomUUID().toString().replace("-", "") + ext1;
+			
+			String changeFile2 = UUID.randomUUID().toString().replace("-", "") + ext2;
+			
+			String path = uploadImagesPath + "trainer/";
+			
+			try {
+				trainerFile.transferTo(new File(path + "\\" + changeFile1));
+				centerFile.transferTo(new File(path + "\\" + changeFile2));
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+			}
+			
+			int result = trainerService.trainerInsert(trainer, originFile1, originFile2, changeFile1, changeFile2);
+			
+			if(result > 0) {
+				rttr.addFlashAttribute("message", "등록 성공");
+				mv.setViewName("redirect:/trainer/");
+				return mv;
+			} else {
+				rttr.addFlashAttribute("message", "등록 실패");
+				mv.setViewName("redirect:/trainer/");
+				return mv;
+			}
 		} else {
-			mv.addObject("msg", "등록 실패");
-			mv.setViewName("redirect:");
+			rttr.addFlashAttribute("message", "이미 등록된 트레이너 입니다.");
+			mv.setViewName("redirect:/trainer/");
 			return mv;
 		}
+		
 	}
 	
 	@GetMapping("/order")
@@ -231,24 +246,29 @@ public class TrainerController {
 	}
 	
 	@PostMapping("/review/insert")
-	public String trainerReviewInsert(Review review, @RequestParam int tNo) {
+	public ModelAndView trainerReviewInsert(ModelAndView mv, Review review, @RequestParam int tNo, RedirectAttributes rttr) {
 		
 		Review rvStatus = trainerService.rvStatus(review, tNo);
-		review.setProductNo(tNo);
+		review.setTNo(tNo);
 		if(rvStatus != null) {
 			review.setPayNo(rvStatus.getPayNo());
 			
 			int result = trainerService.trainerReviewInsert(review);
 			
 			if(result > 0) {
-				return "redirect:?tNo="+tNo;
+				rttr.addFlashAttribute("message", "리뷰 등록 성공");
+				mv.setViewName("redirect:/trainer/review?tNo="+tNo);
+				return mv;
 			} else {
-				return "redirect:?tNo="+tNo;
+				rttr.addFlashAttribute("message", "리뷰를 이미 등록하셨습니다.");
+				mv.setViewName("redirect:/trainer/review?tNo="+tNo);
+				return mv;
 			}
 		} else {
-			return "redirect:?tNo="+tNo;
+			rttr.addFlashAttribute("message", "해당 트레이너에게 PT를 받은 회원만 등록이 가능합니다.");
+			mv.setViewName("redirect:/trainer/review?tNo="+tNo);
+			return mv;
 		}
-		
 	}
 	
 	@PostMapping("pay")
