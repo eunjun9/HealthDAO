@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiConsumer;
+import java.util.function.ToIntFunction;
 
 import javax.servlet.http.HttpSession;
 
@@ -84,6 +86,7 @@ public class MypageController {
 		
 		List<Payment> paymentList = paymentService.mypaymentList(userNo);
 		
+		
 		mv.addObject("paymentList", paymentList);
 		mv.setViewName("mypage/myOrder");
 		
@@ -109,11 +112,6 @@ public class MypageController {
 		return msg;
 	}
 	
-	@PostMapping("/myOrder")
-	public String mypagePaymentInfo() {
-		
-		return "mypage/myOrder";
-	}
 	
 	/* 1:1 문의 */
 	@GetMapping("/qna")
@@ -207,6 +205,8 @@ public class MypageController {
 		int userNo = userImpl.getUserNo();
 		
 		Map<String, Object> map = myReviewService.userReviewList(page, userNo);
+		
+		System.out.println(map.get("reviewList"));
 		
 		mv.addObject("reviewList", map.get("reviewList"));
 		mv.addObject("listCount", map.get("listCount"));
@@ -311,8 +311,6 @@ public class MypageController {
 	public Map<String, String> insertDeli(@RequestBody Address address, @AuthenticationPrincipal UserImpl userImpl) {
 		int userNo = userImpl.getUserNo();
 		address.setUserNo(userNo);
-		
-		log.info("입력 요청 주소 : {}", address);
 		
 		String msg = myInfoService.insertDeli(address) > 0 ? "배송지가 등록되었습니다." : "배송지 등록에 실패하였습니다.";
 		
@@ -568,6 +566,31 @@ public class MypageController {
 		String msg = cartService.cartAllDelete(userNo) > 0 ? "success" : "fail";
 		
 		return msg;
+	}
+	
+	// 회원등급
+	@GetMapping("/memberGrade")
+	public ModelAndView memberGrade(@AuthenticationPrincipal UserImpl userImpl, ModelAndView mv) {		
+		int userNo = userImpl.getUserNo();
+		
+		List<Payment> memberGrade = qnaService.memberGrade(userNo);
+		//System.out.println(memberGrade);
+		
+		List payArr = new ArrayList();
+		for(int i = 0; i < memberGrade.size(); i++) {
+			payArr.add(memberGrade.get(i).getQuantity() * memberGrade.get(i).getProductPrice());
+		}
+		
+		int sum = 0;
+		for(int i = 0; i < payArr.size(); i++) {
+			sum += (int)payArr.get(i);
+		}
+		//System.out.println(sum);
+
+		mv.addObject("sum", sum);
+		mv.setViewName("mypage/memberGrade"); 
+		
+		return mv;
 	}
 	
 

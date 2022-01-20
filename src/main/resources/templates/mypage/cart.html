@@ -23,9 +23,9 @@
 						<ul class="list_box">
 							<li th:each="cart : ${cartList}">
 								<div class="tbl_wrap">
-									<div class="pdtImg"><a href="#"><img src="./resources/web/images/temp/pdt_img3.png" alt="아이크러쉬 디테일 아이라이너"></a></div>
+									<div class="pdtImg"><a href="#"><img th:src="${cart.product.file_path}+${cart.product.change_file1}" alt="상품이미지"></a></div>
 									<div class="pdtTxt">
-										<p class="pdtBrand" th:text="${cart.product.productName}">상품명</p>
+										<p class="pdtBrand" th:text="${cart.product.productBrand}">상품명</p>
 										<p class="pdtName" th:text="${cart.product.productTitle}">상품제목</p>
 										<p class="pdtPrice"><span th:text="${cart.product.productPrice}"></span><em>원</em></p>
 										<p class="pdtOpt">옵션 : <span th:text="${cart.product.productOption}">옵션1</span></p>

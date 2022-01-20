@@ -30,23 +30,16 @@ public class Product {
 	private List<Option> option;	// 옵션 테이블
 	private Category category;		// 카테고리 테이블
 	private PayDetail payDetail;	// 상품 디테일(수량) 테이블
-	
 
-	/* + 추가할 것
-	 * MEMBER 조인 -> 트레이너 이름, 트레이너 전화번호
-	 * REVIEW 조인 -> 별점, 리뷰 수
-	 * TRAINER_FILE 조인 -> AT_FILE 조인 -> 트레이너 사진 1장, 헬스장 사진 2장
-	 * 
-	 * */
-	
 
 	private int productRank;		// 순번
 	private Member member;			// userNo 가져올 때 필요
 	
 	private String file_path;		// 파일경로
-	private String change_file1;	// 트레이너 파일명
-	private String change_file2;	// 센터 파일명
+	private String change_file1;	// 썸네일 파일명
+	private String change_file2;	// 상품 정보 파일명
 	private int f_productNo;		// 상품 파일 번호
 	private int f_productInfoNo;	// 상품 정보 파일 번호
 	
+	private int quantity; // 수량;;
 }

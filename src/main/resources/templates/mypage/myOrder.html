@@ -40,7 +40,7 @@
 									<div class="listT">
 										<dl>
 											<dt>주문일자</dt>
-											<dd th:text="${payment.payDate}"></dd>
+											<dd th:text="${#dates.format(payment.payDate, 'yyyy-MM-dd')}"></dd>
 										</dl>
 										<dl>
 											<dt>주문번호</dt>
@@ -51,9 +51,9 @@
 									<div class="listB">
 										<ul class="list">
 											<li th:each="product : ${payment.productList}">
-												<div class="pdtImg"><a href="#"><img src="./resources/web/images/temp/pdt_img4.jpg" alt="pdt"></a></div>
+												<div class="pdtImg"><a href="#"><img th:src="${product.file_path}+${product.change_file1}" alt="pdt"></a></div>
 												<div class="pdtTxt">
-													<p class="pdtBrand" th:text="${product.productName}">바닐라코</p>
+													<p class="pdtBrand" th:text="${product.productBrand}">바닐라코</p>
 													<p class="pdtName"><a href="#" th:text="${product.productTitle}">아이크러쉬 디테일 아이라이너</a></p>
 													<p class="pdtPrice" th:with="total=${product.productPrice} * ${product.quantity}"><span th:text="${total}"></span><em>원 /</em> <em>수량 <span th:text="${product.quantity}">1</span>개</em></p>
 													<p class="pdtOpt">옵션 : <span th:text="${product.productOption}"></span></p>

@@ -22,7 +22,7 @@
 			<div class="pdtDetailHead">
 				<div class="contents">
 					<div class="pdtVisual">
-						<div class="pdtItem"><img src="./resources/web/images/temp/pdt01.png" alt=""></div>
+						<div class="pdtItem"><img th:src="${shoppingDetail.file_path}+${shoppingDetail.change_file1}" alt=""></div>
 					</div>
 					
 					<div class="pdtInfoBox">
@@ -177,7 +177,7 @@
 				<div id="medeArea">
 					<div id="detailContentMede">
 						<div class="IngreBox">
-							<img class="productInfo" src="./resources/web/images/product/product_info.jfif">
+							<img class="productInfo" th:src="${shoppingDetail.file_path}+${shoppingDetail.change_file2}">
 							
 							<p class="IngreCmt">피부 상태 및 환경에 따라 사용상 주의가 필요한 성분 중, 이 상품에 함유되지 않은 성분입니다.</p>
 						</div>

@@ -43,6 +43,14 @@
 		<result property="rDate" column="R_DATE" />
 		<result property="modifyDate" column="MODIFY_DATE" />
 		<result property="payNo" column="PAY_NO" />
+		<association javaType="com.kh.healthDao.shopping.model.vo.Shopping" property="product">
+			<id property="productNo" column="PRODUCT_NO"/>
+			<result property="productTitle" column="PRODUCT_TITLE"/>			
+		</association>
+		<association javaType="com.kh.healthDao.member.model.vo.Member" property="member">
+			<id property="userNo" column="T_NO"/>
+			<result property="userName" column="USER_NAME"/>			
+		</association>
   </resultMap>
 
 	<resultMap id="AttMap" type="com.kh.healthDao.mypage.model.vo.AttCheck">
@@ -77,12 +85,14 @@
 	<resultMap id="cartResultMap" type="com.kh.healthDao.mypage.model.vo.Cart">
 		<id property="cartNo" column="CART_NO"/>
 		<result property="cartStock" column="CART_STOCK" />		
-		<association javaType="com.kh.healthDao.shopping.model.vo.Shopping" property="product">
+		<association javaType="com.kh.healthDao.admin.model.vo.Product" property="product">
 			<id property="productNo" column="PRODUCT_NO"/>
-			<result property="productName" column="PRODUCT_BRAND"/>
+			<result property="productBrand" column="PRODUCT_BRAND"/>
 			<result property="productTitle" column="PRODUCT_TITLE"/>
 			<result property="productPrice" column="PRODUCT_PRICE"/>
 			<result property="productOption" column="PRODUCT_OPTION"/>
+			<result property="file_path" column="FILE_PATH"/>
+			<result property="change_file1" column="CHANGE_FILE"/>
 		</association>
 	</resultMap>
 	
@@ -94,23 +104,32 @@
   	</resultMap>
 	
 
-	<resultMap id="PaymentResultMap" type="com.kh.healthDao.manager.model.vo.Payment">
+	 <resultMap id="PaymentResultMap" type="com.kh.healthDao.manager.model.vo.Payment">
+      <id property="payNo" column="PAY_NO"/>
+      <result property="payDate" column="PAY_DATE"/>
+      <result property="payMethod" column="PAY_METHOD"/>
+      <result property="ordererPhone" column="ORDERER_PHONE"/>
+      <result property="ordererEmail" column="ORDERER_EMAIL"/>
+      <result property="orderStatus" column="ORDER_STATUS"/>
+      <collection property="productList" resultMap="productResultMap"/>
+   </resultMap>
+   
+   <resultMap id="productResultMap" type="com.kh.healthDao.admin.model.vo.Product">
+      <id property="productNo" column="PRODUCT_NO" />
+      <result property="productBrand" column="PRODUCT_BRAND"/>
+      <result property="productTitle" column="PRODUCT_TITLE"/>
+      <result property="productPrice" column="PRODUCT_PRICE"/>
+      <result property="productOption" column="PRODUCT_OPTION"/>
+      <result property="file_path" column="FILE_PATH"/>
+      <result property="change_file1" column="CHANGE_FILE"/>
+      <result property="quantity" column="QUANTITY"/>
+   </resultMap>
+   
+   	<resultMap id="gradeResultMap" type="com.kh.healthDao.manager.model.vo.Payment">
 		<id property="payNo" column="PAY_NO"/>
-		<result property="payDate" column="PAY_DATE"/>
-		<result property="payMethod" column="PAY_METHOD"/>
-		<result property="ordererPhone" column="ORDERER_PHONE"/>
-		<result property="ordererEmail" column="ORDERER_EMAIL"/>
-		<result property="orderStatus" column="ORDER_STATUS"/>
-		<collection property="productList" resultMap="productResultMap"/>
-	</resultMap>
-	
-	<resultMap id="productResultMap" type="com.kh.healthDao.shopping.model.vo.Shopping">
-		<id property="productNo" column="PRODUCT_NO" />
-		<result property="productName" column="PRODUCT_BRAND"/>
-		<result property="productTitle" column="PRODUCT_TITLE"/>
-		<result property="productPrice" column="PRODUCT_PRICE"/>
-		<result property="productOption" column="PRODUCT_OPTION"/>
+		<result property="userNo" column="USER_NO"/>
 		<result property="quantity" column="QUANTITY"/>
+		<result property="productPrice" column="PRODUCT_PRICE"/>
 	</resultMap>
 
 
@@ -282,7 +301,7 @@
 				ORDER BY POINT_NO DESC)
 	</select>
 	
-	<select id="pointCount" resultType="_int" parameterType="hashmap">
+	<select id="pointCount" resultType="String" parameterType="hashmap">
 		SELECT
 		   SUM(POINT_AMOUNT)
 		  FROM POINT
@@ -381,10 +400,14 @@
 					    , R_CONTENT
 					    , R_DATE
 					    , MODIFY_DATE
-					    , PAY_NO
-					    , USER_NO
-					FROM REVIEW
-					WHERE USER_NO = #{userNo}
+					    , T_NO
+					    , USER_NAME   
+					    , PRODUCT_NO
+					    , PRODUCT_TITLE
+					FROM REVIEW R
+					LEFT JOIN PRODUCT P USING(PRODUCT_NO)
+					LEFT JOIN MEMBER M ON(R.T_NO = M.USER_NO)
+					WHERE R.USER_NO = #{userNo}
 		        ORDER BY REVIEW_NO DESC) A
 		    )
 			WHERE RNUM BETWEEN #{startRow} AND #{endRow}
@@ -392,15 +415,19 @@
 	
 	<select id="reviewDetail" parameterType="_int" resultMap="reviewMap">
 		SELECT 
-		      REVIEW_NO
+		    REVIEW_NO
 		    , CATEGORY
 		    , STAR
 		    , R_CONTENT
 		    , R_DATE
 		    , MODIFY_DATE
-		    , PAY_NO
-		    , USER_NO
-		FROM REVIEW
+		    , T_NO
+		    , USER_NAME   
+		    , PRODUCT_NO
+		    , PRODUCT_TITLE
+		FROM REVIEW R
+		LEFT JOIN PRODUCT P USING(PRODUCT_NO)
+		LEFT JOIN MEMBER M ON(R.T_NO = M.USER_NO)
 		WHERE REVIEW_NO = #{reviewNo}
 	</select>
 	
@@ -599,10 +626,15 @@
 		    , PRODUCT_TITLE
 		    , PRODUCT_PRICE
 		    , PRODUCT_OPTION
+		    , CHANGE_FILE
+		    , FILE_PATH
 		FROM CART C
 		JOIN PRODUCT P USING(PRODUCT_NO)
 		JOIN PRODUCT_OPTION O USING(PRODUCT_NO)
+		JOIN PRODUCT_FILE F USING(PRODUCT_NO)
+		JOIN AT_FILE A USING(F_NO)
 		WHERE USER_NO = #{userNo}
+		AND A.STATUS = 'N'
 	</select>
 
 	
@@ -640,11 +672,16 @@
 		    , PRODUCT_TITLE
 		    , PRODUCT_PRICE
 		    , PRODUCT_OPTION
+		    , CHANGE_FILE
+		    , FILE_PATH
 		FROM PAYMENT
 		JOIN PAY_DETAIL USING(PAY_NO)
 		JOIN PRODUCT USING(PRODUCT_NO)
 		JOIN PRODUCT_OPTION USING(PRODUCT_NO)
+		JOIN PRODUCT_FILE F USING(PRODUCT_NO)
+		JOIN AT_FILE A USING(F_NO)
 		WHERE USER_NO = #{userNo}
+		AND A.STATUS = 'N'
 	</select>
 	<insert id="reviewInsert" parameterType="com.kh.healthDao.review.model.vo.Review">
 		INSERT INTO REVIEW(
@@ -694,42 +731,52 @@
 	</update>
 
 	<insert id="rouletteInsert">
-		INSERT INTO POINT(
-		    POINT_NO
-		  , POINT_AMOUNT
-		  , POINT_ISSUEDATE
-		  , POINT_ENDDATE
-		  , USER_NO
-		  , P_CATEGORY_NO
-		) VALUES (
-		    SEQ_POINT_NO.NEXTVAL
-		  , #{pointAmount}
-		  , TO_CHAR(SYSDATE, 'YY-MM-DD')
-		  , TO_CHAR(SYSDATE+14, 'YY-MM-DD')
-		  , #{userNo}
-		  , '3'
-		)	
-	</insert>
-	
-	<insert id="rouletteTableInsert" parameterType="com.kh.healthDao.mypage.model.vo.Roulette">
-	INSERT 
-	    INTO ROULETTE
-	            (ROUL_NO
-	           , ROUL_DATE
-	           , USER_NO)
-	        VALUES 
-	            (SEQ_ROUL_NO.NEXTVAL
-	           , TO_CHAR(SYSDATE, 'YY-MM-DD')
-	           , #{userNo})
-	</insert>
-	
-	<select id="rouletteButton" resultMap="rouletteMap" parameterType="_int">
-	SELECT 
-	       ROUL_NO
-	     , ROUL_DATE
-	     , USER_NO
-	  FROM ROULETTE
-	 WHERE USER_NO = #{userNo}
+      INSERT INTO POINT(
+          POINT_NO
+        , POINT_AMOUNT
+        , POINT_ISSUEDATE
+        , POINT_ENDDATE
+        , USER_NO
+        , P_CATEGORY_NO
+      ) VALUES (
+          SEQ_POINT_NO.NEXTVAL
+        , #{pointAmount}
+        , TO_CHAR(SYSDATE, 'YY-MM-DD')
+        , TO_CHAR(SYSDATE+14, 'YY-MM-DD')
+        , #{userNo}
+        , '3'
+      )   
+   </insert>
+   
+   <insert id="rouletteTableInsert" parameterType="com.kh.healthDao.mypage.model.vo.Roulette">
+   INSERT 
+       INTO ROULETTE
+               (ROUL_NO
+              , ROUL_DATE
+              , USER_NO)
+           VALUES 
+               (SEQ_ROUL_NO.NEXTVAL
+              , TO_CHAR(SYSDATE, 'YY-MM-DD')
+              , #{userNo})
+   </insert>
+   
+   <select id="rouletteButton" resultMap="rouletteMap" parameterType="_int">
+   SELECT 
+          ROUL_NO
+        , ROUL_DATE
+        , USER_NO
+     FROM ROULETTE
+    WHERE USER_NO = #{userNo}
+   </select>
+   
+   <select id="memberGrade" resultMap="gradeResultMap" parameterType="_int">
+	SELECT
+	      D.QUANTITY 
+	    , T.PRODUCT_PRICE 
+	 FROM PAYMENT P
+	 JOIN PAY_DETAIL D ON(P.PAY_NO=D.PAY_NO)
+	 JOIN PRODUCT T ON(D.PRODUCT_NO=T.PRODUCT_NO)
+	WHERE USER_NO = #{userNo}
 	</select>
 	
 	<select id="payProductCount" parameterType="_int" resultType="_int">

@@ -3,18 +3,10 @@ package com.kh.healthDao.member.model.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMessage.RecipientType;
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.healthDao.member.model.dao.MemberMapper;
 import com.kh.healthDao.member.model.vo.Authority;
-import com.kh.healthDao.member.model.vo.MailTO;
 import com.kh.healthDao.member.model.vo.Member;
 import com.kh.healthDao.member.model.vo.MemberGrade;
 import com.kh.healthDao.member.model.vo.MemberRole;
@@ -100,9 +91,13 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public int idChk(Member member) {
-		int result = memberMapper.idChk(member);
-		return result;
+	public int idChk(String userId) {
+		return memberMapper.idChk(userId);
+	}
+	
+	@Override
+	public int nickChk(String userNickName) {
+		return memberMapper.nickChk(userNickName);
 	}
 
 	@Override
@@ -119,5 +114,5 @@ public class MemberServiceImpl implements MemberService{
 	public int pwdUpdate(Member member) {
 		return memberMapper.pwdUpdate(member);
 	}
-	
+
 }

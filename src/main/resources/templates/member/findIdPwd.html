@@ -56,7 +56,7 @@
 						</form>
 					</div>
 					<div class="guideTab findPwdTab" id="guideTab2" style="display: none;">
-						<form id="findPwdForm" action="/member/findPwd" method="post">
+						<form id="findPwdForm" name="findPwdForm" action="/member/findPwd" method="post" onsubmit="return findFilter();"> <!-- action="/member/findPwd" method="post" onsubmit="return findFilter();" -->
 						<div class="inp_wrap">
 							<label class="inp_lab" for="ipt_label">아이디</label>
 							<div class="inp_text">
@@ -74,7 +74,7 @@
 							<p class="error">잘못 입력했습니다</p>
 						</div>
 						<div class="btn_wrap">
-							<a onclick="showLayer('findPwSuccess');" class="btn btnArr btnSizeL btnColorG btnTypeB findPwdBtn" style="width:180px;"><span><b>확인</b></span></a>
+							<button onclick="showLayer('findPwSuccess');" class="btn btnArr btnSizeL btnColorG btnTypeB findPwdBtn" style="width:180px;"><span><b>확인</b></span></button>
 						</div>
 						</form>
 					</div>
@@ -135,10 +135,70 @@
 				});
 			});
 			
-			$(".findPwdBtn").on('click', function(){
-				$("#findPwdForm").submit();
-			});
+			/* $("#findPwdForm .findPwdBtn").on('click', function(){
+				
+				let userId = $("#findPwdForm [name=userId]").val();
+				let userEmail = $("#findPwdForm [name=userEmail]").val();
+				
+				$.ajax({
+					url : "/member/findPwd",
+					data : {"userId" : userId, "userEmail" : userEmail},
+					dataType : "json",
+					contentType : "application/json; charset=utf-8",
+					type : "get",
+					success : function(data) {
+						if(data['member']) {
+						$("#findPwdForm .findPwdBtn").attr("onclick", "showLayer('findPwSuccess');");
+								
+						let html = '<input type="hidden" name="num" value="' + data.num + '">'
+								 + '<input type="hidden" name="userEmail" value="' + data.userEmail + '">';
+						
+						$('.valDiv').html(html);
+						}
+					},
+					error : function(e) {
+						console.log(e);
+						$("#findPwdForm .findPwdBtn").attr("onclick", "showLayer('findPwFail');");
+					}
+				});
+			}); */
+		
 		});
+		
+		function handleForm() {
+			let form = document.forms.findPwdForm;
+			
+			form.addEventListener("submit", function(e) {
+			      e.preventDefault();
+			});
+		}
+			
+		function findFilter() { 
+		 	var form = document.forms.findPwdForm;
+
+		 	/* 입력한 이메일주소가 네자리 미만일 경우 alert 창 */
+			if(form.userEmail.value.length < 4) {
+				 
+			     var emailVal = $("#findPwdForm [name=userEmail]").val();
+				  
+				 // 이메일 주소 검증 정규식
+			     var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+			     
+			     if(emailVal == ""){
+			    	 alert("이메일을 입력해주세요.");
+			    	 return false;
+			    	 
+			    // 입력한 이메일주소가 정규식에 부합하는 지 확인
+			     } else(emailVal.match(regExp) == null) 
+			    	 alert("이메일 형식에 맞게 입력해주세요.");
+			    	 return false;
+			     
+			 } else {
+				 alert("이메일 형식에 맞게 입력해주세요.");
+				 return false;
+			 }
+			return true;
+		 }
 	</script>
 	
 	<!-- 아이디 찾기 결과 : 성공 -->
@@ -192,7 +252,8 @@
 				<button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
 				<div class="lyTit">비밀번호 찾기 결과</div>
 				<div class="lyBody basic">
-					<form name="findPwForm" action="/member/findPwdUpdate" method="post">
+					<form id="findPwdUpdForm" name="findPwdUpdForm" action="/member/findPwdUpdate" method="post">
+					<div class="valDiv" style="display:none;"></div>
 					<input type="hidden" name ="num" value="${num}">
 					<input type="hidden" name ="userEmail" value="${findUserEmail}">
 					<p>이메일이 발송되었습니다.<br> 새로운 비밀번호를 설정해주세요.</p>
@@ -222,7 +283,7 @@
 						<p class="error">비밀번호가 일치하지 않습니다.</p>
 					</div>
 					<div class="btn_wrap">
-						<a href="javascript:void(0);" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorB btnTypeR findPwdUpdBtn"><span>확인</span></a>
+						<button type="submit" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorB btnTypeR findPwdUpdBtn"><span>확인</span></button>
 					</div>
 					</form>
 				</div>
