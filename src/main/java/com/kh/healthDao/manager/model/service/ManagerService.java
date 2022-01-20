@@ -32,10 +32,6 @@ public interface ManagerService{
 	// 환불완료버튼
 	int managerRefundOk(Refund refund);
 
-	
-	
-
-	
 
 
 

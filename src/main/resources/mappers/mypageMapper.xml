@@ -109,6 +109,7 @@
       <result property="ordererPhone" column="ORDERER_PHONE"/>
       <result property="ordererEmail" column="ORDERER_EMAIL"/>
       <result property="orderStatus" column="ORDER_STATUS"/>
+      <result property="totalPrice" column="TOTAL_PRICE"/>
       <collection property="productList" resultMap="productResultMap"/>
    </resultMap>
    

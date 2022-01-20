@@ -169,7 +169,7 @@
 				<div class="tabType tabType2 sizeL fixedScroll">
 					<ul>
 						<li><a href="#detailContentMede" class="current"><span>상세정보</span></a></li>
-						<li><a href="#detailReviewMede"><span>상품리뷰(0)</span></a></li>
+						<li><a href="#detailReviewMede"><span th:text="'상품리뷰 ('+${sumReview}+')'">상품리뷰(0)</span></a></li>
 						<li><a href="#detailQnaMede"><span>상품문의(0)</span></a></li>
 						<li><a href="#detailOrder"><span>배송안내</span></a></li>
 					</ul>
@@ -203,7 +203,7 @@
 						<div class="reviewGrade">
 							<p><span class="fcPink fs22">세정력, 촉촉함, 피부자극</span><br>에 대하여 만족하는 고객이 많았어요!</p>
 							<div class="gradeArea">
-								<div class="gradeText">4.5</div>
+								<div class="gradeText"><span th:text="${avgStar}">4.5</span></div>
 								<div class="gradeStar js_rating ratingL cPink"><span>4.5</span></div>
 								<p>총 827명의 리뷰어 중 587명이 <br>4.5점을 주었어요</p>
 							</div>
@@ -249,7 +249,7 @@
 							</div>
 						</div>
 						<div class="ReviewList">
-							<p class="ReviewListTtl">전체리뷰 (827)</p>
+							<p class="ReviewListTtl" th:text="'전체리뷰 ('+${sumReview}+')'"></p>
 							<!-- 20200115 영역수정 s -->
 							<div class="tblBar">
 								<div class="sorting">

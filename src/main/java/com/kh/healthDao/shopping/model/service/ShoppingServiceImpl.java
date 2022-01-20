@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.healthDao.admin.model.vo.Product;
 import com.kh.healthDao.common.model.vo.Paging;
+import com.kh.healthDao.manager.model.vo.Payment;
 import com.kh.healthDao.member.model.vo.UserImpl;
 import com.kh.healthDao.mypage.model.service.MyInfoService;
 import com.kh.healthDao.mypage.model.vo.Address;
@@ -275,5 +276,34 @@ public class ShoppingServiceImpl implements ShoppingService{
 	@Override
 	public List<Product> searchList(String searchPdt) {
 		return shoppingMapper.searchList(searchPdt);
+	}
+
+	@Override
+	public int paymentInfoInsert(Payment payment) {
+		
+		int result = 0;
+		int result1 = shoppingMapper.paymentInfoInsert(payment);
+		int result2 = shoppingMapper.paymentDetailInsert(payment);
+		
+		if(result1 > 0 && result2 > 0) {
+			result = 1;
+		}
+		
+		return result;
+	}
+
+	@Override
+	public List<Product> shoppingReview(int productNo) {
+		return shoppingMapper.shoppingReview(productNo);
+	}
+
+	@Override
+	public int sumReview(int productNo) {
+		return shoppingMapper.sumReview(productNo);
+	}
+
+	@Override
+	public int avgStar(int productNo) {
+		return shoppingMapper.avgStar(productNo);
 	}
 }
