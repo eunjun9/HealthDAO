@@ -120,7 +120,7 @@ function requestPay() {
 	var userName = /*[[ ${member.userName} ]]*/;
 	var ordererEmail = /*[[ ${member.userEmail} ]]*/;
 	var ordererPhone = /*[[ ${member.userPhone} ]]*/;
-	var tPrice = /*[[ ${trainer.tPrice} ]]*/;
+	var totalPrice = /*[[ ${trainer.tPrice} ]]*/;
 	var tName = /*[[ ${trainer.member.userName} ]]*/;
 	var productNo = /*[[ ${trainer.tNo} ]]*/;
 	/*]]*/
@@ -130,7 +130,7 @@ function requestPay() {
 		pay_method: "card",
 		merchant_uid: "merchant"+new Date().getTime(),
 		name: tName + " 트레이너 PT 1회 체험",
-		amount: tPrice,
+		amount: totalPrice,
 		buyer_email: ordererEmail,
 		buyer_name: userName,
 		buyer_tel: ordererPhone,
@@ -145,7 +145,8 @@ function requestPay() {
 					data: {"productNo" : productNo,
 						   "userNo" : userNo,
 						   "ordererEmail" : ordererEmail,
-						   "ordererPhone" : ordererPhone},
+						   "ordererPhone" : ordererPhone,
+						   "totalPrice" : totalPrice},
 					success: function(data){
 						alert(data);
 						location.href="/trainer/orderList?userNo="+userNo;
