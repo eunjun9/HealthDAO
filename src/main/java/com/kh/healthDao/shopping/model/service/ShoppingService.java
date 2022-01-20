@@ -22,8 +22,7 @@ public interface ShoppingService {
 	/* 운동기구 페이징 */
 	Map<String, Object> goodsShoppingList(int page);
 
-	/* 신상품 */
-	Product NewProductSelect(int productNo);
+	
 
 	List<Product> beverageShoppingList();
 

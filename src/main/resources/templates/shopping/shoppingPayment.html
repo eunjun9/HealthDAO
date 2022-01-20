@@ -6,6 +6,7 @@
 <!-- 메타태그, 스타일 -->
 <th:block th:replace="common/head.html"></th:block>
 <!--// 메타태그, 스타일 -->
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <body>
 	<div id="wrap" class="main">
 		<!-- HEADER + GNB -->
@@ -462,7 +463,6 @@
 							</div>
 						</div>
 						<div>
-							
 							<button type="button" id="check_module" class="btn btnSizeL btnColorP btnTypeB w100 mgt10"><span>결제하기</span></button>
 						</div>
 						
@@ -490,93 +490,65 @@
 	<th:block th:replace="common/quickNtalk.html"></th:block>
 	<!--// 퀵메뉴 + 톡톡 -->	
 	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
-	<link rel="stylesheet" type="text/css" href="../../css/main.css">
-	<script type="text/javascript" src="../../js/main.js"></script>
 	<script type="text/javascript">
 		$('#quick .quickArea').css({'position':'absolute', 'top':936});
 		mainStart();
 		mainVisual();
 	</script>
-	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-	<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 	
-	<script type="text/javascript">
+	<script th:inline="javascript">
 	$("#check_module").click(function () {
 		/*<![CDATA[*/
-		 
-		let userName = "[[${member.userName}]]";
-		let productTitle = "[[${shoppingPayment.productTitle}]]";
-		let sum = "[[${sum}]]";
-		let amount ="[[${amount}]]";
-		
-		
+		let userNo = /*[[${member.userNo}]]*/;
+		let ordererPhone = /*[[${member.userPhone}]]*/;
+		let ordererEmail = /*[[${member.userEmail}]]*/;
+		let productTitle = /*[[${shoppingPayment.productTitle}]]*/;
+		let totalPrice = /*[[${sum}]]*/;
+		let productNo = /*[[${shoppingPayment.productNo}]]*/;
+		let userName = /*[[${member.userName}]]*/;
 		/*]]>*/
-		var IMP = window.IMP; // 생략가능
+		
 		IMP.init('imp97624274'); 
-		// i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
-		// ''안에 띄어쓰기 없이 가맹점 식별코드를 붙여넣어주세요. 안그러면 결제창이 안뜹니다.
 		IMP.request_pay({
-			pg: 'kakao',
-			pay_method: 'card',
-			merchant_uid: 'merchant_' + new Date().getTime(),
-			/* 
-			 *  merchant_uid에 경우 
-			 *  https://docs.iamport.kr/implementation/payment
-			 *  위에 url에 따라가시면 넣을 수 있는 방법이 있습니다.
-			 */
-			name: productTitle + ' ' + amount + '개',
-			// 결제창에서 보여질 이름
-			// name: '주문명 : ${auction.a_title}',
-			// 위와같이 model에 담은 정보를 넣어 쓸수도 있습니다.
-			amount: sum,
-			// amount: ${bid.b_bid},
-			// 가격 
-			buyer_name: userName,
-			// 구매자 이름, 구매자 정보도 model값으로 바꿀 수 있습니다.
-			// 구매자 정보에 여러가지도 있으므로, 자세한 내용은 맨 위 링크를 참고해주세요.
-			buyer_postcode: '123-456',
+			pg: "kakao",
+			pay_method: "card",
+			merchant_uid: 'merchant'+new Date().getTime(),
+			name: productTitle,
+			amount: totalPrice,
+			buyer_email: ordererEmail,
+	        buyer_name: userName,
+	        buyer_tel: ordererPhone,
+	        buyer_addr: "",
+	        buyer_postcode: ""
 			}, function (rsp) {
-				console.log(rsp);
-			if (rsp.success) {
-				var msg = '결제가 완료되었습니다.';
-				msg += '결제 금액 : ' + rsp.paid_amount;
-				let data = {
-						"imp_uid" : imp_uid,
-						"merchant_uid" : merchant_uid,
-						"userName": userName,
-						"productTitle" : productTitle,
-						"sum" : sum,
-						"amount" : amount,
-						"pay_date" : pay_date
-						}
-				// success.submit();
-				// 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드를 사용하는 방법이 있습니다.
-				// 자세한 설명은 구글링으로 보시는게 좋습니다.
-				$.ajax({
-						url : '/mypage/myOrder', 
-				        type :'POST',
-				        data : data,
-				        contentType:'application/json;charset=utf-8',
-				        dataType: 'json', //서버에서 보내줄 데이터 타입
-				        success: function(data){
-				        			        	
-				          if(res == 1){
-							 console.log("추가성공");	
-							location.href="/mypage/myOrder";           
-				          }else{
-				             console.log("Insert Fail!!!");
-				          }
-				        },
-				        error:function(){
-				          console.log("Insert ajax 통신 실패!!!");
-				        }
-					}) //ajax
-			} else {
-				var msg = '결제에 실패하였습니다.';
-				msg += '에러내용 : ' + rsp.error_msg;
-			}
-			alert(msg);
+				if (rsp.success) {
+					
+					alert('d');
+					var msg = '결제가 완료되었습니다.';
+					msg += '결제 금액 : ' + rsp.paid_amount;
+					$.ajax({
+							url : "/shopping/mypage/myOrder", 
+					        type:"POST",
+					        data: {"productNo" : productNo,
+									"userNo" : userNo,
+									"ordererPhone" : ordererPhone,
+									"ordererEmail" : ordererEmail,
+									"totalPrice" : totalPrice},
+					        success: function(data){
+					        	alert(data);
+								location.href="/mypage/myOrder";           
+					        },
+					        error: function(e){
+					          console.log("Insert ajax 통신 실패!!!");
+					        }
+						});
+				} else {
+					var msg = '결제에 실패하였습니다.';
+					msg += '에러내용 : ' + rsp.error_msg; 
+					
+					 //ajax
+					
+				}
 		});
 	});
 </script>

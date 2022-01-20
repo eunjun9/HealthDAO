@@ -248,12 +248,6 @@ public class ShoppingServiceImpl implements ShoppingService{
 		return goodsProductMap; 
 	}
 
-	@Override
-	public Product NewProductSelect(int productNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 	/* 상품 주문 */
 	@Override
 	public Product shoppingPayment(int productNo) {
