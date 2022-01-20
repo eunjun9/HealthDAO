@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiConsumer;
+import java.util.function.ToIntFunction;
 
 import javax.servlet.http.HttpSession;
 
@@ -568,6 +570,31 @@ public class MypageController {
 		String msg = cartService.cartAllDelete(userNo) > 0 ? "success" : "fail";
 		
 		return msg;
+	}
+	
+	// 회원등급
+	@GetMapping("/memberGrade")
+	public ModelAndView memberGrade(@AuthenticationPrincipal UserImpl userImpl, ModelAndView mv) {		
+		int userNo = userImpl.getUserNo();
+		
+		List<Payment> memberGrade = qnaService.memberGrade(userNo);
+		//System.out.println(memberGrade);
+		
+		List payArr = new ArrayList();
+		for(int i = 0; i < memberGrade.size(); i++) {
+			payArr.add(memberGrade.get(i).getQuantity() * memberGrade.get(i).getProductPrice());
+		}
+		
+		int sum = 0;
+		for(int i = 0; i < payArr.size(); i++) {
+			sum += (int)payArr.get(i);
+		}
+		//System.out.println(sum);
+
+		mv.addObject("sum", sum);
+		mv.setViewName("mypage/memberGrade"); 
+		
+		return mv;
 	}
 	
 
