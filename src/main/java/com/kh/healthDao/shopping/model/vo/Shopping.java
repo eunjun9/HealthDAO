@@ -32,4 +32,7 @@ public class Shopping {
 	
 	private int productRank;		// 순번
 	
+	private float avgStar;
+	private int sumReview;
+	
 }

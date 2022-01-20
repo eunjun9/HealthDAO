@@ -160,13 +160,13 @@
                   </div>
                </div>
                
-               <div class="order_list order_con">
+               <!-- <div class="order_list order_con">
                   <ul class="list_box">
                      <li th:each="sp : ${shoppingPayment}">
                         <div class="tbl_wrap">
                            <div class="pdtImg"><a href="#"><img th:src="${sp.file_path}+${sp.change_file1}" alt="상품이미지"></a></div>
                            <div class="pdtTxt">
-                              <p class="pdtBrand" th:text="${sp.productBrand}"></p><!-- 20200317 수정 -->
+                              <p class="pdtBrand" th:text="${sp.productBrand}"></p>20200317 수정
                               <p class="pdtName" th:text="${sp.productTitle}"></p>
                               <p class="pdtPrice"><span class="sale" th:text="${#numbers.formatInteger(sp.productPrice, 0, 'COMMA')+'원'}"></span></p>
                               <p class="pdtOpt">옵션 : <span class="pdtOpt" th:text="${sp.productOption}"></span></p>
@@ -180,7 +180,7 @@
                         </div>
                      </li>
                   </ul>
-               </div>
+               </div> -->
                <div class="order_coupon order_con">
                   <p class="orderTit">쿠폰/포인트 사용</p>
                   <div class="coupon_wrap">
@@ -475,8 +475,6 @@
 
    <script type="text/javascript">
       $('#quick .quickArea').css({'position':'absolute', 'top':936});
-      mainStart();
-      mainVisual();
    </script>
    
    <script th:inline="javascript">
@@ -487,6 +485,8 @@
       let ordererEmail = /*[[${member.userEmail}]]*/;
       let totalPrice = /*[[${sum}]]*/;
       let userName = /*[[${member.userName}]]*/;
+      var productTitle = /*[[${shoppingPayment.productTitle}]]*/;
+      var ProductNo = /*[[${shoppingPayment.ProductNo}]]*/;
       /*]]>*/
       
       IMP.init('imp97624274'); 
@@ -510,7 +510,8 @@
                            "userNo" : userNo,
                            "ordererPhone" : ordererPhone,
                            "ordererEmail" : ordererEmail,
-                           "totalPrice" : totalPrice},
+                           "totalPrice" : totalPrice,
+                           "productTitle" : productTitle},
                        success: function(data){
                           alert(data);
                         location.href="/mypage/myOrder";           

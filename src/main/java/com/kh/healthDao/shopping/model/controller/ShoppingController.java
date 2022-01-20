@@ -24,7 +24,6 @@ import com.kh.healthDao.mypage.model.vo.Address;
 import com.kh.healthDao.shopping.model.service.ShoppingService;
 
 import lombok.extern.slf4j.Slf4j;
-import oracle.net.aso.a;
 
 
 
@@ -215,21 +214,21 @@ public class ShoppingController {
 	@PostMapping("payment") 
 	public ModelAndView shoppingPaymentInfo(String[] select1, int[] amount, int sum, 
 											ModelAndView mv, int[] productNo, int userNo) {
-		
-		List<Product> shoppingList = new ArrayList<>();
-		
-		for(int i = 0; i < productNo.length; i++) {
-			Product shoppingPayment = shoppingService.shoppingPayment(productNo[i]);	
-			shoppingPayment.setQuantity(amount[i]);
-			shoppingPayment.setProductOption(select1[i]);
-			shoppingList.add(shoppingPayment);
-		}
-		System.out.println(shoppingList);
+		Product shoppingPayment = shoppingService.shoppingPayment(productNo[0]);
+		/*
+		 * List<Product> shoppingList = new ArrayList<>();
+		 * 
+		 * for(int i = 0; i < productNo.length; i++) { Product shoppingPayment =
+		 * shoppingService.shoppingPayment(productNo[i]);
+		 * shoppingPayment.setQuantity(amount[i]);
+		 * shoppingPayment.setProductOption(select1[i]);
+		 * shoppingList.add(shoppingPayment); } System.out.println(shoppingList);
+		 */
 		
 		List<Address> addressList = myInfoService.deliView(userNo);
 		Member member = myInfoService.myInfoView(userNo);
 			
-		mv.addObject("shoppingPayment", shoppingList);
+		mv.addObject("shoppingPayment", shoppingPayment);
 		mv.addObject("sum", sum);
 		mv.addObject("addressList", addressList);
 		mv.addObject("member", member);

@@ -42,5 +42,8 @@ public class Product {
 	private int f_productNo;		// 상품 파일 번호
 	private int f_productInfoNo;	// 상품 정보 파일 번호
 	
-	private int quantity; // 수량;;
+	private int quantity; // 수량;
+	
+	private float avgStar;
+	private int sumReview;
 }

@@ -106,13 +106,13 @@
 										</a>
 									</div>
 									<div class="pdtTxt">
-										<p class="pdtHead" style="color:#4f8ffa;" th:text="${reco.productBenefit}"></p>
+										<p class="pdtHead" style="color:#4f8ffa;" th:text="${reco.categoryId}"></p>
 										<p class="pdtBrand" th:text="${reco.productBrand}"></p>
 										<p class="pdtName" th:text="${reco.productTitle}"></p>
 										<p class="pdtPrice" th:text="${#numbers.formatInteger(reco.productPrice, 0, 'COMMA')+'원'}"></p>
 										<div class="pdtReview">
-											<div class="js_rating ratingS"><span>4.5</span></div>
-											4.5 <span class="count">(리뷰 18)</span>
+											<div class="js_rating ratingS"><span><th:block data-th-text="${reco.avgStar}"></th:block></span></div>
+											<th:block data-th-text="${reco.avgStar}"></th:block> <span class="count">(리뷰 <th:block data-th-text="${reco.sumReview}"></th:block>)</span>
 										</div>
 									</div>
 				                    <a href="javascript:void(0);" th:onclick="|javascript:addWish('${reco.productNo}')|" th:id="pdtNo_+${reco.productNo}" class="btn_like likeM"><span class="hide">찜하기</span></a>
