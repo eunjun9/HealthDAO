@@ -21,7 +21,7 @@
 		<!-- container -->
 		<div id="container" class="pdt0 pdb0">
 			<div class="main">
-				<div class="mainVisual">
+				<div class="mainVisual" th:if="${bannerSize} > 0">
 					<div class="visualRoll">
 						<div class="jsVisualRoll">
 							<div th:each="banner : ${bannerList}">

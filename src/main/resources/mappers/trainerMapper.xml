@@ -443,72 +443,54 @@
 
 
 	<select id="trainerRankList" resultMap="trainerResultMap">
-		 SELECT
-		       T_NO
-		     , T_GYM_NAME
-		     , T_GYM_ADDRESS
-		     , T_AREA
-		     , T_METRO
-		     , T_AREA_INTRO
-		     , T_ONE_INTRO
-		     , T_PRICE
-		     , WEEKDAY_SC
-		     , WEEKAND_SC
-		     , T_INTRO
-		     , QUE_INTRO
-             , SUM_REVIEW
-             , AVG_STAR
-             , FILE_PATH
-             , F_TNO
-             , CHANGE_FILE1
-             , F_CNO
-             , CHANGE_FILE2
-             , USER_NAME
-		FROM (SELECT
-		       T.T_NO
-		     , T.T_GYM_NAME
-		     , T.T_GYM_ADDRESS
-		     , T.T_AREA
-		     , T.T_METRO
-		     , T.T_AREA_INTRO
-		     , T.T_ONE_INTRO
-		     , T.T_PRICE
-		     , T.WEEKDAY_SC
-		     , T.WEEKAND_SC
-		     , T.T_INTRO
-		     , T.QUE_INTRO
-		     , M.USER_NO USER_NO
-		     , M.USER_NAME USER_NAME
-             , COUNT(R.REVIEW_NO) AS SUM_REVIEW
-             , ROUND((SUM(R.STAR)) / COUNT(R.REVIEW_NO), 1) AS AVG_STAR
-             , (SELECT AF.FILE_PATH FROM AT_FILE AF JOIN TRAINER_FILE TF ON(AF.F_NO = TF.F_NO) WHERE STATUS='N' AND TF.T_NO = T.T_NO) AS FILE_PATH
-             , (SELECT TF.F_NO FROM AT_FILE AF JOIN TRAINER_FILE TF ON(AF.F_NO = TF.F_NO) WHERE STATUS='N' AND TF.T_NO = T.T_NO) AS F_TNO
-             , (SELECT AF.CHANGE_FILE FROM AT_FILE AF JOIN TRAINER_FILE TF ON(AF.F_NO = TF.F_NO) WHERE STATUS='N' AND TF.T_NO = T.T_NO) AS CHANGE_FILE1
-             , (SELECT TF.F_NO FROM AT_FILE AF JOIN TRAINER_FILE TF ON(AF.F_NO = TF.F_NO) WHERE STATUS='Y' AND TF.T_NO = T.T_NO) AS F_CNO
-             , (SELECT AF.CHANGE_FILE FROM AT_FILE AF JOIN TRAINER_FILE TF ON(AF.F_NO = TF.F_NO) WHERE STATUS='Y' AND TF.T_NO = T.T_NO) AS CHANGE_FILE2
-		  FROM TRAINER T
-		  JOIN MEMBER M ON(T.T_NO = M.USER_NO)
-          LEFT OUTER JOIN PT_ORDER O ON(T.T_NO = O.T_NO)
-          LEFT OUTER JOIN REVIEW R ON(O.PAY_NO = R.PAY_NO)
-          LEFT OUTER JOIN TRAINER_FILE TF ON(TF.T_NO = T.T_NO)
-          LEFT OUTER JOIN AT_FILE AF ON(AF.F_NO = TF.F_NO)
-         GROUP BY T.T_NO
-		     , T.T_GYM_NAME
-		     , T.T_GYM_ADDRESS
-		     , T.T_AREA
-		     , T.T_METRO
-		     , T.T_AREA_INTRO
-		     , T.T_ONE_INTRO
-		     , T.T_PRICE
-		     , T.WEEKDAY_SC
-		     , T.WEEKAND_SC
-		     , T.T_INTRO
-		     , T.QUE_INTRO
-		     , M.USER_NO
-		     , M.USER_NAME
-		     , M.USER_PHONE
-        ORDER BY T.T_NO DESC)    
-        <![CDATA[WHERE ROWNUM <= 4]]>
+		 SELECT * FROM
+			(SELECT
+			         T.T_NO
+			       , COUNT(DISTINCT O.PT_NO)
+			       , ROW_NUMBER()OVER(ORDER BY COUNT(DISTINCT O.PT_NO) DESC) AS RANK
+			       , T.T_GYM_NAME
+			       , T.T_GYM_ADDRESS
+			       , T.T_AREA
+			       , T.T_METRO
+			       , T.T_AREA_INTRO
+			       , T.T_ONE_INTRO
+			       , T.T_PRICE
+			       , T.WEEKDAY_SC
+			       , T.WEEKAND_SC
+			       , T.T_INTRO
+			       , T.QUE_INTRO
+			       , COUNT(DISTINCT R.REVIEW_NO) AS SUM_REVIEW
+			       , ROUND((SUM(R.STAR)) / COUNT(R.REVIEW_NO), 1) AS AVG_STAR
+			       , M.USER_NO
+			       , M.USER_NAME
+			       , M.USER_PHONE
+			       , (SELECT AF.FILE_PATH FROM AT_FILE AF JOIN TRAINER_FILE TF ON(AF.F_NO = TF.F_NO) WHERE STATUS='N' AND TF.T_NO = T.T_NO) AS FILE_PATH
+			       , (SELECT TF.F_NO FROM AT_FILE AF JOIN TRAINER_FILE TF ON(AF.F_NO = TF.F_NO) WHERE STATUS='N' AND TF.T_NO = T.T_NO) AS F_TNO
+			       , (SELECT AF.CHANGE_FILE FROM AT_FILE AF JOIN TRAINER_FILE TF ON(AF.F_NO = TF.F_NO) WHERE STATUS='N' AND TF.T_NO = T.T_NO) AS CHANGE_FILE1
+			       , (SELECT TF.F_NO FROM AT_FILE AF JOIN TRAINER_FILE TF ON(AF.F_NO = TF.F_NO) WHERE STATUS='Y' AND TF.T_NO = T.T_NO) AS F_CNO
+			       , (SELECT AF.CHANGE_FILE FROM AT_FILE AF JOIN TRAINER_FILE TF ON(AF.F_NO = TF.F_NO) WHERE STATUS='Y' AND TF.T_NO = T.T_NO) AS CHANGE_FILE2
+			    FROM TRAINER T
+			    JOIN MEMBER M ON(T.T_NO = M.USER_NO)
+			      JOIN PT_ORDER O ON(T.T_NO = O.T_NO)
+			      LEFT OUTER JOIN REVIEW R ON(O.PAY_NO = R.PAY_NO)
+			      LEFT OUTER JOIN TRAINER_FILE TF ON(TF.T_NO = T.T_NO)
+			      LEFT OUTER JOIN AT_FILE AF ON(AF.F_NO = TF.F_NO)
+			     GROUP BY T.T_NO
+			       , T.T_GYM_NAME
+			       , T.T_GYM_ADDRESS
+			       , T.T_AREA
+			       , T.T_METRO
+			       , T.T_AREA_INTRO
+			       , T.T_ONE_INTRO
+			       , T.T_PRICE
+			       , T.WEEKDAY_SC
+			       , T.WEEKAND_SC
+			       , T.T_INTRO
+			       , T.QUE_INTRO
+			       , M.USER_NO
+			       , M.USER_NAME
+			       , M.USER_PHONE)
+        	<![CDATA[WHERE RANK <= 4]]>
 	</select> 
 
 	
