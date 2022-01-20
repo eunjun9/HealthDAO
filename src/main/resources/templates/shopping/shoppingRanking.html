@@ -35,60 +35,28 @@
 					<div class="bestTtl"><p class="fs26 notoB">HEALTH DAO TOP 3</p><span class="fs14 fc88 mgl20">헬스 다오에서 가장 많이 판매된 제품입니다.</span></div>
 					<div class="pdt_list1 type03 mgt35">
 						<ul class="list_box">
-							<li>
+                    		<li th:each="pdt:${totalRank}">
 								<div class="bestMark" style="background:#ffbc38;"><span>BEST</span><span>1</span></div>
-								<div class="pdtImg">
-									<a href="#" class="imgLink"><img src="/images/temp/pdt03.png" alt=""></a>
-								</div>
-								<div class="pdtTxt">
-									<p class="pdtHead" style="color:#4f8ffa;">2019 누적판매 15,591건!</p><!-- 문구가 없어도 태그삭제 X -->
-									<p class="pdtBrand">바닐라코</p>
-									<p class="pdtName"><a href="#">바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널</a></p>			
-									<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
-									<div class="pdtReview">
-										<div class="js_rating ratingS"><span>4.5</span></div>
-										4.5 <span class="count">(리뷰 18)</span>
-									</div>
-								</div>
-								<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM"><span class="hide">찜하기</span></a>
-								<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
-							</li>
-							<li>
 								<div class="bestMark" style="background:#ccc;"><span>BEST</span><span>2</span></div>
-								<div class="pdtImg">
-									<a href="#" class="imgLink"><img src="/images/temp/pdt03.png" alt=""></a>
-								</div>
-								<div class="pdtTxt">
-									<p class="pdtHead" style="color:#4f8ffa;">2019 누적판매 15,591건!</p><!-- 문구가 없어도 태그삭제 X -->
-									<p class="pdtBrand">바닐라코</p>
-									<p class="pdtName"><a href="#">바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널</a></p>			
-									<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
-									<div class="pdtReview">
-										<div class="js_rating ratingS"><span>4.5</span></div>
-										4.5 <span class="count">(리뷰 18)</span>
-									</div>
-								</div>
-								<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM"><span class="hide">찜하기</span></a>
-								<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
-							</li>
-							<li>
 								<div class="bestMark" style="background:#dbad82;"><span>BEST</span><span>3</span></div>
-								<div class="pdtImg">
-									<a href="#" class="imgLink"><img src="/images/temp/pdt03.png" alt=""></a>
+		                        <div class="pdtImg">
+									<a th:href="|/shopping/detail?productNo=${pdt.productNo}|" class="imgLink">
+										<img th:src="${pdt.file_path}+${pdt.change_file1}" alt="">
+									</a>
 								</div>
-								<div class="pdtTxt">
-									<p class="pdtHead" style="color:#4f8ffa;">2019 누적판매 15,591건!</p><!-- 문구가 없어도 태그삭제 X -->
-									<p class="pdtBrand">바닐라코</p>
-									<p class="pdtName"><a href="#">바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널</a></p>			
-									<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
-									<div class="pdtReview">
-										<div class="js_rating ratingS"><span>4.5</span></div>
-										4.5 <span class="count">(리뷰 18)</span>
+		                        <div class="pdtTxt">
+									<p class="pdtHead" style="color:#4f8ffa;" th:text="${pdt.categoryId}"></p>
+		                            <p class="pdtBrand" th:text="${pdt.productBrand}"></p>
+		                            <p class="pdtName" th:text="${pdt.productTitle}"><a href="#"></a></p>
+		                            <p class="pdtPrice" th:text="${#numbers.formatInteger(pdt.productPrice, 0, 'COMMA')+'원'}"></p>
+		                            <div class="pdtReview">
+										<div class="js_rating ratingS"><span><th:block data-th-text="${pdt.avgStar}"></th:block></span></div>
+										<th:block data-th-text="${pdt.avgStar}"></th:block> <span class="count">(리뷰 <th:block data-th-text="${pdt.sumReview}"></th:block>)</span>
 									</div>
 								</div>
-								<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM"><span class="hide">찜하기</span></a>
-								<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
-							</li>
+			                    <a href="javascript:void(0);" th:onclick="|javascript:addWish('${pdt.productNo}')|" th:id="pdtNo_+${pdt.productNo}" class="btn_like likeM"><span class="hide">찜하기</span></a>
+			                    <a href="javascript:void(0);" th:onclick="|javascript:cartInsert('${pdt.productNo}')|" class="btn_cart cartM"><span>장바구니</span></a>
+		                    </li>
 						</ul>
 					</div>
 				</div>
@@ -96,60 +64,28 @@
 					<div class="bestTtl"><p class="fs26 notoB">식품 BEST 3</p><span class="fs14 fc88 mgl20">각 카테고리 기준 최근 한주간 가장 많이 판매된 제품입니다.</span></div>
 					<div class="pdt_list1 type03 mgt35">
 						<ul class="list_box">
-							<li>
+                    		<li th:each="pdt:${foodRank}">
 								<div class="bestMark" style="background:#ffbc38;"><span>BEST</span><span>1</span></div>
-								<div class="pdtImg">
-									<a href="#" class="imgLink"><img src="/images/temp/pdt03.png" alt=""></a>
-								</div>
-								<div class="pdtTxt">
-									<p class="pdtHead" style="color:#4f8ffa;">2019 누적판매 15,591건!</p><!-- 문구가 없어도 태그삭제 X -->
-									<p class="pdtBrand">바닐라코</p>
-									<p class="pdtName"><a href="#">바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널</a></p>			
-									<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
-									<div class="pdtReview">
-										<div class="js_rating ratingS"><span>4.5</span></div>
-										4.5 <span class="count">(리뷰 18)</span>
-									</div>
-								</div>
-								<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM"><span class="hide">찜하기</span></a>
-								<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
-							</li>
-							<li>
 								<div class="bestMark" style="background:#ccc;"><span>BEST</span><span>2</span></div>
-								<div class="pdtImg">
-									<a href="#" class="imgLink"><img src="/images/temp/pdt03.png" alt=""></a>
-								</div>
-								<div class="pdtTxt">
-									<p class="pdtHead" style="color:#4f8ffa;">2019 누적판매 15,591건!</p><!-- 문구가 없어도 태그삭제 X -->
-									<p class="pdtBrand">바닐라코</p>
-									<p class="pdtName"><a href="#">바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널</a></p>			
-									<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
-									<div class="pdtReview">
-										<div class="js_rating ratingS"><span>4.5</span></div>
-										4.5 <span class="count">(리뷰 18)</span>
-									</div>
-								</div>
-								<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM"><span class="hide">찜하기</span></a>
-								<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
-							</li>
-							<li>
 								<div class="bestMark" style="background:#dbad82;"><span>BEST</span><span>3</span></div>
-								<div class="pdtImg">
-									<a href="#" class="imgLink"><img src="/images/temp/pdt03.png" alt=""></a>
+		                        <div class="pdtImg">
+									<a th:href="|/shopping/detail?productNo=${pdt.productNo}|" class="imgLink">
+										<img th:src="${pdt.file_path}+${pdt.change_file1}" alt="">
+									</a>
 								</div>
-								<div class="pdtTxt">
-									<p class="pdtHead" style="color:#4f8ffa;">2019 누적판매 15,591건!</p><!-- 문구가 없어도 태그삭제 X -->
-									<p class="pdtBrand">바닐라코</p>
-									<p class="pdtName"><a href="#">바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널</a></p>			
-									<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
-									<div class="pdtReview">
-										<div class="js_rating ratingS"><span>4.5</span></div>
-										4.5 <span class="count">(리뷰 18)</span>
+		                        <div class="pdtTxt">
+									<p class="pdtHead" style="color:#4f8ffa;" th:text="${pdt.categoryId}"></p>
+		                            <p class="pdtBrand" th:text="${pdt.productBrand}"></p>
+		                            <p class="pdtName" th:text="${pdt.productTitle}"><a href="#"></a></p>
+		                            <p class="pdtPrice" th:text="${#numbers.formatInteger(pdt.productPrice, 0, 'COMMA')+'원'}"></p>
+		                            <div class="pdtReview">
+										<div class="js_rating ratingS"><span><th:block data-th-text="${pdt.avgStar}"></th:block></span></div>
+										<th:block data-th-text="${pdt.avgStar}"></th:block> <span class="count">(리뷰 <th:block data-th-text="${pdt.sumReview}"></th:block>)</span>
 									</div>
 								</div>
-								<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM"><span class="hide">찜하기</span></a>
-								<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
-							</li>
+			                    <a href="javascript:void(0);" th:onclick="|javascript:addWish('${pdt.productNo}')|" th:id="pdtNo_+${pdt.productNo}" class="btn_like likeM"><span class="hide">찜하기</span></a>
+			                    <a href="javascript:void(0);" th:onclick="|javascript:cartInsert('${pdt.productNo}')|" class="btn_cart cartM"><span>장바구니</span></a>
+		                    </li>
 						</ul>
 					</div>
 				</div>
@@ -157,60 +93,28 @@
 					<div class="bestTtl"><p class="fs26 notoB">음료 BEST 3</p><span class="fs14 fc88 mgl20">각 카테고리 기준 최근 한주간 가장 많이 판매된 제품입니다.</span></div>
 					<div class="pdt_list1 type03 mgt35">
 						<ul class="list_box">
-							<li>
+                    		<li th:each="pdt:${beverageRank}">
 								<div class="bestMark" style="background:#ffbc38;"><span>BEST</span><span>1</span></div>
-								<div class="pdtImg">
-									<a href="#" class="imgLink"><img src="/images/temp/pdt03.png" alt=""></a>
-								</div>
-								<div class="pdtTxt">
-									<p class="pdtHead" style="color:#4f8ffa;">2019 누적판매 15,591건!</p><!-- 문구가 없어도 태그삭제 X -->
-									<p class="pdtBrand">바닐라코</p>
-									<p class="pdtName"><a href="#">바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널</a></p>			
-									<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
-									<div class="pdtReview">
-										<div class="js_rating ratingS"><span>4.5</span></div>
-										4.5 <span class="count">(리뷰 18)</span>
-									</div>
-								</div>
-								<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM"><span class="hide">찜하기</span></a>
-								<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
-							</li>
-							<li>
 								<div class="bestMark" style="background:#ccc;"><span>BEST</span><span>2</span></div>
-								<div class="pdtImg">
-									<a href="#" class="imgLink"><img src="/images/temp/pdt03.png" alt=""></a>
-								</div>
-								<div class="pdtTxt">
-									<p class="pdtHead" style="color:#4f8ffa;">2019 누적판매 15,591건!</p><!-- 문구가 없어도 태그삭제 X -->
-									<p class="pdtBrand">바닐라코</p>
-									<p class="pdtName"><a href="#">바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널</a></p>			
-									<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
-									<div class="pdtReview">
-										<div class="js_rating ratingS"><span>4.5</span></div>
-										4.5 <span class="count">(리뷰 18)</span>
-									</div>
-								</div>
-								<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM"><span class="hide">찜하기</span></a>
-								<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
-							</li>
-							<li>
 								<div class="bestMark" style="background:#dbad82;"><span>BEST</span><span>3</span></div>
-								<div class="pdtImg">
-									<a href="#" class="imgLink"><img src="/images/temp/pdt03.png" alt=""></a>
+		                        <div class="pdtImg">
+									<a th:href="|/shopping/detail?productNo=${pdt.productNo}|" class="imgLink">
+										<img th:src="${pdt.file_path}+${pdt.change_file1}" alt="">
+									</a>
 								</div>
-								<div class="pdtTxt">
-									<p class="pdtHead" style="color:#4f8ffa;">2019 누적판매 15,591건!</p><!-- 문구가 없어도 태그삭제 X -->
-									<p class="pdtBrand">바닐라코</p>
-									<p class="pdtName"><a href="#">바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널</a></p>			
-									<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
-									<div class="pdtReview">
-										<div class="js_rating ratingS"><span>4.5</span></div>
-										4.5 <span class="count">(리뷰 18)</span>
+		                        <div class="pdtTxt">
+									<p class="pdtHead" style="color:#4f8ffa;" th:text="${pdt.categoryId}"></p>
+		                            <p class="pdtBrand" th:text="${pdt.productBrand}"></p>
+		                            <p class="pdtName" th:text="${pdt.productTitle}"><a href="#"></a></p>
+		                            <p class="pdtPrice" th:text="${#numbers.formatInteger(pdt.productPrice, 0, 'COMMA')+'원'}"></p>
+		                            <div class="pdtReview">
+										<div class="js_rating ratingS"><span><th:block data-th-text="${pdt.avgStar}"></th:block></span></div>
+										<th:block data-th-text="${pdt.avgStar}"></th:block> <span class="count">(리뷰 <th:block data-th-text="${pdt.sumReview}"></th:block>)</span>
 									</div>
 								</div>
-								<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM"><span class="hide">찜하기</span></a>
-								<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
-							</li>
+			                    <a href="javascript:void(0);" th:onclick="|javascript:addWish('${pdt.productNo}')|" th:id="pdtNo_+${pdt.productNo}" class="btn_like likeM"><span class="hide">찜하기</span></a>
+			                    <a href="javascript:void(0);" th:onclick="|javascript:cartInsert('${pdt.productNo}')|" class="btn_cart cartM"><span>장바구니</span></a>
+		                    </li>
 						</ul>
 					</div>
 				</div>
@@ -218,60 +122,28 @@
 					<div class="bestTtl"><p class="fs26 notoB">운동·생활용품 BEST 3</p><span class="fs14 fc88 mgl20">각 카테고리 기준 최근 한주간 가장 많이 판매된 제품입니다.</span></div>
 					<div class="pdt_list1 type03 mgt35">
 						<ul class="list_box">
-							<li>
+                    		<li th:each="pdt:${goodsRank}">
 								<div class="bestMark" style="background:#ffbc38;"><span>BEST</span><span>1</span></div>
-								<div class="pdtImg">
-									<a href="#" class="imgLink"><img src="/images/temp/pdt03.png" alt=""></a>
-								</div>
-								<div class="pdtTxt">
-									<p class="pdtHead" style="color:#4f8ffa;">2019 누적판매 15,591건!</p><!-- 문구가 없어도 태그삭제 X -->
-									<p class="pdtBrand">바닐라코</p>
-									<p class="pdtName"><a href="#">바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널</a></p>			
-									<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
-									<div class="pdtReview">
-										<div class="js_rating ratingS"><span>4.5</span></div>
-										4.5 <span class="count">(리뷰 18)</span>
-									</div>
-								</div>
-								<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM"><span class="hide">찜하기</span></a>
-								<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
-							</li>
-							<li>
 								<div class="bestMark" style="background:#ccc;"><span>BEST</span><span>2</span></div>
-								<div class="pdtImg">
-									<a href="#" class="imgLink"><img src="/images/temp/pdt03.png" alt=""></a>
-								</div>
-								<div class="pdtTxt">
-									<p class="pdtHead" style="color:#4f8ffa;">2019 누적판매 15,591건!</p><!-- 문구가 없어도 태그삭제 X -->
-									<p class="pdtBrand">바닐라코</p>
-									<p class="pdtName"><a href="#">바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널</a></p>			
-									<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
-									<div class="pdtReview">
-										<div class="js_rating ratingS"><span>4.5</span></div>
-										4.5 <span class="count">(리뷰 18)</span>
-									</div>
-								</div>
-								<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM"><span class="hide">찜하기</span></a>
-								<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
-							</li>
-							<li>
 								<div class="bestMark" style="background:#dbad82;"><span>BEST</span><span>3</span></div>
-								<div class="pdtImg">
-									<a href="#" class="imgLink"><img src="/images/temp/pdt03.png" alt=""></a>
+		                        <div class="pdtImg">
+									<a th:href="|/shopping/detail?productNo=${pdt.productNo}|" class="imgLink">
+										<img th:src="${pdt.file_path}+${pdt.change_file1}" alt="">
+									</a>
 								</div>
-								<div class="pdtTxt">
-									<p class="pdtHead" style="color:#4f8ffa;">2019 누적판매 15,591건!</p><!-- 문구가 없어도 태그삭제 X -->
-									<p class="pdtBrand">바닐라코</p>
-									<p class="pdtName"><a href="#">바닐라 바닐라 바닐라클린 잇 제로 클렌징 밤 오리지널</a></p>			
-									<p class="pdtPrice"><span class="sale">10%</span>25,200<em>원</em><span class="cost">15,000원</span></p>
-									<div class="pdtReview">
-										<div class="js_rating ratingS"><span>4.5</span></div>
-										4.5 <span class="count">(리뷰 18)</span>
+		                        <div class="pdtTxt">
+									<p class="pdtHead" style="color:#4f8ffa;" th:text="${pdt.categoryId}"></p>
+		                            <p class="pdtBrand" th:text="${pdt.productBrand}"></p>
+		                            <p class="pdtName" th:text="${pdt.productTitle}"><a href="#"></a></p>
+		                            <p class="pdtPrice" th:text="${#numbers.formatInteger(pdt.productPrice, 0, 'COMMA')+'원'}"></p>
+		                            <div class="pdtReview">
+										<div class="js_rating ratingS"><span><th:block data-th-text="${pdt.avgStar}"></th:block></span></div>
+										<th:block data-th-text="${pdt.avgStar}"></th:block> <span class="count">(리뷰 <th:block data-th-text="${pdt.sumReview}"></th:block>)</span>
 									</div>
 								</div>
-								<a href="javascript:void(0);" onclick="jsShopFloating('like_floating', this)" class="btn_like likeM"><span class="hide">찜하기</span></a>
-								<a href="javascript:void(0);" onclick="jsShopFloating('cart_floating')" class="btn_cart cartM"><span>장바구니</span></a>
-							</li>
+			                    <a href="javascript:void(0);" th:onclick="|javascript:addWish('${pdt.productNo}')|" th:id="pdtNo_+${pdt.productNo}" class="btn_like likeM"><span class="hide">찜하기</span></a>
+			                    <a href="javascript:void(0);" th:onclick="|javascript:cartInsert('${pdt.productNo}')|" class="btn_cart cartM"><span>장바구니</span></a>
+		                    </li>
 						</ul>
 					</div>
 				</div>
