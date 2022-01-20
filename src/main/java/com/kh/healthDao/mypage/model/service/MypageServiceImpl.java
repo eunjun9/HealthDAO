@@ -317,7 +317,19 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 
 	@Override
 	public int reviewInsert(Review review) {
-		return mypageMapper.reviewInsert(review);
+		int payNo = review.getPayNo();
+		// 한 결제 당 상품 몇개인지 구하기
+		int payProductCount = mypageMapper.payProductCount(payNo);
+		// 현재 한 결제 중 리뷰 몇개 되어있는지 구하기
+		int payReviewCount = mypageMapper.payReviewCount(payNo);
+		
+		if((payProductCount - 1) == payReviewCount) {
+			mypageMapper.statusModify(review);
+		}
+		
+		int insertResult = mypageMapper.reviewInsert(review);
+		
+		return insertResult;
 	}
 
 	@Override

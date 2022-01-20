@@ -229,8 +229,8 @@ public class MainController {
 	}
 	
 	// 장바구니 카운트
+	@GetMapping("/cartCountSelect")
 	@ResponseBody
-	@GetMapping("/cc")
 	public int cartCount(@AuthenticationPrincipal UserImpl userImpl) {
 		if(userImpl != null) {
 			int userNo = userImpl.getUserNo();

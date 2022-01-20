@@ -64,7 +64,8 @@
                                     <tbody>
                                         <tr th:each="review : ${reviewList}">
                                             <td class="fc88" th:text="${review.category}"></td>
-                                            <td class="fc88" >잇메이트 소고기볼 혼합 100g</td>
+                                            <td class="fc88" th:if="${review.category == 'PT'}"><span th:text="${review.member.userName}"></span> 트레이너 PT</td>
+                                            <td class="fc88" th:if="${review.category == '상품'}"><span th:text="${review.product.productTitle}"></span></td>
                                             <td class="fc88"><div class="js_rating ratingS"><span th:text="${review.star}"></span></div></td>
                                             <td class="fc88"><a href="#" class="js_ListTtl ListTtl" th:onclick="|javascript:selectPop('${review.reviewNo}')|" th:text="${review.rContent}"></a></td>
                                             <td class="fc88" th:text="${#dates.format(review.rDate, 'yyyy-MM-dd')}"></td>
@@ -159,8 +160,7 @@
 	                    </dl>          
 	                </div>
 	                <div class="btn_wrap length2">
-	                    <button type="submit" class="btn btnSizeL btnArr btnColorW btnTypeR"><span>수정</span></button>
-	                    <a href="#" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></a>
+	                    <button type="submit" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>수정</span></button>
 	                </div>
                 </form>
             </div>
@@ -178,7 +178,6 @@
 			data : sendData,
 			type : "post",
 			success : function(data){
-				console.log(data);
 				document.getElementById("reviewDept").textContent = data.category;
 				let starScore = document.getElementById("starScore");
 				starScore.textContent = data.star;
@@ -192,6 +191,11 @@
 				document.getElementById("reviewContent").textContent = data.rcontent;
 				document.getElementById("star").value = data.star;
 				document.getElementById("reviewNo").value = data.reviewNo;
+				if(data.category == "PT"){
+					document.getElementById("productName").textContent = data.member.userName + "트레이너 PT";
+				}else{
+					document.getElementById("productName").textContent = data.product.productTitle;
+				}
 				showLayer('reviewDetail');
 			},
 			error : function(e){

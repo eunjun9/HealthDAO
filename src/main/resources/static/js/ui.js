@@ -472,6 +472,7 @@ $(document).on('click', '.js_userRating .userRatingBox button', function(e){
 	var resultRtg = Number($(this).text()),
 		rating_W = Math.round($(this).parents('.js_rating').width()) * (resultRtg * 0.2);
 	$(this).closest('.userRatingBox').siblings('span').width(rating_W).text(resultRtg)
+	$('.starResult').val(resultRtg);
 })
 
 
@@ -1174,12 +1175,25 @@ function addCookie(id) {
 	}
 }
 
+// 장바구니 갯수 카운트
+$(function(){
+	$.ajax({
+		url : "/cartCountSelect",
+		method : 'GET',
+		success : function(data){
+			$("#mainCartCount").text(data);	// 장바구니 카운트
+		},
+		error : function(e){
+			console.log(e);
+		}
+	});
+});
+
 /**
  * 장바구니 추가 ajax
  */
 function cartInsert(pNo){
 	let productNo = pNo;
-	
 	var sendData = {"productNo":productNo, "cartStock":1};
 	$.ajax({
 		url : "/mypage/cartInsert",
@@ -1187,6 +1201,16 @@ function cartInsert(pNo){
 		type : "post",
 		success : function(data){
 			if(data == "success"){
+				$.ajax({
+					url : "/cartCountSelect",
+					method : 'GET',
+					success : function(data){
+						$("#mainCartCount").text(data);	// 장바구니 카운트
+					},
+					error : function(e){
+						console.log(e);
+					}
+				});
 				alert("장바구니에 추가되었습니다.");							
 			}else{
 				alert("장바구니에 추가 실패");

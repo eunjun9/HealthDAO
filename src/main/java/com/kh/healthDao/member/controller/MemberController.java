@@ -1,24 +1,18 @@
 package com.kh.healthDao.member.controller;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailSender;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,7 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.healthDao.member.model.service.MemberService;
-import com.kh.healthDao.member.model.vo.MailTO;
 import com.kh.healthDao.member.model.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
@@ -37,14 +30,25 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberController {
 	
 	private MemberService memberService;
+	private JavaMailSender mailSender;
 	
 	@Autowired
-	public MemberController(MemberService memberService) {
+	public MemberController(MemberService memberService, JavaMailSender mailSender) {
 		this.memberService = memberService;
+		this.mailSender = mailSender;
 	}
 	
 	@GetMapping("/login")
-	public void loginForm() {}
+	public String loginForm(@RequestParam(value = "error", required = false) String error,
+            			    @RequestParam(value = "exception", required = false) String exception, Model model) {
+		
+		model.addAttribute("error", error);
+        model.addAttribute("exception", exception);
+        return "/member/login";
+	}
+	
+	/*@GetMapping("/login")
+	public void loginForm() {}*/
 	
 	@GetMapping("/signUp")
 	public void signupForm() {}
@@ -59,28 +63,21 @@ public class MemberController {
 		member.setUserBirth(birth);
 		
 		memberService.signUp(member);
-
-		/*
-		int result = memberService.idChk(member);
-		try {
-			if(result == 1) {
-				return "/member/signUp";
-			}else if(result == 0) {
-				memberService.signUp(member);
-			}
-			// 입력된 아이디가 존재한다면 -> 다시 회원가입 페이지로 돌아가기 
-			// 존재하지 않는다면 -> service
-		} catch (Exception e) {
-			throw new RuntimeException();
-		}*/
 		
 		return "redirect:/";
 	}
 	
 	@PostMapping("/idChk")
 	@ResponseBody
-	public int idChk(Member member) {
-		int result = memberService.idChk(member);
+	public int idChk(@RequestParam String userId) {
+		int result = memberService.idChk(userId);
+		return result;
+	}
+	
+	@PostMapping("/nickChk")
+	@ResponseBody
+	public int nickChk(@RequestParam String userNickName) {
+		int result = memberService.nickChk(userNickName);
 		return result;
 	}
 	
@@ -95,33 +92,28 @@ public class MemberController {
 	}
 	
 	@PostMapping("/findPwd")
-	public ModelAndView findPwd(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
-		String userEmail = (String)request.getParameter("userEmail");
-		String userId = (String)request.getParameter("userId");
+	public ModelAndView findPwd(HttpSession session, @RequestParam String userId, @RequestParam String userEmail,
+			RedirectAttributes rttr) {
 		ModelAndView mv = new ModelAndView();
 
-		Member member = memberService.selectMember(userEmail);
-		JavaMailSender mailSender = null;
-			
-		if(member != null) {
-		Random r = new Random();
-		int num = r.nextInt(999999); // 랜덤난수설정
+		Member selectMember = memberService.selectMember(userEmail);
 		
-			if(member.getUserId().equals(userId)) {
-				session.setAttribute("email", member.getUserEmail());
+		if(selectMember != null && selectMember.getUserId().equals(userId)) {
+			Random r = new Random();
+			int num = r.nextInt(999999); // 랜덤난수설정
+		
+				session.setAttribute("email", selectMember.getUserEmail());
 	
 				String setfrom = "khhealthdao@google.com";
 				String tomail = userEmail; // 받는사람
 				String title = "[HealthDao] 비밀번호변경 인증 이메일 입니다"; 
-				String content = System.getProperty("line.separator") + "안녕하세요 회원님" + System.getProperty("line.separator")
-						+ "HealthDao 비밀번호 찾기(변경) 인증번호는 " + num + " 입니다." + System.getProperty("line.separator");
+				String content = "안녕하세요 " + userId + "님! HealthDao 비밀번호 찾기(변경) 인증번호는 " + num + " 입니다.";
 	
 				try {
-					@SuppressWarnings("null")
 					MimeMessage message = mailSender.createMimeMessage();
 					MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "utf-8");
 	
-					messageHelper.setFrom(setfrom); 
+					messageHelper.setFrom(setfrom);
 					messageHelper.setTo(tomail); 
 					messageHelper.setSubject(title);
 					messageHelper.setText(content); 
@@ -131,23 +123,77 @@ public class MemberController {
 					System.out.println(e.getMessage());
 				}
 	
-				mv.setViewName("member/findIdPwd");
 				mv.addObject("num", num);
 				mv.addObject("findUserEmail", userEmail);
-				return mv;
-			} else {
 				mv.setViewName("member/findIdPwd");
 				return mv;
-			}
+		} else {
+				rttr.addFlashAttribute("msg", "회원정보를 찾을 수 없습니다.");
+				mv.setViewName("redirect:/member/findIdPwd");
+				return mv;
 		}
-		return mv;
 	}
 	
-	@PostMapping("/findPwdUpdate")
+	/* @GetMapping("/findPwd")
+	@ResponseBody
+	public Map<String, Member> findPwd(String userId, String userEmail, HttpSession session, RedirectAttributes rttr) {
+
+		Map<String, Member> json = new HashMap<>();
+		Member selectMember = memberService.selectMember(userEmail);
+		
+		System.out.println(userId +", "+ userEmail);
+		
+		if(selectMember != null && selectMember.getUserId().equals(userId)) {
+			Random r = new Random();
+			int num = r.nextInt(999999); // 랜덤난수설정
+		
+			session.setAttribute("email", selectMember.getUserEmail());
+	
+			String setfrom = "khhealthdao@google.com";
+			String tomail = userEmail; // 받는사람
+			String title = "[HealthDao] 비밀번호변경 인증 이메일 입니다"; 
+			String content = "안녕하세요 " + userId + "님! HealthDao 비밀번호 찾기(변경) 인증번호는 " + num + " 입니다.";
+	
+			try {
+					MimeMessage message = mailSender.createMimeMessage();
+					MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "utf-8");
+	
+					messageHelper.setFrom(setfrom);
+					messageHelper.setTo(tomail); 
+					messageHelper.setSubject(title);
+					messageHelper.setText(content); 
+	
+					mailSender.send(message);
+			} catch (Exception e) {
+					System.out.println(e.getMessage());
+			}
+			selectMember.setNum(num);
+			json.put("member", selectMember);
+			return json;
+		} else {
+			return null;
+		}
+	} */
+	
+	/* @PostMapping("/findPwdUpdate")
 	public String findPwdUpdate(@RequestParam String num, @RequestParam String ijnum, Member member, HttpSession session, RedirectAttributes rttr) {
 		int result = memberService.pwdUpdate(member);
 		
 		if(ijnum.equals(num) && result == 1) {
+			rttr.addFlashAttribute("msg", "비밀번호가 변경되었습니다.");
+			return "member/login";
+		} else {
+			rttr.addFlashAttribute("msg", "인증번호가 맞지 않습니다.");
+			return "member/findIdPwd";
+		}
+	} */
+	
+	@PostMapping("/findPwdUpdate")
+	public String findPwdUpdate(@RequestParam String ijnum, Member member, RedirectAttributes rttr) {
+		int result = memberService.pwdUpdate(member);
+		int ijnum2 = Integer.parseInt(ijnum);
+		
+		if(ijnum2 == member.getNum() && result == 1) {
 			rttr.addFlashAttribute("msg", "비밀번호가 변경되었습니다.");
 			return "member/login";
 		} else {

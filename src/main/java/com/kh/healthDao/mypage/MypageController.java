@@ -85,7 +85,6 @@ public class MypageController {
 		int userNo = userImpl.getUserNo();
 		
 		List<Payment> paymentList = paymentService.mypaymentList(userNo);
-		System.out.println(paymentList);
 		
 		mv.addObject("paymentList", paymentList);
 		mv.setViewName("mypage/myOrder");
@@ -96,18 +95,7 @@ public class MypageController {
 	@PostMapping("/reviewInsert")
 	public String reviewInsert(Review review, @AuthenticationPrincipal UserImpl userImpl, RedirectAttributes rttr) {
 		
-	
-		String msg = myReviewService.reviewInsert(review) > 0 ? "리뷰 등록 성공" : "리뷰 등록 실패";	
-		
-		if(msg.equals("리뷰 등록 성공")) {
-			int result = paymentService.statusModify(review);
-			
-			if(result > 0 ) {
-				msg = "리뷰 등록 성공";
-			}else {
-				msg = "리뷰 등록 실패";
-			}
-		}
+		String msg = myReviewService.reviewInsert(review) > 0 ? "리뷰 등록 완료" : "리뷰 등록 실패";					
 		
 		rttr.addFlashAttribute("msg", msg);
 		
@@ -222,6 +210,8 @@ public class MypageController {
 		
 		Map<String, Object> map = myReviewService.userReviewList(page, userNo);
 		
+		System.out.println(map.get("reviewList"));
+		
 		mv.addObject("reviewList", map.get("reviewList"));
 		mv.addObject("listCount", map.get("listCount"));
 		mv.addObject("pi", map.get("pi"));
@@ -325,8 +315,6 @@ public class MypageController {
 	public Map<String, String> insertDeli(@RequestBody Address address, @AuthenticationPrincipal UserImpl userImpl) {
 		int userNo = userImpl.getUserNo();
 		address.setUserNo(userNo);
-		
-		log.info("입력 요청 주소 : {}", address);
 		
 		String msg = myInfoService.insertDeli(address) > 0 ? "배송지가 등록되었습니다." : "배송지 등록에 실패하였습니다.";
 		

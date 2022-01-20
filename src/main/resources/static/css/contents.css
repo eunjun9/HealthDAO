@@ -2567,7 +2567,7 @@ filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#555555', endC
 .myOrderList .listB .pdtPrice .free{display:inline-block;width:45px;padding:0 11px 0 2px;text-align:center;vertical-align:top;font-size:12px;line-height:25px;color:#fff;background:url('../images/order/ico_free.png') no-repeat center center;}
 .myOrderList .listB .pdtPrice i{font-size:14px;font-weight:400;line-height:25px;}
 .myOrderList .listB .pdtOpt{margin-top:20px;line-height:1;color:#888;}
-.myOrderList .listB .state{display:table-cell;width:164px;vertical-align:middle;}
+.myOrderList .listB .state{display:table-cell;width:164px;vertical-align:middle; text-align:center}
 .myOrderList .listB .btnWrap{display:table-cell;width:122px;vertical-align:middle;}
 .myOrderList .listB .btnWrap .btn{width:92px;margin-top:5px;}
 .myOrderList .listB .btnWrap .btn:first-child{margin-top:0;}

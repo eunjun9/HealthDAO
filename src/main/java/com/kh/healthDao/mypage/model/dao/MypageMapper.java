@@ -118,8 +118,15 @@ public interface MypageMapper {
 
 	int refundStatusModify(int payNo);
 
+
 	// 회원등급
 	List<Payment> memberGrade(int userNo);
+
+	int payProductCount(int payNo);
+
+	int payReviewCount(int payNo);
+
+
 
 
 
