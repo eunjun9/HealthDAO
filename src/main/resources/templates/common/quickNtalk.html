@@ -57,8 +57,6 @@
 					addList[i] = value[i];
 					data.addList = addList;
 				}
-				console.log(data);
-				
 				$.ajax({
 					url : "/recentPdt",
 					dataType : "JSON",	// 200에러나서 삭제
@@ -66,12 +64,11 @@
 					type : "POST",
 					traditional : true,		// 배열로 값 넘길때 필요한 선언
 					success : function(data){
-						console.log(data.length);
 						html = '';
 						if(data.length > 0){
 							for(let i = 0; i < data.length; i++){
 								html += '<div class="list"><a href="/shopping/detail?productNo=' + data[i].productNo + '">'
-									  + '<img src="/images/temp/pdt02.png" alt=""></a></div>';
+									  + '<img src="'+ data[i].file_path + data[i].change_file1 +'" alt=""></a></div>';
 								$(".recoQuick").append(html);
 								html='';
 							}
