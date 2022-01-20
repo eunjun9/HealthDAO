@@ -41,7 +41,38 @@
 		<result property="defAddress" column="DEFAULT_ADDRESS"/>
 		<result property="userNo" column="USER_NO"/>
   	</resultMap>
+
+  	
+  	<resultMap id="PaymentResultMap" type="com.kh.healthDao.manager.model.vo.Payment">
+      <id property="payNo" column="PAY_NO"/>
+      <result property="payDate" column="PAY_DATE"/>
+      <result property="payMethod" column="PAY_METHOD"/>
+      <result property="ordererPhone" column="ORDERER_PHONE"/>
+      <result property="ordererEmail" column="ORDERER_EMAIL"/>
+      <result property="orderStatus" column="ORDER_STATUS"/>
+      <result property="totalPrice" column="TOTAL_PRICE"/>
+      <collection property="productList" resultMap="productResultMap"/>
+   </resultMap>
+   
+	<resultMap id="productReviewMap" type="com.kh.healthDao.admin.model.vo.Product">
+		<id property="productNo" column="PRODUCT_NO"/>
+		<result property="productTitle" column="PRODUCT_TITLE"/>
 		
+		<association javaType="com.kh.healthDao.review.model.vo.Review" property="review">
+				<id property="reviewNo" column="REVIEW_NO"/>
+				<result property="star" column="STAR"/>
+				<result property="rContent" column="R_CONTENT"/>
+				<result property="rDate" column="R_DATE"/>
+				<result property="modifyDate" column="MODIFY_DATE"/>
+				
+				<association javaType="com.kh.healthDao.member.model.vo.Member" property="member">
+					<id property="userNo" column="USER_NO"/>
+					<result property="userName" column="USER_NAME"/>
+				</association>
+		</association>
+	</resultMap>
+	
+
 	<select id="recentList" resultMap="productResultMap">
 		SELECT
 				P.PRODUCT_NO
@@ -555,6 +586,42 @@
 			  , P.PRODUCT_BENEFIT
 			  , PO.PRODUCT_OPTION
 	</select>
+		
+	<select id="shoppingReview" resultMap="productReviewMap" parameterType="_int">
+		SELECT
+		       P.PRODUCT_NO
+		     , P.PRODUCT_TITLE
+		     , RV.REVIEW_NO
+		     , RV.STAR
+		     , RV.R_CONTENT
+		     , RV.R_DATE
+		     , RV.MODIFY_DATE
+		     , M.USER_NAME
+		  FROM PRODUCT P
+		  LEFT OUTER JOIN REVIEW RV ON(P.PRODUCT_NO = RV.PRODUCT_NO)
+		  LEFT OUTER JOIN MEMBER M ON(RV.USER_NO = M.USER_NO)
+		 GROUP BY P.PRODUCT_NO
+		     , P.PRODUCT_TITLE
+		     , RV.REVIEW_NO
+		     , RV.STAR
+		     , RV.R_CONTENT
+		     , RV.R_DATE
+		     , RV.MODIFY_DATE
+		     , M.USER_NAME
+		HAVING P.PRODUCT_NO = #{productNo}
+	</select>
+	
+	<select id="sumReview" resultType="_int" parameterType="_int">
+		SELECT COUNT(*)
+		  FROM REVIEW
+		 WHERE PRODUCT_NO = #{productNo}
+	</select>
+	
+	<select id="avgStar" resultType="_int" parameterType="_int">
+		SELECT ROUND((SUM(STAR)) / COUNT(REVIEW_NO), 1)
+		  FROM REVIEW
+		 WHERE PRODUCT_NO = #{productNo}
+	</select>
 	
 	<select id="shoppingQuantity" parameterType="com.kh.healthDao.admin.model.vo.Product">
 		INSERT 
@@ -599,8 +666,42 @@
 	</select>
 	
 	
+	<!-- 주문결제 정보 전달 -->
+	<insert id="paymentInfoInsert" parameterType="com.kh.healthDao.manager.model.vo.Payment">
+		INSERT INTO PAYMENT(
+				PAY_NO
+			  , PAY_DATE
+			  , PAY_METHOD
+			  , ORDERER_PHONE
+			  , ORDERER_EMAIL
+			  , ORDER_STATUS
+			  , USER_NO
+			  , TOTAL_PRICE
+		)VALUES(
+			    SEQ_PAY_NO.NEXTVAL
+			  , SYSDATE
+			  , 'card'
+			  , #{ordererPhone}
+			  , #{ordererEmail}
+			  , 'N'
+			  , #{userNo}
+			  , #{totalPrice}
+		)
+	</insert>
 	
-	
+	<insert id="paymentDetailInsert" parameterType="com.kh.healthDao.manager.model.vo.Payment">
+		INSERT
+		  INTO PAY_DETAIL
+		  (
+		  	PRODUCT_NO
+		  , PAY_NO
+		  , QUANTITY
+		  )VALUES(
+		  	#{ProductNo}
+		  , SEQ_PAY_NO.CURRVAL
+		  , 0
+		  )
+	</insert>
 	
 	
 	

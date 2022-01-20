@@ -3,6 +3,7 @@ package com.kh.healthDao.admin.model.vo;
 import java.util.List;
 
 import com.kh.healthDao.member.model.vo.Member;
+import com.kh.healthDao.review.model.vo.Review;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,12 +27,12 @@ public class Product {
 	private String productOption;
 	private String categoryId;  // 카테고리ID
 	
-	
 	private List<Option> option;	// 옵션 테이블
 	private Category category;		// 카테고리 테이블
 	private PayDetail payDetail;	// 상품 디테일(수량) 테이블
+	
 
-
+	private Review review;
 	private int productRank;		// 순번
 	private Member member;			// userNo 가져올 때 필요
 	

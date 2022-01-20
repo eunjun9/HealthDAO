@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.healthDao.admin.model.vo.Product;
+import com.kh.healthDao.manager.model.service.ManagerService;
 import com.kh.healthDao.manager.model.vo.Payment;
 import com.kh.healthDao.member.model.vo.Member;
 import com.kh.healthDao.member.model.vo.UserImpl;
@@ -22,6 +23,7 @@ import com.kh.healthDao.mypage.model.vo.Address;
 import com.kh.healthDao.shopping.model.service.ShoppingService;
 
 import lombok.extern.slf4j.Slf4j;
+import oracle.net.aso.a;
 
 
 
@@ -32,11 +34,14 @@ public class ShoppingController {
 
 	private ShoppingService shoppingService;
 	private MyInfoService myInfoService;
+	private ManagerService managerService;
+	
 	
 	@Autowired
-	public ShoppingController(ShoppingService shoppingService, MyInfoService myInfoService) {
+	public ShoppingController(ShoppingService shoppingService, MyInfoService myInfoService, ManagerService managerService) {
 		this.shoppingService = shoppingService;
 		this.myInfoService = myInfoService;
+		this.managerService = managerService;
 	}
 	
 	// 쇼핑 랭킹페이지
@@ -175,10 +180,14 @@ public class ShoppingController {
 	public ModelAndView shoppingDetail(ModelAndView mv, @RequestParam int productNo, @AuthenticationPrincipal UserImpl userImpl) {
 		
 		Product shoppingDetail = shoppingService.shoppingDetail(productNo);
-		
+		List<Product> shoppingReview = shoppingService.shoppingReview(productNo);
+		int sumReview = shoppingService.sumReview(productNo);
+		int avgStar = shoppingService.avgStar(productNo);
+		mv.addObject("sumReview", sumReview);
+		mv.addObject("avgStar", avgStar);
 		mv.addObject("shoppingDetail", shoppingDetail);
+		mv.addObject("shoppingReview", shoppingReview);
 		mv.setViewName("shopping/shoppingProductDetail");
-
 		// 찜한 상품 확인
 		int userNo = 0;		
 		if(userImpl != null) {
@@ -226,14 +235,20 @@ public class ShoppingController {
 		
 	}
 	
-	// 주문 내역
-	@PostMapping("/mypage/myOrder")
+	// 결제완료 정보
+	@PostMapping("mypage/myOrder")
 	@ResponseBody
-	public String myOrderInfo(Payment payment) {
+	public String paymentInfoInsert(Payment payment) {
 		
 		System.out.println(payment);
 		
-		return "";
+		int result = shoppingService.paymentInfoInsert(payment);
+		
+		if(result > 0) {
+			return "결제 성공";
+		} else {
+			return "결제 실패";
+		}
 	}
 	
 	
