@@ -37,13 +37,13 @@
 						<div>
 							<h2>
 								당신의 <strong>회원 등급은?</strong><br>
-								<div th:if="${sum lt 500000}">
+								<div th:if="${sum lt 500000}" style="color: #FF5B5D;">
 									일반회원<br>
 								</div>
-								<div th:if="${500000 le sum && sum lt 1000000}">
+								<div th:if="${500000 le sum && sum lt 1000000}" style="color: #FF5B5D;">
 									VIP<br>
 								</div>
-								<div th:if="${1000000 le sum}">
+								<div th:if="${1000000 le sum}" style="color: #FF5B5D;">
 									VVIP<br>
 								</div>
 							</h2>
