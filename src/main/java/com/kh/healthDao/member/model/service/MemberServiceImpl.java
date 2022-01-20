@@ -112,6 +112,9 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public int pwdUpdate(Member member) {
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		member.setUserPwd(passwordEncoder.encode(member.getUserPwd()));
+		
 		return memberMapper.pwdUpdate(member);
 	}
 

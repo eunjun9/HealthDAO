@@ -99,8 +99,8 @@
 												<button class="title" type="button" th:text="${member.userBirth.substring(0, 4)}"></button>
 												<ul class="selList">
 													<li th:each="m : ${#numbers.sequence(#calendars.format(#calendars.createNow(), 'yyyy'),1910)}">
-														<input type="radio" th:value="${m}" class="option" id="select1_1" name="userBirth">
-														<label for="select1_1" th:text="${m}"></label>
+														<input type="radio" th:value="${m}" class="option" th:id="'userBirth'+${m}" name="userBirth">
+														<label th:for="'userBirth'+${m}" th:text="${m}"></label>
 													</li>
 												</ul>
 											</div>
@@ -110,8 +110,8 @@
 												<button class="title" type="button" th:text="${member.userBirth.substring(4, 6)}"></button>
 												<ul class="selList">
 													<li th:each="m : ${#numbers.sequence(1,12)}">
-														<input type="radio" th:value="${m} <= 9 ? '0'+${m} : ${m}" class="option" id="select1_2" name="userBirth2">
-														<label for="select1_2" th:text="${m} <= 9 ? '0'+${m} : ${m}"></label>
+														<input type="radio" th:value="${m} <= 9 ? '0'+${m} : ${m}" class="option" th:id="'userBirth2'+${m}" name="userBirth2">
+														<label th:for="'userBirth2'+${m}" th:text="${m} <= 9 ? '0'+${m} : ${m}"></label>
 													</li>
 												</ul>
 											</div>
@@ -121,8 +121,8 @@
 												<button class="title" type="button" th:text="${member.userBirth.substring(6)}"></button>
 												<ul class="selList">
 													<li th:each="m : ${#numbers.sequence(1,31)}">
-														<input type="radio" th:value="${m} <= 9 ? '0'+${m} : ${m}" class="option" id="select1_3" name="userBirth3">
-														<label for="select1_3" th:text="${m} <= 9 ? '0'+${m} : ${m}"></label>
+														<input type="radio" th:value="${m} <= 9 ? '0'+${m} : ${m}" class="option" th:id="'userBirth3'+${m}" name="userBirth3">
+														<label th:for="'userBirth3'+${m}" th:text="${m} <= 9 ? '0'+${m} : ${m}"></label>
 													</li>
 												</ul>
 											</div>
@@ -169,7 +169,6 @@
 									<p class="infoMsg">※ 상품 구매정보는 수신동의 여부 관계없이 받아 보실 수 있습니다.</p>
 								</div>
 								<div class="btn_wrap">
-									<button id="btnDelete" class="btn btnArr btnSizeL btnColorW btnTypeB" style="width:150px;"><span>회원탈퇴</span></button>
 									<a href="/mypage/" id="btnCancel" class="btn btnArr btnSizeL btnColorB btnTypeB" style="width:150px;"><span>취소</span></a>
 									<button id="btnUpdate" class="btn btnArr btnSizeL btnColorG btnTypeB" style="width:150px;"><span>확인</span></button>
 								</div>

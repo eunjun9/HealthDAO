@@ -20,7 +20,7 @@
 						<h1>회원가입</h1>
 						<p>Welcome to HealthDao</p>
 					</div>
-					<form id="memberJoinForm" name="join" th:action="@{/member/signUp}" method="post" onsubmit="return validate();">
+					<form id="memberJoinForm" name="join" action="/member/signUp" method="post"> <!-- th:action="@{/member/signUp}" -->
 						<div class="inp_wrap inp_id">
 							<label class="inp_lab" for="ipt_label">아이디 <b>*</b></label>
 							<div class="inp_text sizeS">
@@ -81,8 +81,8 @@
 										<button class="title" type="button">년도</button>
 										<ul class="selList">
 											<li th:each="m : ${#numbers.sequence(#calendars.format(#calendars.createNow(), 'yyyy'),1910)}">
-												<input type="radio" th:value="${m}" class="option" id="select1_1" name="userBirth">
-												<label for="select1_1" th:text="${m}"></label>
+												<input type="radio" th:value="${m}" class="option" th:id="'userBirth'+${m}" name="userBirth">
+												<label th:for="'userBirth'+${m}" th:text="${m}"></label>
 											</li>
 										</ul>
 									</div>
@@ -92,8 +92,8 @@
 										<button class="title" type="button">월</button>
 										<ul class="selList">
 											<li th:each="m : ${#numbers.sequence(1,12)}">
-												<input type="radio" th:value="${m} <= 9 ? '0'+${m} : ${m}" class="option" id="select1_2" name="userBirth2">
-												<label for="select1_2" th:text="${m} <= 9 ? '0'+${m} : ${m}"></label>
+												<input type="radio" th:value="${m} <= 9 ? '0'+${m} : ${m}" class="option" th:id="'userBirth2'+${m}" name="userBirth2">
+												<label th:for="'userBirth2'+${m}" th:text="${m} <= 9 ? '0'+${m} : ${m}"></label>
 											</li>
 										</ul>
 									</div>
@@ -103,8 +103,8 @@
 										<button class="title" type="button">일</button>
 										<ul class="selList">
 											<li th:each="m : ${#numbers.sequence(1,31)}">
-												<input type="radio" th:value="${m} <= 9 ? '0'+${m} : ${m}" class="option" id="select1_3" name="userBirth3">
-												<label for="select1_3" th:text="${m} <= 9 ? '0'+${m} : ${m}"></label>
+												<input type="radio" th:value="${m} <= 9 ? '0'+${m} : ${m}" class="option" th:id="'userBirth3'+${m}" name="userBirth3">
+												<label th:for="'userBirth3'+${m}" th:text="${m} <= 9 ? '0'+${m} : ${m}"></label>
 											</li>
 										</ul>
 									</div>
@@ -193,7 +193,7 @@
 							<p class="infoMsg">※ 상품 구매정보는 수신동의 여부 관계없이 받아 보실 수 있습니다.</p>
 						</div>
 						<div class="btn_wrap">
-							<button type="submit" class="btn btnArr btnSizeL btnColorB btnTypeB" style="width:500px;"><span>회원가입</span></button>
+							<button type="button" onclick="validate();" class="btn btnArr btnSizeL btnColorB btnTypeB" style="width:500px;"><span>회원가입</span></button>
 						</div>
 					</form>
 				</div>
@@ -231,7 +231,6 @@
 		            success : function(data){
 		                if(data != 1) {
 		                	alert('사용 가능한 아이디입니다.');
-		                	$('#inp_id').attr("disabled", true);
 		                } else {
 		                	alert('이미 존재하는 아이디입니다.');
 		                }
@@ -276,9 +275,9 @@
 		
 		function validate() {
 			   // 아이디와 패스워드가 적합한지 검사할 정규식
-		       var re = /^[a-zA-Z0-9]{4,12}+$/;
+		       var re = /^[a-zA-Z0-9]{4,12}$/;
 		       // 이름이 적합한지 검사할 정규식
-		       var re2 = /^[가-힣]{2,}+$/;
+		       var re2 = /^[가-힣]{2,}$/;
 		       // 핸드폰번호가 적합한지 검사할 정규식
 		       var re3 = /01[016789]-[^0][0-9]{2,3}-[0-9]{3,4}/;
 		       // 이메일이 적합한지 검사할 정규식
@@ -337,6 +336,7 @@
 		       }
 
 		       alert("회원가입이 완료되었습니다.");
+		       document.forms.join.submit();
 		   }
 
 		   function check(re, what, message) {
@@ -350,29 +350,5 @@
 		   }
 	</script>
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
-	<div id="phoneCert" class="lyPopArea">
-		<div class="lyPop">
-			<div class="lyWrap">
-				<button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
-				<div class="lyTit">이메일 인증</div>
-				<div class="lyBody basic">
-					<div class="lyBody basic">
-						<p>이메일이 발송되었습니다.<br> 인증번호를 입력해주세요.</p>
-						<div class="inp_wrap mgt20">
-							<label class="inp_lab" for="find_new_pw_chk">인증번호</label>
-							<div class="inp_text">
-								<input type="password" id="find_new_pw_chk" placeholder="인증번호를 입력해주세요.">
-								<button type="button" class="btn_clear"><span>clear</span></button>
-							</div>
-							<p class="error">인증번호가 일치하지 않습니다.</p>
-						</div>
-						<div class="btn_wrap">
-							<a href="javascript:void(0);" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 </body>
 </html>

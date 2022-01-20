@@ -82,8 +82,6 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter{
             .loginPage("/member/login")
             /* 로그인 성공 시 랜딩 페이지 설정 */
             .successForwardUrl("/")
-            /* 로그인 실패 시 설정 핸들러 */
-            .failureHandler(failureHandler)
          .and()
             /* 로그아웃 설정 */
             .logout()
