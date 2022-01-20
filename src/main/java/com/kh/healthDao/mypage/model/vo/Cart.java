@@ -1,6 +1,6 @@
 package com.kh.healthDao.mypage.model.vo;
 
-import com.kh.healthDao.shopping.model.vo.Shopping;
+import com.kh.healthDao.admin.model.vo.Product;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,5 +15,5 @@ public class Cart {
 	private int userNo;			// 사용자
 	private int productNo;		// 상품번호
 	
-	private Shopping product;
+	private Product product;
 }

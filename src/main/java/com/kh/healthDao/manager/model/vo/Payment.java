@@ -2,12 +2,9 @@ package com.kh.healthDao.manager.model.vo;
 
 
 import java.util.Date;
-
-
-
 import java.util.List;
 
-import com.kh.healthDao.shopping.model.vo.Shopping;
+import com.kh.healthDao.admin.model.vo.Product;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,7 +33,7 @@ public class Payment {
 
 	private String productOption;		// 상품 옵션
 	
-	private List<Shopping> productList;	// 상품리스트
+	private List<Product> productList;	// 상품리스트
 
 	private int totalPrice;				// 총 합계 금액
 	
