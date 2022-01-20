@@ -1,23 +1,20 @@
 package com.kh.healthDao.shopping.model.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.healthDao.admin.model.vo.Product;
+import com.kh.healthDao.manager.model.vo.Payment;
 import com.kh.healthDao.member.model.vo.Member;
 import com.kh.healthDao.member.model.vo.UserImpl;
 import com.kh.healthDao.mypage.model.service.MyInfoService;
@@ -207,7 +204,7 @@ public class ShoppingController {
 	// 쇼핑 주문
 	@PostMapping("/payment") 
 	public ModelAndView shoppingPaymentInfo(@RequestParam("select1") String select1, @RequestParam("amount") int amount, @RequestParam("sum") int sum, 
-											ModelAndView mv, @RequestParam int productNo, @RequestParam int userNo) { 
+											ModelAndView mv, @RequestParam int productNo, @RequestParam int userNo) {
 		
 		log.info(select1 + "select1" + amount + "amount" + sum + "sum");
 		
@@ -226,10 +223,18 @@ public class ShoppingController {
 		mv.setViewName("shopping/shoppingPayment");
 		
 		return mv; 
+		
 	}
 	
-	
-	
+	// 주문 내역
+	@PostMapping("/mypage/myOrder")
+	@ResponseBody
+	public String myOrderInfo(Payment payment) {
+		
+		System.out.println(payment);
+		
+		return "";
+	}
 	
 	
 	

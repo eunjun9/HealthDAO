@@ -34,7 +34,7 @@
                                 <li class="bg_r">FREE</li>
                                 <li class="bg_r">GIFT</li>
                             </ul>
-                            <a href="/shopping/detail?productNo=" th:attrappend="href=${newProduct.productNo}" class="imgLink"><img src="/resources/web/images/temp/pdt_img1.png" alt=""></a>
+                            <a href="/shopping/detail?productNo=" th:attrappend="href=${newProduct.productNo}" class="imgLink"><img th:src="${newProduct.file_path}+${newProduct.change_file1}" alt=""></a>
                         </div>
                         <div class="pdtTxt">
                             <p class="pdtHead" style="color:#4f8ffa;">2019 누적판매 15,591건!</p><!-- 문구가 없어도 태그삭제 X -->

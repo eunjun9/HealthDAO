@@ -66,7 +66,6 @@ public class adminController {
 	
 	/* 상품 등록 */
 	@PostMapping("productRegist")
-	@ResponseBody
 	public ModelAndView registProduct(Product product, ModelAndView mv, @RequestParam("productFile") MultipartFile productFile, @RequestParam("productInfoFile") MultipartFile productInfoFile, @Value("${custom.path.upload-images}") String uploadImagesPath) {
 		
 		String originFile1 = productFile.getOriginalFilename();
@@ -87,23 +86,11 @@ public class adminController {
 		}  catch (IllegalStateException | IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println(originFile1);
-		System.out.println(ext1);
-		System.out.println(changeFile1);
-		System.out.println(path);
-		System.out.println(productFile);
-		System.out.println(productInfoFile);
 		
-		/* List<Option> options = new ArrayList<>();
-		options.add(option);
-		
-		product.setOption(options);
-		product.setCategory(category); */
+		int result = adminService.registProduct(product, originFile1, originFile2, changeFile1, changeFile2);
+		int result2 = adminService.registOption(product);
 		
 		System.out.println(product);
-		int result = adminService.registProduct(product, originFile1, originFile2, changeFile1, changeFile2);
-		//int result2 = adminService.registCategory(product);
-		int result3 = adminService.registOption(product);
 		
 		if(result > 0) {
 			mv.addObject("msg", "등록 성공");

@@ -86,6 +86,7 @@ public class MypageController {
 		
 		List<Payment> paymentList = paymentService.mypaymentList(userNo);
 		
+		
 		mv.addObject("paymentList", paymentList);
 		mv.setViewName("mypage/myOrder");
 		
@@ -111,11 +112,6 @@ public class MypageController {
 		return msg;
 	}
 	
-	@PostMapping("/myOrder")
-	public String mypagePaymentInfo() {
-		
-		return "mypage/myOrder";
-	}
 	
 	/* 1:1 문의 */
 	@GetMapping("/qna")

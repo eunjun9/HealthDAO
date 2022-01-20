@@ -190,7 +190,7 @@
 		  , PRODUCT_NO
 		)VALUES(
 		    SEQ_F_NO.CURRVAL
-		  , #{productNo}
+		  , SEQ_PRODUCT_NO.CURRVAL
 		)
 	</insert>
 	
