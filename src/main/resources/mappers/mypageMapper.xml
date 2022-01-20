@@ -85,12 +85,14 @@
 	<resultMap id="cartResultMap" type="com.kh.healthDao.mypage.model.vo.Cart">
 		<id property="cartNo" column="CART_NO"/>
 		<result property="cartStock" column="CART_STOCK" />		
-		<association javaType="com.kh.healthDao.shopping.model.vo.Shopping" property="product">
+		<association javaType="com.kh.healthDao.admin.model.vo.Product" property="product">
 			<id property="productNo" column="PRODUCT_NO"/>
-			<result property="productName" column="PRODUCT_BRAND"/>
+			<result property="productBrand" column="PRODUCT_BRAND"/>
 			<result property="productTitle" column="PRODUCT_TITLE"/>
 			<result property="productPrice" column="PRODUCT_PRICE"/>
 			<result property="productOption" column="PRODUCT_OPTION"/>
+			<result property="file_path" column="FILE_PATH"/>
+			<result property="change_file1" column="CHANGE_FILE"/>
 		</association>
 	</resultMap>
 	
@@ -113,12 +115,14 @@
       <collection property="productList" resultMap="productResultMap"/>
    </resultMap>
    
-   <resultMap id="productResultMap" type="com.kh.healthDao.shopping.model.vo.Shopping">
+   <resultMap id="productResultMap" type="com.kh.healthDao.admin.model.vo.Product">
       <id property="productNo" column="PRODUCT_NO" />
-      <result property="productName" column="PRODUCT_BRAND"/>
+      <result property="productBrand" column="PRODUCT_BRAND"/>
       <result property="productTitle" column="PRODUCT_TITLE"/>
       <result property="productPrice" column="PRODUCT_PRICE"/>
       <result property="productOption" column="PRODUCT_OPTION"/>
+      <result property="file_path" column="FILE_PATH"/>
+      <result property="change_file1" column="CHANGE_FILE"/>
       <result property="quantity" column="QUANTITY"/>
    </resultMap>
    
@@ -298,7 +302,7 @@
 				ORDER BY POINT_NO DESC)
 	</select>
 	
-	<select id="pointCount" resultType="_int" parameterType="hashmap">
+	<select id="pointCount" resultType="String" parameterType="hashmap">
 		SELECT
 		   SUM(POINT_AMOUNT)
 		  FROM POINT
@@ -623,10 +627,15 @@
 		    , PRODUCT_TITLE
 		    , PRODUCT_PRICE
 		    , PRODUCT_OPTION
+		    , CHANGE_FILE
+		    , FILE_PATH
 		FROM CART C
 		JOIN PRODUCT P USING(PRODUCT_NO)
 		JOIN PRODUCT_OPTION O USING(PRODUCT_NO)
+		JOIN PRODUCT_FILE F USING(PRODUCT_NO)
+		JOIN AT_FILE A USING(F_NO)
 		WHERE USER_NO = #{userNo}
+		AND A.STATUS = 'N'
 	</select>
 
 	
@@ -664,11 +673,16 @@
 		    , PRODUCT_TITLE
 		    , PRODUCT_PRICE
 		    , PRODUCT_OPTION
+		    , CHANGE_FILE
+		    , FILE_PATH
 		FROM PAYMENT
 		JOIN PAY_DETAIL USING(PAY_NO)
 		JOIN PRODUCT USING(PRODUCT_NO)
 		JOIN PRODUCT_OPTION USING(PRODUCT_NO)
+		JOIN PRODUCT_FILE F USING(PRODUCT_NO)
+		JOIN AT_FILE A USING(F_NO)
 		WHERE USER_NO = #{userNo}
+		AND A.STATUS = 'N'
 	</select>
 	<insert id="reviewInsert" parameterType="com.kh.healthDao.review.model.vo.Review">
 		INSERT INTO REVIEW(

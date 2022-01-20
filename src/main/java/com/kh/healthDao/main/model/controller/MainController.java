@@ -46,6 +46,7 @@ public class MainController {
 		Map<String, Object> map = shoppingService.pdtList();
 
 		mv.addObject("bannerList", bannerList);
+		mv.addObject("bannerSize", bannerList.size());
 		mv.addObject("trainList", trainList);
 		mv.addObject("recoList", map.get("recoList"));
 		mv.addObject("recoCount", map.get("recoCount"));

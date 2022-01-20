@@ -44,6 +44,8 @@ public interface TrainerService {
 	// 메인 화면에 가져오는 트레이너 4명
 	List<Trainer> trainerRankList();
 
+	int trainerModify4(Trainer trainer);
+
 
 
 }
