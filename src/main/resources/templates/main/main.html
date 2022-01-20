@@ -95,7 +95,9 @@
 											<li class="bg_p">NEW</li>
 											<li class="bg_p">BEST</li>
 										</ul>
-										<a th:href="|/shopping/detail?productNo=${reco.productNo}|" class="imgLink"><img src="/images/temp/pdt01.png" alt=""></a>
+										<a th:href="|/shopping/detail?productNo=${reco.productNo}|" class="imgLink">
+											<img th:src="${reco.file_path}+${reco.change_file1}" alt="">
+										</a>
 									</div>
 									<div class="pdtTxt">
 										<p class="pdtHead" style="color:#4f8ffa;" th:text="${reco.productBenefit}"></p>
