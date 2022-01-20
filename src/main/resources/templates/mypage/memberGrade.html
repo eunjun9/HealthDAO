@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title></title>
+<!-- 메타태그, 스타일 -->
+<th:block th:replace="common/head.html"></th:block>
+<!--// 메타태그, 스타일 -->
+<body>
+<div id="wrap" class="main">
+<!-- HEADER + GNB -->
+<th:block th:replace="common/header.html"></th:block>
+<!--// HEADER + GNB -->
+
+<!-- container -->
+
+<div id="container" class="pdt0">
+	<div class="site_location">
+		<span><a href="/">HOME</a></span>
+		<span><em>마이페이지</em></span>
+           <em>고객의소리</em>
+	</div>
+	<div class="mypage">
+		<div class="myMain myCon">
+			<div class="contents">
+				<!-- mypage lnb -->
+				<div th:replace="common/mypageGnb.html"></div>
+				<!-- //mypage lnb -->
+
+				<!-- myPageCon -->
+				<div class="myPageCon member_sound_input">
+					
+					<p class="tit mgb40">
+						회원 등급
+					</p>
+					
+					<div class="memberGrade_input">
+						<div>
+							<h2>
+								당신의 <strong>회원 등급은?</strong><br>
+								<div th:if="${sum lt 500000}">
+									일반회원<br>
+								</div>
+								<div th:if="${500000 le sum && sum lt 1000000}">
+									VIP<br>
+								</div>
+								<div th:if="${1000000 le sum}">
+									VVIP<br>
+								</div>
+							</h2>
+							<div class="memberGrade_input_info">
+								<span>현재</span><span>까지 사용 금액은</span> <span style="color: #FF5B5D;" th:text=${sum}>100,000</span><span>입니다.</span><br>
+								
+								<div th:if="${sum lt 500000}">
+									<span>VIP</span><span>까지 남은 금액은</span> <span style="color: #FF5B5D;" th:text=500000-${sum}></span><span>입니다.</span><br>
+								</div>
+								<div th:if="${500000 le sum && sum lt 1000000}">
+									<span>VVIP</span><span>까지 남은 금액은</span> <span style="color: #FF5B5D;" th:text=1000000-${sum}></span><span>입니다.</span><br>
+								</div>
+								<div th:if="${1000000 le sum}"></div>
+							</div>
+							<div>
+								<p class="gradeStandard">등급 산정 기준 : 가입 후 ~ 당일까지 누적금액</p>
+							</div>
+						</div>
+						<div>
+							 <img class="memberGrade_input_img" src="/images/mypage/chunsik.png">
+							
+						</div>
+					</div>
+                       
+					<hr class="memberGrade_divide_Subline">
+					<div class="membershipGrade">
+						<h1 class="memberGrade_benefit"><strong>등급별 멤버십 혜택</strong></h1>
+						<img class="memberGrade_input_img2" src="/images/mypage/membership.png">
+					</div>
+					
+                   </div>
+				
+				<!-- //myPageCon -->
+			</div>
+		</div>
+	</div>
+</div>
+<!-- //container -->
+
+	<!-- 스크립트 -->
+	<th:block th:replace="common/script.html"></th:block>
+	<!--// 스크립트 -->
+	<!-- FOOTER -->
+	<th:block th:replace="common/footer.html"></th:block>
+	<!--// FOOTER -->
+	</div>
+
+	<!-- 퀵메뉴 + 톡톡 -->
+	<th:block th:replace="common/quickNtalk.html"></th:block>
+	<!--// 퀵메뉴 + 톡톡 -->
+	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+	<script type="text/javascript">
+		$('#quick .quickArea').css({'position':'absolute', 'top':290});
+	</script>
+	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+</body>
+</html>

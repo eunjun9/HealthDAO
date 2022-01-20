@@ -3887,9 +3887,9 @@ filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#555555', endC
 .memberGrade_input{display: flex;}
 .memberGrade_input_info{margin-top: 30px; font-size: 1.2rem;}
 .gradeStandard{margin-top: 30px;}
-.memberGrade_input_img{margin-left: 90px; width: 230px; height: 230px;}
+.memberGrade_input_img{margin-left: 175%;margin-top: -30%; width: 230px; height: 230px;}
 .membershipGrade{margin-top: 10px;}
-.memberGrade_benefit{margin-top: 30px; margin-left: 240px; margin-bottom: 40px;}
-.memberGrade_divide_Subline{border: 1px solid lightgray; width: 600px; margin-top: 40px; margin-bottom: 40px;}
-.memberGrade_input_img2{margin-left: 10px; width: 590px; height: 310px;}
+.memberGrade_benefit{margin-top: 30px; margin-left: 38%; margin-bottom: 40px;}
+.memberGrade_divide_Subline{border: 1px solid lightgray; width: 100%; margin-top: 40px; margin-bottom: 40px;}
+.memberGrade_input_img2{margin-left: 17.5%; width: 590px; height: 310px;}
 

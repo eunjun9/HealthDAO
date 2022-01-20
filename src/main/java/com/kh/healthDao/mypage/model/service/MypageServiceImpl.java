@@ -345,6 +345,12 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 		return mypageMapper.attendCount(userNo);
 	}
 
+	// 회원등급
+	@Override
+	public List<Payment> memberGrade(int userNo) {
+		return mypageMapper.memberGrade(userNo);
+	}
+
 
 
 
