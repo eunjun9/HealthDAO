@@ -1,560 +1,532 @@
 <!doctype html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
-				xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+            xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <title></title>
 <!-- 메타태그, 스타일 -->
 <th:block th:replace="common/head.html"></th:block>
 <!--// 메타태그, 스타일 -->
-	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+   <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <body>
-	<div id="wrap" class="main">
-		<!-- HEADER + GNB -->
-		<th:block th:replace="common/header.html"></th:block>
-		<!--// HEADER + GNB -->
+   <div id="wrap" class="main">
+      <!-- HEADER + GNB -->
+      <th:block th:replace="common/header.html"></th:block>
+      <!--// HEADER + GNB -->
 
-	<!-- container -->
-	
-	<div id="container" class="pd0">
-		<div class="order_wrap">
-			<div class="contents">
-				<p class="order_leng">주문상품 (6개)</p>
-				<div class="order_box js_orderFloating">
+   <!-- container -->
+   
+   <div id="container" class="pd0">
+      <div class="order_wrap">
+         <div class="contents">
+            <p class="order_leng">주문상품 (6개)</p>
+            <div class="order_box js_orderFloating">
 
-					<div class="order_user order_con">
-						<p class="orderTit">주문고객정보</p>
-						<dl>
-							<dt><label for="order_name"><span class="fcRed">*</span>이름</label></dt>
-							<dd>
-								<div class="inp_wrap">
-									<div class="inp_text sizeS">
-										<input type="text" name="userName" id="order_name" th:value="${member.userName}">
-									</div>
-									<p class="error">주문고객 이름을 입력해주세요.</p>
-								</div>
-							</dd>
-						</dl>
-						<dl>
-							<dt><label for="order_phone"><span class="fcRed">*</span>휴대폰</label></dt>
-							<dd>
-								<div class="inp_wrap">
-									<div class="inp_text sizeS">
-										<input type="text" name="userPhone" id="order_phone" th:value="${member.userPhone}">
-									</div>
-									<p class="error">휴대폰번호를 입력해주세요.</p>
-								</div>
-							</dd>
-						</dl>
-						<dl>
-							<dt><label for="order_email"><span class="fcRed">*</span>이메일</label></dt>
-							<dd>
-								<div class="inp_wrap inp_email2">
-									<div class="inp_text sizeS">
-										<input type="text" name="userEmail" id="order_email" th:value="${#strings.substring(member.userEmail,0,6)}">
-									</div>
-									<span class="hyphen">@</span>
-									<div class="inp_text email_input sizeS">
-										<input type="text" title="이메일 직접입력" value="naver.com" readonly>
-									</div>
-									<div class="inp_select sizeS">
-										<div class="selectBox">
-											<button class="title" type="button" title=""></button>
-											<ul class="selList">
-												<li>
-													<input type="radio" value="" class="option" id="join_email1" name="join_email" checked>
-													<label for="join_email1">naver.com</label>
-												</li>
-												<li>
-													<input type="radio" value="" class="option" id="join_email2" name="join_email">
-													<label for="join_email2">google.com</label>
-												</li>
-												<li>
-													<input type="radio" value="" class="option" id="join_email3" name="join_email">
-													<label for="join_email3">직접선택</label>
-												</li>
-											</ul>
-										</div>
-									</div>
-									<p class="error">이메일을 입력해주세요.</p>
-								</div>
-							</dd>
-						</dl>
-					</div>
+               <div class="order_user order_con">
+                  <p class="orderTit">주문고객정보</p>
+                  <dl>
+                     <dt><label for="order_name"><span class="fcRed">*</span>이름</label></dt>
+                     <dd>
+                        <div class="inp_wrap">
+                           <div class="inp_text sizeS">
+                              <input type="text" name="userName" id="order_name" th:value="${member.userName}">
+                           </div>
+                           <p class="error">주문고객 이름을 입력해주세요.</p>
+                        </div>
+                     </dd>
+                  </dl>
+                  <dl>
+                     <dt><label for="order_phone"><span class="fcRed">*</span>휴대폰</label></dt>
+                     <dd>
+                        <div class="inp_wrap">
+                           <div class="inp_text sizeS">
+                              <input type="text" name="userPhone" id="order_phone" th:value="${member.userPhone}">
+                           </div>
+                           <p class="error">휴대폰번호를 입력해주세요.</p>
+                        </div>
+                     </dd>
+                  </dl>
+                  <dl>
+                     <dt><label for="order_email"><span class="fcRed">*</span>이메일</label></dt>
+                     <dd>
+                        <div class="inp_wrap inp_email2">
+                           <div class="inp_text sizeS">
+                              <input type="text" name="userEmail" id="order_email" th:value="${#strings.substring(member.userEmail,0,6)}">
+                           </div>
+                           <span class="hyphen">@</span>
+                           <div class="inp_text email_input sizeS">
+                              <input type="text" title="이메일 직접입력" value="naver.com" readonly>
+                           </div>
+                           <div class="inp_select sizeS">
+                              <div class="selectBox">
+                                 <button class="title" type="button" title=""></button>
+                                 <ul class="selList">
+                                    <li>
+                                       <input type="radio" value="" class="option" id="join_email1" name="join_email" checked>
+                                       <label for="join_email1">naver.com</label>
+                                    </li>
+                                    <li>
+                                       <input type="radio" value="" class="option" id="join_email2" name="join_email">
+                                       <label for="join_email2">google.com</label>
+                                    </li>
+                                    <li>
+                                       <input type="radio" value="" class="option" id="join_email3" name="join_email">
+                                       <label for="join_email3">직접선택</label>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </div>
+                           <p class="error">이메일을 입력해주세요.</p>
+                        </div>
+                     </dd>
+                  </dl>
+               </div>
 
-					<div class="order_delivery order_con">
-						<p class="orderTit">배송지 정보</p>
-						<div class="delivery_list">
-							<a href="/mypage/deli" class="btn btnSizeS btnColorB btnTypeB"><span>배송지관리</span></a>
-							<!-- 총 리스트를 불러와도 css에서 처리하도록 작업 -->
-							<ul>
-								<li th:each="address:${addressList}">
-									<input type="radio" name="deliveryList" id="deliveryList1" checked>
-									<label for="deliveryList1">
-										<p class="deliName">[기본배송지]</p>
-										<span class="deliUser" name="receiver" th:text="${address.receiver}">박지유 </span><br>
-										<span class="delPhone" name="recPhone" th:text="${address.recPhone}">010-1234-5678</span>
-										<p class="deliAddr" name="address" th:text="${address.Address}">
-											서울특별시 금천구 가산디지털 1로<br>
-											에이스 하이엔드 3차 705호<br>
-											(우)123-456
-										</p>
-									</label>
-									<ul class="btn_wrap">
-										<li>
-											<a href="javascript:void();" onclick="showLayer('deliRegister');">수정</a>
-										</li>
-										<li>
-											<a href="javascript:void();" onclick="showLayer('deliDel');">삭제</a>
-										</li>
-									</ul>
-								</li>
-								<li>
-									<a href="/mypage/deli" onclick="showLayer('deliRegister');" class="new_addr">
-										신규 배송지를 등록해주세요
-									</a>
-								</li>
-							</ul>
-						</div>
-						<div class="delivMesg" >
-							<dl id="selAddMsgList">
-								<dt >배송 메시지 선택</dt>
-								<dd>
-									<div class="inp_wrap inp_mesg">
-										<div class="inp_select sizeS">
-											<div class="selectBox">
-												<button class="title" type="button">메시지를 선택해주세요.</button>
-												<ul class="selList" >
-													<li>
-														<input type="radio" value="" class="option" id="orderCard1" name="orderCard">
-														<label for="orderCard1">메시지 직집 입력하기</label>
-													</li>
-													<li>
-														<input type="radio" value="" class="option" id="orderCard2" name="orderCard">
-														<label for="orderCard2">부재 시 경비실에 맡겨 주세요.</label>
-													</li>
-													<li>
-														<input type="radio" value="" class="option" id="orderCard3" name="orderCard">
-														<label for="orderCard3">부재 시 문앞에 놔주세요.</label>
-													</li>
-													<li>
-														<input type="radio" value="" class="option" id="orderCard4" name="orderCard">
-														<label for="orderCard4">배송 전에 미리 연락주세요.</label>
-													</li>
-													<li>
-														<input type="radio" value="" class="option" id="orderCard5" name="orderCard">
-														<label for="orderCard5">배송 전에 전화주시거나 문자 남겨 주세요.</label>
-													</li>
-												</ul>
-											</div>
-										</div>
-										<div class="inp_text mesg_input sizeS mgt10">
-											<input type="text" name="" id="order_name" placeholder="메시지를 입력해주세요.">
-										</div>
-									</div>
-								</dd>
-							</dl>
-							<ul class="lineInfo mgt30">
-								<li>신규 주소로 배송 시 배송지 등록 후 이용 가능합니다.</li>
-								
-							</ul>
-						</div>
-					</div>
-					
-					<div class="order_list order_con">
-						<ul class="list_box">
-							<li>
-								<div class="tbl_wrap">
-									<div class="pdtImg"><a href="#"><img src="./resources/web/images/temp/pdt_img3.png" alt="아이크러쉬 디테일 아이라이너"></a></div>
-									<div class="pdtTxt" th:each="slist:${shoppingPayment}">
-										<p class="pdtHead" style="color:#4f8ffa;">[이벤트] </p>
-										<p class="pdtBrand" th:text="${shoppingPayment.productBrand}"></p><!-- 20200317 수정 -->
-										<p class="pdtName" th:text="${shoppingPayment.productTitle}"></p>
-										<p class="pdtPrice"><span class="sale">10%</span><span class="sale" th:text="${#numbers.formatInteger(sum, 0, 'COMMA')+'원'}"></span></p>
-										<p class="pdtOpt">옵션 : <span class="pdtOpt" th:text="${select1}"></span></p>
-									</div>
-									<div></div>
-									<div class="pdtCount" style="width:130px; letter-spacing:3px;">
-										<span>수량 : </span><span th:text="${amount}"> </span>
-										
-									</div>
-									
-								</div>
-							</li>
-							<li>
-								<div class="freeGift">
-									<p class="tit">추가 사은품</p>
-									<ul>
-										<li>
-											<div class="giftImg">
-												<img src="./resources/web/images/temp/freeGift.jpg" alt="디어 하이드레이션 토너 샘플">
-												<p>사은품</p>
-											</div>
-											<p class="giftName" th:text="${shoppingPayment.productBenefit}">
-												디어 하이드레이션 토너 샘플
-												<span class="fcRed">일시품절</span>
-											</p>
-										</li>
-									</ul>
-								</div>
-							</li>
-						</ul>
-					</div>
-					<div class="order_coupon order_con">
-						<p class="orderTit">쿠폰/포인트 사용</p>
-						<div class="coupon_wrap">
-							<div class="couponType">
-								<dl>
-									<dt><label for="order_coupon">장바구니/사은품 쿠폰사용</label></dt><!-- 20200410 수정 -->
-									<dd>
-										<div class="inp_wrap">
-											<div class="inp_text sizeS inp_order">
-												<input type="text" name="" id="order_coupon" value="0" disabled>
-											</div>
-											<a href="javascript:void(0);" onclick="order_couponPop();" class="btn btnArr3 btnSizeM btnColorB btnTypeB order_cpBtn"><span>쿠폰 사용/조회</span></a>
-											<p class="info_txt">사용가능쿠폰 <span class="fcPink">1</span>장&nbsp;&nbsp;<span class="fcbf">│</span>&nbsp;&nbsp;보유쿠폰 <span class="fcPink">2</span>장</p>
-										</div>
-										<!-- 쿠폰을 선택했을 경우 출력 -->
-										<ul class="app_list">
-											<li>
-												<p>[장바구니 할인] 쿠폰코드 또는 쿠폰명</p>
-												<a href="#" class="btn_txt">사용취소</a>
-											</li>
-											<li>
-												<p>[사은품 쿠폰] 하이 바이 수딩 마스크 1매 증정</p>
-												<a href="#" class="btn_txt">사용취소</a>
-											</li>
-											<li>
-												<p>[배송비 쿠폰] 배송비 무료</p>
-												<a href="#" class="btn_txt">사용취소</a>
-											</li>
-										</ul>
-										<!-- //쿠폰을 선택했을 경우 -->
-									</dd>
-								</dl>
-								<div class="coupon_layer" id="coupon_layer">
-									<div class="inp_wrap sale_code">
-										<div class="inp_lab"><label for="ipt_label">쿠폰코드를 입력하시고 할인 받으세요.</label></div>
-										<div class="inp_text sizeS">
-											<input type="text" name="" id="ipt_label" placeholder="쿠폰 코드 입력">
-											<button class="btn_clear"><span>clear</span></button>
-										</div>
-										<a href="#" class="btn btnSizeM btnColorW btnTypeB"><span>등록</span></a>
-										<p class="error">쿠폰코드를 입력해 주세요.</p>
-									</div>
-									<ul class="order_cpList">
-										<li>
-											<span class="inp_radio">
-												<input type="radio" name="cpCart" id="cpCart1">
-												<label for="cpCart1">
-													<span class="notoM">VIP 등급 쿠폰</span> <span class="fcPink">/ 1,000원 할인</span>
-													<em>최대 000원 이하 결제시<br> 최대 000원 할인</em><!-- 20200317 수정 -->
-												</label>
-											</span>
-										</li>
-										<li>
-											<span class="inp_radio">
-												<input type="radio" name="cpCart" id="cpCart2" disabled>
-												<label for="cpCart2">
-													<span class="notoM">클린 잇 제로 라인</span> <span class="fcPink">/ 30% 할인</span>
-													<em>총 결제금액 2만원 이상 구매 시</em>
-												</label>
-											</span>
-										</li>
-										<li>
-											<span class="inp_radio">
-												<input type="radio" name="cpGift" id="cpGift1">
-												<label for="cpGift1">
-													<span class="notoM">프라임 프라이머 샘플KIT</span>
-													<em>총 결제금액 1만원 이상 구매 시</em>
-												</label>
-											</span>
-										</li>									
-										<li class="noData">
-											<span>사용 가능한 쿠폰이 없습니다.</span>
-										</li>
-									</ul>
-									<div class="order_cpBottom">
-										<div class="btn_wrap">
-											<a href="javascript:void(0);" onclick="order_couponPop();" class="btn btnSizeM btnColorW btnTypeR"><span>취소</span></a>
-											<a href="javascript:void(0);" onclick="order_couponPop();" class="btn btnSizeM btnColorB btnTypeR"><span>적용 완료</span></a>
-										</div>
-										<p class="info_tit">꼭 확인하세요!</p>
-										<ul class="dotInfo mgt20">
-											<li>주문에 사용하실 쿠폰 선택 또는 쿠폰코드를 입력해 주세요.</li>
-											<li>쿠폰리스트에는 사용가능한 쿠폰만 노출됩니다.</li>
-											<li>장바구니 할인쿠폰은 중복 사용이 불가합니다.</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<dl>
-								<dt><label for="order_point">포인트 사용</label></dt>
-								<dd>
-									<div class="inp_wrap">
-										<div class="inp_text sizeS inp_point">
-											<input type="text" name="" id="order_point" placeholder="0">
-										</div>
-										<a href="#" class="btn btnSizeM btnColorB btnTypeB"><span>적용하기</span></a><!-- 20200317 수정 -->
-										<!-- 20200317 수정
-										<a href="#" class="btn btnSizeM btnColorW btnTypeB"><span>사용 취소</span></a>
-										-->
-										<p class="info_txt">보유 포인트 <span class="fcPink">100</span>P<a href="#" class="btn_txt">전체사용</a></p>
-										<p class="error">포인트를 입력해주세요.</p>
-										<p class="error">주문금액 최소 000,  최대 000 내 적용이 가능합니다.</p>
-										<p class="error">00p 단위로 입력해주세요.</p>
-									</div>
-								</dd>
-							</dl>
-							<!-- 20200410 수정 -->
-							<div class="couponType">
-								<div class="coupon_layer" id="coupon_layer2">
-									<ul class="order_cpList">
-										<li>
-											<span class="inp_radio">
-												<input type="radio" name="cpDeli" id="cpDeli1">
-												<label for="cpDeli1">
-													<span class="notoM">VIP 등급 쿠폰</span> <span class="fcPink">/ 1,000원 할인</span>
-													<em>최대 000원 이하 결제시<br> 최대 000원 할인</em><!-- 20200317 수정 -->
-												</label>
-											</span>
-										</li>
-										<li>
-											<span class="inp_radio">
-												<input type="radio" name="cpDeli" id="cpDeli2" disabled>
-												<label for="cpDeli2">
-													<span class="notoM">클린 잇 제로 라인</span> <span class="fcPink">/ 30% 할인</span>
-													<em>총 결제금액 2만원 이상 구매 시</em>
-												</label>
-											</span>
-										</li>
-										<li>
-											<span class="inp_radio">
-												<input type="radio" name="cpDeli" id="cpDeli3">
-												<label for="cpDeli3">
-													<span class="notoM">VIP 등급 무료배송 쿠폰</span>
-													<em>총 결제금액 1만원 이상 구매 시</em>
-												</label>
-											</span>
-										</li>
-										<li>
-											<span class="inp_radio">
-												<input type="radio" name="cpGift" id="cpDeli4">
-												<label for="cpDeli4">
-													<span class="notoM">프라임 프라이머 샘플KIT</span>
-													<em>총 결제금액 1만원 이상 구매 시</em>
-												</label>
-											</span>
-										</li>									
-										<li class="noData">
-											<span>사용 가능한 쿠폰이 없습니다.</span>
-										</li>
-									</ul>
-									<div class="order_cpBottom">
-										<div class="btn_wrap">
-											<a href="javascript:void(0);" onclick="order_couponPop2();" class="btn btnSizeM btnColorW btnTypeR"><span>취소</span></a>
-											<a href="javascript:void(0);" onclick="order_couponPop2();" class="btn btnSizeM btnColorB btnTypeR"><span>적용 완료</span></a>
-										</div>
-										<p class="info_tit">꼭 확인하세요!</p>
-										<ul class="dotInfo mgt20">
-											<li>배송비 쿠폰 사용시 배송비 무료로 주문하실 수 있습니다.</li>
-											<li>1 주문당 1개의 배송비 쿠폰을 사용하실 수 있습니다.</li>
-											<li>타 쿠폰과 중복 사용이 가능합니다.</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<!-- //20200410 수정 -->
-						</div>
-						<ul class="lineInfo mgt30">
-							<li>쿠폰 사용은 주문 한 건당 사용 가능하며 다른 쿠폰과 중복사용이 불가합니다.</li>
-							<li>일부 프로모션 상품은 쿠폰과 포인트 사용이 제외될 수 있습니다.</li>
-							<li>사용하신 쿠폰은 교환/반품 시 쿠폰이 복구되지 않으며 재사용 불가합니다.<br> (단, 재고 소진 및 내부 사정으로 인해 불가피한 교환/반품 시에는 복구 가능)</li>
-							<li>포인트 사용은 최소 2000p이상으로 사용 가능합니다.</li>
-							<li>포인트 사용은 배송비를 제외한 주문 결제 금액 기준으로 전액 사용 가능합니다.</li>
-							<li>쇼핑백은 쿠폰할인에서 제외되지만 포인트 사용은 가능합니다.</li>
-						</ul>
-					</div>
+               <div class="order_delivery order_con">
+                  <p class="orderTit">배송지 정보</p>
+                  <div class="delivery_list">
+                     <a href="/mypage/deli" class="btn btnSizeS btnColorB btnTypeB"><span>배송지관리</span></a>
+                     <!-- 총 리스트를 불러와도 css에서 처리하도록 작업 -->
+                     <ul>
+                        <li th:each="address:${addressList}">
+                           <input type="radio" name="deliveryList" id="deliveryList1" checked>
+                           <label for="deliveryList1">
+                              <p class="deliName">[기본배송지]</p>
+                              <span class="deliUser" name="receiver" th:text="${address.receiver}">박지유 </span><br>
+                              <span class="delPhone" name="recPhone" th:text="${address.recPhone}">010-1234-5678</span>
+                              <p class="deliAddr" name="address" th:text="${address.Address}">
+                                 서울특별시 금천구 가산디지털 1로<br>
+                                 에이스 하이엔드 3차 705호<br>
+                                 (우)123-456
+                              </p>
+                           </label>
+                           <ul class="btn_wrap">
+                              <li>
+                                 <a href="javascript:void();" onclick="showLayer('deliRegister');">수정</a>
+                              </li>
+                              <li>
+                                 <a href="javascript:void();" onclick="showLayer('deliDel');">삭제</a>
+                              </li>
+                           </ul>
+                        </li>
+                        <li>
+                           <a href="/mypage/deli" onclick="showLayer('deliRegister');" class="new_addr">
+                              신규 배송지를 등록해주세요
+                           </a>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="delivMesg" >
+                     <dl id="selAddMsgList">
+                        <dt >배송 메시지 선택</dt>
+                        <dd>
+                           <div class="inp_wrap inp_mesg">
+                              <div class="inp_select sizeS">
+                                 <div class="selectBox">
+                                    <button class="title" type="button">메시지를 선택해주세요.</button>
+                                    <ul class="selList" >
+                                       <li>
+                                          <input type="radio" value="" class="option" id="orderCard1" name="orderCard">
+                                          <label for="orderCard1">메시지 직집 입력하기</label>
+                                       </li>
+                                       <li>
+                                          <input type="radio" value="" class="option" id="orderCard2" name="orderCard">
+                                          <label for="orderCard2">부재 시 경비실에 맡겨 주세요.</label>
+                                       </li>
+                                       <li>
+                                          <input type="radio" value="" class="option" id="orderCard3" name="orderCard">
+                                          <label for="orderCard3">부재 시 문앞에 놔주세요.</label>
+                                       </li>
+                                       <li>
+                                          <input type="radio" value="" class="option" id="orderCard4" name="orderCard">
+                                          <label for="orderCard4">배송 전에 미리 연락주세요.</label>
+                                       </li>
+                                       <li>
+                                          <input type="radio" value="" class="option" id="orderCard5" name="orderCard">
+                                          <label for="orderCard5">배송 전에 전화주시거나 문자 남겨 주세요.</label>
+                                       </li>
+                                    </ul>
+                                 </div>
+                              </div>
+                              <div class="inp_text mesg_input sizeS mgt10">
+                                 <input type="text" name="" id="order_name" placeholder="메시지를 입력해주세요.">
+                              </div>
+                           </div>
+                        </dd>
+                     </dl>
+                     <ul class="lineInfo mgt30">
+                        <li>신규 주소로 배송 시 배송지 등록 후 이용 가능합니다.</li>
+                        
+                     </ul>
+                  </div>
+               </div>
+               
+               <div class="order_list order_con">
+                  <ul class="list_box">
+                     <li th:each="sp : ${shoppingPayment}">
+                        <div class="tbl_wrap">
+                           <div class="pdtImg"><a href="#"><img th:src="${sp.file_path}+${sp.change_file1}" alt="상품이미지"></a></div>
+                           <div class="pdtTxt">
+                              <p class="pdtBrand" th:text="${sp.productBrand}"></p><!-- 20200317 수정 -->
+                              <p class="pdtName" th:text="${sp.productTitle}"></p>
+                              <p class="pdtPrice"><span class="sale" th:text="${#numbers.formatInteger(sp.productPrice, 0, 'COMMA')+'원'}"></span></p>
+                              <p class="pdtOpt">옵션 : <span class="pdtOpt" th:text="${sp.productOption}"></span></p>
+                           </div>
+                           <div></div>
+                           <div class="pdtCount" style="width:130px; letter-spacing:3px;">
+                              <span>수량 : </span><span th:text="${sp.quantity}"> </span>
+                              
+                           </div>
+                           
+                        </div>
+                     </li>
+                  </ul>
+               </div>
+               <div class="order_coupon order_con">
+                  <p class="orderTit">쿠폰/포인트 사용</p>
+                  <div class="coupon_wrap">
+                     <div class="couponType">
+                        <dl>
+                           <dt><label for="order_coupon">장바구니/사은품 쿠폰사용</label></dt><!-- 20200410 수정 -->
+                           <dd>
+                              <div class="inp_wrap">
+                                 <div class="inp_text sizeS inp_order">
+                                    <input type="text" name="" id="order_coupon" value="0" disabled>
+                                 </div>
+                                 <a href="javascript:void(0);" onclick="order_couponPop();" class="btn btnArr3 btnSizeM btnColorB btnTypeB order_cpBtn"><span>쿠폰 사용/조회</span></a>
+                                 <p class="info_txt">사용가능쿠폰 <span class="fcPink">1</span>장&nbsp;&nbsp;<span class="fcbf">│</span>&nbsp;&nbsp;보유쿠폰 <span class="fcPink">2</span>장</p>
+                              </div>
+                              <!-- 쿠폰을 선택했을 경우 출력 -->
+                              <ul class="app_list">
+                                 <li>
+                                    <p>[장바구니 할인] 쿠폰코드 또는 쿠폰명</p>
+                                    <a href="#" class="btn_txt">사용취소</a>
+                                 </li>
+                                 <li>
+                                    <p>[사은품 쿠폰] 하이 바이 수딩 마스크 1매 증정</p>
+                                    <a href="#" class="btn_txt">사용취소</a>
+                                 </li>
+                                 <li>
+                                    <p>[배송비 쿠폰] 배송비 무료</p>
+                                    <a href="#" class="btn_txt">사용취소</a>
+                                 </li>
+                              </ul>
+                              <!-- //쿠폰을 선택했을 경우 -->
+                           </dd>
+                        </dl>
+                        <div class="coupon_layer" id="coupon_layer">
+                           <div class="inp_wrap sale_code">
+                              <div class="inp_lab"><label for="ipt_label">쿠폰코드를 입력하시고 할인 받으세요.</label></div>
+                              <div class="inp_text sizeS">
+                                 <input type="text" name="" id="ipt_label" placeholder="쿠폰 코드 입력">
+                                 <button class="btn_clear"><span>clear</span></button>
+                              </div>
+                              <a href="#" class="btn btnSizeM btnColorW btnTypeB"><span>등록</span></a>
+                              <p class="error">쿠폰코드를 입력해 주세요.</p>
+                           </div>
+                           <ul class="order_cpList">
+                              <li>
+                                 <span class="inp_radio">
+                                    <input type="radio" name="cpCart" id="cpCart1">
+                                    <label for="cpCart1">
+                                       <span class="notoM">VIP 등급 쿠폰</span> <span class="fcPink">/ 1,000원 할인</span>
+                                       <em>최대 000원 이하 결제시<br> 최대 000원 할인</em><!-- 20200317 수정 -->
+                                    </label>
+                                 </span>
+                              </li>
+                              <li>
+                                 <span class="inp_radio">
+                                    <input type="radio" name="cpCart" id="cpCart2" disabled>
+                                    <label for="cpCart2">
+                                       <span class="notoM">클린 잇 제로 라인</span> <span class="fcPink">/ 30% 할인</span>
+                                       <em>총 결제금액 2만원 이상 구매 시</em>
+                                    </label>
+                                 </span>
+                              </li>
+                              <li>
+                                 <span class="inp_radio">
+                                    <input type="radio" name="cpGift" id="cpGift1">
+                                    <label for="cpGift1">
+                                       <span class="notoM">프라임 프라이머 샘플KIT</span>
+                                       <em>총 결제금액 1만원 이상 구매 시</em>
+                                    </label>
+                                 </span>
+                              </li>                           
+                              <li class="noData">
+                                 <span>사용 가능한 쿠폰이 없습니다.</span>
+                              </li>
+                           </ul>
+                           <div class="order_cpBottom">
+                              <div class="btn_wrap">
+                                 <a href="javascript:void(0);" onclick="order_couponPop();" class="btn btnSizeM btnColorW btnTypeR"><span>취소</span></a>
+                                 <a href="javascript:void(0);" onclick="order_couponPop();" class="btn btnSizeM btnColorB btnTypeR"><span>적용 완료</span></a>
+                              </div>
+                              <p class="info_tit">꼭 확인하세요!</p>
+                              <ul class="dotInfo mgt20">
+                                 <li>주문에 사용하실 쿠폰 선택 또는 쿠폰코드를 입력해 주세요.</li>
+                                 <li>쿠폰리스트에는 사용가능한 쿠폰만 노출됩니다.</li>
+                                 <li>장바구니 할인쿠폰은 중복 사용이 불가합니다.</li>
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
+                     <dl>
+                        <dt><label for="order_point">포인트 사용</label></dt>
+                        <dd>
+                           <div class="inp_wrap">
+                              <div class="inp_text sizeS inp_point">
+                                 <input type="text" name="" id="order_point" placeholder="0">
+                              </div>
+                              <a href="#" class="btn btnSizeM btnColorB btnTypeB"><span>적용하기</span></a><!-- 20200317 수정 -->
+                              <!-- 20200317 수정
+                              <a href="#" class="btn btnSizeM btnColorW btnTypeB"><span>사용 취소</span></a>
+                              -->
+                              <p class="info_txt">보유 포인트 <span class="fcPink">100</span>P<a href="#" class="btn_txt">전체사용</a></p>
+                              <p class="error">포인트를 입력해주세요.</p>
+                              <p class="error">주문금액 최소 000,  최대 000 내 적용이 가능합니다.</p>
+                              <p class="error">00p 단위로 입력해주세요.</p>
+                           </div>
+                        </dd>
+                     </dl>
+                     <!-- 20200410 수정 -->
+                     <div class="couponType">
+                        <div class="coupon_layer" id="coupon_layer2">
+                           <ul class="order_cpList">
+                              <li>
+                                 <span class="inp_radio">
+                                    <input type="radio" name="cpDeli" id="cpDeli1">
+                                    <label for="cpDeli1">
+                                       <span class="notoM">VIP 등급 쿠폰</span> <span class="fcPink">/ 1,000원 할인</span>
+                                       <em>최대 000원 이하 결제시<br> 최대 000원 할인</em><!-- 20200317 수정 -->
+                                    </label>
+                                 </span>
+                              </li>
+                              <li>
+                                 <span class="inp_radio">
+                                    <input type="radio" name="cpDeli" id="cpDeli2" disabled>
+                                    <label for="cpDeli2">
+                                       <span class="notoM">클린 잇 제로 라인</span> <span class="fcPink">/ 30% 할인</span>
+                                       <em>총 결제금액 2만원 이상 구매 시</em>
+                                    </label>
+                                 </span>
+                              </li>
+                              <li>
+                                 <span class="inp_radio">
+                                    <input type="radio" name="cpDeli" id="cpDeli3">
+                                    <label for="cpDeli3">
+                                       <span class="notoM">VIP 등급 무료배송 쿠폰</span>
+                                       <em>총 결제금액 1만원 이상 구매 시</em>
+                                    </label>
+                                 </span>
+                              </li>
+                              <li>
+                                 <span class="inp_radio">
+                                    <input type="radio" name="cpGift" id="cpDeli4">
+                                    <label for="cpDeli4">
+                                       <span class="notoM">프라임 프라이머 샘플KIT</span>
+                                       <em>총 결제금액 1만원 이상 구매 시</em>
+                                    </label>
+                                 </span>
+                              </li>                           
+                              <li class="noData">
+                                 <span>사용 가능한 쿠폰이 없습니다.</span>
+                              </li>
+                           </ul>
+                           <div class="order_cpBottom">
+                              <div class="btn_wrap">
+                                 <a href="javascript:void(0);" onclick="order_couponPop2();" class="btn btnSizeM btnColorW btnTypeR"><span>취소</span></a>
+                                 <a href="javascript:void(0);" onclick="order_couponPop2();" class="btn btnSizeM btnColorB btnTypeR"><span>적용 완료</span></a>
+                              </div>
+                              <p class="info_tit">꼭 확인하세요!</p>
+                              <ul class="dotInfo mgt20">
+                                 <li>배송비 쿠폰 사용시 배송비 무료로 주문하실 수 있습니다.</li>
+                                 <li>1 주문당 1개의 배송비 쿠폰을 사용하실 수 있습니다.</li>
+                                 <li>타 쿠폰과 중복 사용이 가능합니다.</li>
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
+                     <!-- //20200410 수정 -->
+                  </div>
+                  <ul class="lineInfo mgt30">
+                     <li>쿠폰 사용은 주문 한 건당 사용 가능하며 다른 쿠폰과 중복사용이 불가합니다.</li>
+                     <li>일부 프로모션 상품은 쿠폰과 포인트 사용이 제외될 수 있습니다.</li>
+                     <li>사용하신 쿠폰은 교환/반품 시 쿠폰이 복구되지 않으며 재사용 불가합니다.<br> (단, 재고 소진 및 내부 사정으로 인해 불가피한 교환/반품 시에는 복구 가능)</li>
+                     <li>포인트 사용은 최소 2000p이상으로 사용 가능합니다.</li>
+                     <li>포인트 사용은 배송비를 제외한 주문 결제 금액 기준으로 전액 사용 가능합니다.</li>
+                     <li>쇼핑백은 쿠폰할인에서 제외되지만 포인트 사용은 가능합니다.</li>
+                  </ul>
+               </div>
 
-					<div class="order_floating">
-						<div class="shadow_box">
-							<div class="order_price bd_no">
-								<dl>
-									<dt>총 주문금액</dt>
-									<dd th:text="${#numbers.formatInteger(sum, 0, 'COMMA')+'원'}"><em>원</em></dd>
-								</dl>
-								<!-- 20200317 수정 하단 쇼핑백 삭제되고 이곳에 추가 -->
-								<div class="detail_price">
-									<dl>
-										<dt>상품금액</dt>
-										<dd>+ 396,300원</dd>
-									</dl>
-									<dl>
-										<dt>쇼핑백</dt>
-										<dd>+ 1,000원</dd>
-									</dl>
-								</div>
-								<!-- //20200317 수정 -->
-							</div>
-							<div class="order_price">
-								<dl>
-									<dt>총 할인금액</dt>
-									<dd><span class="fcRed">- 11,800</span><em>원</em></dd>
-								</dl>
-								<div class="detail_price">
-									<dl>
-										<dt>멤버십 할인</dt>
-										<dd>- 8,000원</dd>
-									</dl>
-									<dl>
-										<dt>프로모션 할인</dt>
-										<dd>- 4,700원</dd>
-									</dl>
-								</div>
-							</div>
-							<div class="order_price">
-								<dl>
-									<dt>배송비</dt>
-									<dd><em>무료</em></dd>
-								</dl>
-							</div>
-							<div class="floating_bottom">
-								<div class="total_price">
-									<dl>
-										<dt>최종 결제금액</dt>
-										<dd th:text="${#numbers.formatInteger(sum, 0, 'COMMA')+'원'}">55,200<em>원</em></dd>
-									</dl>
-									<p>회원님은 총 <span>13,800</span>원 할인 받으실 예정입니다.</p>
-								</div>
-							</div>
-						</div>
-						<div class="shadow_box">
-							<div class="pdtPoint floating js_acoBox">
-								<div class="js_acoList noScrolling">
-									<a href="javascript:void(0)" class="pdtPointTtl js_acoLink">
-										<div class="tit">포인트 혜택 :  <span class="color">최대 500포인트</span></div>
-										<span class="arrow"><span class="hide">닫기</span></span>
-									</a>
-									<div class="pdtReview_wrap js_acoCon" style="display:none;">
-										<div class="pdtReviewTit">리뷰 적립</div>
-										<dl>
-											<dt>텍스트 리뷰 작성 시</dt>
-											<dd>
-												<span class="num">200</span>포인트
-											</dd>
-										</dl>
-										<dl>
-											<dt>포토 리뷰 작성 시</dt>
-											<dd>
-												<span class="num">500</span>포인트
-											</dd>
-										</dl>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="shadow_box">
-							<div class="floating_terms">
-								<span class="inp_check">
-									<input type="checkbox" name="" id="order_terms">
-									<label for="order_terms">구매조건 및 결제진행 동의</label>
-								</span>
-								<p>주문 정보 및 결제대행 서비스 이용약관에 모두 동의<br> 합니다. (전자상거래법  제8조 2항)</p>
-								<p class="fcRed">상품정보 및 결제대행 서비스 이용약관에 동의하셔야<br> 결제가 진행됩니다.</p>
-							</div>
-						</div>
-						<div>
-							<button type="button" id="check_module" class="btn btnSizeL btnColorP btnTypeB w100 mgt10"><span>결제하기</span></button>
-						</div>
-						
-						<!-- 비회원일경우 -->
-						<ul class="starInfo mgt20">
-							<li class="fcRed">비회원으로 구매하시면 회원/이벤트/쿠폰혜택을 받으실<br> 수 없습니다.</li>
-						</ul>
-						<!-- //비회원일경우 -->
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- //container -->
-	
-	<!-- 스크립트 -->
-		<th:block th:replace="common/script.html"></th:block>
-		<!--// 스크립트 -->
-		<!-- FOOTER -->
-		<th:block th:replace="common/footer.html"></th:block>
-		<!--// FOOTER -->
-	</div>
-	
-	<!-- 퀵메뉴 + 톡톡 -->
-	<th:block th:replace="common/quickNtalk.html"></th:block>
-	<!--// 퀵메뉴 + 톡톡 -->	
-	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+               <div class="order_floating">
+                  <div class="shadow_box">
+                     <div class="order_price bd_no">
+                        <dl>
+                           <dt>총 주문금액</dt>
+                           <dd th:text="${#numbers.formatInteger(sum, 0, 'COMMA')+'원'}"><em>원</em></dd>
+                        </dl>
+                        <!-- 20200317 수정 하단 쇼핑백 삭제되고 이곳에 추가 -->
+                        <div class="detail_price">
+                           <dl>
+                              <dt>상품금액</dt>
+                              <dd>+ 396,300원</dd>
+                           </dl>
+                           <dl>
+                              <dt>쇼핑백</dt>
+                              <dd>+ 1,000원</dd>
+                           </dl>
+                        </div>
+                        <!-- //20200317 수정 -->
+                     </div>
+                     <div class="order_price">
+                        <dl>
+                           <dt>총 할인금액</dt>
+                           <dd><span class="fcRed">- 11,800</span><em>원</em></dd>
+                        </dl>
+                        <div class="detail_price">
+                           <dl>
+                              <dt>멤버십 할인</dt>
+                              <dd>- 8,000원</dd>
+                           </dl>
+                           <dl>
+                              <dt>프로모션 할인</dt>
+                              <dd>- 4,700원</dd>
+                           </dl>
+                        </div>
+                     </div>
+                     <div class="order_price">
+                        <dl>
+                           <dt>배송비</dt>
+                           <dd><em>무료</em></dd>
+                        </dl>
+                     </div>
+                     <div class="floating_bottom">
+                        <div class="total_price">
+                           <dl>
+                              <dt>최종 결제금액</dt>
+                              <dd th:text="${#numbers.formatInteger(sum, 0, 'COMMA')+'원'}">55,200<em>원</em></dd>
+                           </dl>
+                           <p>회원님은 총 <span>13,800</span>원 할인 받으실 예정입니다.</p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="shadow_box">
+                     <div class="pdtPoint floating js_acoBox">
+                        <div class="js_acoList noScrolling">
+                           <a href="javascript:void(0)" class="pdtPointTtl js_acoLink">
+                              <div class="tit">포인트 혜택 :  <span class="color">최대 500포인트</span></div>
+                              <span class="arrow"><span class="hide">닫기</span></span>
+                           </a>
+                           <div class="pdtReview_wrap js_acoCon" style="display:none;">
+                              <div class="pdtReviewTit">리뷰 적립</div>
+                              <dl>
+                                 <dt>텍스트 리뷰 작성 시</dt>
+                                 <dd>
+                                    <span class="num">200</span>포인트
+                                 </dd>
+                              </dl>
+                              <dl>
+                                 <dt>포토 리뷰 작성 시</dt>
+                                 <dd>
+                                    <span class="num">500</span>포인트
+                                 </dd>
+                              </dl>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="shadow_box">
+                     <div class="floating_terms">
+                        <span class="inp_check">
+                           <input type="checkbox" name="" id="order_terms">
+                           <label for="order_terms">구매조건 및 결제진행 동의</label>
+                        </span>
+                        <p>주문 정보 및 결제대행 서비스 이용약관에 모두 동의<br> 합니다. (전자상거래법  제8조 2항)</p>
+                        <p class="fcRed">상품정보 및 결제대행 서비스 이용약관에 동의하셔야<br> 결제가 진행됩니다.</p>
+                     </div>
+                  </div>
+                  <div>
+                     <button type="button" id="check_module" class="btn btnSizeL btnColorP btnTypeB w100 mgt10"><span>결제하기</span></button>
+                  </div>
+                  
+                  <!-- 비회원일경우 -->
+                  <ul class="starInfo mgt20">
+                     <li class="fcRed">비회원으로 구매하시면 회원/이벤트/쿠폰혜택을 받으실<br> 수 없습니다.</li>
+                  </ul>
+                  <!-- //비회원일경우 -->
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- //container -->
+   
+   <!-- 스크립트 -->
+      <th:block th:replace="common/script.html"></th:block>
+      <!--// 스크립트 -->
+      <!-- FOOTER -->
+      <th:block th:replace="common/footer.html"></th:block>
+      <!--// FOOTER -->
+   </div>
+   
+   <!-- 퀵메뉴 + 톡톡 -->
+   <th:block th:replace="common/quickNtalk.html"></th:block>
+   <!--// 퀵메뉴 + 톡톡 -->   
+   <!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 
-	<script type="text/javascript">
-		$('#quick .quickArea').css({'position':'absolute', 'top':936});
-		mainStart();
-		mainVisual();
-	</script>
-	
-	<script th:inline="javascript">
-	$("#check_module").click(function () {
-		/*<![CDATA[*/
-		let userNo = /*[[${member.userNo}]]*/;
-		let ordererPhone = /*[[${member.userPhone}]]*/;
-		let ordererEmail = /*[[${member.userEmail}]]*/;
-		let productTitle = /*[[${shoppingPayment.productTitle}]]*/;
-		let totalPrice = /*[[${sum}]]*/;
-		let productNo = /*[[${shoppingPayment.productNo}]]*/;
-		let userName = /*[[${member.userName}]]*/;
-		/*]]>*/
-		
-		IMP.init('imp97624274'); 
-		IMP.request_pay({
-			pg: "kakao",
-			pay_method: "card",
-			merchant_uid: 'merchant'+new Date().getTime(),
-			name: productTitle,
-			amount: totalPrice,
-			buyer_email: ordererEmail,
-	        buyer_name: userName,
-	        buyer_tel: ordererPhone,
-	        buyer_addr: "",
-	        buyer_postcode: ""
-			}, function (rsp) {
-				if (rsp.success) {
-					
-					alert('d');
-					var msg = '결제가 완료되었습니다.';
-					msg += '결제 금액 : ' + rsp.paid_amount;
-					$.ajax({
-							url : "/shopping/mypage/myOrder", 
-					        type:"POST",
-					        data: {"productNo" : productNo,
-									"userNo" : userNo,
-									"ordererPhone" : ordererPhone,
-									"ordererEmail" : ordererEmail,
-									"totalPrice" : totalPrice},
-					        success: function(data){
-					        	alert(data);
-								location.href="/mypage/myOrder";           
-					        },
-					        error: function(e){
-					          console.log("Insert ajax 통신 실패!!!");
-					        }
-						});
-				} else {
-					var msg = '결제에 실패하였습니다.';
-					msg += '에러내용 : ' + rsp.error_msg; 
-					
-					 //ajax
-					
-				}
-		});
-	});
+   <script type="text/javascript">
+      $('#quick .quickArea').css({'position':'absolute', 'top':936});
+      mainStart();
+      mainVisual();
+   </script>
+   
+   <script th:inline="javascript">
+   $("#check_module").click(function () {
+      /*<![CDATA[*/
+      let userNo = /*[[${member.userNo}]]*/;
+      let ordererPhone = /*[[${member.userPhone}]]*/;
+      let ordererEmail = /*[[${member.userEmail}]]*/;
+      let totalPrice = /*[[${sum}]]*/;
+      let userName = /*[[${member.userName}]]*/;
+      /*]]>*/
+      
+      IMP.init('imp97624274'); 
+      IMP.request_pay({
+         pg: "inicis",
+         pay_method: "card",
+         merchant_uid: 'merchant'+new Date().getTime(),
+         name: productTitle,
+         amount: totalPrice,
+         buyer_email: ordererEmail,
+           buyer_name: userName,
+           buyer_tel: ordererPhone,
+           buyer_addr: "",
+           buyer_postcode: ""
+         }, function (rsp) {
+            if (rsp.success) {
+               $.ajax({
+                     url : "/shopping/mypage/myOrder", 
+                       type:"POST",
+                       data: {"ProductNo" : ProductNo,
+                           "userNo" : userNo,
+                           "ordererPhone" : ordererPhone,
+                           "ordererEmail" : ordererEmail,
+                           "totalPrice" : totalPrice},
+                       success: function(data){
+                          alert(data);
+                        location.href="/mypage/myOrder";           
+                       },
+                       error: function(e){
+                         console.log("Insert ajax 통신 실패!!!");
+                       }
+                  });
+            } else {
+               alert("결제 취소");
+            }
+      });
+   });
 </script>
 
 
-	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
+   <!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 </body>
 </html>

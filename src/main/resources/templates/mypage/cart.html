@@ -84,7 +84,16 @@
 										<dd><span th:text="${allTotalPrice}">0</span><em>원</em></dd>
 									</dl>
 								</div>
-								<a href="#" class="btn btnSizeL btnColorP btnTypeB w100 mgt35">주문하기 (<span th:text="${cartList.size}">0</span>개)</a>
+								<form action="/shopping/payment" method="post">
+									<div th:each="cart : ${cartList}" style="display:none">
+										<input type="hidden" name="productNo" th:value="${cart.product.productNo}" />
+										<input type="hidden" name="amount" th:value="${cart.cartStock}" />
+										<input type="hidden" name="select1" th:value="${cart.product.productOption}" />
+										<input type="hidden" name="sum" th:value="${allTotalPrice}" />
+										<input type="hidden" th:value="${#authentication.principal.userNo}" name="userNo" /> 
+									</div>
+									<button type="submit" class="btn btnSizeL btnColorP btnTypeB w100 mgt35">주문하기 (<span th:text="${cartList.size}">0</span>개)</button>
+								</form>
 								<!-- 주문 내역 없음 : showLayer('noCartList'); -->
 								<!-- N+N 행사 혜택 안내 : showLayer('addPdtEvent'); -->
 								<!-- N+증정품 행사 혜택 안내 : showLayer('addGiftEvent'); -->

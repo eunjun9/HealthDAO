@@ -1,5 +1,6 @@
 package com.kh.healthDao.shopping.model.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -202,20 +203,24 @@ public class ShoppingController {
 	}
 
 	// 쇼핑 주문
-	@PostMapping("/payment") 
-	public ModelAndView shoppingPaymentInfo(@RequestParam("select1") String select1, @RequestParam("amount") int amount, @RequestParam("sum") int sum, 
-											ModelAndView mv, @RequestParam int productNo, @RequestParam int userNo) {
+	@PostMapping("payment") 
+	public ModelAndView shoppingPaymentInfo(String[] select1, int[] amount, int sum, 
+											ModelAndView mv, int[] productNo, int userNo) {
 		
-		log.info(select1 + "select1" + amount + "amount" + sum + "sum");
+		List<Product> shoppingList = new ArrayList<>();
 		
+		for(int i = 0; i < productNo.length; i++) {
+			Product shoppingPayment = shoppingService.shoppingPayment(productNo[i]);	
+			shoppingPayment.setQuantity(amount[i]);
+			shoppingPayment.setProductOption(select1[i]);
+			shoppingList.add(shoppingPayment);
+		}
+		System.out.println(shoppingList);
 		
-		Product shoppingPayment = shoppingService.shoppingPayment(productNo);
 		List<Address> addressList = myInfoService.deliView(userNo);
 		Member member = myInfoService.myInfoView(userNo);
-		
-		mv.addObject("shoppingPayment", shoppingPayment);
-		mv.addObject("select1", select1);
-		mv.addObject("amount", amount);
+			
+		mv.addObject("shoppingPayment", shoppingList);
 		mv.addObject("sum", sum);
 		mv.addObject("addressList", addressList);
 		mv.addObject("member", member);
