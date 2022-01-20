@@ -564,16 +564,9 @@
 	<update id="unregister" parameterType="com.kh.healthDao.member.model.vo.Member">
 		UPDATE MEMBER
 		   SET USER_STATUS = 'N'
+		     , BAN_DATE = SYSDATE
 		 WHERE USER_ID = #{userId}
-		   AND USER_PWD = #{userPwd}
 	</update>
-	
-	<select id="passCheck" parameterType="com.kh.healthDao.member.model.vo.Member">
-		SELECT COUNT(*)
-		  FROM MEMBER
-		 WHERE USER_ID = #{userId}
-		   AND USER_PWD = #{userPwd}
-	</select>
 	
 	<!-- 장바구니 -->
 	<select id="cartProductChk" parameterType="com.kh.healthDao.mypage.model.vo.Cart" resultMap="cartResultMap">

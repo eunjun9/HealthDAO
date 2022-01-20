@@ -21,7 +21,7 @@
 						<p>회원 탈퇴를 위해 비밀번호를 다시 확인해주세요.</p>
 					</div>
 					<div class="loginTabH">
-						<form action="/unregister/proc" id="unregForm" name="unregForm" method="post">
+						<form action="/mypage/unregister/proc" id="unregForm" name="unregForm" method="post">
 							<input type="hidden" name="userId" th:value="${#authentication.principal.userId}">
 							<div class="inp_wrap mgt10 pwdWrap">
 								<div class="inp_text sizeS">
@@ -35,7 +35,7 @@
 								</div>
 								<p class="error">비밀번호를 확인해주세요.</p>
 							</div>
-							<button id="subbtn" class="btn btnSizeM btnColorP btnTypeR w100 mgt20"><span>회원 탈퇴</span></button>
+							<button type="button" id="subbtn" class="btn btnSizeM btnColorP btnTypeR w100 mgt20"><span>회원 탈퇴</span></button>
 						</form>
 					</div>
 				</div>
@@ -81,14 +81,12 @@
 					return;
 				}
 				
-				let param = {};
-				param.userId = $("#unregForm [name=userId]").val();
-				param.userPwd = $("#unregForm [name=userPwd]").val();
+				let userPwd = $("#unregForm [name=userPwd]").val();
 				
 				// 패스워드 맞는지 확인
 				$.ajax({
 					url: "/mypage/unregister/passCheck",
-					data: JSON.stringify(encodeURI(param)),
+					data: {"userPwd" : userPwd},
 					dataType : "json",
 					contentType : "application/json; charset=utf-8",
 					type : "get",
@@ -100,7 +98,7 @@
 							// 탈퇴
 							let result = confirm('정말 탈퇴하시겠습니까?');
 							if(result){
-								$('#subbtn').submit();
+								$('#unregForm').submit();
 							}
 						}
 					},
