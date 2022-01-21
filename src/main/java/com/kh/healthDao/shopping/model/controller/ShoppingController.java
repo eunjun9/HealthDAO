@@ -184,12 +184,13 @@ public class ShoppingController {
 		Product shoppingDetail = shoppingService.shoppingDetail(productNo);
 		List<Product> shoppingReview = shoppingService.shoppingReview(productNo);
 		int sumReview = shoppingService.sumReview(productNo);
-		int avgStar = shoppingService.avgStar(productNo);
+		float avgStar = shoppingService.avgStar(productNo);
 		mv.addObject("sumReview", sumReview);
 		mv.addObject("avgStar", avgStar);
 		mv.addObject("shoppingDetail", shoppingDetail);
 		mv.addObject("shoppingReview", shoppingReview);
 		mv.setViewName("shopping/shoppingProductDetail");
+		
 		// 찜한 상품 확인
 		int userNo = 0;		
 		if(userImpl != null) {

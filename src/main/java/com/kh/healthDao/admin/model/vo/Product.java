@@ -44,6 +44,6 @@ public class Product {
 	
 	private int quantity; // 수량;
 	
-	private float avgStar;
-	private int sumReview;
+	private float avgStar;			// 리뷰 평균
+	private int sumReview;			// 리뷰 개수
 }
