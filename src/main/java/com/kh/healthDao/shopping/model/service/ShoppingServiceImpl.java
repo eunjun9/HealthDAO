@@ -309,11 +309,11 @@ public class ShoppingServiceImpl implements ShoppingService{
 	}
 
 	@Override
-	public int avgStar(int productNo) {
+	public float avgStar(int productNo) {
 		String result = shoppingMapper.avgStar(productNo);
-		int avgStar = 0;
+		float avgStar = 0;
 		if(result != null) {
-			avgStar = Integer.parseInt(result);
+			avgStar = Float.parseFloat(result);
 		}
 		
 		return avgStar;

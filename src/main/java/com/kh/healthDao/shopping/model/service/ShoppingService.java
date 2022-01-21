@@ -70,7 +70,7 @@ public interface ShoppingService {
 
 	int sumReview(int productNo);
 
-	int avgStar(int productNo);
+	float avgStar(int productNo);
 
 	Map<String, Object> rankList();
 }

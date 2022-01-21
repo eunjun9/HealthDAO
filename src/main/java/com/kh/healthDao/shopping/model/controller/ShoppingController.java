@@ -184,7 +184,7 @@ public class ShoppingController {
 		Product shoppingDetail = shoppingService.shoppingDetail(productNo);
 		List<Product> shoppingReview = shoppingService.shoppingReview(productNo);
 		int sumReview = shoppingService.sumReview(productNo);
-		int avgStar = shoppingService.avgStar(productNo);
+		float avgStar = shoppingService.avgStar(productNo);
 		mv.addObject("sumReview", sumReview);
 		mv.addObject("avgStar", avgStar);
 		mv.addObject("shoppingDetail", shoppingDetail);
