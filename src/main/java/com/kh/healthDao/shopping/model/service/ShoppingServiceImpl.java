@@ -297,6 +297,7 @@ public class ShoppingServiceImpl implements ShoppingService{
 		return shoppingMapper.shoppingReview(productNo);
 	}
 
+	// 리뷰 개수
 	@Override
 	public int sumReview(int productNo) {
 		String result = shoppingMapper.sumReview(productNo);
@@ -308,6 +309,7 @@ public class ShoppingServiceImpl implements ShoppingService{
 		return sumReview;
 	}
 
+	// 리뷰 평균
 	@Override
 	public float avgStar(int productNo) {
 		String result = shoppingMapper.avgStar(productNo);
