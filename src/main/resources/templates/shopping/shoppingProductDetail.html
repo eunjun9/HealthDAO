@@ -127,7 +127,7 @@
 									<input type="hidden" name="userNo" th:value="${#authentication.principal.userNo}">
 									<div class="pdtbuyBtnArea">
 										<div class="btn_wrap" style="display:flex;">
-											<a href="javascript:void(0)" class="btn btnArr btnSizeL btnColorW btnTypeR"><span>장바구니</span></a>
+											<a href="javascript:void(0)" th:onclick="|javascript:cartInsert('${shoppingDetail.productNo}')|" class="btn btnArr btnSizeL btnColorW btnTypeR"><span>장바구니</span></a>
 											<!-- <a href="/shopping/payment?productNo=" th:attrappend="href=${shoppingDetail.productNo}" onclick="document.forrm.submit();" class="btn btnSizeL btnColorB btnTypeR"><span>바로구매</span></a>
 									 --><button class="btn btnSizeL btnColorB btnTypeR" style="width:221px; color:white !important;"><span>바로결제</span></button> 
 									 	</div>

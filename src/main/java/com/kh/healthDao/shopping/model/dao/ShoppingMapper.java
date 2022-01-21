@@ -60,7 +60,7 @@ public interface ShoppingMapper {
 	
 	List<Product> searchList(String searchPdt);
 	int paymentInfoInsert(Payment payment);
-	int paymentDetailInsert(Payment payment);
+	int paymentDetailInsert(Product product);
 	List<Product> shoppingReview(int productNo);
 	String sumReview(int productNo);
 	String avgStar(int productNo);

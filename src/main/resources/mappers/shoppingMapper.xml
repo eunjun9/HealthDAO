@@ -918,7 +918,7 @@
 		)
 	</insert>
 	
-	<insert id="paymentDetailInsert" parameterType="com.kh.healthDao.manager.model.vo.Payment">
+	<insert id="paymentDetailInsert" parameterType="com.kh.healthDao.admin.model.vo.Product">
 		INSERT
 		  INTO PAY_DETAIL
 		  (
@@ -926,9 +926,9 @@
 		  , PAY_NO
 		  , QUANTITY
 		  )VALUES(
-		  	#{ProductNo}
+		  	#{productNo}
 		  , SEQ_PAY_NO.CURRVAL
-		  , 0
+		  , #{quantity}
 		  )
 	</insert>
 	

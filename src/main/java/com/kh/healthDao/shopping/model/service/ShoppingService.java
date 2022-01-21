@@ -64,7 +64,7 @@ public interface ShoppingService {
 
 	int deleteWishPdt(int productNo, int userNo);
 
-	int paymentInfoInsert(Payment payment);
+	int paymentInfoInsert(List<Payment> paymentList);
 
 	List<Product> shoppingReview(int productNo);
 
