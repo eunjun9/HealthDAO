@@ -47,10 +47,13 @@ public class ShoppingController {
 	// 쇼핑 랭킹페이지
 	@GetMapping("/ranking")
 	public ModelAndView shoppingRanking(ModelAndView mv, @AuthenticationPrincipal UserImpl userImpl) {
-		
-		//List<Shopping> shoppingList = shoppingService.ShoppingList();
-		
-		// mv.addObject("shoppingList", shoppingList);
+
+		Map<String, Object> map = shoppingService.rankList();
+
+		mv.addObject("rankAll", map.get("rankAll"));
+		mv.addObject("rankFood", map.get("rankFood"));
+		mv.addObject("rankBeverage", map.get("rankBeverage"));
+		mv.addObject("rankGoods", map.get("rankGoods"));
 		mv.setViewName("shopping/shoppingRanking");
 
 		// 찜한 상품 확인
@@ -60,7 +63,6 @@ public class ShoppingController {
 			List like = shoppingService.likeList(userNo);
 			mv.addObject("likeList", like);
 		}
-
 		return mv;
 	}
 

@@ -318,4 +318,27 @@ public class ShoppingServiceImpl implements ShoppingService{
 		
 		return avgStar;
 	}
+
+	@Override
+	public Map<String, Object> rankList() {
+		
+		List<Product> rankAll = shoppingMapper.rankAllList();
+		List<Product> rankFood = shoppingMapper.rankSelectList("식품");
+		List<Product> rankBeverage = shoppingMapper.rankSelectList("음료");
+		List<Product> rankGoods = shoppingMapper.rankSelectList("운동기구");
+		
+		Map<String, Object> rankList = new HashMap<>();
+
+		rankList.put("rankAll", rankAll);
+		rankList.put("rankFood", rankFood);
+		rankList.put("rankBeverage", rankBeverage);
+		rankList.put("rankGoods", rankGoods);
+
+//		System.out.println("ddd" + rankList.get("rankAll"));
+//		System.out.println("ddd" + rankList.get("rankFood"));
+//		System.out.println("ddd" + rankList.get("rankBeverage"));
+//		System.out.println("ddd" + rankList.get("rankGoods"));
+		
+		return rankList;
+	}
 }
