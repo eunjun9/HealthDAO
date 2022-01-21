@@ -60,7 +60,7 @@
 		</div>
 		<div class="btn_wrap" style="margin-top: 50px">
 			<th:block sec:authorize="hasRole('ROLE_TRAINER')">
-				<a href="#" class="btn btnSizeL btnColorW btnTypeR" onclick="showLayer('deliRegister');" style="width:150px;"><span>트레이너 등록</span></a>
+				<a href="#" th:if="${trainer} == null" class="btn btnSizeL btnColorW btnTypeR" onclick="showLayer('deliRegister');" style="width:150px;"><span>트레이너 등록</span></a>
 			</th:block>
 			<th:block sec:authorize="hasRole('ROLE_MEMBER')">
 				<a href="/trainer/orderList?userNo=" th:attrappend="href=${#authentication.principal.userNo}" class="btn btnSizeL btnColorW btnTypeR" style="width:150px;"><span>신청 목록 조회</span></a>
@@ -75,16 +75,16 @@
 		<div class="lyWrap">
 			<button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
 			<div class="lyTit">트레이너 등록</div>
+				<form class="trainerInsertForm" name="trainerInsertForm" action="/trainer/insert" method="post" enctype="multipart/form-data">
 			<div class="lyBody">
 				<div class="form_area">
-				<form class="trainerInsertForm" name="trainerInsertForm" action="/trainer/insert" method="post" enctype="multipart/form-data">
 					<dl>
 						<dt><label for="deliRegId"><span class="fcRed">*</span>센터 이름</label></dt>
 						<dd>
 							<!-- 200330 에러 메세지 추가 -->
-							<div class="inp_wrap error">
+							<div class="inp_wrap">
 								<div class="inp_text sizeS">
-									<input type="text" name="tGymName" id="deliRegId" placeholder="ex) 별림 휘트니스">
+									<input type="text" name="tGymName" id="deliRegId" placeholder="ex) 별림 휘트니스" required>
 								</div>
 								<p class="error">센터 이름을 입력해주세요.</p>
 							</div>
@@ -95,9 +95,9 @@
 						<dt><label for="deliRegName"><span class="fcRed">*</span>센터 위치 소개</label></dt>
 						<dd>
 							<!-- 200330 에러 메세지 추가 -->
-							<div class="inp_wrap error">
+							<div class="inp_wrap">
 								<div class="inp_text sizeS">
-									<input type="text" name="tAreaIntro" id="deliRegName" placeholder="ex) 강남역 도보 6분">
+									<input type="text" name="tAreaIntro" id="deliRegName" placeholder="ex) 강남역 도보 6분" required>
 								</div>
 								<p class="error">위치를 입력하세요.</p>
 							</div>
@@ -108,9 +108,9 @@
 						<dt><label for="deliRegName"><span class="fcRed">*</span>한 줄 소개</label></dt>
 						<dd>
 							<!-- 200330 에러 메세지 추가 -->
-							<div class="inp_wrap error">
+							<div class="inp_wrap">
 								<div class="inp_text sizeS">
-									<input type="text" name="tOneIntro" id="deliRegName" placeholder="ex) 13년 경력/ 다이어트. 근력증가. 바디프로필 전문">
+									<input type="text" name="tOneIntro" id="deliRegName" placeholder="ex) 13년 경력/ 다이어트. 근력증가. 바디프로필 전문" required>
 								</div>
 								<p class="error">소개를 입력하세요.</p>
 							</div>
@@ -121,9 +121,9 @@
 						<dt><label for="deliRegHphone"><span class="fcRed">*</span>가격</label></dt>
 						<dd>
 							<!-- 200330 에러 메세지 추가 -->
-							<div class="inp_wrap error">
+							<div class="inp_wrap">
 								<div class="inp_text sizeS yb">
-									<input type="text" name="tPrice" id="deliRegHphone">원
+									<input type="text" name="tPrice" id="deliRegHphone" required>원
 								</div>
 								<p class="error">가격을 입력해주세요.</p>
 							</div>
@@ -134,9 +134,9 @@
 						<dt><label for="deliRegHphone"><span class="fcRed">*</span>지역</label></dt>
 						<dd>
 							<!-- 200330 에러 메세지 추가 -->
-							<div class="inp_wrap error">
+							<div class="inp_wrap">
 								<div class="inp_text sizeS" style="width: 150px;">
-									<input type="text" name="tArea" id="deliRegHphone" placeholder="ex) 전북">
+									<input type="text" name="tArea" id="deliRegHphone" placeholder="ex) 전북" required>
 								</div>
 								<p class="error">지역을 입력해주세요.</p>
 							</div>
@@ -147,9 +147,9 @@
 						<dt><label for="deliRegHphone"><span class="fcRed">*</span>지하철역</label></dt>
 						<dd>
 							<!-- 200330 에러 메세지 추가 -->
-							<div class="inp_wrap error">
+							<div class="inp_wrap">
 								<div class="inp_text sizeS" style="width: 150px;">
-									<input type="text" name="tMetro" id="deliRegHphone" placeholder="ex) 가양역">
+									<input type="text" name="tMetro" id="deliRegHphone" placeholder="ex) 가양역" required>
 								</div>
 								<p class="error">지하철역을 입력해주세요.</p>
 							</div>
@@ -160,7 +160,7 @@
 						<dt><label for="deliRegName"><span class="fcRed">*</span>평일 스케줄</label></dt>
 						<dd>
 							<div class="inp_text sizeS">
-								<input type="text" name=weekDaySc id="deliRegName" placeholder="ex) 09:00~21:00">
+								<input type="text" name=weekDaySc id="deliRegName" placeholder="ex) 09:00~21:00" required>
 							</div>
 						</dd>
 					</dl>
@@ -168,7 +168,7 @@
 						<dt><label for="deliRegName"><span class="fcRed">*</span>주말 스케줄</label></dt>
 						<dd>
 							<div class="inp_text sizeS">
-								<input type="text" name="weekAndSc" id="deliRegName" placeholder="ex) 09:00~18:00">
+								<input type="text" name="weekAndSc" id="deliRegName" placeholder="ex) 09:00~18:00" required>
 							</div>
 						</dd>
 					</dl>
@@ -176,7 +176,7 @@
 						<dt style="margin-right: 20px;"><label for="deliRegName"><span class="fcRed"></span>선생님 소개</label></dt>
 							<div class="inp_wrap">
 								<div class="inp_textArea yn">
-									<textarea name="tIntro" placeholder="선생님 소개를 입력해주세요."></textarea>
+									<textarea name="tIntro" placeholder="선생님 소개를 입력해주세요." required></textarea>
 									<div class="textarea-clone"></div>
 								</div>
 							</div>
@@ -185,7 +185,7 @@
 						<dt style="margin-right: 30px;"><label for="deliRegName"><span class="fcRed"></span>문의 소개</label></dt>
 							<div class="inp_wrap">
 								<div class="inp_textArea yn">
-									<textarea name="queIntro" placeholder="ex)수업 중에는 연락을 못 받을 수 있습니다."></textarea>
+									<textarea name="queIntro" placeholder="ex)수업 중에는 연락을 못 받을 수 있습니다." required></textarea>
 									<div class="textarea-clone"></div>
 								</div>
 							</div>
@@ -194,7 +194,7 @@
 						<dt><label for="deliRegName"><span class="fcRed">*</span>트레이너 사진</label></dt>
 						<dd style="margin-left: 0px">
 							<div class="inp_text sizeS">
-								<input type="file" name="trainerFile" style="border: none;">
+								<input type="file" name="trainerFile" style="border: none;" required>
 							</div>
 						</dd>
 					</dl>
@@ -202,23 +202,22 @@
 						<dt><label for="deliRegName"><span class="fcRed">*</span>센터 사진</label></dt>
 						<dd style="margin-left: 0px">
 							<div class="inp_text sizeS">
-								<input type="file" name="centerFile" style="border: none;">
+								<input type="file" name="centerFile" style="border: none;" required>
 							</div>
 						</dd>
 					</dl>
 					<!-- <sec:csrfInput /> -->
 					<input type="hidden" name="tNo" th:value="${#authentication.principal.userNo}">
-					</form>
 				</div>
 				<div class="btn_wrap length2">
 					<a href="#" onclick="layerPopClose();" class="btn btnSizeL btnArr btnColorW btnTypeR"><span>취소</span></a>
-					<a href="#" onclick="document.trainerInsertForm.submit();" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></a>
+					<button type="submit" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>확인</span></button>
 				</div>
 			</div>
+				</form>
 		</div>
 	</div>
 </div>
-
 <!-- 스크립트 -->
 		<th:block th:replace="common/script.html"></th:block>
 		<!--// 스크립트 -->
