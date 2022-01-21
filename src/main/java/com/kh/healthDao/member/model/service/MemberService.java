@@ -15,7 +15,7 @@ public interface MemberService extends UserDetailsService{
 
 	Member findId(String userName, String userEmail);
 
-	Member selectMember(String userEmail);
+	Member selectMember(String userId, String userEmail);
 
 	int pwdUpdate(Member member);
 

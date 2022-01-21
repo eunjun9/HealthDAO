@@ -526,7 +526,7 @@
 		  INTO MEMBER_ROLE
 		(
 			USER_NO
-		  , MEMBER_ROLE 
+		  , AUTHORITY_CODE 
 		)
 		VALUES
 		(

@@ -185,7 +185,7 @@
 	
 	<!-- 회원정보 조회 -->
 	<select id="selectMember" parameterType="String" resultMap="loginMemberResultMap">
-		SELECT * FROM MEMBER WHERE USER_EMAIL = #{userEmail}
+		SELECT * FROM MEMBER WHERE USER_ID = #{userId} AND USER_EMAIL = #{userEmail}
 	</select>
 	
 	<!-- 패스워드 변경 -->

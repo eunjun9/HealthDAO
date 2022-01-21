@@ -466,7 +466,9 @@
 			  </if>
 		        USER_NICKNAME = #{userNickName}
 		      , USER_PHONE = #{userPhone}
-		      , USER_BIRTH = #{userBirth}
+		      <if test="userBirth != null">
+		        USER_BIRTH = #{userBirth} ,
+		      </if>
 		      , USER_GENDER = #{userGender}
 		      <choose>
 			  <when test="emailReceive != null">

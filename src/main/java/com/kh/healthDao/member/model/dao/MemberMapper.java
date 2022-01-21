@@ -29,7 +29,7 @@ public interface MemberMapper {
 	/* 아이디/비밀번호 찾기 */
 	Member selectId(String userName, String userEmail);
 
-	Member selectMember(String userEmail);
+	Member selectMember(String userId, String userEmail);
 
 	int pwdUpdate(Member member);
 
