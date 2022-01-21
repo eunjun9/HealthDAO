@@ -1,5 +1,7 @@
 package com.kh.healthDao.member.controller;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
@@ -16,7 +18,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.healthDao.member.model.service.MemberService;
@@ -38,17 +39,17 @@ public class MemberController {
 		this.mailSender = mailSender;
 	}
 	
-	@GetMapping("/login")
+	/*@GetMapping("/login")
 	public String loginForm(@RequestParam(value = "error", required = false) String error,
             			    @RequestParam(value = "exception", required = false) String exception, Model model) {
 		
 		model.addAttribute("error", error);
         model.addAttribute("exception", exception);
         return "/member/login";
-	}
+	}*/
 	
-	/*@GetMapping("/login")
-	public void loginForm() {}*/
+	@GetMapping("/login")
+	public void loginForm() {}
 	
 	@GetMapping("/signUp")
 	public void signupForm() {}
@@ -58,7 +59,6 @@ public class MemberController {
 	
 	@PostMapping("/signUp")
 	public String signUp(Member member, @RequestParam String userBirth, @RequestParam String userBirth2, @RequestParam String userBirth3) {
-		
 		String birth = userBirth + userBirth2 + userBirth3;
 		member.setUserBirth(birth);
 		
@@ -91,7 +91,7 @@ public class MemberController {
 		return memberService.findId(userName, userEmail);
 	}
 	
-	@PostMapping("/findPwd")
+	/*@PostMapping("/findPwd")
 	public ModelAndView findPwd(HttpSession session, @RequestParam String userId, @RequestParam String userEmail,
 			RedirectAttributes rttr) {
 		ModelAndView mv = new ModelAndView();
@@ -132,13 +132,13 @@ public class MemberController {
 				mv.setViewName("redirect:/member/findIdPwd");
 				return mv;
 		}
-	}
+	}*/
 	
-	/* @GetMapping("/findPwd")
+	@GetMapping("/findPwd")
 	@ResponseBody
-	public Map<String, Member> findPwd(String userId, String userEmail, HttpSession session, RedirectAttributes rttr) {
+	public Member findPwd(String userId, String userEmail, HttpSession session, RedirectAttributes rttr) {
 
-		Map<String, Member> json = new HashMap<>();
+//		Map<String, String> json = new HashMap<>();
 		Member selectMember = memberService.selectMember(userEmail);
 		
 		System.out.println(userId +", "+ userEmail);
@@ -168,12 +168,15 @@ public class MemberController {
 					System.out.println(e.getMessage());
 			}
 			selectMember.setNum(num);
-			json.put("member", selectMember);
-			return json;
+			
+//			json.put("num", Integer.valueOf(selectMember.getNum()).toString());
+//			json.put("userEmail", selectMember.getUserEmail());
+			return selectMember;
 		} else {
-			return null;
+//			json.put("msg", "회원정보를 찾을 수 없습니다.");
+			return selectMember;
 		}
-	} */
+	}
 	
 	/* @PostMapping("/findPwdUpdate")
 	public String findPwdUpdate(@RequestParam String num, @RequestParam String ijnum, Member member, HttpSession session, RedirectAttributes rttr) {

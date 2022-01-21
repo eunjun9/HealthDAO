@@ -22,7 +22,7 @@ public class Review {
 	private Date modifyDate;	// 수정일자
 	private int payNo;			// 주문번호
 	private int userNo;			// 유저번호
-
+	private int tNo;			// 트레이너번호
 	
 	private String productName; // 상품명
 

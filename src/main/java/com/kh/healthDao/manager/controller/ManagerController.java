@@ -24,7 +24,6 @@ import com.kh.healthDao.manager.model.service.ManagerService;
 import com.kh.healthDao.manager.model.vo.Payment;
 import com.kh.healthDao.manager.model.vo.Qna;
 import com.kh.healthDao.manager.model.vo.Refund;
-import com.kh.healthDao.mypage.model.vo.QnaDept;
 
 
 @Controller

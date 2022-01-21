@@ -1218,7 +1218,6 @@ HEADER
 .headerTop .utilMenu > ul li:before{content:'';position:absolute;left:0;top:4px;width:1px;height:10px;background:#e8e8e8;}
 .headerTop .utilMenu > ul li:first-child{margin-left:0;padding-left:0;}
 .headerTop .utilMenu > ul li:first-child:before{display:none;}
-.headerTop .utilMenu > ul li:last-of-type{display:none;}
 .headerTop .utilMenu > ul a{font-size:13px;color:#888;}
 .headerTop .utilMenu > ul a span{display:inline-block;width:18px;text-align:center;font-size:10px;color:#fff;background:#222;border-radius:50%;}
 

@@ -197,6 +197,11 @@ public class TrainerServiceImpl implements TrainerService{
 
 	}
 
+	@Override
+	public int trainerModify4(Trainer trainer) {
+		return trainerMapper.trainerModify(trainer);
+	}
+
 
 
 

@@ -132,13 +132,6 @@ public class ManagerServiceImpl implements ManagerService{
 		return managerMapper.managerRefundOk(refund);
 	}
 
-
-
-
-
-
-
-
 	
 
 

@@ -153,10 +153,7 @@
    				// console.log(param);
    				var attendanceDate = new Date();
    				attendanceDate.setDate(param.btnValue);
-   				// console.log(attendanceDate);
-   				var userNo = document.getElementById("inputuId").value;
-   				// console.log(userNo);
-   				var result = {"attendanceDate" : attendanceDate, "userNo" : userNo};
+   				var result = {"attendanceDate" : attendanceDate};
    				$.ajax({
    					url : "/mypage/attCheck",
    					data : result,

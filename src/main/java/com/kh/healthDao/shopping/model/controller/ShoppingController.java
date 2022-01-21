@@ -1,5 +1,6 @@
 package com.kh.healthDao.shopping.model.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.healthDao.admin.model.vo.Product;
+import com.kh.healthDao.manager.model.service.ManagerService;
 import com.kh.healthDao.manager.model.vo.Payment;
 import com.kh.healthDao.member.model.vo.Member;
 import com.kh.healthDao.member.model.vo.UserImpl;
@@ -32,20 +34,26 @@ public class ShoppingController {
 
 	private ShoppingService shoppingService;
 	private MyInfoService myInfoService;
+	private ManagerService managerService;
+	
 	
 	@Autowired
-	public ShoppingController(ShoppingService shoppingService, MyInfoService myInfoService) {
+	public ShoppingController(ShoppingService shoppingService, MyInfoService myInfoService, ManagerService managerService) {
 		this.shoppingService = shoppingService;
 		this.myInfoService = myInfoService;
+		this.managerService = managerService;
 	}
 	
 	// 쇼핑 랭킹페이지
 	@GetMapping("/ranking")
 	public ModelAndView shoppingRanking(ModelAndView mv, @AuthenticationPrincipal UserImpl userImpl) {
-		
-		//List<Shopping> shoppingList = shoppingService.ShoppingList();
-		
-		// mv.addObject("shoppingList", shoppingList);
+
+		Map<String, Object> map = shoppingService.rankList();
+
+		mv.addObject("rankAll", map.get("rankAll"));
+		mv.addObject("rankFood", map.get("rankFood"));
+		mv.addObject("rankBeverage", map.get("rankBeverage"));
+		mv.addObject("rankGoods", map.get("rankGoods"));
 		mv.setViewName("shopping/shoppingRanking");
 
 		// 찜한 상품 확인
@@ -55,7 +63,6 @@ public class ShoppingController {
 			List like = shoppingService.likeList(userNo);
 			mv.addObject("likeList", like);
 		}
-
 		return mv;
 	}
 
@@ -175,10 +182,14 @@ public class ShoppingController {
 	public ModelAndView shoppingDetail(ModelAndView mv, @RequestParam int productNo, @AuthenticationPrincipal UserImpl userImpl) {
 		
 		Product shoppingDetail = shoppingService.shoppingDetail(productNo);
-		
+		List<Product> shoppingReview = shoppingService.shoppingReview(productNo);
+		int sumReview = shoppingService.sumReview(productNo);
+		int avgStar = shoppingService.avgStar(productNo);
+		mv.addObject("sumReview", sumReview);
+		mv.addObject("avgStar", avgStar);
 		mv.addObject("shoppingDetail", shoppingDetail);
+		mv.addObject("shoppingReview", shoppingReview);
 		mv.setViewName("shopping/shoppingProductDetail");
-
 		// 찜한 상품 확인
 		int userNo = 0;		
 		if(userImpl != null) {
@@ -202,20 +213,24 @@ public class ShoppingController {
 	}
 
 	// 쇼핑 주문
-	@PostMapping("/payment") 
-	public ModelAndView shoppingPaymentInfo(@RequestParam("select1") String select1, @RequestParam("amount") int amount, @RequestParam("sum") int sum, 
-											ModelAndView mv, @RequestParam int productNo, @RequestParam int userNo) {
+	@PostMapping("payment") 
+	public ModelAndView shoppingPaymentInfo(String[] select1, int[] amount, int sum, 
+											ModelAndView mv, int[] productNo, int userNo) {
+		Product shoppingPayment = shoppingService.shoppingPayment(productNo[0]);
+		/*
+		 * List<Product> shoppingList = new ArrayList<>();
+		 * 
+		 * for(int i = 0; i < productNo.length; i++) { Product shoppingPayment =
+		 * shoppingService.shoppingPayment(productNo[i]);
+		 * shoppingPayment.setQuantity(amount[i]);
+		 * shoppingPayment.setProductOption(select1[i]);
+		 * shoppingList.add(shoppingPayment); } System.out.println(shoppingList);
+		 */
 		
-		log.info(select1 + "select1" + amount + "amount" + sum + "sum");
-		
-		
-		Product shoppingPayment = shoppingService.shoppingPayment(productNo);
 		List<Address> addressList = myInfoService.deliView(userNo);
 		Member member = myInfoService.myInfoView(userNo);
-		
+			
 		mv.addObject("shoppingPayment", shoppingPayment);
-		mv.addObject("select1", select1);
-		mv.addObject("amount", amount);
 		mv.addObject("sum", sum);
 		mv.addObject("addressList", addressList);
 		mv.addObject("member", member);
@@ -226,14 +241,20 @@ public class ShoppingController {
 		
 	}
 	
-	// 주문 내역
-	@PostMapping("/mypage/myOrder")
+	// 결제완료 정보
+	@PostMapping("mypage/myOrder")
 	@ResponseBody
-	public String myOrderInfo(Payment payment) {
+	public String paymentInfoInsert(Payment payment) {
 		
 		System.out.println(payment);
 		
-		return "";
+		int result = shoppingService.paymentInfoInsert(payment);
+		
+		if(result > 0) {
+			return "결제 성공";
+		} else {
+			return "결제 실패";
+		}
 	}
 	
 	
