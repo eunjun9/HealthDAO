@@ -38,12 +38,19 @@ public class TrainerController {
 	}
 	
 	@GetMapping("")
-	public ModelAndView trainerMain(ModelAndView mv) {
+	public ModelAndView trainerMain(ModelAndView mv, Principal principal) {
 		
 		int sumPtOrder = trainerService.sumPtOrder();
 		int sumTrainer = trainerService.sumTrainer();
 		int sumReview = trainerService.sumReview();
 		
+		Member member = new Member();
+		member.setUserId(principal.getName());
+		member = trainerService.mOrderSelect(member);
+		int tNo = member.getUserNo();
+		Trainer trainer = trainerService.trainerSelect(tNo);
+		
+		mv.addObject("trainer", trainer);
 		mv.addObject("sumPtOrder", sumPtOrder);
 		mv.addObject("sumTrainer", sumTrainer);
 		mv.addObject("sumReview", sumReview);
@@ -64,10 +71,17 @@ public class TrainerController {
 	}
 	
 	@GetMapping("/detail")
-	public ModelAndView trainerDetail(ModelAndView mv, @RequestParam int tNo) {
+	public ModelAndView trainerDetail(ModelAndView mv, @RequestParam int tNo, Principal principal) {
 		
 		Trainer trainer = trainerService.trainerSelect(tNo);
 		
+		Member member = new Member();
+		member.setUserId(principal.getName());
+		member = trainerService.mOrderSelect(member);
+		int userNo = member.getUserNo();
+		PtOrder ptOrderStatus = trainerService.ptOrderStatus(userNo, tNo);
+
+		mv.addObject("ptOrderStatus", ptOrderStatus);
 		mv.addObject("trainer", trainer);
 		mv.setViewName("trainer/trainerDetail");
 		
@@ -173,11 +187,17 @@ public class TrainerController {
 	}
 	
 	@GetMapping("/review")
-	public ModelAndView trainerReviewList(ModelAndView mv, @RequestParam int tNo) {
+	public ModelAndView trainerReviewList(ModelAndView mv, @RequestParam int tNo, Principal principal) {
 		
 		List<Review> reviewList = trainerService.trainerReviewList(tNo);
 		Trainer trainer = trainerService.trainerSelect(tNo);
-		
+		Member member = new Member();
+		member.setUserId(principal.getName());
+		member = trainerService.mOrderSelect(member);
+		int userNo = member.getUserNo();
+		PtOrder ptOrderStatus = trainerService.ptOrderStatus(userNo, tNo);
+
+		mv.addObject("ptOrderStatus", ptOrderStatus);
 		mv.addObject("reviewList", reviewList);
 		mv.addObject("trainer", trainer);
 		mv.setViewName("trainer/trainerReview");
