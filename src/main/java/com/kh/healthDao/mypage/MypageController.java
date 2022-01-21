@@ -583,21 +583,26 @@ public class MypageController {
 	@GetMapping("/memberGrade")
 	public ModelAndView memberGrade(@AuthenticationPrincipal UserImpl userImpl, ModelAndView mv) {		
 		int userNo = userImpl.getUserNo();
-		
+
+		//System.out.println(userNo);
 		List<Payment> memberGrade = qnaService.memberGrade(userNo);
 		//System.out.println(memberGrade);
 		
+		
 		List payArr = new ArrayList();
 		for(int i = 0; i < memberGrade.size(); i++) {
-			payArr.add(/* memberGrade.get(i).getQuantity() * */
-					memberGrade.get(i).getProductPrice());
+
+			payArr.add(memberGrade.get(i).getTotalPrice());
+
 		}
+		
+		// System.out.println(payArr);
 		
 		int sum = 0;
 		for(int i = 0; i < payArr.size(); i++) {
 			sum += (int)payArr.get(i);
 		}
-		//System.out.println(sum);
+		// System.out.println(sum);
 
 		mv.addObject("sum", sum);
 		mv.setViewName("mypage/memberGrade"); 
