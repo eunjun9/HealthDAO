@@ -160,7 +160,7 @@
                   </div>
                </div>
                
-               <!-- <div class="order_list order_con">
+               <div class="order_list order_con">
                   <ul class="list_box">
                      <li th:each="sp : ${shoppingPayment}">
                         <div class="tbl_wrap">
@@ -180,7 +180,7 @@
                         </div>
                      </li>
                   </ul>
-               </div> -->
+               </div>
                <div class="order_coupon order_con">
                   <p class="orderTit">쿠폰/포인트 사용</p>
                   <div class="coupon_wrap">
@@ -469,7 +469,7 @@
    </div>
    
    <!-- 퀵메뉴 + 톡톡 -->
-   <th:block th:replace="common/quickNtalk.html"></th:block>
+    <th:block th:replace="common/quickNtalk.html"></th:block>
    <!--// 퀵메뉴 + 톡톡 -->   
    <!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 
@@ -485,10 +485,19 @@
       let ordererEmail = /*[[${member.userEmail}]]*/;
       let totalPrice = /*[[${sum}]]*/;
       let userName = /*[[${member.userName}]]*/;
-      var productTitle = /*[[${shoppingPayment.productTitle}]]*/;
-      var ProductNo = /*[[${shoppingPayment.ProductNo}]]*/;
+      var productTitle;
+      var Product = /*[[${shoppingPayment}]]*/;
       /*]]>*/
       
+      console.log(Product);
+      sendData = [{
+		 "userNo" : userNo,
+         "ordererPhone" : ordererPhone,
+         "ordererEmail" : ordererEmail,
+         "totalPrice" : totalPrice,
+         "productList" : Product
+      }];
+   
       IMP.init('imp97624274'); 
       IMP.request_pay({
          pg: "inicis",
@@ -506,12 +515,13 @@
                $.ajax({
                      url : "/shopping/mypage/myOrder", 
                        type:"POST",
-                       data: {"ProductNo" : ProductNo,
+                       data: JSON.stringify(sendData)/* {"ProductNo" : ProductNo,
                            "userNo" : userNo,
                            "ordererPhone" : ordererPhone,
                            "ordererEmail" : ordererEmail,
                            "totalPrice" : totalPrice,
-                           "productTitle" : productTitle},
+                        } */,
+                        contentType : 'application/json; charset=utf-8',
                        success: function(data){
                           alert(data);
                         location.href="/mypage/myOrder";           

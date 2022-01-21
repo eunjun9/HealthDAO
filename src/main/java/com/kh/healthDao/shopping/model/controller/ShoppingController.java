@@ -9,6 +9,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -216,21 +217,24 @@ public class ShoppingController {
 	@PostMapping("payment") 
 	public ModelAndView shoppingPaymentInfo(String[] select1, int[] amount, int sum, 
 											ModelAndView mv, int[] productNo, int userNo) {
-		Product shoppingPayment = shoppingService.shoppingPayment(productNo[0]);
-		/*
-		 * List<Product> shoppingList = new ArrayList<>();
-		 * 
-		 * for(int i = 0; i < productNo.length; i++) { Product shoppingPayment =
-		 * shoppingService.shoppingPayment(productNo[i]);
-		 * shoppingPayment.setQuantity(amount[i]);
-		 * shoppingPayment.setProductOption(select1[i]);
-		 * shoppingList.add(shoppingPayment); } System.out.println(shoppingList);
-		 */
+		//Product shoppingPayment = shoppingService.shoppingPayment(productNo[0]);
+		
+		  List<Product> shoppingList = new ArrayList<>();
+		  
+		  for(int i = 0; i < productNo.length; i++) { 
+			  Product shoppingPayment = shoppingService.shoppingPayment(productNo[i]);
+			  shoppingPayment.setQuantity(amount[i]);
+			  shoppingPayment.setProductOption(select1[i]);
+			  shoppingList.add(shoppingPayment); 
+		  } 
+		  
+		 // System.out.println(shoppingList);
+		 
 		
 		List<Address> addressList = myInfoService.deliView(userNo);
 		Member member = myInfoService.myInfoView(userNo);
 			
-		mv.addObject("shoppingPayment", shoppingPayment);
+		mv.addObject("shoppingPayment", shoppingList);
 		mv.addObject("sum", sum);
 		mv.addObject("addressList", addressList);
 		mv.addObject("member", member);
@@ -244,17 +248,15 @@ public class ShoppingController {
 	// 결제완료 정보
 	@PostMapping("mypage/myOrder")
 	@ResponseBody
-	public String paymentInfoInsert(Payment payment) {
+	public String paymentInfoInsert(@RequestBody List<Payment> paymentList) {
 		
-		System.out.println(payment);
+		System.out.println(paymentList);
 		
-		int result = shoppingService.paymentInfoInsert(payment);
 		
-		if(result > 0) {
-			return "결제 성공";
-		} else {
-			return "결제 실패";
-		}
+		int result = shoppingService.paymentInfoInsert(paymentList);
+	  
+		if(result > 0) { return "결제 성공"; } else { return "결제 실패"; }
+		 
 	}
 	
 	

@@ -279,11 +279,20 @@ public class ShoppingServiceImpl implements ShoppingService{
 	}
 
 	@Override
-	public int paymentInfoInsert(Payment payment) {
+	public int paymentInfoInsert(List<Payment> paymentList) {
 		
 		int result = 0;
-		int result1 = shoppingMapper.paymentInfoInsert(payment);
-		int result2 = shoppingMapper.paymentDetailInsert(payment);
+		
+		
+		int result1 = shoppingMapper.paymentInfoInsert(paymentList.get(0));
+		
+		// 디테일 인서트
+		int productCount = paymentList.get(0).getProductList().size();
+		int result2 = 0;
+		for(int i = 0; i < productCount; i++) {
+			Product product = paymentList.get(0).getProductList().get(i);
+			result2 = shoppingMapper.paymentDetailInsert(product);			
+		}
 		
 		if(result1 > 0 && result2 > 0) {
 			result = 1;
