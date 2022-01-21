@@ -32,7 +32,7 @@ public class Product {
 	private PayDetail payDetail;	// 상품 디테일(수량) 테이블
 	
 
-	private Review review;
+	private List<Review> reviewList;
 	private int productRank;		// 순번
 	private Member member;			// userNo 가져올 때 필요
 	

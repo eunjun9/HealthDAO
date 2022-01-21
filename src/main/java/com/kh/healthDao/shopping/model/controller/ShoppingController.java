@@ -190,7 +190,6 @@ public class ShoppingController {
 		mv.addObject("shoppingDetail", shoppingDetail);
 		mv.addObject("shoppingReview", shoppingReview);
 		mv.setViewName("shopping/shoppingProductDetail");
-		
 		// 찜한 상품 확인
 		int userNo = 0;		
 		if(userImpl != null) {
