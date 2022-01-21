@@ -135,21 +135,6 @@ public class adminController {
 		return mv;
 	}
 	
-	// 쿠폰등록
-	@GetMapping("/couponInput")
-	public String couponInput() {
-		return "admin/couponInput";
-	}
-	
-	@PostMapping("/couponInput")
-	public String couponInput(Coupon coupon, RedirectAttributes rttr) {
-		String msg = couponService.couponInput(coupon) > 0 ? "쿠폰 등록 성공" : "쿠폰 등록 실패";
-		
-		rttr.addFlashAttribute("msg", msg);
-		
-		return "redirect:/admin/couponList";
-	}
-	
 	// 쿠폰리스트
 	@GetMapping("/couponList")
 	public ModelAndView couponList(ModelAndView mv, @RequestParam int page) {
@@ -162,6 +147,22 @@ public class adminController {
 		
 		return mv;
 	}
+	
+	// 쿠폰등록
+	@GetMapping("/couponInput")
+	public String couponInput() {
+		return "admin/couponInput";
+	}
+	
+	@PostMapping("/couponInput")
+	public String couponInput(Coupon coupon, RedirectAttributes rttr) {
+		String msg = couponService.couponInput(coupon) > 0 ? "쿠폰 등록 성공" : "쿠폰 등록 실패";
+		
+		rttr.addFlashAttribute("msg", msg);
+		
+		return "redirect:/admin/couponList?page=1";
+	}
+	
 	
 	// 공지사항 리스트
 	@GetMapping("/noticeList")
