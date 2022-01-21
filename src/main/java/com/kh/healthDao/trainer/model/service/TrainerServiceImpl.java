@@ -202,6 +202,12 @@ public class TrainerServiceImpl implements TrainerService{
 		return trainerMapper.trainerModify(trainer);
 	}
 
+	@Override
+	public PtOrder ptOrderStatus(int userNo, int tNo) {
+		return trainerMapper.ptOrderStatus(userNo, tNo);
+	}
+
+
 
 
 

@@ -46,7 +46,7 @@
 					<p th:text="'평일&nbsp; &nbsp; &nbsp; &nbsp'+${trainer.weekDaySc}"/>
 					<p th:text="'주말&nbsp; &nbsp; &nbsp; &nbsp'+${trainer.weekAndSc}"/>
 				</div>
-				<button class="trainerDetailReport">🚨잘못된 정보 신고하기</button>
+				<button class="trainerDetailReport" onclick="reportAlert();">🚨잘못된 정보 신고하기</button>
 				<div class="btn_wrap" style="margin-top: 50px" th:if="${#authentication.principal.userNo} == ${trainer.tNo}">
 					<a href="#" class="btn btnSizeL btnColorW btnTypeR" onclick="showLayer('deliRegister');" style="width:150px;"><span>트레이너 수정</span></a>
 				</div>
@@ -87,7 +87,7 @@
 							<h5>회원권을 등록하지 않아도 가능해요</h5>
 						</div>
 						<div class="trainerDetailOrderAndQue">
-							<button class="trainerDetailOrder"><a href="/trainer/order?tNo=" th:attrappend="href=${trainer.tNo}">1회 체험 신청하기</a></button>
+							<button class="trainerDetailOrder" th:if="${ptOrderStatus} == null and ${#authentication.principal.userNo} != ${trainer.tNo}"><a href="/trainer/order?tNo=" th:attrappend="href=${trainer.tNo}">1회 체험 신청하기</a></button>
 							<button class="trainerDetailQue">문의</button>
 						</div>
                     </div>
@@ -305,6 +305,13 @@
 	<style>
 		#quick{display:none;}
 	</style>
+	
+	<script>
+		function reportAlert(){
+			alert('신고가 접수 되었습니다.');
+			location.href="/trainer/";
+		}
+	</script>
 
 </body>
 </html>
