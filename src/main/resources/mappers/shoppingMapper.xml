@@ -611,13 +611,13 @@
 		HAVING P.PRODUCT_NO = #{productNo}
 	</select>
 	
-	<select id="sumReview" resultType="_int" parameterType="_int">
+	<select id="sumReview" resultType="String" parameterType="_int">
 		SELECT COUNT(*)
 		  FROM REVIEW
 		 WHERE PRODUCT_NO = #{productNo}
 	</select>
 	
-	<select id="avgStar" resultType="_int" parameterType="_int">
+	<select id="avgStar" resultType="String" parameterType="_int">
 		SELECT ROUND((SUM(STAR)) / COUNT(REVIEW_NO), 1)
 		  FROM REVIEW
 		 WHERE PRODUCT_NO = #{productNo}

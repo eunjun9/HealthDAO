@@ -13,13 +13,7 @@
 		<div align="right">
 		<!-- isAuthenticated() : 인증 되어 있는지 확인 (로그인 여부) -->
 		<th:block sec:authorize="isAuthenticated()">
-			<h3><span sec:authentication="principal.userName"></span>님 환영합니다. (로그인 확인용-임시)</h3><br>
-			<pre th:text="${res}"></pre><br>
-			<pre th:text="${session.currentUser}"></pre><br>
-		    <a th:href="${'/naver/getProfile?accessToken=' + session.currentAT}">Get User's Profile</a><br>
-		    <a th:href="${'/naver/refreshToken?refreshToken=' + session.currentRT}">Refresh Token</a><br>
-		    <a th:href="${'/naver/deleteToken?accessToken=' + session.currentAT}">Delete Token</a><br>
-		    <a href="/naver/invalidate">로그아웃 (Invalidate Session)</a>
+			<h3><span sec:authentication="principal.userName"></span>님 환영합니다. (로그인 확인용-임시)</h3>
 		</th:block>
 		</div>
 		<!--// HEADER + GNB -->
