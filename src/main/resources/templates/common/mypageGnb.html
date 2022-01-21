@@ -12,11 +12,7 @@
 	<div class="myPageMenu">
 		<ul class="dep1">
 			<li>
-				<p>주문관리</p>
-				<ul class="dep2">
-					<li><a href="/mypage/myOrder">상품주문</a></li>
-					<li><a href="/mypage/myOrder">PT예약</a></li>
-				</ul>
+				<a href="/mypage/myOrder">주문내역</a>
 			</li>			
 			<li>
 				<a href="/mypage/point?page=1">포인트</a>
@@ -24,10 +20,10 @@
 			<li>
 				<p>이벤트</p>
 				<ul class="dep2">
-				<form action="/mypage/attendanceCheck" method="post" name="attForm">
+				<!-- <form action="/mypage/attendanceCheck" method="post" name="attForm">
 					<input type="hidden" name="userNo" th:value="${#authentication.principal.userNo}">
-				</form>
-					<li><a href="#" onclick="document.attForm.submit();">출석체크</a></li>	
+				</form> -->
+					<li><a href="/mypage/attendanceCheck">출석체크</a></li>	
 					<li><a href="/mypage/roulette">룰렛</a></li>	
 					<li><a href="/mypage/event/couponEvent">쿠폰받기</a></li>					
 				</ul>
@@ -37,7 +33,7 @@
 				<ul class="dep2">
 					<li><a href="/mypage/review?page=1">내가 쓴 리뷰</a></li>
 					<li><a href="/mypage/qna?page=1">1:1 문의</a></li>
-					<li><a href="/mypage/mywish">위시리스트</a></li>
+					<li><a href="/mypage/wish">위시리스트</a></li>
 				</ul>
 			</li>
 			<li>

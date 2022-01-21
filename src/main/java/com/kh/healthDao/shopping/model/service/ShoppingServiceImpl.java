@@ -297,26 +297,54 @@ public class ShoppingServiceImpl implements ShoppingService{
 		return shoppingMapper.shoppingReview(productNo);
 	}
 
+	// 리뷰 개수
 	@Override
 	public int sumReview(int productNo) {
-		
-		int sumReview = 0;
+
 		String result = shoppingMapper.sumReview(productNo);
+		int sumReview = 0;
+
 		if(result != null) {
 			sumReview = Integer.parseInt(result);
 		}
 		
 		return sumReview;
+
+	}
+
+	// 리뷰 평균
+	@Override
+	public float avgStar(int productNo) {
+		String result = shoppingMapper.avgStar(productNo);
+		float avgStar = 0;
+		if(result != null) {
+			avgStar = Float.parseFloat(result);
+		}
+	
+		return avgStar;
 	}
 
 	@Override
-	public int avgStar(int productNo) {
-		int avgStar = 0;
-		String result = shoppingMapper.avgStar(productNo);
-		if(result != null) {
-			avgStar = Integer.parseInt(result);
-		}
+	public Map<String, Object> rankList() {
 		
-		return avgStar;
+		List<Product> rankAll = shoppingMapper.rankAllList();
+		List<Product> rankFood = shoppingMapper.rankSelectList("식품");
+		List<Product> rankBeverage = shoppingMapper.rankSelectList("음료");
+		List<Product> rankGoods = shoppingMapper.rankSelectList("운동기구");
+		
+		Map<String, Object> rankList = new HashMap<>();
+
+		rankList.put("rankAll", rankAll);
+		rankList.put("rankFood", rankFood);
+		rankList.put("rankBeverage", rankBeverage);
+		rankList.put("rankGoods", rankGoods);
+
+//		System.out.println("ddd" + rankList.get("rankAll"));
+//		System.out.println("ddd" + rankList.get("rankFood"));
+//		System.out.println("ddd" + rankList.get("rankBeverage"));
+//		System.out.println("ddd" + rankList.get("rankGoods"));
+		
+		return rankList;
+
 	}
 }

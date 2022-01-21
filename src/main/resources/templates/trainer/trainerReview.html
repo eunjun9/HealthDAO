@@ -44,7 +44,7 @@
                             <p style="font-size: 12px; color: #666666;" th:text="${trainer.sumReview}+'개의 후기'"/>
                         </div>
                     </div>
-                    <button class="trainerReviewBtn" onclick="showLayer('reViewWritePop');" >✍ 리뷰 남기기</button>
+                    <button class="trainerReviewBtn" onclick="showLayer('reViewWritePop');" th:if="${#authentication.principal.userNo} != ${trainer.tNo}">✍ 리뷰 남기기</button>
                 </div>
 
                 <div class="trainerReviewListZone">
@@ -116,7 +116,7 @@
 							<h5>회원권을 등록하지 않아도 가능해요</h5>
 						</div>
 						<div class="trainerDetailOrderAndQue">
-							<button class="trainerDetailOrder"><a href="/trainer/order?tNo=" th:attrappend="href=${trainer.tNo}">1회 체험 신청하기</a></button>
+							<button class="trainerDetailOrder" th:if="${ptOrderStatus} == null and ${#authentication.principal.userNo} != ${trainer.tNo}"><a href="/trainer/order?tNo=" th:attrappend="href=${trainer.tNo}">1회 체험 신청하기</a></button>
 							<button class="trainerDetailQue">문의</button>
 						</div>
                     </div>

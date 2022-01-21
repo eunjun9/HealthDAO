@@ -5,8 +5,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.BiConsumer;
-import java.util.function.ToIntFunction;
 
 import javax.servlet.http.HttpSession;
 
@@ -478,9 +476,9 @@ public class MypageController {
 	}
 	
 	/* 출석체크 화면이동 */
-	@PostMapping("/attendanceCheck")
-	public ModelAndView attendUser(@RequestParam int userNo, ModelAndView mv) {
-		
+	@GetMapping("/attendanceCheck")
+	public ModelAndView attendUser(@AuthenticationPrincipal UserImpl userImpl, ModelAndView mv) {
+		int userNo = userImpl.getUserNo();
 		
 		List<AttCheck> attendUserList = qnaService.attendUserList(userNo);
 		
@@ -502,8 +500,9 @@ public class MypageController {
 	/* 출석 체크 */
 	@PostMapping("/attCheck")
 	@ResponseBody
-	public String attendanceCheck(Date attendanceDate, int userNo) {
+	public String attendanceCheck(Date attendanceDate, @AuthenticationPrincipal UserImpl userImpl) {
 		
+		int userNo = userImpl.getUserNo();
 		AttCheck attcheck = new AttCheck();
 		attcheck.setAttendanceDate(attendanceDate);
 		attcheck.setUserNo(userNo);
@@ -581,20 +580,26 @@ public class MypageController {
 	@GetMapping("/memberGrade")
 	public ModelAndView memberGrade(@AuthenticationPrincipal UserImpl userImpl, ModelAndView mv) {		
 		int userNo = userImpl.getUserNo();
-		
+
+		//System.out.println(userNo);
 		List<Payment> memberGrade = qnaService.memberGrade(userNo);
 		//System.out.println(memberGrade);
 		
+		
 		List payArr = new ArrayList();
 		for(int i = 0; i < memberGrade.size(); i++) {
-			payArr.add(memberGrade.get(i).getQuantity() * memberGrade.get(i).getProductPrice());
+
+			payArr.add(memberGrade.get(i).getTotalPrice());
+
 		}
+		
+		// System.out.println(payArr);
 		
 		int sum = 0;
 		for(int i = 0; i < payArr.size(); i++) {
 			sum += (int)payArr.get(i);
 		}
-		//System.out.println(sum);
+		// System.out.println(sum);
 
 		mv.addObject("sum", sum);
 		mv.setViewName("mypage/memberGrade"); 

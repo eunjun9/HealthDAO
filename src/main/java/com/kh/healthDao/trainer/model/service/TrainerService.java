@@ -46,6 +46,9 @@ public interface TrainerService {
 
 	int trainerModify4(Trainer trainer);
 
+	PtOrder ptOrderStatus(int userNo, int tNo);
+
+
 
 
 }

@@ -24,7 +24,6 @@ import com.kh.healthDao.mypage.model.vo.Address;
 import com.kh.healthDao.shopping.model.service.ShoppingService;
 
 import lombok.extern.slf4j.Slf4j;
-import oracle.net.aso.a;
 
 
 
@@ -48,10 +47,13 @@ public class ShoppingController {
 	// 쇼핑 랭킹페이지
 	@GetMapping("/ranking")
 	public ModelAndView shoppingRanking(ModelAndView mv, @AuthenticationPrincipal UserImpl userImpl) {
-		
-		//List<Shopping> shoppingList = shoppingService.ShoppingList();
-		
-		// mv.addObject("shoppingList", shoppingList);
+
+		Map<String, Object> map = shoppingService.rankList();
+
+		mv.addObject("rankAll", map.get("rankAll"));
+		mv.addObject("rankFood", map.get("rankFood"));
+		mv.addObject("rankBeverage", map.get("rankBeverage"));
+		mv.addObject("rankGoods", map.get("rankGoods"));
 		mv.setViewName("shopping/shoppingRanking");
 
 		// 찜한 상품 확인
@@ -61,7 +63,6 @@ public class ShoppingController {
 			List like = shoppingService.likeList(userNo);
 			mv.addObject("likeList", like);
 		}
-
 		return mv;
 	}
 
@@ -183,12 +184,13 @@ public class ShoppingController {
 		Product shoppingDetail = shoppingService.shoppingDetail(productNo);
 		List<Product> shoppingReview = shoppingService.shoppingReview(productNo);
 		int sumReview = shoppingService.sumReview(productNo);
-		int avgStar = shoppingService.avgStar(productNo);
+		float avgStar = shoppingService.avgStar(productNo);
 		mv.addObject("sumReview", sumReview);
 		mv.addObject("avgStar", avgStar);
 		mv.addObject("shoppingDetail", shoppingDetail);
 		mv.addObject("shoppingReview", shoppingReview);
 		mv.setViewName("shopping/shoppingProductDetail");
+		
 		// 찜한 상품 확인
 		int userNo = 0;		
 		if(userImpl != null) {
@@ -215,21 +217,21 @@ public class ShoppingController {
 	@PostMapping("payment") 
 	public ModelAndView shoppingPaymentInfo(String[] select1, int[] amount, int sum, 
 											ModelAndView mv, int[] productNo, int userNo) {
-		
-		List<Product> shoppingList = new ArrayList<>();
-		
-		for(int i = 0; i < productNo.length; i++) {
-			Product shoppingPayment = shoppingService.shoppingPayment(productNo[i]);	
-			shoppingPayment.setQuantity(amount[i]);
-			shoppingPayment.setProductOption(select1[i]);
-			shoppingList.add(shoppingPayment);
-		}
-		System.out.println(shoppingList);
+		Product shoppingPayment = shoppingService.shoppingPayment(productNo[0]);
+		/*
+		 * List<Product> shoppingList = new ArrayList<>();
+		 * 
+		 * for(int i = 0; i < productNo.length; i++) { Product shoppingPayment =
+		 * shoppingService.shoppingPayment(productNo[i]);
+		 * shoppingPayment.setQuantity(amount[i]);
+		 * shoppingPayment.setProductOption(select1[i]);
+		 * shoppingList.add(shoppingPayment); } System.out.println(shoppingList);
+		 */
 		
 		List<Address> addressList = myInfoService.deliView(userNo);
 		Member member = myInfoService.myInfoView(userNo);
 			
-		mv.addObject("shoppingPayment", shoppingList);
+		mv.addObject("shoppingPayment", shoppingPayment);
 		mv.addObject("sum", sum);
 		mv.addObject("addressList", addressList);
 		mv.addObject("member", member);

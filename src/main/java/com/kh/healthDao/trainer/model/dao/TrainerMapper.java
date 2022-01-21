@@ -60,5 +60,8 @@ public interface TrainerMapper {
 
 	List<Trainer> trainerRankList();
 
+	PtOrder ptOrderStatus(int userNo, int tNo);
+
+
 
 }

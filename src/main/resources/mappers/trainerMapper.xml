@@ -73,6 +73,10 @@
 		<result property="userEmail" column="USER_EMAIL"/>
 	</resultMap>
 	
+	<resultMap id="ptOrderStatusMap" type="com.kh.healthDao.trainer.model.vo.PtOrder">
+		<id property="ptNo" column="PT_NO"/>
+	</resultMap>
+	
 	<select id="trainerList" resultMap="trainerResultMap" parameterType="String">
 		SELECT
 		       T.T_NO
@@ -495,6 +499,13 @@
 			       , M.USER_PHONE)
         	<![CDATA[WHERE RANK <= 4]]>
 	</select> 
-
+	
+	<select id="ptOrderStatus" resultMap="ptOrderStatusMap" parameterType="_int">
+		SELECT
+			   PT_NO
+		  FROM PT_ORDER
+		 WHERE T_NO = #{tNo}
+		   AND USER_ID = #{userNo}
+	</select>
 	
 </mapper>

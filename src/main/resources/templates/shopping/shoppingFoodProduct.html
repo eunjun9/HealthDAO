@@ -15,7 +15,6 @@
 	<div id="container">		
 		<div class="site_location">
 			<span><a href="/">HOME</a></span>
-			<span><a href="#">전체상품</a></span>
 			<em>식품</em>
 		</div>
 		<div class="productList contents">
@@ -24,32 +23,28 @@
 			</div>
             <div class="pdt_list1">
                 <ul class="list_box">
-                    <li th:each="foodProduct:${shoppingList}">
+                    <li th:each="pdt:${shoppingList}">
                         <div class="pdtImg">
                             <ul class="pdt_type">
                                 <li class="bg_p">NEW</li>
                                 <li class="bg_p">BEST</li>
-                                <li class="bg_p">한정판</li>
-                                <li class="bg_r">SALE</li>
-                                <li class="bg_r">FREE</li>
-                                <li class="bg_r">GIFT</li>
                             </ul>
-                            <a href="/shopping/detail?productNo=" th:attrappend="href=${foodProduct.productNo}" class="imgLink"><img src="/resources/web/images/temp/pdt_img1.png" alt=""></a>
-                        </div>
+							<a th:href="|/shopping/detail?productNo=${pdt.productNo}|" class="imgLink">
+								<img th:src="${pdt.file_path}+${pdt.change_file1}" alt="">
+							</a>
+						</div>
                         <div class="pdtTxt">
-                            <p class="pdtHead" style="color:#4f8ffa;">2019 누적판매 15,591건!</p><!-- 문구가 없어도 태그삭제 X -->
-                            <p class="pdtBrand" th:text="${foodProduct.productBrand}"></p>
-                            <p class="pdtName" th:text="${foodProduct.productTitle}"><a href="#"></a></p>
-                            <p class="pdtPrice"><span class="sasle" th:text="${#numbers.formatInteger(foodProduct.productPrice, 0, 'COMMA')+'원'}"></span><span class="cost">15,000원</span></p>
+							<p class="pdtHead" style="color:#4f8ffa;" th:text="${pdt.categoryId}"></p>
+                            <p class="pdtBrand" th:text="${pdt.productBrand}"></p>
+                            <p class="pdtName" th:text="${pdt.productTitle}"><a href="#"></a></p>
+                            <p class="pdtPrice" th:text="${#numbers.formatInteger(pdt.productPrice, 0, 'COMMA')+'원'}"></p>
                             <div class="pdtReview">
-                                <div class="js_rating ratingS"><span>4.5</span></div>
-                                4.5 <span class="count">(리뷰 18)</span>
-                            </div>
-                        </div>
-
-	                    <a href="javascript:void(0);" th:onclick="|javascript:addWish('${foodProduct.productNo}')|" th:id="pdtNo_+${foodProduct.productNo}" class="btn_like likeM"><span class="hide">찜하기</span></a>
-	                    <a href="javascript:void(0);" th:onclick="|javascript:cartInsert('${foodProduct.productNo}')|" class="btn_cart cartM"><span>장바구니</span></a>
-
+								<div class="js_rating ratingS"><span><th:block data-th-text="${pdt.avgStar}"></th:block></span></div>
+								<th:block data-th-text="${pdt.avgStar}"></th:block> <span class="count">(리뷰 <th:block data-th-text="${pdt.sumReview}"></th:block>)</span>
+							</div>
+						</div>
+	                    <a href="javascript:void(0);" th:onclick="|javascript:addWish('${pdt.productNo}')|" th:id="pdtNo_+${pdt.productNo}" class="btn_like likeM"><span class="hide">찜하기</span></a>
+	                    <a href="javascript:void(0);" th:onclick="|javascript:cartInsert('${pdt.productNo}')|" class="btn_cart cartM"><span>장바구니</span></a>
                     </li>
                 </ul>
             </div>
