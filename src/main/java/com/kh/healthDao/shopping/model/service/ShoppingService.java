@@ -72,4 +72,5 @@ public interface ShoppingService {
 
 	int avgStar(int productNo);
 
+	Map<String, Object> rankList();
 }

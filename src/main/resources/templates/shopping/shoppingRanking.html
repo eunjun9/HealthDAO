@@ -15,7 +15,6 @@
 	<div id="container">		
 		<div class="site_location">
 			<span><a href="/">HOME</a></span>
-			<span><a href="#">전체상품</a></span>
 			<em>랭킹</em>
 		</div>
 		<div class="product_best">
@@ -35,10 +34,7 @@
 					<div class="bestTtl"><p class="fs26 notoB">HEALTH DAO TOP 3</p><span class="fs14 fc88 mgl20">헬스 다오에서 가장 많이 판매된 제품입니다.</span></div>
 					<div class="pdt_list1 type03 mgt35">
 						<ul class="list_box">
-                    		<li th:each="pdt:${totalRank}">
-								<div class="bestMark" style="background:#ffbc38;"><span>BEST</span><span>1</span></div>
-								<div class="bestMark" style="background:#ccc;"><span>BEST</span><span>2</span></div>
-								<div class="bestMark" style="background:#dbad82;"><span>BEST</span><span>3</span></div>
+                    		<li th:each="pdt:${rankAll}">
 		                        <div class="pdtImg">
 									<a th:href="|/shopping/detail?productNo=${pdt.productNo}|" class="imgLink">
 										<img th:src="${pdt.file_path}+${pdt.change_file1}" alt="">
@@ -61,13 +57,10 @@
 					</div>
 				</div>
 				<div class="TypeBestArea contents" id="ScrollTab02">
-					<div class="bestTtl"><p class="fs26 notoB">식품 BEST 3</p><span class="fs14 fc88 mgl20">각 카테고리 기준 최근 한주간 가장 많이 판매된 제품입니다.</span></div>
+					<div class="bestTtl"><p class="fs26 notoB">식품 BEST 3</p><span class="fs14 fc88 mgl20">각 카테고리 기준 가장 많이 판매된 제품입니다.</span></div>
 					<div class="pdt_list1 type03 mgt35">
 						<ul class="list_box">
-                    		<li th:each="pdt:${foodRank}">
-								<div class="bestMark" style="background:#ffbc38;"><span>BEST</span><span>1</span></div>
-								<div class="bestMark" style="background:#ccc;"><span>BEST</span><span>2</span></div>
-								<div class="bestMark" style="background:#dbad82;"><span>BEST</span><span>3</span></div>
+                    		<li th:each="pdt:${rankFood}">
 		                        <div class="pdtImg">
 									<a th:href="|/shopping/detail?productNo=${pdt.productNo}|" class="imgLink">
 										<img th:src="${pdt.file_path}+${pdt.change_file1}" alt="">
@@ -90,13 +83,10 @@
 					</div>
 				</div>
 				<div class="TypeBestArea contents" id="ScrollTab03">
-					<div class="bestTtl"><p class="fs26 notoB">음료 BEST 3</p><span class="fs14 fc88 mgl20">각 카테고리 기준 최근 한주간 가장 많이 판매된 제품입니다.</span></div>
+					<div class="bestTtl"><p class="fs26 notoB">음료 BEST 3</p><span class="fs14 fc88 mgl20">각 카테고리 기준 가장 많이 판매된 제품입니다.</span></div>
 					<div class="pdt_list1 type03 mgt35">
 						<ul class="list_box">
-                    		<li th:each="pdt:${beverageRank}">
-								<div class="bestMark" style="background:#ffbc38;"><span>BEST</span><span>1</span></div>
-								<div class="bestMark" style="background:#ccc;"><span>BEST</span><span>2</span></div>
-								<div class="bestMark" style="background:#dbad82;"><span>BEST</span><span>3</span></div>
+                    		<li th:each="pdt:${rankBeverage}">
 		                        <div class="pdtImg">
 									<a th:href="|/shopping/detail?productNo=${pdt.productNo}|" class="imgLink">
 										<img th:src="${pdt.file_path}+${pdt.change_file1}" alt="">
@@ -119,13 +109,10 @@
 					</div>
 				</div>
 				<div class="TypeBestArea contents" id="ScrollTab04">
-					<div class="bestTtl"><p class="fs26 notoB">운동·생활용품 BEST 3</p><span class="fs14 fc88 mgl20">각 카테고리 기준 최근 한주간 가장 많이 판매된 제품입니다.</span></div>
+					<div class="bestTtl"><p class="fs26 notoB">운동·생활용품 BEST 3</p><span class="fs14 fc88 mgl20">각 카테고리 기준 가장 많이 판매된 제품입니다.</span></div>
 					<div class="pdt_list1 type03 mgt35">
 						<ul class="list_box">
-                    		<li th:each="pdt:${goodsRank}">
-								<div class="bestMark" style="background:#ffbc38;"><span>BEST</span><span>1</span></div>
-								<div class="bestMark" style="background:#ccc;"><span>BEST</span><span>2</span></div>
-								<div class="bestMark" style="background:#dbad82;"><span>BEST</span><span>3</span></div>
+                    		<li th:each="pdt:${rankGoods}">
 		                        <div class="pdtImg">
 									<a th:href="|/shopping/detail?productNo=${pdt.productNo}|" class="imgLink">
 										<img th:src="${pdt.file_path}+${pdt.change_file1}" alt="">
@@ -166,6 +153,16 @@
 	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 	<script  th:inline="javascript">
 		$('#quick .quickArea').css({'position':'absolute', 'top':290});
+		
+		$(function(){
+			html1 = '<div class="bestMark" style="background:#ffbc38;"><span>BEST</span><span>1</span></div>';
+			html2 = '<div class="bestMark" style="background:#ccc;"><span>BEST</span><span>2</span></div>';
+			html3 = '<div class="bestMark" style="background:#dbad82;"><span>BEST</span><span>3</span></div>';
+
+			$(".list_box li:nth-child(1)").prepend(html1);
+			$(".list_box li:nth-child(2)").prepend(html2);
+			$(".list_box li:nth-child(3)").prepend(html3);
+		});
 	</script>
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 </body>
