@@ -265,7 +265,7 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 	@Override
 	public void unregister(Member member, HttpSession session) {
 		mypageMapper.unregister(member);
-//		session.invalidate();
+		session.invalidate();
 	}
 	
 	/* 장바구니 */

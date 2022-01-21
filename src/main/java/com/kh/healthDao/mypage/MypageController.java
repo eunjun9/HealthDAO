@@ -415,9 +415,8 @@ public class MypageController {
 		
 		myInfoService.unregister(member, session);
 		System.out.println("proc : " + member);
-		session.invalidate();
 		
-		return "main/main";
+		return "redirect:/main";
 	}
 	
 	@GetMapping("unregister/passCheck")

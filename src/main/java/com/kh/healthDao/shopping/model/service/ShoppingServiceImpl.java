@@ -300,13 +300,16 @@ public class ShoppingServiceImpl implements ShoppingService{
 	// 리뷰 개수
 	@Override
 	public int sumReview(int productNo) {
+
 		String result = shoppingMapper.sumReview(productNo);
 		int sumReview = 0;
+
 		if(result != null) {
 			sumReview = Integer.parseInt(result);
 		}
 		
 		return sumReview;
+
 	}
 
 	// 리뷰 평균
@@ -342,5 +345,6 @@ public class ShoppingServiceImpl implements ShoppingService{
 //		System.out.println("ddd" + rankList.get("rankGoods"));
 		
 		return rankList;
+
 	}
 }

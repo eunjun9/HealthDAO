@@ -521,9 +521,17 @@
 		 WHERE USER_NO = #{userNo}
 	</update>
 	
-	<update id="memberInfoCodeMf" parameterType="com.kh.healthDao.member.model.vo.MemberRole">
-		UPDATE MEMBER_ROLE
-		   SET AUTHORITY_CODE = #{authorityCode}
-		 WHERE USER_NO = #{userNo}
-	</update>
+	<insert id="memberInfoCodeMf" parameterType="com.kh.healthDao.member.model.vo.MemberRole">
+		INSERT
+		  INTO MEMBER_ROLE
+		(
+			USER_NO
+		  , MEMBER_ROLE 
+		)
+		VALUES
+		(
+			#{userNo}
+		  , #{authorityCode}
+		)
+	</insert>
 </mapper>

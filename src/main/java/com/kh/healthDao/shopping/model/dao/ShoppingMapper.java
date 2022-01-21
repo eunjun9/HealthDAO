@@ -64,6 +64,8 @@ public interface ShoppingMapper {
 	List<Product> shoppingReview(int productNo);
 	String sumReview(int productNo);
 	String avgStar(int productNo);
+
 	List<Product> rankAllList();
 	List<Product> rankSelectList(String categoryId);
+
 }

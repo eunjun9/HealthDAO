@@ -108,7 +108,7 @@
 		      },
 		    })
 		    
-		    $.ajax({
+		    /*$.ajax({
 		        url: '/login/getKakaoAuthUrl',
 		        type: 'get',
 		        async: false,
@@ -116,7 +116,7 @@
 		        success: function (res) {
 		            location.href = res;
 		        }
-		    });
+		    });*/
 		}
 		
 		$(document).ready(function() {
@@ -154,7 +154,7 @@
 		// 네이버 로그인
 		var naverLogin = new naver.LoginWithNaverId(
 				{
-					clientId: "vU7ZtZIOmsyNVxd_s8K0", //내 애플리케이션 정보에 cliendId를 입력해줍니다.
+					clientId: "vU7ZtZIOmsyNVxd_s8K0", // 내 애플리케이션 정보에 cliendId를 입력해줍니다.
 					callbackUrl: "http://localhost:8100/main", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
 					isPopup: false,
 					callbackHandle: true
