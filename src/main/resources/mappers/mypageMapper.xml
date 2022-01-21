@@ -130,6 +130,7 @@
 		<result property="userNo" column="USER_NO"/>
 		<result property="quantity" column="QUANTITY"/>
 		<result property="productPrice" column="PRODUCT_PRICE"/>
+		<result property="totalPrice" column="TOTAL_PRICE"/>
 	</resultMap>
 
 
@@ -771,8 +772,7 @@
    
    <select id="memberGrade" resultMap="gradeResultMap" parameterType="_int">
 	SELECT
-	      D.QUANTITY 
-	    , T.PRODUCT_PRICE 
+		  TOTAL_PRICE
 	 FROM PAYMENT P
 	 JOIN PAY_DETAIL D ON(P.PAY_NO=D.PAY_NO)
 	 JOIN PRODUCT T ON(D.PRODUCT_NO=T.PRODUCT_NO)
