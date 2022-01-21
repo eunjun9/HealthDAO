@@ -24,10 +24,10 @@
 			<li>
 				<p>이벤트</p>
 				<ul class="dep2">
-				<form action="/mypage/attendanceCheck" method="post" name="attForm">
+				<!-- <form action="/mypage/attendanceCheck" method="post" name="attForm">
 					<input type="hidden" name="userNo" th:value="${#authentication.principal.userNo}">
-				</form>
-					<li><a href="#" onclick="document.attForm.submit();">출석체크</a></li>	
+				</form> -->
+					<li><a href="/mypage/attendanceCheck">출석체크</a></li>	
 					<li><a href="/mypage/roulette">룰렛</a></li>	
 					<li><a href="/mypage/event/couponEvent">쿠폰받기</a></li>					
 				</ul>
