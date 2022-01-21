@@ -31,7 +31,7 @@
 					<!-- mypage lnb -->
 					<div th:replace="common/mypageGnb.html"></div>
 					<!-- //mypage lnb -->
-
+					
 					<!-- myPageCon -->
 					<div class="myPageCon member_sound_input">
 						<p class="tit mgb40">
@@ -50,44 +50,45 @@
 							</div>
 						</div>
                         <div class="hr"></div>
-						<div class="inp_wrap mgt30">
-							<div class="inp_lab"><label for="select1">의견 유형</label></div>
-							<div class="inp_select">
-								<div class="selectBox">
-									<button class="title" type="button">옵션을 선택해주세요</button>
-									<ul class="selList">
-										<li>
-											<input type="radio" value="1" class="option" id="select1_1" name="cDept">
-											<label for="select1_1">서비스 칭찬</label>
-										</li>
-										<li>
-											<input type="radio" value="2" class="option" id="select1_2" name="cDept">
-											<label for="select1_2">서비스 개선 의견</label>
-										</li>
-										<li>
-											<input type="radio" value="3" class="option" id="select1_3" name="cDept">
-											<label for="select1_3">상품제안</label>
-										</li>
-										<li>
-											<input type="radio" value="3" class="option" id="select1_4" name="cDept">
-											<label for="select1_4">사이트 오류 문의</label>
-										</li>
-										<li>
-											<input type="radio" value="4" class="option" id="select1_5" name="cDept">
-											<label for="select1_5">서비스 불편/제안</label>
-										</li>
-									</ul>
+                        <form action="/mypage/memberSoundInsert" method="post">	
+							<div class="inp_wrap mgt30">
+								<div class="inp_lab"><label for="select1">의견 유형</label></div>
+								<div class="inp_select">
+									<div class="selectBox">
+										<button class="title" type="button">옵션을 선택해주세요</button>
+										<ul class="selList">
+											<li>
+												<input type="radio" value="1" class="option" id="select1_1" name="cDept">
+												<label for="select1_1">서비스 칭찬</label>
+											</li>
+											<li>
+												<input type="radio" value="2" class="option" id="select1_2" name="cDept">
+												<label for="select1_2">서비스 개선 의견</label>
+											</li>
+											<li>
+												<input type="radio" value="3" class="option" id="select1_3" name="cDept">
+												<label for="select1_3">상품제안</label>
+											</li>
+											<li>
+												<input type="radio" value="3" class="option" id="select1_4" name="cDept">
+												<label for="select1_4">사이트 오류 문의</label>
+											</li>
+											<li>
+												<input type="radio" value="4" class="option" id="select1_5" name="cDept">
+												<label for="select1_5">서비스 불편/제안</label>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<label class="inp_lab" for="ipt_label">내용</label>
+	                            <div class="inp_textArea">
+	                                <textarea rows="10" name="cContent"></textarea>
+	                                <div class="textarea-clone"></div>
+	                            </div>
+								<div class="btn_wrap mgt40">
+									<button type="submit" class="btn btnSizeL btnColorW btnTypeR" style="width:150px;"><span>보내기</span></button>
 								</div>
 							</div>
-							<label class="inp_lab" for="ipt_label">내용</label>
-                            <div class="inp_textArea">
-                                <textarea rows="10" name="cContent"></textarea>
-                                <div class="textarea-clone"></div>
-                            </div>
-							<div class="btn_wrap mgt40">
-								<button type="submit" class="btn btnSizeL btnColorW btnTypeR" style="width:150px;"><span>보내기</span></button>
-							</div>
-						</div>
 						</form>
                     </div>
 					<!-- //myPageCon -->

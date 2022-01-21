@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.healthDao.admin.model.vo.Product;
+import com.kh.healthDao.manager.model.vo.Payment;
 import com.kh.healthDao.mypage.model.vo.Address;
 
 public interface ShoppingService {
@@ -63,4 +64,13 @@ public interface ShoppingService {
 
 	int deleteWishPdt(int productNo, int userNo);
 
+	int paymentInfoInsert(Payment payment);
+
+	List<Product> shoppingReview(int productNo);
+
+	int sumReview(int productNo);
+
+	float avgStar(int productNo); 
+
+	Map<String, Object> rankList();
 }

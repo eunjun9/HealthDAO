@@ -68,6 +68,7 @@
 		   LEFT JOIN AUTHORITY C ON(B.AUTHORITY_CODE = C.AUTHORITY_CODE)
 		   LEFT JOIN MEMBER_GRADE D ON(A.USER_NO = D.USER_NO)
 		  WHERE A.USER_ID = #{ userId }
+		    AND A.USER_STATUS = 'Y'
 	</select>
 	
 	<insert id="insertMember" parameterType="com.kh.healthDao.member.model.vo.Member">

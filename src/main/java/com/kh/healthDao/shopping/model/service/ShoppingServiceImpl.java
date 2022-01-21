@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.healthDao.admin.model.vo.Product;
 import com.kh.healthDao.common.model.vo.Paging;
+import com.kh.healthDao.manager.model.vo.Payment;
 import com.kh.healthDao.member.model.vo.UserImpl;
 import com.kh.healthDao.mypage.model.service.MyInfoService;
 import com.kh.healthDao.mypage.model.vo.Address;
@@ -275,5 +276,71 @@ public class ShoppingServiceImpl implements ShoppingService{
 	@Override
 	public List<Product> searchList(String searchPdt) {
 		return shoppingMapper.searchList(searchPdt);
+	}
+
+	@Override
+	public int paymentInfoInsert(Payment payment) {
+		
+		int result = 0;
+		int result1 = shoppingMapper.paymentInfoInsert(payment);
+		int result2 = shoppingMapper.paymentDetailInsert(payment);
+		
+		if(result1 > 0 && result2 > 0) {
+			result = 1;
+		}
+		
+		return result;
+	}
+
+	@Override
+	public List<Product> shoppingReview(int productNo) {
+		return shoppingMapper.shoppingReview(productNo);
+	}
+
+	// 리뷰 개수
+	@Override
+	public int sumReview(int productNo) {
+		String result = shoppingMapper.sumReview(productNo);
+		int sumReview = 0;
+		if(result != null) {
+			sumReview = Integer.parseInt(result);
+		}
+		
+		return sumReview;
+	}
+
+	// 리뷰 평균
+	@Override
+	public float avgStar(int productNo) {
+		String result = shoppingMapper.avgStar(productNo);
+		float avgStar = 0;
+		if(result != null) {
+			avgStar = Float.parseFloat(result);
+		}
+	
+		return avgStar;
+	}
+
+	@Override
+	public Map<String, Object> rankList() {
+		
+		List<Product> rankAll = shoppingMapper.rankAllList();
+		List<Product> rankFood = shoppingMapper.rankSelectList("식품");
+		List<Product> rankBeverage = shoppingMapper.rankSelectList("음료");
+		List<Product> rankGoods = shoppingMapper.rankSelectList("운동기구");
+		
+		Map<String, Object> rankList = new HashMap<>();
+
+		rankList.put("rankAll", rankAll);
+		rankList.put("rankFood", rankFood);
+		rankList.put("rankBeverage", rankBeverage);
+		rankList.put("rankGoods", rankGoods);
+
+//		System.out.println("ddd" + rankList.get("rankAll"));
+//		System.out.println("ddd" + rankList.get("rankFood"));
+//		System.out.println("ddd" + rankList.get("rankBeverage"));
+//		System.out.println("ddd" + rankList.get("rankGoods"));
+		
+		return rankList;
 	}
 }

@@ -13,7 +13,13 @@
 		<div align="right">
 		<!-- isAuthenticated() : 인증 되어 있는지 확인 (로그인 여부) -->
 		<th:block sec:authorize="isAuthenticated()">
-			<h3><span sec:authentication="principal.userName"></span>님 환영합니다. (로그인 확인용-임시)</h3>
+			<h3><span sec:authentication="principal.userName"></span>님 환영합니다. (로그인 확인용-임시)</h3><br>
+			<pre th:text="${res}"></pre><br>
+			<pre th:text="${session.currentUser}"></pre><br>
+		    <a th:href="${'/naver/getProfile?accessToken=' + session.currentAT}">Get User's Profile</a><br>
+		    <a th:href="${'/naver/refreshToken?refreshToken=' + session.currentRT}">Refresh Token</a><br>
+		    <a th:href="${'/naver/deleteToken?accessToken=' + session.currentAT}">Delete Token</a><br>
+		    <a href="/naver/invalidate">로그아웃 (Invalidate Session)</a>
 		</th:block>
 		</div>
 		<!--// HEADER + GNB -->
@@ -100,13 +106,13 @@
 										</a>
 									</div>
 									<div class="pdtTxt">
-										<p class="pdtHead" style="color:#4f8ffa;" th:text="${reco.productBenefit}"></p>
+										<p class="pdtHead" style="color:#4f8ffa;" th:text="${reco.categoryId}"></p>
 										<p class="pdtBrand" th:text="${reco.productBrand}"></p>
 										<p class="pdtName" th:text="${reco.productTitle}"></p>
 										<p class="pdtPrice" th:text="${#numbers.formatInteger(reco.productPrice, 0, 'COMMA')+'원'}"></p>
 										<div class="pdtReview">
-											<div class="js_rating ratingS"><span>4.5</span></div>
-											4.5 <span class="count">(리뷰 18)</span>
+											<div class="js_rating ratingS"><span><th:block data-th-text="${reco.avgStar}"></th:block></span></div>
+											<th:block data-th-text="${reco.avgStar}"></th:block> <span class="count">(리뷰 <th:block data-th-text="${reco.sumReview}"></th:block>)</span>
 										</div>
 									</div>
 				                    <a href="javascript:void(0);" th:onclick="|javascript:addWish('${reco.productNo}')|" th:id="pdtNo_+${reco.productNo}" class="btn_like likeM"><span class="hide">찜하기</span></a>

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -413,15 +414,24 @@ public class MypageController {
 	public String unregisterProc(Member member, HttpSession session) {
 		
 		myInfoService.unregister(member, session);
+		System.out.println("proc : " + member);
+		session.invalidate();
 		
 		return "main/main";
 	}
 	
 	@GetMapping("unregister/passCheck")
 	@ResponseBody
-	public String passCheck(@RequestBody Member member) {
+	public String passCheck(String userPwd, @AuthenticationPrincipal UserImpl userImpl) {
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String loginUserPwd = userImpl.getUserPwd();
 		
-		int result = myInfoService.passCheck(member);
+		System.out.println("pwd1 : " + userPwd);
+		System.out.println("pwd2 : " + loginUserPwd);
+		System.out.println("matches : " + passwordEncoder.matches(userPwd, loginUserPwd));
+		
+		int result = 0;
+		if(passwordEncoder.matches(userPwd, loginUserPwd)) result = 1;
 		
 		return Integer.toString(result);
 	}
@@ -467,9 +477,9 @@ public class MypageController {
 	}
 	
 	/* 출석체크 화면이동 */
-	@PostMapping("/attendanceCheck")
-	public ModelAndView attendUser(@RequestParam int userNo, ModelAndView mv) {
-		
+	@GetMapping("/attendanceCheck")
+	public ModelAndView attendUser(@AuthenticationPrincipal UserImpl userImpl, ModelAndView mv) {
+		int userNo = userImpl.getUserNo();
 		
 		List<AttCheck> attendUserList = qnaService.attendUserList(userNo);
 		
@@ -491,8 +501,9 @@ public class MypageController {
 	/* 출석 체크 */
 	@PostMapping("/attCheck")
 	@ResponseBody
-	public String attendanceCheck(Date attendanceDate, int userNo) {
+	public String attendanceCheck(Date attendanceDate, @AuthenticationPrincipal UserImpl userImpl) {
 		
+		int userNo = userImpl.getUserNo();
 		AttCheck attcheck = new AttCheck();
 		attcheck.setAttendanceDate(attendanceDate);
 		attcheck.setUserNo(userNo);
@@ -570,20 +581,26 @@ public class MypageController {
 	@GetMapping("/memberGrade")
 	public ModelAndView memberGrade(@AuthenticationPrincipal UserImpl userImpl, ModelAndView mv) {		
 		int userNo = userImpl.getUserNo();
-		
+
+		//System.out.println(userNo);
 		List<Payment> memberGrade = qnaService.memberGrade(userNo);
 		//System.out.println(memberGrade);
 		
+		
 		List payArr = new ArrayList();
 		for(int i = 0; i < memberGrade.size(); i++) {
-			payArr.add(memberGrade.get(i).getQuantity() * memberGrade.get(i).getProductPrice());
+
+			payArr.add(memberGrade.get(i).getTotalPrice());
+
 		}
+		
+		// System.out.println(payArr);
 		
 		int sum = 0;
 		for(int i = 0; i < payArr.size(); i++) {
 			sum += (int)payArr.get(i);
 		}
-		//System.out.println(sum);
+		// System.out.println(sum);
 
 		mv.addObject("sum", sum);
 		mv.setViewName("mypage/memberGrade"); 

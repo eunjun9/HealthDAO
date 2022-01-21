@@ -84,8 +84,6 @@ public interface MypageMapper {
 	
 	/* 회원 탈퇴 */
 	void unregister(Member member);
-	
-	int passCheck(Member member);
 
 	/* 장바구니 */
 	int cartInsert(Cart cartinfo);
@@ -125,6 +123,8 @@ public interface MypageMapper {
 	int payProductCount(int payNo);
 
 	int payReviewCount(int payNo);
+
+
 
 
 

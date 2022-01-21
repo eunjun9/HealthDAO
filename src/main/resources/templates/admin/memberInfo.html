@@ -94,12 +94,8 @@
 	<th:block th:replace="common/quickNtalk.html"></th:block>
 	<!--// 퀵메뉴 + 톡톡 -->	
 	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
-	<link rel="stylesheet" type="text/css" href="../../css/main.css">
-	<script type="text/javascript" src="../../js/main.js"></script>
 	<script type="text/javascript">
 		$('#quick .quickArea').css({'position':'absolute', 'top':290});
-		mainStart();
-		mainVisual();
 		
 		function showInfo(userNo) {
 			let infoArr = document.querySelectorAll('#stockAlt .userNo');
@@ -139,14 +135,12 @@
 											<ul class="selList">
 												<li>
 													<input type="radio" value="1" class="option" id="optStock1" name="authorityCode">
-													<label for="optStock1">
-														<span class="selectColor colorShipM"></span>일반회원
+													<label for="optStock1">일반회원
 													</label>
 												</li>
 												<li>
 													<input type="radio" value="2" class="option" id="optStock2" name="authorityCode">
-													<label for="optStock2">
-														<span class="selectColor colorShipM"></span>트레이너
+													<label for="optStock2">트레이너
 													</label>
 												</li>
 											</ul>
@@ -165,15 +159,13 @@
 											<button th:if="${member.userStatus == 'N'}" class="title" type="button" title="">활동중지</button>
 											<ul class="selList">
 												<li>
-													<input type="radio" value="Y" class="option" id="optStock3" name="userStatus">
-													<label for="optStock3">
-														<span class="selectColor colorShipM"></span>활동가능
+													<input type="radio" value="Y" class="option" id="optStock3" name="userStatus" th:checked="${member.userStatus == 'Y'}">
+													<label for="optStock3">활동가능
 													</label>
 												</li>
 												<li>
-													<input type="radio" value="N" class="option" id="optStock4" name="userStatus">
-													<label for="optStock4">
-														<span class="selectColor colorShipM"></span>활동중지
+													<input type="radio" value="N" class="option" id="optStock4" name="userStatus" th:checked="${member.userStatus == 'N'}">
+													<label for="optStock4">활동중지
 													</label>
 												</li>
 											</ul>

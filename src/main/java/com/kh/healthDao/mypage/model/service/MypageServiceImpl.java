@@ -265,15 +265,7 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 	@Override
 	public void unregister(Member member, HttpSession session) {
 		mypageMapper.unregister(member);
-		session.invalidate();
-	}
-
-	@Override
-	public int passCheck(Member member) {
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		member.setUserPwd(passwordEncoder.encode(member.getUserPwd()));
-		
-		return mypageMapper.passCheck(member);
+//		session.invalidate();
 	}
 	
 	/* 장바구니 */
@@ -365,6 +357,10 @@ public class MypageServiceImpl implements QnaService, MyCouponService, MyReviewS
 	public List<Payment> memberGrade(int userNo) {
 		return mypageMapper.memberGrade(userNo);
 	}
+
+
+
+
 
 
 

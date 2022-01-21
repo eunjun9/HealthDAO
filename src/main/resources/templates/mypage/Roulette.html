@@ -171,16 +171,16 @@
 	<script>
 		// 룰렛 버튼	
 		var st_date = new Date().toISOString().substr(2, 8);
-		// console.log(st_date);
+		console.log(st_date);
 		
 		var roulday = "[[${rouletteButtonList}]]";
 		// console.log(roulday1);
 		
-		
-		if(roulday.includes(st_date)) {
+		if(roulday.includes(st_date)){
 			$(".trigger").attr("disabled", true).css("background-color", "red");
 		}
-	
+			
+		
 	</script>
 
 </body>

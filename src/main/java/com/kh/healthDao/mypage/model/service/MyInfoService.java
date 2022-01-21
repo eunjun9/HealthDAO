@@ -34,7 +34,5 @@ public interface MyInfoService {
 	/* 회원 탈퇴 */
 	void unregister(Member member, HttpSession session);
 
-	int passCheck(Member member);
-
 
 }
