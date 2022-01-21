@@ -414,7 +414,6 @@ public class MypageController {
 	public String unregisterProc(Member member, HttpSession session) {
 		
 		myInfoService.unregister(member, session);
-		System.out.println("proc : " + member);
 		
 		return "redirect:/main";
 	}
@@ -424,10 +423,6 @@ public class MypageController {
 	public String passCheck(String userPwd, @AuthenticationPrincipal UserImpl userImpl) {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String loginUserPwd = userImpl.getUserPwd();
-		
-		System.out.println("pwd1 : " + userPwd);
-		System.out.println("pwd2 : " + loginUserPwd);
-		System.out.println("matches : " + passwordEncoder.matches(userPwd, loginUserPwd));
 		
 		int result = 0;
 		if(passwordEncoder.matches(userPwd, loginUserPwd)) result = 1;

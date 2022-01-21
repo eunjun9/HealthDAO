@@ -138,8 +138,7 @@ public class MemberController {
 	@ResponseBody
 	public Member findPwd(String userId, String userEmail, HttpSession session, RedirectAttributes rttr) {
 
-//		Map<String, String> json = new HashMap<>();
-		Member selectMember = memberService.selectMember(userEmail);
+		Member selectMember = memberService.selectMember(userId, userEmail);
 		
 		System.out.println(userId +", "+ userEmail);
 		
@@ -169,11 +168,8 @@ public class MemberController {
 			}
 			selectMember.setNum(num);
 			
-//			json.put("num", Integer.valueOf(selectMember.getNum()).toString());
-//			json.put("userEmail", selectMember.getUserEmail());
 			return selectMember;
 		} else {
-//			json.put("msg", "회원정보를 찾을 수 없습니다.");
 			return selectMember;
 		}
 	}

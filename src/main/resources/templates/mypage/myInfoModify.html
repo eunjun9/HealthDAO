@@ -73,7 +73,7 @@
 									<label class="inp_lab" for="ipt_label">닉네임 <b>*</b></label>
 									<div class="inp_text sizeS">
 										<input type="text" name="userNickName" id="inp_nic" th:value="${member.userNickName}">
-										<a href="#" class="btn btnSizeM btnColorM btnTypeB"><span>중복확인</span></a>
+										<a id="nickChk" class="btn btnSizeM btnColorM btnTypeB"><span>중복확인</span></a>
 									</div>
 									<p class="error">잘못 입력했습니다</p>
 								</div>
@@ -231,6 +231,27 @@
 						console.log(e);
 					}
 				});
+			});
+			
+			$("#nickChk").on('click', function(){
+				let userNickName = $('#inp_nic').val();
+				
+		        $.ajax({
+		            url : "/member/nickChk",
+		            type : "post",
+		            dataType : "json",
+					data : {"userNickName" : userNickName},
+		            success : function(data){
+		                if(data != 1) {
+		                	alert('사용 가능한 닉네임입니다.');
+		                } else {
+		                	alert('이미 존재하는 닉네임입니다.');
+		                }
+		            },
+		            error : function(e){
+		                alert("에러입니다");
+		            }
+		        });
 			});
 			
 			$("#infoModifyForm #btnDelete").on('click', function(){

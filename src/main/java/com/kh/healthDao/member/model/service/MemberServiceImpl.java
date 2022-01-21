@@ -106,8 +106,8 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public Member selectMember(String userEmail) {
-		return memberMapper.selectMember(userEmail);
+	public Member selectMember(String userId, String userEmail) {
+		return memberMapper.selectMember(userId, userEmail);
 	}
 
 	@Override

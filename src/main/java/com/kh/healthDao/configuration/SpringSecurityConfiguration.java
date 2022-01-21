@@ -22,7 +22,6 @@ import lombok.extern.slf4j.Slf4j;
 /* 스프링 시큐리티 설정 활성화 + bean 등록 가능 */
 @Configuration
 @EnableWebSecurity
-@Slf4j
 public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter{
    
    private MemberService memberService;
