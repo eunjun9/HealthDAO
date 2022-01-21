@@ -317,7 +317,7 @@ public class ShoppingServiceImpl implements ShoppingService{
 		if(result != null) {
 			avgStar = Float.parseFloat(result);
 		}
-		
+	
 		return avgStar;
 	}
 
