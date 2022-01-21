@@ -503,8 +503,9 @@ public class MypageController {
 	/* 출석 체크 */
 	@PostMapping("/attCheck")
 	@ResponseBody
-	public String attendanceCheck(Date attendanceDate, int userNo) {
+	public String attendanceCheck(Date attendanceDate, @AuthenticationPrincipal UserImpl userImpl) {
 		
+		int userNo = userImpl.getUserNo();
 		AttCheck attcheck = new AttCheck();
 		attcheck.setAttendanceDate(attendanceDate);
 		attcheck.setUserNo(userNo);
