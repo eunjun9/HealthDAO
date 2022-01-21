@@ -59,19 +59,19 @@
 	<resultMap id="productReviewMap" type="com.kh.healthDao.admin.model.vo.Product">
 		<id property="productNo" column="PRODUCT_NO"/>
 		<result property="productTitle" column="PRODUCT_TITLE"/>
-		
-		<association javaType="com.kh.healthDao.review.model.vo.Review" property="review">
-				<id property="reviewNo" column="REVIEW_NO"/>
-				<result property="star" column="STAR"/>
-				<result property="rContent" column="R_CONTENT"/>
-				<result property="rDate" column="R_DATE"/>
-				<result property="modifyDate" column="MODIFY_DATE"/>
-				
-				<association javaType="com.kh.healthDao.member.model.vo.Member" property="member">
-					<id property="userNo" column="USER_NO"/>
-					<result property="userName" column="USER_NAME"/>
-				</association>
-		</association>
+		<collection property="reviewList" resultMap="reviewListResultMap"/>
+	</resultMap>
+	<resultMap id="reviewListResultMap" type="com.kh.healthDao.review.model.vo.Review">
+			<id property="reviewNo" column="REVIEW_NO"/>
+			<result property="star" column="STAR"/>
+			<result property="rContent" column="R_CONTENT"/>
+			<result property="rDate" column="R_DATE"/>
+			<result property="modifyDate" column="MODIFY_DATE"/>
+			
+			<association javaType="com.kh.healthDao.member.model.vo.Member" property="member">
+				<id property="userNo" column="USER_NO"/>
+				<result property="userName" column="USER_NAME"/>
+			</association>
 	</resultMap>
 	
 	<select id="rankAllList" resultMap="productResultMap">
