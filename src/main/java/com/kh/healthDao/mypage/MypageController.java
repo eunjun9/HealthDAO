@@ -479,9 +479,9 @@ public class MypageController {
 	}
 	
 	/* 출석체크 화면이동 */
-	@PostMapping("/attendanceCheck")
-	public ModelAndView attendUser(@RequestParam int userNo, ModelAndView mv) {
-		
+	@GetMapping("/attendanceCheck")
+	public ModelAndView attendUser(@AuthenticationPrincipal UserImpl userImpl, ModelAndView mv) {
+		int userNo = userImpl.getUserNo();
 		
 		List<AttCheck> attendUserList = qnaService.attendUserList(userNo);
 		
@@ -589,7 +589,8 @@ public class MypageController {
 		
 		List payArr = new ArrayList();
 		for(int i = 0; i < memberGrade.size(); i++) {
-			payArr.add(memberGrade.get(i).getQuantity() * memberGrade.get(i).getProductPrice());
+			payArr.add(/* memberGrade.get(i).getQuantity() * */
+					memberGrade.get(i).getProductPrice());
 		}
 		
 		int sum = 0;
