@@ -62,7 +62,7 @@
 										<td class="fc22" id="joinDate" th:text="${#dates.format(trainer.joinDate, 'yyyy-MM-dd')}"></td>
 										<td class="fc22" id="userStatus" th:if="${trainer.userStatus == 'Y'}">활동가능</td>
 										<td class="fc22" id="userStatus" th:if="${trainer.userStatus == 'N'}">활동중지</td>
-										<td onclick="showLayer('stockAlt');"><a href="javascript:void(0)" class="btn btnSizeS btnColorG btnTypeB" style="width:70px;"><span>수정</span></a></td>
+										<td th:onclick="|showLayer('stockAlt'); showInfo('${trainer.userNo}');|"><a href="javascript:void(0)" class="btn btnSizeS btnColorG btnTypeB MfBtn" style="width:70px;"><span>수정</span></a></td>
 									</tr>
 								</tbody>
 							</table>
@@ -87,25 +87,35 @@
 	<th:block th:replace="common/quickNtalk.html"></th:block>
 	<!--// 퀵메뉴 + 톡톡 -->	
 	<!-- 해당 페이지에서만 사용되는 스타일, 스크립트 -->
-	<link rel="stylesheet" type="text/css" href="../../css/main.css">
-	<script type="text/javascript" src="../../js/main.js"></script>
 	<script type="text/javascript">
 		$('#quick .quickArea').css({'position':'absolute', 'top':290});
-		mainStart();
-		mainVisual();
+		
+		function showInfo(userNo) {
+			let infoArr = document.querySelectorAll('#stockAlt .userNo');
+			let popupArr = document.querySelectorAll('#stockAlt');
+			
+			for(let i = 0; i < infoArr.length; i++) {
+				if(userNo == infoArr[i].value) {
+					popupArr[i].style.display = 'block';
+					console.log(userNo + ", " + infoArr[i].value);
+				}
+			}
+		}
 	</script>
 	<!--// 해당 페이지에서만 사용되는 스타일, 스크립트 -->
 	<!-- 회원정보 수정 팝업 -->
-	<div id="stockAlt" class="lyPopArea" th:each="member: ${memberList}">
+	<div id="stockAlt" class="lyPopArea" th:each="trainer: ${trainerList}" style="display:none;">
 		<div class="lyPop adminMemMfPop">
 			<div class="lyWrap">
 				<button type="button" class="lyClose" onclick="layerPopClose();"><span class="hide">CLOSED</span></button>
 				<div class="lyTit">회원정보 관리</div>
 				<div class="lyBody">
+					<form name="InfoForm" action="/admin/trainerInfoMf" method="post">
 					<div class="stockApply">
+					<input type="hidden" class="userNo" name="userNo" th:value="${trainer.userNo}">
 						<dl>
 							<dt class="ml25 fs16">아이디</dt>
-							<dd class="fs16 userId" th:text="${member.userId}"></dd>
+							<dd class="fs16 userId" th:text="${trainer.userId}"></dd>
 						</dl>
 						<!-- 옵션 선택일 경우 -->
 						<dl>
@@ -114,18 +124,16 @@
 								<div class="inp_wrap">
 									<div class="inp_select pdtSelect">
 										<div class="selectBox">
-											<button class="title" type="button" title="">옵션</button>
+											<button class="title" type="button" title="">트레이너</button>
 											<ul class="selList">
 												<li>
-													<input type="radio" value="1" class="option" id="optStock1" name="code">
-													<label for="optStock1">
-														<span class="selectColor colorShipM"></span>회원
+													<input type="radio" value="1" class="option" id="optStock1" name="authorityCode">
+													<label for="optStock1">일반회원
 													</label>
 												</li>
 												<li>
-													<input type="radio" value="2" class="option" id="optStock2" name="code">
-													<label for="optStock2">
-														<span class="selectColor colorShipM"></span>트레이너
+													<input type="radio" value="2" class="option" id="optStock2" name="authorityCode">
+													<label for="optStock2">트레이너
 													</label>
 												</li>
 											</ul>
@@ -140,18 +148,17 @@
 								<div class="inp_wrap">
 									<div class="inp_select pdtSelect">
 										<div class="selectBox">
-											<button class="title" type="button" title="">옵션</button>
+											<button th:if="${trainer.userStatus == 'Y'}" class="title" type="button" title="">활동가능</button>
+											<button th:if="${trainer.userStatus == 'N'}" class="title" type="button" title="">활동중지</button>
 											<ul class="selList">
 												<li>
-													<input type="radio" value="Y" class="option" id="optStock1" name="userStatus">
-													<label for="optStock1">
-														<span class="selectColor colorShipM"></span>활동가능
+													<input type="radio" value="Y" class="option" id="optStock3" name="userStatus" th:checked="${trainer.userStatus == 'Y'}">
+													<label for="optStock3">활동가능
 													</label>
 												</li>
 												<li>
-													<input type="radio" value="N" class="option" id="optStock2" name="userStatus">
-													<label for="optStock2">
-														<span class="selectColor colorShipM"></span>활동중지
+													<input type="radio" value="N" class="option" id="optStock4" name="userStatus" th:checked="${trainer.userStatus == 'N'}">
+													<label for="optStock4">활동중지
 													</label>
 												</li>
 											</ul>
@@ -161,12 +168,14 @@
 							</dd>
 						</dl>
 						<div class="btn_wrap">
-							<a href="javascript:void(0);" onclick="layerPopClose();showLayer('stockAltSuccess');" class="btn btnSizeL btnArr btnColorB btnTypeR"><span>수정하기</span></a>
+							<button onclick="layerPopClose();showLayer('stockAltSuccess'); document.InfoForm.submit();" class="btn btnSizeL btnArr btnColorB btnTypeR InfoMfBtn"><span>수정하기</span></button>
 						</div>
 					</div>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
+	
 </body>
 </html>

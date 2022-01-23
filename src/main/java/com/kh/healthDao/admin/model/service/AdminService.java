@@ -33,6 +33,8 @@ public interface AdminService {
 
 	int memberInfoCodeMf(Member member);
 
+	int trainerInfoCodeMf(Member member);
+
 
 	
 

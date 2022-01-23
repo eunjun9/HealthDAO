@@ -289,4 +289,28 @@ public class adminController {
 		return mv;
 	}
 	
+	@PostMapping("trainerInfoMf")
+	public String trainerInfoMf(@RequestParam int userNo, @RequestParam int authorityCode, @RequestParam String userStatus, RedirectAttributes rttr) {
+		Member member = new Member();
+		member.setUserNo(userNo);
+		member.setUserStatus(userStatus);
+		
+		
+		String msg = "";
+		if(authorityCode == 1) {
+			member.setAuthorityCode(2);
+			int result = 0;
+			result = adminService.memberInfoMf(member);
+			result += adminService.trainerInfoCodeMf(member); // 트레이너(코드2) 삭제
+			msg = result > 1 ? "회원정보 수정 완료" : "회원정보 수정 실패";
+		} else if(authorityCode == 2) {
+			msg = adminService.memberInfoMf(member) > 0 ? "회원정보 수정 완료" : "회원정보 수정 실패";
+		}
+		System.out.println(member);
+		
+		rttr.addFlashAttribute("msg", msg);
+		
+		return "redirect:/admin/memberInfo";
+	}
+	
 }

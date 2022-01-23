@@ -107,6 +107,8 @@ public interface AdminMapper {
 
 	public int memberInfoCodeMf(Member member);
 
+	public int trainerInfoCodeMf(Member member);
+
 
 
 	
