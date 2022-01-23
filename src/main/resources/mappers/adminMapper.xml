@@ -534,4 +534,11 @@
 		  , #{authorityCode}
 		)
 	</insert>
+	
+	<delete id="trainerInfoCodeMf" parameterType="com.kh.healthDao.member.model.vo.MemberRole">
+		DELETE
+		  FROM MEMBER_ROLE
+		 WHERE USER_NO = #{userNo}
+		   AND AUTHORITY_CODE = #{authorityCode}
+	</delete>
 </mapper>

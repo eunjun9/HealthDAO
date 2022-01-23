@@ -91,49 +91,6 @@ public class MemberController {
 		return memberService.findId(userName, userEmail);
 	}
 	
-	/*@PostMapping("/findPwd")
-	public ModelAndView findPwd(HttpSession session, @RequestParam String userId, @RequestParam String userEmail,
-			RedirectAttributes rttr) {
-		ModelAndView mv = new ModelAndView();
-
-		Member selectMember = memberService.selectMember(userEmail);
-		
-		if(selectMember != null && selectMember.getUserId().equals(userId)) {
-			Random r = new Random();
-			int num = r.nextInt(999999); // 랜덤난수설정
-		
-				session.setAttribute("email", selectMember.getUserEmail());
-	
-				String setfrom = "khhealthdao@google.com";
-				String tomail = userEmail; // 받는사람
-				String title = "[HealthDao] 비밀번호변경 인증 이메일 입니다"; 
-				String content = "안녕하세요 " + userId + "님! HealthDao 비밀번호 찾기(변경) 인증번호는 " + num + " 입니다.";
-	
-				try {
-					MimeMessage message = mailSender.createMimeMessage();
-					MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "utf-8");
-	
-					messageHelper.setFrom(setfrom);
-					messageHelper.setTo(tomail); 
-					messageHelper.setSubject(title);
-					messageHelper.setText(content); 
-	
-					mailSender.send(message);
-				} catch (Exception e) {
-					System.out.println(e.getMessage());
-				}
-	
-				mv.addObject("num", num);
-				mv.addObject("findUserEmail", userEmail);
-				mv.setViewName("member/findIdPwd");
-				return mv;
-		} else {
-				rttr.addFlashAttribute("msg", "회원정보를 찾을 수 없습니다.");
-				mv.setViewName("redirect:/member/findIdPwd");
-				return mv;
-		}
-	}*/
-	
 	@GetMapping("/findPwd")
 	@ResponseBody
 	public Member findPwd(String userId, String userEmail, HttpSession session, RedirectAttributes rttr) {
@@ -173,19 +130,6 @@ public class MemberController {
 			return selectMember;
 		}
 	}
-	
-	/* @PostMapping("/findPwdUpdate")
-	public String findPwdUpdate(@RequestParam String num, @RequestParam String ijnum, Member member, HttpSession session, RedirectAttributes rttr) {
-		int result = memberService.pwdUpdate(member);
-		
-		if(ijnum.equals(num) && result == 1) {
-			rttr.addFlashAttribute("msg", "비밀번호가 변경되었습니다.");
-			return "member/login";
-		} else {
-			rttr.addFlashAttribute("msg", "인증번호가 맞지 않습니다.");
-			return "member/findIdPwd";
-		}
-	} */
 	
 	@PostMapping("/findPwdUpdate")
 	public String findPwdUpdate(@RequestParam String ijnum, Member member, RedirectAttributes rttr) {
