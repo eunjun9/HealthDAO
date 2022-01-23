@@ -84,8 +84,8 @@ public class MypageController {
 		int userNo = userImpl.getUserNo();
 		
 		List<Payment> paymentList = paymentService.mypaymentList(userNo);
-		
-		
+
+		mv.addObject("userImpl", userImpl);
 		mv.addObject("paymentList", paymentList);
 		mv.setViewName("mypage/myOrder");
 		
@@ -383,7 +383,7 @@ public class MypageController {
 	@PutMapping("myInfo/modify")
 	@ResponseBody
 	public Map<String, String> myInfoModify(@RequestBody Member member) {
-		
+		System.out.println(member);
 		String msg = myInfoService.myInfoModify(member) > 0 ? "정보 수정에 성공했습니다." : "정보 수정에 실패했습니다.";
 		
 		Map<String, String> map = new HashMap<>();

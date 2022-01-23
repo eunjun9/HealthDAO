@@ -467,7 +467,7 @@
 		        USER_NICKNAME = #{userNickName}
 		      , USER_PHONE = #{userPhone}
 		      <if test="userBirth != null">
-		        USER_BIRTH = #{userBirth} ,
+		      , USER_BIRTH = #{userBirth}
 		      </if>
 		      , USER_GENDER = #{userGender}
 		      <choose>
