@@ -122,6 +122,7 @@ public class MypageController {
 		mv.addObject("qnaList", map.get("qnaList"));
 		mv.addObject("listCount", map.get("listCount"));
 		mv.addObject("pi", map.get("pi"));
+		mv.addObject("userImpl", userImpl);
 		mv.setViewName("mypage/oneQuestion");
 		
 		return mv;
@@ -131,10 +132,11 @@ public class MypageController {
 	
 	/* 1:1 문의 상세 */
 	@GetMapping("qnaDetail")
-	public ModelAndView qnaDetail(ModelAndView mv, @RequestParam int qNo) {
+	public ModelAndView qnaDetail(ModelAndView mv, @RequestParam int qNo, @AuthenticationPrincipal UserImpl userImpl) {
 		Qna qna = qnaService.qnaDetail(qNo);
 		
 		mv.addObject("qna", qna);
+		mv.addObject("userImpl", userImpl);
 		mv.setViewName("mypage/oneQuestionDetail");
 		
 		return mv;

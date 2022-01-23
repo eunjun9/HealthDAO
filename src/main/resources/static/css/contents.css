@@ -2273,10 +2273,8 @@ filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#555555', endC
 /* 마이페이지 LNB */
 .myPageLnb .myRank{margin-bottom:18px;}
 .myPageLnb .myRank .rank{position:relative;margin-top:15px;text-align:center;font-size:15px;font-weight:600;}
+.myPageLnb .myRank .rank + .rank{margin-top:5px;}
 .myPageLnb .myRank .userLv1 .btnMain{color:#eb3149;}
-.myPageLnb .myRank .userLv2 .btnMain{color:#9b9b9b;}
-.myPageLnb .myRank .userLv3 .btnMain{color:#d3a777;}
-.myPageLnb .myRank .userLv4 .btnMain{color:#3c3c3c;}
 .myPageLnb .myRank .txt{margin:15px;text-align:center;font-size:16px;font-weight:500;line-height:22px;}
 .myPageLnb .myRank .txt span{font-size:13px;font-weight:600;}
 
