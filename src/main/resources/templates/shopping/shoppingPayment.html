@@ -365,34 +365,10 @@
                            <dd th:text="${#numbers.formatInteger(sum, 0, 'COMMA')+'원'}"><em>원</em></dd>
                         </dl>
                         <!-- 20200317 수정 하단 쇼핑백 삭제되고 이곳에 추가 -->
-                        <div class="detail_price">
-                           <dl>
-                              <dt>상품금액</dt>
-                              <dd>+ 396,300원</dd>
-                           </dl>
-                           <dl>
-                              <dt>쇼핑백</dt>
-                              <dd>+ 1,000원</dd>
-                           </dl>
-                        </div>
+                        
                         <!-- //20200317 수정 -->
                      </div>
-                     <div class="order_price">
-                        <dl>
-                           <dt>총 할인금액</dt>
-                           <dd><span class="fcRed">- 11,800</span><em>원</em></dd>
-                        </dl>
-                        <div class="detail_price">
-                           <dl>
-                              <dt>멤버십 할인</dt>
-                              <dd>- 8,000원</dd>
-                           </dl>
-                           <dl>
-                              <dt>프로모션 할인</dt>
-                              <dd>- 4,700원</dd>
-                           </dl>
-                        </div>
-                     </div>
+                     
                      <div class="order_price">
                         <dl>
                            <dt>배송비</dt>
@@ -405,7 +381,7 @@
                               <dt>최종 결제금액</dt>
                               <dd th:text="${#numbers.formatInteger(sum, 0, 'COMMA')+'원'}">55,200<em>원</em></dd>
                            </dl>
-                           <p>회원님은 총 <span>13,800</span>원 할인 받으실 예정입니다.</p>
+                           <p>회원님의 배송료는 <span>무료</span>입니다.</p>
                         </div>
                      </div>
                   </div>
@@ -448,11 +424,7 @@
                      <button type="button" id="check_module" class="btn btnSizeL btnColorP btnTypeB w100 mgt10"><span>결제하기</span></button>
                   </div>
                   
-                  <!-- 비회원일경우 -->
-                  <ul class="starInfo mgt20">
-                     <li class="fcRed">비회원으로 구매하시면 회원/이벤트/쿠폰혜택을 받으실<br> 수 없습니다.</li>
-                  </ul>
-                  <!-- //비회원일경우 -->
+                  
                </div>
             </div>
          </div>

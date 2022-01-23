@@ -679,6 +679,7 @@
 		JOIN AT_FILE A USING(F_NO)
 		WHERE USER_NO = #{userNo}
 		AND A.STATUS = 'N'
+		ORDER BY PAY_NO DESC
 	</select>
 	<insert id="reviewInsert" parameterType="com.kh.healthDao.review.model.vo.Review">
 		INSERT INTO REVIEW(
@@ -717,7 +718,7 @@
 		)VALUES(
 		    SEQ_REFUND_NO.NEXTVAL
 		    , SYSDATE
-		    , DEFAULT
+		    , '환불중'
 		    , #{payNo}
 		)
 	</insert>
