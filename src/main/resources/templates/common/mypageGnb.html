@@ -1,13 +1,15 @@
 <!-- mypage lnb -->
 <div class="myPageLnb">
-	<div th:text="${userImpl}"></div>
-	<div class="myRank">
-		<p class="rank userLv1" id="Lv">
-			<span class="btnMain">관리자</span>
+	<div class="myRank" th:if="${userImpl} != null">
+		<p class="rank userLv1" id="Lv" sec:authorize="hasRole('MEMBER')">
+			<span class="btnMain" sec:authentication="principal.memberRoleList[0].authority.desc"></span>
+		</p>
+		<p class="rank userLv1" id="Lv" sec:authorize="hasRole('TRAINER')">
+			<span class="btnMain" sec:authentication="principal.memberRoleList[1].authority.desc"></span>
 		</p>
 		<p class="txt">
-			<span>HELLO, VIP!</span><br>
-			<em id="name"><th:block th:text="${userImpl.userName}"></th:block>님</em>
+			<span>HELLO, <span sec:authentication="principal.memberGrade.userGrade"></span>!</span><br>
+			<em id="name"><th:block sec:authentication="principal.userName"></th:block>님</em>
 		</p>
 	</div>
 	<div class="myPageMenu">

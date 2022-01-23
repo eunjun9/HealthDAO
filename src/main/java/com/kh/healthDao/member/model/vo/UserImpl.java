@@ -32,6 +32,8 @@ public class UserImpl extends User{
 	
 	/* 한 멤버는 여러 권한을 가질 수 있음 - MEMBER_ROLE과 조인한 결과 값 */
 	private List<MemberRole> memberRoleList;	// 보유권한목록
+	
+	private MemberGrade memberGrade;	// 유저등급
 
 	public UserImpl(String username, String password, Collection<? extends GrantedAuthority> authorities) {
 		super(username, password, authorities);
@@ -53,6 +55,7 @@ public class UserImpl extends User{
 		this.emailReceive = member.getEmailReceive();
 		this.smsReceive = member.getSmsReceive();
 		this.memberRoleList = member.getMemberRoleList();
+		this.memberGrade = member.getMemberGrade();
 	}
 
 }
