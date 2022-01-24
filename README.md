@@ -19,11 +19,9 @@
 2022.01.24 프로젝트 발표<br>
 <p>
 <p>
-<p>
 
 ## 팀원
 1조 이창섭(조장), 이예림, 원은정, 류상훈, 유가희, 윤용한
-<p>
 <p>
 <p>
 
@@ -32,13 +30,12 @@
 <a href="">Diagrams</a><br>
 <p>
 <p>
-<p>
 
 ## 개발환경
 운영체제 : Windows 10 <br>
 개발 도구 : SpringToolSuite4 <br>
 프레임워크 : Spring Boot, Mybatis, Maven, Bootstrap, Spring Security <br>
-DBMS : Oracle SQL Developer
+DBMS : Oracle SQL Developer <br>
 소스 제어 관리 : GitHub <br>
 협업 툴 : Google Sheet <br>
 프로토타이핑 툴 : Draw.io, Figma <br>
@@ -57,7 +54,6 @@ DB 모델링 툴 :  ERD Cloud <br>
 API : Google SMTP, Postcodify 주소 찾기, iamport <br>
 <p>
 <p>
-<p>
 
 ## 맡은 기능
 이창섭 : 상품 등록, 상품  조회,  상품 상세페이지, 상품 주문, 결제, 결제내역 <br>
@@ -66,7 +62,6 @@ API : Google SMTP, Postcodify 주소 찾기, iamport <br>
 류상훈 : 메인 페이지, QnA톡, 장바구니, 최근 본 상품, 신상품, 랭킹, 찜한 상품, 메인관리(메인롤링배너, 추천상품) <br>
 유가희 : 1:1문의, 고객의소리, 쿠폰관리, 내 쿠폰, 쿠폰이벤트, 내가 쓴 리뷰, 공지사항, 자주묻는질문 <br>
 윤용한 : 트레이너 활동 등록(상세 페이지 생성, 수정), 트레이너 찾기, 트레이너 리뷰, PT 신청 <br>
-<p>
 <p>
 <p>
 
