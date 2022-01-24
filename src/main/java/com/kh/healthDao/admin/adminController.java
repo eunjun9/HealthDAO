@@ -66,7 +66,7 @@ public class adminController {
 	
 	/* 상품 등록 */
 	@PostMapping("productRegist")
-	public ModelAndView registProduct(Product product, ModelAndView mv, @RequestParam("productFile") MultipartFile productFile, @RequestParam("productInfoFile") MultipartFile productInfoFile, @Value("${custom.path.upload-images}") String uploadImagesPath) {
+	public ModelAndView registProduct(Product product, ModelAndView mv, @RequestParam("productFile") MultipartFile productFile, @RequestParam("productInfoFile") MultipartFile productInfoFile, @Value("${custom.path.upload-images}") String uploadImagesPath,  RedirectAttributes rttr) {
 		
 		String originFile1 = productFile.getOriginalFilename();
 		String ext1 = originFile1.substring(originFile1.lastIndexOf("."));
@@ -93,13 +93,13 @@ public class adminController {
 		System.out.println(product);
 		
 		if(result > 0) {
-			mv.addObject("msg", "등록 성공");
+			rttr.addFlashAttribute("message", "등록 성공");
 			mv.setViewName("redirect:/admin/productRegist");
 			return mv;
 			
 		}else {
-			mv.setViewName("redirect:/ProductRegist");
-			mv.addObject("msg", "등록 실패");
+			rttr.addFlashAttribute("message", "등록 실패");
+			mv.setViewName("redirect:/admin/productRegist");
 			return mv;
 		}
 	}

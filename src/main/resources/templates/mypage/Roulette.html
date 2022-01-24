@@ -170,7 +170,13 @@
 	</script>		
 	<script>
 		// 룰렛 버튼	
-		var st_date = new Date().toISOString().substr(2, 8);
+		var today = new Date();
+
+		var year = today.getFullYear();
+		var month = ('0' + (today.getMonth() + 1)).slice(-2);
+		var day = ('0' + today.getDate()).slice(-2);
+		
+		var st_date = year + '-' + month  + '-' + day;
 		console.log(st_date);
 		
 		var roulday = "[[${rouletteButtonList}]]";

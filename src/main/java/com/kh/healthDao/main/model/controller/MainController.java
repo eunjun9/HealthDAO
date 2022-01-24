@@ -49,6 +49,7 @@ public class MainController {
 		mv.addObject("bannerSize", bannerList.size());
 		mv.addObject("trainList", trainList);
 		mv.addObject("recoList", map.get("recoList"));
+		mv.addObject("pdtList", map.get("pdtList"));
 		mv.addObject("recoCount", map.get("recoCount"));
 
 		int userNo = 0;		

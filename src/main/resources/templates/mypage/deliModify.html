@@ -133,7 +133,7 @@
 				param.address += " " + $("#deliInsertForm [name=address2]").val();
 				param.address += " " + $("#deliInsertForm [name=address3]").val();
 				param.recPhone = $("#deliInsertForm [name=recPhone]").val();
-				param.defAddress = $("#deliInsertForm [name=defAddress]").val();
+				param.defAddress = $("#deliInsertForm [name=defAddress]:checked").val();
 				
 				$.ajax({
 					url : "/mypage/deli/insert",
@@ -144,41 +144,6 @@
 					success : function(data) {
 						alert(data.msg);
 						
-					},
-					error : function(e) {
-						console.log(e);
-					}
-				});
-			});
-			
-			$("#deliListForm .btnMf").on('click', function(){
-				let param = {};
-				param.addressNo = $("#deliList [name=addressNo]:checked").val();
-				
-				$.ajax({
-					url : "/mypage/deli/detail",
-					data : JSON.stringify(param),
-					dataType : "json",
-					contentType : "application/json; charset=utf-8",
-					type : "put",
-					success : function(data) {
-						let form = $("#deliUpdateForm");
-						
-						form.find("[name=receiver]").val(data.receiver);
-						/* form.find("[name=address1]").val();
-						form.find("[name=address2]").val();
-						form.find("[name=address3]").val(); */
-						form.find("[name=recPhone]").val(data.recPhone);
-						if(form.find("[name=defAddress]").val('Y')) {
-							form.find("[name=defAddress]").prop("checked", true);
-						}
-						/* if(data) {
-							$.each(data, function(i){
-								
-							});
-						} else {
-	 						alert('배송지 정보가 없습니다.');
-	 					} */
 					},
 					error : function(e) {
 						console.log(e);

@@ -38,7 +38,7 @@
 							</div>
 							<div class="pdt_list1 type02 mgt60" th:if="${recoCount != 0}">
 								<ul class="list_box">
-									<li th:each="list : ${recoList}">
+									<li th:each="list : ${pdtList}">
 										<div class="pdtImg">
 											<a th:href="|javascript:selectReco(${list.productNo});|" class="imgLink">
 												<img th:src="${list.file_path}+${list.change_file1}" alt="">
@@ -101,7 +101,7 @@
             <div class="lyBody">
                 <div class="listBox">
                     <ul class="vScroll" th:if="${pdt != 0}">
-                        <li th:each="pdt:${pdtList}" th:classappend="${pdt.productRank} == 0 ? noRank : isRank">
+                        <li th:each="pdt:${recoList}" th:classappend="${pdt.productRank} == 0 ? noRank : isRank">
                         	<a href="javascript:void(0);" th:onclick="|selectPdt('${pdt.productNo}');|">
                         		<img th:src="${pdt.file_path}+${pdt.change_file1}" alt="">
                         	</a>
