@@ -26,7 +26,7 @@
 <p>
 
 ## 설계
-<a href="">Figma</a><br>
+<a href="https://www.figma.com/file/NwlPhtaU6oY7744Ikkbcgo/final-pj-team-library?node-id=0%3A1">Figma</a><br>
 <a href="">Diagrams</a><br>
 <p>
 <p>
