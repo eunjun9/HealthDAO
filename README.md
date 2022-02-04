@@ -52,7 +52,7 @@ DB 모델링 툴 :  ERD Cloud <br>
 프로그래밍 언어 : Java 8 <br>
 서버 : Apache Tomcat 8.5 <br>
 데이터베이스 : Oracle 11g <br>
-API : Google SMTP, Postcodify 주소 찾기, iamport <br>
+API : Google SMTP, Postcodify 주소 찾기, iamport, Kakao Maps <br>
 <p>
 <p>
 
